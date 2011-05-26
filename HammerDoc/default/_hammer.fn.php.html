@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs for page hammer.fn.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name">/hammer.fn.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+									<a href="#sec-includes">Includes</a>
+			|											<a href="#sec-functions">Functions</a>
+			</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+		
+			</div>
+</div>
+		
+
+	<a name="sec-includes"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Includes</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Includes</span>
+			|													<a href="#sec-functions">Functions</a>
+					</div>
+		<div class="info-box-body">	
+			<a name="_nails/nail2_php"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="include-title">
+			<span class="include-type">include_once</span>
+			(<span class="include-name"><a href="../default/_nails---nail2.php.html">"nails/nail2.php"</a></span>)
+			(line <span class="line-number">14</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+</div>
+<a name="_nails/nail3_php"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="include-title">
+			<span class="include-type">include_once</span>
+			(<span class="include-name"><a href="../default/_nails---nail3.php.html">"nails/nail3.php"</a></span>)
+			(line <span class="line-number">12</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The Default hammer functions</p>
+<p class="description"><p>Removed from hammerexception,  had no buisness being in there to begin with</p></p>
+	<ul class="tags">
+				<li><span class="field">version:</span> $Id: hammer.fn.php 477 2010-01-04 12:57:54Z keloran $</li>
+			</ul>
+	
+</div>
+		</div>
+	</div>
+	
+	
+	
+	<a name="sec-functions"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Functions</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-includes">Includes</a>
+				|												<span class="disabled">Functions</span>
+		</div>
+		<div class="info-box-body">	
+			<a name="functionerrorHandler" id="functionerrorHandler"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">errorHandler</span> (line <span class="line-number">201</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the error handler, so that if anything happens it throws an exception,</p>
+<p class="description"><p>and informs the admin, instead of spitting out rubbish to the user</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			errorHandler
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$errno</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$errstr</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$errfile</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$errline</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$errno</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$errstr</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$errfile</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$errline</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionexceptionHandler" id="functionexceptionHandler"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">exceptionHandler</span> (line <span class="line-number">232</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">exceptionHandler()</p>
+	
+	<div class="method-signature">
+		<span class="method-result">null</span>
+		<span class="method-name">
+			exceptionHandler
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$oException</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$oException</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functiongetAddress" id="functiongetAddress"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">getAddress</span> (line <span class="line-number">618</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is a global for setting the address so that it can be used by pretty much everything</p>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getAddress
+		</span>
+					([<span class="var-type">array</span>&nbsp;<span class="var-name">$aFilters</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$cSiteAddress</span> = <span class="var-default">false</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$aFilters</span><span class="var-description">: This sets teh order/name of the variable</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$cSiteAddress</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functiongetBrowser" id="functiongetBrowser"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">getBrowser</span> (line <span class="line-number">799</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">getBrowser()</p>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getBrowser
+		</span>
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$cSpecific</span> = <span class="var-default">null</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$cSpecific</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functiongetBrowserCap" id="functiongetBrowserCap"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">getBrowserCap</span> (line <span class="line-number">743</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">getBrowserCap()</p>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getBrowserCap
+		</span>
+				()
+			</div>
+
+		
+	
+</div>
+<a name="functiongetNailed" id="functiongetNailed"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">getNailed</span> (line <span class="line-number">872</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">getNailed()</p>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			getNailed
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cNail</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$oNail</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$mParams</span> = <span class="var-default">null</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cNail</span>			</li>
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$oNail</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$mParams</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionHammer" id="functionHammer"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">Hammer</span> (line <span class="line-number">425</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">this starts the site and calls the right objects</p>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			Hammer
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cSite</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$aFilter</span> = <span class="var-default">false</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$bNoInstall</span> = <span class="var-default">null</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cSite</span><span class="var-description">: This is the name of the site, it isnt really used atm</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$aFilter</span><span class="var-description">: The filters e.g. page/action/choice/others</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$bNoInstall</span><span class="var-description">: set this if you want all files to be set to no install</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionhammerHash" id="functionhammerHash"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">hammerHash</span> (line <span class="line-number">557</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">a more secure hash method than sha1 although it will fallback to sha1 if has isnt installed</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			hammerHash
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cString</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$iStrength</span> = <span class="var-default">false</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cString</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$iStrength</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionhideProtected" id="functionhideProtected"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">hideProtected</span> (line <span class="line-number">97</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is used to hide passwords/hostnames from being sent through the email, although it doesnt work with hte xml</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			hideProtected
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cString</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cString</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionmakeSEO" id="functionmakeSEO"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">makeSEO</span> (line <span class="line-number">882</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">makeSEO()</p>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			makeSEO
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cString</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cString</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionob_process" id="functionob_process"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">ob_process</span> (line <span class="line-number">391</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This doesnt really work and as such isnt called by anything</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			ob_process
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cBuffer</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cBuffer</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionprintRead" id="functionprintRead"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">printRead</span> (line <span class="line-number">110</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is for debugging purposes its like print_r but with the output to browser instead of source</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			printRead
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$mString</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$mOptions</span> = <span class="var-default">null</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$mString</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$mOptions</span><span class="var-description">: This dicates how its shown</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionsendEmail" id="functionsendEmail"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">sendEmail</span> (line <span class="line-number">254</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is a better method of sending mail instead of using mail() it sends in html and text</p>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			sendEmail
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cTo</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cSubject</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cContent</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$cContentText</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cFrom</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$cFromName</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$cReturn</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$bTextOnly</span> = <span class="var-default">false</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cTo</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cSubject</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cContent</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cFrom</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$cContentText</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$cFromName</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$cReturn</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$bTextOnly</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionshrinkThis" id="functionshrinkThis"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">shrinkThis</span> (line <span class="line-number">330</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This shrinks the content, and trys not to break the syntax so that it still passes validator</p>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			shrinkThis
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cString</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$iLength</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cString</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$iLength</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionstribet" id="functionstribet"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">stribet</span> (line <span class="line-number">596</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This finds the bits between the start and end inside a string</p>
+	<ul class="tags">
+				<li><span class="field">example:</span> example not found</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			stribet
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cString</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cStart</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cEnd</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cString</span><span class="var-description">: The whole string</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cStart</span><span class="var-description">: The starter part to find</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cEnd</span><span class="var-description">: The ender</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionunSEO" id="functionunSEO"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">unSEO</span> (line <span class="line-number">912</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">unSEO()</p>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			unSEO
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cString</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cString</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="function__autoload" id="function__autoload"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">__autoload</span> (line <span class="line-number">27</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">this is here so i dont need to keep including it in every single project  seemed kinda pointless to keep repeating it, also it means that alot harder to  drop support for hammer from a project, unless intentionally doing it</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			__autoload
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cClassName</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cClassName</span>			</li>
+				</ul>
+		
+	
+</div>
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 28 Sep 2010 12:21:10 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+	</p>
+	</div></body>
+</html>

@@ -1,0 +1,758 @@
+<?php
+/**
+ * Template
+ *
+ * @package
+ * @author Max
+ * @copyright Copyright (c) 2008
+ * @version $Id: template.inc.php 484 2010-01-05 09:44:52Z keloran $
+ * @access public
+ */
+class Template {
+	public $cTemplate		= false;
+	public $aVars			= array();
+	public $cJS				= false;
+	public $cExtraJS		= false;
+	public $cPagination		= false;
+	public $bDeleted		= false;
+
+	//override and get a different structure for hte homepage
+	public $bStructOverride	= false;
+	public $cOverride		= false;
+
+    //Sub templates so that templates themselves dont need todo buisness
+    private $aSubTemplates	= false;
+    private $cTemp			= false;
+    private $cFolder		= false;
+
+    private $cSiteCalled		= false;
+
+    static $oTemplate;
+    public $oForms			= false;
+
+	//decouple
+	public $oNails		= false;
+	private $oDB		= false;
+	private $cPage		= false;
+	private $cAction	= false;
+	private $cChoice	= false;
+	private $cLang		= false;
+	private $cBrand		= false;
+	private $cError		= false;
+	private $iPage		= false;
+	private $cSkin		= false;
+
+	/**
+	 * Template::__construct()
+	 *
+	 */
+	function __construct($cSite = false, $cSkin = false) {
+		if ($cSite) { $this->cSiteCalled 	= $cSite; }
+		if ($cSkin) { $this->cSkin			= $cSkin; }
+		
+		$this->oNails	= new Nails();
+		$this->oDB	= $this->oNails->oDB;
+
+		//add this version, since this might get changed and its good to keep track
+		if ($this->oNails->checkVersion("template", "1.4") == false) {
+			//1.4
+			$this->oNails->updateVersion("template", "1.4", false, "Seperated Form and Validator");
+
+			//1.3
+			$this->oNails->updateVersion("template", "1.3", false, "De-Coupled from Hammer");
+
+			//1.2
+			$this->oNails->updateVersion("template", "1.2", false, "Added branding support");
+
+			//1.1
+			$this->oNails->updateVersion("template", "1.1", false, "Added Internation Support");
+
+			//1.0
+			$this->oNails->addVersion("template", "1.0");
+		}
+
+		$this->cPage	= $this->oNails->cPage;
+		$this->cAction	= $this->oNails->cAction;
+		$this->cChoice	= $this->oNails->cChoice;
+		$this->cLang	= $this->oNails->cLang;
+		$this->cBrand	= $this->oNails->cBrand;
+		$this->iPage	= $this->oNails->iPage;
+
+		//Add the error from hammer (others) into the vars
+		$this->setVars("error", $this->cError);
+	}
+
+	/**
+	 * Template::getInstance()
+	 *
+	 * @return
+	 */
+	static function getInstance($cSite = false, $cSkin = false) {
+		if (is_null(self::$oTemplate)) {
+			self::$oTemplate = new Template($cSite, $cSkin);
+		}
+
+		return self::$oTemplate;
+	}
+
+	/**
+	 * Template::getMainPage()
+	 *
+	 * @param string $cDefault The Default page, e.g. News
+	 * @desc This thows the main page to the renderer
+	 * @return
+	 */
+	function getMainPage($cDefault = false) {
+	    $cReturn = "<div id=\"mainArea\">\n";
+
+	    if (!$this->cPage) {
+	            if ($cDefault) {
+        	        $cPage = PAGES . $cDefault . "/" . $cDefault . ".php";
+                	$this->cPage = $cDefault;
+	            } else {
+        	        $cPage = PAGES . "news/news.php";
+                	$this->cPage = "news";
+ 	           }
+        } else {
+        	//The Page requested doesnt exist
+        	if (!file_exists(PAGES . $this->cPage . "/" . $this->cPage . ".php")) {
+        		$this->cError = "Sorry that page doesn't seem to exist";
+        	}
+
+        	if ($this->cAction) { //An Action has been asked for inside hte file
+        		if ($this->cChoice) { // choice has been asked inside the action
+        			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . ucfirst($this->cChoice) . ".php")) { //The page exists, so its not inside the action file
+        				$cPage = PAGES . $this->cPage . "/" . $this->cAction . ucfirst($this->cChoice) . ".php";
+        			} else if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . ".php")) { //Action folder exists, e.g. /admin/news/
+        				$cPage = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . ".php";
+        			} else if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/" . $this->cChoice . ".php")) { //choice file is in its own folder, this extra customization required
+        				$cPage = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/" . $this->cChoice . ".php";
+        			} else if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . ".php")) { //this is incase the variable is used inside the action file
+        				$cPage = PAGES . $this->cPage . "/" . $this->cAction . ".php";
+        			} else { //the action and the choice are used in the main file
+        				$cPage = PAGES . $this->cPage . "/" . $this->cPage . ".php";
+        			}
+        		} else { // No choice has been chosen
+        			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . ".php")) { // does the action file actually exist
+        				$cPage = PAGES . $this->cPage . "/" . $this->cAction . ".php";
+        			} else if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cAction . ".php")) { //extra customization
+        				$cPage = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cAction . ".php";
+        			} else { //The action file doesnt exist, eitehr the action is unknown, or the page file is so small that the action file isnt needed
+        				$cPage = PAGES . $this->cPage . "/" . $this->cPage . ".php";
+        			}
+        		}
+        	} else { //No action chosen so its the base file asked for
+        		$cPage = PAGES . $this->cPage . "/" . $this->cPage . ".php";
+        	}
+        }
+
+        if (isset($cPage)) {
+            $this->cTemplate = $cPage;
+            $cReturn .= $this->renderTemplate();
+        }
+
+		$cReturn .= "</div>\n";
+
+        return $cReturn;
+	}
+
+	/**
+	* Template::getCore()
+	*
+	* @param string $cPage
+	* @param bool $bEcho this is incase we dont want to use echo inside the struct
+	* @return string
+	*/
+	function getCore($cPage, $bEcho = false) {
+		if (is_dir(SITEPATH . "/layout")) {
+			$cLayoutFolder = "/layout/";
+		} else {
+			$cLayoutFolder = "/core/";
+		}
+
+		$this->cTemplate = SITEPATH . $cLayoutFolder . $cPage . ".php";
+
+		if ($bEcho) {
+			echo $this->renderTemplate();
+		} else {
+			return $this->renderTemplate();
+		}
+	}
+
+	/**
+	* Template::indexTemplate()
+	*
+	* @param string $cTemplate
+	* @desc This is for old sites, dont use for new ones
+	*/
+	function indexTemplate($cTemplate) {
+		$this->cTemplate = SITEPATH . "/templates/" . $cTemplate . ".tpl";
+
+		return $this->renderTemplate();
+	}
+
+	/**
+	 * Template::getStructure()
+	 *
+	 * @param string $cStructure
+	 * @return
+	 */
+	function getStructure($cStructure = false) {
+		if (!isset($oHammer)) {
+			$this->setVars("oHammer", Hammer::getHammer());
+		}
+
+		//maintence active, so send to the maint file
+		if (defined("MAINT")) {
+			$this->oNails->sendLocation("/maint.html");
+		}
+
+		//set the main structure folder to be different
+		if (is_dir(SITEPATH . "/layout/")) {
+			$cLayoutFolder	= "/layout/";
+		} else {
+			$cLayoutFolder	= "/core/";
+		}
+
+		//set the template path
+		if ($this->cSkin) {
+			$this->cFolder	= "/templates/"		. $this->cSkin . "/";
+			$cCore			= $cLayoutFolder	. "templates/" . $this->cSkin . "/";
+		} else {
+			$this->cFolder	= "/templates/";
+			$cCore			= $cLayoutFolder . "templates/";
+		}
+
+		//language
+		if (isset($this->cLang)) { //to make sure that it doesnt bug out for no reason
+			if ($this->cLang) { //now thats done make sure its set to something thats useful
+				if (file_exists(SITEPATH . $cLayoutFolder . $this->cLang . "/structure.struct")) {
+					$this->cFolder 	= "/" 				. $this->cLang . "/";
+					$cCore			= $cLayoutFolder	. $this->cLang . "/";
+				}
+			}
+		}
+
+		//branding is set
+		if (isset($this->cBrand)) {
+			if ($this->cBrand) {
+				if (file_exists(SITEPATH . $cLayoutFolder . $this->cBrand . "/structure.struct")) {
+					$this->cFolder	= "/" 				. $this->cBrand . "/";
+					$cCore			= $cLayoutFolder	. $this->cBrand . "/";
+				}
+			}
+		}
+
+		if ($this->cChoice) { //Choice
+			if (file_exists(PAGES . $this->cPage . "/" . $this->cChoice . $this->cFolder . "structure.struct")) { //structure specific to a choice
+				$cPath = PAGES . $this->cPage . "/" . $this->cChoice . $this->cFolder . "structure.struct";
+			} else {
+				$cPath = PAGES . $this->cPage . $this->cFolder . "structure.struct";
+			}
+		} else if ($this->cAction) {
+			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . $this->cFolder . "structure.struct")) { //structure specific to an action
+				$cPath = PAGES . $this->cPage . "/" . $this->cAction . $this->cFolder . "structure.struct";
+			} else {
+				$cPath = PAGES . $this->cPage . $this->cFolder . "structure.struct";
+			}
+		} else { //structure for all of them
+			$cPath = PAGES . $this->cPage . $this->cFolder . "structure.struct";
+		}
+
+
+		if (file_exists($cPath)) {
+			if ($this->bStructOverride) {
+				$this->cTemplate = PAGES . $this->cOverride;
+			} else {
+				$this->cTemplate = $cPath;
+			}
+		} else {
+			if ($this->bStructOverride) {
+				$this->cTemplate = PAGES . $this->cOverride;
+			} else {
+				if (($cStructure) && ($this->cPage == "")) { //Home page structure
+					if (file_exists(PAGES . $cStructure . "/structure.struct")) { //This is a better place for it
+						$this->cTemplate = PAGES . $cStrucure . "/structure.struct";
+					} else { //Old place for it
+						$this->cTemplate = PAGES . $cStructure . $this->cFolder . "structure.struct";
+					}
+				} else {
+					$this->cTemplate = SITEPATH . $cCore . "structure.struct";
+				}
+			}
+		}
+	}
+
+	/**
+	* Template::setCoreTemplate();
+	*
+	* @param string $cTemplate
+	* @return null
+	*/
+	function setCoreTemplate($cTemplate = false) {
+		if (($this->cSkin) && is_dir(SITEPATH . "/layout/" . $this->cSkin)) {
+			$cLayoutFolder	= "/layout/" . $this->cSkin . "/";
+		} else if (is_dir(SITEPATH . "/layout")) {
+			$cLayoutFolder	= "/layout/";
+		} else {
+			$cLayoutFolder	= "/core/";
+		}
+
+		$this->cTemplate = SITEPATH . $cLayoutFolder . $this->cFolder . $cTemplate . ".tpl";
+	}
+
+	/**
+	* Template::getCoreTemplate()
+	*
+	* @param strng $cTemplate
+	* @desc This is the old method, you should use setCoreTemplate since your setting not getting
+	* @return
+	*/
+	private function getCoreTemplate($cTemplate) {
+		if (($this->cSkin) && is_dir(SITEPATH . "/layout/" . $this->cSkin)) {
+			$cLayoutFolder	= "/layout/" . $this->cSkin . "/";
+		} else if (is_dir(SITEPATH . "/layout")) {
+			$cLayoutFolder	= "/layout/";
+		} else {
+			$cLayoutFolder	= "/core/";
+		}
+
+		$this->cTemplate = SITEPATH . $cLayoutFolder . "templates/" . $cTemplate . ".tpl";
+	}
+
+	/**
+	 * Template::setTemplate()
+	 *
+	 * @param string $cTemplate The actual template file
+	 * @param string $cAltPage The location of the page itself, e.g. news instead of /news
+	 * @return
+	 */
+	public function setTemplate($cTemplate = false, $cAltPage = false) {
+		$cChoice	= PAGES 	. $this->cPage 		. "/" . $this->cChoice .	$this->cFolder; //Choice
+		$cAction	= PAGES 	. $this->cPage		. "/" . $this->cAction .	$this->cFolder; //Action
+		if ($cAltPage) {
+			if ($this->cSkin) {
+				$cPage	= PAGES		. $cAltPage			.	"/templates/" . $this->cSkin . "/";
+			} else {
+				$cPage	= PAGES		. $cAltPage 		. 	"/templates/"; //Alt Page
+			}
+		} else {
+			$cPage		= PAGES 	. $this->cPage		. 	$this->cFolder; //Page
+		}
+
+		//do the grabs
+		if ($this->cChoice) { //if choice try to see if the files exist
+			$cTemplate	= ($cTemplate ? $cTemplate : $this->cChoice) . ".tpl";
+
+			if (file_exists($cChoice . $cTemplate)) { //choice might be the one
+				$cPath = $cChoice . $cTemplate;
+			} else if (file_exists($cAction . $cTemplate)) { //action since there is no choice so it must be a subselect
+				$cPath = $cAction . $cTemplate;
+			} else if (file_exists($cPage . $cTemplate)) { //no choice/action templates so it must be default
+				$cPath = $cPage . $cTemplate;
+			}
+		} else if ($this->cAction) { //if action try to see if its file exists
+			$cTemplate = ($cTemplate ? $cTemplate : $this->cAction) . ".tpl";
+
+			if (file_exists($cAction . $cTemplate)) {
+				$cPath = $cAction . $cTemplate;
+			} else if (file_exists($cPage . $cTemplate)) {
+				$cPath = $cPage . $cTemplate;
+			}
+		} else if (file_exists($this->cPage)) { //if page try the default one
+			$cTemplate = ($cTemplate ? $cTemplate : $this->cPage) . ".tpl";
+
+			if (file_exists($cPage . $cTemplate)) {
+				$cPath = $cPage . $cTemplate;
+			}
+		} else if (file_exists(PAGES . $cAltPage)) { //Alt Page
+			$cTemplate = ($cTemplate ? $cTemplate : $cAltPage) . ".tpl";
+
+			if (file_exists($cPage . $cTemplate)) {
+				$cPath = $cPage . $cTemplate;
+			}
+		}
+
+		//No path set so it must be at the template for the page
+		if (!isset($cPath)) {
+			$cPath = PAGES . $this->cPage . $this->cFolder . $this->cPage . ".tpl";
+		}
+
+		//no template set so it must be the default page thats the issue
+		if (!isset($cTemplate)) { $cTemplate = $this->cPage; }
+
+		//See if the path exists
+		if (file_exists($cPath)) {
+			$this->cTemplate = $cPath;
+		} else {
+			throw new Spanner($cTemplate . " template doesnt exist", 500);
+		}
+	}
+
+	/**
+	* Template::setLanguage()
+	*
+	* @param string $cLanguage
+	* @return
+	*/
+	public function setLanguage($cLanguage) {
+		$this->cLanguage = $cLanguage;
+	}
+
+	/**
+	 * Template::setVars()
+	 *
+	 * @param string $cName
+	 * @param mixed $mVars
+	 * @return
+	 */
+	public function setVars($cName, $mVars) {
+		if (is_array($mVars)) {
+			foreach ($mVars as $cVarName => $cVar) {
+				$this->aVars[$cName][$cVarName] = $cVar;
+			}
+		} else {
+			$this->aVars[$cName] = $mVars;
+		}
+	}
+
+	/**
+	 * Template::addJS()
+	 *
+	 * @param string $cFile
+	 * @param array $aVariables
+	 * @return
+	 */
+	function addJS($cFile, $aVariables = false) {
+		$cReturn = "<script type='text/javascript' src='/js/" . $cFile . ".js'>\n";
+
+		if ($aVariables) {
+			foreach ($aVariables as $cName => $cValue) {
+				if ($cName) {
+					$cReturn .= "var " . $cName . " = " . $cValue . ";\n";
+				} else {
+					$cReturn .= $cValue . ";\n";
+				}
+			}
+		}
+
+		$cReturn .= "</script>\n";
+		$this->cJS .= $cReturn;
+	}
+
+	/**
+	 * Template::addJSProperties()
+	 *
+	 * @param string $cJS
+	 * @return
+	 */
+	function addJSProperties($cJS) {
+        $cReturn = "<script type='text/javascript'>\n";
+		$cReturn .= $cJS . "\n";
+		$cReturn .= "</script>\n";
+
+		$this->cExtraJS .= $cReturn;
+	}
+
+    /**
+     * Template::addForm()
+     *
+     * @desc Add a form to the template
+     * @return
+     */
+    function addForm() {
+    	$oForm			= Form::getInstance($this);
+    	$this->oForms	= $oForm;
+
+    	return $this->oForms;
+    }
+    
+    /**
+    * @desc This is really only for ease of use
+    */
+    function getForm() {
+    	return $this->addForm();
+    }
+
+    /**
+     * Template::addFormed()
+     *
+     * @return
+     */
+    function addFormed() {
+    	$oForm	= $this->addForm();
+
+    	$this->oForms = $oForm;
+
+    	return $this->oForms;
+    }
+
+	/**
+	 * Template::getValidate()
+	 *
+	 * @desc Get the validator
+	 * @todo Change to addValidator
+	 * @return
+	 */
+	function getValidate() {
+		$oValidate = Validator::getInstance($this->oForms);
+
+		return $oValidate;
+	}
+
+	/**
+	* Template::addValidator()
+	*
+	* @return
+	*/
+	function addValidator() {
+		return $this->getValidator();
+	}
+
+	/**
+	* Template:addPagination()
+	*
+	* @desc Adds pagination to a page
+	* @param mixed $mList the list of items so that pagination can be created
+	* @param int $iLimit the limit that can be shown in order to create the pagination
+	* @param string $cAddress the address of the page that the pagination will be filtered to
+	* @param bool $bStated if there needs to be an = at end instead of /
+	* @return string
+	*/
+	function addPagination($mList, $cAddress, $iLimit, $bStated = false) {
+		$cReturn 	= false;
+		$iPage		= $this->iPage;
+
+		$cNewAddress 	= $bStated 			? $cAddress . "&amp;num=" : $cAddress . "/";
+		$iAmount		= is_array($mList)	? count($mList) : $mList;
+
+		if ($iAmount > $iLimit) {
+			$j = 2;
+			$cReturn  = "<div class=\"pages\">\n";
+
+			if ($iPage) {
+				$cReturn .= "<img src=\"/images/layout/pages.png\" alt=\"Pages\" />&nbsp; Page <a href=\"" . $cAddress . "\">1</a>";
+			} else {
+				$cReturn .= "<img src=\"/images/layout/pages.png\" alt=\"Pages\" />&nbsp; Page <a class=\"selectedPage\" href=\"" . $cAddress . "\">1</a>";
+			}
+
+			for ($i = 0; $i < $iAmount; $i++) {
+				if ($i > 0) {
+					if ($i % $iLimit == 0) {
+						if ($iPage == $j) {
+							$cReturn .= ", <a class=\"selectedPage\" href=\"" . $cNewAddress . $j . "\">" . $j . "</a>";
+						} else {
+							$cReturn .= ", <a href=\"" . $cNewAddress . $j . "\">" . $j . "</a>";
+						}
+						$j++;
+					}
+				}
+			}
+
+			$cReturn .= "</div>";
+		}
+
+		$this->cPagination = $cReturn;
+		return $this->cPagination;
+	}
+
+	/**
+	 * Template::renderTemplate()
+	 *
+	 * @return
+	 */
+	function renderTemplate() {
+		if (file_exists($this->cTemplate)) {
+			if ($this->oForms) {
+				$this->setVars('cForm', $this->oForms->fullForm());
+			} else { //this is incase you didnt add the form but your trying to call it
+				$this->setVars("cForm", "");
+			}
+
+			//layout folder better name than core
+			if (($this->cSkin) && is_dir(SITEPATH . "/layout/" . $this->cSkin)) {
+				$cLayoutPath	= "/layout/" . $this->cSkin . "/";
+			} else if (is_dir(SITEPATH . "/layout")) {
+				$cLayoutPath = "/layout/";
+			} else {
+				$cLayoutPath = "/core/";
+			}
+
+			//check for old style
+			if (!file_exists(SITEPATH . "templates/structure.struct")) { #really old method
+				if (!file_exists(SITEPATH . "layout/structure.struct")) { #newer method
+					$this->setVars("oHammer", Hammer::getHammer());
+				}
+			}
+
+			//Get rid of the hammer object reference for templates tehy dont need it
+			if (strstr($this->cTemplate, "tpl")) {
+				$this->setVars("oHammer", false);
+			}
+
+			$this->setVars("cExtraJS", $this->cExtraJS);
+			$this->setVars("cPagination", $this->cPagination);
+			$this->setVars('cJS', $this->cJS);
+			
+			//Secure the admin area with an extra login screen
+			if (defined("adminsecure")) {
+				$bAdminLogged	= $this->oNails->getCookie("adminLogged");
+				$bAdminExists	= file_exists(PAGES . "/admin/secure.php");
+				$bLogged	= $this->oNails->getCookie("userCookie");
+				
+				//Since we know that the person isnt re-checked and we want them to be
+				if (!$bAdminLogged && $bAdminExists) {
+					if ($this->cAction !== "secure") { //since your on secure we dont want to send into an infinite loop
+						if ($this->cPage == "admin") { //since we only want todo this if the page is admin
+							if ($bLogged) { //since your already logged in then show it
+								$this->oNails->sendLocation("/admin/secure");
+							} else { //your not logged in, so why are you trying to get to the admin area
+								$this->oNails->sendLocation("/login");
+							}
+						}
+					}
+				}
+			} else {
+				$bAdminLogged	= false;
+			}
+
+			//indented to show that stuff inside happens inside and then is cleaned after
+			ob_start();
+				extract($this->aVars, EXTR_PREFIX_SAME, "hammer::" . Hammer::$cWebSite);
+				include_once($this->cTemplate);			
+				$cTemplate = ob_get_contents();
+			ob_end_clean();
+
+			if (isset($this->aSubTemplates[0])) {
+				$iSub	= count($this->aSubTemplates);
+
+				for ($i = 0; $i < $iSub; $i++) {
+					if (file_exists($this->aSubTemplates[$i])) {
+						ob_start();
+							extract($this->aVars, EXTR_PREFIX_SAME, "hammer::" . Hammer::$cWebSite);
+							include_once($this->aSubTemplates[$i]);
+							$aTemplates[$i] = ob_get_contents();
+						ob_end_clean();
+					}
+				}
+			}
+
+			//this is incase there are sub templates attached
+			if (isset($aTemplates[0])) {
+				$cChain 	= $cTemplate;
+				$iTemplates	= count($aTemplates);
+				for ($i = 0; $i < $iTemplates; $i++) {
+					$cChain .= $aTemplates[$i];
+				}
+
+				return $cChain;
+			} else {
+				//this is to fix a strange bug which might not exist in non ppc devices when used with php 5.2.10
+				if (!isset($cTemplate[1])) {
+					$cTemplate .= "&nbsp;";
+				}
+
+				return $cTemplate;
+			}
+		} else {
+			return $this->errorTemplate($this->cTemplate);
+		}
+	}
+
+	/**
+	 * Template::setSubTemplate()
+	 *
+	 * @param string $cTemplate
+	 * @param bool $bCore
+	 * @return
+	 */
+	function setSubTemplate($cTemplate, $bCore = false) {
+		//Layout
+		if (($this->cSkin) && is_dir(SITEPATH . "/layout/" . $this->cSkin)) {
+			$cLayoutFolder	= "/layout/" . $this->cSkin . "/";
+		} else if (is_dir(SITEPATH . "/layout")) {
+			$cLayoutFolder = "/layout/";
+		} else {
+			$cLayoutFolder = "/core/";
+		}
+
+		if ($bCore) {
+			if ($this->cSkin) {
+				$cSubTemplate	= SITEPATH . $cLayoutFolder . "templates/" . $this->cSkin . "/" . $cTemplate . ".tpl";
+			} else {
+				$cSubTemplate	= SITEPATH . $cLayoutFolder . "templates/" . $cTemplate . ".tpl";
+			}
+		} else {
+			if ($this->cSkin) {
+				$cSubTemplate	= PAGES . $this->cPage . "/templates/" . $this->cSkin . "/" . $cTemplate . ".tpl";
+			} else {
+				$cSubTemplate	= PAGES . $this->cPage . "/templates/" . $cTemplate . ".tpl";
+			}
+		}
+
+		$this->aSubTemplates[] = $cSubTemplate;
+	}
+
+	/**
+	 * Template::errorTemplate()
+	 *
+	 * @return
+	 */
+	private function errorTemplate($cCalled = false) {
+		//Layout
+		if (is_dir(SITEPATH . "/layout")) {
+			$cLayoutFolder = "/layout/";
+		} else {
+			$cLayoutFolder = "/core/";
+		}
+
+		header("HTTP/1.0 404 Not Found");
+		if ($this->cError) {
+			if (file_exists(SITEPATH . $cLayoutFolder . "templates/error.tpl")) {
+				//Custom error page
+				ob_start("ob_process");
+					include(SITEPATH . $cLayoutFolder . "templates/error.tpl");
+					$cTemplate = ob_get_contents();
+				ob_end_clean();
+			} else {
+				header("HTTP/1.0 404 Not Found");
+				$cTemplate = "<h1>Error</h1>\n";
+				$cTemplate .= $this->cError . "<br />";
+
+				switch($this->cPage){
+					case "register": //Shall be changing register to be an actual page
+						$cTemplate .= "This page might actually be at, <a href=\"/login/register/\">Here</a>";
+						break;
+
+					case "user": //Change this once the user module does actually exist
+						$cTemplate .= "The user module hasn't been finished yet sorry";
+						break;
+
+					case "manager":
+					default:
+						$cTemplate .= "I have no idea where your trying to get to, but most likelly your trying to use a bug 	that doesnt exist";
+						break;
+				} // switch
+
+				if (isset($_SERVER['HTTP_REFERER'])) {
+					$cTemplate .= "<hr /><a href='" . $_SERVER['HTTP_REFERER'] . "'>Back</a>\n";
+				} else {
+					$cTemplate .= "<hr /><a href='/'>Back</a>\n";
+				}
+			}
+
+			return $cTemplate;
+		} else {
+			$cMessage = "Template Doesnt exist:";
+			//all the extras to diagnose
+			if ($this->cTemplate) {		$cMessage .= " Called: "	. $this->cTemplate; }
+			if ($cCalled) { 		$cMessage .= " Template: "	. $cCalled; }
+			if ($this->cPage) {		$cMessage .= " Page: "		. $this->cPage; }
+			if ($this->cAction) {		$cMessage .= " Action: "	. $this->cAction; }
+			if ($this->cError) { 		$cMessage .= " Error: " 	. $this->cError; }
+			if ($this->cSiteCalled) { 	$cMessage .= " SiteCalled: " 	. $this->cSiteCalled; }
+
+			throw new Spanner($cMessage, 2);
+		}
+	}
+}

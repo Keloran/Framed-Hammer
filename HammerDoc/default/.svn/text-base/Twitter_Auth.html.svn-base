@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Twitter_Auth</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Twitter_Auth</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+		<p class="notes">
+			Located in <a class="field" href="_nails---twitter---auth---auth.inc.php.html">/nails/twitter/auth/auth.inc.php</a> (line <span class="field">2</span>)
+		</p>
+		
+				
+		<pre><a href="../default/Twitter.html">Twitter</a>
+   |
+   --Twitter_Auth</pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+												
+												<div class="method-definition">
+											<span class="method-result">Twitter_Auth</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+										<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../default/Twitter.html">Twitter</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/Twitter.html#var$aAccessToken">Twitter::$aAccessToken</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/Twitter.html#var$aRequestToken">Twitter::$aRequestToken</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/Twitter.html#var$cConsumerKey">Twitter::$cConsumerKey</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/Twitter.html#var$cConsumerSecret">Twitter::$cConsumerSecret</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/Twitter.html#var$cPassword">Twitter::$cPassword</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/Twitter.html#var$cUsername">Twitter::$cUsername</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/Twitter.html#var$oNails">Twitter::$oNails</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/Twitter.html#var$oTwitter">Twitter::$oTwitter</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/Twitter.html#var$oUser">Twitter::$oUser</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/Twitter.html#var$oXML">Twitter::$oXML</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-vars">Vars</a>
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">8</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor</p>
+	
+	<div class="method-signature">
+		<span class="method-result">Twitter_Auth</span>
+		<span class="method-name">
+			__construct
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../default/Twitter.html#method__construct">Twitter::__construct()</a></dt>
+						<dd>Twitter::__construct()</dd>
+					</dl>
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../default/Twitter.html">Twitter</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../default/Twitter.html#method__construct">Twitter::__construct()</a></span><br>
+													<span class="method-name"><a href="../default/Twitter.html#methodauthIt">Twitter::authIt()</a></span><br>
+													<span class="method-name"><a href="../default/Twitter.html#methodgetFeed">Twitter::getFeed()</a></span><br>
+													<span class="method-name"><a href="../default/Twitter.html#methodgetFeedFile">Twitter::getFeedFile()</a></span><br>
+													<span class="method-name"><a href="../default/Twitter.html#methodgetFollowers">Twitter::getFollowers()</a></span><br>
+													<span class="method-name"><a href="../default/Twitter.html#methodgetFollowing">Twitter::getFollowing()</a></span><br>
+													<span class="method-name"><a href="../default/Twitter.html#methodgetInstance">Twitter::getInstance()</a></span><br>
+													<span class="method-name"><a href="../default/Twitter.html#methodgetMentions">Twitter::getMentions()</a></span><br>
+													<span class="method-name"><a href="../default/Twitter.html#methodgetReply">Twitter::getReply()</a></span><br>
+													<span class="method-name"><a href="../default/Twitter.html#methodgetTweets">Twitter::getTweets()</a></span><br>
+													<span class="method-name"><a href="../default/Twitter.html#methodgetUsername">Twitter::getUsername()</a></span><br>
+													<span class="method-name"><a href="../default/Twitter.html#methodinstall">Twitter::install()</a></span><br>
+													<span class="method-name"><a href="../default/Twitter.html#methodparseFeed">Twitter::parseFeed()</a></span><br>
+													<span class="method-name"><a href="../default/Twitter.html#methodpostTweet">Twitter::postTweet()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 28 Sep 2010 12:20:58 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+	</p>
+	</div></body>
+</html>

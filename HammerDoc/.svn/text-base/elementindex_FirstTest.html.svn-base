@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title></title>
+			<link rel="stylesheet" href="media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+						<a name="top"></a>
+<h2>[FirstTest] element index</h2>
+	<h3>Package indexes</h3>
+	<ul>
+				<li><a href="elementindex_default.html">default</a></li>
+					<li><a href="elementindex_.html"></a></li>
+					<li><a href="elementindex_Gallery.html">Gallery</a></li>
+					</ul>
+<a href="elementindex.html">All elements</a>
+<br />
+<div class="index-letter-menu">
+	<a class="index-letter" href="elementindex_FirstTest.html#a">a</a>
+	<a class="index-letter" href="elementindex_FirstTest.html#f">f</a>
+	<a class="index-letter" href="elementindex_FirstTest.html#o">o</a>
+	<a class="index-letter" href="elementindex_FirstTest.html#s">s</a>
+	<a class="index-letter" href="elementindex_FirstTest.html#t">t</a>
+</div>
+
+	<a name="a"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">a</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="include-title">AllTests.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="FirstTest/_tests---AllTests.php.html">AllTests.php</a> in AllTests.php</div>
+					</dd>
+		</dl>
+	<a name="f"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">f</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						FirstTest
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="FirstTest/FirstTest.html">FirstTest</a> in AllTests.php</div>
+							<div class="index-item-description">Tester</div>
+					</dd>
+		</dl>
+	<a name="o"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">o</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="var-title">$oHammer</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="FirstTest/FirstTest.html#var$oHammer">FirstTest::$oHammer</a> in AllTests.php</div>
+					</dd>
+		</dl>
+	<a name="s"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">s</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="method-title">setUp</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="FirstTest/FirstTest.html#methodsetUp">FirstTest::setUp()</a> in AllTests.php</div>
+					</dd>
+		</dl>
+	<a name="t"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">t</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="method-title">testGetSiteSkin</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="FirstTest/FirstTest.html#methodtestGetSiteSkin">FirstTest::testGetSiteSkin()</a> in AllTests.php</div>
+					</dd>
+		</dl>
+
+<div class="index-letter-menu">
+	<a class="index-letter" href="elementindex_FirstTest.html#a">a</a>
+	<a class="index-letter" href="elementindex_FirstTest.html#f">f</a>
+	<a class="index-letter" href="elementindex_FirstTest.html#o">o</a>
+	<a class="index-letter" href="elementindex_FirstTest.html#s">s</a>
+	<a class="index-letter" href="elementindex_FirstTest.html#t">t</a>
+</div>	</body>
+</html>

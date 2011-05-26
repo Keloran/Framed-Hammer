@@ -1,0 +1,57 @@
+There is a set path for actions/choices
+
+<!--structure-->
+current:
+[page]
+news	= /pages/news/news/.php
+[template]
+news	= /pages/news/templates/news.tpl
+
+[page]
+news/comments	= /pages/news/comments/comments.php
+				= /pages/news/newsComments.php
+				= /pages/news/comments.php
+[template]			
+news/comments	= /pages/news/comments/templates/comments.tpl
+				= /pages/news/templates/comments.tpl
+				
+[page]
+news/comments/edit	= /pages/news/comments/edit.php
+					= /pages/news/newsEdit.php
+					= /pages/news/edit.php
+[template]
+news/comments/edit	= /pages/news/comments/templates/edit.tpl
+					= /pages/news/templates/edit.tpl
+					
+proposed:
+[page]
+news	= /pages/news/news.php
+[template]
+news	= /pages/news/templates/news.tpl
+
+[page]
+news/comments	= /pages/news/comments/comments.php
+[template]
+news/comments	= /pages/news/comments/template/comments.tpl
+
+[page]
+news/comments/edit	= /pages/news/comments/edit/edit.php
+[template]
+news/comments/edit	= /pages/news/comments/edit/templates/edit.tpl
+
+<!--reason-->
+The reason for this is so that if your doing skinning, filtering, langauges it makes it easier to organise
+
+example:
+news	= /pages/news/templates/<filter/skin/language>.tpl
+
+news/comments	= /pages/news/comments/templates/<filter/skin/language>.tpl
+
+news/comments/edit	= /pages/news/comments/edit/templates/<filter/skin/language>.tpl
+
+so if your skin is black, and you have a language
+news	= /pages/news/templates/black/english.tpl
+news	= /pages/news/templates/black/german.tpl
+
+or would it be better to have it as
+news	= /pages/news/templates/english/black/news.tpl

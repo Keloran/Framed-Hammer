@@ -1,0 +1,8 @@
+<Solution version="3.4" name="Hammer" xmlns="http://www.waterproof.fr/PHPEdit/Solution">
+  <Dependencies>
+    <Dependency kind="Project" id="Hammer.PHPEditProject" />
+  </Dependencies>
+  <Item type="project" src="..\Bugs\Bugs.PHPEditProject" />
+  <Item type="project" src="Hammer.PHPEditProject" />
+  <Item type="project" src="..\Admin\Admin.PHPEditProject" />
+</Solution>

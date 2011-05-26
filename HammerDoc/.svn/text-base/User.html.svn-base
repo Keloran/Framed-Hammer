@@ -1,0 +1,1576 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class User</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class User</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="..//Nails_Interface.html">Nails_Interface</a></li>            </ul>
+        </p>
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Max</li>
+				<li><span class="field">version:</span> $Id: user.inc.php 457 2009-12-26 20:45:50Z keloran $</li>
+				<li><span class="field">copyright:</span> Copyright (c) 2008</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_nails---user---user.inc.php.html">/nails/user/user.inc.php</a> (line <span class="field">11</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																				<div class="var-title">
+					static <span class="var-type">mixed</span>
+					<a href="#$oUser" title="details" class="var-name">$oUser</a>
+				</div>
+																				<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$aConfig" title="details" class="var-name">$aConfig</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cError" title="details" class="var-name">$cError</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cPage" title="details" class="var-name">$cPage</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$iGroupID" title="details" class="var-name">$iGroupID</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$iUserID" title="details" class="var-name">$iUserID</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$oDB" title="details" class="var-name">$oDB</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$oNails" title="details" class="var-name">$oNails</a>
+				</div>
+																			</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																				<div class="method-definition">
+					static 						<span class="method-result">object</span>
+										<a href="#getInstance" title="details" class="method-name">getInstance</a>
+											(<span class="var-type"><a href="..//Nails.html">Nails</a></span>&nbsp;<span class="var-name">$oNails</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$bNoInstall</span> = <span class="var-default">null</span>])
+									</div>
+																																																																																																																																																																
+												<div class="method-definition">
+											<span class="method-result">User</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type"><a href="..//Nails.html">Nails</a></span>&nbsp;<span class="var-name">$oNails</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$bNoInstall</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#__destruct" title="details" class="method-name">__destruct</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">null</span>
+										<a href="#addInstallGroups" title="details" class="method-name">addInstallGroups</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#addSpecial" title="details" class="method-name">addSpecial</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cAllowed</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$iUserID</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">null</span>
+										<a href="#addUser" title="details" class="method-name">addUser</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cEmail</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$iLength</span> = <span class="var-default">8</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#canDoThis" title="details" class="method-name">canDoThis</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cAllowed</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">false</span>
+										<a href="#checkExists" title="details" class="method-name">checkExists</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cUsername</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#checkPassword" title="details" class="method-name">checkPassword</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cPassword</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#confirmUser" title="details" class="method-name">confirmUser</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cCode</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#forgotDetails" title="details" class="method-name">forgotDetails</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cEmail</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#genHash" title="details" class="method-name">genHash</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cSalt</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#genPassword" title="details" class="method-name">genPassword</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$iLength</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getAllUsers" title="details" class="method-name">getAllUsers</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#getGroupID" title="details" class="method-name">getGroupID</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getGroupName" title="details" class="method-name">getGroupName</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getGroups" title="details" class="method-name">getGroups</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getID" title="details" class="method-name">getID</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$cCookie</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$bIsHash</span> = <span class="var-default">null</span>])
+									</div>
+																								<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getSetting" title="details" class="method-name">getSetting</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cSetting</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getUserDetails" title="details" class="method-name">getUserDetails</a>
+											([<span class="var-type">int</span>&nbsp;<span class="var-name">$iUserID</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#getUserGroupID" title="details" class="method-name">getUserGroupID</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getUserGroupName" title="details" class="method-name">getUserGroupName</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getUserID" title="details" class="method-name">getUserID</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$cCookie</span> = <span class="var-default">false</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$bIsHash</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getUserImage" title="details" class="method-name">getUserImage</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#getUserLimit" title="details" class="method-name">getUserLimit</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getUsername" title="details" class="method-name">getUsername</a>
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$iUserID</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">null</span>
+										<a href="#install" title="details" class="method-name">install</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#isTemp" title="details" class="method-name">isTemp</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#isUserGroup" title="details" class="method-name">isUserGroup</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#login" title="details" class="method-name">login</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cUsername</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cPassword</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$bInternal</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#register" title="details" class="method-name">register</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cUsername</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cPassword</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cPassword2</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cEmail</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">null</span>
+										<a href="#sendConfirm" title="details" class="method-name">sendConfirm</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cEmail</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cRegisterHash</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$iUserID</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">null</span>
+										<a href="#sendRegister" title="details" class="method-name">sendRegister</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cEmail</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cUsername</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cPassword</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setGroup" title="details" class="method-name">setGroup</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$iGroupID</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$iUserID</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#setSetting" title="details" class="method-name">setSetting</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cSetting</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cValue</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">null</span>
+										<a href="#updatePassword" title="details" class="method-name">updatePassword</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cPassword</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#whatGroupID" title="details" class="method-name">whatGroupID</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cName</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$oUser" id="$oUser"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">mixed</span>
+			<span class="var-name">$oUser</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">17</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$aConfig" id="$aConfig"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$aConfig</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">15</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cError" id="$cError"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cError</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">14</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cPage" id="$cPage"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cPage</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">22</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$iGroupID" id="$iGroupID"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$iGroupID</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">13</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$iUserID" id="$iUserID"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$iUserID</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">12</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$oDB" id="$oDB"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$oDB</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">21</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$oNails" id="$oNails"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$oNails</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">20</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodgetInstance" id="getInstance"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method getInstance</span> (line <span class="line-number">96</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::getInstance()</p>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">object</span>
+		<span class="method-name">
+			getInstance
+		</span>
+					(<span class="var-type"><a href="..//Nails.html">Nails</a></span>&nbsp;<span class="var-name">$oNails</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$bNoInstall</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$oNails</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$bNoInstall</span><span class="var-description">: dont want installer to happen, e.g. the setup file running</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="..//Nails_Interface.html#methodgetInstance">Nails_Interface::getInstance()</a></dt>
+						<dd>This gets an instance of the object</dd>
+					</dl>
+			
+	</div>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">29</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">User</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type"><a href="..//Nails.html">Nails</a></span>&nbsp;<span class="var-name">$oNails</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$bNoInstall</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$oNails</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$bNoInstall</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method__destruct" id="__destruct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Destructor __destruct</span> (line <span class="line-number">84</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::__destruct()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			__destruct
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodaddInstallGroups" id="addInstallGroups"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">addInstallGroups</span> (line <span class="line-number">165</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::addInstallGroups()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">null</span>
+		<span class="method-name">
+			addInstallGroups
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodaddSpecial" id="addSpecial"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addSpecial</span> (line <span class="line-number">689</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add a special ability to a user so if User A is in Group G and needs to do something like addnews, but doesnt need the perm of delete</p>
+	<ul class="tags">
+				<li><span class="field">todo:</span> Should this really be in the admin lib</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			addSpecial
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cAllowed</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$iUserID</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cAllowed</span><span class="var-description">: What is the permision they need</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$iUserID</span><span class="var-description">: What is the id of the user that needs the perm</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddUser" id="addUser"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">addUser</span> (line <span class="line-number">446</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is to add a user to the site and tell them there details</p>
+	<ul class="tags">
+				<li><span class="field">todo:</span> Should this really be in the admin lib</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">null</span>
+		<span class="method-name">
+			addUser
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cEmail</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$iLength</span> = <span class="var-default">8</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cName</span><span class="var-description">: What username do want to give them</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cEmail</span><span class="var-description">: waht is tehre email so we can email them there details</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$iLength</span><span class="var-description">: how long should the email be</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcanDoThis" id="canDoThis"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">canDoThis</span> (line <span class="line-number">709</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::canDoThis()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			canDoThis
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cAllowed</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cAllowed</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcheckExists" id="checkExists"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">checkExists</span> (line <span class="line-number">391</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::checkExists()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">false</span>
+		<span class="method-name">
+			checkExists
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cUsername</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cUsername</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcheckPassword" id="checkPassword"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">checkPassword</span> (line <span class="line-number">199</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">this is mainly used for admin area</p>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			checkPassword
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cPassword</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cPassword</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodconfirmUser" id="confirmUser"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">confirmUser</span> (line <span class="line-number">923</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::confirmUser()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			confirmUser
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cCode</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cCode</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodforgotDetails" id="forgotDetails"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">forgotDetails</span> (line <span class="line-number">818</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::forgotDetails()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			forgotDetails
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cEmail</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cEmail</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenHash" id="genHash"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">genHash</span> (line <span class="line-number">522</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">this uses hammerHash</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			genHash
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cSalt</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cSalt</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenPassword" id="genPassword"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">genPassword</span> (line <span class="line-number">536</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is used by createUser</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			genPassword
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$iLength</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$iLength</span><span class="var-description">: This is used to state how long the password should be</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetAllUsers" id="getAllUsers"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAllUsers</span> (line <span class="line-number">776</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is used to give a list of all the users, mainly used for admin</p>
+	<ul class="tags">
+				<li><span class="field">todo:</span> Should this really be in the admin area</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getAllUsers
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetGroupID" id="getGroupID"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getGroupID</span> (line <span class="line-number">344</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is a pointer to getUserGroupID to make it more standardized</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			getGroupID
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetGroupName" id="getGroupName"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getGroupName</span> (line <span class="line-number">381</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">this is a shortcut to usergroupname since its in the user class   so why do i need to call it get user%   and lowercase it</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getGroupName
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetGroups" id="getGroups"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getGroups</span> (line <span class="line-number">796</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::getGroups()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getGroups
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetID" id="getID"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getID</span> (line <span class="line-number">293</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::getID()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getID
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$cCookie</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$bIsHash</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cCookie</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$bIsHash</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetSetting" id="getSetting"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getSetting</span> (line <span class="line-number">844</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::getSetting()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getSetting
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cSetting</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cSetting</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetUserDetails" id="getUserDetails"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUserDetails</span> (line <span class="line-number">889</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::getUserDetails();</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getUserDetails
+		</span>
+					([<span class="var-type">int</span>&nbsp;<span class="var-name">$iUserID</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$iUserID</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetUserGroupID" id="getUserGroupID"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUserGroupID</span> (line <span class="line-number">303</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Whats hte users group id, not really used better to use canDoThis()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			getUserGroupID
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetUserGroupName" id="getUserGroupName"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUserGroupName</span> (line <span class="line-number">354</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets the groups name, better to use perms canDoThis()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getUserGroupName
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetUserID" id="getUserID"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUserID</span> (line <span class="line-number">239</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This gets the users id based on either there cookie, or the hash of a cookie</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getUserID
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$cCookie</span> = <span class="var-default">false</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$bIsHash</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cCookie</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$bIsHash</span><span class="var-description">: Old method not really used anymore</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetUserImage" id="getUserImage"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUserImage</span> (line <span class="line-number">754</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::getUserImage()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getUserImage
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetUserLimit" id="getUserLimit"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUserLimit</span> (line <span class="line-number">652</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::getUserLimit()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			getUserLimit
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetUsername" id="getUsername"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUsername</span> (line <span class="line-number">625</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::getUsername()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getUsername
+		</span>
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$iUserID</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$iUserID</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodinstall" id="install"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">install</span> (line <span class="line-number">109</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::install()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">null</span>
+		<span class="method-name">
+			install
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodisTemp" id="isTemp"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isTemp</span> (line <span class="line-number">554</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is to check if the password is temp and needs to be changed</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isTemp
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodisUserGroup" id="isUserGroup"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isUserGroup</span> (line <span class="line-number">737</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">this is an easier way of checking if the user is in a specific group</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isUserGroup
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cName</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlogin" id="login"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">login</span> (line <span class="line-number">466</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::login()</p>
+	<ul class="tags">
+				<li><span class="field">todo:</span> Change MD5 to SHA</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			login
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cUsername</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cPassword</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$bInternal</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cUsername</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cPassword</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$bInternal</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodregister" id="register"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">register</span> (line <span class="line-number">413</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is used to register people</p>
+	<ul class="tags">
+				<li><span class="field">todo:</span> Change MD5 to SHA, this should really be normalized</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			register
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cUsername</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cPassword</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cPassword2</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cEmail</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cUsername</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cPassword</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cPassword2</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cEmail</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsendConfirm" id="sendConfirm"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">sendConfirm</span> (line <span class="line-number">571</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::sendConfirm()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">null</span>
+		<span class="method-name">
+			sendConfirm
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cEmail</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cRegisterHash</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$iUserID</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cEmail</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cRegisterHash</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$iUserID</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsendRegister" id="sendRegister"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">sendRegister</span> (line <span class="line-number">603</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This sends the user the details for the account</p>
+	<ul class="tags">
+				<li><span class="field">todo:</span> This might be better in admin lib, i needs normalizng</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">null</span>
+		<span class="method-name">
+			sendRegister
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cEmail</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cUsername</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cPassword</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cEmail</span><span class="var-description">: Email of the user that needs the details sending</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cUsername</span><span class="var-description">: The username the user has been given</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cPassword</span><span class="var-description">: the temp password the user has been given</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetGroup" id="setGroup"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setGroup</span> (line <span class="line-number">675</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::setGroup()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setGroup
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$iGroupID</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$iUserID</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$iGroupID</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$iUserID</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetSetting" id="setSetting"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setSetting</span> (line <span class="line-number">867</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::setSetting()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			setSetting
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cSetting</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$cValue</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cSetting</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cValue</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodupdatePassword" id="updatePassword"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">updatePassword</span> (line <span class="line-number">220</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User::updatePassword()</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">null</span>
+		<span class="method-name">
+			updatePassword
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cPassword</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cPassword</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodwhatGroupID" id="whatGroupID"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">whatGroupID</span> (line <span class="line-number">327</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is to get what a groupid is based on the name</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			whatGroupID
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cName</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 28 Sep 2010 12:21:26 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+	</p>
+	</div></body>
+</html>

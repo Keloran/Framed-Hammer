@@ -1,0 +1,66 @@
+This is curretlly taking everythign from you so you dont need todo anything, but this means that any titles have to be in the database, and pulled out specially
+
+if we let the user dictate everything and and take over when it comes to jquery/css then we can have all the custom titles we want since they are dictated by the user
+
+current:
+head->getFullHead()
+
+proposed:
+head->getTemplate()
+
+standard:
+layout	= /layout/head.php
+layout	= /layout/templates/head.tpl
+
+which then lets you dictate the head element and parts of it
+
+page specific:
+news = /pages/news/head.php
+news = /pages/news/templates/head.tpl
+
+if there is a head/tpl then it uses that, otherwise it uses the standard
+
+<!--Page Specific-->
+head.php news example:
+<?php
+$oHead	= $oHammer->getHead();
+$oNews	= $oHammer->getNews();
+$cTitle	= $oNews->getTitle();
+
+$oHead->setTitle($cTitle);
+
+echo $oHead->renderTemplate();
+?>
+
+head.tpl news example:
+<!DOCTYPE html>
+	<head>
+		<title><?php echo $cTitle?></title>
+		<?php
+			echo $cCSS;
+			echo $cJS;
+		?>
+		<script type="text/javascript">
+			var $asda = "News Specific";
+		</script>
+	</head>
+	<body>
+	
+<!--Standard-->
+<?php
+$oHead	= $oHammer->getHead();
+
+$oHead->doStandard();
+
+echo $oHead->renderTemplate();
+?>
+
+<!DOCTYPE html>
+	<head>
+		<title><?php echo $cTitle?></title>
+		<?php
+			echo $cCSS;
+			echo $cJS;
+		?>
+	</head>
+	<body>
