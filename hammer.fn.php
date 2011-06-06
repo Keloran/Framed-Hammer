@@ -26,14 +26,22 @@ if (PHP_VERSION <= 5.3) {
 			if ($mFile_a == ".") { continue; }
 			if ($mFile_a == "..") { continue; }
 
+			//set the path
+			$mFile_a = $cPath . $mFile_a;
+
 			//go into the folder
 			if (is_dir($mFile_a)) {
 				if ($pHandle_b = opendir($mFile_a)) {
 					while(false !== ($mFile_b = readdir($pHandle_b))) {
-						if (strstr($mFile_b, ".fn")) {
-							if (is_file($cPath . basename($mFile_b))) {
-								$aFiles[] = $mFile_b;
-							}
+						//skips
+						if ($mFile_b == ".") { continue; }
+						if ($mFile_b == "..") { continue; }
+						if (!strpos($mFile_b, "fn")){ continue; } //its proberlly a trait file
+
+						//Only files left
+						$cPath_b = $mFile_a . "/" . $mFile_b;
+						if (is_file($cPath_b)) {
+							$aFiles[] = $cPath_b;
 						}
 					}
 					closedir($pHandle_b);
@@ -43,9 +51,11 @@ if (PHP_VERSION <= 5.3) {
 		closedir($pHandle_a);
 	}
 
+	//now include the new files
 	if ($aFiles) {
-		$cFiles = implode(PATH_SEPARATOR, $aFiles); //put the files into callable
-		if ($cFiles) { set_include_path(get_include_path() . PATH_SEPARATOR . $cFiles); } //add them to the include path
+		for($i = 0; $i < count($aFiles); $i++) {
+			include_once($aFiles[$i]);
+		}
 	}
 }
 
