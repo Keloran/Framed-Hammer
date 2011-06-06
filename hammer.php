@@ -7,15 +7,7 @@
  * @copyright Copyright (c) 2008
  * @version $Id: hammer.php 482 2010-01-04 14:26:49Z keloran $
  * @access public
-<<<<<<< HEAD
  */
-=======
- *
- * @notes getHammer, Taken from Tim Igoe's Framework http://tim.igoe.me.uk
- */
-#namespace Hammer;
-
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 class Hammer {
 	/**
 	* @var object $oHammer
@@ -181,10 +173,6 @@ class Hammer {
 		$oHammer = self::$oHammer;
 		$oHammer->setAddress($aFilter, $cSiteAddy);
 
-<<<<<<< HEAD
-=======
-		#return self::$oHammer;
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		return $oHammer;
 	}
 
@@ -274,12 +262,6 @@ class Hammer {
 		$oScrewDriver	= new ScrewDriver($aFilter, $cSiteAddress);
 		$aAddress	= $oScrewDriver->finalAddress();
 
-<<<<<<< HEAD
-=======
-		#$aAddress		= getAddress($aFilter, $cSiteAddress);
-		#$this->aAddress	= $aAddress;
-
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		//Set the variables
 		if ($aAddress) {
 			foreach ($aAddress as $cName => $cValue) {

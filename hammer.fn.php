@@ -302,7 +302,6 @@ function shrinkThis($cString, $iLength) {
 	$iPosBR		= stripos($cString, "<br />");
 
 	//Start the tags
-<<<<<<< HEAD
 	$iPosStart_a	= stripos($cString, "<");
 	$iPosEnd_a		= stripos($cString, ">");
 	$iLength1_a		= (($iPosEnd1 + 1) + $iPosStart_a);
@@ -320,30 +319,10 @@ function shrinkThis($cString, $iLength) {
 			$cReturn = substr($cString, 0, $iLength);
 		} else {
 			$cReturn = substr($cString, 0, $iLength_b);
-=======
-	$iPosStart1	= stripos($cString, "<");
-	$iPosEnd1	= stripos($cString, ">");
-	$iLength1	= (($iPosEnd1 + 1) + $iPosStart1);
-	$cStrStart	= substr($cString, $iPosStart1, $iLength1);
-
-	//Get the length before the tag
-	if (isset($iPosStart1) && ($iPosStart1 > 0)) {
-		$cStart2	= substr($cString, 0, $iPosStart1);
-		$iLength2	= strlen($cStart2);
-	}
-
-	//The return string if the tag is after the point wanted to cut anyway
-	if (isset($iLength2) && ($iLength2 > 0)) {
-		if ($iLength2 > $iLength) {
-			$cReturn = substr($cString, 0, $iLength);
-		} else {
-			$cReturn = substr($cString, 0, $iLength2);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		}
 	}
 
 	//End the tag
-<<<<<<< HEAD
 	if (isset($cStart_b)) {
 		$iPosEnd_c	= stripos($cString, "</" . $cStart_b . ">");
 		$iPosEnd_d	= (3 + $iLength_a);
@@ -359,23 +338,6 @@ function shrinkThis($cString, $iLength) {
 	//If the length is less than the end of the tags, then return after tag end
 	if (isset($iLength_e) && ($iLength_e > 0)) {
 		if ($iLength_e > $iLength) {
-=======
-	if (isset($cStart2)) {
-		$iPosEnd3	= stripos($cString, "</" . $cStart2 . ">");
-		$iPosEnd4	= (3 + $iLength1);
-		$iPosEnd5	= ($iPosEnd3 + $iPosEnd4);
-	}
-
-	//Get the length after the end of the tags
-	if (isset($iPosEnd5) && ($iPosEnd5 > 0)) {
-		$cStart3	= substr($cString, 0, $iPosEnd5);
-		$iLength5	= strlen($cStart3);
-	}
-
-	//If the length is less than the end of the tags, then return after tag end
-	if (isset($iLength5) && ($iLength5 > 0)) {
-		if ($iLength5 > $iLength) {
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 			$cReturn	= substr($cString, 0, $iLength);
 		}
 	}
@@ -536,10 +498,6 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 		if (isset($_SERVER['REMOTE_ADDR'])) {
 			if (!is_null($oAdmin)) {
 				if ($oAdmin->getBannedIP($_SERVER['REMOTE_ADDR'])) {
-<<<<<<< HEAD
-=======
-					#printRead("ermd");
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 					$oHammer->sendLocation("http://www.google.com");
 				}
 			}
@@ -763,10 +721,6 @@ function getBrowser($cSpecific = null) {
 		} else if (stristr($cBrowser, "MSIE 8") || stristr($cBrowser, "MSie 8")) {
 			$mBrowser = array("ie", "ie8");
 		} else if (stristr($cBrowser, "MSIE 9") || stristr($cBrowser, "MSie 9")) {
-<<<<<<< HEAD
-=======
-			#$mBrowser = array("ie", "ie9");
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 			$mBrowser = "ie9";
 		} else if (stristr($cBrowser, "MSIE") || stristr($cBrowser, "MSie")) {
 			$mBrowser = array("ie", "ie6");
