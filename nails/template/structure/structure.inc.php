@@ -16,12 +16,6 @@ class Template_Structure extends Template_Abstract {
 	protected $aVars;
 
 	//Variables that are only used in the class
-<<<<<<< HEAD
-=======
-	#public $cPage;
-	#public $cAction;
-	#public $cChoice;
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 	public $cLang;
 	public $cBrand;
 	public $cFilter;
@@ -230,12 +224,7 @@ class Template_Structure extends Template_Abstract {
 					"Layout"	=> $cLayout,
 					"this"		=> $this
 				);
-<<<<<<< HEAD
 		//printRead($aDebug);die();
-=======
-		#printRead($aDebug);
-		#die();
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 
 		//There still hasnt been a structure set so the page/action/choice dont have a specific strucutre
 		if (!$this->cTemplate) {

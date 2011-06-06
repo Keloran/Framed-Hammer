@@ -8,12 +8,6 @@
  * @version $Id: database.inc.php 288 2009-11-27 14:28:13Z keloran $
  * @access public
  */
-<<<<<<< HEAD
-//namespace Hammer\Database;
-=======
-#namespace Hammer\Database;
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
-
 class Database {
 	protected $aWrite 	= false;
 	protected $aRead	= false;
@@ -421,7 +415,6 @@ class Database {
 
 		return $aReturn;
 	}
-<<<<<<< HEAD
 
 	/**
 	 * Database::__call()
@@ -440,6 +433,4 @@ class Database {
 		return $mReturn;
 	}
 
-=======
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 }

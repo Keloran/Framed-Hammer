@@ -134,11 +134,7 @@ class User implements Nails_Interface {
      * @return null
      */
     private function install() {
-<<<<<<< HEAD
     	//Create the groups table
-=======
-    	#Create the groups table
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
     	printRead("users_groups");
     	$this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `users_groups` (
@@ -147,11 +143,7 @@ class User implements Nails_Interface {
 				PRIMARY KEY (`iGroupID`)
 			) ENGINE = InnoDB");
 
-<<<<<<< HEAD
 		//Create the users table and its index`s
-=======
-		#Create the users table and its index`s
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
     	printRead("users");
 		$this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `users` (
@@ -167,21 +159,9 @@ class User implements Nails_Interface {
 				`cLastIP` VARCHAR(15) NOT NULL,
 				PRIMARY KEY (`iUserID`),
 				INDEX (`iGroupID`),
-<<<<<<< HEAD
 				INDEX (`tsDate`)
 			) ENGINE = InnoDB");
 
-    	//Create the settings table
-=======
-				INDEX (`tsDate`),
-				FOREIGN KEY (`iGroupID`)
-					REFERENCES `users_groups` (`iGroupID`)
-					ON DELETE CASCADE
-					ON UPDATE CASCADE
-			) ENGINE = InnoDB");
-
-    	#Create the settings table
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
     	printRead("users_settings");
     	$this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `users_settings` (
@@ -197,11 +177,7 @@ class User implements Nails_Interface {
 					ON UPDATE CASCADE
 			) ENGINE = InnoDB");
 
-<<<<<<< HEAD
     	//Create the banned table
-=======
-    	#Create the banned table
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
     	printRead("users_banned");
     	$this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `users_banned` (
@@ -212,11 +188,7 @@ class User implements Nails_Interface {
 				INDEX (`iBannedID`, `iUserID`)
 			) ENGINE = InnoDB");
 
-<<<<<<< HEAD
 		//Install the groups
-=======
-		# Install the groups
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
     	printRead("Add Version");
     	$this->oNails->addVersion("users", "1.0");
 
@@ -552,7 +524,6 @@ class User implements Nails_Interface {
 
 			//banned
 			if ($this->getGroupName() == "banned") { $this->oNails->sendLocation("/banned/"); }
-<<<<<<< HEAD
 		} else {
 			$oSession 	= $this->oNails->getSession();
 			$cLog		= print_r(array(
@@ -560,8 +531,6 @@ class User implements Nails_Interface {
 				"Password"	=> $cPassword
 			), true);
 			$oSession->logIt($cLog, 1, "Console");
-=======
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		}
 
 		return $cHash;
@@ -575,10 +544,6 @@ class User implements Nails_Interface {
      * @return string
      */
     private function genHash($cSalt) {
-<<<<<<< HEAD
-=======
-        #$cRand = md5(uniqid(rand()) . $cSalt);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
     	$cRand = hammerHash($cSalt);
 
         return $cRand;
@@ -645,10 +610,6 @@ class User implements Nails_Interface {
 		if (defined("DEV") && defined("NOMAIL")) {
 			throw new Spanner($cMessage, 600);
 		} else {
-<<<<<<< HEAD
-=======
-			#ail($cEmail, $cTitle, $cMessage, "From: Admin <admin@" . Hammer::getHead()->aHead['address'] . ">");
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 			sendEmail($cEmail, $cTitle, $cMessage, "Admin", "admin@" . $cAddress);
 		}
     }
@@ -997,12 +958,6 @@ class User implements Nails_Interface {
 				$this->oDB->write("UPDATE users SET iGroupID = ? WHERE iUserID = ? LIMIT 1", $aUpdate);
 
 				$bReturn = true;
-<<<<<<< HEAD
-
-				//Get the random code
-
-=======
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 			}
 		}
 

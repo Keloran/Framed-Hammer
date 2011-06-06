@@ -244,7 +244,6 @@ class Database_PDO extends PDO implements Database_Interface {
 		$this->oResult	= null;
 		$this->aResult	= null;
 	}
-<<<<<<< HEAD
 
 	/**
 	 * Database_PDO::__call()
@@ -262,6 +261,4 @@ class Database_PDO extends PDO implements Database_Interface {
 
 		return $mReturn;
 	}
-=======
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 }

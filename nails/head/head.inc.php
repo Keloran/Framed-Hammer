@@ -140,11 +140,7 @@ class Head {
 	 * @return
 	 */
 	private function install() {
-<<<<<<< HEAD
 		// Create the keywords table
-=======
-		# Create the keywords table
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		$this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `keywords` (
 				`iKeywordID` INT NOT NULL AUTO_INCREMENT,
@@ -373,7 +369,6 @@ class Head {
 
 				if (strstr($cTag, "|")) {
 					$iSplitPos = strpos($cTag, "|");
-<<<<<<< HEAD
 					$cTag_a = substr($cTag, 0, $iSplitPos);
 					$cTag_b = substr($cTag, $iSplitPos + 1, strlen($cTag));
 
@@ -381,15 +376,6 @@ class Head {
 						$cReturn .= "<meta name=\"" . $cTag_b . "\" content=\"" . $cValue . "\" />\n";
 					} else {
 						$cReturn .= "<meta name=\"" . $cTag_b . "\" http-equiv=\"" . $cTag_b . "\" content=\"" . $cValue . "\" />\n";
-=======
-					$cTag1 = substr($cTag, 0, $iSplitPos);
-					$cTag2 = substr($cTag, $iSplitPos + 1, strlen($cTag));
-
-					if ($this->cDocType == "html5") {
-						$cReturn .= "<meta name=\"" . $cTag2 . "\" content=\"" . $cValue . "\" />\n";
-					} else {
-						$cReturn .= "<meta name=\"" . $cTag2 . "\" http-equiv=\"" . $cTag2 . "\" content=\"" . $cValue . "\" />\n";
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 					}
 				} else {
 					if ($this->cDocType == "html5") {
@@ -416,11 +402,6 @@ class Head {
 			} else {
 				$cHTTP = "http";
 			}
-<<<<<<< HEAD
-=======
-
-    		#$cReturn .= "<link rel=\"canonical\" href=\"" . $cHTTP . "://" . $cCan . "\" />\n";
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
     	}
 
     	return $cReturn;
@@ -434,21 +415,12 @@ class Head {
      * @return
      */
     public function getCSS($cFile = false, $cStyle = false) {
-<<<<<<< HEAD
     	$cCSS_a = false;
 		if (isset($this->cCSS)) { if ($this->cCSS) { $cCSS_a = $this->cCSS; }} //this is to avoid a memory loss when apache segfaults
 
 		//set the css
 		$mConfigCSS	= $this->oNails->getConfig("css", $this->oNails->getConfigKey());
 		$mCSS		= ($cFile ? $cFile : ($cCSS_a ? $cCSS_a : $mConfigCSS));
-=======
-    	$cCSS1 = false;
-		if (isset($this->cCSS)) { if ($this->cCSS) { $cCSS1 = $this->cCSS; }} //this is to avoid a memory loss when apache segfaults
-
-		//set the css
-		$mConfigCSS	= $this->oNails->getConfig("css", $this->oNails->getConfigKey());
-		$mCSS		= ($cFile ? $cFile : ($cCSS1 ? $cCSS1 : $mConfigCSS));
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
     	$cTrue		= false;
     	$cPath		= false;
 
@@ -456,21 +428,12 @@ class Head {
     	$cCSS	= "";
 
     	//the folder can be css, or stylesheet
-<<<<<<< HEAD
     	$cFolder_a	= SITEPATH . "/css/";
     	$cFolder_b	= "/css/";
 
     	if (is_dir(SITEPATH . "/stylesheet/")) {
     		$cFolder_a	= SITEPATH . "/stylesheet/";
     		$cFolder_b	= "/stylesheet/";
-=======
-    	$cFolder1	= SITEPATH . "/css/";
-    	$cFolder2	= "/css/";
-
-    	if (is_dir(SITEPATH . "/stylesheet/")) {
-    		$cFolder1	= SITEPATH . "/stylesheet/";
-    		$cFolder2	= "/stylesheet/";
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
     	}
 
 		if (!is_array($mCSS)) {
@@ -479,13 +442,8 @@ class Head {
 				$cPath	= $mCSS;
 				$cTrue	= SITEPATH . $mCSS;
 			} else {
-<<<<<<< HEAD
 				$cPath	= $cFolder_b . $mCSS . ".css";
 				$cTrue	= $cFolder_a . $mCSS . ".css";
-=======
-				$cPath	= $cFolder2 . $mCSS . ".css";
-				$cTrue	= $cFolder1 . $mCSS . ".css";
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 			}
 		} else {
 			foreach ($mCSS as $cFontName => $cStyleSheet) {
@@ -493,13 +451,8 @@ class Head {
 					$cStyleSheet	.= ".css";
 				}
 
-<<<<<<< HEAD
 				if (file_exists($cFolder_a . $cStyleSheet)) {
 					$cCSS	.= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $cStyleSheet . "\" />\n";
-=======
-				if (file_exists($cFolder1 . $cStyleSheet)) {
-					$cCSS	.= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder2 . $cStyleSheet . "\" />\n";
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 				}
 			}
 		}
@@ -515,19 +468,13 @@ class Head {
 		}
 
 		if (file_exists($cTrue)) {
-<<<<<<< HEAD
 			if (file_exists($cFolder_a . "style.css")) {
 				$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . "/style.css\" />\n";
-=======
-			if (file_exists($cFolder1 . "style.css")) {
-				$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder2 . "/style.css\" />\n";
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 				$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $this->cCSS . "\" />\n";
 			} else {
 				$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $this->cCSS . "\" />\n";
 			}
 		} else {
-<<<<<<< HEAD
 			if ($cStyled && file_exists($cFolder_b . $cStyled . "/style.css")) {
 				$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $cStyled . "/style.css\" />\n";
 			} else {
@@ -536,16 +483,6 @@ class Head {
 		}
 
         // Here so it overrides the default style
-=======
-			if ($cStyled && file_exists($cFolder1 . $cStyled . "/style.css")) {
-				$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder2 . $cStyled . "/style.css\" />\n";
-			} else {
-				$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder2 . "/style.css\" />\n";
-			}
-		}
-
-        # Here so it overrides the default style
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
         $mBrowser = getBrowser();
         $cCSS .= $this->getBrowserCSS($mBrowser, $cStyled);
 
@@ -613,42 +550,24 @@ class Head {
     	$cCSS		= "";
 
     	//The stylefolder can be stylesheets, or css
-<<<<<<< HEAD
     	$cFolder_a	= SITEPATH . "/css/";
     	$cFolder_b	= "/css/";
 
     	if (is_dir(SITEPATH . "/stylesheet/")) {
     		$cFolder_a	=  SITEPATH . "/stylesheet/";
     		$cFolder_b	= "/stylesheet/";
-=======
-    	$cFolder1	= SITEPATH . "/css/";
-    	$cFolder2	= "/css/";
-
-    	if (is_dir(SITEPATH . "/stylesheet/")) {
-    		$cFolder1	=  SITEPATH . "/stylesheet/";
-    		$cFolder2	= "/stylesheet/";
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
     	}
 
 
     	if (is_array($mBrowser)) {
     		for ($i = 0; $i < count($mBrowser); $i++) {
 		    	if ($cStyled) {
-<<<<<<< HEAD
-    			    if (file_exists($cFolder_a . $cStyled . "/" . $mBrowser[$i] . ".css")) {
-    			    	$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $cStyled . "/" . $mBrowser[$i] . ".css	\" />\n";
-    	    		}
+    				if (file_exists($cFolder_a . $cStyled . "/" . $mBrowser[$i] . ".css")) {
+    			    		$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $cStyled . "/" . $mBrowser[$i] . ".css	\" />\n";
+    	    			}
 		    	} else {
     			    if (file_exists($cFolder_a . $mBrowser[$i] . ".css")) {
     			        $cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $mBrowser[$i] . ".css\" />\n";
-=======
-    			    if (file_exists($cFolder1 . $cStyled . "/" . $mBrowser[$i] . ".css")) {
-    			    	$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder2 . $cStyled . "/" . $mBrowser[$i] . ".css	\" />\n";
-    	    		}
-		    	} else {
-    			    if (file_exists($cFolder1 . $mBrowser[$i] . ".css")) {
-    			        $cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder2. $mBrowser[$i] . ".css\" />\n";
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
     				}
     			}
     		}
@@ -660,21 +579,12 @@ class Head {
     		}
     	} else {
     		if ($cStyled) {
-<<<<<<< HEAD
     		    if (file_exists($cFolder_a . $cStyled . "/" . $mBrowser . ".css")) {
     		    	$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $cStyled . "/" . $mBrowser . ".css	\" />\n";
     			}
     		} else {
     		    if (file_exists($cFolder_a . $mBrowser . ".css")) {
     		        $cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $mBrowser . ".css\" />\n";
-=======
-    		    if (file_exists($cFolde1r . $cStyled . "/" . $mBrowser . ".css")) {
-    		    	$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder2 . $cStyled . "/" . $mBrowser . ".css	\" />\n";
-    			}
-    		} else {
-    		    if (file_exists($cFolder1 . $mBrowser . ".css")) {
-    		        $cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder2 . $mBrowser . ".css\" />\n";
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
     			}
     		}
     	}
@@ -1042,11 +952,7 @@ class Head {
 		$cReturn .= $this->getKeywords();
 		$cReturn .= $this->getDescription();
 		$cReturn .= $this->getMetaTags();
-<<<<<<< HEAD
 		//$cReturn .= $this->getRSS();
-=======
-		#$cReturn .= $this->getRSS();
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 
 		if ($this->bJS) {
 			//jQuery

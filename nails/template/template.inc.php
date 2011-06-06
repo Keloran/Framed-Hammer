@@ -94,15 +94,7 @@ class Template extends Template_Abstract {
 	static function getInstance($aParams, $cSite = false, $cSkinSetting = false) {
 		if (is_null(self::$oTemplate)) {
 			self::$oTemplate	= new Template($aParams, $cSite, $cSkinSetting);
-<<<<<<< HEAD
 		}
-
-=======
-			#self::$oTemplate	= new Template($oNails, $aParams);
-		}
-
-		#self::$oTemplate->setTemplate();
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		return self::$oTemplate;
 	}
 
@@ -532,12 +524,6 @@ class Template extends Template_Abstract {
 		//remove the option of pages for templates
 		if (strstr($this->cTemplate, "http:")) { return false; }
 
-<<<<<<< HEAD
-=======
-		//now there is something returned but i still dont trust it
-		#if (!$this->bThere) { return $this->errorTemplate("Ahh somet went very wrong"); }
-
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		//since the template doesnt exist, yet somehow it has been checked
 		if (!$this->cTemplate) {
 			$this->setTemplate(); //this sometimes doesnt get called
@@ -569,13 +555,8 @@ class Template extends Template_Abstract {
 			}
 
 			//check for old style
-<<<<<<< HEAD
 			if (!file_exists(SITEPATH . "templates/structure.struct")) { //really old method
 				if (!file_exists(SITEPATH . "layout/structure.struct")) { //newer method
-=======
-			if (!file_exists(SITEPATH . "templates/structure.struct")) { #really old method
-				if (!file_exists(SITEPATH . "layout/structure.struct")) { #newer method
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 					if (!isset($oHammer)) {
 						$oHammer = Hammer::getHammer();
 					}
@@ -586,10 +567,6 @@ class Template extends Template_Abstract {
 			//Get rid of the hammer object reference for templates tehy dont need it
 			if (strstr($this->cTemplate, "tpl")) {
 				unset($this->aVars["oHammer"]);
-<<<<<<< HEAD
-=======
-				#$this->setVars("oHammer", false);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 			}
 
 			$this->setVars("cExtraJS", $this->cExtraJS);
@@ -600,13 +577,7 @@ class Template extends Template_Abstract {
 			$cTemplate	= false;
 			if (file_exists($this->cTemplate)) {
 				ob_start();
-<<<<<<< HEAD
 					extract($this->aVars, EXTR_SKIP);
-=======
-				#ob_start("ob_process");
-					extract($this->aVars, EXTR_SKIP);
-					#include_once($this->cTemplate);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 					include($this->cTemplate);
 					$cTemplate	.= ob_get_contents();
 					$cTemplate	.= $this->cJS;
@@ -614,10 +585,6 @@ class Template extends Template_Abstract {
 
 				//if there is a started ob
 				if (ob_get_level()) { ob_end_clean(); }
-<<<<<<< HEAD
-=======
-				#ob_clean();
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 			} else {
 				$cTemplate	= $this->errorTemplate($this->cTemplate);
 			}
@@ -686,10 +653,6 @@ class Template extends Template_Abstract {
 		if ($this->cError) {
 			if (file_exists(SITEPATH . $cLayoutFolder . "templates/error.tpl")) {
 				//Custom error page
-<<<<<<< HEAD
-=======
-				#ob_start();
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 				ob_start("ob_process");
 					include(SITEPATH . $cLayoutFolder . "templates/error.tpl");
 					$cTemplate = ob_get_contents();

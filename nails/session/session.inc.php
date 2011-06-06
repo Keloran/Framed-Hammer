@@ -288,11 +288,7 @@ class Session {
 	 * @param string $cType
 	 * @return null
 	 */
-<<<<<<< HEAD
 	public function logIt($cLog, $iLog, $cType) {
-=======
-	private function logIt($cLog, $iLog, $cType) {
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		if ($cType == "Database") {
 			if (isset($_SERVER['REMOTE_ADDR'])) {
 				$aInsert = array($this->iUserID, session_id(), $cLog, ip2long($_SERVER['REMOTE_ADDR']), $_SERVER['HTTP_USER_AGENT']);

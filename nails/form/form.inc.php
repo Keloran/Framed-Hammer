@@ -371,11 +371,7 @@ class Form {
 
 		//set this to text by default
 		if (!$cType) { $cType = "text"; }
-<<<<<<< HEAD
 		//$aType[] = array("extraType" => $cType);
-=======
-		#$aType[] = array("extraType" => $cType);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 
 		//placeholder
 		if (!$cPlaceHolder) { $cPlaceHolder = $cLabel; }
@@ -1313,15 +1309,8 @@ class Form {
 		}
 
 		//now that the form is allowed to proced
-<<<<<<< HEAD
 		ob_start();
 			print($cReturn);
-=======
-		#ob_start("ob_process");
-		ob_start();
-			print($cReturn);
-			#print_r($cReturn, false);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 			$cObReturn = ob_get_contents();
 		ob_end_clean();
 
