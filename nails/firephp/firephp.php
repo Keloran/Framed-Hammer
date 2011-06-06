@@ -616,7 +616,6 @@ class FirePHP {
 	 * @throws Exception
 	 */
 	public function fb($Object) {
-
 		if(!$this->enabled) {
 			return false;
 		}
