@@ -521,18 +521,28 @@ function printRead($mString, $mOptions = null) {
 
 	//Console remove all the tags since not in use for console, and firephp
 	if ($bConsole || $bFirePHP) {
-		$cReturn = strip_tags($cReturn);
+		$cReturn_a = str_replace("<br />", "\n", $cReturn);
+		$cReturn_a = strip_tags($cReturn_a);
 
 		if ($bFirePHP) {
-			FirePHP($cReturn);
+			FirePHP($cReturn_a);
 		}
 	}
 
 	//return or echo
 	if ($bReturn) {
-		return $cReturn;
+		//Console or not
+		if ($bConsole) {
+			return $cReturn_a;
+		} else {
+			return $cReturn;
+		}
 	} else {
-		echo $cReturn;
+		if ($bConsole) {
+			echo $cReturn_a;
+		} else {
+			echo $cReturn;
+		}
 	}
 }
 
