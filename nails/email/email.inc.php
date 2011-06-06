@@ -1061,11 +1061,7 @@ class Email implements Nails_Interface {
 		$mReturn	= false;
 		$bAll		= false;
 		$cBody		= false;
-<<<<<<< HEAD
 		$mReturn_a	= false;
-=======
-		$mReturn1	= false;
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 
 		//gone to far
 		if ($iMessageID > $this->getCount()) {
@@ -1079,27 +1075,17 @@ class Email implements Nails_Interface {
 
 		//are we still connected
 		if ($this->checkConnection()) {
-<<<<<<< HEAD
 			$oStruct_a	= imap_bodystruct($this->pIMAP, $iMessageID, 1);
 			$oStruct_b	= imap_bodystruct($this->pIMAP, $iMessageID, 2);
 
 			if ($this->oNails->cChoice == "query") {
 				printRead($oStruct_a);
 				printRead($oStruct_b);
-=======
-			$oStruct1	= imap_bodystruct($this->pIMAP, $iMessageID, 1);
-			$oStruct2	= imap_bodystruct($this->pIMAP, $iMessageID, 2);
-
-			if ($this->oNails->cChoice == "query") {
-				printRead($oStruct1);
-				printRead($oStruct2);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 				printRead(imap_fetchstructure($this->pIMAP, $iMessageID));
 				printRead(imap_headerinfo($this->pIMAP, $iMessageID));
 			}
 
 			//prefer to get the html version
-<<<<<<< HEAD
 			if (is_object($oStruct_b)) {
 				$cBody	= imap_fetchbody($this->pIMAP, $iMessageID, 2);
 
@@ -1118,44 +1104,16 @@ class Email implements Nails_Interface {
 						}
 					} else {
 						$mReturn_a	= $cBody;
-=======
-			if (is_object($oStruct2)) {
-				$cBody	= imap_fetchbody($this->pIMAP, $iMessageID, 2);
-
-				if ($oStruct2->subtype == "HTML") {
-					$mReturn	= $this->returnBody($cBody, $oStruct2->encoding);
-					$bAll		= true;
-				} else if ($oStruct2->subtype == "PNG") {
-					$mReturn = $this->returnImage($oStruct2, $iMessageID, 2);
-					$bAll		= true;
-				} else {
-					if (is_array($oStruct2->parameters)) {
-						if (strtolower($oStruct2->parameters[0]->value) == "utf-8") {
-							$mReturn1 = utf8_decode($cBody);
-						} else {
-							$mReturn1 = $cBody;
-						}
-					} else {
-						$mReturn1	= $cBody;
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 					}
 				}
 			}
 
 			if (!$bAll) {
-<<<<<<< HEAD
 				if (is_object($oStruct_a)) { //if no html version at all
 					$cBody		= imap_fetchbody($this->pIMAP, $iMessageID, 1);
 					$aParams	= $oStruct_a->parameters[0];
 
 					if ($oStruct_a->subtype == "PLAIN") {
-=======
-				if (is_object($oStruct1)) { //if no html version at all
-					$cBody		= imap_fetchbody($this->pIMAP, $iMessageID, 1);
-					$aParams	= $oStruct1->parameters[0];
-
-					if ($oStruct1->subtype == "PLAIN") {
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 						if ($aParams->value == "UTF-8") {
 							$mReturn = utf8_decode($cBody);
 						} else {
@@ -1163,7 +1121,6 @@ class Email implements Nails_Interface {
 						}
 
 						$mReturn = $this->parseMail($mReturn);
-<<<<<<< HEAD
 					} else if ($oStruct_a->subtype == "JPEG") {
 						$mReturn = $this->returnImage($oStruct_a, $iMessageID, 1);
 					} else if ($oStruct_a->subtype == "PNG") {
@@ -1172,16 +1129,6 @@ class Email implements Nails_Interface {
 						$mReturn = "Image invalid";
 					} else {
 						$mReturn = $this->returnBody($cBody, $oStruct_a->encoding);
-=======
-					} else if ($oStruct1->subtype == "JPEG") {
-						$mReturn = $this->returnImage($oStruct1, $iMessageID, 1);
-					} else if ($oStruct1->subtype == "PNG") {
-						$mReturn = $this->returnImage($oStruct1, $iMessageID, 1);
-					} else if ($oStruct1->subtype == "TIFF") {
-						$mReturn = "Image invalid";
-					} else {
-						$mReturn = $this->returnBody($cBody, $oStruct1->encoding);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 
 						//now take the parameters and do something with them
 						if (strtolower($aParams->value) == "utf-8") {
@@ -1192,11 +1139,7 @@ class Email implements Nails_Interface {
 			}
 		}
 
-<<<<<<< HEAD
 		return $mReturn . $mReturn_a;
-=======
-		return $mReturn . $mReturn1;
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 	}
 
 	/**
@@ -1348,11 +1291,6 @@ class Email implements Nails_Interface {
 		$cReturn	= $cMessage;
 		$cReturn	= $this->decodeUTF($cReturn);
 		$cReturn	= str_replace('=\n', "", $cReturn);
-<<<<<<< HEAD
-=======
-
-		#$cReturn	= utf8_decode($cReturn);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		$cReturn	= nl2br($cReturn);
 
 		//make href links href links
@@ -1399,13 +1337,6 @@ class Email implements Nails_Interface {
 			$cReturn 	= preg_replace($aSearch, $aReplace, $cReturn);
 		}
 
-<<<<<<< HEAD
-=======
-		//amazon bug
-		#$cReturn	= str_replace("</head", "", $cReturn);
-
-
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		return $cReturn;
 	}
 
