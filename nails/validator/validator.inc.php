@@ -703,10 +703,6 @@ class Validator {
 	public function textArea($cText, $cIgnore = false) {
 		if (!isset($cText[1])) { return false; }
 
-<<<<<<< HEAD
-=======
-		#$cText = htmlentities($cText);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		$cText = $this->bbCode($cText, $cIgnore);
 
 		return $cText;
