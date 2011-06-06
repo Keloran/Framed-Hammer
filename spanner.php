@@ -519,11 +519,14 @@ function printRead($mString, $mOptions = null) {
 	$cReturn .= $cCode;
 	$cReturn .= "</code><br />";
 
-	//Console remove all the tags since not in use for console
-	if ($bConsole) { $cReturn = strip_tags($cReturn); }
+	//Console remove all the tags since not in use for console, and firephp
+	if ($bConsole || $bFirePHP) {
+		$cReturn = strip_tags($cReturn);
 
-	//do we want to use FirePHP
-	if ($bFirePHP) { FirePHP($cReturn); }
+		if ($bFirePHP) {
+			FirePHP($cReturn);
+		}
+	}
 
 	//return or echo
 	if ($bReturn) {
