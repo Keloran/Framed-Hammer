@@ -16,7 +16,7 @@ if (PHP_VERSION >= 5.3) {
 
 //is it 5.4 in which case traits exist
 if (PHP_VERSION <= 5.3) {
-	$cPath = HAMMER_PATH . "/nails/traits/";
+	$cPath = HAMMERPATH . "/nails/traits/";
 
 	$aFiles = false;
 	if ($pHandle_a = opendir($cPath)) {

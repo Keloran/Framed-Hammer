@@ -167,7 +167,11 @@ class Screws {
 	 */
 	private function defineNailsPath() {
 		$bReturn	= false;
-		if (defined("USERNAILS")) { $bReturn = true; }
+		if (defined("USERNAILS")) {
+			$bReturn = true;
+		} else {
+			return false;
+		}
 
 		//site class
 		$this->fSiteClass_a	= USERNAILS	. $this->cClass_a	. ".inc.php";
