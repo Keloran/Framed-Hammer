@@ -101,13 +101,6 @@ class Form_Input extends Form_Abstract {
 		//has an id
 		if ($this->aElement[$cName]['id']) { $cReturn .= " id=\"" . $this->aElement[$cName]['id'] . "\""; }
 
-<<<<<<< HEAD
-=======
-		//there is an error
-		#$cError = $this->getError($cName);
-		#if ($cError) { $cReturn .= " error=\"" . $cError . "\""; }
-
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		//set its name and close the opener
 		$cReturn .= " name=\"" . $cName . "\"";
 

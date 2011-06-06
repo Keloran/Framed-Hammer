@@ -33,7 +33,6 @@ abstract class Form_Abstract implements Form_Interface {
 	 */
 	public function getTyped() {
 		$cName = $this->cName;
-<<<<<<< HEAD
 		if (isset($this->aElement[$cName])) {
 			if (isset($this->aElement[$cName]['type'])) {
 				return $this->aElement[$cName]['type'];
@@ -41,10 +40,6 @@ abstract class Form_Abstract implements Form_Interface {
 		}
 
 		return false;
-=======
-
-		return $this->aElement[$cName]['type'];
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 	}
 
 	/**
@@ -61,11 +56,7 @@ abstract class Form_Abstract implements Form_Interface {
 		//does it have extraType defined
 		if (isset($this->aElement[$cName]['extraType']) && ($this->aElement[$cName]['extraType'] == "hidden")) {
 			$bHidden = true;
-<<<<<<< HEAD
 		} else if (isset($this->aElement[$cName]['type']) && ($this->aElement[$cName]['type'] == "hidden")) {
-=======
-		} else if ($this->aElement[$cName]['type'] == "hidden") {
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 			$bHidden = true;
 		}
 
@@ -292,10 +283,6 @@ abstract class Form_Abstract implements Form_Interface {
 	 * @return string
 	 */
 	public function createLabel($cName) {
-<<<<<<< HEAD
-=======
-		#$cName		= $this->cName;
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		$cReturn	= false;
 		$cLabel		= false;
 
