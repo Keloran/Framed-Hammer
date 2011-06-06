@@ -523,7 +523,7 @@ function printRead($mString, $mOptions = null) {
 	if ($bConsole) { $cReturn = strip_tags($cReturn); }
 
 	//do we want to use FirePHP
-	if ($bFirePHP) { return FirePHP($cReturn); }
+	if ($bFirePHP) { FirePHP($cReturn); }
 
 	//return or echo
 	if ($bReturn) {
