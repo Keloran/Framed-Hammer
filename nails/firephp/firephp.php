@@ -596,19 +596,12 @@ class FirePHP {
 	public function detectClientExtension() {
 		/* Check if FirePHP is installed on client */
 		$headers = getallheaders();
-		if (isset($headers['X-FirePHP']) && version_compare($headers['X-FirePHP'], '0.0.6', '>='))
-		{
+		if (isset($headers['X-FirePHP']) && version_compare($headers['X-FirePHP'], '0.0.6', '>=')) {
 			return true;
-		}
-		else
-		{
-			if(!@preg_match_all('/\sFirePHP\/([\.|\d]*)\s?/si',$this->getUserAgent(),$m) ||
-				!version_compare($m[1][0],'0.0.6','>='))
-			{
+		} else {
+			if(!@preg_match_all('/\sFirePHP\/([\.|\d]*)\s?/si',$this->getUserAgent(),$m) || !version_compare($m[1][0],'0.0.6','>=')) {
 				return false;
-			}
-			else
-			{
+			} else {
 				return true;
 			}
 		}
@@ -1537,6 +1530,18 @@ class FirePHP {
 		}
 
 		return $this->json_encode(strval($name)) . ':' . $encoded_value;
+	}
+}
+
+
+if (!function_exists('getallheaders')) {
+	function getallheaders() {
+		foreach ($_SERVER as $name => $value) {
+			if (substr($name, 0, 5) == 'HTTP_') {
+				$headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+			}
+		}
+		return $headers;
 	}
 }
 ?>
