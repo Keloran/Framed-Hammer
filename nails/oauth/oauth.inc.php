@@ -86,11 +86,7 @@ class OAuth {
 	 * @return
 	 */
 	public function setToken($cToken = null, $cSecret = null) {
-<<<<<<< HEAD
 		//$aParams = func_get_args();
-=======
-		#$aParams = func_get_args();
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		$this->cToken 		= $cToken;
 		$this->cTokenSecret	= $cSecret;
 	}

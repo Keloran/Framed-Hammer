@@ -73,10 +73,6 @@ class Charts_PNG_Pie {
 
 			$iDegree		= ($oObject->iValue / $iTotal) * 360;
 
-<<<<<<< HEAD
-=======
-			#imagearc($this->imImage, 225, 225, 450, 450, $iStop, ($iStop + $iDegree), $imBlack);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 			imagefilledarc($this->imImage, 225, 225, 450, 450, $iStop, ($iStop + $iDegree), $imPartColor, IMG_ARC_PIE);
 
 			$iStop 		= $iStop + $iDegree;

@@ -185,12 +185,7 @@ class Email_Attachments extends Email_Abstract {
 			$cDecode 	= $this->simpleDecode($cFile, $iEnc);
 			$iLength	= strlen($cDecode);
 
-<<<<<<< HEAD
 			//printRead(array($cFile, $cDecode, $iLength, $iLengthO));die();
-=======
-			#printRead(array($cFile, $cDecode, $iLength, $iLengthO));die();
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
-
 			header('Content-Description: File Transfer');
 			header("Content-Type: " . $cType);
 			header("Content-Disposition: attachment; filename=\"" . $cFilename . "\"");

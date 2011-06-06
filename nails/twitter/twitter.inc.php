@@ -120,10 +120,6 @@ class Twitter implements Nails_Interface {
 	 */
 	public function setUserToken($cToken) {
 		//set the token for the user
-<<<<<<< HEAD
-=======
-		#$this->oUser->setSetting("twitterToken", $cToken);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		$this->oNails->setSession("twitterToken", $cToken);
 
 		//set the token in the twitter object
@@ -136,11 +132,6 @@ class Twitter implements Nails_Interface {
 		//set the session token
 		$this->oNails->setSession("auth_token", $oToken->oauth_token);
 		$this->oNails->setSession("auth_token_secret", $oToken->oauth_token_secret);
-<<<<<<< HEAD
-=======
-
-		#$this->setInfo();
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 	}
 
 	/**

@@ -9,10 +9,6 @@
  * @access public
  */
 class Twitter_Tweet extends OAuth {
-<<<<<<< HEAD
-=======
-#class Twitter_Tweet {
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 	const TWITTER_SIGNATURE_METHOD		= 'HMAC-SHA1';
 	public $cRequestTokenUrl 		= 'http://twitter.com/oauth/request_token';
 	public $cAccessTokenUrl 			= 'http://twitter.com/oauth/access_token';
@@ -37,10 +33,6 @@ class Twitter_Tweet extends OAuth {
 		$aArgs	= false;
 		if(!empty($aParams)) { $aArgs = array_shift($aParams); }
 
-<<<<<<< HEAD
-=======
-		#if ($this->oAuth) { return new Twitter_JSON($this->oAuth->httpRequest($cMethod, $cUrl, $aArgs)); }
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		return new Twitter_JSON(call_user_func(array($this, 'httpRequest'), $cMethod, $cUrl, $aArgs));
 	}
 

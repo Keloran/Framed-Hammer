@@ -33,10 +33,6 @@ class Charts_PNG_Create {
 		$aData	= $this->aData;
 
 		//load the font
-<<<<<<< HEAD
-=======
-		#$iFont	= imageloadfont(dirname(__FILE__) . "/courier8.gdf");
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		$iFont	= 2;
 
 		//get the legend width

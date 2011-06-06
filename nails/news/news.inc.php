@@ -88,11 +88,7 @@ class News implements Nails_Interface {
      * @return null
      */
     private function install() {
-<<<<<<< HEAD
         //Create the news table and its index`s
-=======
-        #Create the news table and its index`s
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
         $this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `news` (
 				`iNewsID` INT NOT NULL AUTO_INCREMENT,
@@ -107,11 +103,7 @@ class News implements Nails_Interface {
     	$aNews = array("iUserID", "iCategoryID", "iImageID");
 		$this->oNails->addIndexs("news", $aNews);
 
-<<<<<<< HEAD
         //Create the category table
-=======
-        #Create the category table
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
         $this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `news_categorys` (
 				`iCategoryID` INT NOT NULL AUTO_INCREMENT,
@@ -120,11 +112,7 @@ class News implements Nails_Interface {
 				PRIMARY KEY (`iCategoryID`))
 			ENGINE=MYISAM");
 
-<<<<<<< HEAD
         //Create the comments table
-=======
-        #Create the comments table
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
         $this->oNails->addTable("
 			CREATE  TABLE IF NOT EXISTS `news_comments` (
 			  `iCommentID` INT NOT NULL AUTO_INCREMENT,
@@ -137,11 +125,7 @@ class News implements Nails_Interface {
 			ENGINE = InnoDB");
 		$this->oNails->addIndexs("news_comments", array("iNewsID", "iUserID"));
 
-<<<<<<< HEAD
     	//Create the images table
-=======
-    	#Create the images table
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
     	$this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `news_images` (
 				`iImageID` INT NOT NULL AUTO_INCREMENT,
@@ -152,13 +136,8 @@ class News implements Nails_Interface {
 			ENGINE=InnoDB");
 		$this->oNails->addIndexs("news_images", "iNewsID");
 
-<<<<<<< HEAD
 		//check if the groups table is there, if it is add the allowed to comment
 		//and news options, and their respective index's
-=======
-		#check if the groups table is there, if it is add the allowed to comment
-		#and news options, and their respective index's
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		if ($this->oNails->groupsInstalled()) {
 			$aGroups = array("newsComments", "news");
 			$this->oNails->addGroups($aGroups);

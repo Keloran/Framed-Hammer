@@ -3,10 +3,6 @@ class Curl {
 	const iTimeout = 3;
 
 	static $oCurl 		= null;
-<<<<<<< HEAD
-=======
-	#static $singleton	= 0;
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 
 	private $pMc;
 	private $msgs;

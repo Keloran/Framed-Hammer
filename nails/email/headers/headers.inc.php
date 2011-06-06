@@ -158,11 +158,7 @@ class Email_Headers extends Email_Abstract {
 		$iPages 	= round(($iHeaders / $iLimit));
 		$this->iPages	= $iPages;
 
-<<<<<<< HEAD
 		//$aHeaders	= imap_headers($this->pIMAP);
-=======
-		#$aHeaders	= imap_headers($this->pIMAP);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		return $aHeaders;
 	}
 

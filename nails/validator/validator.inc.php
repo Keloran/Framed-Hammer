@@ -21,11 +21,6 @@ class Validator {
 	 *
 	 */
 	private function __construct(Nails $oNails) {
-<<<<<<< HEAD
-=======
-		#$this->oForm	= $oForm;
-		#$this->oNails	= $this->oForm->oNails;
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		$this->oNails	= $oNails;
 
 		if (isset($this->oNails) && $this->oNails) {
@@ -925,19 +920,11 @@ class Validator {
         );
 
 		//smileys
-<<<<<<< HEAD
 		$aSearch_b = array(
 			'`(<img src="\/images\/smiles\/)([a-zA-Z]+)(\.png" alt=")([a-zA-Z]+)(" \/>)`is',
 		);
 
 		$aReplace_b = array(
-=======
-		$aSearch2 = array(
-			'`(<img src="\/images\/smiles\/)([a-zA-Z]+)(\.png" alt=")([a-zA-Z]+)(" \/>)`is',
-		);
-
-		$aReplace2 = array(
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 			':\4:',
 		);
 
@@ -950,11 +937,7 @@ class Validator {
 					break;
 			} // switch
 		} else {
-<<<<<<< HEAD
 			$cReturn = preg_replace($aSearch_b, $aReplace_b, $cReturn);
-=======
-			$cReturn = preg_replace($aSearch2, $aReplace2, $cReturn);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		}
 
 		return $cReturn;

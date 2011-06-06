@@ -56,11 +56,7 @@ class Charts {
 	 * @access protected
 	 * @param string $cType
 	 */
-<<<<<<< HEAD
 	function __construct(Nails $oNails, $cType = false) {
-=======
-	function __construct(Nails $oNails, $aType = false) {
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		$this->oNails	= $oNails;
 
 		$oHead 		= $oNails->getHead();
@@ -83,7 +79,6 @@ class Charts {
 			case "mobileie":
 			default:
 				$this->cType = "PNG";
-<<<<<<< HEAD
 				break;
 		} // switch
 
@@ -91,15 +86,6 @@ class Charts {
 		$cSetType	= $cType ? $cType : $oUser->getSetting("graphType");
 		if ($cSetType) { $this->cType = $cSetType; }
 
-=======
-		} // switch
-
-		$oUser 		= $oNails->getUser();
-		$cSetType	= $aType ? $aType[0] : $oUser->getSetting("graphType");
-		if ($cSetType) { $this->cType = $cSetType; }
-
-
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		//do the upgrade
 		if ($oNails->checkVersion("charts", "1.0") == false) {
 			//1.0
@@ -163,12 +149,9 @@ class Charts {
 	function createChart($aOptions = false, $cType = false){
 		if ($aOptions) { $this->aOptions = $aOptions; }
 
-<<<<<<< HEAD
 		//it shouldnt be an array
 		if (is_array($this->cType)) { $this->cType = $this->cType[0]; }
 
-=======
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		//Type
 		switch($cType){
 			case "barv":
@@ -233,8 +216,4 @@ class Charts {
 		return $cReturn;
 	}
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3

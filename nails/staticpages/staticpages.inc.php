@@ -105,15 +105,9 @@ class StaticPages {
 		$cTitle			= $oXML->getElement("title");
 
 		$cText			= $this->cStaticPage . " is offline, go fix it";
-<<<<<<< HEAD
 
 		$a = array($cEmail, $cAddress, $cTitle, $cText);
 		//printRead($a);die();
-=======
-		
-		$a = array($cEmail, $cAddress, $cTitle, $cText);
-		#printRead($a);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 
 		sendEmail($cEmail, "Site Offline", $cText, $cText, "emergency@" . $cAddress, $cTitle);
 	}

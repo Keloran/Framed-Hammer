@@ -25,11 +25,7 @@ class Email implements Nails_Interface {
 	private $bConsole	= false;
 
 	//message details
-<<<<<<< HEAD
 	private $bIsUTF			= false;
-=======
-	private $bIsUTF8		= false;
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 	private $iMessageID		= false;
 	private $iMessageIDn	= false;
 	private $iStruct		= false;
@@ -281,12 +277,8 @@ class Email implements Nails_Interface {
 						if ($bClean) {
 							$aReturn[$j]['title']	= $this->getSubject($i);
 							$aReturn[$j]['address']	= urlencode(trim($this->getSubject($i)));
-<<<<<<< HEAD
 							//$aReturn[] = $aHeaders[$i];
-=======
 
-							#$aReturn[] = $aHeaders[$i];
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 							$j++;
 						} else {
 							$aReturn[] = $aHeaders[$j];
@@ -393,12 +385,7 @@ class Email implements Nails_Interface {
 		//now we have a valid number, get the details
 		if ($this->checkConnection()) {
 			$this->setMessageID($iMessageID);
-<<<<<<< HEAD
 			//$aReturn		= $this->getMessageDetails($iMessageID, $bText, $bImages);
-=======
-
-			#$aReturn		= $this->getMessageDetails($iMessageID, $bText, $bImages);
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 
 			$aReturn['newheaders']		= $this->getNewHeaders();
 			$aReturn['newtext']			= $this->getBodyText();

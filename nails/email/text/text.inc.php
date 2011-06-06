@@ -47,16 +47,11 @@ class Email_Text extends Email_Abstract {
 					$iEnc		= $aParts[0]->encoding;
 				}
 			} else if ($aParts[0]->type === 1) {
-<<<<<<< HEAD
 				$aParts_a = false;
-=======
-				$aParts1 = false;
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 
 				//its a multipart
 				if (isset($aParts[0]->parts)) {
 					//now it should be here
-<<<<<<< HEAD
 					$aParts_a = $aParts[0]->parts;
 
 					if ($aParts_a[0]->type === 0) {
@@ -64,15 +59,6 @@ class Email_Text extends Email_Abstract {
 						if ($aParts_a[0]->subtype == "PLAIN") {
 							$cReturn	= imap_fetchbody($this->pIMAP, $this->iMID, "1.1");
 							$iEnc		= $aParts_a[0]->encoding;
-=======
-					$aParts1 = $aParts[0]->parts;
-
-					if ($aParts1[0]->type === 0) {
-						//now this should always be text
-						if ($aParts1[0]->subtype == "PLAIN") {
-							$cReturn	= imap_fetchbody($this->pIMAP, $this->iMID, "1.1");
-							$iEnc		= $aParts1[0]->encoding;
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 						}
 					}
 				}
