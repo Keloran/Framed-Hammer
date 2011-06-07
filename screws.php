@@ -252,8 +252,6 @@ class Screws {
 			}
 		}
 
-if ($this->cOriginal) { print_r($this); die(); }
-
 		return false;
 	}
 }
