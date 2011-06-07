@@ -226,6 +226,8 @@ class Screws {
 		$aRange = range("a", "f");
 		$iRange	= count($aRange);
 
+if ($this->cOriginal == "Charts_PNG_Create") { printRead($this, array("color", "firephp"));die(); }
+
 		//base class
 		if (file_exists($this->fBaseClass)) {
 			$this->cPath = $this->fBaseClass;
