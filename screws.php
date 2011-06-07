@@ -223,7 +223,7 @@ class Screws {
 	 * @return bool
 	 */
 	private function checkExists() {
-		$aRange = range("a", "e");
+		$aRange = range("a", "f");
 		$iRange	= count($aRange);
 
 		//base class
