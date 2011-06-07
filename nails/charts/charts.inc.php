@@ -117,6 +117,10 @@ class Charts {
 		$aTmp = $this->aData;
 		$iSum = 0;
 
+		//since there might not be any data
+		if (!$this->aPreData) { return false; }
+
+
 		foreach ($this->aPreData as $oObject){
 			$iSum += $oObject->iValue;
 		}
