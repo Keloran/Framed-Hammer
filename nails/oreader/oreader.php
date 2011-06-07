@@ -50,7 +50,8 @@ class oReader {
 			$this->cOutput	.= $this->colorMe($this->cMethods);
 		}
 
-		printRead($this->cOutput, "noreader");
+		printRead("tester", "noreader");
+		printRead($this->cFormated, "noreader");
 
 		//if its console then it needs a different method
 		if ($this->bFirePHP || $this->bConsole) {
