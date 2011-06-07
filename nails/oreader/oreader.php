@@ -48,10 +48,10 @@ class oReader {
 		if ($this->bColor) {
 			$this->cOutput	 = $this->colorMe($this->cFormated);
 			$this->cOutput	.= $this->colorMe($this->cMethods);
+		} else {
+			$this->cOutput  = $this->cFormated;
+			$this->cOutput .= $this->cMethods;
 		}
-
-		printRead("tester", "noreader");
-		printRead($this->cFormated, "noreader");
 
 		//if its console then it needs a different method
 		if ($this->bFirePHP || $this->bConsole) {
@@ -77,13 +77,15 @@ class oReader {
 			$cConsole	.= $this->cConsole;
 
 			$this->cConsole = $cConsole;
-		} else {
-			$cOutput	 = "<b>printRead called by: " . $this->aFile[0]['file'] . "</b><br />";
-			$cOutput	.= "<b>on line: " . $this->aFile[0]['line'] . "</b><br />";
-			$cOutput	 = str_replace("<br&nbsp;/>", "<br />", $this->cOutput); //br gets added a space, so needs removing on old converted
-
-			$this->cOutput = $cOutput;
 		}
+
+		//get the output anyway
+		$cOutput	 = "<b>printRead called by: " . $this->aFile[0]['file'] . "</b><br />";
+		$cOutput	.= "<b>on line: " . $this->aFile[0]['line'] . "</b><br />";
+		$cOutput	 = str_replace("<br&nbsp;/>", "<br />", $this->cOutput); //br gets added a space, so needs removing on old converted
+
+		$this->cOutput = $cOutput;
+
 
 		//start hte code to make it nice
 		$cFinal = "<code>";
