@@ -371,7 +371,7 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 	$bEmail		= false;
 	$bColored	= false;
 	$bFirePHP	= false;
-	$bNoReader	= false;
+	$bScreen	= true;
 	$cName		= false;
 
 	//are hte options an array
@@ -400,8 +400,8 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 					$bFirePHP	= true;
 					break;
 
-				case "noreader":
-					$bNoReader 			= true;
+				case "noscreen":
+					$bScreen 	= false;
 					break;
 
 				default:
@@ -426,15 +426,15 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 				break;
 
 			case "color":
-				$bColor	= true;
+				$bColor		= true;
 				break;
 
 			case "firephp":
 				$bFirePHP	= true;
 				break;
 
-			case "noreader":
-				$bNoReader 			= true;
+			case "noscreen":
+				$bScreen	= false;
 				break;
 
 			default:
@@ -453,6 +453,7 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 	if ($bReturn) {		$oReader->bReturn	= true; }
 	if ($bFirePHP) {	$oReader->bFirePHP	= true; }
 	if ($cName) {		$oReader->cName		= $cName; }
+	if (!$bScreen) {	$oReader->bScreen	= false; }
 
 	//is there a fire level given
 	if ($cFireLevel) { $oReader->cLevel = $cFireLevel; }

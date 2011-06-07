@@ -25,6 +25,7 @@ class oReader {
 		$this->mOriginal	= $mString;
 		$this->aFile		= debug_backtrace();
 		$this->cFormated	= print_r($mString, 1);
+		$this->bScreen		= true;
 
 		//Show the methods of the class your trying diagnose
 		if (is_object($mString)) { $this->cMethods = print_r(get_class_methods($mString), 1); }
@@ -115,12 +116,14 @@ class oReader {
 
 			return $this->cOutput;
 		} else {
-			if ($this->bConsole) {
-				echo $this->cConsole;
-			} else if ($this->bEmail) {
-				echo $this->cEmail;
-			} else {
-				echo $this->cOutput;
+			if (!$this->bFirePHP && $this->bScreen) {
+				if ($this->bConsole) {
+					echo $this->cConsole;
+				} else if ($this->bEmail) {
+					echo $this->cEmail;
+				} else {
+					echo $this->cOutput;
+				}
 			}
 		}
 	}
