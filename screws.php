@@ -119,12 +119,15 @@ class Screws {
 		//so it doesnt do it on every loop
 		$iClass		= count($aClass);
 		$cClass_b	= $aClass[0];
+		$cClass_c	= $cClassName;
 
 		//its not the base class (e.g. Database)
 		if ($iClass >= 2) {
 			for ($i = 1; $i < $iClass; $i++) {
 				$cClass_b .= "/" . $aClass[$i]; //get the folder
 				$cClass_b .= "/" . $aClass[$i]; //get the file itself
+
+				$cClass_c = $aClass_a . $aClass[$i];
 			}
 		} else {
 			$cClass_a	= $cClassName . "/" . $cClassName;
@@ -132,6 +135,7 @@ class Screws {
 
 		$this->cClass_a 	= $cClass_a;
 		$this->cClass_b 	= $cClass_b;
+		$this->cClass_c		= $cClass_c;
 		$this->cClassName	= $cClassName;
 	}
 
@@ -148,6 +152,10 @@ class Screws {
 		//without the inc bit
 		$this->fHammerClass_c	= HAMMERPATH	. "/nails/" . $this->cClass_a	. ".php";
 		$this->fHammerClass_d	= HAMMERPATH	. "/nails/" . $this->cClass_b	. ".php";
+
+		//lots of unders with/out inc
+		$this->fHammerClass_e	= HAMMERPATH	. "/nails/" . $this->cClass_c	. ".inc.php";
+		$this->fHammerClass_f	= HAMMERPATH	. "/nails/" . $this->cClass_c	. ".php";
 
 		//Base class, this is only for things like spanner
 		$this->fBaseClass	= HAMMERPATH	. "/" 		. $this->cClassName	. ".php";
@@ -181,6 +189,10 @@ class Screws {
 		$this->fSiteClass_c	= USERNAILS . $this->cClass_a	. ".php";
 		$this->fSiteClass_d	= USERNAILS . $this->cClass_b	. ".php";
 
+		//lots of unders with/out inc
+		$this->fSiteClass_e	= USERNAILS	. "/nails/" . $this->cClass_c	. ".inc.php";
+		$this->fSiteClass_f	= USERNAILS	. "/nails/" . $this->cClass_c	. ".php";
+
 		return $bReturn;
 	}
 
@@ -196,6 +208,10 @@ class Screws {
 		//without the inc bit
 		$this->fSiteClass_c	= SITEPATH . "/libs/"	. $this->cClass_a	. ".php";
 		$this->fSiteClass_d	= SITEPATH . "/libs/"	. $this->cClass_b	. ".php";
+
+		//lots of unders, with/out inc
+		$this->fSiteClass_e	= SITEPATH . "/libs/"	. $this->cClass_c	. ".inc.php";
+		$this->fSiteClass_f	= SITEPATH . "/libs/"	. $this->cClass_c	. ".php";
 	}
 
 	/**
@@ -204,7 +220,8 @@ class Screws {
 	 * @return bool
 	 */
 	private function checkExists() {
-		$aRange = range("a", "d");
+		$aRange = range("a", "e");
+		$iRange	= count($aRange);
 
 		//base class
 		if (file_exists($this->fBaseClass)) {
@@ -213,7 +230,7 @@ class Screws {
 		}
 
 		//now do the site classes
-		for ($i = 0; $i < 4; $i++) {
+		for ($i = 0; $i < $iRange; $i++) {
 			$cClass	= "fSiteClass_";
 			$cClass .= $aRange[$i];
 			if (file_exists($this->$cClass)) {
@@ -223,7 +240,7 @@ class Screws {
 		}
 
 		//now do the hammer classes
-		for ($i = 0; $i < 4; $i++) {
+		for ($i = 0; $i < $iRange; $i++) {
 			$cClass	= "fHammerClass_";
 			$cClass .= $aRange[$i];
 			if (file_exists($this->$cClass)) {
