@@ -126,11 +126,7 @@ class Screws {
 		//its not the base class (e.g. Database)
 		if ($iClass >= 2) {
 			for ($i = 1; $i < $iClass; $i++) {
-				$cClass_b .= "/" . $aClass[$i]; //get the folder
-				$cClass_b .= "/" . $aClass[$i]; //get the file itself
-
-				//lots of underscores, so need to assign the final
-				$cClass_c = $cClass_a . "/" . $aClass[$i];
+				$cClass_b = $cClass_a . "/" . $aClass[$i];
 			}
 		} else {
 			$cClass_a	= $cClassName . "/" . $cClassName;
@@ -156,12 +152,8 @@ class Screws {
 		$this->fHammerClass_c	= HAMMERPATH	. "/nails/" . $this->cClass_a	. ".php";
 		$this->fHammerClass_d	= HAMMERPATH	. "/nails/" . $this->cClass_b	. ".php";
 
-		//lots of unders with/out inc
-		$this->fHammerClass_e	= HAMMERPATH	. "/nails/" . $this->cClass_c	. ".inc.php";
-		$this->fHammerClass_f	= HAMMERPATH	. "/nails/" . $this->cClass_c	. ".php";
-
 		//Base class, this is only for things like spanner
-		$this->fBaseClass	= HAMMERPATH	. "/" 		. $this->cClassName	. ".php";
+		$this->fBaseClass		= HAMMERPATH	. "/" 		. $this->cClassName	. ".php";
 
 		//if the dir exists
 		if (is_dir(SITEPATH . "/nails")) {
@@ -192,10 +184,6 @@ class Screws {
 		$this->fSiteClass_c	= USERNAILS . $this->cClass_a	. ".php";
 		$this->fSiteClass_d	= USERNAILS . $this->cClass_b	. ".php";
 
-		//lots of unders with/out inc
-		$this->fSiteClass_e	= USERNAILS	. $this->cClass_c	. ".inc.php";
-		$this->fSiteClass_f	= USERNAILS	. $this->cClass_c	. ".php";
-
 		return $bReturn;
 	}
 
@@ -211,10 +199,6 @@ class Screws {
 		//without the inc bit
 		$this->fSiteClass_c	= SITEPATH . "/libs/"	. $this->cClass_a	. ".php";
 		$this->fSiteClass_d	= SITEPATH . "/libs/"	. $this->cClass_b	. ".php";
-
-		//lots of unders, with/out inc
-		$this->fSiteClass_e	= SITEPATH . "/libs/"	. $this->cClass_c	. ".inc.php";
-		$this->fSiteClass_f	= SITEPATH . "/libs/"	. $this->cClass_c	. ".php";
 	}
 
 	/**
@@ -223,10 +207,8 @@ class Screws {
 	 * @return bool
 	 */
 	private function checkExists() {
-		$aRange = range("a", "f");
+		$aRange = range("a", "d");
 		$iRange	= count($aRange);
-
-if ($this->cOriginal == "Charts_PNG_Create") { printRead($this, array("color", "firephp"));die(); }
 
 		//base class
 		if (file_exists($this->fBaseClass)) {
