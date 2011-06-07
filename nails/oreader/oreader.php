@@ -34,9 +34,7 @@ class oReader {
 		$this->cFormated	= print_r($mString, 1);
 
 		//Show the methods of the class your trying diagnose
-		if (is_object($mString)) {
-			$this->cMethods = print_r(get_class_methods($mString), 1);
-		}
+		if (is_object($mString)) { $this->cMethods = print_r(get_class_methods($mString), 1); }
 	}
 
 	/**
