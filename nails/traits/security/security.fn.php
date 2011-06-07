@@ -59,3 +59,14 @@ function genHash($cString) {
 	return $cRand;
 }
 
+/**
+ * hideProtected()
+ *
+ * @desc This is used to hide passwords/hostnames from being sent through the email, although it doesnt work with hte xml
+ * @param string $cString
+ * @return
+ */
+function hideProtected($cString) {
+	$cReturn	= preg_replace('`(=>)(.*)`is', "\1**Protected**<br />", $cString);
+	return $cReturn;
+}

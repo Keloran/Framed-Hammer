@@ -357,15 +357,16 @@ class Spanner extends Exception {
  *
  * @param mixed $mString
  * @param mixed $mOptions
+ * @param string $cFireLevel this is the level at which we give to FirePHP
  * @return mixed
  */
-function printRead($mString, $mOptions = null) {
+function printRead($mString, $mOptions = null, $cFireLevel = null) {
 	//there is nothing here, so why continue processing
 	if (!$mString) { return null; }
 
 	//options that are set later
-	$aFile		= debug_backtrace();
-	$cReturn	= print_r($mString, 1);
+	#$aFile		= debug_backtrace();
+	#$cReturn	= print_r($mString, 1);
 	$bReturn	= false;
 	$bColor		= false;
 	$bConsole	= false;
@@ -373,8 +374,11 @@ function printRead($mString, $mOptions = null) {
 	$bColored	= false;
 	$bFirePHP	= false;
 
+	//get the output reader object
+	$oReader = new oReader($mString);
+
 	//Show the methods of the class your trying diagnose
-	if (is_object($mString)) { $cReturn .= print_r(get_class_methods($mString), 1); }
+	#if (is_object($mString)) { $cReturn .= print_r(get_class_methods($mString), 1); }
 
 	//are hte options an array
 	if (is_array($mOptions)) {
@@ -382,58 +386,68 @@ function printRead($mString, $mOptions = null) {
 			//Since this can be anything
 			switch ($mOptions[$i]) {
 				case "email":
-					$bEmail		= true;
+					$oReader->bEmail	= true;
 					break;
 
 				case "console":
-					$bConsole	= true;
+					$oReader->bConsole	= true;
 					break;
 
 				case "return":
 				case "ret":
-					$bReturn	= true;
+					$oReader->bReturn	= true;
 					break;
 
 				case "color":
-					$bColor		= true;
+					$oReader->bColor	= true;
 					break;
 
 				case "firephp":
-					$bFirePHP	= true;
+					$oReader->bFirePHP	= true;
 					break;
 
+				default:
+					$oReader->cName 	= $mOptions[$i];
+					break;
 			}
 		}
 	} else { //options are just a string
 		//Since this can be anything
 		switch ($mOptions) {
 			case "email":
-				$bEmail		= true;
+				$oReader->bEmail	= true;
 				break;
 
 			case "console":
-				$bConsole	= true;
+				$oReader->bConsole	= true;
 				break;
 
 			case "return":
 			case "ret":
-				$bReturn	= true;
+				$oReader->bReturn	= true;
 				break;
 
 			case "color":
-				$bColor		= true;
+				$oReader->bColor	= true;
 				break;
 
 			case "firephp":
-				$bFirePHP	= true;
+				$oReader->bFirePHP	= true;
 				break;
 
 			default:
-				$cName	= $mOptions;
+				$oReader->cName	= $mOptions;
 				break;
 		}
 	}
 
+	//is there a fire level given
+	if ($cFireLevel) { $oReader->cLevel = $cFireLevel; }
+
+	//now send to reader
+	$oReader->doOutput();
+
+	/**
 	//if there is color choice
 	if ($bColor) {
 		//different color modes depending on whats in it
@@ -544,6 +558,7 @@ function printRead($mString, $mOptions = null) {
 			echo $cReturn;
 		}
 	}
+	*/
 }
 
 /**
@@ -555,18 +570,6 @@ function FirePHP() {
 	$oInstance 	= FirePHP::getInstance(true);
 	$aArgs		= func_get_args();
 	return call_user_func_array(array($oInstance, "fb"), $aArgs);
-}
-
-/**
- * hideProtected()
- *
- * @desc This is used to hide passwords/hostnames from being sent through the email, although it doesnt work with hte xml
- * @param string $cString
- * @return
- */
-function hideProtected($cString) {
-	$cReturn	= preg_replace('`(=>)(.*)`is', "\1**Protected**<br />", $cString);
-	return $cReturn;
 }
 
 /**
