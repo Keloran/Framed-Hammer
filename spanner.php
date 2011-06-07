@@ -373,6 +373,7 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 	$bEmail		= false;
 	$bColored	= false;
 	$bFirePHP	= false;
+	$bNoReader	= false;
 
 	//get the output reader object
 	$oReader = new oReader($mString);
@@ -406,6 +407,10 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 					$oReader->bFirePHP	= true;
 					break;
 
+				case "noreader":
+					$bNoReader 			= true;
+					break;
+
 				default:
 					$oReader->cName 	= $mOptions[$i];
 					break;
@@ -435,6 +440,10 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 				$oReader->bFirePHP	= true;
 				break;
 
+			case "noreader":
+				$bNoReader 			= true;
+				break;
+
 			default:
 				$oReader->cName	= $mOptions;
 				break;
@@ -444,121 +453,120 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 	//is there a fire level given
 	if ($cFireLevel) { $oReader->cLevel = $cFireLevel; }
 
-	//now send to reader
-	$oReader->doOutput();
-
-	/**
-	//if there is color choice
-	if ($bColor) {
-		//different color modes depending on whats in it
-		if ((strstr($cReturn, "Array")) || (strstr($cReturn, "Object ("))) { //PHP highlight
-			$bAdded	= false;
-
-			//add the php tag if needed
-			if (!strstr($cReturn, "<?php")) {
-				$bAdded = true;
-				$cReturn	= "<?php " . $cReturn;
-			}
-
-			//now highlight the stuff
-			$cReturn	= highlight_string($cReturn, true);
-
-			//if added strip the <?php bit, only if added
-			if ($bAdded) {
-				$cStart	= substr($cReturn, 0, 35);
-				$cRest	= substr($cReturn, 79);
-
-				//the rest plus the start tag
-				$cReturn = $cStart .= $cRest;
-			}
-
-		//XML highlught
-		} else if (strstr($cReturn, "<?xml")) {
-			$cReturn	= xml_highlight($cReturn);
-
-		//SQL highlight
-		} else if ((stristr($cReturn, "SELECT")) && (stristr($cReturn, "FROM"))) {
-			$cReturn	= sql_highlight($cReturn);
-		}
-
-		$cCoded		= $cReturn;
+	if (!$bNoReader) {
+		return $oReader->doOutput();
 	} else {
-		if ($bFirePHP || $bConsole) {
+		//if there is color choice
+		if ($bColor) {
+			//different color modes depending on whats in it
+			if ((strstr($cReturn, "Array")) || (strstr($cReturn, "Object ("))) { //PHP highlight
+				$bAdded	= false;
+
+				//add the php tag if needed
+				if (!strstr($cReturn, "<?php")) {
+					$bAdded = true;
+					$cReturn	= "<?php " . $cReturn;
+				}
+
+				//now highlight the stuff
+				$cReturn	= highlight_string($cReturn, true);
+
+				//if added strip the <?php bit, only if added
+				if ($bAdded) {
+					$cStart	= substr($cReturn, 0, 35);
+					$cRest	= substr($cReturn, 79);
+
+					//the rest plus the start tag
+					$cReturn = $cStart .= $cRest;
+				}
+
+			//XML highlught
+			} else if (strstr($cReturn, "<?xml")) {
+				$cReturn	= xml_highlight($cReturn);
+
+			//SQL highlight
+			} else if ((stristr($cReturn, "SELECT")) && (stristr($cReturn, "FROM"))) {
+				$cReturn	= sql_highlight($cReturn);
+			}
+
 			$cCoded		= $cReturn;
-		}else {
-			//turn it into new lines
-			$cReturn	= str_replace(" ", "&nbsp;", $cReturn);
-			$cReturn	= preg_replace("{[\t]+}", "&nbsp;&nbsp;&nbsp;&nbsp;", $cReturn);
-			$cCoded		= nl2br($cReturn);
-		}
-	}
-
-	//split the lines and remove anything that might need protecting
-	$aLines 	= explode("\n", $cCoded);
-	$iLines		= count($aLines);
-	$cFixed		= "";
-	for ($i = 0; $i < $iLines; $i++) {
-		if (strstr($aLines[$i], "[hostname]")) {
-			$cFixed .= hideProtected($aLines[$i]);
-		} else if (strstr($aLines[$i], "[username]")) {
-			$cFixed .= hideProtected($aLines[$i]);
-		} else if (strstr($aLines[$i], "[password]")) {
-			$cFixed .= hideProtected($aLines[$i]);
-		} else if (strstr($aLines[$i], "[database]")) {
-			$cFixed .= hideProtected($aLines[$i]);
 		} else {
-			$cFixed .= $aLines[$i];
+			if ($bFirePHP || $bConsole) {
+				$cCoded		= $cReturn;
+			}else {
+				//turn it into new lines
+				$cReturn	= str_replace(" ", "&nbsp;", $cReturn);
+				$cReturn	= preg_replace("{[\t]+}", "&nbsp;&nbsp;&nbsp;&nbsp;", $cReturn);
+				$cCoded		= nl2br($cReturn);
+			}
 		}
-	}
 
-	//add the header and merge the stripped content
-	if ($bEmail) {
-		$cCode	= $cFixed;
-	} else {
-		$cCode	 = "<b>printRead called by: " . $aFile[0]['file'] . "</b><br />";
-		$cCode	.= "<b>on line: " . $aFile[0]['line'] . "</b><br />";
-
-		//k have to fix it at this point for browsers, since <br /> gets turned into <br&nbsp;/>
-		$cFixed	= str_replace("<br&nbsp;/>", "<br />", $cFixed);
-		$cCode	.= $cFixed;
-	}
-
-	//start hte code to make it nice
-	$cReturn = "<code>";
-
-	//If there a title then bold it
-	if (isset($cName)) { $cReturn .= "<b><u>" . ucwords($cName) . "</u></b><br />"; }
-
-	//close the code to make it nice
-	$cReturn .= $cCode;
-	$cReturn .= "</code><br />";
-
-	//Console remove all the tags since not in use for console, and firephp
-	if ($bConsole || $bFirePHP) {
-		$cReturn_a = str_replace("<br />", "\n", $cReturn);
-		$cReturn_a = strip_tags($cReturn_a);
-
-		if ($bFirePHP) {
-			FirePHP($cReturn_a);
+		//split the lines and remove anything that might need protecting
+		$aLines 	= explode("\n", $cCoded);
+		$iLines		= count($aLines);
+		$cFixed		= "";
+		for ($i = 0; $i < $iLines; $i++) {
+			if (strstr($aLines[$i], "[hostname]")) {
+				$cFixed .= hideProtected($aLines[$i]);
+			} else if (strstr($aLines[$i], "[username]")) {
+				$cFixed .= hideProtected($aLines[$i]);
+			} else if (strstr($aLines[$i], "[password]")) {
+				$cFixed .= hideProtected($aLines[$i]);
+			} else if (strstr($aLines[$i], "[database]")) {
+				$cFixed .= hideProtected($aLines[$i]);
+			} else {
+				$cFixed .= $aLines[$i];
+			}
 		}
-	}
 
-	//return or echo
-	if ($bReturn) {
-		//Console or not
-		if ($bConsole) {
-			return $cReturn_a;
+		//add the header and merge the stripped content
+		if ($bEmail) {
+			$cCode	= $cFixed;
 		} else {
-			return $cReturn;
+			$cCode	 = "<b>printRead called by: " . $aFile[0]['file'] . "</b><br />";
+			$cCode	.= "<b>on line: " . $aFile[0]['line'] . "</b><br />";
+
+			//k have to fix it at this point for browsers, since <br /> gets turned into <br&nbsp;/>
+			$cFixed	= str_replace("<br&nbsp;/>", "<br />", $cFixed);
+			$cCode	.= $cFixed;
 		}
-	} else {
-		if ($bConsole) {
-			echo $cReturn_a;
+
+		//start hte code to make it nice
+		$cReturn = "<code>";
+
+		//If there a title then bold it
+		if (isset($cName)) { $cReturn .= "<b><u>" . ucwords($cName) . "</u></b><br />"; }
+
+		//close the code to make it nice
+		$cReturn .= $cCode;
+		$cReturn .= "</code><br />";
+
+		//Console remove all the tags since not in use for console, and firephp
+		if ($bConsole || $bFirePHP) {
+			$cReturn_a = str_replace("<br />", "\n", $cReturn);
+			$cReturn_a = strip_tags($cReturn_a);
+
+			if ($bFirePHP) {
+				FirePHP($cReturn_a);
+			}
+		}
+
+		//return or echo
+		if ($bReturn) {
+			//Console or not
+			if ($bConsole) {
+				return $cReturn_a;
+			} else {
+				return $cReturn;
+			}
 		} else {
-			echo $cReturn;
+			if ($bConsole) {
+				echo $cReturn_a;
+			} else {
+				echo $cReturn;
+			}
 		}
 	}
-	*/
 }
 
 /**
