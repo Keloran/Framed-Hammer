@@ -116,7 +116,7 @@ class oReader {
 
 			return $this->cOutput;
 		} else {
-			if (!$this->bFirePHP && $this->bScreen) {
+			if ($this->bScreen) {
 				if ($this->bConsole) {
 					echo $this->cConsole;
 				} else if ($this->bEmail) {
