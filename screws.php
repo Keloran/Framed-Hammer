@@ -129,7 +129,8 @@ class Screws {
 				$cClass_b .= "/" . $aClass[$i]; //get the folder
 				$cClass_b .= "/" . $aClass[$i]; //get the file itself
 
-				$cClass_c = $cClass_a . $aClass[$i];
+				//lots of underscores, so need to assign the final
+				$cClass_c = $cClass_a . "/" . $aClass[$i];
 			}
 		} else {
 			$cClass_a	= $cClassName . "/" . $cClassName;
