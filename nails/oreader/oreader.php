@@ -169,7 +169,7 @@ class oReader {
 			$bAdded	= false;
 
 			//add the php tag if needed
-			if (!strstr($cReturn, "<?php")) {
+			if (!strstr($cString, "<?php")) {
 				$bAdded 	= true;
 				$cString	= "<?php " . $cString;
 			}
@@ -188,7 +188,7 @@ class oReader {
 
 		//XML highlught
 		} else if (strstr($cString, "<?xml")) {
-			$cString	= $this->xml_highlight($cReturn);
+			$cString	= $this->xml_highlight($cString);
 
 		//SQL highlight
 		} else if ((stristr($cString, "SELECT")) && (stristr($cString, "FROM"))) {
