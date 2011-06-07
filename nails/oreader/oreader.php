@@ -82,7 +82,7 @@ class oReader {
 		//get the output anyway
 		$cOutput	 = "<b>printRead called by: " . $this->aFile[0]['file'] . "</b><br />";
 		$cOutput	.= "<b>on line: " . $this->aFile[0]['line'] . "</b><br />";
-		$cOutput	 = str_replace("<br&nbsp;/>", "<br />", $this->cOutput); //br gets added a space, so needs removing on old converted
+		$cOutput	.= str_replace("<br&nbsp;/>", "<br />", $this->cOutput); //br gets added a space, so needs removing on old converted
 
 		$this->cOutput = $cOutput;
 
