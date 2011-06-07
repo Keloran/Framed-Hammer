@@ -457,7 +457,11 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 		if ($bFirePHP) {	$oReader->bFirePHP	= true; }
 		if ($cName) {		$oReader->cName		= $cName; }
 
-		return $oReader->doOutput();
+		if (!$bReturn) {
+			echo $oReader->doOutput();
+		} else {
+			return $oReader->doOutput();
+		}
 	} else {
 		$aFile		= debug_backtrace();
 		$cReturn	= print_r($mString, 1);
