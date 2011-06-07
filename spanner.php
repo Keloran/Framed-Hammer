@@ -372,6 +372,7 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 	$bColored	= false;
 	$bFirePHP	= false;
 	$bNoReader	= false;
+	$cName		= false;
 
 	//are hte options an array
 	if (is_array($mOptions)) {
