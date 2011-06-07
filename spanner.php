@@ -365,8 +365,6 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 	if (!$mString) { return null; }
 
 	//options that are set later
-	#$aFile		= debug_backtrace();
-	#$cReturn	= print_r($mString, 1);
 	$bReturn	= false;
 	$bColor		= false;
 	$bConsole	= false;
@@ -375,36 +373,30 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 	$bFirePHP	= false;
 	$bNoReader	= false;
 
-	//get the output reader object
-	$oReader = new oReader($mString);
-
-	//Show the methods of the class your trying diagnose
-	#if (is_object($mString)) { $cReturn .= print_r(get_class_methods($mString), 1); }
-
 	//are hte options an array
 	if (is_array($mOptions)) {
 		for ($i = 0; $i < count($mOptions); $i++) {
 			//Since this can be anything
 			switch ($mOptions[$i]) {
 				case "email":
-					$oReader->bEmail	= true;
+					$bEmail	= true;
 					break;
 
 				case "console":
-					$oReader->bConsole	= true;
+					$bConsole	= true;
 					break;
 
 				case "return":
 				case "ret":
-					$oReader->bReturn	= true;
+					$bReturn	= true;
 					break;
 
 				case "color":
-					$oReader->bColor	= true;
+					$bColor	= true;
 					break;
 
 				case "firephp":
-					$oReader->bFirePHP	= true;
+					$bFirePHP	= true;
 					break;
 
 				case "noreader":
@@ -412,7 +404,7 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 					break;
 
 				default:
-					$oReader->cName 	= $mOptions[$i];
+					$cName 	= $mOptions[$i];
 					break;
 			}
 		}
@@ -420,24 +412,24 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 		//Since this can be anything
 		switch ($mOptions) {
 			case "email":
-				$oReader->bEmail	= true;
+				$bEmail	= true;
 				break;
 
 			case "console":
-				$oReader->bConsole	= true;
+				$bConsole	= true;
 				break;
 
 			case "return":
 			case "ret":
-				$oReader->bReturn	= true;
+				$bReturn	= true;
 				break;
 
 			case "color":
-				$oReader->bColor	= true;
+				$bColor	= true;
 				break;
 
 			case "firephp":
-				$oReader->bFirePHP	= true;
+				$bFirePHP	= true;
 				break;
 
 			case "noreader":
@@ -445,7 +437,7 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 				break;
 
 			default:
-				$oReader->cName	= $mOptions;
+				$cName	= $mOptions;
 				break;
 		}
 	}
@@ -454,8 +446,24 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 	if ($cFireLevel) { $oReader->cLevel = $cFireLevel; }
 
 	if (!$bNoReader) {
+		//get the output reader object
+		$oReader = new oReader($mString);
+
+		if ($bEmail) {		$oReader->bEmail	= true; }
+		if ($bConsole) {	$oReader->bConsole	= true; }
+		if ($bColor) {		$oReader->bColor	= true; }
+		if ($bReturn) {		$oReader->bReturn	= true; }
+		if ($bFirePHP) {	$oReader->bFirePHP	= true; }
+		if ($cName) {		$oReader->cName		= $cName; }
+
 		return $oReader->doOutput();
 	} else {
+		$aFile		= debug_backtrace();
+		$cReturn	= print_r($mString, 1);
+
+		//Show the methods of the class your trying diagnose
+		if (is_object($mString)) { $cReturn .= print_r(get_class_methods($mString), 1); }
+
 		//if there is color choice
 		if ($bColor) {
 			//different color modes depending on whats in it
@@ -545,10 +553,6 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 		if ($bConsole || $bFirePHP) {
 			$cReturn_a = str_replace("<br />", "\n", $cReturn);
 			$cReturn_a = strip_tags($cReturn_a);
-
-			if ($bFirePHP) {
-				FirePHP($cReturn_a);
-			}
 		}
 
 		//return or echo
