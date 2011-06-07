@@ -191,8 +191,8 @@ class Screws {
 		$this->fSiteClass_d	= USERNAILS . $this->cClass_b	. ".php";
 
 		//lots of unders with/out inc
-		$this->fSiteClass_e	= USERNAILS	. "/nails/" . $this->cClass_c	. ".inc.php";
-		$this->fSiteClass_f	= USERNAILS	. "/nails/" . $this->cClass_c	. ".php";
+		$this->fSiteClass_e	= USERNAILS	. $this->cClass_c	. ".inc.php";
+		$this->fSiteClass_f	= USERNAILS	. $this->cClass_c	. ".php";
 
 		return $bReturn;
 	}
