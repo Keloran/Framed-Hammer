@@ -11,13 +11,6 @@
 class oReader {
 	private $aData;
 
-	private $bReturn	= false;
-	private $bColor		= false;
-	private $Console	= false;
-	private $bEmail		= false;
-	private $bFirePHP	= false;
-	private $bColored	= false;
-
 	/**
 	 * oReader::__construct()
 	 *
@@ -72,16 +65,16 @@ class oReader {
 		//now do we want a header
 		if ($this->bEmail) { $this->cEmail = $this->cOutput; }
 		if ($this->bConsole || $this->bFirePHP) {
-			$cConsole	 = "printRead called by: " . $this->aFile[0]['file'] . "\n";
-			$cConsole	.= "on line: " . $this->aFile[0]['line'] . "\n";
+			$cConsole	 = "printRead called by: " . $this->aFile[1]['file'] . "\n";
+			$cConsole	.= "on line: " . $this->aFile[1]['line'] . "\n";
 			$cConsole	.= $this->cConsole;
 
 			$this->cConsole = $cConsole;
 		}
 
 		//get the output anyway
-		$cOutput	 = "<b>printRead called by: " . $this->aFile[0]['file'] . "</b><br />";
-		$cOutput	.= "<b>on line: " . $this->aFile[0]['line'] . "</b><br />";
+		$cOutput	 = "<b>printRead called by: " . $this->aFile[1]['file'] . "</b><br />";
+		$cOutput	.= "<b>on line: " . $this->aFile[1]['line'] . "</b><br />";
 		$cOutput	.= str_replace("<br&nbsp;/>", "<br />", $this->cOutput); //br gets added a space, so needs removing on old converted
 
 		$this->cOutput = $cOutput;
@@ -365,7 +358,11 @@ class oReader {
 				break;
 
 			default:
-				$oFirePHP->log($cMessage, " Level:" . $cLevel);
+				if (!$cLevel) {
+					$oFirePHP->log($cMessage);
+				} else {
+					$oFirePHP->log($cMessage, " Level:" . $cLevel);
+				}
 				break;
 		}
 
