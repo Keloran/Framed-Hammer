@@ -341,31 +341,29 @@ class oReader {
 	 * @return object
 	 */
 	private function FirePHP($cMessage, $cLevel = false) {
-		$oFirePHP = new FirePHP();
-
 		//set the level to UC
 		$cLevel = strtoupper($cLevel);
 
 		//different levels
 		switch($cLevel) {
 			case "NOTICE":
-				$oFirePHP->info($cMessage, " Level:" . $cLevel);
+				FB::info($cMessage);
+				ChromePHP::info($cMessage);
 				break;
 
 			case "ERROR":
-				$oFirePHP->error($cMessage, " Level:" . $cLevel);
+				FB::error($cMessage);
+				ChromePHP::error($cMessage);
 				break;
 
 			case "WARNING":
-				$oFirePHP->warn($cMessage, " Level:" . $cLevel);
+				FB::warn($cMessage);
+				ChromePHP::warn($cMessage);
 				break;
 
 			default:
-				if (!$cLevel) {
-					$oFirePHP->log($cMessage);
-				} else {
-					$oFirePHP->log($cMessage, " Level:" . $cLevel);
-				}
+				FB::log($cMessage);
+				ChromePHP::log($cMessage);
 				break;
 		}
 
