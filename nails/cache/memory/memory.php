@@ -8,30 +8,9 @@
  * @version $Id$
  * @access public
  */
-class Cached implements Nails_Interface {
+class Cache_Memory extends Cache_Abstract {
 	static $oCached;
-
 	private $oCache;
-	private $oNails;
-
-	private $aData;
-	private $iUserID;
-	private $bUseCache;
-
-	/**
-	 * Cached::getInstance()
-	 *
-	 * @param Nails $oNails
-	 * @param mixed $mParams
-	 * @return object
-	 */
-	public static function getInstance(Nails $oNails, $mParams = false) {
-		if (is_null(self::$oCached)) {
-			self::$oCached = new Cached($oNails, $mParams);
-		}
-
-		return self::$oCached;
-	}
 
 	/**
 	 * Cached::__construct()
@@ -39,35 +18,7 @@ class Cached implements Nails_Interface {
 	 * @param Nails $oNails
 	 * @param mixed $mParams
 	 */
-	private function __construct(Nails $oNails, $mParams = false) {
-		//get the cache setting
-		$this->bUseCache = false;
-		$cCache	= $oNails->getConfig("cacheSetting");
-		if ($cCache == "on") {
-			//always turn off on login, and register page
-			switch ($oNails->cPage){
-				case "login":
-				case "register":
-					$this->bUseCache	= false;
-					break;
-
-				default:
-					$this->bUseCache 	= true;
-					break;
-			} // switch
-		}
-
-		//should we even use cache
-		if ($this->bUseCache) {
-			//does memcache actually exist
-			if (function_exists("memcache_connect")) {
-				$this->oCache	= new Memcache;
-				$this->oCache->addServer("localhost");
-			}
-		}
-
-		$this->oNails	= $oNails;
-
+	public function __construct(Nails $oNails, $mParams = false) {
 		//get the userid
 		$oUser				= $oNails->getUser();
 		$this->iUserID		= $oUser->getUserID();
@@ -127,7 +78,27 @@ class Cached implements Nails_Interface {
 	 * @param string $cSep
 	 * @return string
 	 */
+	private function getParams($cSep) {
+		$cReturn	= false;
+		$iExtra		= isset($this->extraParams) ? ($this->extraParams - 1) : 0;
 
+		if ($iExtra) {
+			//get the extra params
+			for ($i = 0; $i < $iExtra; $i++) {
+				$cParam	= "cParam" . $i;
+				$iParam	= "iParam" . $i;
+
+				//cParams
+				if (isset($this->$cParam)) { $cReturn .= $this->cParam . $cSep; }
+				if (isset($this->$iParam)) { $cReturn .= $this->iParam . $cSep; }
+			}
+		}
+
+		//remove teh extra ||s
+		if ($cReturn) { $cReturn = substr($cReturn, 0, (strlen($cReturn) - 2)); }
+
+		return $cReturn;
+	}
 
 	/**
 	 * Cached::getItem()
@@ -136,22 +107,7 @@ class Cached implements Nails_Interface {
 	 */
 	public function getItem() {
 		$cReturn	= false;
-		$cKey		= false;
-		$cSep		= "||";
-
-		//if it isnt in ignore list
-		if ($this->ignoreList($this->cPage)) {
-			$cKey	 = $this->cAddress	. $cSep;
-			$cKey	.= $this->cPage		. $cSep;
-			$cKey	.= $this->cAction	. $cSep;
-			$cKey	.= $this->cChoice	. $cSep;
-			$cKey	.= $this->iItem		. $cSep;
-			$cKey	.= $this->iPage		. $cSep;
-			$cKey	.= $this->getParams($cSep);
-
-			//add the userid
-			$cKey	.= "userid=" . $this->iUserID;
-		}
+		$cKey		= $this->getItemName();
 
 		//cant do this if cache isnt in use
 		if ($this->bUseCache) {
@@ -159,44 +115,6 @@ class Cached implements Nails_Interface {
 		}
 
 		return $cReturn;
-	}
-
-	/**
-	 * Cached::ignoreList()
-	 *
-	 * @return string
-	 */
-	private function ignoreList($cUrl) {
-		//ignore list, since these things are going to change to often
-		$aIgnoreStandard = array(
-			"admin",
-			"user",
-			"webmail",
-			"users"
-		);
-
-		//get the extra ones as specified by the user
-		$cIgnoreExtra	= $this->oNails->getConfig("cacheIgnore");
-		$aIgnoreExtra	= array();
-
-		//might have a different seperator
-		if (strstr($cIgnoreExtra, "|")) { //pipe delimited
-			$aIgnoreExtra	= explode("|", $cIgnoreExtra);
-		} else if (strstr($cIgnoreExtra, ",")) { //comma delimited
-			$aIgnoreExtra	= explode(",", $cIgnoreExtra);
-		} else if (strstr($cIgnoreExtra, ":")) { //colon delimited
-			$aIgnoreExtra	= explode(":", $cIgnoreExtra);
-		} else if (strstr($cIgnoreExtra, ";")) { //semi-colon delimited
-			$aIgnoreExtra	= explode(";", $cIgnoreExtra);
-		}
-
-		//now merge them so that the full list can be ignored
-		$aIgnore	= array_merge($aIgnoreStandard, $aIgnoreExtra);
-
-		//is the url in the list
-		if (in_array($cUrl, $aIgnore)) { return false; }
-
-		return true;
 	}
 
 	/**
@@ -232,7 +150,13 @@ class Cached implements Nails_Interface {
 	 * @param mixed $mParams
 	 * @return null
 	 */
-
+	private function setParams($mParams) {
+		if (is_array($mParams)) {
+			foreach ($mParams as $mKey => $mValue) {
+				$this->$mKey = $mValue;
+			}
+		}
+	}
 
 	/**
 	 * Cached::getStats()
