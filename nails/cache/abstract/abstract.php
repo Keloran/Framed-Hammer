@@ -89,7 +89,9 @@ class Cache_Abstract {
 			"admin",
 			"user",
 			"webmail",
-			"users"
+			"users",
+			"login",
+			"register"
 		);
 
 		//get the extra ones as specified by the user
@@ -142,5 +144,35 @@ class Cache_Abstract {
 		return $cKey;
 	}
 
+	/**
+	 * Cache_Abstract::addItemName()
+	 *
+	 * @return string
+	 */
+	protected function addItemName() {
+		$cSep		= "||";
+		$cKey		= false;
 
+		if ($iTime) {
+			$iTime		= (time() + ($iTime * 3600));
+		} else {
+			$iTime		= (time() + 259200);
+		}
+
+		//if it isnt in the ignore list
+		if ($this->ignoreList($this->cPage)) {
+			$cKey	 = $this->cAddress	. $cSep;
+			$cKey	.= $this->cPage		. $cSep;
+			$cKey	.= $this->cAction	. $cSep;
+			$cKey	.= $this->cChoice	. $cSep;
+			$cKey	.= $this->iItem		. $cSep;
+			$cKey	.= $this->iPage		. $cSep;
+			$cKey	.= $this->getParams($cSep);
+
+			//add the userid
+			$cKey	.= "userid=" . $this->iUserID;
+		}
+
+		return $cKey;
+	}
 }

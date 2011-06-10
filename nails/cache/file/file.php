@@ -147,4 +147,6 @@ class Cache_File implements Nails_Interface {
 
 		$this->writeCache($cCache);
 	}
+
+	public function addItem()
 }

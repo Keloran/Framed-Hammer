@@ -18,12 +18,9 @@ class Cache_Memory extends Cache_Abstract {
 	 * @param Nails $oNails
 	 * @param mixed $mParams
 	 */
-	public function __construct(Nails $oNails, $mParams = false) {
-		//get the userid
-		$oUser				= $oNails->getUser();
-		$this->iUserID		= $oUser->getUserID();
-
-		$this->setParams($mParams);
+	public function __construct() {
+		$this->oCache	= new Memcache;
+		$this->oCache->addServer("localhost");
 	}
 
 	/**
@@ -33,30 +30,8 @@ class Cache_Memory extends Cache_Abstract {
 	 * @return string
 	 */
 	public function addItem($cItem, $iTime = null) {
-		$cSep		= "||";
-		$cKey		= false;
+		$cKey		= $this->addItemName();
 		$bWorked	= false;
-
-		if ($iTime) {
-			$iTime		= (time() + ($iTime * 3600));
-		} else {
-			$iTime		= (time() + 259200);
-		}
-
-		//if it isnt in the ignore list
-		if ($this->ignoreList($this->cPage)) {
-			$cKey	 = $this->cAddress	. $cSep;
-			$cKey	.= $this->cPage		. $cSep;
-			$cKey	.= $this->cAction	. $cSep;
-			$cKey	.= $this->cChoice	. $cSep;
-			$cKey	.= $this->iItem		. $cSep;
-			$cKey	.= $this->iPage		. $cSep;
-			$cKey	.= $this->getParams($cSep);
-
-			//add the userid
-			$cKey	.= "userid=" . $this->iUserID;
-		}
-
 
 		//do we even bother if cache is turned off
 		if ($this->bUseCache) {
@@ -70,34 +45,6 @@ class Cache_Memory extends Cache_Abstract {
 				$this->oCache->replace($cKey, $cItem, MEMCACHE_COMPRESSED, $iTime);
 			}
 		}
-	}
-
-	/**
-	 * Cached::getParams()
-	 *
-	 * @param string $cSep
-	 * @return string
-	 */
-	private function getParams($cSep) {
-		$cReturn	= false;
-		$iExtra		= isset($this->extraParams) ? ($this->extraParams - 1) : 0;
-
-		if ($iExtra) {
-			//get the extra params
-			for ($i = 0; $i < $iExtra; $i++) {
-				$cParam	= "cParam" . $i;
-				$iParam	= "iParam" . $i;
-
-				//cParams
-				if (isset($this->$cParam)) { $cReturn .= $this->cParam . $cSep; }
-				if (isset($this->$iParam)) { $cReturn .= $this->iParam . $cSep; }
-			}
-		}
-
-		//remove teh extra ||s
-		if ($cReturn) { $cReturn = substr($cReturn, 0, (strlen($cReturn) - 2)); }
-
-		return $cReturn;
 	}
 
 	/**
@@ -115,47 +62,6 @@ class Cache_Memory extends Cache_Abstract {
 		}
 
 		return $cReturn;
-	}
-
-	/**
-	 * Cached::__set()
-	 *
-	 * @param string $cKey
-	 * @param mixed $cValue
-	 * @return null
-	 */
-	public function __set($cKey, $mValue) {
-		$this->aData[$cKey]	= $mValue;
-	}
-
-	/**
-	 * Cached::__get()
-	 *
-	 * @param string $cKey
-	 * @return mixed
-	 */
-	public function __get($cKey) {
-		$mReturn	= false;
-
-		if (isset($this->aData[$cKey])) {
-			$mReturn	= $this->aData[$cKey];
-		}
-
-		return $mReturn;
-	}
-
-	/**
-	 * Cached::setParams()
-	 *
-	 * @param mixed $mParams
-	 * @return null
-	 */
-	private function setParams($mParams) {
-		if (is_array($mParams)) {
-			foreach ($mParams as $mKey => $mValue) {
-				$this->$mKey = $mValue;
-			}
-		}
 	}
 
 	/**

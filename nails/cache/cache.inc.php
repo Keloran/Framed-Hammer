@@ -35,41 +35,62 @@ class Cache extends Cache_Abstract {
 	 */
 	private function __construct(Nails $oNails, $mParams = false) {
 		//get the cache setting
-		$this->bUseCache = false;
-		$cCache	= $oNails->getConfig("cacheSetting");
-		if ($cCache == "on") {
-			//always turn off on login, and register page
-			switch ($oNails->cPage){
-				case "login":
-				case "register":
-					$this->bUseCache	= false;
-					break;
-
-				default:
-					$this->bUseCache 	= true;
-					break;
-			} // switch
-		}
+		$this->bUseCache	= false;
+		$cCache				= $oNails->getConfig("cacheSetting");
+		if ($cCache == "on") { $this->bUseCache = true; }
 
 		//should we even use cache
 		if ($this->bUseCache) {
-			//does memcache actually exist
-			if (function_exists("memcache_connect")) {
-				$this->oCache	= new Cache_Memory($oNails);
-
-				$this->oCache	= new Memcache;
-				$this->oCache->addServer("localhost");
+			//do we have cacheType
+			$cCacheType	= $oNails->getConfig("cacheType");
+			if ($cCacheType == "file") {
+				$this->oCache	= new Cache_File();
 			} else {
-				$this->oCache	= new Cache_File($oNails);
+				//does memcache actually exist
+				if (function_exists("memcache_connect")) {
+					$this->oCache	= new Cache_Memory();
+				} else { //memcache doesnt exist, and no cachetype given, so use files
+					$this->oCache	= new Cache_File();
+				}
 			}
+
+			$this->oNails	= $oNails;
+
+			//get the userid
+			$oUser				= $oNails->getUser();
+			$this->iUserID		= $oUser->getUserID();
+
+			$this->setParams($mParams);
+		}
+	}
+
+	/**
+	 * Cache::addItem()
+	 *
+	 * @param string $cItem
+	 * @param int $iItem
+	 * @return mixed
+	 */
+	public function addItem($cItem, $iItem = false) {
+		if ($this->oCache) {
+			return $this->oCache->addItem($cItem, $iTime = false);
 		}
 
-		$this->oNails	= $oNails;
-
-		//get the userid
-		$oUser				= $oNails->getUser();
-		$this->iUserID		= $oUser->getUserID();
-
-		$this->setParams($mParams);
+		return false;
 	}
+
+	/**
+	 * Cache::getItem()
+	 *
+	 * @return mixed
+	 */
+	public function getItem() {
+		if ($this->oCache) {
+			return $this->oCache->getItem();
+		}
+
+		return false;
+	}
+
+
 }
