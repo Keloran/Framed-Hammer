@@ -1023,7 +1023,7 @@ class Head {
 		//Because Javascript can have multiple sub elements
 		$aJS					= $this->oNails->getConfig("javascript", $this->oNails->getConfigKey());
 		if (isset($aJS[0])) {
-			if (count($aJS) >= 1) {
+			if (strlen($aJS[0]) >= 2) {
 				foreach ($aJS as $aJSPart) {
 					$aReturn['javascript'][]	= $aJSPart;
 				}
