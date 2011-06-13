@@ -9,7 +9,6 @@
  * @access public
  */
 class Cache_Memory extends Cache_Abstract {
-	static $oCached;
 	private $oCache;
 
 	/**
@@ -19,7 +18,7 @@ class Cache_Memory extends Cache_Abstract {
 	 * @param mixed $mParams
 	 */
 	public function __construct() {
-		$this->oCache	= new Memcache;
+		$this->oCache	= new Memcache();
 		$this->oCache->addServer("localhost");
 	}
 

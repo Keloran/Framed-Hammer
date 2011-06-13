@@ -61,6 +61,7 @@ class Cache extends Cache_Abstract {
 			$this->iUserID		= $oUser->getUserID();
 
 			$this->setParams($mParams);
+			$this->setTime();
 		}
 	}
 
@@ -71,7 +72,7 @@ class Cache extends Cache_Abstract {
 	 * @param int $iItem
 	 * @return mixed
 	 */
-	public function addItem($cItem, $iItem = false) {
+	public function addItem($cItem, $iTime = false) {
 		if ($this->oCache) {
 			return $this->oCache->addItem($cItem, $iTime = false);
 		}
@@ -92,5 +93,20 @@ class Cache extends Cache_Abstract {
 		return false;
 	}
 
+	/**
+	 * Cache::setTime()
+	 *
+	 * @return null
+	 */
+	public function setTime() {
+		$iTime	= $oNails->getConfig("cacheTime");
 
+		if (defined("CACHETIME")) {
+			$this->iTime = time() - CACHETIME;
+		} else if ($iTime) {
+			$this->iTime = time() - $iTime;
+		} else {
+			$this->iTime = time() - 3600;
+		}
+	}
 }
