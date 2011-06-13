@@ -457,10 +457,10 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 
 	//is there a fire level given
 	if ($cFireLevel) { $oReader->cLevel = $cFireLevel; }
-
+	
 	if (!$bReturn) {
-		echo $oReader->doOutput();
-	} else {
+	echo $oReader->doOutput();
+		} else {
 		return $oReader->doOutput();
 	}
 }

@@ -12,6 +12,7 @@ class Screws {
 	private $cClass;
 	private $cPath;
 	private $aData;
+	private $cOriginal;
 
 	/**
 	 * Screws::__construct()
@@ -28,7 +29,8 @@ class Screws {
 	 * @return
 	 */
 	private function loader($cClass) {
-		$this->cClass	= $cClass;
+		$this->cClass		= $cClass;
+		$this->cOriginal	= $cClass;
 
 		$this->definePaths();
 		$bExists = $this->checkExists();
