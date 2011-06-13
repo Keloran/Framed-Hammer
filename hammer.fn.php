@@ -309,13 +309,11 @@ function getNailed($cNail, $oNail, $mParams = null) {
  * @return string
  */
 function visitorIP() {
-	if (isset($_SERVER['HTTP_CLIENT_IP'])) {
-		//check ip from share internet
+	if (isset($_SERVER['HTTP_CLIENT_IP'])) { //check ip from share internet
 		$cIP = $_SERVER['HTTP_CLIENT_IP'];
-	} else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-		//to check ip is pass from proxy
+	} else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) { //to check ip is pass from proxy
 		$cIP = $_SERVER['HTTP_X_FORWARDED_FOR'];
-	} else if ($_SERVER['REMOTE_ADDR']) {
+	} else if (isset($_SERVER['REMOTE_ADDR'])) { //is it standard method
 		$cIP = $_SERVER['REMOTE_ADDR'];
 	} else {
 		$cIP = false;
