@@ -21,7 +21,7 @@ class Cache extends Cache_Abstract {
 	 */
 	public static function getInstance(Nails $oNails, $mParams = false) {
 		if (is_null(self::$oCached)) {
-			self::$oCached = new Cached($oNails, $mParams);
+			self::$oCached = new Cache($oNails, $mParams);
 		}
 
 		return self::$oCached;
