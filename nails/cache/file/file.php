@@ -17,10 +17,11 @@ class Cache_File extends Cache_Abstract {
 	 *
 	 * @param Nails $oNails
 	 */
-	function __construct() {
+	function __construct(Nails $oNails) {
 		$cCache			= $this->getItemName();
 		$cCache			= str_replace(":", "_", $cCache);
 		$this->cFile	= $cCache . ".cache";
+		$this->oNails	= $oNails;
 	}
 
 	/**

@@ -47,13 +47,13 @@ class Cache extends Cache_Abstract {
 			//do we have cacheType
 			$cCacheType	= $oNails->getConfig("cacheType");
 			if ($cCacheType == "file") {
-				$this->oCache	= new Cache_File();
+				$this->oCache	= new Cache_File($this->oNails);
 			} else {
 				//does memcache actually exist
 				if (function_exists("memcache_connect")) {
-					$this->oCache	= new Cache_Memory();
+					$this->oCache	= new Cache_Memory($this->oNails);
 				} else { //memcache doesnt exist, and no cachetype given, so use files
-					$this->oCache	= new Cache_File();
+					$this->oCache	= new Cache_File($this->oNails);
 				}
 			}
 

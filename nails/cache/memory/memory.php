@@ -17,9 +17,10 @@ class Cache_Memory extends Cache_Abstract {
 	 * @param Nails $oNails
 	 * @param mixed $mParams
 	 */
-	public function __construct() {
+	public function __construct(Nails $oNails) {
 		$this->oCache	= new Memcache();
 		$this->oCache->addServer("localhost");
+		$this->oNails	= $oNails;
 	}
 
 	/**
