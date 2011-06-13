@@ -339,7 +339,7 @@ class Session {
 		$iInit	= $iStart;
 
 		//get the first data
-		$aRead	= array($iInit, ($iInit + 86400));
+		$aRead	= array($iInit, ($iInit + 86399));
 		$this->oDB->read("SELECT COUNT(*) AS visitors FROM users_sessions_visitors WHERE (tsDate BETWEEN (?) AND (?))", $aRead);
 		if ($this->oDB->nextRecord()) {
 			$aData[0]['visitors']	= $this->oDB->f('visitors');
@@ -351,7 +351,7 @@ class Session {
 		if ($iDays >= 1) {
 			for ($i = 1; $i < $iDays; $i++) {
 				$iInit	= ($iInit + 86400);
-				$aRead	= array($iInit, ($iInit + 86400));
+				$aRead	= array($iInit, ($iInit + 86399));
 				$this->oDB->read("SELECT COUNT(*) AS visitors FROM users_sessions_visitors WHERE (tsDate BETWEEN (?) AND (?))", $aRead);
 				if ($this->oDB->nextRecord()) {
 					$aData[$i]['visitors']	= $this->oDB->f('visitors');
