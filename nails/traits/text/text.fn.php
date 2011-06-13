@@ -59,7 +59,7 @@ function shrinkThis($cString, $iLength) {
 	if (isset($cStart_b)) {
 		$iPosEnd_c	= stripos($cString, "</" . $cStart_b . ">");
 		$iPosEnd_d	= (3 + $iLength_a);
-		$iPosEnd_e	= ($iPosEnd_c + $iPosEnd_e);
+		$iPosEnd_e	= ($iPosEnd_c + $iPosEnd_d);
 	}
 
 	//Get the length after the end of the tags
