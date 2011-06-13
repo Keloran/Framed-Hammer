@@ -99,7 +99,7 @@ class Cache extends Cache_Abstract {
 	 * @return null
 	 */
 	public function setTime() {
-		$iTime	= $oNails->getConfig("cacheTime");
+		$iTime	= $this->oNails->getConfig("cacheTime");
 
 		if (defined("CACHETIME")) {
 			$this->iTime = time() - CACHETIME;
