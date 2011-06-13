@@ -152,8 +152,8 @@ class Cache_Abstract {
 		$cSep		= "||";
 		$cKey		= false;
 
-		if ($iTime) {
-			$iTime		= (time() + ($iTime * 3600));
+		if ($this->iTime) {
+			$iTime		= (time() + ($this->iTime * 3600));
 		} else {
 			$iTime		= (time() + 259200);
 		}
