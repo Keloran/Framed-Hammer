@@ -157,7 +157,7 @@ class Charts {
 		if (is_array($this->cType)) { $this->cType = $this->cType[0]; }
 
 		//Type
-		switch($cType){
+		switch($cType) {
 			case "barv":
 				$this->aOptions["bLegend"]	= "true";
 				$cType		= "Charts_" . $this->cType . "_BarV";
@@ -192,6 +192,7 @@ class Charts {
 		$cContent = $this->oType->renderChart();
 
 		$this->cContent = $cContent;
+		return $cContent;
 	}
 
 	/**
