@@ -290,9 +290,12 @@ class User implements Nails_Interface {
         	}
         }
 
+    	//get the ip
+    	$cVisitor = visitorIP();
+
     	//is there a cookie hash
         if ($cCookieHash) {
-        	$aCheck = array($cCookieHash, ip2long($_SERVER['REMOTE_ADDR']));
+        	$aCheck = array($cCookieHash, ip2long($cVisitor));
             $this->oDB->read("SELECT iUserID FROM users WHERE cLoginHash = ? AND cLastIP = ? LIMIT 1", $aCheck);
             if ($this->oDB->nextRecord()) {
                 $this->iUserID = $this->oDB->f('iUserID');
@@ -300,7 +303,7 @@ class User implements Nails_Interface {
 
             return $this->iUserID;
         } else if ($this->cCookie) {
-        	$aCheck = array($this->cCookie, ip2long($_SERVER['REMOTE_ADDR']));
+        	$aCheck = array($this->cCookie, ip2long($cVisitor));
             $this->oDB->read("SELECT iUserID FROM users WHERE cLoginHash = ? AND cLastIP = ? LIMIT 1", $aCheck);
             while ($this->oDB->nextRecord()) {
                 $this->iUserID = $this->oDB->f('iUserID');
@@ -501,8 +504,9 @@ class User implements Nails_Interface {
 			//set the userdetails for login
 			$this->iUserID		= $iUserID;
 			$this->cUsername	= $cUsername;
+			$cVisitor			= visitorIP();
 
-			$aUpdate = array(ip2long($_SERVER['REMOTE_ADDR']), $iUserID);
+			$aUpdate = array(ip2long($cVisitor), $iUserID);
 			$this->oDB->write("UPDATE users SET cLastIP = ? WHERE iUserID = ? LIMIT 1", $aUpdate);
 
 			if ($iGroupID >= 3) {

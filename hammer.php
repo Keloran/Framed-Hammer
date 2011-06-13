@@ -626,7 +626,7 @@ class Hammer {
 	* @return object
 	*/
 	public function getCache() {
-		return $this->getNail("cached", $this->aData);
+		return $this->getNail("cache", $this->aData);
 	}
 
 	/**
