@@ -219,9 +219,10 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 		}
 
 		//Since this IP is banned, send them to google
-		if (isset($_SERVER['REMOTE_ADDR'])) {
+		$cVisitor = visitorIP();
+		if ($cVisitor) {
 			if (!is_null($oAdmin)) {
-				if ($oAdmin->getBannedIP($_SERVER['REMOTE_ADDR'])) {
+				if ($oAdmin->getBannedIP($cVisitor)) {
 					$oHammer->sendLocation("http://www.google.com");
 				}
 			}
@@ -302,3 +303,23 @@ function getNailed($cNail, $oNail, $mParams = null) {
 	return getNail_Version($cNail, $oNail, $mParams);
 }
 
+/**
+ * visitorIP()
+ *
+ * @return string
+ */
+function visitorIP() {
+	if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+		//check ip from share internet
+		$cIP = $_SERVER['HTTP_CLIENT_IP'];
+	} else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+		//to check ip is pass from proxy
+		$cIP = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	} else if ($_SERVER['REMOTE_ADDR']) {
+		$cIP = $_SERVER['REMOTE_ADDR'];
+	} else {
+		$cIP = false;
+	}
+
+	return $cIP;
+}

@@ -127,27 +127,7 @@ class Cached implements Nails_Interface {
 	 * @param string $cSep
 	 * @return string
 	 */
-	private function getParams($cSep) {
-		$cReturn	= false;
-		$iExtra		= isset($this->extraParams) ? ($this->extraParams - 1) : 0;
 
-		if ($iExtra) {
-			//get the extra params
-			for ($i = 0; $i < $iExtra; $i++) {
-				$cParam	= "cParam" . $i;
-				$iParam	= "iParam" . $i;
-
-				//cParams
-				if (isset($this->$cParam)) { $cReturn .= $this->cParam . $cSep; }
-				if (isset($this->$iParam)) { $cReturn .= $this->iParam . $cSep; }
-			}
-		}
-
-		//remove teh extra ||s
-		if ($cReturn) { $cReturn = substr($cReturn, 0, (strlen($cReturn) - 2)); }
-
-		return $cReturn;
-	}
 
 	/**
 	 * Cached::getItem()
@@ -252,13 +232,7 @@ class Cached implements Nails_Interface {
 	 * @param mixed $mParams
 	 * @return null
 	 */
-	private function setParams($mParams) {
-		if (is_array($mParams)) {
-			foreach ($mParams as $mKey => $mValue) {
-				$this->$mKey = $mValue;
-			}
-		}
-	}
+
 
 	/**
 	 * Cached::getStats()

@@ -116,11 +116,13 @@ class Session {
 	 * @return
 	 */
 	public function lastLogin() {
+		$cVisitor = visitorIP();
+
 		if ($this->iUserID) {
             $this->oDB->read("SELECT tsDate FROM users_sessions WHERE iUserID = ? ORDER BY iSessionID DESC LIMIT 1", $this->iUserID);
             if ($this->oDB->nextRecord()) {
                 if ($this->oDB->f('tsDate') < (time() - 1000)) {
-                    $aEscape = array($this->iUserID, session_id(), "Old Session", ip2long($_SERVER['REMOTE_ADDR']), $_SERVER['HTTP_USER_AGENT']);
+                    $aEscape = array($this->iUserID, session_id(), "Old Session", ip2long($cVisitor), $_SERVER['HTTP_USER_AGENT']);
 
                     $this->oDB->write("INSERT INTO users_sessions (iUserID, cLastSessionID, tsDate, cReason, cIP, cBrowser) VALUES (?, ?, UNIX_TIMESTAMP(), ?, ?, ?)", $aEscape);
                     $this->oNails->createCookie("lastVisit", time(), true);
@@ -130,7 +132,7 @@ class Session {
 	                $this->tsLastLogin = time();
                 }
             } else {
-                $aEscape = array($this->iUserID, session_id(), "New Session", ip2long($_SERVER['REMOTE_ADDR']), $_SERVER['HTTP_USER_AGENT']);
+                $aEscape = array($this->iUserID, session_id(), "New Session", ip2long($cVisitor), $_SERVER['HTTP_USER_AGENT']);
 
                 $this->oDB->write("INSERT INTO users_sessions (iUserID, cLastSessionID, tsDate, cReason, cIP, cBrowser) VALUES (?, ?, UNIX_TIMESTAMP(), ?, ?, ?)", $aEscape);
                 $this->oNails->createCookie("lastVisit", time(), true);
@@ -164,7 +166,8 @@ class Session {
 		    $this->tsLogin = time();
 
 		    if ($this->iUserID) {
-				$aEscape = array($this->iUserID, session_id(), "Login", ip2long($_SERVER['REMOTE_ADDR']), $_SERVER['HTTP_USER_AGENT']);
+		    	$cVisitor = visitorIP();
+				$aEscape = array($this->iUserID, session_id(), "Login", ip2long($cVisitor), $_SERVER['HTTP_USER_AGENT']);
 				$this->oDB->write("INSERT INTO users_sessions(iUserID, cLastSessionID, tsDate, cReason, cIP, cBrowser) VALUES (?, ?, UNIX_TIMESTAMP(), ?, ?, ?)", $aEscape);
 		    }
         } else {
@@ -238,10 +241,11 @@ class Session {
 		//todays date
 		$cLog	.= "Date: " . $dDate . " :: ";
 
-		//has this user got an ip
-		if (isset($_SERVER['REMOTE_ADDR'])) {
-			$cAddress	= $_SERVER['REMOTE_ADDR'];
+		//Visotr IP
+		$cAddress	= visitorIP();
 
+		//has this user got an ip
+		if ($cAddress) {
 			//see if we can get a hostname
 			if (function_exists("gethostbyaddr")) {
 				if (defined("host-detail")) {
@@ -290,8 +294,9 @@ class Session {
 	 */
 	public function logIt($cLog, $iLog, $cType) {
 		if ($cType == "Database") {
-			if (isset($_SERVER['REMOTE_ADDR'])) {
-				$aInsert = array($this->iUserID, session_id(), $cLog, ip2long($_SERVER['REMOTE_ADDR']), $_SERVER['HTTP_USER_AGENT']);
+			$cVisitor = visitorIP();
+			if ($cVisitor) {
+				$aInsert = array($this->iUserID, session_id(), $cLog, ip2long($cVisitor), $_SERVER['HTTP_USER_AGENT']);
 			} else {
 				$aInsert = array(0, session_id(), $cLog, 0, 0);
 			}

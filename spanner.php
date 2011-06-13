@@ -306,9 +306,8 @@ class Spanner extends Exception {
 		$cMessage .= "<p>Function Arguments <br />" . nl2br(print_r(func_get_args(), true)) . "</p>\n";
 
 		//Since not all systems have the remote addr, e.g. googlebot
-		if (isset($_SERVER['REMOTE_ADDR'])) {
-		    $cMessage .= "<p>It was triggered by " . $_SERVER['REMOTE_ADDR'] . "</p>\n";
-		}
+		$cVisitor = visitorIP();
+		if ($cVisitor) { $cMessage .= "<p>It was triggered by " . $cVisitor. "</p>\n"; }
 
 		//class previous
 		if (isset($this->cPrevious)) { $cMessage .= "<p>Previous: " . $this->cPrevious . "</p>\n"; }
