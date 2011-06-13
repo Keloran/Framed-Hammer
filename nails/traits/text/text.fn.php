@@ -37,7 +37,7 @@ function shrinkThis($cString, $iLength) {
 	//Start the tags
 	$iPosStart_a	= stripos($cString, "<");
 	$iPosEnd_a		= stripos($cString, ">");
-	$iLength1_a		= (($iPosEnd1 + 1) + $iPosStart_a);
+	$iLength1_a		= (($iPosEnd_a + 1) + $iPosStart_a);
 	$cStrStart		= substr($cString, $iPosStart_a, $iLength_a);
 
 	//Get the length before the tag
