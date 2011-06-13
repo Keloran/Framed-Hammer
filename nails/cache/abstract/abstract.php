@@ -10,7 +10,6 @@
  */
 class Cache_Abstract {
 	private $aData;
-	private $oNails;
 
 	/**
 	 * Cache_Abstract::__get()
