@@ -39,6 +39,9 @@ class Cache extends Cache_Abstract {
 		$cCache				= $oNails->getConfig("cacheSetting");
 		if ($cCache == "on") { $this->bUseCache = true; }
 
+		//Nails
+		$this->oNails		= $oNails;
+
 		//should we even use cache
 		if ($this->bUseCache) {
 			//do we have cacheType
