@@ -1,0 +1,241 @@
+<?php
+require_once 'PHPUnit/Framework.php';
+require_once('src/Config.class.php');
+require_once('classes/class.SQL.php');
+require_once('core/CrbmsLog.class.php');
+require_once 'src/StopSell.class.php';
+
+/**
+ * Test Crypt
+ */
+class TestStopSell extends PHPUnit_Framework_TestCase {
+	public static $db = null;
+	public static $locations = null;
+	public static $stopSells = null;
+
+	public static function setUpBeforeClass() {
+		if (self::$db === null) {
+			self::connectDb();
+		}
+
+
+		self::defineLocations();
+		self::insertLocations();
+		self::defineStopSells();
+		self::insertStopSells();
+	}
+
+	public function setUp() {
+		self::connectDb();
+	}
+
+	public static function connectDb() {
+		$conf = array(
+			'host'	=> '192.168.0.2',
+			'user'	=> 'crbms',
+			'pass'	=> 'verbatim2000',
+			'db'	=> 'tj_unittests'
+		);
+
+		self::$db = new SQL($conf);
+		$GLOBALS['C'] = &self::$db;
+	}
+
+	public static function insertStopSells() {
+		global $C;
+		$t = time();
+		$uId = 10;
+
+		foreach (self::$stopSells as $i => $s) {
+			$C->Q("INSERT INTO stop_sell_group (user_id, create_time) VALUES($uId, $t)");
+			$groupId = $C->lID();
+			$C->Q("
+				INSERT INTO stop_sell SET
+					id = {$groupId},
+					group_id = {$groupId},
+					company = '{$s['company']}', country = '{$s['country']}', city = '{$s['city']}',
+					location = '{$s['location']}', class = '{$s['class']}', car_type = '*',
+					dt_from = '{$s['from']}', dt_till = '{$s['till']}', type_ = {$s['type']},
+					num_days = 0, apply = {$s['apply']}, subgroup = NULL, internal_class = NULL, one_ways = {$s['one_ways']},
+					international_one_ways = {$s['international_one_ways']}, pick_up_hours = {$s['pick_up_hours']}, op_call = {$s['op_call']}
+			");
+			self::$stopSells[$i]['id'] = $groupId;
+			self::$stopSells[$i]['group_id'] = $groupId;
+		}
+	}
+
+	public static function insertLocations() {
+		global $C;
+		foreach (self::$locations as $i => $d) {
+			$C->Q("INSERT INTO d (company, country, city, location) VALUES('{$d['company']}', '{$d['country']}', '{$d['city']}', '{$d['location']}')");
+			$dId = self::$locations[$i]['id'] = $C->lID();
+
+			foreach (self::$locations[$i]['cars'] as $class => $car) {
+				$C->Q("INSERT INTO c (name, loc) VALUES('{$class}', {$dId})");
+				$cId = $C->lID();
+				$C->Q("INSERT INTO a (car_type, class, loc) VALUES('{$car['type']}', {$cId}, {$dId})");
+				$aId = $C->lID();
+				self::$locations[$i]['cars'][$class]['c_id'] = $cId;
+				self::$locations[$i]['cars'][$class]['id'] = $aId;
+
+			}
+		}
+	}
+
+	public static function tearDownAfterClass() {
+		global $C;
+		self::connectDb();
+		foreach (self::$locations as $d) {
+			$C->Q("DELETE FROM d WHERE id = {$d['id']}");
+			foreach ($d['cars'] as $car) {
+				$C->Q("DELETE FROM c WHERE id = {$car['c_id']}");
+				$C->Q("DELETE FROM a WHERE id = {$car['id']}");
+			}
+		}
+		foreach (self::$stopSells as $s) {
+			$C->Q("DELETE FROM stop_sell_group WHERE id = {$s['group_id']}");
+			$C->Q("DELETE FROM stop_sell WHERE id = {$s['id']}");
+		}
+	}
+
+	public static function defineLocations() {
+		self::$locations = array(
+			'Budget/Estonia/Tartu/Tartu Airport' => array(
+				'company' => 'Budget',
+				'country' => 'Estonia',
+				'city' => 'Tartu',
+				'location' => 'Tartu Airport',
+				'cars' => array(
+					'A' => array('type' => 'Ford Focus'),
+					'B' => array('type' => 'Opel Astra')
+				)
+			),
+			'Budget/Estonia/Tartu/Tartu Downtown' => array(
+				'company' => 'Budget',
+				'country' => 'Estonia',
+				'city' => 'Tartu',
+				'location' => 'Tartu Downtown',
+				'cars' => array(
+					'A' => array('type' => 'Ford Focus'),
+					'B' => array('type' => 'Opel Astra')
+				)
+			)
+		);
+	}
+
+	public static function defineStopSells() {
+		self::$stopSells = array(
+			array(
+				'company' => '*',
+				'country' => '*',
+				'city' => '*',
+				'location' => '*',
+				'class' => '*',
+				'from' => '2010-02-01 00:00:00',
+				'till' => '2010-02-10 00:00:00',
+				'type' => StopSell::STOP_SELL,
+				'apply' => StopSell::APPLY_ALL,
+				'one_ways' => 0,
+				'international_one_ways' => 0,
+				'pick_up_hours' => 0,
+				'op_call' => 0
+			)
+		);
+	}
+
+	public function stopSellsProvider() {
+		return array(
+			array(
+				'Budget/Estonia/Tartu/Tartu Airport',
+				'Budget/Estonia/Tartu/Tartu Airport',
+				'2010-01-02 12:00', '2010-01-20 12:00',
+				'A',
+				false // Type
+			),
+			array(
+				'Budget/Estonia/Tartu/Tartu Airport',
+				'Budget/Estonia/Tartu/Tartu Downtown',
+				'2010-01-01 12:00', '2010-02-03 12:00',
+				'A',
+				StopSell::STOP_SELL
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider stopSellsProvider
+	 * @param unknown_type $pickupKey
+	 * @param unknown_type $dropoffKey
+	 * @param unknown_type $pickupDate
+	 * @param unknown_type $dropoffDate
+	 * @param unknown_type $underStopSell
+	 */
+	public function testStopSells($pickupKey, $dropoffKey, $pickupDate, $dropoffDate, $class, $type) {
+		$this->assertTrue(isset(self::$locations[$pickupKey]), "Pick-up location not found!");
+		$this->assertTrue(isset(self::$locations[$dropoffKey]), "Drop-off location not found!");
+		$this->assertTrue(isset(self::$locations[$pickupKey]['cars'][$class]), "Car not found!");
+
+		$c = self::$locations[$pickupKey]['cars'][$class];
+		$p = self::$locations[$pickupKey];
+		$d = self::$locations[$dropoffKey];
+
+		$pTime = strtotime($pickupDate);
+		$dTime = strtotime($dropoffDate);
+
+		list($stopSells, $onRequests, $opCalls) = StopSell::getCarsInStopSell($p['id'], $pTime, $dTime, 0, $d['id'], $p['country'], $d['country'], true);
+
+		if ($type === StopSell::STOP_SELL) {
+			$this->assertTrue(in_array($c['id'], $stopSells));
+		} elseif ($type === StopSell::ON_REQUEST) {
+			$this->assertTrue(in_array($c['id'], $onRequests));
+		} else {
+			// FREESALE
+			$this->assertTrue(!in_array($c['id'], $stopSells));
+			$this->assertTrue(!in_array($c['id'], $onRequests));
+		}
+		//public static function getCarsInStopSell($branchId, $pickupTimestamp, $dropoffTimestamp, $numberOfDays, $dropBranchId, $pickCountry, $dropCountry, $backend = false)
+
+
+	}
+
+	public function mergeDatesProvider() {
+		return array(
+			array('2010-01-01 12:00', '2010-01-20 12:00', array(
+				array('2010-01-01 00:00', '2010-01-02 00:00', StopSell::APPLY_ALL, StopSell::ON_REQUEST)
+			), '13333333333333333333'),
+			array('2010-01-01 00:00', '2010-01-01 23:00', array(
+				array('2009-12-30 00:00', '2010-01-05 00:00', StopSell::APPLY_PICKUPS, StopSell::STOP_SELL)
+			), '2'),
+			array('2010-01-01 12:00', '2010-01-10 23:00', array(
+			), '3333333333'),
+			array('2010-01-01 12:00', '2010-01-10 23:00', array(
+				array('2009-12-30 00:00', '2010-12-30 00:00', StopSell::APPLY_PICKUPS, StopSell::STOP_SELL), // 2333333333
+				array('2010-01-01 00:00', '2010-01-02 00:00', StopSell::APPLY_ALL, StopSell::FREESALE), // 3333333333
+			), '3333333333'),
+			array('2010-01-11 12:00', '2010-01-20 12:00', array(
+				array('2010-01-13 00:00', '2010-01-18 00:00', StopSell::APPLY_ALL, StopSell::STOP_SELL),
+			), '3322222333')
+		);
+	}
+
+	/**
+	 * @dataProvider mergeDatesProvider
+	 * @param string $str
+	 */
+	public function testMergeDates($pickDate, $dropDate, $stopSells, $resultMatrix) {
+
+		$pickDate = strtotime(date('Y-m-d 00:00:00', strtotime($pickDate)));
+		$dropDate = strtotime(date('Y-m-d 00:00:00', strtotime($dropDate)));
+
+		$len = ($dropDate - $pickDate) / 86400;
+
+		$matrix = array_fill(0, $len + 1, StopSell::FREESALE);
+		foreach ($stopSells as $stopSell) {
+			$matrix = StopSell::mergeDates($matrix, $len, $pickDate, $dropDate, strtotime($stopSell[0]), strtotime($stopSell[1]), $stopSell[2], $stopSell[3]);
+		}
+		$matrix = implode('', $matrix);
+
+		$this->assertEquals($resultMatrix, $matrix);
+	}
+}
+?>
