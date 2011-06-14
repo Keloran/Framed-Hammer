@@ -56,11 +56,6 @@ class Form_Select extends Form_Abstract {
 		//has an id
 		if ($this->aElement[$cName]['id']) { $cReturn .= "id=\"" . $this->aElement[$cName]['id'] . "\" "; }
 
-<<<<<<< HEAD
-=======
-		#$cReturn .= "error=\"" . $this->getError($cName) . "\"";
-
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		//HTML5
 		$cReturn .= $this->addHTML5();
 		$cReturn .= ">";
@@ -74,12 +69,6 @@ class Form_Select extends Form_Abstract {
 		//Errors
 		$cReturn .= $this->addError();
 
-<<<<<<< HEAD
-=======
-		//has it got an error
-		#$cReturn .= $this->getError($cName, true);
-
->>>>>>> c0c66965fad63221c98f14c695de9a95e55161f3
 		return $cReturn;
 	}
 
