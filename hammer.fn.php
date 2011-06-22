@@ -222,8 +222,17 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 		$cVisitor = visitorIP();
 		if ($cVisitor) {
 			if (!is_null($oAdmin)) {
-				if ($oAdmin->getBannedIP($cVisitor)) {
-					$oHammer->sendLocation("http://www.google.com");
+				if (strstr($cVisitor, ",")) {
+					$aVisitor = explode(",", $cVisitor);
+					for ($i = 0; $i < count($aVisitor); $i++) {
+						if ($oAdmin->getBannedIP($aVisitor[$i])) {
+							$oHammer->sendLocation("http://www.google.com");
+						}
+					}
+				} else {
+					if ($oAdmin->getBannedIP($cVisitor)) {
+						$oHammer->sendLocation("http://www.google.com");
+					}
 				}
 			}
 		}
