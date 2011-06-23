@@ -347,30 +347,20 @@ class oReader {
 		//different levels
 		switch($cLevel) {
 			case "NOTICE":
-				FB::info($cMessage);
 				ChromePHP::info($cMessage);
 				break;
 
 			case "ERROR":
-				FB::error($cMessage);
 				ChromePHP::error($cMessage);
 				break;
 
 			case "WARNING":
-				FB::warn($cMessage);
 				ChromePHP::warn($cMessage);
 				break;
 
 			default:
-				FB::log($cMessage);
 				ChromePHP::log($cMessage);
 				break;
 		}
-
-		/**
-		$oInstance 	= FirePHP::getInstance(true);
-		$aArgs		= func_get_args();
-		return call_user_func_array(array($oInstance, "fb"), $aArgs);
-		*/
 	}
 }
