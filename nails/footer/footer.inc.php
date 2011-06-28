@@ -188,6 +188,9 @@ class Footer implements Nails_Interface {
 			$cReturn = "";
 		}
 
+		//close the page
+		
+
 		$cReturn .= "</body>\n";
 		$cReturn .= "</html>\n";
 

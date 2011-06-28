@@ -1033,6 +1033,9 @@ class Head {
 			$cReturn .= $this->getWarnings();
 		}
 
+		//Mobile head
+		if ($this->bMobile) { $cReturn .= "<div data-role=\"page\" class=\"type-home\">\n"; }
+
 		return $cReturn;
 	}
 
