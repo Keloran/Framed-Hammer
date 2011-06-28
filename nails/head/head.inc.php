@@ -9,8 +9,8 @@
  * @access public
  */
 class Head {
-	public $aHead       	= false;
-	public $cJS		= false;
+	public $aHead       = false;
+	public $cJS			= false;
 	public $bHTML		= false;
 	public $cCSS		= false;
 	public $cDocType	= "xhtml";
@@ -18,20 +18,25 @@ class Head {
 	public $bRTL		= false;
 
 	//Custom settings for templates
-	public $cPageTitle		= false;
+	public $cPageTitle			= false;
 	public $cPageDescription	= false;
 	public $cPageKeywords		= false;
-	public $bTitleLower		= false;
+	public $bTitleLower			= false;
 
 	//jQuery
-	public $bJSFramework		= false;
-	public $cJSFrameworkVersion	= "1.5.1";
-	public $cJSFrameworkSubVersion	= "1.5";
-	public $cJSFrameworkName	= "jquery";
-	public $cJSFrameworkUIVersion	= "1.8.9";
-	public $bJSFrameworkUI		= false;
+	public $bJSFramework			= false;
+	public $bJSFrameworkUI			= false;
+
+	public $cJSFrameworkVersion			= "1.6.1";
+	public $cJSFrameworkSubVersion		= "1.6";
+	public $cJSFrameworkName			= "jquery";
+	public $cJSFrameworkUIVersion		= "1.8.13";
+	public $cJSFrameworkMobileName		= "mobile";
+	public $cJSFrameworkMobileVersion 	= "1.0b1";
+
 	public $bJS			= true;
-	public $bWarning		= true;
+	public $bWarning	= true;
+	public $bMobile		= false;
 
 	//Nails
 	static $oHead;
@@ -110,6 +115,9 @@ class Head {
 	    		define("SITEADDRESS", $cAddress);
 	    	}
 		}
+
+		$mBrowser		= getBrowser();
+		$this->bMobile	= $this->mobileBrowser($mBrowser);
 	}
 
     /**
@@ -356,8 +364,8 @@ class Head {
     	$bViewPort	= false;
 
     	//get the browser, since there might be a viewport tag for iphone
-    	$mBrowser	= getBrowser();
-    	$bViewPort	= $this->mobileBrowser($mBrowser);
+    	#$mBrowser	= getBrowser();
+    	$bViewPort	= $this->bMobile;
 
 		//The initial tag to denote it as made with Hammer
 		$cReturn = "<meta name=\"Generator\" content=\"Hammer Framework\" />\n";
@@ -731,16 +739,6 @@ class Head {
 			$cPath .= $this->cJSFrameworkVersion . "/";
 			$cPath .= $this->cJSFrameworkName . ".min.js";
 
-			//sometimes google doesnt have it but MS does
-			/**
-			if (!file_exists($cPath)) {
-				$cPath  = $cHTTP . "://ajax.aspnetcdn.com/ajax/";
-				$cPath .= $this->cJSFrameworkName . "/";
-				$cPath .= $this->cJSFrameworkName . "-";
-				$cPath .= $this->cJSFrameworkSubVersion . ".min.js";
-			}
-			*/
-
 		    	$cReturn	 = "<script src=\"" . $cPath . "\" type=\"text/javascript\"></script>\n";
 
 			//now do we want the ui aswell
@@ -751,6 +749,16 @@ class Head {
 				$cReturn .= $this->cJSFrameworkUIVersion . "";
 				$cReturn .= $this->cJSFrameworkName . "-ui";
 				$cReturn .= ".min.js\" type=\"text/javascript\"></script>\n";
+			}
+
+			//are we a mobile version
+			if ($this->bMobile) {
+				$cReturn	.= "<script src=\"http://code.jquery.com/";
+				$cReturn	.= $this->cJSFrameworkMobileName . "/";
+				$cReturn	.= $this->cJSFrameworkMobileVersion . "/";
+				$cReturn	.= $this->cJSFrameworkName . "." . $this->cJSFrameworkMobileName;
+				$cReturn	.= "-" . $this->cJSFrameworkMobileVersion;
+				$cReturn	.= ".min.js\" type=\"text/javascritpt\"></script>\n";
 			}
 		}
 
@@ -775,6 +783,24 @@ class Head {
 			$cLocation .= "themes/" . $cName . "/";
 
 			$cNamed		= $this->cJSFrameworkName . "-ui.css";
+
+			$this->aAddedCSS[$iNum]['location'] = $cLocation;
+			$this->aAddedCSS[$iNum]['file']		= $cNamed;
+		}
+
+		//if its a mobile
+		if ($this->bMobile) {
+			$iNum = count($this->aAddedCSS);
+			if ($iNum) { $iNum++; }
+
+			$cLocation	 = "http://code.jquery.com/";
+			$cLocation	.= $this->cJSFrameworkMobileName . "/";
+			$cLocation	.= $this->cJSFrameworkMobileVersion . "/";
+
+			$cNamed	 = $this->cJSFrameworkName . ".";
+			$cNamed	.= $this->cJSFrameworkMobileName . "-";
+			$cNamed	.= $this->cJSFrameworkMobileVersion;
+			$cNamed	.= ".min.css";
 
 			$this->aAddedCSS[$iNum]['location'] = $cLocation;
 			$this->aAddedCSS[$iNum]['file']		= $cNamed;
