@@ -130,4 +130,31 @@ trait Traits_Browser {
 
 		return $mBrowser;
 	}
+
+	function mobileBrowser($mBrowser = false) {
+		if (!$mBrowser) { $mBrowser = getBrowser(); }
+
+		$bReturn	= false;
+
+		//is mBrowser an array
+		if (is_array($mBrowser)) {
+			if (in_array("android", $mBrowser)) {
+				$bReturn	= true;
+			} else if (in_array("iphone", $mBrowser)) {
+				$bReturn	= true;
+			} else if (in_array("ipad", $mBrowser)) {
+				$bReturn	= true;
+			}
+		} else {
+			switch($mBrowser) {
+				case "android":
+				case "iphone":
+				case "ipad":
+					$bReturn = true;
+					break;
+			} // switch
+		}
+
+		return $bReturn;
+	}
 }

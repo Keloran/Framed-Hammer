@@ -117,7 +117,7 @@ class Head {
 		}
 
 		$mBrowser		= getBrowser();
-		$this->bMobile	= $this->mobileBrowser($mBrowser);
+		$this->bMobile	= mobileBrowser($mBrowser);
 	}
 
     /**
@@ -325,36 +325,6 @@ class Head {
 	    $cDescription = "<meta name=\"description\" content=\"" . $cDescriptions . "\" />\n";
         return $cDescription;
     }
-
-	/**
-	 * Head::mobileBrowser()
-	 *
-	 * @param mixed $mBrowser
-	 * @return bool
-	 */
-	private function mobileBrowser($mBrowser) {
-		$bReturn	= false;
-
-		if (is_array($mBrowser)) {
-			if (in_array("android", $mBrowser)) {
-				$bReturn	= true;
-			} else if (in_array("iphone", $mBrowser)) {
-				$bReturn	= true;
-			} else if (in_array("ipad", $mBrowser)) {
-				$bReturn	= true;
-			}
-		} else {
-			switch($mBrowser) {
-				case "android":
-				case "iphone":
-				case "ipad":
-					$bReturn = true;
-					break;
-			} // switch
-		}
-
-		return $bReturn;
-	}
 
     /**
      * Head::getMetaTags()
@@ -1027,6 +997,9 @@ class Head {
 
 		//get the body
 		if ($bBody) { $cReturn .= "<body>\n"; }
+
+		//mobile browser
+		if ($this->bMobile) { $cReturn .= "<div data-role=\"page\" id=\"jqm-home\" class=\"type-home\">\n"; }
 
 		//Display any warnings till i get the setup script made
 		if ($this->getWarnings()) {

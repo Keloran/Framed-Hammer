@@ -13,6 +13,8 @@ class Footer implements Nails_Interface {
 	private $oNails;
 	private $oDB;
 
+	private $bMobile;
+
 	static $oFooter;
 
 	/**
@@ -25,6 +27,9 @@ class Footer implements Nails_Interface {
 			$this->oNails	= $oNails;
 			$this->oDB		= $oNails->getDatabase();
 		}
+
+		$mBrowser 		= getBrowser();
+		$this->bMobile	= mobileBrowser($mBrowser);
 	}
 
 	/**
@@ -187,6 +192,9 @@ class Footer implements Nails_Interface {
 		} else {
 			$cReturn = "";
 		}
+
+		//since mobile needs the page closing
+		if ($this->bMobile) { $cReturn .= "</div>\n"; }
 
 		$cReturn .= "</body>\n";
 		$cReturn .= "</html>\n";
