@@ -340,11 +340,14 @@ class Head {
 				$bReturn	= true;
 			} else if (in_array("iphone", $mBrowser)) {
 				$bReturn	= true;
+			} else if (in_array("ipad", $mBrowser)) {
+				$bReturn	= true;
 			}
 		} else {
 			switch($mBrowser) {
 				case "android":
 				case "iphone":
+				case "ipad":
 					$bReturn = true;
 					break;
 			} // switch
