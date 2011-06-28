@@ -60,6 +60,7 @@ class Email_Attachments extends Email_Abstract {
 			//now depending on the encoding, hopefully it will only be 3 or less
 			$cFile 	= imap_fetchbody($this->pIMAP, $this->iMID, $iUpPart);
 			$iEnc	= $oPart->encoding;
+			$cFilename = $oPart->description;
 
 			//add to array
 			$aReturn['type']		= $cHeader;
@@ -137,6 +138,7 @@ class Email_Attachments extends Email_Abstract {
 						case 4:
 						case 5:
 						case 6:
+						case 3:
 							$aReturn[] = $this->getPart($aParts[$i], $i);
 							break;
 						default:
@@ -150,6 +152,7 @@ class Email_Attachments extends Email_Abstract {
 					case 4:
 					case 5:
 					case 6:
+					case 3:
 						$aReturn[] = $this->getPart($oPart, 1);
 						break;
 				} // switch
@@ -179,12 +182,14 @@ class Email_Attachments extends Email_Abstract {
 		$cType		 = $this->getFileHeader($oStruct->type);
 		$cType		.= strtolower($oStruct->subtype);
 
+		$cReturn	= false;
+
 		//start a new buffer so that download works
 		ob_start();
 			$cFile		= imap_fetchbody($this->pIMAP, $this->iMID, $iPart);
 			$cDecode 	= $this->simpleDecode($cFile, $iEnc);
 			$iLength	= strlen($cDecode);
-
+		
 			//printRead(array($cFile, $cDecode, $iLength, $iLengthO));die();
 			header('Content-Description: File Transfer');
 			header("Content-Type: " . $cType);
@@ -220,9 +225,9 @@ class Email_Attachments extends Email_Abstract {
 		$cReturn	= SITEPATH . "/files/" . $cFile;
 
 		//write the file
-		$fp 	= fopen($cFile, 'w');
-			fwrite($fp, $cDecode);
-		$bReturn =	fclose($fp);
+		$fp 	= fopen($cReturn, 'w');
+		fwrite($fp, $cDecode);
+		$bReturn = fclose($fp);
 
 		if ($bReturn) { return $cFile; }
 
@@ -273,6 +278,8 @@ class Email_Attachments extends Email_Abstract {
 	public function previewAttachment($iPart) {
 		$oStruct	= $this->getPartStruct($iPart);
 		$cFilename	= false;
+
+		if (!is_object($oStruct)) { return false; }
 
 		//there is a description to get the filename
 		if ($oStruct->ifdescription) {
