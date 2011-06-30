@@ -9,19 +9,7 @@
  * @access public
  */
 class Head {
-	public $aHead       = false;
-	public $cJS			= false;
-	public $bHTML		= false;
-	public $cCSS		= false;
 	public $cDocType	= "xhtml";
-	public $cError		= false;
-	public $bRTL		= false;
-
-	//Custom settings for templates
-	public $cPageTitle			= false;
-	public $cPageDescription	= false;
-	public $cPageKeywords		= false;
-	public $bTitleLower			= false;
 
 	//jQuery
 	public $bJSFramework			= false;
@@ -44,17 +32,7 @@ class Head {
 	//un-coupling
 	private $oDB		= false;
 	private $oNails		= false;
-
-	private $cPage;
-	private $cAction;
-	private $cChoice;
-	private $iItem;
-	private $cStyled;
-	private $cAddress;
-	private $aAddedCSS;
-	private $bTitleMixed;
-	public $iCache;
-	private $cExtraConds;
+	private $aData		= false;
 
     /**
      * Head::__construct()
@@ -118,6 +96,59 @@ class Head {
 
 		$mBrowser		= getBrowser();
 		$this->bMobile	= mobileBrowser($mBrowser);
+
+		//get the default warnings
+		if (ini_get("register_globals")) { 			$this->aWarnings[]	=  "You have register_globals turned on, this is a bad idea, turn it off<br />\n"; }
+		if (ini_get("short_tags")) {				$this->aWarnings[]	=  "You don't have short tags turned on, it is recommended you turn it on, for no other reason that it makes writing templates easier<br />\n"; }
+		if (ini_get("memory_limit") <= 31) {		$this->aWarnings[]	= "Your memory_limit is set to less than 32M it is recommended to have this higher<br />\n"; }
+		if (ini_get("post_max_size") <= 8) { 		$this->aWarnings[]	= "Your post_max_size is set to less than 9M it is recommeded you increase this if you plan on creating a file area<br />\n"; }
+		if (ini_get("magic_quotes_gpc")) {			$this->aWarnings[]	= "You have magic_quotes_gpc turned on, this is a bad idea, turn it off<br />\n"; }
+		if (ini_get("upload_max_filesize") <= 31) {	$this->aWarnings[]	= "Your upload_max_filesize is set to less than 32M it is recommneded you increase this if you plan on creating a file area<br />\n"; }
+		if (ini_get("allow_url_include")) {			$this->aWarnings[]	= "You have allow_url_include turned on, it is recommended that you turn this off<br />\n"; }
+
+	}
+
+	/**
+	 * Head::__set()
+	 *
+	 * @param string $cName
+	 * @param mixed $mValue
+	 * @return null
+	 */
+	public function __set($cName, $mValue) {
+		$this->aData[$cName] = $mValue;
+	}
+
+	/**
+	 * Head::__isset()
+	 *
+	 * @param string $cName
+	 * @return bool
+	 */
+	public function __isset($cName) {
+		$bReturn = false;
+
+		if (isset($this->aData[$cName])) {
+			$bReturn = true;
+		} else if (isset($this->$cName)) {
+			$bReturn = true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Head::__get()
+	 *
+	 * @param string $cName
+	 * @return mixed
+	 */
+	public function __get($cName) {
+		$mReturn = false;
+
+		if (isset($this->aData[$cName]))) { $mReturn = $this->aData[$cName]; }
+
+		return $mReturn;
 	}
 
     /**
@@ -857,15 +888,7 @@ class Head {
     */
     public function getWarnings() {
     	$cReturn	= false;
-		$aReturn	= false;
-
-		if (ini_get("register_globals")) { 		$aReturn[]	=  "You have register_globals turned on, this is a bad idea, turn it off<br />\n"; }
-		if (ini_get("short_tags")) {			$aReturn[]	=  "You don't have short tags turned on, it is recommended you turn it on, for no other reason that it makes writing templates easier<br />\n"; }
-		if (ini_get("memory_limit") <= 31) {		$aReturn[]	= "Your memory_limit is set to less than 32M it is recommended to have this higher<br />\n"; }
-		if (ini_get("post_max_size") <= 8) { 		$aReturn[]	= "Your post_max_size is set to less than 9M it is recommeded you increase this if you plan on creating a file area<br />\n"; }
-		if (ini_get("magic_quotes_gpc")) {		$aReturn[]	= "You have magic_quotes_gpc turned on, this is a bad idea, turn it off<br />\n"; }
-		if (ini_get("upload_max_filesize") <= 31) {	$aReturn[]	= "Your upload_max_filesize is set to less than 32M it is recommneded you increase this if you plan on creating a file area<br />\n"; }
-		if (ini_get("allow_url_include")) {		$aReturn[]	= "You have allow_url_include turned on, it is recommended that you turn this off<br />\n"; }
+		$aReturn	= $this->aWarnings;
 
 		if ($aReturn) {
 			$cReturn	= "<div style=\"width: 100%; background-color: red; color: white; font-size: 1.3em;\">\n";
@@ -963,23 +986,12 @@ class Head {
 		}
 
 		//browser cap
-		$mBrowser = getBrowserCap();
+		#$mBrowser = getBrowserCap();
 
 		//Favicon
 		$cReturn .= "<link rel=\"icon\" href=\"/favicon.ico\" type=\"image/x-icon\" />\n";
 		$cReturn .= "<link rel=\"shortcut icon\" href=\"/favicon.ico\" type=\"image/x-icon\" />\n";
 		$cReturn .= "<link rel=\"apple-touch-icon\" href=\"/favicon.ico\" />\n"; //iphone image
-
-		//show the ie6 warning
-		if ($this->bWarning) {
-			$cReturn .= "<!--[if lte IE 8]>\n";
-			$cReturn .= "<div style=\"clear: both; height: 59px; padding:0 0 0 15px; position: relative;\">\n";
-			$cReturn .= "<a href=\"http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode\">\n";
-			$cReturn .= "<img src=\"http://www.theie6countdown.com/images/upgrade.jpg\" border=\"0\" height=\"42\" width=\"820\" alt=\"IE Upgrade\" />\n";
-			$cReturn .= "</a>\n";
-			$cReturn .= "</div>\n";
-			$cReturn .= "<![endif]-->\n";
-		}
 
 		//since most of the time you will be using HTML5 add the shiv for less than IE9 which likes HTML5
 		//its not a good idea to have stuff in the head thats remote, but google should be fast
@@ -1001,10 +1013,20 @@ class Head {
 		//mobile browser
 		if ($this->bMobile) { $cReturn .= "<div data-role=\"page\" id=\"jqm-home\" class=\"type-home\">\n"; }
 
-		//Display any warnings till i get the setup script made
-		if ($this->getWarnings()) {
-			$cReturn .= $this->getWarnings();
+		//show the ie6 warning
+		if ($this->bWarning) {
+			$cWarning = "<!--[if lte IE 8]>\n";
+			$cWarning .= "<div style=\"clear: both; height: 59px; padding:0 0 0 15px; position: relative;\">\n";
+			$cWarning .= "<a href=\"http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode\">\n";
+			$cWarning .= "<img src=\"http://www.theie6countdown.com/images/upgrade.jpg\" border=\"0\" height=\"42\" width=\"820\" alt=\"IE Upgrade\" />\n";
+			$cWarning .= "</a>\n";
+			$cWarning .= "</div>\n";
+			$cWarning .= "<![endif]-->\n";
+			$this->aWarnings[] = $cWarning;
 		}
+
+		//Display any warnings till i get the setup script made
+		if ($this->getWarnings()) { $cReturn .= $this->getWarnings(); }
 
 		return $cReturn;
 	}
