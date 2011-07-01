@@ -96,10 +96,11 @@ class Head {
 
 		$mBrowser		= getBrowser();
 		$this->bMobile	= mobileBrowser($mBrowser);
+		$this->bWarning = IEBrowser($mBrowser);
 
 		//get the default warnings
-		if (ini_get("register_globals")) { 			$this->cWarnings	.=  "You have register_globals turned on, this is a bad idea, turn it off<br />\n"; }
-		if (ini_get("short_tags")) {				$this->cWarnings	.=  "You don't have short tags turned on, it is recommended you turn it on, for no other reason that it makes writing templates easier<br />\n"; }
+		if (ini_get("register_globals")) { 			$this->cWarnings	.= "You have register_globals turned on, this is a bad idea, turn it off<br />\n"; }
+		if (ini_get("short_tags")) {				$this->cWarnings	.= "You don't have short tags turned on, it is recommended you turn it on, for no other reason that it makes writing templates easier<br />\n"; }
 		if (ini_get("memory_limit") <= 31) {		$this->cWarnings	.= "Your memory_limit is set to less than 32M it is recommended to have this higher<br />\n"; }
 		if (ini_get("post_max_size") <= 8) { 		$this->cWarnings	.= "Your post_max_size is set to less than 9M it is recommeded you increase this if you plan on creating a file area<br />\n"; }
 		if (ini_get("magic_quotes_gpc")) {			$this->cWarnings	.= "You have magic_quotes_gpc turned on, this is a bad idea, turn it off<br />\n"; }

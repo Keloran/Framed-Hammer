@@ -153,3 +153,11 @@ function mobileBrowser($mBrowser = false) {
 
 	return $bReturn;
 }
+
+function IEBrowser($mBrowser = false) {
+	if (!$mBrowser) { $mBrowser = getBrowser(); }
+
+	$bReturn = false;
+
+	printRead($mBrowser);
+}
