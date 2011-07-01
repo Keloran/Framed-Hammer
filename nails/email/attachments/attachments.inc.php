@@ -68,10 +68,15 @@ class Email_Attachments extends Email_Abstract {
 			$cFile 	= imap_fetchbody($this->pIMAP, $this->iMID, $iUpPart);
 			$iEnc	= $oPart->encoding;
 
+			//get the filename
 			if (isset($oPart->description)) {
 				$cFilename = $oPart->description;
+			} else if (isset($oPart->dparameters)) {
+				if (is_array($oPart->dparameters)) {
+					$cFilename = $oPart->dparameters[0]['value'];
+				}
 			} else {
-				printRead($oPart);die();
+				return false;
 			}
 
 			//add to array
