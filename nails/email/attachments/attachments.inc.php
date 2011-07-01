@@ -67,7 +67,12 @@ class Email_Attachments extends Email_Abstract {
 			//now depending on the encoding, hopefully it will only be 3 or less
 			$cFile 	= imap_fetchbody($this->pIMAP, $this->iMID, $iUpPart);
 			$iEnc	= $oPart->encoding;
-			$cFilename = $oPart->description;
+
+			if (isset($oPart->description)) {
+				$cFilename = $oPart->description;
+			} else {
+				printRead($oPart);die();
+			}
 
 			//add to array
 			$aReturn['type']		= $cHeader;
