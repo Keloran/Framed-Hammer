@@ -73,7 +73,7 @@ class Email_Attachments extends Email_Abstract {
 				$cFilename = $oPart->description;
 			} else if (isset($oPart->dparameters)) {
 				if (is_array($oPart->dparameters)) {
-					$cFilename = $oPart->dparameters[0]['value'];
+					$cFilename = $oPart->dparameters[0]->value;
 				}
 			} else {
 				return false;
