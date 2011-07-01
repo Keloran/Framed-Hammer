@@ -890,6 +890,8 @@ class Head {
     	$cReturn	= false;
 		$cWarnings	= $this->cWarnings;
 
+    	printRead($cWarnings);
+
 		if ($cWarnings) {
 			$cReturn	= "<div style=\"width: 100%; background-color: red; color: white; font-size: 1.3em;\">\n";
 			$cReturn	.= "<h1>Warnings</h1>";
