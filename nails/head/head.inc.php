@@ -98,13 +98,13 @@ class Head {
 		$this->bMobile	= mobileBrowser($mBrowser);
 
 		//get the default warnings
-		if (ini_get("register_globals")) { 			$this->aWarnings[]	=  "You have register_globals turned on, this is a bad idea, turn it off<br />\n"; }
-		if (ini_get("short_tags")) {				$this->aWarnings[]	=  "You don't have short tags turned on, it is recommended you turn it on, for no other reason that it makes writing templates easier<br />\n"; }
-		if (ini_get("memory_limit") <= 31) {		$this->aWarnings[]	= "Your memory_limit is set to less than 32M it is recommended to have this higher<br />\n"; }
-		if (ini_get("post_max_size") <= 8) { 		$this->aWarnings[]	= "Your post_max_size is set to less than 9M it is recommeded you increase this if you plan on creating a file area<br />\n"; }
-		if (ini_get("magic_quotes_gpc")) {			$this->aWarnings[]	= "You have magic_quotes_gpc turned on, this is a bad idea, turn it off<br />\n"; }
-		if (ini_get("upload_max_filesize") <= 31) {	$this->aWarnings[]	= "Your upload_max_filesize is set to less than 32M it is recommneded you increase this if you plan on creating a file area<br />\n"; }
-		if (ini_get("allow_url_include")) {			$this->aWarnings[]	= "You have allow_url_include turned on, it is recommended that you turn this off<br />\n"; }
+		if (ini_get("register_globals")) { 			$this->cWarnings	.=  "You have register_globals turned on, this is a bad idea, turn it off<br />\n"; }
+		if (ini_get("short_tags")) {				$this->cWarnings	.=  "You don't have short tags turned on, it is recommended you turn it on, for no other reason that it makes writing templates easier<br />\n"; }
+		if (ini_get("memory_limit") <= 31) {		$this->cWarnings	.= "Your memory_limit is set to less than 32M it is recommended to have this higher<br />\n"; }
+		if (ini_get("post_max_size") <= 8) { 		$this->cWarnings	.= "Your post_max_size is set to less than 9M it is recommeded you increase this if you plan on creating a file area<br />\n"; }
+		if (ini_get("magic_quotes_gpc")) {			$this->cWarnings	.= "You have magic_quotes_gpc turned on, this is a bad idea, turn it off<br />\n"; }
+		if (ini_get("upload_max_filesize") <= 31) {	$this->cWarnings	.= "Your upload_max_filesize is set to less than 32M it is recommneded you increase this if you plan on creating a file area<br />\n"; }
+		if (ini_get("allow_url_include")) {			$this->cWarnings	.= "You have allow_url_include turned on, it is recommended that you turn this off<br />\n"; }
 
 	}
 
@@ -888,15 +888,12 @@ class Head {
     */
     public function getWarnings() {
     	$cReturn	= false;
-		$aReturn	= $this->aWarnings;
+		$cWarnings	= $this->cWarnings;
 
-		if ($aReturn) {
+		if ($cWarnings) {
 			$cReturn	= "<div style=\"width: 100%; background-color: red; color: white; font-size: 1.3em;\">\n";
 			$cReturn	.= "<h1>Warnings</h1>";
-
-			for ($i = 0; $i < count($aReturn); $i++) {
-				$cReturn .= $aReturn[$i];
-			}
+			$cReturn	.= $cWarnings;
 
 			$cReturn	.= "</div>\n";
 		}
@@ -1022,7 +1019,7 @@ class Head {
 			$cWarning .= "</a>\n";
 			$cWarning .= "</div>\n";
 			$cWarning .= "<![endif]-->\n";
-			$this->aWarnings[] = $cWarning;
+			$this->cWarnings .= $cWarning;
 		}
 
 		//Display any warnings till i get the setup script made
