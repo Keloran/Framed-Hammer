@@ -31,6 +31,13 @@ class Email_Attachments extends Email_Abstract {
 	 */
 	public function getBody() {}
 
+	/**
+	 * Email_Attachments::getPart()
+	 *
+	 * @param object $oPart
+	 * @param int $iPart
+	 * @return array
+	 */
 	private function getPart($oPart, $iPart) {
 		$aReturn	= false;
 		$iSubPart	= ($iPart - 1);
@@ -189,7 +196,7 @@ class Email_Attachments extends Email_Abstract {
 			$cFile		= imap_fetchbody($this->pIMAP, $this->iMID, $iPart);
 			$cDecode 	= $this->simpleDecode($cFile, $iEnc);
 			$iLength	= strlen($cDecode);
-		
+
 			//printRead(array($cFile, $cDecode, $iLength, $iLengthO));die();
 			header('Content-Description: File Transfer');
 			header("Content-Type: " . $cType);

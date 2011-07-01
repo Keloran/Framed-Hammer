@@ -146,7 +146,7 @@ class Head {
 	public function __get($cName) {
 		$mReturn = false;
 
-		if (isset($this->aData[$cName]))) { $mReturn = $this->aData[$cName]; }
+		if (isset($this->aData[$cName])) { $mReturn = $this->aData[$cName]; }
 
 		return $mReturn;
 	}
