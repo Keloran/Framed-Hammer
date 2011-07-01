@@ -127,6 +127,12 @@ function getBrowser($cSpecific = null) {
 	return $mBrowser;
 }
 
+/**
+ * mobileBrowser()
+ *
+ * @param mixed $mBrowser
+ * @return bool
+ */
 function mobileBrowser($mBrowser = false) {
 	if (!$mBrowser) { $mBrowser = getBrowser(); }
 
@@ -154,10 +160,27 @@ function mobileBrowser($mBrowser = false) {
 	return $bReturn;
 }
 
+/**
+ * IEBrowser()
+ *
+ * @param mixed $mBrowser
+ * @return bool
+ */
 function IEBrowser($mBrowser = false) {
 	if (!$mBrowser) { $mBrowser = getBrowser(); }
 
 	$bReturn = false;
 
-	printRead($mBrowser);
+	if (is_array($mBrowser)) {
+		if (in_array("ie", $mBrowser)) {
+			$bReturn = true;
+		}
+	} else {
+		if ($mBrowser == "ie") {
+			$bReturn = true;
+		}
+	}
+
+	return $bReturn;
 }
+
