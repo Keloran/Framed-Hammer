@@ -793,6 +793,9 @@ class Head {
 				"location"	=> $cLocation,
 				"file"		=> $cNamed
 			);
+
+			$aAdded = array_merge($this->aAddedCSS, $aCSS);
+			printRead($aAdded);die();
 			$this->aAddedCSS[] = $aCSS;
 		}
 
