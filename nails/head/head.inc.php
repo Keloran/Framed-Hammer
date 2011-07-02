@@ -789,8 +789,11 @@ class Head {
 
 			$cNamed		= $this->cJSFrameworkName . "-ui.css";
 
-			$this->aAddedCSS[$iNum]['location'] = $cLocation;
-			$this->aAddedCSS[$iNum]['file']		= $cNamed;
+			$aCSS		= array(
+				"location"	=> $cLocation,
+				"file"		=> $cNamed
+			);
+			$this->aAddedCSS[] = $aCSS;
 		}
 
 		//if its a mobile
