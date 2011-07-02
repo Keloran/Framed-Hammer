@@ -549,8 +549,10 @@ class Head {
 		if ($iNum) { $iNum++; }
 
 		$aCSS = array(
-			'location'	=> $cLocation,
-			'file'		=> $cCSS
+			$iNum	=> array(
+				'location'	=> $cLocation,
+				'file'		=> $cCSS
+			)
 		);
 
 		if (is_array($this->aAddedCSS)) {
@@ -800,8 +802,10 @@ class Head {
 			$cNamed		= $this->cJSFrameworkName . "-ui.css";
 
 			$aCSS		= array(
-				"location"	=> $cLocation,
-				"file"		=> $cNamed
+				$iNum	=> array(
+					"location"	=> $cLocation,
+					"file"		=> $cNamed
+				)
 			);
 
 			if (is_array($this->aAddedCSS)) {
@@ -827,8 +831,20 @@ class Head {
 			$cNamed	.= $this->cJSFrameworkMobileVersion;
 			$cNamed	.= ".min.css";
 
-			$this->aAddedCSS[$iNum]['location'] = $cLocation;
-			$this->aAddedCSS[$iNum]['file']		= $cNamed;
+			$aCSS		= array(
+				$iNum	=> array(
+					"location"	=> $cLocation,
+					"file"		=> $cNamed
+				)
+			);
+
+			if (is_array($this->aAddedCSS)) {
+				$aAdded = array_merge($this->aAddedCSS, $aCSS);
+			} else {
+				$aAdded = $aCSS;
+			}
+
+			$this->aAddedCSS = $aAdded;
 		}
 
 		return $cReturn;
