@@ -59,8 +59,7 @@ class Charts {
 	function __construct(Nails $oNails, $cType = false) {
 		$this->oNails	= $oNails;
 
-		$oHead 		= $oNails->getHead();
-		$cBrowser	= $oHead->getBrowser();
+		$cBrowser	= getBrowser();
 
 		switch($cBrowser){
 			case "ie6":

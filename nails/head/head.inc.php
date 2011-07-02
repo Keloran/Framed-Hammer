@@ -1019,9 +1019,6 @@ class Head {
 			$cReturn .= $this->getJS();
 		}
 
-		//browser cap
-		#$mBrowser = getBrowserCap();
-
 		//Favicon
 		$cReturn .= "<link rel=\"icon\" href=\"/favicon.ico\" type=\"image/x-icon\" />\n";
 		$cReturn .= "<link rel=\"shortcut icon\" href=\"/favicon.ico\" type=\"image/x-icon\" />\n";
@@ -1107,15 +1104,5 @@ class Head {
 		$cReturn	= nl2br($cReturn);
 
 		return $cReturn;
-	}
-
-	/**
-	 * Head::getBrowser()
-	 *
-	 * @desc for back compat
-	 * @return mixed
-	 */
-	public function getBrowser() {
-		return getBrowser();
 	}
 }
