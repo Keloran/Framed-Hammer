@@ -550,7 +550,7 @@ class Head {
 
 		$aCSS = array(
 			'location'	=> $cLocation,
-			'file'		=> $cFile
+			'file'		=> $cCSS
 		);
 
 		if (is_array($this->aAddedCSS)) {
