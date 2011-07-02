@@ -548,8 +548,18 @@ class Head {
 		$iNum	= count($this->aAddedCSS);
 		if ($iNum) { $iNum++; }
 
-		$this->aAddedCSS[$iNum]['location']	= $cLocation;
-		$this->aAddedCSS[$iNum]['file']		= $cCSS;
+		$aCSS = array(
+			'location'	=> $cLocation,
+			'file'		=> $cFile
+		);
+
+		if (is_array($this->aAddedCSS)) {
+			$aAdded = array_merge($this->aAddedCSS, $aCSS);
+		} else {
+			$aAdded	= $aCSS;
+		}
+
+		$this->aAddedCSS = $aAdded;
 	}
 
     /**
@@ -796,7 +806,6 @@ class Head {
 
 			if (is_array($this->aAddedCSS)) {
 				$aAdded = array_merge($this->aAddedCSS, $aCSS);
-				printRead($aAdded);die();
 			} else {
 				$aAdded = $aCSS;
 			}
