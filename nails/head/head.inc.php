@@ -794,9 +794,14 @@ class Head {
 				"file"		=> $cNamed
 			);
 
-			$aAdded = array_merge($this->aAddedCSS, $aCSS);
-			printRead($aAdded);die();
-			$this->aAddedCSS[] = $aCSS;
+			if (is_array($this->aAddedCSS)) {
+				$aAdded = array_merge($this->aAddedCSS, $aCSS);
+				printRead($aAdded);die();
+			} else {
+				$aAdded = $aCSS;
+			}
+
+			$this->aAddedCSS = $aAdded;
 		}
 
 		//if its a mobile
