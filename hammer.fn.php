@@ -37,6 +37,7 @@ if (PHP_VERSION <= 5.3) {
 						if ($mFile_b == ".") { continue; }
 						if ($mFile_b == "..") { continue; }
 						if (!strpos($mFile_b, "fn")){ continue; } //its proberlly a trait file
+						if (strpos($mFile_b, "swp")) { continue; } //swap file, should not be included
 
 						//Only files left
 						$cPath_b = $mFile_a . "/" . $mFile_b;

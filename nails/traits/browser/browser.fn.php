@@ -211,7 +211,7 @@ function getCookie($cCookie = null) {
  * @return null
  */
 function createCookie($cName, $mValue, $bForever = false, $iTimeLimit = false) {
-	$cServer = false;
+	$cServer = ".";
 	if (isset($_SERVER['HTTP_HOST'])) { $cServer = $_SERVER['HTTP_HOST']; }
 
 	//is the page actually a https
@@ -235,4 +235,6 @@ function createCookie($cName, $mValue, $bForever = false, $iTimeLimit = false) {
 	} else {
 		setcookie($cName, $mValue, $iTime, "/", $cServer, $bSecure);
 	}
+
+	#printRead(array($cName, $mValue, $iTime, "/", $cServer, $bSecure));die();
 }
