@@ -219,7 +219,7 @@ function createCookie($cName, $mValue, $bForever = false, $iTimeLimit = false) {
 	//Origin in server
 	if (isset($_SERVER['HTTP_ORIGIN'])) {
 		$cOrigin = $_SERVER['HTTP_ORIGIN'];
-		if (strstr("http", $cOrigin)) { $cOrigin = substr($cOrigin, 7); }
+		if (strstr($cOrigin, "http")) { $cOrigin = substr($cOrigin, 7); }
 
 		$cServer = $cOrigin;
 	}
