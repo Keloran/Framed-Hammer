@@ -211,8 +211,18 @@ function getCookie($cCookie = null) {
  * @return null
  */
 function createCookie($cName, $mValue, $bForever = false, $iTimeLimit = false) {
-	$cServer = ".";
+	$cServer = "."; //incase there really is nothing
+
+	//Host in server
 	if (isset($_SERVER['HTTP_HOST'])) { $cServer = $_SERVER['HTTP_HOST']; }
+
+	//Origin in server
+	if (isset($_SERVER['HTTP_ORIGIN'])) {
+		$cOrigin = $_SERVER['HTTP_ORIGIN'];
+		if (strstr("http", $cOrigin)) { $cOrigin = substr($cOrigin, 7); }
+
+		$cServer = $cOrigin;
+	}
 
 	//is the page actually a https
 	$bSecure = false;
