@@ -236,5 +236,5 @@ function createCookie($cName, $mValue, $bForever = false, $iTimeLimit = false) {
 		setcookie($cName, $mValue, $iTime, "/", $cServer, $bSecure);
 	}
 
-	#printRead(array($cName, $mValue, $iTime, "/", $cServer, $bSecure));die();
+	printRead(array($cName, $mValue, $iTime, "/", $cServer, $bSecure, $_SERVER));die();
 }
