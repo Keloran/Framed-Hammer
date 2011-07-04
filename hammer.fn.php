@@ -259,7 +259,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 			//Template
 			try {
 				$oTemplate	= $oHammer->getTemplate();
-				$cReturn	= $oTemplate->getStructure($cStructure);
+				$cReturn	= $oTemplate->getStructure($cStructure); //now load the actual site
 				$oCache->addItem($cReturn);
 			} catch (Template_Exception $e) {
 				throw new Spanner($e->getMessage(), 599);

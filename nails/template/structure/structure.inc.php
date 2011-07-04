@@ -79,13 +79,19 @@ class Template_Structure extends Template_Abstract {
 		$bLanguage	= false;
 		$bFiltered	= false;
 
+		//is it a mobile device, and
+		$bMobile 	= mobileBrowser();
+		$bUseNormal	= $this->getParam("useNormal") ?: $this->getCookie("useNormal") ?: false;
+
 		//The structure name
 		if ($cTemplate) {
 			$cStruct	= $cTemplate . ".struct";
 			$cStruct1	= "structure.struct";
+			$cMobile	= "mobile.struct";
 		} else {
 			$cStruct	= "structure.struct";
 			$cStruct1	= $cStruct;
+			$cMobile	= "mobile.struct";
 		}
 
 		//now check to see what the core folder is called
@@ -134,13 +140,21 @@ class Template_Structure extends Template_Abstract {
 		//is there a page in place
 		if ($cPage) {
 			if (file_exists(PAGES . $cSep . $cPage . $cEnd1 . $cStruct)) { // news --end1-named.struct
-				$this->cTemplate	= PAGES . $cSep . $cPage . $cEnd1 . $cStruct;
+				$this->cTemplate	= PAGES . $cSep . $cPage . $cEnd1 . $cStruct; //normal browser
 			} else if (file_exists(PAGES . $cSep . $cPage . $cEnd2 . $cStruct)) { // news --end2-named.struct
 				$this->cTemplate	= PAGES . $cSep . $cPage . $cEnd2 . $cStruct;
 			} else if (file_exists(PAGES . $cSep . $cPage . $cEnd1 . $cStruct1)) { //news --end1-structure.struct
 				$this->cTemplate	= PAGES . $cSep . $cPage . $cEnd1 . $cStruct1;
+
+				if ($bMobile && !$bUseNormal) { //use mobile
+					if (file_exists(PAGES . $cSep . $cPage . $cEnd1 . $cMobile)) { $this->cTemplate = PAGES . $cSep . $cPage . $cEnd1 . $cMobile; }
+				}
 			} else if (file_exists(PAGES . $cSep . $cPage . $cEnd2 . $cStruct1)) { //news --end2-structure.struct
 				$this->cTemplate	= PAGES . $cSep . $cPage . $cEnd2 . $cStruct1;
+
+				if ($bMobile && !$bUseNormal) { //use mobile
+					if (file_exists(PAGES . $cSep . $cPage . $cEnd2 . $cMobile)) { $this->cTemplate = PAGES . $cSep . $cPage . $cEnd2 . $cMobile; }
+				}
 			}
 		}
 
@@ -153,8 +167,16 @@ class Template_Structure extends Template_Abstract {
 				$this->cTemplate	= PAGES . $cSep . $cPage . $cSep . $cAction . $cEnd2 . $cStruct;
 			} else if (file_exists(PAGES . $cSep . $cPage . $cSep . $cAction . $cEnd1 . $cStruct1)) { // news/comments --end2-structure.struct
 				$this->cTemplate	= PAGES . $cSep . $cPage . $cSep . $cAction . $cEnd1 . $cStruct1;
+
+				if ($bMobile && !$bUseNormal) { //use mobile
+					if (file_exists(PAGES . $cSep . $cPage . $cSep . $cAction . $cEnd1 . $cMobile)) { $this->cTemplate = PAGES . $cSep . $cPage . $cSep . $cAction . $cEnd1 . $cMobile; }
+				}
 			} else if (file_exists(PAGES . $cSep . $cPage . $cSep . $cAction . $cEnd2 . $cStruct1)) { // news/comments --end2-structure.struct
 				$this->cTemplate	= PAGES . $cSep . $cPage . $cSep . $cAction . $cEnd2 . $cStruct1;
+
+				if ($bMobile && !$bUseNormal) { //use mobile
+					if (file_exists(PAGES . $cSep . $cPage . $cSep . $cAction . $cEnd2 . $cMobile)) { $this->cTemplate = PAGES . $cSep . $cPage . $cSep . $cAction . $cEnd2 . $cMobile; }
+				}
 			}
 		}
 
@@ -166,8 +188,20 @@ class Template_Structure extends Template_Abstract {
 				$this->cTemplate	= PAGES . $cSep . $cPage . $cSep . $cAction . $cSep . $cChoice . $cEnd2 . $cStruct;
 			} else if (file_exists(PAGES . $cSep . $cPage . $cSep . $cAction . $cSep . $cChoice . $cEnd1 . $cStruct1)) { // news/comments/jimmy --structure.struct
 				$this->cTemplate	= PAGES . $cSep . $cPage . $cSep . $cAction . $cSep . $cChoice . $cEnd1 . $cStruct1;
+
+				if ($bMobile && !$bUseNormal) { //use mobile
+					if (file_exists(PAGES . $cSep . $cPage . $cSep . $cAction . $cSep . $cChoice . $cEnd1 . $cMobile)) {
+						$this->cTemplate = PAGES . $cSep . $cPage . $cSep . $cAction . $cSep . $cChoice . $cEnd1 . $cMobile;
+					}
+				}
 			} else if (file_exists(PAGES . $cSep . $cPage . $cSep . $cAction . $cSep . $cChoice . $cEnd2 . $cStruct1)) { // news/comments/jimmy --structure.struct
 				$this->cTemplate	= PAGES . $cSep . $cPage . $cSep . $cAction . $cSep . $cChoice . $cEnd2 . $cStruct1;
+
+				if ($bMobile && !$bUseNormal) { //use mobile
+					if (file_exists(PAGES . $cSep . $cPage . $cSep . $cAction . $cSep . $cChoice . $cEnd2 . $cMobile)) {
+						$this->cTemplate = PAGES . $cSep . $cPage . $cSep . $cAction . $cSep . $cChoice . $cEnd2 . $cMobile;
+					}
+				}
 			}
 		}
 
@@ -185,8 +219,20 @@ class Template_Structure extends Template_Abstract {
 					} else if (file_exists(PAGES . $cSep . $this->cNamedTemplate . $cEnd1 . $cStruct1)) { //end1-structure.struct
 						$this->cTemplate = PAGES . $cSep . $this->cNamedTemplate . $cEnd1 . $cStruct1;
 
+						if ($bMobile && !$bUseNormal) { //use mobile
+							if (file_exists(PAGES . $cSep . $this->cNamedTemplate . $cEnd1 . $cMobile)) {
+								$this->cTemplate = PAGES . $cSep . $this->cNamedTemplate . $cEnd1 . $cMobile;
+							}
+						}
+
 					} else if (file_exists(PAGES . $cSep . $this->cNamedTemplate . $cEnd2 . $cStruct1)) { //end2-structure.struct
 						$this->cTemplate = PAGES . $cSep . $this->cNamedTemplate . $cEnd2 . $cStruct1;
+
+						if ($bMobile && !$bUseNormal) { //use mobile
+							if (file_exists(PAGES . $cSep . $this->cNamedTemplate . $cEnd2 . $cMobile)) {
+								$this->cTemplate = PAGES . $cSep . $this->cNamedTemplate . $cEnd2 . $cMobile;
+							}
+						}
 					}
 				}
 			}
@@ -201,8 +247,20 @@ class Template_Structure extends Template_Abstract {
 
 			} else if (file_exists($cLayout . $cEnd1 . $cStruct1)) { //layout-end1-structure.struct
 				$this->cTemplate	= $cLayout . $cEnd1 . $cStruct1;
+
+				if ($bMobile && !$bUseNormal) { //use mobile
+					if (file_exists($cLayout . $cEnd1 . $cMobile)) {
+						$this->cTemplate = $cLayout . $cEnd1 . $cMobile;
+					}
+				}
 			} else if (file_exists($cLayout . $cEnd2 . $cStruct1)) { //layout-end2-structure.struct
 				$this->cTemplate	= $cLayout . $cEnd2 . $cStruct1;
+
+				if ($bMobile && !$bUseNormal) { //use mobile
+					if (file_exists($cLayout . $cEnd2 . $cMobile)) {
+						$this->cTemplate = $cLayout . $cEnd2 . $cMobile;
+					}
+				}
 			}
 		}
 

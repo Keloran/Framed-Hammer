@@ -221,7 +221,7 @@ class Template extends Template_Abstract {
 		$oStruct->createTemplate();
 		$this->bCalled	= true;
 
-		return $oStruct->renderTemplate();
+		return $oStruct->renderTemplate(); //render the actual site/layout
 	}
 
 	/**
