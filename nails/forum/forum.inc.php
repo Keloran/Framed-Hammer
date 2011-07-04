@@ -664,7 +664,7 @@ class Forum implements Nails_Interface {
 			$iTotal = $this->oDB->f('total');
 		}
 
-		$aRead = array($this->iTopicID, $this->oNails->getCookie("lastVisit"));
+		$aRead = array($this->iTopicID, getCookie("lastVisit"));
 		$this->oDB->read("
 			SELECT forums_replys.iReplyID
 			FROM forums_replys

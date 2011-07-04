@@ -26,10 +26,10 @@ class StaticPages {
 	private function __construct(Nails $oNails) {
 		$this->oNails		= $oNails;
 
-		if ($this->oNails->getParam("static")) {
+		if (getParam("static")) {
 			$this->cStaticPage	= $this->oNails->getParam("static");
 			$this->bSite		= false;
-		} else if ($this->oNails->getParam("site")) {
+		} else if (getParam("site")) {
 			$this->cStaticPage	= $this->oNails->getParam("site");
 			$this->bSite		= true;
 		}

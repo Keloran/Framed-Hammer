@@ -81,7 +81,7 @@ class Template_Structure extends Template_Abstract {
 
 		//is it a mobile device, and
 		$bMobile 	= mobileBrowser();
-		$bUseNormal	= $this->getParam("useNormal") ?: $this->getCookie("useNormal") ?: false;
+		$bUseNormal	= getParam("useNormal") ?: getCookie("useNormal") ?: false;
 
 		//The structure name
 		if ($cTemplate) {

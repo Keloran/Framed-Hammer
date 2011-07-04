@@ -82,7 +82,7 @@ class User implements Nails_Interface {
     	}
 
 	//Cookie
-        $this->cCookie = $this->oNails->getCookie("userCookie");
+        $this->cCookie = getCookie("userCookie");
         if ($this->cCookie) {
                 $this->iUserID  = $this->getID();
                 $this->iGroupID = $this->getGroupID();
@@ -283,7 +283,7 @@ class User implements Nails_Interface {
         		return $this->iUserID;
         	} else {
         		if ($cCookie) {
-	            	$cCookieHash	= $this->oNails->getCookie($cCookie);
+	            	$cCookieHash	= getCookie($cCookie);
 	        	} else {
 	        		$cCookieHash	= $this->cCookie;
 	        	}
@@ -674,12 +674,12 @@ class User implements Nails_Interface {
     public function getUserLimit() {
 		if (!$this->iUserID) { return 10; }
 
-		if ($this->oNails->getCookie("userLimit")) {
-			return $this->oNails->getCookie("userLimit");
+		if (getCookie("userLimit")) {
+			return getCookie("userLimit");
 		} else {
 			$iLimit = $this->getSetting("userLimit");
 			if ($iLimit) {
-				$this->oNails->createCookie("userLimit", $iLimit, true);
+				createCookie("userLimit", $iLimit, true);
 				return $iLimit;
 			} else {
 				return 10;

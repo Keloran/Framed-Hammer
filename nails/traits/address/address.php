@@ -17,7 +17,6 @@ trait Traits_Address {
 		return $oScrewDriver->finalAddress();
 	}
 
-
 	/**
 	 * removeEndSlash()
 	 * @desc Remove the closing slash since it causes problems
@@ -44,5 +43,22 @@ trait Traits_Address {
 				$_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], 0, (strlen($_SERVER['REQUEST_URI']) -1));
 			}
 		}
+	}
+
+	/**
+	 * getParam()
+	 *
+	 * @param mixed $mName
+	 * @return string
+	 */
+	function getParam($mName) {
+		$cReturn	= false;
+
+		if (isset($_GET[$mName])) {
+			$this->cOther	= $_GET[$mName];
+			$cReturn		= $_GET[$mName];
+		}
+
+		return $cReturn;
 	}
 }

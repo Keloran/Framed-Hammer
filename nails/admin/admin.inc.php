@@ -139,8 +139,8 @@ class Admin implements Nails_Interface {
 	 */
 	public function secureLogin($bSecure = null) {
 		//Logged in
-		$bLogged		= $this->oNails->getCookie("userCookie");
-		$iAdminLogged	= $this->oNails->getCookie("adminLogged");
+		$bLogged		= getCookie("userCookie");
+		$iAdminLogged	= getCookie("adminLogged");
 
 		$cAdminLoc		= $this->oNails->getConfig("adminLocation"); //Get the admin location, e.g. you could put it in /secure/
 		$cAdminPage		= $cAdminLoc ? $cAdminLoc : "admin"; //there is a loc set, or revert to default
@@ -159,7 +159,7 @@ class Admin implements Nails_Interface {
 					$iOld	= time() - 240;
 					if ($iAdminLogged < $iOld) {
 						if ($iAdminLogged) {
-							$this->oNails->createCookie("adminLogged", time(), false, 5, $bSecure);
+							createCookie("adminLogged", time(), false, 5, $bSecure);
 						}
 					}
 
@@ -186,10 +186,10 @@ class Admin implements Nails_Interface {
 	 * @return null
 	 */
 	private function insecureAdmin($bSecure = null) {
-		$bLogged = $this->oNails->getCookie("userCookie");
+		$bLogged = getCookie("userCookie");
 
 		if ($bLogged) {
-			$this->oNails->createCookie("adminLogged", time(), false, 5, $bSecure);
+			createCookie("adminLogged", time(), false, 5, $bSecure);
 		} else {
 			if ($this->oNails->cPage !== "login") {
 				$this->oNails->sendLocation("/login/");
@@ -216,7 +216,7 @@ class Admin implements Nails_Interface {
 	 */
 	public function getBannedIP($cIP) {
 		$cIP = ip2long($cIP);
-		
+
 		$this->oDB->read("SELECT iBannedID FROM users_banned WHERE cBannedIP = ? LIMIT 1", $cIP);
 		if ($this->oDB->nextRecord()) {
 			return true;

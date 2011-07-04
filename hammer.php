@@ -302,14 +302,7 @@ class Hammer {
      * @return mixed
      */
     public function getParam($mName) {
-		$cReturn	= false;
-
-        if (isset($_GET[$mName])) {
-        	$this->cOther	= $_GET[$mName];
-        	$cReturn		= $_GET[$mName];
-        }
-
-		return $cReturn;
+    	return getParam($mName);
     }
 
     /**
