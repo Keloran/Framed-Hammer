@@ -202,11 +202,6 @@ trait Traits_Browser {
 			}
 		}
 
-		//No cookie chosen
-		if (isset($_COOKIE[$cSiteTitle])) {
-			return $_COOKIE[$cSiteTitle];
-		}
-
 		return false;
 	}
 

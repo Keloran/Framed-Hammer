@@ -198,11 +198,6 @@ function getCookie($cCookie = null) {
 		}
 	}
 
-	//No cookie chosen
-	if (isset($_COOKIE[$cSiteTitle])) {
-		return $_COOKIE[$cSiteTitle];
-	}
-
 	return false;
 }
 
