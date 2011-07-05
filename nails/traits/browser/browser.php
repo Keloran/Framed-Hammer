@@ -69,7 +69,7 @@ trait Traits_Browser {
 	 */
 	function getBrowser($cSpecific = null) {
 		$mBrowser 	= false;
-		$mGetBrowser	= getBrowserCap();
+		$mGetBrowser	= $this->getBrowserCap();
 
 		//this is a better method
 		if ($mGetBrowser) { return $mGetBrowser; }
@@ -138,7 +138,7 @@ trait Traits_Browser {
 	 * @return bool
 	 */
 	function mobileBrowser($mBrowser = false) {
-		if (!$mBrowser) { $mBrowser = getBrowser(); }
+		if (!$mBrowser) { $mBrowser = $this->getBrowser(); }
 
 		$bReturn	= false;
 
