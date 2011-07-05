@@ -119,7 +119,6 @@ function ob_process($cBuffer) {
 * @return string
 */
 function Hammer($cSite, $aFilter = false, $aOptions = null) {
-	use Traits_Address;
 	$cReturn	= false;
 
 	//options
