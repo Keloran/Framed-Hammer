@@ -30,7 +30,7 @@ if ($pHandle_a = opendir($cPath)) {
 				closedir($pHandle_b);
 			}
 		} else {
-			if (strpos($mFile_b, "swp")) { continue; } //swap file, should not be included
+			if (strpos($mFile_a, "swp")) { continue; } //swap file, should not be included
 			$aFiles[] = $mFile_a;
 		}
 	}
