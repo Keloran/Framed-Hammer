@@ -9,8 +9,11 @@
  * @access public
  */
 class User implements Nails_Interface {
-    public $iUserID     = false;
-    public $iGroupID    = false;
+	//Use Cookie Traits
+	use Traits_Browser;
+
+	public $iUserID     = false;
+	public $iGroupID    = false;
 	public $cError		= false;
 	public $aConfig     = false;
 
@@ -27,62 +30,62 @@ class User implements Nails_Interface {
      * @access protected
      */
     private function __construct(Nails $oNails, $bNoInstall = null) {
-		$this->oNails	= $oNails;
-		$this->oDB		= $this->oNails->getDatabase();
-		$this->cPage	= $oNails->cPage;
+	$this->oNails	= $oNails;
+	$this->oDB		= $this->oNails->getDatabase();
+	$this->cPage	= $oNails->cPage;
 
     	//installed
     	if ($this->oNails->checkInstalled("users") == false) {
-			$this->install();
-		}
+		$this->install();
+	}
 
     	//update
-		if ($this->oNails->checkVersion("users", 1.6) == false) {
-			//1.1
-			printRead("1.1 Start");
-			$cSQL	= "CREATE TABLE IF NOT EXISTS `users_special_privs` (`iSpecialID` INT NOT NULL AUTO_INCREMENT, `cAllowed` VARCHAR(50) NOT NULL, `iUserID` INT NOT NULL, PRIMARY KEY (`iSpecialID`), INDEX (`iUserID`))";
-			$this->oNails->updateVersion("users", 1.1, $cSQL, "Added the special Privs table");
-			printRead("1.1 End");
+	if ($this->oNails->checkVersion("users", 1.6) == false) {
+		//1.1
+		printRead("1.1 Start");
+		$cSQL	= "CREATE TABLE IF NOT EXISTS `users_special_privs` (`iSpecialID` INT NOT NULL AUTO_INCREMENT, `cAllowed` VARCHAR(50) NOT NULL, `iUserID` INT NOT NULL, PRIMARY KEY (`iSpecialID`), INDEX (`iUserID`))";
+		$this->oNails->updateVersion("users", 1.1, $cSQL, "Added the special Privs table");
+		printRead("1.1 End");
 
-			//1.2
-			printRead("1.2 Start");
-			$this->oNails->updateVersion("users", 1.2, false, "De-Coupled");
-			printRead("1.2 End");
+		//1.2
+		printRead("1.2 Start");
+		$this->oNails->updateVersion("users", 1.2, false, "De-Coupled");
+		printRead("1.2 End");
 
-			//1.3
-			printRead("1.3 Start");
-			$cSQL	= "ALTER TABLE `users` ADD COLUMN `bTemp` BOOL NOT NULL";
-			$this->oNails->updateVersion("users", 1.3, $cSQL, "Added Temp flag for passwords");
-			printRead("1.3 End");
+		//1.3
+		printRead("1.3 Start");
+		$cSQL	= "ALTER TABLE `users` ADD COLUMN `bTemp` BOOL NOT NULL";
+		$this->oNails->updateVersion("users", 1.3, $cSQL, "Added Temp flag for passwords");
+		printRead("1.3 End");
 
-			//1.4
-			printRead("1.4 Start");
-			$cSQL 	= "CREATE TABLE IF NOT EXISTS `users_notify` (`iNotifyID` INT NOT NULL AUTO_INCREMENT, `iUserID` INT NOT NULL, `cMessage` TEXT, PRIMARY KEY(`iNotifyID`), INDEX(`iUserID`))";
-			$this->oNails->updateVersion("users", 1.4, $cSQL, "Added Notifications");
-			printRead("1.4 End");
+		//1.4
+		printRead("1.4 Start");
+		$cSQL 	= "CREATE TABLE IF NOT EXISTS `users_notify` (`iNotifyID` INT NOT NULL AUTO_INCREMENT, `iUserID` INT NOT NULL, `cMessage` TEXT, PRIMARY KEY(`iNotifyID`), INDEX(`iUserID`))";
+		$this->oNails->updateVersion("users", 1.4, $cSQL, "Added Notifications");
+		printRead("1.4 End");
 
-			//1.5
-			printRead("1.5 Start");
-			$mSQL	= array(
-				"ALTER TABLE `users` CHANGE COLUMN `cPassword` `cPassword` VARCHAR(65) NOT NULL",
-				"ALTER TABLE `users` CHANGE COLUMN `cRegisterHash` `cRegisterHash` VARCHAR(65) NOT NULL",
-				"ALTER TABLE `users` CHANGE COLUMN `cLoginHash` `cLoginHash` VARCHAR(65) NOT NULL"
-			);
-			$this->oNails->updateVersion("users", 1.5, $mSQL, "Updated MD5 fields to 65 chars");
-			printRead("1.5 End");
+		//1.5
+		printRead("1.5 Start");
+		$mSQL	= array(
+			"ALTER TABLE `users` CHANGE COLUMN `cPassword` `cPassword` VARCHAR(65) NOT NULL",
+			"ALTER TABLE `users` CHANGE COLUMN `cRegisterHash` `cRegisterHash` VARCHAR(65) NOT NULL",
+			"ALTER TABLE `users` CHANGE COLUMN `cLoginHash` `cLoginHash` VARCHAR(65) NOT NULL"
+		);
+		$this->oNails->updateVersion("users", 1.5, $mSQL, "Updated MD5 fields to 65 chars");
+		printRead("1.5 End");
 
-			//1.6
-			printRead("1.6 Start");
-			$mSQL = array(
-				"ALTER TABLE `users` ADD COLUMN `bDeleted` BOOL DEFAULT 0",
-				"ALTER TABLE `users` ADD COLUMN `bBanned` BOOL DEFAULT 0"
-			);
-			$this->oNails->updateVersion("users", 1.6, $mSQL, "Added Deleted and Banned flags");
-			printRead("1.6 End");
+		//1.6
+		printRead("1.6 Start");
+		$mSQL = array(
+			"ALTER TABLE `users` ADD COLUMN `bDeleted` BOOL DEFAULT 0",
+			"ALTER TABLE `users` ADD COLUMN `bBanned` BOOL DEFAULT 0"
+		);
+		$this->oNails->updateVersion("users", 1.6, $mSQL, "Added Deleted and Banned flags");
+		printRead("1.6 End");
     	}
 
 	//Cookie
-        $this->cCookie = getCookie("userCookie");
+        $this->cCookie = $this->getCookie("userCookie");
         if ($this->cCookie) {
                 $this->iUserID  = $this->getID();
                 $this->iGroupID = $this->getGroupID();

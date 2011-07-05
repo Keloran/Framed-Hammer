@@ -9,6 +9,9 @@
  * @access public
  */
 class Template_Core extends Template_Abstract {
+	//Browser Trait
+	use Traits_Browser;
+
 	public $aParams;
 	public $cTemplate;
 
@@ -58,9 +61,9 @@ class Template_Core extends Template_Abstract {
 		if (is_dir(SITEPATH . "/layout/")) { $cLayout = "/layout/"; }
 
 		//browser checker
-		if (getBrowser("iphone")) {
+		if ($this->getBrowser("iphone")) {
 			$cExtra = "_iphone";
-		} else if (getBrowser("android")) {
+		} else if ($this->getBrowser("android")) {
 			$cExtra = "_android";
 		}
 

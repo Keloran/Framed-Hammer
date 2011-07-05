@@ -9,6 +9,9 @@
  * @tag value
  */
 class Admin implements Nails_Interface {
+	//Browser Trait
+	use Traits_Browser;
+
 	static $oAdmin;
 
 	private $oNails	= false;
@@ -139,11 +142,11 @@ class Admin implements Nails_Interface {
 	 */
 	public function secureLogin($bSecure = null) {
 		//Logged in
-		$bLogged		= getCookie("userCookie");
-		$iAdminLogged	= getCookie("adminLogged");
+		$bLogged	= $this->getCookie("userCookie");
+		$iAdminLogged	= $this->getCookie("adminLogged");
 
-		$cAdminLoc		= $this->oNails->getConfig("adminLocation"); //Get the admin location, e.g. you could put it in /secure/
-		$cAdminPage		= $cAdminLoc ? $cAdminLoc : "admin"; //there is a loc set, or revert to default
+		$cAdminLoc	= $this->oNails->getConfig("adminLocation"); //Get the admin location, e.g. you could put it in /secure/
+		$cAdminPage	= $cAdminLoc ? $cAdminLoc : "admin"; //there is a loc set, or revert to default
 
 		//since its the admin page we are on
 		if ($cAdminPage == $this->oNails->cPage) {
@@ -186,7 +189,7 @@ class Admin implements Nails_Interface {
 	 * @return null
 	 */
 	private function insecureAdmin($bSecure = null) {
-		$bLogged = getCookie("userCookie");
+		$bLogged = $this->getCookie("userCookie");
 
 		if ($bLogged) {
 			createCookie("adminLogged", time(), false, 5, $bSecure);

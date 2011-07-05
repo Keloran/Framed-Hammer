@@ -9,6 +9,9 @@
  * @access public
  */
 class Template_Structure extends Template_Abstract {
+	//Browser Trait
+	use Traits_Browser;
+
 	public $aParams;
 	public $cTemplate;
 
@@ -80,8 +83,8 @@ class Template_Structure extends Template_Abstract {
 		$bFiltered	= false;
 
 		//is it a mobile device, and
-		$bMobile 	= mobileBrowser();
-		$bUseNormal	= getParam("useNormal") ?: getCookie("useNormal") ?: false;
+		$bMobile 	= $this->mobileBrowser();
+		$bUseNormal	= getParam("useNormal") ?: $this->getCookie("useNormal") ?: false;
 
 		//The structure name
 		if ($cTemplate) {

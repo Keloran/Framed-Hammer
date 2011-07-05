@@ -9,6 +9,9 @@
  * @access public
  */
 class Footer implements Nails_Interface {
+	//Browser Trait
+	use Traits_Browser;
+
 	//This gets set during the construct
 	private $oNails;
 	private $oDB;
@@ -28,8 +31,8 @@ class Footer implements Nails_Interface {
 			$this->oDB		= $oNails->getDatabase();
 		}
 
-		$mBrowser 		= getBrowser();
-		$this->bMobile	= mobileBrowser($mBrowser);
+		$mBrowser 	= $this->getBrowser();
+		$this->bMobile	= $this->mobileBrowser($mBrowser);
 	}
 
 	/**

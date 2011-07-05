@@ -9,6 +9,9 @@
  * @access public
  */
 class Template_Page extends Template_Abstract {
+	//Browser Traits
+	use Traits_Browser;
+
 	public $aParams;
 	public $cTemplate;
 
@@ -127,9 +130,9 @@ class Template_Page extends Template_Abstract {
 		if (!$this->cFolder) { $this->cFolder = "/templates/"; }
 
 		//get the mobile pages
-		if (getBrowser("iphone")) {
+		if ($this->getBrowser("iphone")) {
 			$cExtra = "_iphone";
-		} else if (getBrowser("android")) {
+		} else if ($this->getBrowser("android")) {
 			$cExtra = "_android";
 		}
 
