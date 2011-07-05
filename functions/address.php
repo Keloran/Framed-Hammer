@@ -1,5 +1,7 @@
 <?php
 
+printRead("tester");die();
+
 /**
  * removeEndSlash()
  * @desc Remove the closing slash since it causes problems

@@ -198,6 +198,8 @@ function getCookie($cCookie = null) {
 		}
 	}
 
+	//printRead(array($cCookie, $_COOKIE));die();
+
 	return false;
 }
 
