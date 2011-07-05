@@ -18,7 +18,6 @@ if ($pHandle_a = opendir($cPath)) {
 					//skips
 					if ($mFile_b == ".") { continue; }
 					if ($mFile_b == "..") { continue; }
-					if (!strpos($mFile_b, "fn")){ continue; } //its proberlly a trait file
 					if (strpos($mFile_b, "swp")) { continue; } //swap file, should not be included
 
 					//Only files left
@@ -29,6 +28,9 @@ if ($pHandle_a = opendir($cPath)) {
 				}
 				closedir($pHandle_b);
 			}
+		} else {
+			if (strpos($mFile_b, "swp")) { continue; } //swap file, should not be included
+			$aFiles[] = $mFile_a;
 		}
 	}
 	closedir($pHandle_a);
