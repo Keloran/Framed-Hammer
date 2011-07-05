@@ -171,7 +171,7 @@ trait Traits_Browser {
 	 * @return bool
 	 */
 	function IEBrowser($mBrowser = false) {
-		if (!$mBrowser) { $mBrowser = getBrowser(); }
+		if (!$mBrowser) { $mBrowser = $this->getBrowser(); }
 
 		$bReturn = false;
 
