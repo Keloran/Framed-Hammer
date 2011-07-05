@@ -23,7 +23,7 @@ class oReader {
 
 		//options that are set later
 		$this->mOriginal	= $mString;
-		$this->aFile		= debug_backtrace();
+		$this->aFile		= debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 2);
 		$this->cFormated	= print_r($mString, 1);
 		$this->bScreen		= true;
 

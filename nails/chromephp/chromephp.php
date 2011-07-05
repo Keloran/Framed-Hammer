@@ -294,7 +294,7 @@ class ChromePhp
 		$logger->_processed = array();
 		$value = $logger->_convert($value);
 
-		$backtrace = debug_backtrace(false);
+		$backtrace = debug_backtrace(false, 2);
 		$level = $logger->getSetting(self::BACKTRACE_LEVEL);
 
 		$backtrace_message = 'unknown';
