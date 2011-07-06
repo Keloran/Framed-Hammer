@@ -7,6 +7,9 @@
 */
 date_default_timezone_set('UTC');
 
+//5.4 since it has a built in server
+if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js)$/', $_SERVER["REQUEST_URI"])) { return; } // serve the requested resource as-is.
+
 //since 5.2 cant do late static binding
 if (PHP_VERSION >= 5.3) {
 	include_once("nails/nail3.php");
@@ -33,9 +36,6 @@ function funcParam($cParam, $aArray) {
 
 	return $mReturn;
 }
-
-//5.4 since it has a built in server
-if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js)$/', $_SERVER["REQUEST_URI"])) { return false; } // serve the requested resource as-is.
 
 /**
  * ob_process()
