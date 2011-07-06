@@ -677,12 +677,12 @@ class User implements Nails_Interface {
     public function getUserLimit() {
 		if (!$this->iUserID) { return 10; }
 
-		if (getCookie("userLimit")) {
-			return getCookie("userLimit");
+		if ($this->getCookie("userLimit")) {
+			return $this->getCookie("userLimit");
 		} else {
 			$iLimit = $this->getSetting("userLimit");
 			if ($iLimit) {
-				createCookie("userLimit", $iLimit, true);
+				$this->createCookie("userLimit", $iLimit, true);
 				return $iLimit;
 			} else {
 				return 10;
