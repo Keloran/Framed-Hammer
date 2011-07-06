@@ -10,7 +10,7 @@
  */
 class User implements Nails_Interface {
 	//Use Cookie Traits
-	use Traits_Browser;
+	use Traits_Browser, Traits_Security;
 
 	public $iUserID     = false;
 	public $iGroupID    = false;
@@ -551,7 +551,7 @@ class User implements Nails_Interface {
      * @return string
      */
     private function genHash($cSalt) {
-    	$cRand = hammerHash($cSalt);
+    	$cRand = $this->hammerHash($cSalt);
 
         return $cRand;
     }
