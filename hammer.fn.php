@@ -101,9 +101,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 	}
 
 	//xhprofiler
-	if (function_exists("xhprof_enable") && (defined("profile"))) {
-    		xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
-	}
+	if (function_exists("xhprof_enable") && (defined("profile"))) { xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY); }
 
 	//set a filter if its missign, but still tell them, since they are doign it wrong
 	if (!$aFilter) { $aFilter = array("page", "action", "choice"); }
@@ -139,7 +137,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 			$_GET,
 		);
 		$cError = printRead($aError, "ret");
-
+	
 		throw new Spanner($cError, 100);
 		die();
 	}
@@ -194,7 +192,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 				}
 			}
 		}
-
+	
 		//Organics
 		try {
 			$oOrganic = $oHammer->getNails("Organic");
@@ -202,7 +200,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 		} catch (Organic_Exception $e) {
 			throw new Spanner($e->getMessage(), 1099);
 		}
-
+	
 		//Cache
 		$cCached		= false;
 		try {
@@ -239,7 +237,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 			session_destroy();
 		}
 	}
-
+	
 	//now use the profile and display the result
 	if (function_exists("xhprof_disable")) {
  		if (defined("profile")) {
@@ -247,13 +245,13 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 
 			include_once(HAMMERPATH . "/tests/xhprof_lib/utils/xhprof_lib.php");
  			include_once(HAMMERPATH . "/tests/xhprof_lib/utils/xhprof_runs.php");
-
+	
 			$oProf = new XHProfRuns_Default();
- 			$iRunID = $oProf->save_run($mProf, "xhprof");
+			$iRunID = $oProf->save_run($mProf, "xhprof");
 
 			$cReturn .= "<div \"profiled\">run=" . $iRunID . "&source=xhprof</div>\n";
 		}
-	}
+	}	
 
 	return $cReturn;
 }
