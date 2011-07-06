@@ -34,6 +34,9 @@ function funcParam($cParam, $aArray) {
 	return $mReturn;
 }
 
+//5.4 since it has a built in server
+if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js)$/', $_SERVER["REQUEST_URI"])) { return false; } // serve the requested resource as-is.
+
 /**
  * ob_process()
  *
@@ -137,7 +140,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 			$_GET,
 		);
 		$cError = printRead($aError, "ret");
-	
+
 		throw new Spanner($cError, 100);
 		die();
 	}
@@ -192,7 +195,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 				}
 			}
 		}
-	
+
 		//Organics
 		try {
 			$oOrganic = $oHammer->getNails("Organic");
@@ -200,7 +203,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 		} catch (Organic_Exception $e) {
 			throw new Spanner($e->getMessage(), 1099);
 		}
-	
+
 		//Cache
 		$cCached		= false;
 		try {
@@ -237,7 +240,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 			session_destroy();
 		}
 	}
-	
+
 	//now use the profile and display the result
 	if (function_exists("xhprof_disable")) {
  		if (defined("profile")) {
@@ -245,13 +248,13 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 
 			include_once(HAMMERPATH . "/tests/xhprof_lib/utils/xhprof_lib.php");
  			include_once(HAMMERPATH . "/tests/xhprof_lib/utils/xhprof_runs.php");
-	
+
 			$oProf = new XHProfRuns_Default();
 			$iRunID = $oProf->save_run($mProf, "xhprof");
 
 			$cReturn .= "<div \"profiled\">run=" . $iRunID . "&source=xhprof</div>\n";
 		}
-	}	
+	}
 
 	return $cReturn;
 }
