@@ -127,17 +127,17 @@ class Session {
                     $aEscape = array($this->iUserID, session_id(), "Old Session", ip2long($cVisitor), $_SERVER['HTTP_USER_AGENT']);
 
                     $this->oDB->write("INSERT INTO users_sessions (iUserID, cLastSessionID, tsDate, cReason, cIP, cBrowser) VALUES (?, ?, UNIX_TIMESTAMP(), ?, ?, ?)", $aEscape);
-                    createCookie("lastVisit", time(), true);
+                    $this->createCookie("lastVisit", time(), true);
                     $this->tsLastLogin = time();
                 } else {
-                    createCookie("lastVisit", time(), true);
+                    $this->createCookie("lastVisit", time(), true);
 	                $this->tsLastLogin = time();
                 }
             } else {
                 $aEscape = array($this->iUserID, session_id(), "New Session", ip2long($cVisitor), $_SERVER['HTTP_USER_AGENT']);
 
                 $this->oDB->write("INSERT INTO users_sessions (iUserID, cLastSessionID, tsDate, cReason, cIP, cBrowser) VALUES (?, ?, UNIX_TIMESTAMP(), ?, ?, ?)", $aEscape);
-                createCookie("lastVisit", time(), true);
+                $this->createCookie("lastVisit", time(), true);
                 $this->tsLastLogin = time();
             }
 
