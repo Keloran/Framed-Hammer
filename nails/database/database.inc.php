@@ -123,12 +123,13 @@ class Database {
 
 			//set the errors to non
 			error_reporting(0);
-			$iConnected		= fsockopen($mServers['hostname'], $iPort, $iErr, $cErr, 5);
+				$cName = "tcp://" . $mServers['hostname'] . ":" . $iPort;
+				$pConnect = stream_socket_client($cName, $iErr, $cErr, 5);
+				if ($pConnect) {
+					$this->iConnect = $pConnect;
+					$iConnect	= $this->iConnect;
+				}
 			error_reporting($iPrevError);
-			if ($iConnected) {
-				$this->iConnect = $iConnected;
-				$iConnect		= $this->iConnect;
-			}
 		}
 
 		//since it has to always connect or return false
