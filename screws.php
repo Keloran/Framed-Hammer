@@ -1,4 +1,15 @@
 <?php
+//if there is no hammerpath defined must called specific so return false
+if (!defined("HAMMERPATH")) { throw new Spanner("Hammer Path not defined", 99); }
+
+//if no sitepath included make it app for other frameworks to understand
+if (!defined("SITEPATH")) {
+	$cPath	 = dirname(__FILE__);
+	$cPath	.= "app/";
+	define("SITEPATH", $cPath);
+}
+
+
 /**
  * Screws
  *
@@ -106,9 +117,6 @@ class Screws {
 	private function defineClassVars() {
 		//Set teh defaults so it doesnt complain
 		$cClassName		= strtolower($this->cClass);
-
-		//if there is no hammerpath defined must called specific so return false
-		if (!defined("HAMMERPATH")) { throw new Spanner("Hammer Path not defined", 99); }
 
 		//added this so it doesnt die when one doesnt exist
 		$cClass_b	= false;
