@@ -104,4 +104,8 @@ class Form_TextArea extends Form_Abstract {
 
 		return $cReturn;
 	}
+
+	public function validate() {
+
+	}
 }

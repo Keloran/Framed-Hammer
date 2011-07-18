@@ -370,14 +370,16 @@ class Template extends Template_Abstract {
      * Template::addForm()
      *
      * @desc Add a form to the template
+     * @var bool $bObject do you want the form to return objects
      * @return
      */
-    public function addForm() {
-    	$this->oForms		= new Form($this);
-    	$this->bFormAdded	= true;
+	public function addForm($bObject = false) {
+		$this->oForms			= new Form($this);
+		$this->bFormAdded		= true;
+		$this->oForms->bObject	= $bObject;
 
-    	return $this->oForms;
-    }
+		return $this->oForms;
+	}
 
     /**
      * Template::getForm()

@@ -1002,9 +1002,9 @@ class Form {
 	 */
 	public function getValue($mName, $bFile = false, $iName = false) {
 		$cType	= false;
+		$bObject	= $this->bObject;
 
 		if (is_array($mName)) {
-			$bObj	= true;
 			foreach ($mName as $cKey => $cValue) {
 				switch ($cKey) {
 					case "name":
@@ -1021,7 +1021,10 @@ class Form {
 			if ($bFile) { $cType = "file"; }
 		}
 
-		$oValue = new Form_Value();
+		//Set the default type to input
+		if (!$cType) { $cType = "input"; }
+
+		$oValue = new Form_Value($bObject);
 		$oValue->setName($cName)
 			->setTyped($cType);
 

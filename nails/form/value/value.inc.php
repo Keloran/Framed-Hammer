@@ -14,14 +14,29 @@ class Form_Value {
 	private $iNum;
 	private $cType;
 
+	public $mValue;
+
 	/**
 	 * Form_Value::__construct()
 	 *
-	 * @param string $cName
-	 * @param bool $bFile
-	 * @param int $iNum
+	 * @var bool $bObject
 	 */
-	public function __construct() {
+	public function __construct($bObject = false) {
+		$this->bObject = $bObject;
+	}
+
+	/**
+	 * Form_Value::__call()
+	 *
+	 * @param string $cFunction
+	 * @param mixed $mValue
+	 * @return mixed
+	 */
+	public function __call($cFunction, $mValue) {
+		$cType		= "Form_" . $this->cType;
+		$oType		= new $cType();
+		$oType->mValue 	= $this->mValue;
+		return $oType->$cFunction($mValue);
 	}
 
 	/**
