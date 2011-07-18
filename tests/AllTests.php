@@ -1,5 +1,6 @@
 <?php
 require_once ("PHPUnit/Framework.php");
+require_once("/Hammer/hammer.fn.php");
 require_once("/Hammer/hammer.php");
 
 /**
