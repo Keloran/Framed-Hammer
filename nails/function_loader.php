@@ -1,4 +1,10 @@
 <?php
+if (!defined("HAMMERPATH")) {
+	$cPath	 = "../";
+	$cPath	.= dirname(__FILE__);
+	define("HAMMERPATH", $cPath);
+}
+
 $cPath = HAMMERPATH . "/functions/";
 $aFiles = false;
 if ($pHandle_a = opendir($cPath)) {
