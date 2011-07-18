@@ -171,7 +171,7 @@ class Form_Input extends Form_Abstract {
 	 *
 	 * @return string
 	 */
-	private function validateEmail() {
+	public function validateEmail() {
 		$cReturn	= false;
 
 		//Might aswell use filter var if its avalible, less resource-hungry
@@ -192,7 +192,7 @@ class Form_Input extends Form_Abstract {
 	 *
 	 * @return string
 	 */
-	private function validateText() {
+	public function validateText() {
 		$cReturn	= false;
 		$cInput		= $this->getValue();
 
@@ -217,7 +217,7 @@ class Form_Input extends Form_Abstract {
 	 *
 	 * @return string
 	 */
-	private function validateNumber() {
+	public function validateNumber() {
 		$cReturn	= false;
 		$cInput		= $this->getValue();
 
