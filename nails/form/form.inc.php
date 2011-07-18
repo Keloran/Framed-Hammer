@@ -1001,7 +1001,8 @@ class Form {
 	 * @return mixed
 	 */
 	public function getValue($mName, $bFile = false, $iName = false) {
-		$cType	= false;
+		$cType		= false;
+		$bObject	= $this->bObject;
 
 		if (is_array($mName)) {
 			$bObj	= true;
@@ -1021,7 +1022,7 @@ class Form {
 			if ($bFile) { $cType = "file"; }
 		}
 
-		$oValue = new Form_Value();
+		$oValue = new Form_Value($bObject);
 		$oValue->setName($cName)
 			->setTyped($cType);
 

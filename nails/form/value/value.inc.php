@@ -13,6 +13,9 @@ class Form_Value {
 	private $bFile;
 	private $iNum;
 	private $cType;
+	private $bObject;
+
+	public $mValue;
 
 	/**
 	 * Form_Value::__construct()
@@ -21,7 +24,8 @@ class Form_Value {
 	 * @param bool $bFile
 	 * @param int $iNum
 	 */
-	public function __construct() {
+	public function __construct($bObject = false) {
+		$this->bObject = $bObject;
 	}
 
 	/**
@@ -54,18 +58,35 @@ class Form_Value {
 	 * @return mixed
 	 */
 	public function getValue() {
+		$bObject	= $this->bObject;
+
 		//special handlings
 		switch ($this->cType) {
 			case "file":
-				return $this->getFile();
+				if ($bObject) {
+					$this->mValue = $this->getFile();
+					return $this;
+				} else {
+					return $this->getFile();
+				}
 				break;
 
 			case "checkbox":
-				return $this->getCheckbox();
+				if ($bObject) {
+					$this->mValue = $this->getCheckbox();
+					return $this;
+				} else {
+					return $this->getCheckbox();
+				}
 				break;
 
 			default:
-				return $this->getDefault();
+				if ($bObject) {
+					$this->mValue = $this->getDefault();
+					return $this;
+				} else {
+					return $this->getDefault();
+				}
 				break;
 		}
 	}
