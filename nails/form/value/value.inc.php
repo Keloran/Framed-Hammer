@@ -56,7 +56,7 @@ class Form_Value {
 		$cType		= "Form_" . $this->cType;
 		$oType		= new $cType();
 		$oType->mValue 	= $this->mValue;
-		$oType->$cFunction($mValue);
+		return $oType->$cFunction($mValue);
 	}
 
 	/**
