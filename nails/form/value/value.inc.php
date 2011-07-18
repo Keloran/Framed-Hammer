@@ -52,6 +52,10 @@ class Form_Value {
 		return $this;
 	}
 
+	public function __call($cFunction, $mValue) {
+		printRead($this);die();
+	}
+
 	/**
 	 * Form_Value::getValue()
 	 *
