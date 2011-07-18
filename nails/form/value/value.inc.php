@@ -53,7 +53,9 @@ class Form_Value {
 	}
 
 	public function __call($cFunction, $mValue) {
-		printRead($this);die();
+		$cType	= "Form_" . $this->cType;
+		$oType	= new $cType();
+		$oType->$cFunction($mValue);
 	}
 
 	/**
