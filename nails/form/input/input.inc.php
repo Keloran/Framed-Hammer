@@ -10,6 +10,7 @@
  */
 class Form_Input extends Form_Abstract {
 	public $cFormElementType	= "input";
+	public $mValue			= false;
 
 	/**
 	 * Form_Input::__construct()
@@ -173,14 +174,15 @@ class Form_Input extends Form_Abstract {
 	 */
 	public function validateEmail() {
 		$cReturn	= false;
+		$cInput		= $this->mValue;
 
 		//Might aswell use filter var if its avalible, less resource-hungry
 		if (function_exists("filter_var")) {
-			$cReturn	= filter_var($this->getValue(), FILTER_VALIDATE_EMAIL);
+			$cReturn	= filter_var($cInput, FILTER_VALIDATE_EMAIL);
 		} else {
 			$cPattern = "([\\w-+]+(?:\\.[\\w-+]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7})";
-			if (preg_match($cPattern, $this->getValue())) {
-				$cReturn = $this->getValue();
+			if (preg_match($cPattern, $cInput)) {
+				$cReturn = $cInput;
 			}
 		}
 
@@ -194,7 +196,7 @@ class Form_Input extends Form_Abstract {
 	 */
 	public function validateText() {
 		$cReturn	= false;
-		$cInput		= $this->getValue();
+		$cInput		= $this->mValue;
 
 		//It doesnt have anything
 		if (!isset($cInput[0])) { return false; }
@@ -219,7 +221,7 @@ class Form_Input extends Form_Abstract {
 	 */
 	public function validateNumber() {
 		$cReturn	= false;
-		$cInput		= $this->getValue();
+		$cInput		= $this->mValue;
 
 		//its not actually got any chars
 		if (!isset($cInput[0])) { return false; }
