@@ -19,10 +19,8 @@ class Form_Value {
 
 	/**
 	 * Form_Value::__construct()
-	 *
-	 * @param string $cName
-	 * @param bool $bFile
-	 * @param int $iNum
+	 * 
+	 * @var bool $bObject
 	 */
 	public function __construct($bObject = false) {
 		$this->bObject = $bObject;
