@@ -16,10 +16,12 @@ class Form_Input extends Form_Abstract {
 	 *
 	 * @param string $cName
 	 */
-	public function __construct($cName) {
-		if (!isset($_FORM[$cName])) {
-			$this->cName = $cName;
-			$this->addElement("input");
+	public function __construct($cName = false) {
+		if ($cName) {
+			if (!isset($_FORM[$cName])) {
+				$this->cName = $cName;
+				$this->addElement("input");
+			}
 		}
 	}
 
