@@ -279,7 +279,8 @@ class Form_Value {
 	 */
 	private function validateNumber() {
 		$cReturn	= false;
-		$cInput		= $this->getValue();
+		if (!$this->mValue) { $this->mValue = $this->getValue(); }
+		$cInput		= $this->mValue;
 
 		//its not actually got any chars
 		if (!isset($cInput[0])) { return false; }
