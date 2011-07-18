@@ -1,7 +1,8 @@
 <?php
 if (!defined("HAMMERPATH")) {
-	$cPath	 = "../";
-	$cPath	.= dirname(__FILE__);
+	$cPath	 = dirname(__FILE__);
+	$cPath	.= "../../";
+
 	define("HAMMERPATH", $cPath);
 }
 
