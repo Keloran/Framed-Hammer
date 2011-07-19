@@ -373,9 +373,9 @@ class Template extends Template_Abstract {
      * @return
      */
     public function addForm($bObject = false) {
-    	$this->oForms			= new Form($this);
-    	$this->bFormAdded		= true;
-		$this->oForms->bObject	= $bObject;
+    	$this->oForms		= new Form($this);
+    	$this->bFormAdded	= true;
+	$this->oForms->bObject	= $bObject;
 
     	return $this->oForms;
     }
