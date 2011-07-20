@@ -76,57 +76,56 @@ class Form_File extends Form_Abstract {
 	 * @return bool
 	 */
 	public function validate($cFileName, $bType = false) {
-			$bReturn		= false;
-			$aConfImages	= false;
-			$aConfFiles		= false;
+		$bReturn		= false;
+		$aConfImages	= false;
+		$aConfFiles		= false;
 
-			//Get the position, if there isnt one, then its not going to be valid
-			$iDotPos = strrpos($cFileName, '.');
-			if (!$iDotPos) { return false; }
+		//Get the position, if there isnt one, then its not going to be valid
+		$iDotPos = strrpos($cFileName, '.');
+		if (!$iDotPos) { return false; }
 
-			$aFilters		= $this->oNails->getConfig("fiters");
-			if ($aFilters) {
-				$aConfImages	= $aFilters['images'];
-				$aConfFiles		= $aFilters['files'];
-			}
-
-			//Since they want to specify the image filters
-			if ($aConfImages) {
-				$aImages	= $aConfImages;
-			} else {
-				$aImages    = array("jpg", "png", "gif", "psd", "tiff");
-			}
-
-			//Since they want to specify the file filters
-			if ($aConfFiles) {
-				$aFiles	= $aConfFiles;
-			} else {
-				$aFiles     = array("txt", "zip", "rar", "doc", "docx", "pdf");
-			}
-
-			//What is its extension, true this isnt a very good check, becasue you could just name anything this
-			$cExt = strtolower(substr($cFileName, ($iDotPost + 1)));
-
-			switch($bType){
-				case 1: //Files
-					if (in_array($cExt, $aFiles)) {
-						$bReturn = true;
-					}
-					break;
-				case 2: //Images
-					if (in_array($cExt, $aImages)) {
-						$bReturn = true;
-					}
-					break;
-				default:
-					$aNewArray = array_merge($aImages, $aFiles);
-					if (in_array($cExt, $aNewArray)) {
-						$bReturn = true;
-					}
-					break;
-			} // switch
-
-			return $bReturn;
+		$aFilters		= $this->oNails->getConfig("fiters");
+		if ($aFilters) {
+			$aConfImages	= $aFilters['images'];
+			$aConfFiles		= $aFilters['files'];
 		}
+
+		//Since they want to specify the image filters
+		if ($aConfImages) {
+			$aImages	= $aConfImages;
+		} else {
+			$aImages    = array("jpg", "png", "gif", "psd", "tiff");
+		}
+
+		//Since they want to specify the file filters
+		if ($aConfFiles) {
+			$aFiles	= $aConfFiles;
+		} else {
+			$aFiles     = array("txt", "zip", "rar", "doc", "docx", "pdf");
+		}
+
+		//What is its extension, true this isnt a very good check, becasue you could just name anything this
+		$cExt = strtolower(substr($cFileName, ($iDotPost + 1)));
+
+		switch($bType){
+			case 1: //Files
+				if (in_array($cExt, $aFiles)) {
+					$bReturn = true;
+				}
+				break;
+			case 2: //Images
+				if (in_array($cExt, $aImages)) {
+					$bReturn = true;
+				}
+				break;
+			default:
+				$aNewArray = array_merge($aImages, $aFiles);
+				if (in_array($cExt, $aNewArray)) {
+					$bReturn = true;
+				}
+				break;
+		} // switch
+
+		return $bReturn;
 	}
 }

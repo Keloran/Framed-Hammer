@@ -1,11 +1,16 @@
 <?php
+require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . '../../../hammer.fn.php';
+#require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . '../../../nails/interface/interface.inc.php';
 require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . '../../../nails/footer/footer.inc.php';
 require_once 'PHPUnit/Framework.php';
 
 class nails_footer_FooterTest extends PHPUnit_Framework_TestCase
 {
 
-	public function testGetInstance()
+	/**
+	* @test
+	*/
+	public function getInstance()
 	{
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
