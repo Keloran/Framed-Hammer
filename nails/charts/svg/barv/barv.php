@@ -29,7 +29,6 @@ class Charts_SVG_BarV {
 	 */
 	function getColor($iID) {
 		$cColor = $this->aColors[$iID % count($this->aColors)];
-
 		return $cColor;
 	}
 
