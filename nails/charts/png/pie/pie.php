@@ -57,9 +57,7 @@ class Charts_PNG_Pie {
 
 		//Get the total
 		$iTotal = 0;
-		foreach ($aData as $oObject) {
-			$iTotal += $oObject->iValue;
-		}
+		foreach ($aData as $oObject) { $iTotal += $oObject->iValue; }
 
 		//Draw the circle
 		$i = 0;

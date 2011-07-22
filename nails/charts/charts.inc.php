@@ -169,11 +169,13 @@ class Charts {
 	/**
 	 * Charts::renderChart()
 	 *
+	 * @param bool $bLegend
+	 * @param string $cFontColor default black
 	 * @return
 	 */
-	function renderChart($bLegend = false) {
+	function renderChart($bLegend = false, $cFontColor = 'black') {
 		if ($bLegend) {
-			$cReturn	= $this->oCreate->makeLegend($this->cContent);
+			$cReturn	= $this->oCreate->makeLegend($this->cContent, $cFontColor);
 			$cReturn 	= $this->oCreate->createOutput($cReturn);
 		} else {
 			$cReturn 	= $this->oCreate->createOutput($this->cContent);

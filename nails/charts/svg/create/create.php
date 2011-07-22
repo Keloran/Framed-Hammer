@@ -23,9 +23,10 @@ class Charts_SVG_Create {
 	 * Charts_SVG_Create::makeLegend()
 	 *
 	 * @param string $cContent
+	 * @param string $cFontColor
 	 * @return
 	 */
-	function makeLegend($cContent) {
+	function makeLegend($cContent, $cFontColor = 'black') {
 		$iX = isset($this->aOptions["iX"]) 				? $this->aOptions["iX"] + 305 	: 305;
 		$iY = isset($this->aOptions["iY"]) 				? $this->aOptions["iY"] 		: 0;
 		$iWidth = isset($this->aOptions["iWidth"]) 		? $this->aOptions["iWidth"] 	: 150;
@@ -44,6 +45,7 @@ class Charts_SVG_Create {
 			$cColor = $oObject->cColor;
 			$cSVG .= "<rect x='" . $iX . "' y='" . $iY . "' width='15' height='15' fill='" . $cColor . "' stroke='black' />\n";
 			$cSVG .= "<text x='" . $iTextX . "' y='" . $iTextY . "' font-size='12' fill='" . $this->aOptions['fontcolor'] . "'>" . $oObject->cDesc . " - " . $oObject->iPercent . "% (" . $oObject->iValue . ")</text>\n";
+
 			$iY += 20;
 			$iCount++;
 		}
