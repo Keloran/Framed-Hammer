@@ -119,11 +119,13 @@ class Charts {
 		//since there might not be any data
 		if (!$this->aPreData) { return false; }
 
+		//get the total number of results		
+		foreach ($this->aPreData as $oObject){ $iSum += $oObject->iValue; }
 
-		foreach ($this->aPreData as $oObject){
-			$iSum += $oObject->iValue;
-		}
+		//set sum to 1, if its 0, to avoid DbZ
+		if ($iSum === 0) { $iSum = 1; }
 
+		//now get a percentage of those results, if larger than 0
 		foreach ($this->aPreData as $cKey => $oObject){
 			$oObject->iPercent	= round(($oObject->iValue / $iSum) * 100, 2);
 			$this->aData[$cKey]	= $oObject;
