@@ -12,25 +12,12 @@ class Charts_SVG_BarV {
 	var $cTitle     = false;
 	var $aOptions	= false;
 	var $aData		= false;
-	var $aColors	= false;
 
 	/**
 	 * Constructor
 	 * @access protected
 	 */
 	function __construct(){
-	}
-
-	/**
-	 * Charts_Bar::getColor()
-	 *
-	 * @param mixed $iID
-	 * @return
-	 */
-	function getColor($iID) {
-		$cColor = $this->aColors[$iID % count($this->aColors)];
-
-		return $cColor;
 	}
 
 	/**
@@ -61,7 +48,7 @@ class Charts_SVG_BarV {
 		$iBarY	= $iY;
 
 		foreach ($aData as $oObject) {
-			$cColor 	= $this->getColor($iCount);
+			$cColor 	= $oObject->cColor;
 			$iHeight	= $oObject->iPercent * 2;
 			$iPercent	= number_format($oObject->iPercent, 2, ",", ".");
 

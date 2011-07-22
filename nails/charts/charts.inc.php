@@ -11,34 +11,6 @@
 class Charts {
 	var $aPreData 	= false;
 
-	var $aColors	= array(
-		"#F82321",
-		"#F8F121",
-		"#48F821",
-		"#F8AF21",
-		"#21F899",
-		"#218FF8",
-		"#C021F8",
-		"#5221F8",
-		"#000000",
-		"#0A3861",
-		"#3e7fee",
-		"#626c8c",
-		"#9e32a8",
-		"#e0443a",
-		"#c9706e",
-		"#7fbd2a",
-		"#e36413",
-		"#1b992e",
-		"#2301c0",
-		"#6a2713",
-		"#acb13c",
-		"#6b3a3c",
-		"#da7ca9",
-		"#316413",
-		"#b49ea8",
-	);
-
 	var $iChartType	= 1; //1 = Pie, 2 = BarH, 3 = BarV
 	var $cContent	= false;
 	var $aOptions	= false;
@@ -119,27 +91,16 @@ class Charts {
 		//since there might not be any data
 		if (!$this->aPreData) { return false; }
 
+		//count the total values
+		foreach ($this->aPreData as $oObject){ $iSum += $oObject->iValue; }
 
-		foreach ($this->aPreData as $oObject){
-			$iSum += $oObject->iValue;
-		}
-
+		//go through the data and make it percentage
 		foreach ($this->aPreData as $cKey => $oObject){
 			$oObject->iPercent	= round(($oObject->iValue / $iSum) * 100, 2);
 			$this->aData[$cKey]	= $oObject;
 		}
 
 		return $this->aData;
-	}
-
-	/**
-	 * Chart::addColor()
-	 *
-	 * @param string $cColor
-	 * @return
-	 */
-	function addColor($cColor) {
-		$this->aColors[] = $cColor;
 	}
 
 	/**
@@ -154,6 +115,9 @@ class Charts {
 
 		//it shouldnt be an array
 		if (is_array($this->cType)) { $this->cType = $this->cType[0]; }
+
+		//set teh font color
+		if (!isset($this->aOptions['fontcolor'])) { $this->aOptions['fontcolor'] = 'black'; }
 
 		//Type
 		switch($cType) {
@@ -175,22 +139,20 @@ class Charts {
 		$this->oCreate	= new $cCreate();
 		$this->oType	= new $cType();
 
-		if ($this->cType == "SVG") {
-			$this->aOptions['bAnimated'] = "true";
-		}
+		if ($this->cType == "SVG") { $this->aOptions['bAnimated'] = "true"; }
 
+		//give the data to the graphs
 		$this->setData();
 		$this->oType->aData 	= $this->aData;
 		$this->oCreate->aData	= $this->aData;
 
+		//send the options to the graphs
 		$this->oType->aOptions	= $this->aOptions;
 
-		$this->oType->aColors	= $this->aColors;
-		$this->oCreate->aColors	= $this->aColors;
-
-		$cContent = $this->oType->renderChart();
-
+		//set teh content
+		$cContent 		= $this->oType->renderChart();
 		$this->cContent = $cContent;
+
 		return $cContent;
 	}
 

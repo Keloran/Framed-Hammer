@@ -12,7 +12,6 @@ class Charts_SVG_Pie {
 	var $cTitle     = false;
 	var $aOptions	= false;
 	var $aData		= false;
-	var $aColors	= false;
 
 	/**
 	 * Charts_Pie::__construct()
@@ -37,7 +36,6 @@ class Charts_SVG_Pie {
 		$iCount		= 0;
 
 		$aData	= $this->aData;
-		$aColors = $this->aColors;
 
 		foreach ($aData as $oObject){
 			$iAlpha = $iAlpha + ($oObject->iPercent / 100 * (2 * M_PI));
@@ -45,9 +43,8 @@ class Charts_SVG_Pie {
 			$iX2 = $iCX + ($iR * sin($iAlpha));
 			$iY2 = $iCY - ($iR * cos($iAlpha));
 
-			$iOver180 = $oObject->iPercent > 50 ? "1" : "0";
-
-			$cColor = $this->getColor($iCount);
+			$iOver180	= $oObject->iPercent > 50 ? "1" : "0";
+			$cColor 	= $oObject->cColor;
 
 			$cOutput .= "<path d='M" . $iCX . "," . $iCY;
 			$cOutput .= " L" . $iX1 . "," . $iY1;
@@ -70,17 +67,5 @@ class Charts_SVG_Pie {
 		}
 
 		return $cOutput;
-	}
-
-	/**
-	 * Charts_Pie::getColor()
-	 *
-	 * @param int $iID
-	 * @return
-	 */
-	function getColor($iID) {
-		$cColor = $this->aColors[$iID % count($this->aColors)];
-
-		return $cColor;
 	}
 }

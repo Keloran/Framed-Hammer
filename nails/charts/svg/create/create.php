@@ -36,15 +36,14 @@ class Charts_SVG_Create {
 		$iY = $iY + 5;
 		$iX = $iX + 5;
 		$iCount = 0;
-		$aColors = $this->aColors;
 		$aData = $this->aData;
 
 		foreach ($aData as $oObject) {
 			$iTextY = $iY + 15;
 			$iTextX = $iX + 20;
-			$cColor = $aColors[$iCount % count($aColors)];
+			$cColor = $oObject->cColor;
 			$cSVG .= "<rect x='" . $iX . "' y='" . $iY . "' width='15' height='15' fill='" . $cColor . "' stroke='black' />\n";
-			$cSVG .= "<text x='" . $iTextX . "' y='" . $iTextY . "' font-size='12'>" . $oObject->cDesc . " - " . $oObject->iPercent . "% (" . $oObject->iValue . ")</text>\n";
+			$cSVG .= "<text x='" . $iTextX . "' y='" . $iTextY . "' font-size='12' fill='" . $this->aOptions['fontcolor'] . "'>" . $oObject->cDesc . " - " . $oObject->iPercent . "% (" . $oObject->iValue . ")</text>\n";
 			$iY += 20;
 			$iCount++;
 		}
@@ -61,8 +60,9 @@ class Charts_SVG_Create {
 	 * @return
 	 */
 	function createOutput($cSVG) {
-		$cData = "<?xml version='1.0' encoding='iso-8859-1' ?>\n";
-		$cData .= "<svg xmlns='http://www.w3.org/2000/svg'>\n\n";
+		$cData  = "<?xml version='1.0' encoding='UTF-8' ?>\n";
+		$cData .= "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n";
+		$cData .= "<svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n\n";
 		$cData .= $cSVG;
 		$cData .= "</svg>\n";
 

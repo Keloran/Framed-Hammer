@@ -12,25 +12,12 @@ class Charts_SVG_BarH {
 	var $cTitle     = false;
 	var $aOptions	= false;
 	var $aData		= false;
-	var $aColors	= false;
 
 	/**
 	 * Constructor
 	 * @access protected
 	 */
 	function __construct(){
-	}
-
-	/**
-	 * Charts_Bar::getColor()
-	 *
-	 * @param mixed $iID
-	 * @return
-	 */
-	function getColor($iID) {
-		$cColor = $this->aColors[$iID % count($this->aColors)];
-
-		return $cColor;
 	}
 
 	/**
@@ -62,7 +49,7 @@ class Charts_SVG_BarH {
 		$iDescX	= $iX + 200;
 
 		foreach ($aData as $oObject) {
-			$cColor 	= $this->getColor($iCount);
+			$cColor 	= $oObject->cColor;
 			$iTextY		= $iY + 11;
 			$iWidth		= $oObject->iPercent;
 			$iPercent	= number_format($oObject->iPercent, 2, ",", ".");
@@ -72,15 +59,15 @@ class Charts_SVG_BarH {
 				$cOutput .= "<animate attributeName='width' attributeType='XML' begin='0s' dur='1s' fill='freeze' from='0' to='" . $iWidth . "' />\n";
 				$cOutput .= "</rect>\n";
 
-				$cOutput .= "<text x='" . $iX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;'>" . $oObject->cDesc . "</text>\n";
+				$cOutput .= "<text x='" . $iX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;' fill='" . $this->aOptions['fontcolor'] . "'>" . $oObject->cDesc . "</text>\n";
 
-				$cOutput .= "<text x='" . $iDescX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right; visibility: hidden;'>" . $oObject->iValue . " [" . $iPercent . "%]\n";
+				$cOutput .= "<text x='" . $iDescX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right; visibility: hidden;' fill='" . $this->aOptions['fontcolor'] . "'>" . $oObject->iValue . " [" . $iPercent . "%]\n";
 				$cOutput .= "<animate attributeName='visibility' attributeType='CSS' begin='1s' dur='0.1s' fill='freeze' from='hidden' to='visible' calcMode='discrete' />\n";
 				$cOutput .= "</text>\n";
 			} else {
 				$cOutput .= "<rect x='" . $iBarX . "' y='" . $iY . "' width='" . $iWidth . "' height='15' fill='" . $cColor . "' style='filter: url(#flt)' />\n";
-				$cOutput .= "<text x='" . $iX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;'>" . $oObject->cDesc . "</text>\n";
-				$cOutput .= "<text x='" . $iDescX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;'>" . $oObject->iValue . " [" . $iPercent . "%]</text>\n";
+				$cOutput .= "<text x='" . $iX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;' fill='" . $this->aOptions['fontcolor'] . "'>" . $oObject->cDesc . "</text>\n";
+				$cOutput .= "<text x='" . $iDescX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;' fill='" . $this->aOptions['fontcolor'] . "'>" . $oObject->iValue . " [" . $iPercent . "%]</text>\n";
 			}
 
 			$iY = $iY + 27;
