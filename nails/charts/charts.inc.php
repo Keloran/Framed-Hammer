@@ -94,6 +94,9 @@ class Charts {
 		//count the total values
 		foreach ($this->aPreData as $oObject){ $iSum += $oObject->iValue; }
 
+		//set sum to 1 if acutally its 0, todo divide
+		if ($iSum == 0) { $iSum = 1; }
+
 		//go through the data and make it percentage
 		foreach ($this->aPreData as $cKey => $oObject){
 			$oObject->iPercent	= round(($oObject->iValue / $iSum) * 100, 2);

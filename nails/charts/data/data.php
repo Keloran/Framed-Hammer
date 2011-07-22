@@ -13,10 +13,7 @@ class Charts_Data {
 		$this->cDesc 	= $cDesc;
 		$this->cExtra	= $cExtra;
 		$this->cColor	= $this->createColors();
-
-		//if value is 0 set it to infinitlly small, so it can be divided by
-		if ($iValue == 0) { $iValue = 0.1; }
-		$this->iValue	= $iValue;
+		$this->iValue	= $iValue; //the set to 0 wasnt needed, it was in the divide that was needed
 	}
 
 	/**
