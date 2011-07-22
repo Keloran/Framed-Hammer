@@ -122,9 +122,6 @@ class Charts {
 		//get the total number of results		
 		foreach ($this->aPreData as $oObject){ $iSum += $oObject->iValue; }
 
-		//set sum to 1, if its 0, to avoid DbZ
-		if ($iSum === 0) { $iSum = 1; }
-
 		//now get a percentage of those results, if larger than 0
 		foreach ($this->aPreData as $cKey => $oObject){
 			$oObject->iPercent	= round(($oObject->iValue / $iSum) * 100, 2);
@@ -177,9 +174,7 @@ class Charts {
 		$this->oCreate	= new $cCreate();
 		$this->oType	= new $cType();
 
-		if ($this->cType == "SVG") {
-			$this->aOptions['bAnimated'] = "true";
-		}
+		if ($this->cType == "SVG") { $this->aOptions['bAnimated'] = "true"; }
 
 		$this->setData();
 		$this->oType->aData 	= $this->aData;
@@ -209,11 +204,13 @@ class Charts {
 	/**
 	 * Charts::renderChart()
 	 *
+	 * @param bool $bLegend
+	 * @param string $cFontColor default black
 	 * @return
 	 */
-	function renderChart($bLegend = false) {
+	function renderChart($bLegend = false, $cFontColor = 'black') {
 		if ($bLegend) {
-			$cReturn	= $this->oCreate->makeLegend($this->cContent);
+			$cReturn	= $this->oCreate->makeLegend($this->cContent, $cFontColor);
 			$cReturn 	= $this->oCreate->createOutput($cReturn);
 		} else {
 			$cReturn 	= $this->oCreate->createOutput($this->cContent);

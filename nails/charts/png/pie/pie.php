@@ -59,9 +59,6 @@ class Charts_PNG_Pie {
 		$iTotal = 0;
 		foreach ($aData as $oObject) { $iTotal += $oObject->iValue; }
 
-		//set total to 1 if 0, avoid DbZ
-		if ($iTotal === 0) { $iTotal = 1; }
-
 		//Draw the circle
 		$i = 0;
 		foreach ($aData as $oObject) {

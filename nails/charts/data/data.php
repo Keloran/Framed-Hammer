@@ -11,7 +11,9 @@ class Charts_Data {
 	 */
 	function __construct($iValue, $cDesc = false, $cExtra = false) {
 		$this->cDesc 	= $cDesc;
-		$this->iValue	= $iValue;
 		$this->cExtra	= $cExtra;
+
+		if ($iValue == 0) { $iValue = 0.1; }
+		$this->iValue	= $iValue;
 	}
 }
