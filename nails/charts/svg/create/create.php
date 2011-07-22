@@ -27,9 +27,9 @@ class Charts_SVG_Create {
 	 * @return
 	 */
 	function makeLegend($cContent, $cFontColor = 'black') {
-		$iX 		= isset($this->aOptions["iX"]) 			? $this->aOptions["iX"] + 305 	: 305;
-		$iY 		= isset($this->aOptions["iY"]) 			? $this->aOptions["iY"] 		: 0;
-		$iWidth 	= isset($this->aOptions["iWidth"]) 		? $this->aOptions["iWidth"] 	: 150;
+		$iX 		= isset($this->aOptions["iX"]) 		? $this->aOptions["iX"] + 305 	: 305;
+		$iY 		= isset($this->aOptions["iY"]) 		? $this->aOptions["iY"] 		: 0;
+		$iWidth 	= isset($this->aOptions["iWidth"]) 	? $this->aOptions["iWidth"] 	: 150;
 		$iHeight 	= isset($this->aOptions["iHeight"]) 	? $this->aOptions["iHeight"] 	: 200;
 		$cFontColor	= isset($this->aOptions['fontcolor'])	? $this->aOptions['fontcolor']	: 'black';
 
@@ -45,7 +45,7 @@ class Charts_SVG_Create {
 			$iTextX = $iX + 20;
 			$cColor = $oObject->cColor;
 			$cSVG .= "<rect x='" . $iX . "' y='" . $iY . "' width='15' height='15' fill='" . $cColor . "' stroke='black' />\n";
-			$cSVG .= "<text x='" . $iTextX . "' y='" . $iTextY . "' font-size='12' fill='" . $cFontColor . "'>" . $oObject->cDesc . " - " . $oObject->iPercent . "% (" . $oObject->iValue . ")</text>\n";
+			$cSVG .= "<text x='" . $iTextX . "' y='" . $iTextY . "' font-size='12' fill='" . $cFontColor . "'>" . $oObject->cDesc . " - " . $oObject->iPercentLegend . "% (" . $oObject->iValue . ")</text>\n";
 
 			$iY += 20;
 			$iCount++;

@@ -95,11 +95,20 @@ class Charts {
 		foreach ($this->aPreData as $oObject){ $iSum += $oObject->iValue; }
 
 		//set sum to 1 if acutally its 0, todo divide
-		if ($iSum == 0) { $iSum = 1; }
+		if ($iSum == 0) { $iSum = 100; }
 
 		//go through the data and make it percentage
 		foreach ($this->aPreData as $cKey => $oObject){
-			$oObject->iPercent	= round(($oObject->iValue / $iSum) * 100, 2);
+			$iValue = $oObject->iValue;
+			if ($iValue == 0) { 
+				$iValue = 0.001; 
+			} else {
+				$iValue = ($iValue - 0.001);
+			}
+			
+			$oObject->iPercentLegend	= round(($iValue / $iSum) * 100, 2);
+			$oObject->iPercent		= round(($iValue / $iSum) * 100, 3);
+
 			$this->aData[$cKey]	= $oObject;
 		}
 
