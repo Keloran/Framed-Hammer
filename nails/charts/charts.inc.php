@@ -147,7 +147,8 @@ class Charts {
 		$this->oCreate->aData	= $this->aData;
 
 		//send the options to the graphs
-		$this->oType->aOptions	= $this->aOptions;
+		$this->oType->aOptions		= $this->aOptions;
+		$this->oCreate->aOptions	= $this->aOptions;
 
 		//set teh content
 		$cContent 		= $this->oType->renderChart();
