@@ -492,15 +492,48 @@ class User implements Nails_Interface {
 	 *
 	 * @todo Change MD5 to SHA
 	 *
-	 * @param string $cUsername
+	 * @param array $mDetails
 	 * @param string $cPassword
+	 * @param bool $bInternal
 	 * @return string
 	 */
-	public function login($cUsername, $cPassword, $bInternal = false) {
-        $aEscape 	= array($cUsername, $cPassword);
+	public function login($mDetails, $cPassword = false, $bInternal = false) {
+		$cUsername	= false;
+		$cPassword	= false;
+		$bEmail		= false;
 		$cHash		= false;
 
-		$this->oDB->read("SELECT iUserID, iGroupID FROM users WHERE cUsername = ? AND cPassword = MD5(?) LIMIT 1", $aEscape);
+		if (is_array($mDetails)) {
+			foreach ($mDetails as $cKey => $mValue) {
+				switch($cKey){
+					case "login":
+						$cUsername = $mValue;
+						break;
+
+					case "password":
+						$cPassword = $mValue;
+						break;
+
+					case "email":
+						$bEmail = $mValue;
+						break;
+
+				} // switch
+			}
+		} else {
+			$cUsername = $mDetails;
+		}
+
+		//details
+		$aEscape 	= array($cUsername, $cPassword);
+
+		//email login
+		if ($bEmail) {
+			$this->oDB->read("SELECT iUserID, iGroupID FROM users WHERE cEmail = ? AND cPassword = MD5(?) LIMIT 1", $aEscape);
+		} else { //username login
+			$this->oDB->read("SELECT iUserID, iGroupID FROM users WHERE cUsername = ? AND cPassword = MD5(?) LIMIT 1", $aEscape);
+		}
+
 		if ($this->oDB->nextRecord()) {
 			$iGroupID	= $this->oDB->f('iGroupID');
 			$iUserID	= $this->oDB->f('iUserID');
