@@ -21,6 +21,9 @@ class User implements Nails_Interface {
 	private $oDB	= false;
 	private $cPage	= false;
 
+	//Set to logged in
+	public $bLogged = false;
+
     /**
      * Constructor
      * @param object $oNails
@@ -86,6 +89,7 @@ class User implements Nails_Interface {
         if ($this->cCookie) {
                 $this->iUserID  = $this->getID();
                 $this->iGroupID = $this->getGroupID();
+        		$this->bLogged	= true;
 
                 //Is this user actually banned
                 $cGroup = $this->getGroupName();
