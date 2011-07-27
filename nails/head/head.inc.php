@@ -517,9 +517,17 @@ class Head {
 		if ($this->aAddedCSS) {
 			foreach ($this->aAddedCSS as $aCSS) {
 				if (strstr($aCSS['location'], "http")) {
-					$cReturn .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $aCSS['location'] . $aCSS['file'] . "\" />\n";
+					if ($this->cDocType == "html5") {
+						$cReturn .= "<link rel=\"stylesheet\" href=\"" . $aCSS['location'] . $aCSS['file'] . "\" />\n";
+					} else {
+						$cReturn .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $aCSS['location'] . $aCSS['file'] . "\" />\n";
+					}
 				} else {
-					$cReturn .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"/css/" . $aCSS['location'] . $aCSS['file'] . ".css\" />\n";
+					if ($this->cDocType == "html5") {
+						$cReturn .= "<link rel=\"stylesheet\" href=\"/css/" . $aCSS['location'] . $aCSS['file'] . ".css\" />\n";
+					} else {
+						$cReturn .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"/css/" . $aCSS['location'] . $aCSS['file'] . ".css\" />\n";
+					}
 				}
 			}
 		}
@@ -697,9 +705,17 @@ class Head {
 	*/
 	public function addJS($cJS, $bExternal = false) {
 		if ($bExternal) {
-			$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cJS . "\"</script>\n";
+			if ($this->cDocType == "html5") {
+				$this->cJS .= "<script src=\"" . $cJS . "\"</script>\n";
+			} else {
+				$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cJS . "\"</script>\n";
+			}
 		} else {
-			$this->cJS .= "<script type=\"text/javascript\" src=\"/js/" . $cJS . ".js\"></script>\n";
+			if ($this->cDocType == "html5") {
+				$this->cJS .= "<script src=\"/js/" . $cJS . ".js\"></script>\n";
+			} else {
+				$this->cJS .= "<script type=\"text/javascript\" src=\"/js/" . $cJS . ".js\"></script>\n";
+			}
 		}
 	}
 
