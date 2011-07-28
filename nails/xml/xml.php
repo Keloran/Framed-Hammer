@@ -57,8 +57,12 @@ class XML {
 		return self::$oXML;
 	}
 
-	public function getElement() {
+	public function getElement($cElement, $cParent = null) {
+		$oXPath	= new DOMXPath($this->oDOM); //get the xpath object
 
+		if ($cParent) { $cPath = "//" . $cParent;
+
+		}
 	}
 
 	/**
@@ -102,5 +106,28 @@ class XML {
 
 			$this->oDOM->appendChild($this->oRoot);
 		}
+	}
+
+	public function setRoot($cRoot, $cNameSpace = null, $aExtraNS = null) {
+		$this->cRoot	= $cRoot;
+		$this->iExtraNs	= 0;
+		$oRoot			= false;
+
+		$this->xmlns 	= $cNameSpace;
+
+		//are there any extra namespaces
+		if ($aExtraNS) {
+			$this->iExtraNS	= count($aExtraNS);
+			$this->aExtraNS	= $aExtraNS;
+		}
+
+		//set the root
+		if ($this->oDOM) {
+			$oDOM	= $this->oDOM->getElementsByTagName($cRoot);
+			$oRoot	= $oDOM->item(0);
+		}
+
+		$this->oRoot	= $oRoot;
+		return $oRoot;
 	}
 }
