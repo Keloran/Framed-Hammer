@@ -76,7 +76,9 @@ class XML {
 		foreach ($mParent as $mParentElem) {
 			$oElem		= $mParentElem->getElementsByTagName($cElement);
 			$iElements	= $oElem->length;
-			$mReturn[]	= $iElements;
+			for ($i = 0; $i < $iElements; $i++) {
+				$mReturn[] = $oElem->item($i);
+			}
 		}
 
 		return $mReturn;
