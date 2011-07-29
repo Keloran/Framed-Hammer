@@ -73,13 +73,22 @@ class XML {
 		for ($i = 0; $i < $iParent; $i++) { $mParent[] = $oParent->item($i); }
 
 		//hopefully there will only be one parent
+		$z = 0;
 		foreach ($mParent as $mParentElem) {
 			$oElem		= $mParentElem->getElementsByTagName($cElement);
 			$iElements	= $oElem->length;
 			for ($i = 0; $i < $iElements; $i++) {
-				$mElement = $oElem->item($i);
+				$mElement 	= $oElem->item($i);
+				$z			= $i;
 				if ($mElement->hasChildNodes()) {
-					$mReturn[] = $mElement->childNodes->length;
+					$iChildren = $mElement->childNodes->length;
+					for ($j = 0; $j < $iChildren; $j++) {
+						$mItem	= $mElement->item($j);
+						$cName	= $mItem->nodeName;
+						$mValue = $mItem->nodeValue;
+
+						$mReturn[$z][$cName] = $mValue;
+					}
 				}
 			}
 		}
