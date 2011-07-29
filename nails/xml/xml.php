@@ -70,7 +70,7 @@ class XML {
 
 		$oParent	= $this->oDOM->getElementsByTagName($cParent);
 		$iParent	= count($oParent);
-		return $iParent;
+
 
 		$cPath	= "//";
 
@@ -105,7 +105,7 @@ class XML {
 	 * @param bool $bDelete
 	 * @return null
 	 */
-	public function setFile($cFile, $bAbsolute = null, $bDelete = null) {
+	public function setFile($cFile, $bAbsolute = null, $bDelete = null, $bPreserve = false) {
 		//given the absolute path, could even be remote
 		if (!$bAbsolute) {
 			$cRealFile	= SITEPATH . "/" . $cFile . ".xml";
@@ -121,6 +121,7 @@ class XML {
 
 		//create the dom object
 		$this->oDOM	= new DomDocument("1.0", "UTF-8");
+		$this->oDOM->preserveWhiteSpace = $bPreserve;
 
 		//if there isnt a root set
 		if (!$this->cRoot) { $this->cRoot = "config"; }
@@ -138,6 +139,12 @@ class XML {
 
 			$this->oDOM->appendChild($this->oRoot);
 		}
+
+		return $this->oDOM;
+	}
+
+	public function getFile($cFile, $bAbsolute) {
+		return $this->setFile($cFile, $bAbsolute, false, false);
 	}
 
 	/**
