@@ -75,6 +75,8 @@ class XML {
 		$iElements	= count($aElements);
 
 		foreach ($aElements as $aElement) {
+			printRead($aElement);
+
 			if ($iElements >= 2) {
 				$mReturn[] = $aElement->item;
 			} else {
