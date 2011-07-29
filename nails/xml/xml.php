@@ -98,7 +98,7 @@ class XML {
 			}
 		}
 
-		$iReturn = count($mReturn);
+		$iCount = count($mReturn);
 		if ($iCount == 1) {
 			$mReturn1 = $mReturn;
 			foreach ($mReturn1 as $cKey => $mValue) { $mReturn[$cKey] = $mValue; }
