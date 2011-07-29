@@ -69,7 +69,8 @@ class XML {
 		$mReturn	= false;
 
 		$oParent	= $this->oDOM->getElementsByTagName($cParent);
-		return $oParent;
+		$iParent	= count($oParent);
+		return $iParent;
 
 		$cPath	= "//";
 
