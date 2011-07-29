@@ -73,6 +73,7 @@ class XML {
 
 		$aElements	= $oXPath->query($cPath . $cElement);
 		$iElements	= count($aElements);
+		return $aElements;
 
 		foreach ($aElements as $aElement) {
 			printRead($aElement);
