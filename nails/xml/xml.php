@@ -64,7 +64,7 @@ class XML {
 		if ($cParent) { $cPath = "//" . $cParent; }
 
 		$aElements	= $oXPath->query($cPath . $cElement);
-		printRead($Elements);
+		printRead($aElements);
 	}
 
 	public function addElement($cElement) {
