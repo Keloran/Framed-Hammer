@@ -83,6 +83,7 @@ class XML {
 				if ($mElement->hasChildNodes()) {
 					$iChildren = $mElement->childNodes->length;
 					for ($j = 0; $j < $iChildren; $j++) {
+						$mItem	= $mElement->childNodes->item($j);
 						$cName	= $mItem->nodeName;
 						$mValue = $mItem->nodeValue;
 
