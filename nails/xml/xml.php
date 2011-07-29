@@ -60,9 +60,15 @@ class XML {
 	public function getElement($cElement, $cParent = null) {
 		$oXPath	= new DOMXPath($this->oDOM); //get the xpath object
 
-		if ($cParent) { $cPath = "//" . $cParent;
+		$cPath	= "//";
+		if ($cParent) { $cPath = "//" . $cParent; }
 
-		}
+		$aElements	= $oXPath->query($cPath . $cElement);
+		printRead($Elements);
+	}
+
+	public function addElement($cElement) {
+
 	}
 
 	/**
