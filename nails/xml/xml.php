@@ -68,7 +68,11 @@ class XML {
 		$oXPath		= new DOMXPath($this->oDOM); //get the xpath object
 		$mReturn	= false;
 
+		$oParent	= $this->oDOM->getElementsByTagName($cParent);
+		return $oParent;
+
 		$cPath	= "//";
+
 		if ($cParent) { $cPath = "//" . $cParent; }
 
 		$aElements	= $oXPath->query($cPath . $cElement);
