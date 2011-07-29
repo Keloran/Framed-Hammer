@@ -57,14 +57,32 @@ class XML {
 		return self::$oXML;
 	}
 
+	/**
+	 * XML::getElement()
+	 *
+	 * @param string $cElement
+	 * @param string $cParent
+	 * @return mixed
+	 */
 	public function getElement($cElement, $cParent = null) {
-		$oXPath	= new DOMXPath($this->oDOM); //get the xpath object
+		$oXPath		= new DOMXPath($this->oDOM); //get the xpath object
+		$mReturn	= false;
 
 		$cPath	= "//";
 		if ($cParent) { $cPath = "//" . $cParent; }
 
 		$aElements	= $oXPath->query($cPath . $cElement);
-		printRead($aElements);
+		$iElements	= count($aElements);
+
+		if ($iElements >= 2) {
+			foreach ($aElements as $aElement) {
+				$mReturn[] = $aElement->item;
+			}
+		} else {
+			$mReturn = $aElements[0]->item;
+		}
+
+		return $mReturn;
 	}
 
 	public function addElement($cElement) {
@@ -104,8 +122,8 @@ class XML {
 			$pFile		= file_get_contents($cRealFile);
 			$this->oDOM->loadXML($pFile);
 		} else {
-			if ($this->xmlns) {
-				$this->oRoot = $this->oDOM->createElementNS($this->xmlns, $this->cRoot);
+			if ($this->cXMLNS) {
+				$this->oRoot = $this->oDOM->createElementNS($this->cXMLNS, $this->cRoot);
 			} else {
 				$this->oRoot = $this->oDOM->createElement($this->cRoot);
 			}
@@ -114,12 +132,20 @@ class XML {
 		}
 	}
 
+	/**
+	 * XML::setRoot()
+	 *
+	 * @param string $cRoot
+	 * @param string $cNameSpace
+	 * @param array $aExtraNS
+	 * @return object
+	 */
 	public function setRoot($cRoot, $cNameSpace = null, $aExtraNS = null) {
 		$this->cRoot	= $cRoot;
 		$this->iExtraNs	= 0;
 		$oRoot			= false;
 
-		$this->xmlns 	= $cNameSpace;
+		$this->cXMLNS 	= $cNameSpace;
 
 		//are there any extra namespaces
 		if ($aExtraNS) {
