@@ -79,7 +79,7 @@ class XML {
 			for ($i = 0; $i < $iElements; $i++) {
 				$mElement = $oElem->item($i);
 				if ($mElement->hasChildNodes()) {
-					$mReturn[] = $mElement->childNodes;
+					$mReturn[] = $mElement->childNodes->length;
 				}
 			}
 		}
