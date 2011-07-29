@@ -70,27 +70,13 @@ class XML {
 		$oParent	= $this->oDOM->getElementsByTagName($cParent);
 		$mParent	= false;
 		$iParent	= $oParent->length;
-		for ($i = 0; $i < $iParent; $i++) {
-			$mParent[] = $oParent->item($i);
-		}
-		return $mParent;
+		for ($i = 0; $i < $iParent; $i++) { $mParent[] = $oParent->item($i); }
 
-		$cPath	= "//";
-
-		if ($cParent) { $cPath = "//" . $cParent; }
-
-		$aElements	= $oXPath->query($cPath . $cElement);
-		$iElements	= count($aElements);
-		return $aElements;
-
-		foreach ($aElements as $aElement) {
-			printRead($aElement);
-
-			if ($iElements >= 2) {
-				$mReturn[] = $aElement->item;
-			} else {
-				$mReturn = $aElement->item;
-			}
+		//hopefully there will only be one parent
+		foreach ($mParent as $mParentElem) {
+			$oElem		= $mParentElem->getElementsByTagName($cElement);
+			$iElements	= $oElem->length;
+			$mReturn[]	= $iElements;
 		}
 
 		return $mReturn;
