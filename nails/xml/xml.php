@@ -144,7 +144,7 @@ class XML {
 		return $this->oDOM;
 	}
 
-	public function getFile($cFile, $bAbsolute) {
+	public function getFile($cFile, $bAbsolute = null) {
 		return $this->setFile($cFile, $bAbsolute, false, false);
 	}
 
