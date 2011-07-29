@@ -78,7 +78,7 @@ class XML {
 			if ($iElements >= 2) {
 				$mReturn[] = $aElement->item;
 			} else {
-				$mReturn = $aElements[0]->item;
+				$mReturn = $aElement->item;
 			}
 		}
 
