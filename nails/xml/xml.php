@@ -74,12 +74,12 @@ class XML {
 		$aElements	= $oXPath->query($cPath . $cElement);
 		$iElements	= count($aElements);
 
-		if ($iElements >= 2) {
-			foreach ($aElements as $aElement) {
+		foreach ($aElements as $aElement) {
+			if ($iElements >= 2) {
 				$mReturn[] = $aElement->item;
+			} else {
+				$mReturn = $aElements[0]->item;
 			}
-		} else {
-			$mReturn = $aElements[0]->item;
 		}
 
 		return $mReturn;
