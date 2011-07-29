@@ -81,11 +81,6 @@ class XML {
 				$mElement 	= $oElem->item($i);
 				$z			= $i;
 
-				//debug
-				$cName	= $mElement->nodeName;
-				$mValue	= $mElement->nodeValue;
-				$mReturn[99][$cName] = $mValue;
-
 				if ($mElement->hasChildNodes()) {
 					$iChildren = $mElement->childNodes->length;
 					for ($j = 0; $j < $iChildren; $j++) {
@@ -95,6 +90,10 @@ class XML {
 
 						$mReturn[$z][$cName] = $mValue;
 					}
+				} else {
+					$cName	= $mElement->nodeName;
+					$mValue	= $mElement->nodeValue;
+					$mReturn[$z][$cName] = $mValue;
 				}
 			}
 		}
