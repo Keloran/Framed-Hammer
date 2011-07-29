@@ -65,12 +65,15 @@ class XML {
 	 * @return mixed
 	 */
 	public function getElement($cElement, $cParent = null) {
-		$oXPath		= new DOMXPath($this->oDOM); //get the xpath object
 		$mReturn	= false;
 
 		$oParent	= $this->oDOM->getElementsByTagName($cParent);
-		$iParent	= count($oParent);
-		return $oParent;
+		$mParent	= false;
+		$iParent	= $oParent->length;
+		for ($i = 0; $i < $iParent; $i++) {
+			$mParent[] = $oParent->item($i);
+		}
+		return $mParent;
 
 		$cPath	= "//";
 
