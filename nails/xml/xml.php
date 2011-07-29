@@ -80,6 +80,12 @@ class XML {
 			for ($i = 0; $i < $iElements; $i++) {
 				$mElement 	= $oElem->item($i);
 				$z			= $i;
+
+				//debug
+				$cName	= $mElement->nodeName;
+				$mValue	= $mElement->nodeValue;
+				$mReturn[99][$cName] = $mValue;
+
 				if ($mElement->hasChildNodes()) {
 					$iChildren = $mElement->childNodes->length;
 					for ($j = 0; $j < $iChildren; $j++) {
