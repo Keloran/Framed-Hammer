@@ -216,6 +216,8 @@ class Admin implements Nails_Interface {
 	 */
 	public function getBannedIP($cIP) {
 		$cIP = ip2long($cIP);
+		//just make sure its actually there
+		if (!$cIP) { return false; }
 
 		$this->oDB->read("SELECT iBannedID FROM users_banned WHERE cBannedIP = ? LIMIT 1", $cIP);
 		if ($this->oDB->nextRecord()) {
