@@ -289,5 +289,8 @@ function visitorIP() {
 		$cIP = false;
 	}
 
+	//Check to make sure its not "unknown"
+	if ($cIP == "unknown") { $cIP = false; }
+
 	return $cIP;
 }
