@@ -498,8 +498,8 @@ class User implements Nails_Interface {
 	 * @return string
 	 */
 	public function login($mDetails, $cPassword = false, $bInternal = false) {
-		$cUsername	= false;
-		$cPassword	= false;
+		$cUsername	= $mDetails ?: false;
+		$cPassword	= $cPassword ?: false;
 		$bEmail		= false;
 		$cHash		= false;
 
@@ -520,8 +520,6 @@ class User implements Nails_Interface {
 
 				} // switch
 			}
-		} else {
-			$cUsername = $mDetails;
 		}
 
 		//details
