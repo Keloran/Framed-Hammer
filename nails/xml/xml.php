@@ -137,16 +137,16 @@ class XML {
 		$iLength	= $oElement->childNodes->length;
 		if ($iLength > 1) {
 			for ($i = 0; $i < $iLength; $i++) {
-				$oElem = $oElement->childNodes->item($i);
-				$this->recursiveElement($oElem);
+				$oElem 		= $oElement->childNodes->item($i);
+				$mReturn	= $this->recursiveElement($oElem);
 			}
 		} else {
 			$cName		= $oElement->nodeName;
 			$cValue		= $oElement->nodeValue;
 			$mReturn	= array($cName => $cValue);
-
-			return $mReturn;
 		}
+
+		return $mReturn;
 	}
 
 	/**
