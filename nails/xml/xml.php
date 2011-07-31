@@ -141,9 +141,8 @@ class XML {
 				$mReturn	= $this->recursiveElement($oElem);
 			}
 		} else {
-			$oElem		= $oElement->childNodes->item(0);
-			$cName		= $oElem->nodeName;
-			$cValue		= $oElem->nodeValue;
+			$cName		= $oElement->nodeName;
+			$cValue		= $oElement->nodeValue;
 			$mReturn	= array($cName => $cValue);
 
 			return $mReturn;
