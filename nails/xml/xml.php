@@ -136,12 +136,16 @@ class XML {
 	 */
 	private function getElementRecursive($oElement) {
 		if (!is_object($oElement)) { return false; }
-		if ($oElement->childNodes->length > 1) { return $this->getElementRecursive($oElement); }
+
+		//get the final node
+		if ($oElement->childNodes->length > 1) {
+				$oElement1 = $oElement->childNodes->item(0);
+				return $this->getElementRecursive($oElement1);
+		}
 
 		//finally get the element
-		$oElem	= $oElement->childNodes->item(0);
-		$cName	= $oElem->nodeName;
-		$cValue	= $oElem->nodeValue;
+		$cName	= $oElement->nodeName;
+		$cValue	= $oElement->nodeValue;
 
 		$aReturn[$cName] = $cValue;
 		return $aReturn;
