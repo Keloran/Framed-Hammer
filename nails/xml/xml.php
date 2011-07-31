@@ -141,7 +141,7 @@ class XML {
 				$oElement1	= $this->recursiveElement($oElem);
 			}
 		} else {
-			$oElement1	= $oElement;
+			return false;
 		}
 
 		$cName		= $oElement1->nodeName;
