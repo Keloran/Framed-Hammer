@@ -83,7 +83,7 @@ class XML {
 			$iElements	= $oElem->length;
 
 			//return the elements
-			if ($bReturn) { return $mElement; }
+			if ($bReturn) { return $oElem; }
 
 			//go through the elements
 			for ($i = 0; $i < $iElements; $i++) {
@@ -94,15 +94,15 @@ class XML {
 				if ($mElement->hasChildNodes()) {
 					$iChildren = $mElement->childNodes->length;
 					for ($j = 0; $j < $iChildren; $j++) {
-						$mItem	= $mElement->childNodes->item($j);
+						$mItem	= $oElem->childNodes->item($j);
 						$cName	= $mItem->nodeName;
 						$mValue = $mItem->nodeValue;
 
 						$mReturn[$z][$cName] = $mValue;
 					}
 				} else {
-					$cName	= $mElement->nodeName;
-					$mValue	= $mElement->nodeValue;
+					$cName	= $oElem->nodeName;
+					$mValue	= $oElem->nodeValue;
 					$mReturn[$z][$cName] = $mValue;
 				}
 			}
