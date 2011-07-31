@@ -137,15 +137,15 @@ class XML {
 		$iLength	= $oElement->childNodes->length;
 		if ($iLength > 1) {
 			for ($i = 0; $i < $iLength; $i++) {
-				return $this->recursiveElement($oElement->childNodes->item($i));
+				$mReturn = $this->recursiveElement($oElement->childNodes->item($i));
 			}
 		} else {
 			$oElem		= $oElement->childNodes->item(0);
 			$cName		= $oElem->nodeName;
 			$cValue		= $oElem->nodeValue;
-			$aReturn	= array($cName => $cValue);
+			$mReturn	= array($cName => $cValue);
 
-			return $aReturn;
+			return $mReturn;
 		}
 	}
 
