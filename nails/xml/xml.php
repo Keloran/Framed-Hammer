@@ -82,9 +82,6 @@ class XML {
 			$oElem		= $mParentElem->getElementsByTagName($cElement);
 			$iElements	= $oElem->length;
 
-			//return the elements
-			if ($bReturn) { return $oElem; }
-
 			//go through the elements
 			for ($i = 0; $i < $iElements; $i++) {
 				$mElement 	= $oElem->item($i);
@@ -95,12 +92,19 @@ class XML {
 					$iChildren = $mElement->childNodes->length;
 					for ($j = 0; $j < $iChildren; $j++) {
 						$mItem	= $oElem->childNodes->item($j);
+
+						//return the elements
+						if ($bReturn) { return $mItem; }
+
 						$cName	= $mItem->nodeName;
 						$mValue = $mItem->nodeValue;
 
 						$mReturn[$z][$cName] = $mValue;
 					}
 				} else {
+					//return the elements
+					if ($bReturn) { return $oElem; }
+
 					$cName	= $oElem->nodeName;
 					$mValue	= $oElem->nodeValue;
 					$mReturn[$z][$cName] = $mValue;
