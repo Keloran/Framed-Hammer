@@ -99,7 +99,7 @@ class XML {
 						$mItem	= $mElement->childNodes->item($j);
 						$cClass	= array($mItem, "childNodes");
 
-						if (is_callable($cClass)) {
+						if ($mItem->hasChildNodes()) {
 							$mReturn[$z] = $this->getElementRecursive($mItem);
 						} else {
 							//it must be the only element
