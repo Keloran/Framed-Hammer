@@ -97,10 +97,16 @@ class XML {
 					//go through the elements
 					for ($j = 0; $j < $iChildren; $j++) {
 						$mItem	= $mElement->childNodes->item($j);
-						$cName	= $mItem->nodeName;
-						$mValue = $mItem->nodeValue;
+						$cClass	= array($mItem, "childNodes");
 
-						$mReturn[$z][$cName] = $mValue;
+						if (is_callable($cClass)) {
+							$mReturn[$z] = $this->getElementRecursive($mItem);
+						} else {
+							//it must be the only element
+							$cName	= $mItem->nodeName;
+							$mValue = $mItem->nodeValue;
+							$mReturn[$z][$cName] = $mValue;
+						}
 					}
 				} else {
 					//return the elements
@@ -120,6 +126,25 @@ class XML {
 		}
 
 		return $mReturn;
+	}
+
+	/**
+	 * XML::getElementRecursive()
+	 *
+	 * @param object $oElement
+	 * @return array
+	 */
+	private function getElementRecursive($oElement) {
+		if (!is_object($oElement)) { return false; }
+		if ($oElement->childNodes->length > 1) { return $this->getElementRecursive($oElement); }
+
+		//finally get the element
+		$oElem	= $oElement->childNodes->item(0);
+		$cName	= $oElem->nodeName;
+		$cValue	= $oElem->nodeValue;
+
+		$aReturn[$cName] = $cValue;
+		return $aReturn;
 	}
 
 	/**
