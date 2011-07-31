@@ -99,7 +99,7 @@ class XML {
 						$mItem	= $mElement->childNodes->item($j);
 
 						if ($mItem->hasChildNodes()) {
-							$mReturn[$z] = $this->recursiveElement($mItem);
+							$mReturn = $this->recursiveElement($mItem);
 						} else {
 							//it must be the only element
 							$cName	= $mItem->nodeName;
@@ -137,8 +137,8 @@ class XML {
 		$iLength	= $oElement->childNodes->length;
 		if ($iLength > 1) {
 			for ($i = 0; $i < $iLength; $i++) {
-				$oElem 		= $oElement->childNodes->item($i);
-				$mReturn	= $this->recursiveElement($oElem);
+				$oElem = $oElement->childNodes->item($i);
+				$this->recursiveElement($oElem);
 			}
 		} else {
 			$cName		= $oElement->nodeName;
