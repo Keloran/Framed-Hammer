@@ -149,6 +149,7 @@ class XML {
 		$oParent->appendChild($oElement);
 
 		//save the file
+		$this->oDOM->formatOutput = true;
 		$this->oDOM->save($this->cFile);
 	}
 
