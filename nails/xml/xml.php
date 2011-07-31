@@ -134,10 +134,14 @@ class XML {
 	 * @return array
 	 */
 	private function recursiveElement($oElement) {
-		$iLength	= $oElement->childNodes->length;
-		for ($i = 0; $i < $iLength; $i++) {
-			$oElem 		= $oElement->childNodes->item($i);
-			$oElement1	= $this->recursiveElement($oElem);
+		if (is_object($oElement->childNodes)) {
+			$iLength	= $oElement->childNodes->length;
+			for ($i = 0; $i < $iLength; $i++) {
+				$oElem 		= $oElement->childNodes->item($i);
+				$oElement1	= $this->recursiveElement($oElem);
+			}
+		} else {
+			$oElement1	= $oElement;
 		}
 
 		$cName		= $oElement1->nodeName;
