@@ -97,10 +97,9 @@ class XML {
 					//go through the elements
 					for ($j = 0; $j < $iChildren; $j++) {
 						$mItem	= $mElement->childNodes->item($j);
-						$cClass	= array($mItem, "childNodes");
 
 						if ($mItem->hasChildNodes()) {
-							$mReturn[$z] = $this->getElementRecursive($mItem);
+							$mReturn[$z] = $this->recursiveElement($mItem);
 						} else {
 							//it must be the only element
 							$cName	= $mItem->nodeName;
@@ -129,26 +128,25 @@ class XML {
 	}
 
 	/**
-	 * XML::getElementRecursive()
+	 * XML::recursiveElement()
 	 *
 	 * @param object $oElement
 	 * @return array
 	 */
-	private function getElementRecursive($oElement) {
-		if (!is_object($oElement)) { return false; }
+	private function recursiveElement($oElement) {
+		$iLength	= $oElement->childNodes->length;
+		if ($iLength > 1) {
+			for ($i = 0; $i < $iLength; $i++) {
+				return $this->recursiveElement($oElement->childNodes->item($i));
+			}
+		} else {
+			$oElem		= $oElement->childNodes->item(0);
+			$cName		= $oElem->nodeName;
+			$cValue		= $oElem->nodeValue;
+			$aReturn	= array($cName => $cValue);
 
-		//get the final node
-		if ($oElement->childNodes->length > 1) {
-				$oElement1 = $oElement->childNodes->item(0);
-				return $this->getElementRecursive($oElement1);
+			return $aReturn;
 		}
-
-		//finally get the element
-		$cName	= $oElement->nodeName;
-		$cValue	= $oElement->nodeValue;
-
-		$aReturn[$cName] = $cValue;
-		return $aReturn;
 	}
 
 	/**
