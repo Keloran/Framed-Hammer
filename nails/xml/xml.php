@@ -90,12 +90,13 @@ class XML {
 				//get the values
 				if ($mElement->hasChildNodes()) {
 					$iChildren = $mElement->childNodes->length;
+
+					//return the elements
+					if ($bReturn) { return $mElement; }
+
+					//go through the elements
 					for ($j = 0; $j < $iChildren; $j++) {
-						$mItem	= $oElem->childNodes->item($j);
-
-						//return the elements
-						if ($bReturn) { return $mItem; }
-
+						$mItem	= $mElement->childNodes->item($j);
 						$cName	= $mItem->nodeName;
 						$mValue = $mItem->nodeValue;
 
@@ -103,10 +104,10 @@ class XML {
 					}
 				} else {
 					//return the elements
-					if ($bReturn) { return $oElem; }
+					if ($bReturn) { return $mElement; }
 
-					$cName	= $oElem->nodeName;
-					$mValue	= $oElem->nodeValue;
+					$cName	= $mElement->nodeName;
+					$mValue	= $mElement->nodeValue;
 					$mReturn[$z][$cName] = $mValue;
 				}
 			}
