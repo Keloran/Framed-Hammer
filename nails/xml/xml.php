@@ -144,6 +144,10 @@ class XML {
 			return false;
 		}
 
+		//since element1 proberlly isnt an object
+		if (!is_object($oElement1)) { return false; }
+
+		//hopefully at the end of the chain
 		$cName		= $oElement1->nodeName;
 		$cValue		= $oElement1->nodeValue;
 		$mReturn	= array($cName => $cValue);
