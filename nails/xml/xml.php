@@ -137,7 +137,8 @@ class XML {
 		$iLength	= $oElement->childNodes->length;
 		if ($iLength > 1) {
 			for ($i = 0; $i < $iLength; $i++) {
-				$mReturn = $this->recursiveElement($oElement->childNodes->item($i));
+				$oElem 		= $oElement->childNodes->item($i);
+				$mReturn	= $this->recursiveElement($oElem);
 			}
 		} else {
 			$oElem		= $oElement->childNodes->item(0);
