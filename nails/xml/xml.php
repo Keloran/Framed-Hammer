@@ -64,9 +64,13 @@ class XML {
 	 * @param string $cParent
 	 * @return mixed
 	 */
-	public function getElement($cElement, $cParent = null) {
+	public function getElement($cElement, $cParent = null, $bReturn = null) {
 		$mReturn	= false;
 
+		//no parent given, so make it default to config
+		if (!$cParent) { $cParent = "config"; }
+
+		//go through the parent elements
 		$oParent	= $this->oDOM->getElementsByTagName($cParent);
 		$mParent	= false;
 		$iParent	= $oParent->length;
@@ -77,10 +81,16 @@ class XML {
 		foreach ($mParent as $mParentElem) {
 			$oElem		= $mParentElem->getElementsByTagName($cElement);
 			$iElements	= $oElem->length;
+
+			//return the elements
+			if ($bReturn) { return $mElement; }
+
+			//go through the elements
 			for ($i = 0; $i < $iElements; $i++) {
 				$mElement 	= $oElem->item($i);
 				$z			= $i;
 
+				//get the values
 				if ($mElement->hasChildNodes()) {
 					$iChildren = $mElement->childNodes->length;
 					for ($j = 0; $j < $iChildren; $j++) {
@@ -107,8 +117,34 @@ class XML {
 		return $mReturn;
 	}
 
-	public function addElement($cElement) {
+	/**
+	 * XML::addElement()
+	 *
+	 * @param mixed $cElement
+	 * @return
+	 */
+	public function addElement($cElement, $cValue = false, $cParent = false) {
+		if ($cParent) {
+			$oParent = $this->getElement($cParent, false, true);
+		} else {
+			$oParent = $this->getElement("config", false, true);
+		}
 
+		//if no parent then there must be a problem
+		if (!$oParent) { return false; }
+
+		//if value
+		if ($cValue) {
+			$oElement = $this->oDOM->createElement($cElement, $cValue);
+		} else {
+			$oElement = $this->oDOM->createElement($cElement);
+		}
+
+		//append the element
+		$oParent->appendChild($oElement);
+
+		//save the file
+		$this->oDOM->save($this->cFile);
 	}
 
 	/**
@@ -158,6 +194,13 @@ class XML {
 		return $this->oDOM;
 	}
 
+	/**
+	 * XML::getFile()
+	 *
+	 * @param string $cFile
+	 * @param bool $bAbsolute
+	 * @return object
+	 */
 	public function getFile($cFile, $bAbsolute = null) {
 		return $this->setFile($cFile, $bAbsolute, false, false);
 	}
