@@ -142,7 +142,7 @@ class XML {
 				$oElem 		= $oElement->childNodes->item($i);
 
 				if ($oElem->childNodes->length > 1) {
-					$this->recursiveElement($oElem);
+					$mReturn	= $this->recursiveElement($oElem);
 				} else {
 					$cName		= $oElem->nodeName;
 					$cValue		= $oElem->nodeValue;
