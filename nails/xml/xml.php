@@ -144,9 +144,9 @@ class XML {
 				if ($oElem->childNodes->length > 1) {
 					$mReturn	= $this->recursiveElement($oElem);
 				} else {
-					$cName		= $oElem->nodeName;
-					$cValue		= $oElem->nodeValue;
-					$mReturn	= array($cName => $cValue);
+					$cName				= $oElem->nodeName;
+					$cValue				= $oElem->nodeValue;
+					$mReturn[$cName]	= $cValue;
 				}
 			}
 		}
