@@ -134,23 +134,22 @@ class XML {
 	 * @return array
 	 */
 	private function recursiveElement($oElement) {
+		$mReturn	=  false;
+
 		if (is_object($oElement->childNodes)) {
 			$iLength	= $oElement->childNodes->length;
 			for ($i = 0; $i < $iLength; $i++) {
 				$oElem 		= $oElement->childNodes->item($i);
-				$oElement1	= $this->recursiveElement($oElem);
+
+				if ($oElem->childNodes->length > 1) {
+					$this->recursiveElement($oElem);
+				} else {
+					$cName		= $oElem->nodeName;
+					$cValue		= $oElem->nodeValue;
+					$mReturn	= array($cName => $cValue);
+				}
 			}
-		} else {
-			return false;
 		}
-
-		//since element1 proberlly isnt an object
-		if (!is_object($oElement1)) { return false; }
-
-		//hopefully at the end of the chain
-		$cName		= $oElement1->nodeName;
-		$cValue		= $oElement1->nodeValue;
-		$mReturn	= array($cName => $cValue);
 
 		return $mReturn;
 	}
