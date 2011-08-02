@@ -100,14 +100,14 @@ class XML {
 						$bRealNode	= $this->isRealNode($mItem);
 
 						if ($bRealNode) {
-							$mReturn = $this->recursiveElement($mItem);
+							$mReturn[$z] = $this->recursiveElement($mItem);
 						} else {
 							//it must be the only element
 							$cName					= $mItem->nodeName;
 							$mValue 				= $mItem->nodeValue;
 							$mReturn[$z][$cName]	= $mValue;
-							$z++;
 						}
+						$z++;
 					}
 				} else {
 					//return the elements
