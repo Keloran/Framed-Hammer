@@ -110,6 +110,10 @@ class XML {
 						} else {
 							$cName					= $mItem->nodeName;
 							$mValue 				= $mItem->nodeValue;
+
+							//we have got to the element
+							if ($cName == "#text") { $cName = $cElement; }
+
 							$mReturn[$z][$cName]	= $mValue;
 							$z++;
 						}
