@@ -85,9 +85,10 @@ class XML {
 			//go through the elements
 			for ($i = 0; $i < $iElements; $i++) {
 				$mElement 	= $oElem->item($i);
+				$bReal		= $this->isRealNode($mElement);
 
 				//get the values
-				if ($mElement->hasChildNodes()) {
+				if ($bReal) {
 					$iChildren = $mElement->childNodes->length;
 
 					//return the elements
