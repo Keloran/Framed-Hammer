@@ -149,13 +149,19 @@ class XML {
 
 	public function updateElement($cElement, $cValue, $cParent = false) {
 		$mElement	= $this->getElement($cElement, $cParent, true);
-		$oElement	= $mElement->childNodes->item(0);
 
-		$mElement->nodeValue = $cValue;
+		//there is an element to update
+		if ($mElement) {
+			$oElement	= $mElement->childNodes->item(0);
 
-		//save the file
-		$this->oDOM->formatOutput = true;
-		$this->oDOM->save($this->cFile);
+			$mElement->nodeValue = $cValue;
+
+			//save the file
+			$this->oDOM->formatOutput = true;
+			$this->oDOM->save($this->cFile);
+		} else {
+			$this->addElement($cElement, $cValue, $cParent);
+		}
 	}
 
 	/**
