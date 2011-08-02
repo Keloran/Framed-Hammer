@@ -127,6 +127,17 @@ class XML {
 		return $mReturn;
 	}
 
+	public function updateElement($cElement, $cValue, $cParent = false) {
+		$mElement	= $this->getElement($cElement, $cParent);
+		$oElement	= $mElement->childNodes->item(0);
+
+		$mElement->nodeValue = $cValue;
+
+		//save the file
+		$this->oDOM->formatOutput = true;
+		$this->oDOM->save($this->cFile);
+	}
+
 	/**
 	 * XML::recursiveElement()
 	 *
@@ -140,9 +151,14 @@ class XML {
 			$iLength	= $oElement->childNodes->length;
 			for ($i = 0; $i < $iLength; $i++) {
 				$oElem 		= $oElement->childNodes->item($i);
-
-				if ($oElem->childNodes->length > 1) {
-					$mReturn	= $this->recursiveElement($oElem);
+				if (is_object($oElem->childNodes)) {
+					if ($oElem->childNodes->length > 1) {
+						$mReturn	= $this->recursiveElement($oElem);
+					} else {
+						$cName				= $oElem->nodeName;
+						$cValue				= $oElem->nodeValue;
+						$mReturn[$cName]	= $cValue;
+					}
 				} else {
 					$cName				= $oElem->nodeName;
 					$cValue				= $oElem->nodeValue;
