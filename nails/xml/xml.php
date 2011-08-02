@@ -161,7 +161,7 @@ class XML {
 				$oElem 		= $oElement->childNodes->item($i);
 				if (is_object($oElem->childNodes)) {
 					if ($oElem->childNodes->length > 1) {
-						$mReturn	= $this->recursiveElement($oElem);
+						$mReturn			= $this->recursiveElement($oElem);
 					} else {
 						$cName				= $oElem->nodeName;
 						$cValue				= $oElem->nodeValue;
@@ -173,6 +173,10 @@ class XML {
 					$mReturn[$cName]	= $cValue;
 				}
 			}
+		} else {
+			$cName				= $oElem->nodeName;
+			$cValue				= $oElem->nodeValue;
+			$mReturn[$cName]	= $cValue;
 		}
 
 		return $mReturn;
