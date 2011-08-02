@@ -95,25 +95,15 @@ class XML {
 
 					//go through the elements
 					for ($j = 0; $j < $iChildren; $j++) {
-						$mItem	= $mElement->childNodes->item($j);
+						$mItem		= $mElement->childNodes->item($j);
+						$bRealNode	= $this->isRealNode($mItem);
 
-						if (is_object($mItem->childNodes)) {
-							if ($mItem->childNodes->length > 1) {
-								$mReturn = $this->recursiveElement($mItem);
-							} else {
-								//it must be the only element
-								$cName					= $mItem->nodeName;
-								$mValue 				= $mItem->nodeValue;
-								$mReturn[$z][$cName]	= $mValue;
-								$z++;
-							}
+						if ($bRealNode) {
+							$mReturn = $this->recursiveElement($mItem);
 						} else {
+							//it must be the only element
 							$cName					= $mItem->nodeName;
 							$mValue 				= $mItem->nodeValue;
-
-							//we have got to the element
-							if ($cName == "#text") { $cName = $cElement; }
-
 							$mReturn[$z][$cName]	= $mValue;
 							$z++;
 						}
@@ -139,6 +129,22 @@ class XML {
 		return $mReturn;
 	}
 
+	/**
+	 * XML::isRealNode()
+	 *
+	 * @param object $oElement
+	 * @return bool
+	 */
+	private function isRealNode($oElement) {
+		if ($oElement->hasChildNodes()) {
+			foreach ($oElement->childNodes as $oElem) {
+				if ($oElem->nodeType == XML_ELEMENT_NODE) { return true; }
+			}
+		}
+
+		return false;
+	}
+
 	public function updateElement($cElement, $cValue, $cParent = false) {
 		$mElement	= $this->getElement($cElement, $cParent);
 		$oElement	= $mElement->childNodes->item(0);
@@ -158,19 +164,16 @@ class XML {
 	 */
 	private function recursiveElement($oElement) {
 		$mReturn	=  false;
+		$bReal		= $this->isRealNode($oElement);
 
-		if (is_object($oElement->childNodes)) {
+		if ($bReal) {
 			$iLength	= $oElement->childNodes->length;
 			for ($i = 0; $i < $iLength; $i++) {
 				$oElem 		= $oElement->childNodes->item($i);
-				if (is_object($oElem->childNodes)) {
-					if ($oElem->childNodes->length > 1) {
-						$mReturn			= $this->recursiveElement($oElem);
-					} else {
-						$cName				= $oElem->nodeName;
-						$cValue				= $oElem->nodeValue;
-						$mReturn[$cName]	= $cValue;
-					}
+				$bRealNode	= $this->isRealNode($oElem);
+
+				if ($bRealNode) {
+					$mReturn			= $this->recursiveElement($oElem);
 				} else {
 					$cName				= $oElem->nodeName;
 					$cValue				= $oElem->nodeValue;
@@ -178,8 +181,8 @@ class XML {
 				}
 			}
 		} else {
-			$cName				= $oElem->nodeName;
-			$cValue				= $oElem->nodeValue;
+			$cName				= $oElement->nodeName;
+			$cValue				= $oElement->nodeValue;
 			$mReturn[$cName]	= $cValue;
 		}
 
