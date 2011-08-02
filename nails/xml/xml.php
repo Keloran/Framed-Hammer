@@ -122,10 +122,10 @@ class XML {
 		}
 
 		$iCount = count($mReturn);
-		if ($iCount == 1) {
-			$mReturn1	= $mReturn;
-			$mReturn	= false;
-			foreach ($mReturn1[0] as $cKey => $mValue) { $mReturn[$cKey] = $mValue; }
+		$mReturn1	= $mReturn;
+		$mReturn	= false;
+		for ($i = 0; $i < $iCount; $i++) {
+			foreach ($mReturn1[$i] as $cKey => $mValue) { $mReturn[$cKey] = $mValue; }
 		}
 
 		return $mReturn;
