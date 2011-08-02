@@ -85,7 +85,7 @@ class oReader {
 		$cFinal = "<code>";
 
 		//If there a title then bold it
-		if (isset($this->cName)) { $cFinal .= "<b><u>" . ucwords($this->cName) . "</u></b><br />"; }
+		if ($this->cName) { $cFinal .= "<b><u>" . ucwords($this->cName) . "</u></b><br />"; }
 
 		//close the code to make it nice
 		$cFinal .= $this->cOutput;

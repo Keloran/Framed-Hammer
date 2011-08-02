@@ -231,6 +231,11 @@ class Dommed {
 		return true;
 	}
 
+	/**
+	 * Dommed::returnIt()
+	 *
+	 * @return string
+	 */
 	public function returnIt() {
 		if (!$this->oDOM) { return false; }
 

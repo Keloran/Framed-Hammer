@@ -431,13 +431,13 @@ class Hammer {
 	 * @param bool $bDOM This is incase you want to use domdocument
 	 * @return object
 	 */
-	public function getXML($bDOM = null) {
+	/*public function getXML($bDOM = null) {
 		if ($bDOM) {
 			return $this->getNail("dommed");
 		} else {
 			return $this->getNail("exml");
 		}
-	}
+	}*/
 
 	/**
 	* Hammer::getNail()
