@@ -338,12 +338,10 @@ class Nails extends Hammer {
 		$oXML			= self::$oXML;
 		$oXML->setFile("installed");
 		$oXML->cRoot	= "install";
-		$oXML->addElement("version", $cVersion, $cLibrary);
+		$oXML->updateElement("version", $cVersion, $cLibrary);
 
 		//add the changelog
-		if ($cChangelog) {
-			$oXML->addElement("changelog", $cChangelog, $cLibrary);
-		}
+		if ($cChangelog) { $oXML->updateElement("changelog", $cChangelog, $cLibrary); }
 		return true;
 	}
 
@@ -374,16 +372,12 @@ class Nails extends Hammer {
 	 * @return null
 	 */
 	private function addXML($cLibrary, $cVersion) {
-		$this->updateXML($cLibrary, $cVersion, "Initial");
-
-		/**
 		if (is_null(self::$oXML)) { self::$oXML = new Exml(); }
 
-		$oXML	= self::$oXML;
+		$oXML			= self::$oXML;
 		$oXML->setFile("installed");
-		$oXML->cRoot = "install";
-		$oXML->addElement("version", $cVersion, $cLibrary);
-		*/
+		$oXML->cRoot	= "install";
+		$this->addElement($cLibrary, $cVersion, "Initial");
 	}
 
 	/**
