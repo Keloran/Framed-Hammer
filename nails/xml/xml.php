@@ -148,7 +148,7 @@ class XML {
 	}
 
 	public function updateElement($cElement, $cValue, $cParent = false) {
-		$mElement	= $this->getElement($cElement, $cParent);
+		$mElement	= $this->getElement($cElement, $cParent, true);
 		$oElement	= $mElement->childNodes->item(0);
 
 		$mElement->nodeValue = $cValue;
