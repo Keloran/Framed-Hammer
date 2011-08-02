@@ -85,7 +85,6 @@ class XML {
 			//go through the elements
 			for ($i = 0; $i < $iElements; $i++) {
 				$mElement 	= $oElem->item($i);
-				$z			= $i;
 
 				//get the values
 				if ($mElement->hasChildNodes()) {
@@ -98,13 +97,21 @@ class XML {
 					for ($j = 0; $j < $iChildren; $j++) {
 						$mItem	= $mElement->childNodes->item($j);
 
-						if ($mItem->hasChildNodes()) {
-							$mReturn = $this->recursiveElement($mItem);
+						if (is_object($mItem->childNodes)) {
+							if ($mItem->childNodes->length > 1) {
+								$mReturn = $this->recursiveElement($mItem);
+							} else {
+								//it must be the only element
+								$cName					= $mItem->nodeName;
+								$mValue 				= $mItem->nodeValue;
+								$mReturn[$z][$cName]	= $mValue;
+								$z++;
+							}
 						} else {
-							//it must be the only element
-							$cName	= $mItem->nodeName;
-							$mValue = $mItem->nodeValue;
-							$mReturn[$z][$cName] = $mValue;
+							$cName					= $mItem->nodeName;
+							$mValue 				= $mItem->nodeValue;
+							$mReturn[$z][$cName]	= $mValue;
+							$z++;
 						}
 					}
 				} else {
@@ -114,6 +121,7 @@ class XML {
 					$cName	= $mElement->nodeName;
 					$mValue	= $mElement->nodeValue;
 					$mReturn[$z][$cName] = $mValue;
+					$z++;
 				}
 			}
 		}
