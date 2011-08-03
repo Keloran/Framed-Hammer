@@ -68,7 +68,7 @@ class Nails extends Hammer {
 	 * @return bool
 	 */
 	private function checkXML($cNail) {
-		if (is_null(self::$oXML)) { self::$oXML	= new Exml(); }
+		if (is_null(self::$oXML)) { self::$oXML	= new XML(); }
 		$bXML			= false;
 
 		$oXML			= self::$oXML;
@@ -333,7 +333,7 @@ class Nails extends Hammer {
 	 * @return true
 	 */
 	private function updateXML($cLibrary, $cVersion, $cChangelog = null) {
-		if (is_null(self::$oXML)) { self::$oXML = new Exml(); }
+		if (is_null(self::$oXML)) { self::$oXML = new XML(); }
 
 		$oXML			= self::$oXML;
 		$oXML->setFile("installed");
@@ -372,7 +372,7 @@ class Nails extends Hammer {
 	 * @return null
 	 */
 	private function addXML($cLibrary, $cVersion) {
-		if (is_null(self::$oXML)) { self::$oXML = new Exml(); }
+		if (is_null(self::$oXML)) { self::$oXML = new XML(); }
 
 		$oXML			= self::$oXML;
 		$oXML->setFile("installed");
