@@ -145,8 +145,8 @@ class Spanner extends Exception {
 		$cFrom			= "error@" . $this->cAddress;
 		$mContact		= $this->mContact;
 
-		$cMessageHTML	= $this->showMessage(true);
-		$cMessageText	= $this->showMessage();
+		$cMessageHTML	= $this->showMessage(false);
+		$cMessageText	= $this->showMessage(true);
 
 		//I really dont want to send this to bug tracker
 		$bNoSend	= isset($_GET['nobugs']) ? $_GET['nobugs'] : false;
