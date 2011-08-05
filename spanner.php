@@ -341,7 +341,7 @@ class Spanner extends Exception {
 		if ($bConsole) {
 			$cMessage = str_replace("<br />", "\n", $cMessage);
 			$cMessage = str_replace("\n\n", "\n", $cMessage);
-			$cMessage = str_replace(array("<p>", "</p>", array("\n--------\n", "\n--------\n")), $cMessage);
+			$cMessage = str_replace(array("<p>", "</p>"), array("\n--------\n", "\n--------\n"), $cMessage);
 		}
 
 		return $cMessage;
