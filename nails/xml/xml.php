@@ -121,6 +121,10 @@ class XML {
 			}
 		}
 
+		//if no return at this point return false
+		if (!$mReturn) { return false; }
+
+		//stuff must have been found
 		$iCount = count($mReturn);
 		$mReturn1	= $mReturn;
 		$mReturn	= false;
