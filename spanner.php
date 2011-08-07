@@ -141,10 +141,12 @@ class Spanner extends Exception {
 	 * @return
 	 */
 	private function sendMessage($iErrNo, $bBugs = false) {
-		$cTitle		= "An error occoured in " . $this->cAddress . ":" . $iErrNo;
-		$cFrom		= "error@" . $this->cAddress;
-		$cMessage	= $this->showMessage();
-		$mContact	= $this->mContact;
+		$cTitle			= "An error occoured in " . $this->cAddress . ":" . $iErrNo;
+		$cFrom			= "error@" . $this->cAddress;
+		$mContact		= $this->mContact;
+
+		$cMessageHTML	= $this->showMessage(false);
+		$cMessageText	= $this->showMessage(true);
 
 		//I really dont want to send this to bug tracker
 		$bNoSend	= isset($_GET['nobugs']) ? $_GET['nobugs'] : false;
@@ -156,8 +158,8 @@ class Spanner extends Exception {
 				$aSend = array(
 					"to"		=> "bugs@bugfixs.com",
 					"title"		=> $cTitle,
-					"html"		=> $cMessage,
-					"text"		=> $cMessage,
+					"html"		=> $cMessageHTML,
+					"text"		=> $cMessageText,
 					"from"		=> $cFrom,
 				);
 				$oSend->compose($aSend);
@@ -170,8 +172,8 @@ class Spanner extends Exception {
 						$aSend		= array(
 							"to"		=> $cTo,
 							"title"		=> $cTitle,
-							"html"		=> $cMessage,
-							"text"		=> $cMessage,
+							"html"		=> $cMessageHTML,
+							"text"		=> $cMessageText,
 							"from"		=> $cFrom,
 						);
 						$oSend->compose($aSend);
@@ -181,8 +183,8 @@ class Spanner extends Exception {
 					$aSend 	= array(
 						"to"	=> $cTo,
 						"title"	=> $cTitle,
-						"html"	=> $cMessage,
-						"text"	=> $cMessage,
+						"html"	=> $cMessageHTML,
+						"text"	=> $cMessageText,
 						"from"	=> $cFrom,
 					);
 					$oSend->compose($aSend);
@@ -291,7 +293,11 @@ class Spanner extends Exception {
 	 * @return
 	 */
 	private function showMessage($bConsole = false) {
-		$cMessage	 = "<section id=\"exceptiond\">\n";
+		$cMessage	 =false;
+
+		//since console messages cant see this
+		if (!$bConsole) { $cMessage	.= "<section id=\"exceptiond\">\n"; }
+
 		$cMessage	.= "<p>An exception happened in <br />" . $this->getFile() . ".</p>\n";
 		$cMessage	.= "<p>On line <br />" . $this->getLine() . ".</p>\n";
 		$cMessage	.= "<p>The whole message is <br />" . $this->getMessage() . "</p>\n";
@@ -327,12 +333,15 @@ class Spanner extends Exception {
 
         //put the date
         $cMessage	.= "<p>Date: " . date("d/m/Y H:i", time()) . "</p>\n";
-		$cMessage	.= "</section>\n";
+
+		//since console cant see this
+		if (!$bConsole) { $cMessage	.= "</section>\n"; }
 
 		//remove the brs and replace with newlines
 		if ($bConsole) {
 			$cMessage = str_replace("<br />", "\n", $cMessage);
 			$cMessage = str_replace("\n\n", "\n", $cMessage);
+			$cMessage = str_replace(array("<p>", "</p>"), array("\n--------\n", "\n--------\n"), $cMessage);
 		}
 
 		return $cMessage;
@@ -456,7 +465,7 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 
 	//is there a fire level given
 	if ($cFireLevel) { $oReader->cLevel = $cFireLevel; }
-	
+
 	if (!$bReturn) {
 	echo $oReader->doOutput();
 		} else {
