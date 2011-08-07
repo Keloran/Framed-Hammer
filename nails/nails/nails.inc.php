@@ -30,7 +30,7 @@ class Nails extends Hammer {
 		parent::__construct();
 
 		//Get the XML
-		if (is_null(self::$oXML)) { self::$oXML = new Exml(); }
+		if (is_null(self::$oXML)) { self::$oXML = new XML(); }
 
 		//get the database object
 		if (is_null($this->oDB)) { $this->oDB = $this->getDatabase(); }
@@ -274,7 +274,7 @@ class Nails extends Hammer {
 	 * @return bool
 	 */
 	private function checkXMLVersion($cLibrary, $cVersion) {
-		if (is_null(self::$oXML)) { self::$oXML = new Exml(); }
+		if (is_null(self::$oXML)) { self::$oXML = new XML(); }
 		$bReturn	= false;
 
 		$oXML			= self::$oXML;

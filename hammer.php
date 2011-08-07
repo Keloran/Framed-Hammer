@@ -186,7 +186,7 @@ class Hammer {
 	private static function rootConfig($cElement, $cKey = null) {
 		$mReturn	= false;
 
-		$oConfig 	= New Exml();
+		$oConfig 	= New XML();
 		$oConfig->cRoot = "config";
 
 		if (defined("STAGED")) {
@@ -394,7 +394,7 @@ class Hammer {
 	 * @return null
 	 */
 	public function setConfig($cKey, $cValue) {
-		$oConfig		= new Exml();
+		$oConfig		= new XML();
 		$oConfig->cRoot		= "config";
 
 		if (defined("STAGED")) {
@@ -424,20 +424,6 @@ class Hammer {
 
         return $oHead;
     }
-
-	/**
-	 * Hammer::getXML()
-	 *
-	 * @param bool $bDOM This is incase you want to use domdocument
-	 * @return object
-	 */
-	/*public function getXML($bDOM = null) {
-		if ($bDOM) {
-			return $this->getNail("dommed");
-		} else {
-			return $this->getNail("exml");
-		}
-	}*/
 
 	/**
 	* Hammer::getNail()
