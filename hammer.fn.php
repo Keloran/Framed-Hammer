@@ -9,13 +9,13 @@ date_default_timezone_set('UTC');
 
 //since 5.2 cant do late static binding
 if (PHP_VERSION >= 5.3) {
-	include_once("nails/nail3.php");
+	if (!function_exists("getNail_Version")) { include HAMMERPATH . "/nails/nails3.php"; }
 } else {
-	include_once("nails/nail2.php");
+	if (!function_exists("getNail_Version")) { include HAMMERPATH . "/nails/nails2.php"; }
 }
 
 //is spanner included
-if (!function_exists("printRead")) { include_once("spanner.php"); }
+if (!function_exists("printRead")) { include HAMMERPATH . "/spanner.php"; }
 
 /**
  * funcParam()
@@ -130,7 +130,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 
 	//Try the loader
 	try {
-		if (!class_exists("Hammer")) { include_once("hammer.php"); }
+		if (!class_exists("Hammer")) { include HAMMERPATH . "/hammer.php"; }
 
 		$oHammer = Hammer::getHammer($cSite, $aFilter);
 	} catch (Spanner $e) {
@@ -247,8 +247,8 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
  		if (defined("profile")) {
 			$mProf = xhprof_disable();
 
-			include_once(HAMMERPATH . "/tests/xhprof_lib/utils/xhprof_lib.php");
- 			include_once(HAMMERPATH . "/tests/xhprof_lib/utils/xhprof_runs.php");
+			include HAMMERPATH . "/tests/xhprof_lib/utils/xhprof_lib.php";
+ 			include HAMMERPATH . "/tests/xhprof_lib/utils/xhprof_runs.php";
 
 			$oProf = new XHProfRuns_Default();
  			$iRunID = $oProf->save_run($mProf, "xhprof");

@@ -580,7 +580,7 @@ class Template extends Template_Abstract {
 			if (file_exists($this->cTemplate)) {
 				ob_start();
 					extract($this->aVars, EXTR_SKIP);
-					include($this->cTemplate);
+					include $this->cTemplate;
 					$cTemplate	.= ob_get_contents();
 					$cTemplate	.= $this->cJS;
 					$cTemplate	.= $this->cExtraJS;
@@ -656,7 +656,7 @@ class Template extends Template_Abstract {
 			if (file_exists(SITEPATH . $cLayoutFolder . "templates/error.tpl")) {
 				//Custom error page
 				ob_start("ob_process");
-					include(SITEPATH . $cLayoutFolder . "templates/error.tpl");
+					include SITEPATH . $cLayoutFolder . "templates/error.tpl";
 					$cTemplate = ob_get_contents();
 				ob_end_clean();
 			} else {

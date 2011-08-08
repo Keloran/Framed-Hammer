@@ -44,7 +44,8 @@ class Spanner extends Exception {
 			$aHead		= Config("head");
 			$this->cAddress	= $aHead['address'];
 		} else {
-			include_once("hammer.php");
+			if (!class_exists("Hammer")) { include "hammer.php"; }
+
 			$this->mContact	= Hammer::getConfigStat("email")['email'];
 			$this->cAddress	= Hammer::getConfigStat("address")['address'];
 		}

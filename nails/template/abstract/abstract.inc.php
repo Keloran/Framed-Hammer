@@ -109,7 +109,7 @@ abstract class Template_Abstract implements Template_Interface {
 		ob_start();
 			extract($this->aVars, EXTR_SKIP);
 
-			include($this->cTemplate);
+			include $this->cTemplate;
 			$cTemplate = ob_get_contents();
 
 		//make sure we are in an ob before cleaning
