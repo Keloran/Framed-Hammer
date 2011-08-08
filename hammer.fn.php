@@ -9,9 +9,9 @@ date_default_timezone_set('UTC');
 
 //since 5.2 cant do late static binding
 if (PHP_VERSION >= 5.3) {
-	if (!function_exists("getNail_Version")) { include HAMMERPATH . "/nails/nails3.php"; }
+	if (!function_exists("getNail_Version")) { include HAMMERPATH . "/nails/nail3.php"; }
 } else {
-	if (!function_exists("getNail_Version")) { include HAMMERPATH . "/nails/nails2.php"; }
+	if (!function_exists("getNail_Version")) { include HAMMERPATH . "/nails/nail2.php"; }
 }
 
 //is spanner included
