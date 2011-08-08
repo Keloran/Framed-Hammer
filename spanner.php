@@ -45,8 +45,8 @@ class Spanner extends Exception {
 			$this->cAddress	= $aHead['address'];
 		} else {
 			include_once("hammer.php");
-			$this->mContact	= Hammer::getConfigStat("email");
-			$this->cAddress	= Hammer::getConfigStat("address");
+			$this->mContact	= Hammer::getConfigStat("email")['email'];
+			$this->cAddress	= Hammer::getConfigStat("address")['address'];
 		}
 
 		//Since we now need to actually do something with this
@@ -119,7 +119,7 @@ class Spanner extends Exception {
 		if ($bNice) { $cReturn = $this->showNiceMessage(); }
 
 		echo $cReturn;
-		
+
 		//now kill it since it will loop otherwise
 		die();
 	}
