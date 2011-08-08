@@ -160,6 +160,9 @@ class Screws {
 		$this->fHammerClass_c	= HAMMERPATH	. "/nails/" . $this->cClass_a	. ".php";
 		$this->fHammerClass_d	= HAMMERPATH	. "/nails/" . $this->cClass_b	. ".php";
 
+		//Traits
+		$this->fHammerClass_Trait	= HAMMERPATH . "/traits/" . $this->cClass_a . ".php";
+
 		//Base class, this is only for things like spanner
 		$this->fBaseClass		= HAMMERPATH	. "/" 		. $this->cClassName	. ".php";
 
@@ -191,6 +194,9 @@ class Screws {
 		//without the inc bit
 		$this->fSiteClass_c	= USERNAILS . $this->cClass_a	. ".php";
 		$this->fSiteClass_d	= USERNAILS . $this->cClass_b	. ".php";
+
+		//Traits
+		$this->fSiteClass_Trait = USERNAILS . "/traits/" . $this->cClass_a . ".php";
 
 		return $bReturn;
 	}
@@ -242,6 +248,15 @@ class Screws {
 				$this->cPath = $this->$cClass;
 				return true;
 			}
+		}
+
+		//Check the traits
+		if (file_exists($this->fSiteClass_Trait)) {
+			$this->cPath = $this->fSiteClass_Trait;
+			return true;
+		} else if (file_exists($this->fHammerClass_Trait)) {
+			$this->cPath = $this->fHammerClass_Trait;
+			return true;
 		}
 
 		return false;

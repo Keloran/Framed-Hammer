@@ -9,7 +9,9 @@
  * @access public
  */
 class User implements Nails_Interface {
-    	public $iUserID     = false;
+	use Security;
+
+    public $iUserID     = false;
 	public $iGroupID    = false;
 	public $cError		= false;
 	public $aConfig     = false;
@@ -580,19 +582,6 @@ class User implements Nails_Interface {
 
 		return $cHash;
 	}
-
-    /**
-     * User::genHash()
-     *
-     * @desc this uses hammerHash
-     * @param string $cSalt
-     * @return string
-     */
-    private function genHash($cSalt) {
-    	$cRand = hammerHash($cSalt);
-
-        return $cRand;
-    }
 
 	/**
 	* User::getPassword()
