@@ -46,6 +46,8 @@ class Template_Layout extends Template_Abstract {
 	 * @return string
 	 */
 	public function setTemplate($cTemplate = null) {
+		if (!function_exists("getBrowser")) { include HAMMERPATH . "/functions/browser.php"; }
+
 		$cReturn		= false;
 		$cSep			= "/"; //make it cleaner code
 		$cExtra			= "_"; //just so it checks something

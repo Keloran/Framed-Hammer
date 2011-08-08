@@ -9,8 +9,8 @@
  * @access public
  */
 class User implements Nails_Interface {
-    public $iUserID     = false;
-    public $iGroupID    = false;
+    	public $iUserID     = false;
+	public $iGroupID    = false;
 	public $cError		= false;
 	public $aConfig     = false;
 
@@ -30,6 +30,8 @@ class User implements Nails_Interface {
      * @access protected
      */
     private function __construct(Nails $oNails, $bNoInstall = null) {
+	if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
+
 		$this->oNails	= $oNails;
 		$this->oDB		= $this->oNails->getDatabase();
 		$this->cPage	= $oNails->cPage;
@@ -279,6 +281,8 @@ class User implements Nails_Interface {
      * @return mixed
      */
     public function getUserID($cCookie = false, $bIsHash = false) {
+	if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
+
         if ($bIsHash) {
             $cCookieHash = $cCookie;
         } else {
@@ -709,6 +713,8 @@ class User implements Nails_Interface {
      * @return int
      */
     public function getUserLimit() {
+		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
+
 		if (!$this->iUserID) { return 10; }
 
 		if (getCookie("userLimit")) {

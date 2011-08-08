@@ -14,9 +14,6 @@ if (PHP_VERSION >= 5.3) {
 	include_once("nails/nail2.php");
 }
 
-//include teh function files
-include_once("nails/function_loader.php");
-
 //is spanner included
 if (!function_exists("printRead")) { include_once("spanner.php"); }
 
@@ -79,6 +76,8 @@ function ob_process($cBuffer) {
 * @return string
 */
 function Hammer($cSite, $aFilter = false, $aOptions = null) {
+	if (!function_exists("removeEndSlash")) { include HAMMERPATH . "/functions/address.php"; }
+
 	$cReturn	= false;
 
 	//options

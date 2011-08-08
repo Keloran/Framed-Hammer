@@ -26,6 +26,8 @@ class Session {
 	 *
 	 */
 	private function __construct(Nails $oNails) {
+		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
+
 		$this->oNails	= $oNails;
 		$this->oDB		= $oNails->getDatabase();
 
@@ -161,8 +163,10 @@ class Session {
 	 * @return
 	 */
 	public function setLogin() {
-        if (!getCookie("userLogin")) {
-            createCookie("userLogin", time());
+		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
+
+	        if (!getCookie("userLogin")) {
+        	    createCookie("userLogin", time());
 		    $this->tsLogin = time();
 
 		    if ($this->iUserID) {
@@ -170,9 +174,9 @@ class Session {
 				$aEscape = array($this->iUserID, session_id(), "Login", ip2long($cVisitor), $_SERVER['HTTP_USER_AGENT']);
 				$this->oDB->write("INSERT INTO users_sessions(iUserID, cLastSessionID, tsDate, cReason, cIP, cBrowser) VALUES (?, ?, UNIX_TIMESTAMP(), ?, ?, ?)", $aEscape);
 		    }
-        } else {
-            $this->tsLogin = getCookie("userLogin");
-        }
+	        } else {
+        	    $this->tsLogin = getCookie("userLogin");
+	        }
 
 		//regenerate the id again
 		session_regenerate_id();

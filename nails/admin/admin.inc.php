@@ -138,12 +138,14 @@ class Admin implements Nails_Interface {
 	 * @return null
 	 */
 	public function secureLogin($bSecure = null) {
+		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
+
 		//Logged in
-		$bLogged		= getCookie("userCookie");
+		$bLogged	= getCookie("userCookie");
 		$iAdminLogged	= getCookie("adminLogged");
 
-		$cAdminLoc		= $this->oNails->getConfig("adminLocation"); //Get the admin location, e.g. you could put it in /secure/
-		$cAdminPage		= $cAdminLoc ? $cAdminLoc : "admin"; //there is a loc set, or revert to default
+		$cAdminLoc	= $this->oNails->getConfig("adminLocation"); //Get the admin location, e.g. you could put it in /secure/
+		$cAdminPage	= $cAdminLoc ? $cAdminLoc : "admin"; //there is a loc set, or revert to default
 
 		//since its the admin page we are on
 		if ($cAdminPage == $this->oNails->cPage) {
@@ -186,6 +188,8 @@ class Admin implements Nails_Interface {
 	 * @return null
 	 */
 	private function insecureAdmin($bSecure = null) {
+		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
+
 		$bLogged = getCookie("userCookie");
 
 		if ($bLogged) {

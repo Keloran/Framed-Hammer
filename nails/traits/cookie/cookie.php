@@ -15,6 +15,7 @@ trait Traits_Cookie {
 	 * @param string $cCookie
 	 * @return bool
 	 */
+/*
 	public function getCookie($cCookie = null) {
 		//Cookies
 		if ($cCookie) {
@@ -35,6 +36,7 @@ trait Traits_Cookie {
 	 * @param int $iTimeLimit
 	 * @return null
 	 */
+/*
 	public function createCookie($cName, $mValue, $bForever = false, $iTimeLimit = false) {
 		$cServer = "."; //incase there really is nothing
 
@@ -71,4 +73,7 @@ trait Traits_Cookie {
 			setcookie($cName, $mValue, $iTime, "/", $cServer, $bSecure);
 		}
 	}
+*/
+public function getCookie() {}
+public function createCookie() {}
 }

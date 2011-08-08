@@ -119,6 +119,9 @@ class Spanner extends Exception {
 		if ($bNice) { $cReturn = $this->showNiceMessage(); }
 
 		echo $cReturn;
+		
+		//now kill it since it will loop otherwise
+		die();
 	}
 
 	/**

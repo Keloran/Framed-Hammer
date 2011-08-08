@@ -39,6 +39,8 @@ class Head {
      *
      */
 	private function __construct(Nails $oNails, $cStyle = false, $bNoInstall = null) {
+		if (!function_exists("getBrowser")) { include HAMEMRPATH . "/functions/browser.php"; }
+
 		$this->oNails	= $oNails;
 		$this->oDB	= $this->oNails->oDB;
 
@@ -95,7 +97,7 @@ class Head {
 	    	}
 		}
 
-		$mBrowser		= getBrowser();
+		$mBrowser	= getBrowser();
 		$this->bMobile	= mobileBrowser($mBrowser);
 		$this->bWarning = IEBrowser($mBrowser);
 
@@ -217,7 +219,8 @@ class Head {
     public function getTitle() {
     	//seperator, most people will be happy with ..::..
 		$cSep	= $this->oNails->getConfig("seperator", $this->oNails->getConfigKey());
-		$aBrand	= $this->oNails->getConfig("title", $this->oNails->getConfigKey());
+		$aTitle	= $this->oNails->getConfig("title", $this->oNails->getConfigKey());
+		$aBrand = $this->oNails->getConfig("brand", $this->oNails->getConfigKey());
 
 		if (is_array($aBrand)) {
 			$cTitle = $aBrand[0];

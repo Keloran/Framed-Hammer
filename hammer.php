@@ -541,41 +541,45 @@ class Hammer {
         $this->sendLocation();
     }
 
-    /**
-     * Hammer::getCookie()
-     *
-     * @desc Get the cookies value
-     * @param string $cCookie Name of the cookie
-     * @return mixed
-     */
-    public function getCookie($cCookie = null) {
-    	$mHead = $this->getConfig("title");
+	/**
+	 * Hammer::getCookie()
+	 *
+	 * @desc Get the cookies value
+	 * @param string $cCookie Name of the cookie
+	 * @return mixed
+	 */
+	public function getCookie($cCookie = null) {
+		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
+		
+    		$mHead = $this->getConfig("title");
 
-    	if (isset($mHead['title'])) {
-    		$cSiteTitle = str_replace(" ", "_", $mHead['title']);
-    	} else {
+	  	if (isset($mHead['title'])) {
+    			$cSiteTitle = str_replace(" ", "_", $mHead['title']);
+	    	} else {
 			if (is_array($mHead)) {
 				$cSiteTitle	= str_replace(" ", "_", $mHead[0]);
 			} else {
-	    		$cSiteTitle	= str_replace(" ", "_", $mHead);
+		    		$cSiteTitle	= str_replace(" ", "_", $mHead);
 			}
-    	}
+	    	}
 
 		//Cookies
-        if ($cCookie) {
-            if (isset($_COOKIE[$cCookie])) {
-                $this->bSiteCookie = true;
-                return $_COOKIE[$cCookie];
-            }
-        }
+        	if ($cCookie) {
+			$cCookie = getCookie($cCookie);
+			if ($cCookie) {
+				$this->bSiteCookie = true;
+				return $cCookie;
+            		}
+	        }
 
 		//No cookie chosen
-		if (isset($_COOKIE[$cSiteTitle])) {
-        	$this->bSiteCookie = true;
-            return $_COOKIE[$cSiteTitle];
-        }
-
-        return false;
+		$cCookie = getCookie($cSiteTitle);
+		if ($cCookie) {
+			$this->bSiteCookie = true;
+			return $cCookie;
+		}
+		
+		return false;
 	}
 
 	/**

@@ -112,6 +112,8 @@ class Template_Page extends Template_Abstract {
 	 * @return string
 	 */
 	public function setTemplate($cTemplate = null, $cAltPage = null) {
+		if (!function_exists("getBrowser")) { include HAMMERPATH . "/functions/browser.php"; }
+
 		$cPath		= false;
 		$cReturn	= false;
 		$cSep		= "/";

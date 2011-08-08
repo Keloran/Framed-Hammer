@@ -645,6 +645,8 @@ class Forum implements Nails_Interface {
 	 * @return
 	 */
 	public function getLastVisit() {
+		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
+
 		$this->oDB->read("
 			SELECT forums_replys.iReplyID
 			FROM forums_replys

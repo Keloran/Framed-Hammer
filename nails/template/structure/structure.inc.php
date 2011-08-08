@@ -56,6 +56,9 @@ class Template_Structure extends Template_Abstract {
 	 * @return null
 	 */
 	protected function setTemplate($cTemplate = null) {
+		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
+		if (!function_exists("mobileBrowser")) { include HAMMERPATH . "/functions/browser.php"; }
+
 		$this->cNamedTemplate	= $cTemplate;
 		$this->cSetTemplate		= $cTemplate;
 
