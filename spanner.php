@@ -584,7 +584,7 @@ function assertionHandler($cFile, $iLine, $cCode) {
 * These are defined at the end so that they work basiclly
 */
 set_exception_handler("exceptionHandler");
-set_error_handler("errorHandler");
+set_error_handler("errorHandler", E_ALL);
 
 /** Assertions **/
 assert_options(ASSERT_ACTIVE, 1);
