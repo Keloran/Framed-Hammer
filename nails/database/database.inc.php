@@ -46,6 +46,14 @@ class Database {
 
 			//get the engine
 			$aConfig['engine']		= $oHammer->getConfig("engine", $oHammer->getConfigKey());
+
+			//just incase its an old config style
+			if (is_array($aConfig['engine'])) {
+				$cEngine			= $aConfig['engine']['engine'];
+				$aConfig['engine']	= false;
+				$aConfig['engine']	= $cEngine;
+			}
+
 			$aConfig['read']['engine']	= $aConfig['engine'];
 			$aConfig['write']['engine']	= $aConfig['engine'];
 		}
