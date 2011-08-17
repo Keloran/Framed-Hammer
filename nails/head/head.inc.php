@@ -88,7 +88,8 @@ class Head {
 		if (!$bNoInstall) {
 			//this is mainly for emails
 	    	if (!defined("SITEADDRESS")) {
-				$cAddress	= $this->oNails->getConfig("address", $this->oNails->getConfigKey());
+				$aAddress	= $this->oNails->getConfig("address", $this->oNails->getConfigKey());
+	    		$cAddress	= $aAddress['address'];
 
 	    		define("SITEADDRESS", $cAddress);
 	    	}

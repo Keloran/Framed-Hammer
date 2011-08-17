@@ -68,13 +68,16 @@ class XML {
 		$mReturn	= false;
 
 		//no parent given, so make it default to config
-		if (!$cParent) { $cParent = "config"; }
+		if (!$cParent) { $cParent = $this->cRoot ?: "config"; }
 
 		//go through the parent elements
 		$oParent	= $this->oDOM->getElementsByTagName($cParent);
 		$mParent	= false;
 		$iParent	= $oParent->length;
 		for ($i = 0; $i < $iParent; $i++) { $mParent[] = $oParent->item($i); }
+
+		//if no parents found at this point it might be blank
+		if (!$mParent) { return false; }
 
 		//hopefully there will only be one parent
 		$z = 0;
@@ -121,6 +124,10 @@ class XML {
 			}
 		}
 
+		//if no return at this point return false
+		if (!$mReturn) { return false; }
+
+		//stuff must have been found
 		$iCount = count($mReturn);
 		$mReturn1	= $mReturn;
 		$mReturn	= false;
