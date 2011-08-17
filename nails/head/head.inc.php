@@ -217,7 +217,8 @@ class Head {
     public function getTitle() {
     	//seperator, most people will be happy with ..::..
 		$cSep	= $this->oNails->getConfig("seperator", $this->oNails->getConfigKey());
-		$aBrand	= $this->oNails->getConfig("title", $this->oNails->getConfigKey());
+		$cTitle	= $this->oNails->getConfig("title", $this->oNails->getConfigKey());
+    	$aBrand	= $this->oNails->getConfig("brand", $this->oNails->getConfigKey());
 
 		if (is_array($aBrand)) {
 			$cTitle = $aBrand[0];
