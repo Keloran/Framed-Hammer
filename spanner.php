@@ -49,6 +49,16 @@ class Spanner extends Exception {
 			$this->cAddress	= Hammer::getConfigStat("address");
 		}
 
+		//fix for old configs
+		if (is_array($this->cAddress)) {
+			$cAddress 		= $this->cAddress['address'];
+			$this->cAddress	= $cAddress;
+		}
+		if (is_array($this->mContact)) {
+			$cContact		= $this->mContact['email'];
+			$this->mContact	= $cContact;
+		}
+
 		//Since we now need to actually do something with this
 		$this->catchIt();
 	}
