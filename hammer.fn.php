@@ -258,8 +258,6 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 		}
 	}
 
-	try { new Beeper(); } catch (Exception $e) { new Spanner($e->getMessage(), $e->getCode()); }
-
 	return $cReturn;
 }
 
