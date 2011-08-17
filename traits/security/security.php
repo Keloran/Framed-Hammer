@@ -46,7 +46,7 @@ trait Security {
 		$cRand		= "";
 
 		//get the hash
-		$cHash 		= $this->hammerHash($cString);
+		$cHash 		= $this->hammerHash($cString, 1);
 		$iHash		= strlen($cHash);
 
 		//now go through and generate a random one based on that
