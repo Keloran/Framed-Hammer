@@ -218,50 +218,52 @@ class Head {
      */
     public function getTitle() {
     	//seperator, most people will be happy with ..::..
-		$cSep	= $this->oNails->getConfig("seperator", $this->oNails->getConfigKey());
-		$aTitle	= $this->oNails->getConfig("title", $this->oNails->getConfigKey());
-		$aBrand = $this->oNails->getConfig("brand", $this->oNails->getConfigKey());
+	$cSep	= $this->oNails->getConfig("seperator", $this->oNails->getConfigKey());
+	$aTitle	= $this->oNails->getConfig("title", $this->oNails->getConfigKey());
+	$aBrand = $this->oNails->getConfig("brand", $this->oNails->getConfigKey());
 
-		if (is_array($aBrand)) {
-			$cTitle = $aBrand[0];
-			$bLower = $aBrand[1]['case'];
-		} else {
-			$cTitle = $aBrand['title'];
-			$bLower		= true;
-		}
+	if (is_array($aBrand)) {
+		$cTitle = $aBrand[0];
+		$bLower = $aBrand[1]['case'];
+	} else {
+		$cTitle = $aBrand['title'];
+		$bLower	= true;
+	}
+
+	if (!$this->cPageTitle) { $this->cPageTitle = $aTitle['title']; }
 
     	//theres some attributes
-		if (isset($aBrand['attrs'])) {
-			if (isset($aBrand['attrs']['case'])) {
-				switch ($aBrand['attrs']['case']) {
-					case "lower":
-						$cBrand	= strtolower($aBrand['title']);
-						break;
+	if (isset($aBrand['attrs'])) {
+		if (isset($aBrand['attrs']['case'])) {
+			switch ($aBrand['attrs']['case']) {
+				case "lower":
+					$cBrand	= strtolower($aBrand['title']);
+					break;
 
-					case "upper":
-						$cBrand = strtoupper($aBrand['title']);
-						break;
+				case "upper":
+					$cBrand = strtoupper($aBrand['title']);
+					break;
 
-					case "words":
-						$cBrand = ucwords($aBrand['title']);
-						break;
-				}
-			} else {
-				$cBrand = $aBrand;
+				case "words":
+					$cBrand = ucwords($aBrand['title']);
+					break;
 			}
 		} else {
-			$cBrand	= $cTitle ? $cTitle : $aBrand;
+			$cBrand = $aBrand;
 		}
+	} else {
+		$cBrand	= $cTitle ? $cTitle : $aBrand;
+	}
 
-		if (is_array($cSep)) { $cSep = false; }
-    	$cBrand		= $cBrand				? $cBrand 						: "Hammer";
+	if (is_array($cSep)) { $cSep = false; }
+    	$cBrand		= $cBrand ? $cBrand : "Hammer";
 
-		//lower or not the title
-		if (!$this->bTitleMixed) {
-			$cTitle		= $this->bTitleLower	? strtolower($this->cPageTitle) : ucwords($this->cPageTitle);
-		} else {
-			$cTitle	= $this->cPageTitle;
-		}
+	//lower or not the title
+	if (!$this->bTitleMixed) {
+		$cTitle		= $this->bTitleLower	? strtolower($this->cPageTitle) : ucwords($this->cPageTitle);
+	} else {
+		$cTitle	= $this->cPageTitle;
+	}
 
     	$cSeperator	= $cSep					? $cSep	 						: " ..::.. ";
 
