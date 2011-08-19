@@ -217,7 +217,7 @@ class Head {
      * @return
      */
     public function getTitle() {
-    	//seperator, most people will be happy with ..::..
+	   	//seperator, most people will be happy with ..::..
 		$cSep	= $this->oNails->getConfig("seperator", $this->oNails->getConfigKey());
 		$aTitle	= $this->oNails->getConfig("title", $this->oNails->getConfigKey());
 		$aBrand = $this->oNails->getConfig("brand", $this->oNails->getConfigKey());
@@ -227,8 +227,10 @@ class Head {
 			$bLower = $aBrand[1]['case'];
 		} else {
 			$cTitle = $aBrand['title'];
-			$bLower		= true;
+			$bLower	= true;
 		}
+
+		if (!$this->cPageTitle) { $this->cPageTitle = $aTitle['title']; }
 
     	//theres some attributes
 		if (isset($aBrand['attrs'])) {
@@ -254,7 +256,7 @@ class Head {
 		}
 
 		if (is_array($cSep)) { $cSep = false; }
-    	$cBrand		= $cBrand				? $cBrand 						: "Hammer";
+	    	$cBrand		= $cBrand ? $cBrand : "Hammer";
 
 		//lower or not the title
 		if (!$this->bTitleMixed) {

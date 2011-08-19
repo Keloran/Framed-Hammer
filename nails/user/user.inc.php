@@ -11,7 +11,7 @@
 class User implements Nails_Interface {
 	use Security;
 
-    public $iUserID     = false;
+	public $iUserID     = false;
 	public $iGroupID    = false;
 	public $cError		= false;
 	public $aConfig     = false;
