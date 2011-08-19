@@ -377,7 +377,7 @@ class Nails extends Hammer {
 		$oXML			= self::$oXML;
 		$oXML->setFile("installed");
 		$oXML->cRoot	= "install";
-		$this->addElement($cLibrary, $cVersion, "Initial");
+		$oXML->addElement($cLibrary, $cVersion, "Initial");
 	}
 
 	/**
