@@ -234,7 +234,10 @@ class XML {
 		$this->oDOM->formatOutput = true;
 		$iFile	= $this->oDOM->save($this->cFile);
 
-		if (!$iFile) { printRead($this->cFile, "Something went very wrong writing the file"); }
+		if (!$iFile) {
+			printRead($this->cFile, "Something went very wrong writing the file");
+			die();
+		}
 	}
 
 	/**
