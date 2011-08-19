@@ -32,6 +32,53 @@ class oReader {
 	}
 
 	/**
+	 * oReader::makeNewLines()
+	 *
+	 * @param string $cString
+	 * @return string
+	 */
+	private function makeNewLines($cString) {
+		$cString	= str_replace(" ", "&nbsp;", $cString);
+		$cString	= preg_replace("{[\t]+}", "&nbsp;&nbsp;&nbsp;&nbsp;", $cString);
+		$cString	= nl2br($cString);
+
+		return $cString;
+	}
+
+	/**
+	 * oReader::makeHeader()
+	 *
+	 * @param string $cString
+	 * @param bool $bConsole
+	 * @return string
+	 */
+	private function makeHeader($cString, $bConsole = false) {
+		$cReturn	= "";
+
+		$cNewLine	= "\n";
+		$cBold_a	= "";
+		$cBold_b	= "";
+
+		if (!$bConsole) {
+			$cNewLine	= "<br />";
+			$cBold_a	= "<b>";
+			$cBold_b	= "</b>";
+		}
+
+		//console cant display bo
+		$cReturn .= $cBold_a . "printRead called by: " . $this->aFile[1]['file'] . $cBold_b . $cNewLine;
+		$cReturn .= $cBold_a . "on line: " . $this->aFile[1]['line'] . $cBold_b . $cNewLine;
+
+		if ($bConsole) {
+			$cReturn	.= $cString;
+		} else {
+			$cReturn	.= str_replace("<br&nbsp;/>", "<br />", $cString); //sometimes br gets a space injected
+		}
+
+		return $cReturn;
+	}
+
+	/**
 	 * oReader::doOutput()
 	 *
 	 * @desc this is because construct wont do echo
@@ -54,9 +101,7 @@ class oReader {
 		}
 
 		//turn it into new lines
-		$this->cOutput	= str_replace(" ", "&nbsp;", $this->cOutput);
-		$this->cOutput	= preg_replace("{[\t]+}", "&nbsp;&nbsp;&nbsp;&nbsp;", $this->cOutput);
-		$this->cOutput	= nl2br($this->cOutput);
+		$this->cOutput	= $this->makeNewLines($this->cOutput);
 
 		//Protect stuff
 		$this->cConsole	= $this->protectMe($this->cConsole);
@@ -65,21 +110,10 @@ class oReader {
 
 		//now do we want a header
 		if ($this->bEmail) { $this->cEmail = $this->cOutput; }
-		if ($this->bConsole || $this->bFirePHP) {
-			$cConsole	 = "printRead called by: " . $this->aFile[1]['file'] . "\n";
-			$cConsole	.= "on line: " . $this->aFile[1]['line'] . "\n";
-			$cConsole	.= $this->cConsole;
-
-			$this->cConsole = $cConsole;
-		}
+		if ($this->bConsole || $this->bFirePHP) { $this->cConsole = $this->makeHeader($this->cConsole, true); }
 
 		//get the output anyway
-		$cOutput	 = "<b>printRead called by: " . $this->aFile[1]['file'] . "</b><br />";
-		$cOutput	.= "<b>on line: " . $this->aFile[1]['line'] . "</b><br />";
-		$cOutput	.= str_replace("<br&nbsp;/>", "<br />", $this->cOutput); //br gets added a space, so needs removing on old converted
-
-		$this->cOutput = $cOutput;
-
+		$this->cOutput	= $this->makeHeader($this->cOutput);
 
 		//start hte code to make it nice
 		$cFinal = "<code>";
@@ -206,7 +240,9 @@ class oReader {
 	 * @param mixed $mData
 	 * @return null
 	 */
-	public function __set($cName, $mData) { $this->aData[$cName] = $mData; }
+	public function __set($cName, $mData) {
+		$this->aData[$cName] = $mData;
+	}
 
 	/**
 	 * oReader::__get()
