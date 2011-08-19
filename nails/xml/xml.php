@@ -238,6 +238,9 @@ class XML {
 			printRead($this->cFile, "Something went very wrong writing the file");
 			die();
 		}
+
+		printRead($this->cFile);
+		die();
 	}
 
 	/**
