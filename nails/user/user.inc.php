@@ -32,7 +32,7 @@ class User implements Nails_Interface {
      * @access protected
      */
     private function __construct(Nails $oNails, $bNoInstall = null) {
-	if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
+		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
 
 		$this->oNails	= $oNails;
 		$this->oDB		= $this->oNails->getDatabase();

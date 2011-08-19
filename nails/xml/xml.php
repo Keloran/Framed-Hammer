@@ -232,7 +232,9 @@ class XML {
 
 		//save the file
 		$this->oDOM->formatOutput = true;
-		$this->oDOM->save($this->cFile);
+		$iFile	= $this->oDOM->save($this->cFile);
+
+		if (!$iFile) { printRead($this->cFile, "Something went very wrong writing the file"); }
 	}
 
 	/**
@@ -267,8 +269,6 @@ class XML {
 		//now if there is a file, which possibly there isnt now
 		if (file_exists($cRealFile)) {
 			$this->oDOM->load($cRealFile);
-			#$pFile		= file_get_contents($cRealFile);
-			#$this->oDOM->loadXML($pFile);
 		} else {
 			if ($this->cXMLNS) {
 				$this->oRoot = $this->oDOM->createElementNS($this->cXMLNS, $this->cRoot);
