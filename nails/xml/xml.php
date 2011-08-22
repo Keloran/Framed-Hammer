@@ -234,6 +234,11 @@ class XML {
 		//if no parent then there must be a problem
 		if (!$oParent) {
 			printRead("There is no parent found");
+			printRead(array(
+				$cElement,
+				$cValue,
+				$cParent
+			));
 			return false;
 		}
 
