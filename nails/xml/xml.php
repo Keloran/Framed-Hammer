@@ -268,10 +268,10 @@ class XML {
 	 */
 	public function setFile($cFile, $bAbsolute = null, $bDelete = null, $bPreserve = false) {
 		//given the absolute path, could even be remote
-		if (!$bAbsolute) {
-			$cRealFile	= SITEPATH . "/" . $cFile . ".xml";
-		} else {
+		if ($bAbsolute) {
 			$cRealFile	= $cFile;
+		} else {
+			$cRealFile	= SITEPATH . "/" . $cFile . ".xml";
 		}
 
 		//send to the object
