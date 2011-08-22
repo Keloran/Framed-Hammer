@@ -251,7 +251,7 @@ class XML {
 		$oParent->appendChild($oElement);
 
 		//its a new one so need to add parent to dom
-		if ($this->bNew) { $this->oDOM->appendChild($oParent); }
+		if ($this->bNew) { $this->oDOM->appendChild($oRoot); }
 
 		//save the file
 		$this->saveFile();
