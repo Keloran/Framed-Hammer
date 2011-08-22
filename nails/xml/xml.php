@@ -219,8 +219,18 @@ class XML {
 
 		//if no parent then there must be a problem
 		if (!$oParent) {
-			printRead("Something has gone wrong getting the parent");
-			return false;
+			if ($this->bNew) {
+				//create the install element
+				$oNew 		= $this->oDOM->createElement("install");
+
+				//append it
+				$this->oDOM->appendChild($oNew);
+
+				//now grab it so that rest can be added
+				$oParent	= $this->getElement("install", false, true);
+			} else {
+				return false;
+			}
 		}
 
 		//if value
@@ -261,11 +271,14 @@ class XML {
 		if (!$bAbsolute) {
 			$cRealFile	= SITEPATH . "/" . $cFile . ".xml";
 		} else {
-			$cRealFile	= $cFile;
+			$cRealFile	= $cFile . ".xml";
 		}
 
 		//send to the object
 		$this->cFile = $cRealFile;
+
+		//is it the install file
+		if ($this->cFile == "installed.xml") { $this->bNew = true; }
 
 		//do we want to delete it, before making a new one, and does the file exist
 		if ($bDelete && file_exists($cRealFile)) { unlink($cRealFile); }
