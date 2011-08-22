@@ -270,8 +270,8 @@ class Nails extends Hammer {
 		$bReturn	= false;
 
 		$oXML			= self::$oXML;
-		$oXML->setFile("installed");
 		$oXML->cRoot	= "install";
+		$oXML->setFile("installed");
 		$aLibrary		= $oXML->getElement("version", $cLibrary);
 
 		if ($aLibrary) {
