@@ -234,10 +234,7 @@ class XML {
 
 				//now create the parent element
 				$oParent = $this->oDOM->createElement($cParent);
-				$this->oDOM->appendChild($oParent);
-
-				//save the file
-				$this->saveFile();
+				$oRoot->appendChild($oParent);
 			} else {
 				return false;
 			}
