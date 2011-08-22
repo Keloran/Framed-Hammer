@@ -228,6 +228,9 @@ class XML {
 		//if no parent then there must be a problem
 		if (!$oParent) {
 			if ($this->bNew) {
+				//create the root
+				$oRoot	= $this->oDOM->createElement("install");
+
 				//now create the parent element
 				$oParent = $this->oDOM->createElement($cParent);
 				$oRoot->appendChild($oParent);
