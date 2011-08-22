@@ -233,13 +233,8 @@ class XML {
 
 		//if no parent then there must be a problem
 		if (!$oParent) {
-			if ($this->bNew) {
-				//now create the parent element
-				$oParent = $this->oDOM->createElement($cParent);
-				$this->oRoot->appendChild($oParent);
-			} else {
-				return false;
-			}
+			printRead("There is no parent found");
+			return false;
 		}
 
 		//if value
