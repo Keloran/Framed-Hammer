@@ -318,8 +318,8 @@ class Nails extends Hammer {
 		if (is_null(self::$oXML)) { self::$oXML = new XML(); }
 
 		$oXML			= self::$oXML;
-		$oXML->setFile("installed");
 		$oXML->cRoot	= "install";
+		$oXML->setFile("installed");
 		$oXML->updateElement("version", $cVersion, $cLibrary);
 
 		//add the changelog

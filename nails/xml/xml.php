@@ -275,7 +275,8 @@ class XML {
 		}
 
 		//send to the object
-		$this->cFile = $cRealFile;
+		$this->cFile 	= $cRealFile;
+		$this->cFiled	= $cFile;
 
 		//is it the install file
 		if ($this->cFile == "installed.xml") { $this->bNew = true; }
@@ -302,6 +303,9 @@ class XML {
 
 			$this->oDOM->appendChild($this->oRoot);
 		}
+
+		printRead($this->oDOM);
+		printRead($this);
 
 		return $this->oDOM;
 	}
