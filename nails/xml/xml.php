@@ -291,9 +291,6 @@ class XML {
 		$this->cFile 	= $cRealFile;
 		$this->cFiled	= $cFile;
 
-		//is it the install file
-		if ($this->cFiled == "installed") { $this->bNew = true; }
-
 		//do we want to delete it, before making a new one, and does the file exist
 		if ($bDelete && file_exists($cRealFile)) { unlink($cRealFile); }
 
@@ -308,6 +305,10 @@ class XML {
 		if (file_exists($cRealFile)) {
 			$this->oDOM->load($cRealFile);
 		} else {
+			//is it the install file
+			if ($this->cFiled == "installed") { $this->bNew = true; }
+
+			//has it got a namespace
 			if ($this->cXMLNS) {
 				$this->oRoot = $this->oDOM->createElementNS($this->cXMLNS, $this->cRoot);
 			} else {
