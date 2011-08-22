@@ -221,13 +221,7 @@ class XML {
 		if (!$oParent) {
 			if ($this->bNew) {
 				//create the install element
-				$oNew 		= $this->oDOM->createElement("install");
-
-				//append it
-				$this->oDOM->appendChild($oNew);
-
-				//now grab it so that rest can be added
-				$oParent	= $this->getElement("install", false, true);
+				$oParent = $this->oDOM->createElement("install");
 			} else {
 				return false;
 			}
@@ -242,6 +236,9 @@ class XML {
 
 		//append the element
 		$oParent->appendChild($oElement);
+
+		//its a new one so need to add parent to dom
+		if ($this->bNew) { $this->oDOM->appendElement($oParent); }
 
 		//save the file
 		$this->oDOM->formatOutput = true;
