@@ -78,6 +78,7 @@ function ob_process($cBuffer) {
 function Hammer($cSite, $aFilter = false, $aOptions = null) {
 	if (!function_exists("removeEndSlash")) { include HAMMERPATH . "/functions/address.php"; }
 
+	//default of false
 	$cReturn	= false;
 
 	//options
@@ -103,9 +104,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 	}
 
 	//xhprofiler
-	if (function_exists("xhprof_enable") && (defined("profile"))) {
-    		xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
-	}
+	if (function_exists("xhprof_enable") && (defined("profile"))) { xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY); }
 
 	//set a filter if its missign, but still tell them, since they are doign it wrong
 	if (!$aFilter) { $aFilter = array("page", "action", "choice"); }
@@ -154,12 +153,15 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 
 	//do the try/catch of the modules
 	try {
+		/**
+		* Since i dont actually use this in the loader
 		//User
 		try {
 			$oUser		= $oHammer->getUser();
 		} catch (User_Exception $e) {
 			throw new Spanner($e->getMessage(), 699);
 		}
+		*/
 
 		//Session
 		try {
@@ -173,15 +175,10 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 		//Admin
 		try {
 			$oAdmin	= $oHammer->getAdmin();
-			$oAdmin->secureLogin();
-		} catch (Admin_Exception $e) {
-			throw new Spanner($e->getMessage(), 999);
-		}
 
-		//Since this IP is banned, send them to google
-		$cVisitor = visitorIP();
-		if ($cVisitor) {
-			if (!is_null($oAdmin)) {
+			//Since this IP is banned, send them to google
+			$cVisitor = visitorIP();
+			if ($cVisitor) {
 				if (strstr($cVisitor, ",")) {
 					$aVisitor = explode(",", $cVisitor);
 					for ($i = 0; $i < count($aVisitor); $i++) {
@@ -195,6 +192,11 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 					}
 				}
 			}
+
+			//the user isnt banned so go through secure incase of page
+			$oAdmin->secureLogin();
+		} catch (Admin_Exception $e) {
+			throw new Spanner($e->getMessage(), 999);
 		}
 
 		//Organics
@@ -206,26 +208,25 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 		}
 
 		//Cache
-		$cCached		= false;
 		try {
 			$oCache		= $oHammer->getCache();
 			$cCached	= $oCache->getItem();
+
+			//is there anything in the cache
+			if (!$cCached) {
+				//Template
+				try {
+					$oTemplate	= $oHammer->getTemplate();
+					$cReturn	= $oTemplate->getStructure($cStructure); //now load the actual site
+					$oCache->addItem($cReturn);
+				} catch (Template_Exception $e) {
+					throw new Spanner($e->getMessage(), 599);
+				}
+			} else {
+				$cReturn = $cCached;
+			}
 		} catch (Cache_Exception $e) {
 			throw new Spanner($e->getMessage(), 1199);
-		}
-
-		//is there anything in the cache
-		if (!$cCached) {
-			//Template
-			try {
-				$oTemplate	= $oHammer->getTemplate();
-				$cReturn	= $oTemplate->getStructure($cStructure); //now load the actual site
-				$oCache->addItem($cReturn);
-			} catch (Template_Exception $e) {
-				throw new Spanner($e->getMessage(), 599);
-			}
-		} else {
-			$cReturn = $cCached;
 		}
 	} catch (Spanner $e) {
 		new Spanner($e->getMessage(), $e->getCode());
