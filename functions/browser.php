@@ -63,7 +63,7 @@ function getBrowserCap() {
  * @return array
  */
 function getBrowser($cSpecific = null) {
-	$mBrowser 	= false;
+	$mBrowser 		= false;
 	$mGetBrowser	= getBrowserCap();
 
 	//this is a better method
