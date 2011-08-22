@@ -48,7 +48,7 @@ class Session_Robots {
 					PRIMARY KEY (`iSessionID`)
 				) ENGINE = MyISAM
 			";
-			$this->oNails->updateVersion("users_session_robots", 1.3, $cSQL, "Add Visitors Sessions");
+			$this->oNails->updateVersion("users_session_robots", "1.3", $cSQL, "Add Visitors Sessions");
 		}
 	}
 
