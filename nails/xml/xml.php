@@ -271,15 +271,15 @@ class XML {
 		if (!$bAbsolute) {
 			$cRealFile	= SITEPATH . "/" . $cFile . ".xml";
 		} else {
-			$cRealFile	= $cFile . ".xml";
+			$cRealFile	= $cFile;
 		}
 
 		//send to the object
 		$this->cFile 	= $cRealFile;
-		$this->cFiled	= $cFile;
+		$this->cFiled	= $cFile . ".xml";
 
 		//is it the install file
-		if ($this->cFile == "installed.xml") { $this->bNew = true; }
+		if ($this->cFile == "installed") { $this->bNew = true; }
 
 		//do we want to delete it, before making a new one, and does the file exist
 		if ($bDelete && file_exists($cRealFile)) { unlink($cRealFile); }
