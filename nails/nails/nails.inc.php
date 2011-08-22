@@ -274,9 +274,7 @@ class Nails extends Hammer {
 		$oXML->setFile("installed");
 		$aLibrary		= $oXML->getElement("version", $cLibrary);
 
-		printRead($aLibrary);
-		printRead($cVersion);
-
+		//now check wether the element is there
 		if ($aLibrary) {
 			if (isset($aLibrary['version'])) {
 				$cOldVersion	= $aLibrary['version'];
@@ -285,9 +283,6 @@ class Nails extends Hammer {
 				}
 			}
 		}
-
-		printRead(var_dump($bReturn));
-		die();
 
 		return $bReturn;
 	}

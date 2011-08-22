@@ -62,9 +62,11 @@ class XML {
 	 *
 	 * @param string $cElement
 	 * @param string $cParent
+	 * @param bool $bReturn
+	 * @param bool $bKey
 	 * @return mixed
 	 */
-	public function getElement($cElement, $cParent = null, $bReturn = null) {
+	public function getElement($cElement, $cParent = null, $bReturn = null, $bKey = false) {
 		$mReturn	= false;
 
 		//no parent given, so make it default to config
@@ -128,12 +130,16 @@ class XML {
 		if (!$mReturn) { return false; }
 
 		//stuff must have been found
-		$iCount = count($mReturn);
+		$iCount 	= count($mReturn);
 		$mReturn1	= $mReturn;
 		$mReturn	= false;
 		for ($i = 0; $i < $iCount; $i++) {
 			foreach ($mReturn1[$i] as $cKey => $mValue) { $mReturn[$cKey] = $mValue; }
 		}
+
+		//if the key needed and its a single element
+		$iCount	= count($mReturn);
+		if ($iCount == 1 && $bKey) { $mReturn = $mReturn[$cElement]; }
 
 		return $mReturn;
 	}
