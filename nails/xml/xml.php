@@ -225,10 +225,12 @@ class XML {
 	 * @return
 	 */
 	public function addElement($cElement, $cValue = false, $cParent = false) {
+		$cRoot		= $this->cRoot ?: "config"; //just uncase its needed
+
+		//is there a parent given
 		if ($cParent) {
 			$oParent	= $this->getElement($cParent, false, true);
 		} else {
-			$cRoot		= $this->cRoot ?: "config";
 			$oParent	= $this->getElement($cRoot, false, true);
 		}
 
