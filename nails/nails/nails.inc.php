@@ -272,7 +272,7 @@ class Nails extends Hammer {
 			}
 		}
 
-		printRead($bReturn);
+		printRead(var_dump($bReturn));
 		printRead("tester1");
 		die();
 
