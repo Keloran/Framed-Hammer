@@ -259,8 +259,10 @@ class XML {
 		$iFile	= $this->oDOM->save($this->cFile);
 
 		if (!$iFile) {
-			printRead($this->cFile, "Something went very wrong writing the file");
+			printRead("Something went very wrong writing the file");
 			die();
+		} else {
+			printRead("File Installled");
 		}
 	}
 
