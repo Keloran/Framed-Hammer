@@ -233,14 +233,11 @@ class XML {
 				$this->oDOM->appendChild($oRoot);
 
 				//now create the parent element
-				$oNew = $this->oDOM->createElement($cParent);
-				$this->oDOM->appendChild($oNew);
+				$oParent = $this->oDOM->createElement($cParent);
+				$this->oDOM->appendChild($oParent);
 
 				//save the file
 				$this->saveFile();
-
-				//now get the element
-				$oParent	= $this->getElement($cParent, false, "install");
 			} else {
 				return false;
 			}
