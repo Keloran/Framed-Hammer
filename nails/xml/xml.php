@@ -276,10 +276,10 @@ class XML {
 
 		//send to the object
 		$this->cFile 	= $cRealFile;
-		$this->cFiled	= $cFile . ".xml";
+		$this->cFiled	= $cFile;
 
 		//is it the install file
-		if ($this->cFile == "installed") { $this->bNew = true; }
+		if ($this->cFiled == "installed") { $this->bNew = true; }
 
 		//do we want to delete it, before making a new one, and does the file exist
 		if ($bDelete && file_exists($cRealFile)) { unlink($cRealFile); }
@@ -304,8 +304,10 @@ class XML {
 			$this->oDOM->appendChild($this->oRoot);
 		}
 
-		printRead($this->oDOM);
-		printRead($this);
+		if ($this->cFiled == "installed") {
+			printRead($this->oDOM);
+			printRead($this);
+		}
 
 		return $this->oDOM;
 	}
