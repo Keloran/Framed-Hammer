@@ -272,10 +272,6 @@ class Nails extends Hammer {
 			}
 		}
 
-		printRead(var_dump($bReturn));
-		printRead("tester1");
-		die();
-
 		return $bReturn;
 	}
 
@@ -360,7 +356,9 @@ class Nails extends Hammer {
 		$oXML			= self::$oXML;
 		$oXML->setFile("installed");
 		$oXML->cRoot	= "install";
-		$oXML->addElement($cLibrary, $cVersion, "Initial");
+
+		$oXML->addElement("version", $cVersion, $cLibrary);
+		$oXML->addElement("changelog", "Inital", $cLibrary);
 	}
 
 	/**
