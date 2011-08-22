@@ -228,13 +228,9 @@ class XML {
 		//if no parent then there must be a problem
 		if (!$oParent) {
 			if ($this->bNew) {
-				//create the root
-				$oRoot	= $this->oDOM->createElement("install");
-				$this->oDOM->appendChild($oRoot);
-
 				//now create the parent element
 				$oParent = $this->oDOM->createElement($cParent);
-				$oRoot->appendChild($oParent);
+				$this->oRoot->appendChild($oParent);
 			} else {
 				return false;
 			}
@@ -254,6 +250,11 @@ class XML {
 		$this->saveFile();
 	}
 
+	/**
+	 * XML::saveFile()
+	 *
+	 * @return null
+	 */
 	private function saveFile() {
 		//save the file
 		$this->oDOM->formatOutput = true;
