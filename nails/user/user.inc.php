@@ -217,13 +217,7 @@ class User implements Nails_Interface {
 			"Banned",
 			"Admin"
 		);
-
-		if ($this->oNails->checkVersion("users_groups", "0.5") == false) {
-			$this->oDB->write("INSERT INTO `users_groups` (cGroup) VALUES (?), (?), (?), (?), (?)", $aEscape);
-
-			//set sub install
-			$this->oNails->addVersion("users_groups", "0.5");
-		}
+		$this->oDB->write("INSERT INTO `users_groups` (cGroup) VALUES (?), (?), (?), (?), (?)", $aEscape);
 
 		//add the groups
 		$this->oNails->addGroups("install");

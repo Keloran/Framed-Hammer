@@ -248,25 +248,6 @@ class Nails extends Hammer {
 	}
 
 	/**
-	* Nails::checkVesion()
-	*
-	* @desc Checks to see if the current version matches the version you want to use
-	* @param string $cLibrary
-	* @param string $cVersion
-	* @param string $cNail This is for usage with the XML method
-	* @return bool
-	*/
-	public function checkVersion($cLibrary, $cVersion) {
-		$bReturn	 = false;
-
-		//This is for the xml version, and it will return depending on if a file exists or not
-		$bXML	= $this->checkXMLVersion($cLibrary, $cVersion);
-		if ($bXML) { $bReturn = true; }
-
-		return $bReturn;
-	}
-
-	/**
 	 * Nails::checkXMLVersion()
 	 *
 	 * @param string $cLibrary
@@ -281,6 +262,11 @@ class Nails extends Hammer {
 		$oXML->setFile("installed");
 		$oXML->cRoot	= "install";
 		$aLibrary		= $oXML->getElement($cLibrary);
+
+		printRead($oXML);
+		printRead($aLibrary);
+		die();
+
 		if ($aLibrary) {
 			if (isset($aLibrary['version'])) {
 				$cOldVersion	= $aLibrary['version'];
@@ -353,11 +339,7 @@ class Nails extends Hammer {
 	* @return false
 	*/
 	public function addVersion($cLibrary, $cVersion) {
-		$aEscape	= array($cLibrary, $cVersion);
-
-		if ($this->checkVersion($cLibrary, $cVersion)) {
-			return false;
-		} else {
+		if ($this->checkXMLVersion($cLibrary, $cVersion) == false) {
 			$this->addXML($cLibrary, $cVersion);
 			return true;
 		}
