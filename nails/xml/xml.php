@@ -240,6 +240,8 @@ class XML {
 		}
 
 		printRead($this->cFile);
+		printRead($cFile);
+		printRead("tester");
 		die();
 	}
 
@@ -259,7 +261,7 @@ class XML {
 			$cRealFile	= $cFile;
 		}
 
-		//set to the object
+		//send to the object
 		$this->cFile = $cRealFile;
 
 		//do we want to delete it, before making a new one, and does the file exist

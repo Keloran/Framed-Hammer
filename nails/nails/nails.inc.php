@@ -359,6 +359,7 @@ class Nails extends Hammer {
 			return false;
 		} else {
 			$this->addXML($cLibrary, $cVersion);
+			return true;
 		}
 
 		return false;
