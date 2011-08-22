@@ -320,9 +320,6 @@ class XML {
 			}
 
 			$this->oDOM->appendChild($this->oRoot);
-			$this->saveFile();
-
-			$this->oDOM	= $this->setFile($cFile, $bAbsolute, $bDelete, $bPreserve);
 		}
 
 		return $this->oDOM;
