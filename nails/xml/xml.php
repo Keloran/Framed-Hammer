@@ -226,9 +226,10 @@ class XML {
 	 */
 	public function addElement($cElement, $cValue = false, $cParent = false) {
 		if ($cParent) {
-			$oParent = $this->getElement($cParent, false, true);
+			$oParent	= $this->getElement($cParent, false, true);
 		} else {
-			$oParent = $this->getElement("config", false, true);
+			$cRoot		= $this->cRoot ?: "config";
+			$oParent	= $this->getElement($cRoot, false, true);
 		}
 
 		//if no parent then there must be a problem
