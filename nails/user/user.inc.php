@@ -218,8 +218,14 @@ class User implements Nails_Interface {
 			"Admin"
 		);
 
-		$this->oDB->write("INSERT INTO `users_groups` (cGroup) VALUES (?), (?), (?), (?), (?)", $aEscape);
+		if ($this->oNails->checkVersion("users_groups", "0.5") == false) {
+			$this->oDB->write("INSERT INTO `users_groups` (cGroup) VALUES (?), (?), (?), (?), (?)", $aEscape);
 
+			//set sub install
+			$this->oNails->addVersion("users_groups", "0.5");
+		}
+
+		//add the groups
 		$this->oNails->addGroups("install");
 		$this->oNails->addAbility("Admin", "install");
 
