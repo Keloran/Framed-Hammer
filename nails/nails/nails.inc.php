@@ -276,7 +276,6 @@ class Nails extends Hammer {
 
 		printRead($aLibrary);
 		printRead($cVersion);
-		die();
 
 		if ($aLibrary) {
 			if (isset($aLibrary['version'])) {
@@ -286,6 +285,9 @@ class Nails extends Hammer {
 				}
 			}
 		}
+
+		printRead(var_dump($bReturn));
+		die();
 
 		return $bReturn;
 	}
