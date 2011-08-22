@@ -15,10 +15,10 @@ class Head {
 	public $bJSFramework			= false;
 	public $bJSFrameworkUI			= false;
 
-	public $cJSFrameworkVersion			= "1.6.1";
+	public $cJSFrameworkVersion			= "1.6.2";
 	public $cJSFrameworkSubVersion		= "1.6";
 	public $cJSFrameworkName			= "jquery";
-	public $cJSFrameworkUIVersion		= "1.8.13";
+	public $cJSFrameworkUIVersion		= "1.8.16";
 	public $cJSFrameworkMobileName		= "mobile";
 	public $cJSFrameworkMobileVersion 	= "1.0b1";
 
@@ -880,14 +880,14 @@ class Head {
      * @return
      */
     public function setJSFramework($cName = false, $cVersion = false, $bUI = false) {
-    	$cJSName	= $cName 	? $cName 	: "jquery";
-    	$cJSVersion	= $cVersion	? $cVersion	: "1.5.1";
-	$cJSSubVersion	= $cVersion	? $cVersion	: "1.5";
+    	$cJSName		= $cName 	?: $this->cJSFrameworkName;
+    	$cJSVersion		= $cVersion	?: $this->cJSFrameworkVersion;
+		$cJSSubVersion	= $cVersion	?: $this->cJSFrameworkSubVersion;
 
-    	$this->cJSFrameworkName		= $cJSName;
-    	$this->cJSFrameworkVersion	= $cJSVersion;
-    	$this->bJSFramework		= true;
-	$this->cJSFrameworkSubVersion	= $cJSSubVersion;
+    	$this->cJSFrameworkName			= $cJSName;
+    	$this->cJSFrameworkVersion		= $cJSVersion;
+    	$this->bJSFramework				= true;
+		$this->cJSFrameworkSubVersion	= $cJSSubVersion;
 
 		//is the ui set
 		if ($bUI) { $this->bJSFrameworkUI = true; }
@@ -1034,10 +1034,9 @@ class Head {
 
 		if ($this->bJS) {
 			//jQuery
-			if ($this->bJSFramework) {
-				$cReturn .= $this->loadJSFramework();
-			}
+			if ($this->bJSFramework) {  $cReturn .= $this->loadJSFramework(); }
 
+			//get custom js
 			$cReturn .= $this->getJS();
 		}
 
@@ -1049,9 +1048,11 @@ class Head {
 		//since most of the time you will be using HTML5 add the shiv for less than IE9 which likes HTML5
 		//its not a good idea to have stuff in the head thats remote, but google should be fast
 		if ($this->cDocType == "html5") {
-			$cReturn .= "<!--[if lt IE 9]>\n";
-			$cReturn .= "<script src=\"http://html5shim.googlecode.com/svn/trunk/html5.js\"></script>\n";
-			$cReturn .= "<![endif]-->\n";
+			if ($this->bWarning) {
+				$cReturn .= "<!--[if lt IE 9]>\n";
+				$cReturn .= "<script src=\"http://html5shim.googlecode.com/svn/trunk/html5.js\"></script>\n";
+				$cReturn .= "<![endif]-->\n";
+			}
 		}
 
 		//Get the extra conditions, usually just IE stuffs
