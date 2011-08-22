@@ -154,6 +154,14 @@ class XML {
 		return false;
 	}
 
+	/**
+	 * XML::updateElement()
+	 *
+	 * @param string $cElement
+	 * @param string $cValue
+	 * @param string $cParent
+	 * @return null
+	 */
 	public function updateElement($cElement, $cValue, $cParent = false) {
 		$mElement	= $this->getElement($cElement, $cParent, true);
 
@@ -248,11 +256,6 @@ class XML {
 			printRead($this->cFile, "Something went very wrong writing the file");
 			die();
 		}
-
-		printRead($this->cFile);
-		printRead($cFile);
-		printRead("tester");
-		die();
 	}
 
 	/**
@@ -299,11 +302,6 @@ class XML {
 			}
 
 			$this->oDOM->appendChild($this->oRoot);
-		}
-
-		if ($this->cFiled == "installed") {
-			printRead($this->oDOM);
-			printRead($this);
 		}
 
 		return $this->oDOM;
