@@ -218,7 +218,10 @@ class XML {
 		}
 
 		//if no parent then there must be a problem
-		if (!$oParent) { return false; }
+		if (!$oParent) {
+			printRead("Something has gone wrong getting the parent");
+			return false;
+		}
 
 		//if value
 		if ($cValue) {
