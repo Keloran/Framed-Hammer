@@ -230,6 +230,7 @@ class XML {
 			if ($this->bNew) {
 				//create the root
 				$oRoot	= $this->oDOM->createElement("install");
+				$this->oDOM->appendChild($oRoot);
 
 				//now create the parent element
 				$oParent = $this->oDOM->createElement($cParent);
@@ -248,9 +249,6 @@ class XML {
 
 		//append the element
 		$oParent->appendChild($oElement);
-
-		//its a new one so need to add parent to dom
-		if ($this->bNew) { $this->oDOM->appendChild($oRoot); }
 
 		//save the file
 		$this->saveFile();
