@@ -235,7 +235,10 @@ class XML {
 		}
 
 		//if no parent see if i can revert to the basic method
-		if (!$oParent) { $oParent = $this->oDOM->getElementsByTagName($cRoot); }
+		if (!$oParent) {
+			$oRoot 		= $this->oDOM->getElementsByTagName($cRoot);
+			$oParent	= $oRoot->item(0);
+		}
 
 		//if there is still no parent die
 		if (!$oParent) { printRead("Erm somet really went wrong"); }
