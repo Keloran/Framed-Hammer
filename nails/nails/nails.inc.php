@@ -319,7 +319,7 @@ class Nails extends Hammer {
 
 		$oXML			= self::$oXML;
 		$oXML->cRoot	= "install";
-		$oXML->setFile("installed");
+		$oXML->setFile("installed", true);
 		$oXML->updateElement("version", $cVersion, $cLibrary);
 
 		//add the changelog
@@ -354,8 +354,8 @@ class Nails extends Hammer {
 		if (is_null(self::$oXML)) { self::$oXML = new XML(); }
 
 		$oXML			= self::$oXML;
-		$oXML->setFile("installed");
 		$oXML->cRoot	= "install";
+		$oXML->setFile("installed", true);
 
 		$oXML->addElement("version", $cVersion, $cLibrary);
 		$oXML->addElement("changelog", "Inital", $cLibrary);
