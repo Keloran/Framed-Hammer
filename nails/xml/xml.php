@@ -238,7 +238,8 @@ class XML {
 			printRead(array(
 				$cElement,
 				$cValue,
-				$cParent
+				$cParent,
+				$cRoot
 			));
 			return false;
 		}
