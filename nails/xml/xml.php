@@ -234,19 +234,11 @@ class XML {
 			$oParent	= $this->getElement($cRoot, false, true);
 		}
 
-		//if no parent then there must be a problem
-		if (!$oParent) {
-			printRead("There is no parent found");
-			printRead(array(
-				$cElement,
-				$cValue,
-				$cParent,
-				$cRoot,
-				$this->oDOM->getElementsByTagName($cRoot),
-				$this->oDOM
-			));
-			return false;
-		}
+		//if no parent see if i can revert to the basic method
+		if (!$oParent) { $oParent	= $this->oDOM->getElementsByTagName($cRoot); }
+
+		//if there is still no parent die
+		if (!$oParent) { printRead("Erm somet really went wrong"); }
 
 		//if value
 		if ($cValue) {
