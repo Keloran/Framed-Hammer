@@ -248,6 +248,17 @@ class Nails extends Hammer {
 	}
 
 	/**
+	 * Nails::checkVersion()
+	 *
+	 * @param string $cLibrary
+	 * @param string $cVersion
+	 * @return bool
+	 */
+	public function checkVersion($cLibrary, $cVersion) {
+		return $this->checkXMLVersion($cLibrary, $cVersion);
+	}
+
+	/**
 	 * Nails::checkXMLVersion()
 	 *
 	 * @param string $cLibrary
