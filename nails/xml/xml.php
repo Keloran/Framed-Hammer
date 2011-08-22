@@ -241,7 +241,9 @@ class XML {
 				$cElement,
 				$cValue,
 				$cParent,
-				$cRoot
+				$cRoot,
+				$this->oDOM->getElementsByTagName($cRoot),
+				$this->oDOM
 			));
 			return false;
 		}
