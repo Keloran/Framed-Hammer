@@ -232,11 +232,15 @@ class XML {
 				$oRoot = $this->oDOM->createElement("install");
 				$this->oDOM->appendChild($oRoot);
 
-				//now save the file
+				//now create the parent element
+				$oNew = $this->oDOM->createElement($cParent);
+				$this->oDOM->appendChild($oNew);
+
+				//save the file
 				$this->saveFile();
 
-				//now create the parent element
-				$oParent = $this->addElement($cParent, false, "install");
+				//now get the element
+				$oParent	= $this->getElement($cParent, false, "install");
 			} else {
 				return false;
 			}
