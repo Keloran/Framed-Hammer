@@ -88,27 +88,26 @@ class User implements Nails_Interface {
 			printRead("1.6 End");
     	}
 
-	//Cookie
+		//Cookie
         $this->cCookie = getCookie("userCookie");
         if ($this->cCookie) {
-                $this->iUserID  = $this->getID();
-                $this->iGroupID = $this->getGroupID();
-        		$this->bLogged	= true;
+        	$this->iUserID  = $this->getID();
+        	$this->iGroupID = $this->getGroupID();
+        	$this->bLogged	= true;
 
-                //Is this user actually banned
-                $cGroup = $this->getGroupName();
-                if ($cGroup == "banned") {
-                        switch ($this->cPage) {
-                                case "login":
-                                case "banned":
-                                        break;
+			//Is this user actually banned
+        	$cGroup = $this->getGroupName();
+			if ($cGroup == "banned") {
+				switch ($this->cPage) {
+					case "login":
+					case "banned":
+						break;
 
-                                default:
-                                        $this->oNails->sendLocation("/banned/");
-                                        die();
-                                        break;
-                        }
-                }
+					default:
+						$this->oNails->sendLocation("/banned/");
+						break;
+				}
+			}
         }
     }
 

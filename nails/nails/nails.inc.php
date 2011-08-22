@@ -76,9 +76,6 @@ class Nails extends Hammer {
 		$oXML->setFile("installed");
 		$bXML			= $oXML->getElement($cNail);
 
-		printRead($bXML);
-		die();
-
 		return $bXML;
 	}
 
