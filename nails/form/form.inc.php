@@ -1207,10 +1207,13 @@ class Form {
 
 		//get the action
 		if (isset($this->cFormAction) && $this->cFormAction) {
-			$cReturn .= "action=\"" . $this->cFormAction . "\"";
+			$cReturn .= "action=\"" . $this->cFormAction . "\" ";
 		} else {
-			$cReturn .= "action=\"\"";
+			$cReturn .= "action=\"\" ";
 		}
+
+		//charset set to utf8
+		$cReturn .= "accept-charset=\"UTF-8\" ";
 
 		//close the form opener
 		$cReturn .= ">\n";
