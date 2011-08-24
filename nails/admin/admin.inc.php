@@ -55,6 +55,17 @@ class Admin implements Nails_Interface {
 	 * @return null
 	 */
 	private function install() {
+		//Create the banned table
+		printRead("users_banned");
+		$this->oNails->addTable("
+			CREATE TABLE IF NOT EXISTS `users_banned` (
+				`iBannedID` INT NOT NULL AUTO_INCREMENT,
+				`iBannedIP` INT NOT NULL,
+				`iUserID`	INT NOT NULL,
+				PRIMARY KEY (`iBannedID`),
+				INDEX (`iBannedID`, `iUserID`)
+			) ENGINE = InnoDB");
+
 		$this->oNails->addGroups("admin");
 		$this->oNails->addAbility("admin", "Admin");
 

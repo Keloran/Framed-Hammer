@@ -1041,9 +1041,18 @@ class Head {
 		}
 
 		//Favicon
-		$cReturn .= "<link rel=\"icon\" href=\"/favicon.ico\" type=\"image/x-icon\" />\n";
-		$cReturn .= "<link rel=\"shortcut icon\" href=\"/favicon.ico\" type=\"image/x-icon\" />\n";
-		$cReturn .= "<link rel=\"apple-touch-icon\" href=\"/favicon.ico\" />\n"; //iphone image
+		$cFavi	= false;
+		if (file_exists(SITEPATH . "/favicon.ico")) {
+			$cFavi	= "/favicon.ico";
+		} else if (file_exists(SITEPATH . "/images/favicon.ico")) {
+			$cFavi	= "/images/favicon.ico";
+		}
+
+		if ($cFavi) {
+			$cReturn .= "<link rel=\"icon\" href=\"" . $cFavi . "\" type=\"image/x-icon\" />\n";
+			$cReturn .= "<link rel=\"shortcut icon\" href=\"" . $cFavi . "\" type=\"image/x-icon\" />\n";
+			$cReturn .= "<link rel=\"apple-touch-icon\" href=\"" . $cFavi . "\" />\n"; //iphone image
+		}
 
 		//since most of the time you will be using HTML5 add the shiv for less than IE9 which likes HTML5
 		//its not a good idea to have stuff in the head thats remote, but google should be fast
