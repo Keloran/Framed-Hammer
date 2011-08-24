@@ -331,7 +331,7 @@ class Head {
 				}
 			}
 
-			$cKeyword .= $this->oNails->getConfig("keywords", $this->oNails->getConfigKey());
+			$cKeyword .= $this->oNails->getConfig("keywords", $this->oNails->getConfigKey())['keywords'];
 		}
 
         $cKeywords = "<meta name=\"keywords\" content=\"" . $cKeyword . "\" />\n";
@@ -357,7 +357,7 @@ class Head {
     	if ($this->cPageDescription) {
     		$cDescriptions = $this->cPageDescription;
     	} else {
-		$cDescriptions	= $this->oNails->getConfig("description", $this->oNails->getConfigKey());
+			$cDescriptions	= $this->oNails->getConfig("description", $this->oNails->getConfigKey())['description'];
 	    }
 
 	    $cDescription = "<meta name=\"description\" content=\"" . $cDescriptions . "\" />\n";
@@ -1047,7 +1047,6 @@ class Head {
 		} else if (file_exists(SITEPATH . "/images/favicon.ico")) {
 			$cFavi	= "/images/favicon.ico";
 		}
-
 		if ($cFavi) {
 			$cReturn .= "<link rel=\"icon\" href=\"" . $cFavi . "\" type=\"image/x-icon\" />\n";
 			$cReturn .= "<link rel=\"shortcut icon\" href=\"" . $cFavi . "\" type=\"image/x-icon\" />\n";
