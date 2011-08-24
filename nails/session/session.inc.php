@@ -318,10 +318,19 @@ class Session {
 				$iLogFile	= LOG_SYSLOG; //no idea on the OS
 			}
 
+			$cSite	= $this->oNails->cSited;
+			if (!$cSite) { $cSite = "unknown"; }
+
+			$cLocation	 = HAMMERPATH . "/logs/";
+			$cLocation	.= $cSite . ".log";
+
 			//since they all do this, make it more effecient
+			/**
 			openlog("HammerLog", LOG_PID | LOG_PERROR, $iLogFile);
 				syslog($iLog, $cLog);
 			closelog();
+			*/
+			error_log($cLog, 3, $cLocation);
 		}
 	}
 
