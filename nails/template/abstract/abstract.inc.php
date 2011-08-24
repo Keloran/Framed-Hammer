@@ -108,7 +108,7 @@ abstract class Template_Abstract implements Template_Interface {
 	public function renderTemplate() {
 		ob_start();
 			extract($this->aVars, EXTR_SKIP);
-
+			
 			include $this->cTemplate;
 			$cTemplate = ob_get_contents();
 

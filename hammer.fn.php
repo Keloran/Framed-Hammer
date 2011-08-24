@@ -153,16 +153,6 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 
 	//do the try/catch of the modules
 	try {
-		/**
-		* Since i dont actually use this in the loader
-		//User
-		try {
-			$oUser		= $oHammer->getUser();
-		} catch (User_Exception $e) {
-			throw new Spanner($e->getMessage(), 699);
-		}
-		*/
-
 		//Session
 		try {
 			$oSession	= $oHammer->getSession();
