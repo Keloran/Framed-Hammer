@@ -192,11 +192,11 @@ class Template_Layout extends Template_Abstract {
 				"Final"		=> $cFinal,
 				"Template1"	=> $cTemplate,
 				"Template2"	=> $cTemplate2,
-				"FullPath1"	=> (SITEPATH . $cLayout . $cTemplate2 . $cTemplate . ".tpl"),
-				"FullPath2"	=> (SITEPATH . $cLayout1 . $cTemplate2 . $cTemplate . ".tpl"),
-				"FullPath3"	=> (SITEPATH . $cLayout2 . $cTemplate2 . $cTemplate . ".tpl"),
-				"FullPath4"	=> (SITEPATH . $cLayout3 . $cTemplate2 . $cTemplate . ".tpl"),
-				"FullPath5"	=> (SITEPATH . $cLayout4 . $cTemplate2 . $cTemplate . ".tpl"),
+				"FullPath"	=> (SITEPATH . $cLayout . $cTemplate2 . $cTemplate . ".tpl"),
+				"FullPath1"	=> ($cLayout1 . $cTemplate2 . $cTemplate . ".tpl"),
+				"FullPath2"	=> ($cLayout2 . $cTemplate2 . $cTemplate . ".tpl"),
+				"FullPath3"	=> ($cLayout3 . $cTemplate2 . $cTemplate . ".tpl"),
+				"FullPath4"	=> ($cLayout4 . $cTemplate2 . $cTemplate . ".tpl"),
 			);
 			printRead($a);
 			die();
