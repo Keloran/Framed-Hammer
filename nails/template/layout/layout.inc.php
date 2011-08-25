@@ -133,7 +133,7 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = $cLayout4 . $cTemplate . $cExtra . ".tpl";
 			} else if (file_exists($cLayout4 . $cTemplate . ".tpl")) { //normal
 				$cFinal = $cLayout4 . $cTemplate . ".tpl";
-			} else if (file_exists($cLayout4 . $cTemplate2 . $cTemplate . ".tpl")) { //in a folder
+			} else if (file_exists($cLayout4 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
 				$cFinal = $cLayout4 . $cTemplate2 . $cTemplate . ".tpl";
 			}
 		}
@@ -144,7 +144,7 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = $cLayout3 . $cTemplate . $cExtra . ".tpl";
 			} else if (file_exists($cLayout3 . $cTemplate . ".tpl")) { //normal
 				$cFinal = $cLayout3 . $cTemplate . ".tpl";
-			} else if (file_exists($cLayout3 . $cTemplate2 . $cTemplate . ".tpl")) { //in a folder
+			} else if (file_exists($cLayout3 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
 				$cFinal = $cLayout3 . $cTemplate2 . $cTemplate . ".tpl";
 			}
 		}
@@ -155,8 +155,8 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = $cLayout2 . $cTemplate . $cExtra . ".tpl";
 			} else if (file_exists($cLayout2 . $cTemplate . ".tpl")) { //normal
 				$cFinal = $cLayout2 . $cTemplate . ".tpl";
-			} else if (file_exists($cLayout2 . $cTemplate2 . $cTemplate . ".tpl")) { //in a folder
-				$cFinal = $cLayout2 . $cTemplate2 . $cTemplate . ".tpl";
+			} else if (file_exists($cLayout2 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
+				$cFinal = $cLayout2 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl";
 			}
 		}
 
@@ -167,7 +167,7 @@ class Template_Layout extends Template_Abstract {
 			} else if (file_exists($cLayout1 . $cTemplate . ".tpl")) { //normal
 				$cFinal = $cLayout1 . $cTemplate . ".tpl";
 			} else if (file_exists($cLayout1 . $cTemplate2 . $cTemplate . ".tpl")) { //in a folder
-				$cFinal = $cLayout1 . $cTemplate2 . $cTemplate . ".tpl";
+				$cFinal = $cLayout1 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl";
 			}
 		}
 
