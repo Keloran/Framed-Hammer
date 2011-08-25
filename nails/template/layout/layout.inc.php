@@ -87,21 +87,27 @@ class Template_Layout extends Template_Abstract {
 		//does the page have a layout folder
 		if ($this->cPage) {
 			if (is_dir(PAGES . $this->cPage . $cLayout)) {
-				$cLayout1		= PAGES . $this->cPage . $cLayout;
+				$cLayout1	= PAGES . $this->cPage . $cLayout;
+			} else if (is_dir(PAGES . $this->cPage . $cNewLayout)) {
+				$cLayout1	= PAGES . $this->cPage . $cNewLayout;
 			}
 		}
 
 		//is it an action layout
 		if ($this->cAction) {
 			if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cLayout)) {
-				$cLayout2		= PAGES . $this->cPage . $cSep . $this->cAction . $cLayout;
+				$cLayout2	= PAGES . $this->cPage . $cSep . $this->cAction . $cLayout;
+			} else if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cNewLayout)) {
+				$cLayout2	= PAGES . $this->cPage . $cSep . $this->cAction . $cNewLayout;
 			}
 		}
 
 		//is it a choice layout
 		if ($this->cChoice) {
 			if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cLayout)) {
-				$cLayout3		= PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cLayout;
+				$cLayout3	= PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cLayout;
+			} else if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cNewLayout)) {
+				$cLayout3	= PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cNewLayout;
 			}
 		}
 
@@ -113,6 +119,9 @@ class Template_Layout extends Template_Abstract {
 				//does it have a layout folder
 				if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $cParam . $cLayout)) {
 					$cLayout4 = PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $cParam . $cLayout;
+					break;
+				} else if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $cParam . $cNewLayout)) {
+					$cLayout4 = PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $cParam . $cNewLayout;
 					break;
 				}
 			}
