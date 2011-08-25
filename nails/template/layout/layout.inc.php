@@ -89,7 +89,7 @@ class Template_Layout extends Template_Abstract {
 			if (is_dir(PAGES . $this->cPage . $cLayout)) {
 				$cLayout1	= PAGES . $this->cPage . $cLayout;
 			} else if (is_dir(PAGES . $this->cPage . $cNewLayout)) {
-				$cLayout1	= PAGES . $this->cPage . $cLayout;
+				$cLayout1	= PAGES . $this->cPage . $cNewLayout;
 			}
 		}
 
@@ -166,7 +166,7 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = $cLayout1 . $cTemplate . $cExtra . ".tpl";
 			} else if (file_exists($cLayout1 . $cTemplate . ".tpl")) { //normal
 				$cFinal = $cLayout1 . $cTemplate . ".tpl";
-			} else if (file_exists($cLayout1 . $cTemplate2 . $cTemplate . ".tpl")) { //in a folder
+			} else if (file_exists($cLayout1 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
 				$cFinal = $cLayout1 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl";
 			}
 		}
