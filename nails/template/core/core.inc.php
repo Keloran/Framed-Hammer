@@ -166,7 +166,7 @@ class Template_Core extends Template_Abstract {
 				"Final"		=> $cFinal,
 				"Template1"	=> $cTemplate,
 				"Template2"	=> $cTemplate2,
-				"FullPath"	=> (SITEPATH . $cLayout . $cTemplate2 . $cTemplate . ".tpl")
+				"FullPath"	=> (SITEPATH . $cLayout . $cTemplate2 . $cTemplate . ".php")
 			);
 			printRead($a);
 			die();
