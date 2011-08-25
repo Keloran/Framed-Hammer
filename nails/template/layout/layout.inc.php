@@ -89,7 +89,7 @@ class Template_Layout extends Template_Abstract {
 			if (is_dir(PAGES . $this->cPage . $cLayout)) {
 				$cLayout1	= PAGES . $this->cPage . $cLayout;
 			} else if (is_dir(PAGES . $this->cPage . $cNewLayout)) {
-				$cLayout1	= PAGES . $this->cPage . $cNewLayout;
+				$cLayout1	= PAGES . $this->cPage . $cLayout;
 			}
 		}
 
@@ -98,7 +98,7 @@ class Template_Layout extends Template_Abstract {
 			if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cLayout)) {
 				$cLayout2	= PAGES . $this->cPage . $cSep . $this->cAction . $cLayout;
 			} else if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cNewLayout)) {
-				$cLayout2	= PAGES . $this->cPage . $cSep . $this->cAction . $cNewLayout;
+				$cLayout2	= PAGES . $this->cPage . $cSep . $this->cAction . $cLayout;
 			}
 		}
 
@@ -107,7 +107,7 @@ class Template_Layout extends Template_Abstract {
 			if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cLayout)) {
 				$cLayout3	= PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cLayout;
 			} else if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cNewLayout)) {
-				$cLayout3	= PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cNewLayout;
+				$cLayout3	= PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cLayout;
 			}
 		}
 
@@ -121,7 +121,7 @@ class Template_Layout extends Template_Abstract {
 					$cLayout4 = PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $cParam . $cLayout;
 					break;
 				} else if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $cParam . $cNewLayout)) {
-					$cLayout4 = PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $cParam . $cNewLayout;
+					$cLayout4 = PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $cParam . $cLayout;
 					break;
 				}
 			}
