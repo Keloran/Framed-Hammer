@@ -106,6 +106,8 @@ class Template_Core extends Template_Abstract {
 				$cFinal = $cLayout4 . $cTemplate . $cExtra . ".php";
 			} else if (file_exists($cLayout4 . $cTemplate . ".php")) { //normal
 				$cFinal = $cLayout4 . $cTemplate . ".php";
+			} else if (file_exists($cLayout4 . $cTemplate2 . $cTemplate . ".php")) { //inside a folder
+				$cFinal = $cLayout4 . $cTemplate2 . $cTemplate . ".php";
 			}
 		}
 
@@ -115,6 +117,8 @@ class Template_Core extends Template_Abstract {
 				$cFinal = $cLayout3 . $cTemplate . $cExtra . ".php";
 			} else if (file_exists($cLayout3 . $cTemplate . ".php")) { //normal
 				$cFinal = $cLayout3 . $cTemplate . ".php";
+			} else if (file_exists($cLayout3 . $cTemplate2 . $cTemplate . ".php")) { //inside a folder
+				$cFinal = $cLayout3 . $cTemplate2 . $cTemplate . ".php";
 			}
 		}
 
@@ -124,6 +128,8 @@ class Template_Core extends Template_Abstract {
 				$cFinal = $cLayout2 . $cTemplate . $cExtra . ".php";
 			} else if (file_exists($cLayout2 . $cTemplate . ".php")) { //normal
 				$cFinal = $cLayout2 . $cTemplate . ".php";
+			} else if (file_exists($cLayout2 . $cTemplate2 . $cTemplate . ".php")) { //inside a folder
+				$cFinal = $cLayout2 . $cTemplate2 . $cTemplate . ".php";
 			}
 		}
 
@@ -133,6 +139,8 @@ class Template_Core extends Template_Abstract {
 				$cFinal = $cLayout1 . $cTemplate . $cExtra . ".php";
 			} else if (file_exists($cLayout1 . $cTemplate . ".php")) { //normal
 				$cFinal = $cLayout1 . $cTemplate . ".php";
+			} else if (file_exists($cLayout1 . $cTemplate2 . $cTemplate . ".php")) { //inside a folder
+				$cFinal = $cLayout1 . $cTemplate2 . $cTemplate . ".php";
 			}
 		}
 
@@ -142,7 +150,7 @@ class Template_Core extends Template_Abstract {
 				$cFinal = SITEPATH . $cLayout . $cTemplate . $cExtra . ".php";
 			} else if (file_exists(SITEPATH . $cLayout . $cTemplate . ".php")) { //normal
 				$cFinal = SITEPATH . $cLayout . $cTemplate . ".php";
-			} else if (file_exists(SITEPATH . $cLayout . $cTemplate2 . $cTemplate . ".php")) {
+			} else if (file_exists(SITEPATH . $cLayout . $cTemplate2 . $cTemplate . ".php")) { //inside a folder
 				$cFinal = SITEPATH . $cLayout . $cTemplate2 . $cTemplate . ".php";
 			}
 		}
