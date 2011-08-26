@@ -302,8 +302,20 @@ class Hammer {
      * @return mixed
      */
     public function getParam($mName) {
+    	if (!function_exists("getParam")) { include HAMMERPATH . "/functions/address.php"; }
     	return getParam($mName);
     }
+
+	/**
+	 * Hammer::getPost()
+	 *
+	 * @param string $mName
+	 * @return mixed
+	 */
+	public function getPost($mName) {
+		if (!function_exists("getPost")) { include HAMMERPATH . "/functions/address.php"; }
+		return getPost($mName);
+	}
 
     /**
      * Hammer::getDatabase()
@@ -550,7 +562,7 @@ class Hammer {
 	 */
 	public function getCookie($cCookie = null) {
 		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
-		
+
     		$mHead = $this->getConfig("title");
 
 	  	if (isset($mHead['title'])) {
@@ -578,7 +590,7 @@ class Hammer {
 			$this->bSiteCookie = true;
 			return $cCookie;
 		}
-		
+
 		return false;
 	}
 

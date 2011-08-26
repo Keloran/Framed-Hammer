@@ -35,11 +35,7 @@ function removeEndSlash() {
  */
 function getParam($mName) {
 	$cReturn	= false;
-
-	if (isset($_GET[$mName])) {
-		#$this->cOther	= $_GET[$mName];
-		$cReturn		= $_GET[$mName];
-	}
+	if (isset($_GET[$mName])) { $cReturn = $_GET[$mName]; }
 
 	return $cReturn;
 }
@@ -56,4 +52,17 @@ function getAddress($aFilters = false, $cSiteAddress = false) {
 	$oScrewDriver = new Screwdriver($aFilters, $cSiteAddress);
 
 	return $oScrewDriver->finalAddress();
+}
+
+/**
+ * getPost()
+ *
+ * @param string $mName
+ * @return mixed
+ */
+function getPost($mName) {
+	$cReturn	= false;
+	if (isset($_POST[$cName])) { $cReturn = $_POST[$cName]; }
+
+	return $cReturn;
 }
