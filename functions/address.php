@@ -62,7 +62,7 @@ function getAddress($aFilters = false, $cSiteAddress = false) {
  */
 function getPost($mName) {
 	$cReturn	= false;
-	if (isset($_POST[$cName])) { $cReturn = $_POST[$cName]; }
+	if (isset($_POST[$mName])) { $cReturn = $_POST[$mName]; }
 
 	return $cReturn;
 }
