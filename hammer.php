@@ -299,27 +299,6 @@ class Hammer {
 	}
 
     /**
-     * Hammer::getParam()
-     *
-     * @desc This is for paramaters on an address, e.g. framedhammer.com/?rand=1
-     * @param mixed $mName
-     * @return mixed
-     */
-    public function getParam($mName) {
-    	return $this->getParam($mName);
-    }
-
-	/**
-	 * Hammer::getPost()
-	 *
-	 * @param string $mName
-	 * @return mixed
-	 */
-	public function getPost($mName) {
-		return $this->getPost($mName);
-	}
-
-    /**
      * Hammer::getDatabase()
      *
      * @desc This gets the database object

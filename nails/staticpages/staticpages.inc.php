@@ -9,6 +9,9 @@
  * @access public
  */
 class StaticPages {
+	//Traits
+	use Address;
+
 	private $oNails		= false;
 
 	public $cStaticPage		= false;
@@ -26,11 +29,11 @@ class StaticPages {
 	private function __construct(Nails $oNails) {
 		$this->oNails		= $oNails;
 
-		if (getParam("static")) {
-			$this->cStaticPage	= $this->oNails->getParam("static");
+		if ($this->getParam("static")) {
+			$this->cStaticPage	= $this->getParam("static");
 			$this->bSite		= false;
-		} else if (getParam("site")) {
-			$this->cStaticPage	= $this->oNails->getParam("site");
+		} else if ($this->getParam("site")) {
+			$this->cStaticPage	= $this->getParam("site");
 			$this->bSite		= true;
 		}
 
