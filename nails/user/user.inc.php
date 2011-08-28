@@ -10,7 +10,7 @@
  */
 class User implements Nails_Interface {
 	//Traits
-	use Security, Cookie, Email;
+	use Security, Cookie, Mailer;
 
 	public $iUserID     = false;
 	public $iGroupID    = false;

@@ -10,7 +10,7 @@
  */
 class Email implements Nails_Interface {
 	//Traits
-	use Email;
+	use Mailer;
 
 	private $pIMAP		= false;
 	private $oMailDB	= false;

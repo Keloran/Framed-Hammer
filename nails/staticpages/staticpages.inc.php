@@ -10,7 +10,7 @@
  */
 class StaticPages {
 	//Traits
-	use Address, Email;
+	use Address, Mailer;
 
 	private $oNails		= false;
 

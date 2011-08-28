@@ -1,6 +1,6 @@
 <?php
 /**
- * Email
+ * Mailer
  *
  * @package
  * @author Keloran
@@ -8,7 +8,7 @@
  * @version $Id$
  * @access public
  */
-trait Email {
+trait Mailer {
 	/**
 	 * sendMail()
 	 *
