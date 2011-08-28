@@ -1,6 +1,6 @@
 <?php
 if (!class_exists("screws")) { include "screws.php"; } //include the autoloader
-if (!function_exists("visitorIP")) { include "hammer.fn.php"; } //to include the standard hammer functons
+if (!function_exists("visitorIP")) { include HAMMERPATH . "/functions/hammer.php"; } //to include the standard hammer functons
 
 /**
  * Spanner
