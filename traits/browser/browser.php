@@ -143,7 +143,7 @@ trait Browser {
 	 * @return bool
 	 */
 	function mobileBrowser($mBrowser = false) {
-		if (!$mBrowser) { $mBrowser = getBrowser(); }
+		if (!$mBrowser) { $mBrowser = $this->getBrowser(); }
 
 		$bReturn	= false;
 
@@ -176,7 +176,7 @@ trait Browser {
 	 * @return bool
 	 */
 	function IEBrowser($mBrowser = false) {
-		if (!$mBrowser) { $mBrowser = getBrowser(); }
+		if (!$mBrowser) { $mBrowser = $this->getBrowser(); }
 
 		$bReturn = false;
 
