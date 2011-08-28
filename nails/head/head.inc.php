@@ -42,8 +42,6 @@ class Head {
      *
      */
 	private function __construct(Nails $oNails, $cStyle = false, $bNoInstall = null) {
-		//if (!function_exists("getBrowser")) { include HAMEMRPATH . "/functions/browser.php"; }
-
 		$this->oNails	= $oNails;
 		$this->oDB	= $this->oNails->oDB;
 

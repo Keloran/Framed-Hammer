@@ -9,6 +9,9 @@
  * @access public
  */
 class Template_Page extends Template_Abstract {
+	//Traits
+	use Browser;
+
 	public $aParams;
 	public $cTemplate;
 
@@ -112,8 +115,6 @@ class Template_Page extends Template_Abstract {
 	 * @return string
 	 */
 	public function setTemplate($cTemplate = null, $cAltPage = null) {
-		if (!function_exists("getBrowser")) { include HAMMERPATH . "/functions/browser.php"; }
-
 		$cPath		= false;
 		$cReturn	= false;
 		$cSep		= "/";
@@ -129,9 +130,9 @@ class Template_Page extends Template_Abstract {
 		if (!$this->cFolder) { $this->cFolder = "/templates/"; }
 
 		//get the mobile pages
-		if (getBrowser("iphone")) {
+		if ($this->getBrowser("iphone")) {
 			$cExtra = "_iphone";
-		} else if (getBrowser("android")) {
+		} else if ($this->getBrowser("android")) {
 			$cExtra = "_android";
 		}
 
