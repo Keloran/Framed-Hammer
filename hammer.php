@@ -10,7 +10,7 @@
  */
 class Hammer {
 	//Traits
-	use address;
+	use Address;
 
 
 	/**

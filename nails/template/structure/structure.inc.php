@@ -9,6 +9,9 @@
  * @access public
  */
 class Template_Structure extends Template_Abstract {
+	//Traits
+	use Address;
+
 	public $aParams;
 	public $cTemplate;
 
@@ -84,7 +87,7 @@ class Template_Structure extends Template_Abstract {
 
 		//is it a mobile device, and
 		$bMobile 	= mobileBrowser();
-		$bUseNormal	= getParam("useNormal") ?: getCookie("useNormal") ?: false;
+		$bUseNormal	= $this->getParam("useNormal") ?: getCookie("useNormal") ?: false;
 
 		//The structure name
 		if ($cTemplate) {
