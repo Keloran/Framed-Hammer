@@ -9,6 +9,9 @@
  * @access public
  */
 class Head {
+	//Traits
+	use Browser;
+
 	public $cDocType	= "xhtml";
 
 	//jQuery
@@ -97,9 +100,9 @@ class Head {
 	    	}
 		}
 
-		$mBrowser	= getBrowser();
-		$this->bMobile	= mobileBrowser($mBrowser);
-		$this->bWarning = IEBrowser($mBrowser);
+		$mBrowser		= $this->getBrowser();
+		$this->bMobile	= $this->mobileBrowser($mBrowser);
+		$this->bWarning = $this->IEBrowser($mBrowser);
 
 		//get the default warnings
 		if (ini_get("register_globals")) { 			$this->cWarnings	.= "You have register_globals turned on, this is a bad idea, turn it off<br />\n"; }
@@ -502,7 +505,7 @@ class Head {
 		}
 
         // Here so it overrides the default style
-        $mBrowser = getBrowser();
+        $mBrowser = $this->getBrowser();
         $cCSS .= $this->getBrowserCSS($mBrowser, $cStyled);
 
     	//a page structure overrides the css

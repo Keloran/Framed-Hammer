@@ -9,6 +9,9 @@
  * @access public
  */
 class Session_Robots {
+	//Traits
+	use Browser;
+
 	static $oRobots;
 
 	public $cError;
@@ -93,7 +96,8 @@ class Session_Robots {
 		$aInsert	= false;
 
 		if (isset($_SERVER['HTTP_USER_AGENT'])) {
-			$cBrowser = $_SERVER['HTTP_USER_AGENT'];
+			//$cBrowser = $_SERVER['HTTP_USER_AGENT'];
+			$cBrowser	= $this->getBrowser();
 
 			//Get the robotname and
 			$cPattern	= "`(\()(.+?)((?:http://)([a-zA-Z0-9\-_.\/]+))(\))`is";

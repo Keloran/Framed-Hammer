@@ -9,6 +9,9 @@
  * @access public
  */
 class Charts {
+	//Traits
+	use Browser
+
 	var $aPreData 	= false;
 
 	var $iChartType	= 1; //1 = Pie, 2 = BarH, 3 = BarV
@@ -31,7 +34,7 @@ class Charts {
 	function __construct(Nails $oNails, $cType = false) {
 		$this->oNails	= $oNails;
 
-		$cBrowser	= getBrowser();
+		$cBrowser	= $this->getBrowser();
 
 		switch($cBrowser){
 			case "ie6":
@@ -100,12 +103,12 @@ class Charts {
 		//go through the data and make it percentage
 		foreach ($this->aPreData as $cKey => $oObject){
 			$iValue = $oObject->iValue;
-			if ($iValue == 0) { 
-				$iValue = 0.001; 
+			if ($iValue == 0) {
+				$iValue = 0.001;
 			} else {
 				$iValue = ($iValue - 0.001);
 			}
-			
+
 			$oObject->iPercentLegend	= round(($iValue / $iSum) * 100, 2);
 			$oObject->iPercent		= round(($iValue / $iSum) * 100, 3);
 

@@ -9,6 +9,9 @@
  * @access public
  */
 class Footer implements Nails_Interface {
+	//Traits
+	use Browser;
+
 	//This gets set during the construct
 	private $oNails;
 	private $oDB;
@@ -23,15 +26,13 @@ class Footer implements Nails_Interface {
 	 * @param Nails $oNails
 	 */
 	private function __construct(Nails $oNails, $bNoInstall = null) {
-		if (!function_exists("getBrowser")) { include HAMMERPATH . "/functions/browser.php"; }
-
 		if (!$bNoInstall) {
 			$this->oNails	= $oNails;
 			$this->oDB		= $oNails->getDatabase();
 		}
 
-		$mBrowser 	= getBrowser();
-		$this->bMobile	= mobileBrowser($mBrowser);
+		$mBrowser 		= $this->getBrowser();
+		$this->bMobile	= $this->mobileBrowser($mBrowser);
 	}
 
 	/**
