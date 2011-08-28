@@ -9,6 +9,10 @@
  * @access public
  */
 class Hammer {
+	//Traits
+	use address;
+
+
 	/**
 	* @var object $oHammer
 	*/
@@ -302,8 +306,7 @@ class Hammer {
      * @return mixed
      */
     public function getParam($mName) {
-    	if (!function_exists("getParam")) { include HAMMERPATH . "/functions/address.php"; }
-    	return getParam($mName);
+    	return $this->getParam($mName);
     }
 
 	/**
@@ -313,8 +316,7 @@ class Hammer {
 	 * @return mixed
 	 */
 	public function getPost($mName) {
-		if (!function_exists("getPost")) { include HAMMERPATH . "/functions/address.php"; }
-		return getPost($mName);
+		return $this->getPost($mName);
 	}
 
     /**

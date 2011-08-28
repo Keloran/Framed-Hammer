@@ -1001,7 +1001,7 @@ class Form {
 	 * @return mixed
 	 */
 	public function getValue($mName, $bFile = false, $iName = false) {
-		$cType	= false;
+		$cType		= false;
 		$bObject	= $this->bObject;
 
 		if (is_array($mName)) {
@@ -1014,6 +1014,11 @@ class Form {
 					case "type":
 						$cType = $cValue;
 						break;
+
+					case "object":
+						$bObject = $cValue;
+						break;
+
 				}
 			}
 		} else {
