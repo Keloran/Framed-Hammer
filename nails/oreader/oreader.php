@@ -9,6 +9,9 @@
  * @access public
  */
 class oReader {
+	//Traits
+	use Security;
+
 	private $aData;
 
 	/**
@@ -255,18 +258,6 @@ class oReader {
 		if (isset($this->aData[$cName])) { $mReturn = $this->aData[$cName]; }
 
 		return $mReturn;
-	}
-
-	/**
-	 * oReader::hideProtected()
-	 *
-	 * @desc Used to hide passwords
-	 * @param string $cString
-	 * @return string
-	 */
-	private function hideProtected($cString) {
-		$cReturn	= preg_replace('`(=>)(.*)`is', "\1**Protected**<br />", $cString);
-		return $cReturn;
 	}
 
 	/**

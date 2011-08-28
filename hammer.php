@@ -10,7 +10,7 @@
  */
 class Hammer {
 	//Traits
-	use Address;
+	use Address, Cookie;
 
 
 	/**
@@ -275,12 +275,12 @@ class Hammer {
 	}
 
 	/**
-	* Hammer::getAddress()
+	* Hammer::debugAddress()
 	*
 	* @desc This is for debugging purposes only
 	* @return string
 	*/
-	public function getAddress() {
+	public function debugAddress() {
 		$cReturn	= "<hr />";
 		$cReturn	.= "Page: " . trim($this->cPage) . "<br />";
 		$cReturn	.= "Action: " . $this->cAction . "<br />";
@@ -534,46 +534,6 @@ class Hammer {
         $this->sendLocation();
     }
 
-	/**
-	 * Hammer::getCookie()
-	 *
-	 * @desc Get the cookies value
-	 * @param string $cCookie Name of the cookie
-	 * @return mixed
-	 */
-	public function getCookie($cCookie = null) {
-		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
-
-    		$mHead = $this->getConfig("title");
-
-	  	if (isset($mHead['title'])) {
-    			$cSiteTitle = str_replace(" ", "_", $mHead['title']);
-	    	} else {
-			if (is_array($mHead)) {
-				$cSiteTitle	= str_replace(" ", "_", $mHead[0]);
-			} else {
-		    		$cSiteTitle	= str_replace(" ", "_", $mHead);
-			}
-	    	}
-
-		//Cookies
-        	if ($cCookie) {
-			$cCookie = getCookie($cCookie);
-			if ($cCookie) {
-				$this->bSiteCookie = true;
-				return $cCookie;
-            		}
-	        }
-
-		//No cookie chosen
-		$cCookie = getCookie($cSiteTitle);
-		if ($cCookie) {
-			$this->bSiteCookie = true;
-			return $cCookie;
-		}
-
-		return false;
-	}
 
 	/**
 	 * Hammer::getTemplate()
