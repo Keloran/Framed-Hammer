@@ -9,6 +9,9 @@
  * @access public
  */
 class News implements Nails_Interface {
+	//Traits
+	use Text;
+
 	private $oUser;
 	private $oSession;
 	private $oNails;
@@ -204,7 +207,7 @@ class News implements Nails_Interface {
 			if (strlen($this->oDB->f('cContent')) < $iMinLength) {
 				$aReturn[$i]['cContent'] = $this->oDB->f('cContent');
 			} else {
-				$aReturn[$i]['cContent'] = shrinkThis($this->oDB->f('cContent'), $iMinLength);
+				$aReturn[$i]['cContent'] = $this->shrinkThis($this->oDB->f('cContent'), $iMinLength);
 			}
 
 			//removed the hungarian to keep inline with other nails, but keep back-compat
@@ -287,7 +290,7 @@ class News implements Nails_Interface {
             if (strlen($this->oDB->f('cContent')) < $iMinLength) {
                 $aReturn[$i]['cContent'] = $this->oDB->f('cContent');
             } else {
-            	$aReturn[$i]['cContent'] = shrinkThis($this->oDB->f('cContent'), $iMinLength);
+            	$aReturn[$i]['cContent'] = $this->shrinkThis($this->oDB->f('cContent'), $iMinLength);
             }
 
             //removed the hungarian to keep inline with other nails, but keep back-compat

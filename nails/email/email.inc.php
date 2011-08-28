@@ -10,7 +10,7 @@
  */
 class Email implements Nails_Interface {
 	//Traits
-	use Mailer;
+	use Mailer, Text;
 
 	private $pIMAP		= false;
 	private $oMailDB	= false;
@@ -818,7 +818,7 @@ class Email implements Nails_Interface {
 			$cReturn	= $this->getHeaderDetails($cHeader, "From", true);
 
 			if (strstr($cReturn, "<")) {
-				$cReturn	= stribet($cReturn, "<", ">");
+				$cReturn	= $this->stribet($cReturn, "<", ">");
 			}
 
 			if (strstr($cReturn, "(")) {
