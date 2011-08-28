@@ -9,6 +9,9 @@
  * @access public
  */
 class Email implements Nails_Interface {
+	//Traits
+	use Email;
+
 	private $pIMAP		= false;
 	private $oMailDB	= false;
 	private $oNails		= null;
@@ -1420,7 +1423,7 @@ class Email implements Nails_Interface {
 	 * @return bool
 	 */
 	public function sendEmail($cTo, $cSubject, $cContent, $cContentText) {
-		return sendEmail($cTo, $cSubject, $cContent, $cContentText, $this->cUser, $this->cName, $this->cUser);
+		return $this->sendMail($cTo, $cSubject, $cContent, $cContentText, $this->cUser, $this->cName, $this->cUser);
 	}
 
 	/**

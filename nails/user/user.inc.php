@@ -9,7 +9,8 @@
  * @access public
  */
 class User implements Nails_Interface {
-	use Security, Cookie;
+	//Traits
+	use Security, Cookie, Email;
 
 	public $iUserID     = false;
 	public $iGroupID    = false;
@@ -630,7 +631,7 @@ class User implements Nails_Interface {
 		if (defined("DEV") && defined("NOMAIL")) {
 			throw new Spanner($cMessage, 600);
 		} else {
-			sendEmail($cEmail, $cTitle, $cMessage, "Admin", "admin@" . $cAddress);
+			$this->sendMail($cEmail, $cTitle, $cMessage, "Admin", "admin@" . $cAddress);
 		}
     }
 
@@ -657,7 +658,7 @@ class User implements Nails_Interface {
 		if (defined("DEV") && defined("NOMAIL")) {
 			throw new Spanner($cMessage, 601);
 		} else {
-			sendEmail($cEmail, $cTitle, $cMessage, "Admin", "admin@" . $oHead->aHead['address']);
+			$this->sendMail($cEmail, $cTitle, $cMessage, "Admin", "admin@" . $oHead->aHead['address']);
 		}
 	}
 
@@ -875,7 +876,7 @@ class User implements Nails_Interface {
             $cMessage   = "Your password has been reset to a " . $cNewPass . "\n";
             $cMessage   .= "You can change this now, by going to settings\n";
 
-			sendEmail($cEmail, $cTitle, $cMessage, $cMessage, "admin@" . $cAddress, $cSiteTitle . " Admin");
+			$this->sendMail($cEmail, $cTitle, $cMessage, $cMessage, "admin@" . $cAddress, $cSiteTitle . " Admin");
         }
     }
 

@@ -10,7 +10,7 @@
  */
 class StaticPages {
 	//Traits
-	use Address;
+	use Address, Email;
 
 	private $oNails		= false;
 
@@ -112,6 +112,6 @@ class StaticPages {
 		$a = array($cEmail, $cAddress, $cTitle, $cText);
 		//printRead($a);die();
 
-		sendEmail($cEmail, "Site Offline", $cText, $cText, "emergency@" . $cAddress, $cTitle);
+		$this->sendMail($cEmail, "Site Offline", $cText, $cText, "emergency@" . $cAddress, $cTitle);
 	}
 }
