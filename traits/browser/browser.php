@@ -74,7 +74,7 @@ trait Browser {
 	 */
 	function getBrowser($cSpecific = null) {
 		$mBrowser 		= false;
-		$mGetBrowser	= getBrowserCap();
+		$mGetBrowser	= $this->getBrowserCap();
 
 		//this is a better method
 		if ($mGetBrowser) { return $mGetBrowser; }
