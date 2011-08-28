@@ -10,7 +10,7 @@
  */
 class Template_Structure extends Template_Abstract {
 	//Traits
-	use Address;
+	use Address, Cookie;
 
 	public $aParams;
 	public $cTemplate;
@@ -59,7 +59,6 @@ class Template_Structure extends Template_Abstract {
 	 * @return null
 	 */
 	protected function setTemplate($cTemplate = null) {
-		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
 		if (!function_exists("mobileBrowser")) { include HAMMERPATH . "/functions/browser.php"; }
 
 		$this->cNamedTemplate	= $cTemplate;
@@ -87,7 +86,7 @@ class Template_Structure extends Template_Abstract {
 
 		//is it a mobile device, and
 		$bMobile 	= mobileBrowser();
-		$bUseNormal	= $this->getParam("useNormal") ?: getCookie("useNormal") ?: false;
+		$bUseNormal	= $this->getParam("useNormal") ?: $this->getCookie("useNormal") ?: false;
 
 		//The structure name
 		if ($cTemplate) {

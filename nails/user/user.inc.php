@@ -9,7 +9,7 @@
  * @access public
  */
 class User implements Nails_Interface {
-	use Security;
+	use Security, Cookie;
 
 	public $iUserID     = false;
 	public $iGroupID    = false;
@@ -32,8 +32,6 @@ class User implements Nails_Interface {
      * @access protected
      */
     private function __construct(Nails $oNails, $bNoInstall = null) {
-		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
-
 		$this->oNails	= $oNails;
 		$this->oDB		= $this->oNails->getDatabase();
 		$this->cPage	= $oNails->cPage;
@@ -89,7 +87,7 @@ class User implements Nails_Interface {
     	}
 
 		//Cookie
-        $this->cCookie = getCookie("userCookie");
+        $this->cCookie = $this->getCookie("userCookie");
         if ($this->cCookie) {
         	$this->iUserID  = $this->getID();
         	$this->iGroupID = $this->getGroupID();
@@ -273,8 +271,6 @@ class User implements Nails_Interface {
      * @return mixed
      */
     public function getUserID($cCookie = false, $bIsHash = false) {
-	if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
-
         if ($bIsHash) {
             $cCookieHash = $cCookie;
         } else {
@@ -283,7 +279,7 @@ class User implements Nails_Interface {
         		return $this->iUserID;
         	} else {
         		if ($cCookie) {
-	            	$cCookieHash	= getCookie($cCookie);
+	            	$cCookieHash	= $this->getCookie($cCookie);
 	        	} else {
 	        		$cCookieHash	= $this->cCookie;
 	        	}
@@ -692,16 +688,14 @@ class User implements Nails_Interface {
      * @return int
      */
     public function getUserLimit() {
-		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
-
 		if (!$this->iUserID) { return 10; }
 
-		if (getCookie("userLimit")) {
-			return getCookie("userLimit");
+		if ($this->getCookie("userLimit")) {
+			return $this->getCookie("userLimit");
 		} else {
 			$iLimit = $this->getSetting("userLimit");
 			if ($iLimit) {
-				createCookie("userLimit", $iLimit, true);
+				$this->createCookie("userLimit", $iLimit, true);
 				return $iLimit;
 			} else {
 				return 10;

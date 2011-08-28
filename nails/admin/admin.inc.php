@@ -9,6 +9,9 @@
  * @tag value
  */
 class Admin implements Nails_Interface {
+	//Traits
+	use Cookie;
+
 	static $oAdmin;
 
 	private $oNails	= false;
@@ -149,11 +152,9 @@ class Admin implements Nails_Interface {
 	 * @return null
 	 */
 	public function secureLogin($bSecure = null) {
-		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
-
 		//Logged in
-		$bLogged	= getCookie("userCookie");
-		$iAdminLogged	= getCookie("adminLogged");
+		$bLogged		= $this->getCookie("userCookie");
+		$iAdminLogged	= $this->getCookie("adminLogged");
 
 		$cAdminLoc	= $this->oNails->getConfig("adminLocation"); //Get the admin location, e.g. you could put it in /secure/
 		$cAdminPage	= $cAdminLoc ? $cAdminLoc : "admin"; //there is a loc set, or revert to default
@@ -172,7 +173,7 @@ class Admin implements Nails_Interface {
 					$iOld	= time() - 240;
 					if ($iAdminLogged < $iOld) {
 						if ($iAdminLogged) {
-							createCookie("adminLogged", time(), false, 5, $bSecure);
+							$this->createCookie("adminLogged", time(), false, 5, $bSecure);
 						}
 					}
 
@@ -199,16 +200,12 @@ class Admin implements Nails_Interface {
 	 * @return null
 	 */
 	private function insecureAdmin($bSecure = null) {
-		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
-
-		$bLogged = getCookie("userCookie");
+		$bLogged = $this->getCookie("userCookie");
 
 		if ($bLogged) {
-			createCookie("adminLogged", time(), false, 5, $bSecure);
+			$this->createCookie("adminLogged", time(), false, 5, $bSecure);
 		} else {
-			if ($this->oNails->cPage !== "login") {
-				$this->oNails->sendLocation("/login/");
-			}
+			if ($this->oNails->cPage !== "login") { $this->oNails->sendLocation("/login/"); }
 		}
 	}
 

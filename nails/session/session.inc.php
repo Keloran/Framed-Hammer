@@ -9,6 +9,9 @@
  * @access public
  */
 class Session {
+	//Traits
+	use Cookie;
+
 	public $tsLogin		= false;
 	public $tsLastLogin 	= false;
 	public $iUserID		= false;
@@ -26,7 +29,6 @@ class Session {
 	 *
 	 */
 	private function __construct(Nails $oNails) {
-		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
 
 		$this->oNails	= $oNails;
 		$this->oDB		= $oNails->getDatabase();
@@ -42,7 +44,7 @@ class Session {
 			$this->cSited	= $this->oNails->cSite;
 		}
 
-        $this->tsLastLogin = getCookie("lastVisit");
+        $this->tsLastLogin = $this->getCookie("lastVisit");
 
         //get the robot nail
         $this->oRobot		= Session_Robots::getInstance($oNails);
@@ -127,17 +129,17 @@ class Session {
                     $aEscape = array($this->iUserID, session_id(), "Old Session", ip2long($cVisitor), $_SERVER['HTTP_USER_AGENT']);
 
                     $this->oDB->write("INSERT INTO users_sessions (iUserID, cLastSessionID, tsDate, cReason, cIP, cBrowser) VALUES (?, ?, UNIX_TIMESTAMP(), ?, ?, ?)", $aEscape);
-                    createCookie("lastVisit", time(), true);
+                    $this->createCookie("lastVisit", time(), true);
                     $this->tsLastLogin = time();
                 } else {
-                    createCookie("lastVisit", time(), true);
+                    $this->createCookie("lastVisit", time(), true);
 	                $this->tsLastLogin = time();
                 }
             } else {
                 $aEscape = array($this->iUserID, session_id(), "New Session", ip2long($cVisitor), $_SERVER['HTTP_USER_AGENT']);
 
                 $this->oDB->write("INSERT INTO users_sessions (iUserID, cLastSessionID, tsDate, cReason, cIP, cBrowser) VALUES (?, ?, UNIX_TIMESTAMP(), ?, ?, ?)", $aEscape);
-                createCookie("lastVisit", time(), true);
+                $this->createCookie("lastVisit", time(), true);
                 $this->tsLastLogin = time();
             }
 
@@ -163,19 +165,17 @@ class Session {
 	 * @return
 	 */
 	public function setLogin() {
-		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
+	        if (!$this->getCookie("userLogin")) {
+        	    $this->createCookie("userLogin", time());
+		    	$this->tsLogin = time();
 
-	        if (!getCookie("userLogin")) {
-        	    createCookie("userLogin", time());
-		    $this->tsLogin = time();
-
-		    if ($this->iUserID) {
-		    	$cVisitor = visitorIP();
-				$aEscape = array($this->iUserID, session_id(), "Login", ip2long($cVisitor), $_SERVER['HTTP_USER_AGENT']);
-				$this->oDB->write("INSERT INTO users_sessions(iUserID, cLastSessionID, tsDate, cReason, cIP, cBrowser) VALUES (?, ?, UNIX_TIMESTAMP(), ?, ?, ?)", $aEscape);
-		    }
+		    	if ($this->iUserID) {
+		    		$cVisitor = visitorIP();
+					$aEscape = array($this->iUserID, session_id(), "Login", ip2long($cVisitor), $_SERVER['HTTP_USER_AGENT']);
+					$this->oDB->write("INSERT INTO users_sessions(iUserID, cLastSessionID, tsDate, cReason, cIP, cBrowser) VALUES (?, ?, UNIX_TIMESTAMP(), ?, ?, ?)", $aEscape);
+		    	}
 	        } else {
-        	    $this->tsLogin = getCookie("userLogin");
+        	    $this->tsLogin = $this->getCookie("userLogin");
 	        }
 
 		//regenerate the id again

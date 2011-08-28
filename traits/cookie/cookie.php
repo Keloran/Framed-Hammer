@@ -16,10 +16,7 @@ trait Cookie {
 	 * @return bool
 	 */
 	function getCookie($cCookie = null) {
-		//Cookies
-		if ($cCookie) {
-			if (isset($_COOKIE[$cCookie])) { return $_COOKIE[$cCookie]; }
-		}
+		if (isset($_COOKIE[$cCookie])) { return $_COOKIE[$cCookie]; }
 
 		return false;
 	}
@@ -68,5 +65,33 @@ trait Cookie {
 		} else {
 			setcookie($cName, $mValue, $iTime, "/", $cServer, $bSecure);
 		}
+	}
+
+	/**
+	 * destroyCookie()
+	 *
+	 * @param string $cName
+	 * @return null
+	 */
+	public function destroyCookie($cName) {
+		if (isset($_SERVER['HTTP_HOST'])) {
+			$cServer = $_SERVER['HTTP_HOST'];
+		} else {
+			$cServer	= $this->getConfig("address");
+		}
+
+		//is the page actually a https
+		$bSecure = false;
+		if (isset($_SERVER['HTTPS'])) { $bSecure = true; }
+
+		$cServer = "." . $cServer;
+
+		if (defined("DEV")) {
+			setcookie($cName, "", time()-50000, "/");
+		} else {
+			setcookie($cName, "", time()-50000, "/", $cServer, $bSecure);
+		}
+
+		Hammer::sendLocation();
 	}
 }

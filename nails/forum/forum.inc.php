@@ -9,6 +9,9 @@
  * @access public
  */
 class Forum implements Nails_Interface {
+	//Traits
+	use Cookie;
+
     public $oUser		= false;
     public $oSession	= false;
 	public $oNails		= false;
@@ -645,8 +648,6 @@ class Forum implements Nails_Interface {
 	 * @return
 	 */
 	public function getLastVisit() {
-		if (!function_exists("getCookie")) { include HAMMERPATH . "/functions/cookie.php"; }
-
 		$this->oDB->read("
 			SELECT forums_replys.iReplyID
 			FROM forums_replys
@@ -666,7 +667,7 @@ class Forum implements Nails_Interface {
 			$iTotal = $this->oDB->f('total');
 		}
 
-		$aRead = array($this->iTopicID, getCookie("lastVisit"));
+		$aRead = array($this->iTopicID, $this->getCookie("lastVisit"));
 		$this->oDB->read("
 			SELECT forums_replys.iReplyID
 			FROM forums_replys
