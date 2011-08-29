@@ -429,7 +429,30 @@ class User implements Nails_Interface {
      * @param string $cEmail
      * @return bool
      */
-    public function register($cUsername, $cPassword, $cPassword2, $cEmail) {
+    public function register($mUsername, $cPassword = false, $cPassword2 = false, $cEmail = false) {
+    	if (is_array($mUsername)) {
+    		foreach ($mUsername as $mKey => $mValue) {
+    			switch ($mKey){
+    				case "username":
+    					$cUsername	= $mValue;
+    					break;
+
+    				case "password":
+    					$cPassword = $mValue;
+    					break;
+
+    				case "password2":
+    					$cPassword2 = $mValue;
+    					break;
+
+    				case "email":
+    					$cEmail	= $mValue;
+    					break;
+
+    			}
+    		}
+    	}
+
 		$bExists = $this->checkExists($cUsername);
 
 		//does the username already exist
