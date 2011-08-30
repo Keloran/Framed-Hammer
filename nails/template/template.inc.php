@@ -379,7 +379,7 @@ class Template extends Template_Abstract {
 		} else {
 			$this->oForms			= new Form($this);
 			$this->bFormAdded		= true;
-			$this->oForms->bObject	= $bObject;
+			$this->oForms->bObject	= $mObject;
 		}
 
 		return $this->oForms;
