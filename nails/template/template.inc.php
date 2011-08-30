@@ -219,7 +219,7 @@ class Template extends Template_Abstract {
 		$oStruct->setTemplate($cStructure);
 		$oStruct->createTemplate();
 		$this->bCalled	= true;
-		
+
 		return $oStruct->renderTemplate(); //render the actual site/layout
 	}
 
@@ -369,13 +369,17 @@ class Template extends Template_Abstract {
      * Template::addForm()
      *
      * @desc Add a form to the template
-     * @var bool $bObject do you want the form to return objects
-     * @return
+     * @var mixed $mObject do you want the form to return objects, or is it an object itself
+     * @return object
      */
-	public function addForm($bObject = false) {
-		$this->oForms			= new Form($this);
-		$this->bFormAdded		= true;
-		$this->oForms->bObject	= $bObject;
+	public function addForm($mObject = false) {
+		if (is_object($mObject)) {
+			$this->oForms	= $mObject;
+		} else {
+			$this->oForms			= new Form($this);
+			$this->bFormAdded		= true;
+			$this->oForms->bObject	= $bObject;
+		}
 
 		return $this->oForms;
 	}
