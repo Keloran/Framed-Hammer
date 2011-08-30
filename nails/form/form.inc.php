@@ -37,28 +37,30 @@ class Form {
 	 * Form::__construct()
 	 *
 	 */
-	public function __construct(Template $oTemplate) {
+	public function __construct($oTemplate = false) {
 		$this->oTemplate	= null;
 		$this->oTemplate	= $oTemplate;
 
-		$this->oNails		= null;
-		$this->oNails		= $this->oTemplate->oNails;
-		$this->cFile		= $this->oTemplate->cFormTemplate;
+		if ($oTemplate instanceof Template) {
+			$this->oNails		= null;
+			$this->oNails		= $this->oTemplate->oNails;
+			$this->cFile		= $this->oTemplate->cFormTemplate;
 
-		//see if this can remove the extra stuff
-		$this->oTemplate->oForms	= null;
+			//see if this can remove the extra stuff
+			$this->oTemplate->oForms	= null;
 
-		if (isset($this->oNails) && $this->oNails) {
-			//Check the version and do any updats
-			if ($this->oNails->checkVersion("template_formed", "1.2") == false) {
-				//1.2
-				$this->oNails->updateVersion("template_formed", "1.2", false, "Moved so that it can be replaced easier");
+			if (isset($this->oNails) && $this->oNails) {
+				//Check the version and do any updats
+				if ($this->oNails->checkVersion("template_formed", "1.2") == false) {
+					//1.2
+					$this->oNails->updateVersion("template_formed", "1.2", false, "Moved so that it can be replaced easier");
 
-				//1.1
-				$this->oNails->updateVersion("template_formed", "1.1", false, "De-Coupled");
+					//1.1
+					$this->oNails->updateVersion("template_formed", "1.1", false, "De-Coupled");
 
-				//1.0
-				$this->oNails->addVersion("template_formed", "1.0");
+					//1.0
+					$this->oNails->addVersion("template_formed", "1.0");
+				}
 			}
 		}
 
