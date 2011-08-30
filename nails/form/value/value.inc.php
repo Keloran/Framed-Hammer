@@ -13,6 +13,7 @@ class Form_Value {
 	private $bFile;
 	private $iNum;
 	private $cType;
+	private $bObject;
 
 	public $mValue;
 
@@ -94,7 +95,12 @@ class Form_Value {
 		$cName	= $this->cName;
 
 		if (isset($_POST[$cName])) {
-			return $_POST[$cName];
+			if ($this->bObject) {
+				$this->mValue	= $_POST[$cName];
+				return $this;
+			} else {
+				return $_POST[$cName];
+			}
 		}
 
 		return false;
@@ -211,6 +217,17 @@ class Form_Value {
 		}
 
 		return $mReturn;
+	}
+
+	/**
+	 * Form_Value::addValidate()
+	 *
+	 * @desc this is a link to validate
+	 * @param string $cType
+	 * @return mixed
+	 */
+	public function addValidate($cType = "text") {
+		return $this->validate($cType);
 	}
 
 	/**
