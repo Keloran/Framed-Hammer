@@ -372,9 +372,10 @@ class Template extends Template_Abstract {
      * @var mixed $mObject do you want the form to return objects, or is it an object itself
      * @return object
      */
-	public function addForm($mObject = false) {
+	public function addForm($mObject = null) {
 		if (is_object($mObject)) {
-			$this->oForms	= $mObject;
+			$this->oForms			= $mObject;
+			$this->bFormAdded		= true;
 		} else {
 			$this->oForms			= new Form($this);
 			$this->bFormAdded		= true;
