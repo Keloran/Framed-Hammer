@@ -642,10 +642,10 @@ class User implements Nails_Interface {
 		$oHead		= $oHammer->getHead();
 
 		$cAddress	= $oHammer->getConfig("address", $oHammer->getConfigKey());
-	    	$aTitle		= $oHammer->getconfig("title");
-    		$cTitle		= $aTitle[0];
+	    $aTitle		= $oHammer->getconfig("title");
+    	$cTitle		= $aTitle['title'];
 
-		$cTitle = "Confirmation email from " . $oHead->aHead['title'];
+		$cTitle = "Confirmation email from " . $cTitle;
 		$cMessage = "You will need to confirm your email address by clicking on the following link\n<br />";
 		$cMessage .= "<a href=\"http://" . $_SERVER['HTTP_HOST'] . "/login/confirm/" . $cRegisterHash . "/\">Here</a>\n<br />";
 		$cMessage .= "or by going to http://" . $_SERVER['HTTP_HOST'] . "/login/confirm/" . $cRegisterHash . "/\n<br />";

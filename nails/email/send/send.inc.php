@@ -202,16 +202,6 @@ class Email_Send {
 			}
 		}
 
-		/**
-		printRead(array(
-			$this->cTo,
-			$this->cSubject,
-			$this->cBody,
-			$this->cHeaders,
-			$cLogin
-		));die();
-		*/
-
 		//actually send the message
 		if ($bLogin) {
 			return mail($this->cTo, $this->cSubject, $this->cBody, $this->cHeaders, $cLogin);
