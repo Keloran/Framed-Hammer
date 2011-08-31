@@ -531,7 +531,8 @@ class User implements Nails_Interface {
 						break;
 
 					case "email":
-						$bEmail = $mValue;
+						$bEmail 	= true;
+						$cUsername	= $mValue;
 						break;
 
 				} // switch
@@ -545,14 +546,15 @@ class User implements Nails_Interface {
 
 		//email login
 		if ($bEmail) {
-			$this->oDB->read("SELECT iUserID, iGroupID FROM users WHERE cEmail = ? AND cPassword = MD5(?) LIMIT 1", $aEscape);
+			$this->oDB->read("SELECT cUsername, iUserID, iGroupID FROM users WHERE cEmail = ? AND cPassword = MD5(?) LIMIT 1", $aEscape);
 		} else { //username login
-			$this->oDB->read("SELECT iUserID, iGroupID FROM users WHERE cUsername = ? AND cPassword = MD5(?) LIMIT 1", $aEscape);
+			$this->oDB->read("SELECT cUsername, iUserID, iGroupID FROM users WHERE cUsername = ? AND cPassword = MD5(?) LIMIT 1", $aEscape);
 		}
 
 		if ($this->oDB->nextRecord()) {
 			$iGroupID	= $this->oDB->f('iGroupID');
 			$iUserID	= $this->oDB->f('iUserID');
+			$cUsername	= $this->oDB->f('cUsername');
 
 			//set the userdetails for login
 			$this->iUserID		= $iUserID;
@@ -585,7 +587,8 @@ class User implements Nails_Interface {
 			$oSession 	= $this->oNails->getSession();
 			$cLog		= print_r(array(
 				"Username"	=> $cUsername,
-				"Password"	=> $cPassword
+				"Password"	=> $cPassword,
+				"Email"		=> $bEmail,
 			), true);
 			$oSession->logIt($cLog, 1, "Console");
 		}
