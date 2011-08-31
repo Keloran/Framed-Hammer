@@ -199,6 +199,8 @@ class Session {
 			$cAction .= $iUserID;
 		}
 
+		printRead($_SERVER);
+
 		$dDate		= date("d-m-Y H:i:s");
 
 		//Very long winded way of doing this
@@ -265,9 +267,10 @@ class Session {
 		}
 
 		//has this user got a user-agent
-		if (isset($_SERVER['HTTP_USER_AGENT'])) {
-			$cLog .= "UserAgent: " . $_SERVER['HTTP_USER_AGENT'] . " :: ";
-		}
+		if (isset($_SERVER['HTTP_USER_AGENT'])) { $cLog .= "UserAgent: " . $_SERVER['HTTP_USER_AGENT'] . " :: "; }
+
+		//add a seperate line for the end
+		$cLog .= "\n";
 
 		//Logging might want to log to both
 		if (defined("Logging")) {
@@ -323,9 +326,6 @@ class Session {
 
 			$cLocation	 = HAMMERPATH . "/logs/";
 			$cLocation	.= $cSite . ".log";
-
-			//add a newline to the log
-			$cLog .= "\n";
 
 			//since they all do this, make it more effecient
 			/**
