@@ -324,6 +324,9 @@ class Session {
 			$cLocation	 = HAMMERPATH . "/logs/";
 			$cLocation	.= $cSite . ".log";
 
+			//add a newline to the log
+			$cLog .= "\n";
+
 			//since they all do this, make it more effecient
 			/**
 			openlog("HammerLog", LOG_PID | LOG_PERROR, $iLogFile);
