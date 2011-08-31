@@ -7,11 +7,21 @@
  */
 date_default_timezone_set('UTC');
 
-//since 5.2 cant do late static binding
-if (PHP_VERSION >= 5.3) {
-	if (!function_exists("getNail_Version")) { include HAMMERPATH . "/nails/nail3.php"; }
-} else {
-	if (!function_exists("getNail_Version")) { include HAMMERPATH . "/nails/nail2.php"; }
+/**
+ * getNail_Version()
+ *
+ * @desc Since this is 5.4 only, include it in fn file
+ * @param string $cNail
+ * @param string $oNail
+ * @param mixed $mParams
+ * @return object
+ */
+function getNail_Version($cNail, $oNail, $mParams = null) {
+	if (is_callable(array($cNail, "getInstance"))) {
+		return $cNail::getInstance($oNail, $mParams);
+	} else {
+		return new $cNail($oNail, $mParams);
+	}
 }
 
 //is spanner included
