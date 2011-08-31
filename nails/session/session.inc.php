@@ -199,8 +199,6 @@ class Session {
 			$cAction .= $iUserID;
 		}
 
-		printRead($_SERVER);
-
 		$dDate		= date("d-m-Y H:i:s");
 
 		//Very long winded way of doing this
@@ -268,6 +266,9 @@ class Session {
 
 		//has this user got a user-agent
 		if (isset($_SERVER['HTTP_USER_AGENT'])) { $cLog .= "UserAgent: " . $_SERVER['HTTP_USER_AGENT'] . " :: "; }
+
+		//Query String
+		if (isset($_SERVER['QUERY_STRING'])) { $cLog .= "Query String: " . $_SERVER['QUERY_STRING'] . " :: "; }
 
 		//add a seperate line for the end
 		$cLog .= "\n";
