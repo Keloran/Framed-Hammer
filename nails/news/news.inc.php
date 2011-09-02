@@ -575,6 +575,8 @@ class News implements Nails_Interface {
 			$i++;
 		}
 
+		if (!$aResult) { return false; }
+
 		//meld them array
 		$j = 0;
 		for ($i = 0; $i < count($aResult); $i++) {
