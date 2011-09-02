@@ -270,8 +270,6 @@ class XML {
 		if (!$iFile) {
 			printRead("Something went very wrong writing the file");
 			die();
-		} else {
-			printRead("File Installled");
 		}
 	}
 
