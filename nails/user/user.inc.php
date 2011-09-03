@@ -559,7 +559,7 @@ class User implements Nails_Interface {
 			//set the userdetails for login
 			$this->iUserID		= $iUserID;
 			$this->cUsername	= $cUsername;
-			$cVisitor			= visitorIP();
+			$cVisitor		= visitorIP();
 
 			$aUpdate = array(ip2long($cVisitor), $iUserID);
 			$this->oDB->write("UPDATE users SET cLastIP = ? WHERE iUserID = ? LIMIT 1", $aUpdate);
