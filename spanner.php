@@ -507,7 +507,7 @@ function errorHandler($errno, $errstr, $errfile, $errline) {
 		case E_ERROR:
 		case E_COMPILE_ERROR:
 		case E_CORE_ERROR:
-			$oError = new Spanner("Error: " . $cError, $errno);
+			$cError	= "Error: " . $cError;
 			break;
 
 		case E_USER_WARNING:
@@ -515,24 +515,26 @@ function errorHandler($errno, $errstr, $errfile, $errline) {
 		case E_COMPILE_WARNING:
 		case E_CORE_WARNING:
 		case E_RECOVERABLE_ERROR:
-			$oError = new Spanner("Warning: " . $cError, $errno);
+			$cError	= "Warning: " . $cError;
 			break;
 
 		case E_USER_NOTICE:
 		case E_NOTICE:
 		case E_DEPRECATED:
-			$oError = new Spanner("Notice: " . $cError, $errno);
+			$cError	= "Notice: " . $cError;
 			break;
 
 		case E_PARSE:
 		case E_STRICT:
-			$oError = new Spanner("Parse Error: " . $cError, $errno);
+			$cError	= "Parse Error: " . $cError;
 			break;
 
 		default:
-			printRead(array($errstr, $errno, $errfile, $errline), "Something went very wrong");
+			printRead(array($errstr, $errno, $errfile, $errline), array("Something went very wrong", "die"));
 			break;
 	}
+
+	$oError	= new Spanner($cError, $errno);
 
 	//print a nice error
 	if (is_object($oError)) { $oError->showNiceMessage(false, true); }
