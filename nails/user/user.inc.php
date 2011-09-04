@@ -571,7 +571,7 @@ class User implements Nails_Interface {
 				$cNewHash	= session_id();
 				$cHash		= $this->genHash($cNewHash);
 
-				if (!$bInternal) { $this->oNails->createCookie("userCookie", $cHash, true); }
+				//if (!$bInternal) { $this->oNails->createCookie("userCookie", $cHash, true); }
 
 				$aUpdate = array($cHash, $iUserID);
 				$this->oDB->write("UPDATE users SET cLoginHash = ? WHERE iUserID = ? LIMIT 1", $aUpdate);
