@@ -567,17 +567,17 @@ function exceptionHandler($oException) {
 			//wow something went really wrong
 			printRead($oError, "Exception happened and spanner callable, but normal exception thrown");
 		}
-		die();
 	} else {
 		printRead($oException, "Exception happened and spanner not callbable");
-		die();
 	}
 
 	//make sure they are defentlly all gone
 	while (ob_get_level()) { ob_end_clean(); }
 
 	printRead($oException, "Something has gone very wrong if we have thrown an exception this far down");
-	die();
+
+	//since die doesnt work
+	return false;
 }
 
 /**
