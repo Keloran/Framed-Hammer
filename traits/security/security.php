@@ -51,10 +51,11 @@ trait Security {
 
 		//now go through and generate a random one based on that
 		for ($i = 0; $i < 20; $i++) {
-			$iRand	= rand(0, $iHash);
-			$cRand .= $cHash[$iRand];
-			$iRand	= ($iRand + 1);
-			$cRand .= round($iRand + ($iRand / $iHash * $iRand));
+			$iRand_a	= rand(0, ($iHash - 1));
+			$iRand_b	= ($iRand_a + 1);
+
+			$cRand .= $cHash[$iRand_a];
+			$cRand .= round($iRand + ($iRand_b / ($iHash - 1) * $iRand_b));
 		}
 
 		return $cRand;
