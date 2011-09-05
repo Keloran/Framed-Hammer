@@ -99,6 +99,8 @@ class Spanner extends Exception {
 				if (defined("DEV")) {
 					$cReturn	 = $this->showThis($cSave);
 					$cReturn	.= $this->showMessage();
+				} else if () {
+
 				}
 
 				break;
@@ -223,7 +225,7 @@ class Spanner extends Exception {
 	 */
 	private function saveMessage($iErrNo) {
 		$iTime		= time();
-		$cMessage 	= $this->showMessage();
+		$cMessage 	= $this->showMessage(true);
 		file_put_contents("/tmp/" . $iTime . "_error.message", $cMessage);
 
 		$cReturn	= "File Located at: /tmp/" . $iTime . "_error.message";
@@ -319,10 +321,14 @@ class Spanner extends Exception {
 	 * @return
 	 */
 	private function showMessage($bConsole = false) {
-		$cMessage	 =false;
+		$cMessage = false;
 
 		//since console messages cant see this
-		if (!$bConsole) { $cMessage	.= "<section id=\"exceptiond\">\n"; }
+		if (!$bConsole) {
+			$cMessage	.= "<section id=\"exceptiond\">\n";
+			$cMessage	.= "<header>" . $this->getMessage() . "</header>\n";
+			$cMessage	.= "<article>\n";
+		}
 
 		$cMessage	.= "<p>An exception happened in <br />" . $this->getFile() . ".</p>\n";
 		$cMessage	.= "<p>On line <br />" . $this->getLine() . ".</p>\n";
@@ -361,7 +367,10 @@ class Spanner extends Exception {
         $cMessage	.= "<p>Date: " . date("d/m/Y H:i", time()) . "</p>\n";
 
 		//since console cant see this
-		if (!$bConsole) { $cMessage	.= "</section>\n"; }
+		if (!$bConsole) {
+			$cMessage	.= "</article>\n";
+			$cMessage	.= "</section>\n";
+		}
 
 		//remove the brs and replace with newlines
 		if ($bConsole) {
