@@ -72,6 +72,7 @@ class Spanner extends Exception {
 	public function catchIt() {
 		$cReturn	= false;
 		$bNice		= false;
+		$cSave		= false;
 
 		//Since this dictates what happens
 		switch($this->code) {
@@ -91,8 +92,15 @@ class Spanner extends Exception {
 			case 8:
 			case 200:
 			case 100:
-				$bNice = false;
-				$this->saveMessage($this->code);
+				$bNice 		= false;
+				$cSave		= $this->saveMessage($this->code);
+
+				//is it dev, in which case tell me where the message is saved, and also show it
+				if (defined("DEV")) {
+					$cReturn	 = $this->showThis($cSave);
+					$cReturn	.= $this->showMessage();
+				}
+
 				break;
 
 			case 1001:
@@ -214,8 +222,12 @@ class Spanner extends Exception {
 	 * @return null
 	 */
 	private function saveMessage($iErrNo) {
-		$cMessage = $this->showMessage();
-		file_put_contents("/tmp/" . time() . "_error.message", $cMessage);
+		$iTime		= time();
+		$cMessage 	= $this->showMessage();
+		file_put_contents("/tmp/" . $iTime . "_error.message", $cMessage);
+
+		$cReturn	= "File Located at: /tmp/" . $iTime . "_error.message";
+		return $cReturn;
 	}
 
 	/**
@@ -362,12 +374,19 @@ class Spanner extends Exception {
 	}
 
 	/**
-	 * Spanner::getMessages()
+	 * Spanner::showThis()
 	 *
+	 * @param string $cMessage
 	 * @return string
 	 */
-	public function getMessages() {
-		return "wow somet really went wrong";
+	private function showThis($cMessage) {
+		$cReturn	 = "<section id=\"exceptiond\">\n";
+		$cReturn	.= "<header>Specific Message</header>\n";
+		$cReturn	.= "<article>" . $cMessage . "</article>\n";
+		$cReturn	.= "</section>\n";
+		$cReturn	.= "<hr />\n";
+
+		return $cReturn
 	}
 }
 
@@ -481,8 +500,8 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 	if ($cFireLevel) { $oReader->cLevel = $cFireLevel; }
 
 	if (!$bReturn) {
-	echo $oReader->doOutput();
-		} else {
+		echo $oReader->doOutput();
+	} else {
 		return $oReader->doOutput();
 	}
 }
