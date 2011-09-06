@@ -334,10 +334,14 @@ class Spanner extends Exception {
 		$cMessage	.= "<p>A Trace is <br />" . nl2br($this->getTraceAsString()) . "</p>\n";
 		$cMessage	.= "<p>A Printed trace is <br />" . nl2br(print_r($this->getTrace(), true)) . "</p>\n";
 
-		//5.2 specific
-		if (function_exists("error_get_last")) { 		$cMessage .= "<p>Last Error array <br />" . nl2br(print_r(error_get_last(), true)) . "</p>\n"; }
-		if (function_exists("memory_get_peak_usage")) { $cMessage .= "<p>Memory Usage<br />" . nl2br(print_r(memory_get_peak_usage(), true)) . "</p>\n"; }
+		//the last error, incase it exists
+		$cMessage 	.= "<p>Last Error array <br />" . nl2br(print_r(error_get_last(), true)) . "</p>\n";
 
+		//memory usage, and devided by 1024
+		$cMessage .= "<p>Memory Usage<br />" . nl2br(print_r(memory_get_peak_usage(), true));
+ 		$cMessage .= " (" . nl2br(print_r(round(memory_get_peak_usage() / 1024), true)) . ")</p>\n";
+
+		//arguments in useS
 		$cMessage .= "<p>Function Arguments <br />" . nl2br(print_r(func_get_args(), true)) . "</p>\n";
 
 		//Since not all systems have the remote addr, e.g. googlebot
