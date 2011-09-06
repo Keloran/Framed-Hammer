@@ -18,7 +18,7 @@ class Head {
 	public $bJSFramework			= false;
 	public $bJSFrameworkUI			= false;
 
-	public $cJSFrameworkVersion			= "1.6.2";
+	public $cJSFrameworkVersion			= "1.6.3";
 	public $cJSFrameworkSubVersion		= "1.6";
 	public $cJSFrameworkName			= "jquery";
 	public $cJSFrameworkUIVersion		= "1.8.16";

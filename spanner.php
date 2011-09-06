@@ -99,10 +99,7 @@ class Spanner extends Exception {
 				if (defined("DEV")) {
 					$cReturn	 = $this->showThis($cSave);
 					$cReturn	.= $this->showMessage();
-				} else if () {
-
 				}
-
 				break;
 
 			case 1001:
