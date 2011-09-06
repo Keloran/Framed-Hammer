@@ -55,7 +55,7 @@ trait Security {
 			$iRand_b	= ($iRand_a + 1);
 
 			$cRand .= $cHash[$iRand_a];
-			$cRand .= round($iRand + ($iRand_b / ($iHash - 1) * $iRand_b));
+			$cRand .= round($iRand_b + ($iRand_b / ($iHash - 1) * $iRand_b));
 		}
 
 		return $cRand;
