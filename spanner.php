@@ -392,7 +392,7 @@ class Spanner extends Exception {
 		$cReturn	.= "</section>\n";
 		$cReturn	.= "<hr />\n";
 
-		return $cReturn
+		return $cReturn;
 	}
 }
 
