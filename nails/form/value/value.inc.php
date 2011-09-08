@@ -248,6 +248,7 @@ class Form_Value {
 			$this->mValue	= $mValue->mValue;
 		} catch (Exception $e) {
 			//do nothing
+			die($e);
 		}
 
 		//return the object, or return the value
