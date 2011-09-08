@@ -236,7 +236,7 @@ class Form_Value {
 		//try the object, or return the value
 		try {
 			$cType		= ucfirst($cType);
-			$cValid		= "Validate_" . $cValid;
+			$cValid		= "Validate_" . $cType;
 			$oValid		= new $cValid();
 
 			//send the options to the validator
