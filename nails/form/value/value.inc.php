@@ -199,24 +199,55 @@ class Form_Value {
 	 * @param string $cType
 	 * @return string
 	 */
-	public function validate($cType = "text") {
-		$mReturn	= false;
+	public function validate($mType = "text", $bObject = false) {
+		if (is_array($mType)) {
+			foreach ($mType as $cKey => $mValue) {
+				switch($cKey) {
+					case "name":
+					case "type":
+						$cType	= $mValue;
+						break;
 
-		switch($cType) {
-			case "email":
-				$mReturn = $this->validateEmail();
-				break;
+					case "options":
+						$mOptions	= $mValue;
+						break;
 
-			case "number":
-				$mReturn = $this->validateNumber();
-				break;
-
-			default:
-				$mReturn = $this->validateText();
-				break;
+					case "object":
+						$bObject	= $mValue;
+						break;
+				}
+			}
+		} else {
+			$cType		= $mType;
+			$mOptions	= false;
 		}
 
-		return $mReturn;
+		$cType		= ucfirst($cType);
+		$cValid		= "Validate_" . $cValid;
+		$oValid		= new $cValid();
+
+		//are we an object, in order to send the data forward
+		if ($this->bObject) {
+			$mValue	= $this->mValue;
+		} else {
+			$mValue	= $this->getValue();
+		}
+
+		//send the options to the validator
+		$oValid->bObject	= $bObject;
+		$oValid->mOptions	= $mOptions;
+
+		//return the valid object
+		$mValue				= $oValid->validate($mValue);
+
+		//do we want an object back
+		if ($bObject) {
+			$this->mValue	= $mValue->mValue;
+			return $this;
+		}
+
+		//return the value
+		return $mValue->mValue;
 	}
 
 	/**
@@ -226,94 +257,7 @@ class Form_Value {
 	 * @param string $cType
 	 * @return mixed
 	 */
-	public function addValidate($cType = "text") {
-		return $this->validate($cType);
-	}
-
-	/**
-	 * Form_Value::validateEmail()
-	 *
-	 * @return string
-	 */
-	private function validateEmail() {
-		$cReturn	= false;
-
-		if ($this->bObject) {
-			$cInput	= $this->mValue;
-		} else {
-			$cInput	= $this->getValue();
-		}
-
-		//Might aswell use filter var if its avalible, less resource-hungry
-		if (function_exists("filter_var")) {
-			$cReturn	= filter_var($cInput, FILTER_VALIDATE_EMAIL);
-		} else {
-			$cPattern = "([\\w-+]+(?:\\.[\\w-+]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7})";
-			if (preg_match($cPattern, $cInput)) {
-				$cReturn = $cInput;
-			}
-		}
-
-		return $cReturn;
-	}
-
-	/**
-	 * Form_Value::validateText()
-	 *
-	 * @return string
-	 */
-	private function validateText() {
-		$cReturn	= false;
-
-		if ($this->bObject) {
-			$cInput	= $this->mValue;
-		} else {
-			$cInput	= $this->getValue();
-		}
-
-		//It doesnt have anything
-		if (!isset($cInput[0])) { return false; }
-
-		//Use filter var
-		if (function_exists("filter_var")) {
-			$aFilters	= array(FILTER_FLAG_ENCODE_HIGH, FILTER_FLAG_ENCODE_LOW, FILTER_FLAG_ENCODE_AMP);
-			$cReturn	= filter_var($cInput, FILTER_SANITIZE_STRING, $aFilters);
-		} else {
-			if (preg_match("`([a-zA-Z0-9\-_]+)`is", $cInput)) {
-				$cReturn = addslashes($cInput);
-			}
-		}
-
-		return $cReturn;
-	}
-
-	/**
-	 * Form_Value::validateNumber()
-	 *
-	 * @return string
-	 */
-	private function validateNumber() {
-		$cReturn	= false;
-
-		if ($this->bObject) {
-			$cInput	= $this->mValue;
-		} else {
-			$cInput	= $this->getValue();
-		}
-
-		//its not actually got any chars
-		if (!isset($cInput[0])) { return false; }
-
-		if (function_exists("filter_var")) {
-			if (filter_var($cInput, FILTER_VALIDATE_INT)) {
-				$cReturn	= filter_var($cInput, FILTER_SANITIZE_NUMBER_INT);
-			}
-		} else {
-			if (preg_match("`([0-9\s]+)`is", $cInput)) {
-				$cReturn = addslashes($cInput);
-			}
-		}
-
-		return $cReturn;
+	public function addValidate($cType = "text", $bObject = false) {
+		return $this->validate($cType, $bObject);
 	}
 }
