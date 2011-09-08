@@ -222,10 +222,6 @@ class Form_Value {
 			$mOptions	= false;
 		}
 
-		$cType		= ucfirst($cType);
-		$cValid		= "Validate_" . $cValid;
-		$oValid		= new $cValid();
-
 		//are we an object, in order to send the data forward
 		if ($this->bObject) {
 			$mValue	= $this->mValue;
@@ -233,21 +229,33 @@ class Form_Value {
 			$mValue	= $this->getValue();
 		}
 
-		//send the options to the validator
-		$oValid->bObject	= $bObject;
-		$oValid->mOptions	= $mOptions;
+		//set hte value so its always something
+		$this->mValue	= $mValue;
 
-		//return the valid object
-		$mValue				= $oValid->validate($mValue);
 
-		//do we want an object back
-		if ($bObject) {
+		//try the object, or return the value
+		try {
+			$cType		= ucfirst($cType);
+			$cValid		= "Validate_" . $cValid;
+			$oValid		= new $cValid();
+
+			//send the options to the validator
+			$oValid->bObject	= $bObject;
+			$oValid->mOptions	= $mOptions;
+
+			//return the valid object
+			$mValue			= $oValid->validate($mValue);
 			$this->mValue	= $mValue->mValue;
-			return $this;
+		} catch (Exception $e) {
+			//do nothing
 		}
 
-		//return the value
-		return $mValue->mValue;
+		//return the object, or return the value
+		if ($bObject) {
+			return $this;
+		} else {
+			return $mValue->mValue;
+		}
 	}
 
 	/**
