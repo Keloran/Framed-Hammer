@@ -255,7 +255,7 @@ class Form_Value {
 		if ($bObject) {
 			return $this;
 		} else {
-			return $mValue->mValue;
+			return $this->mValue;
 		}
 	}
 
