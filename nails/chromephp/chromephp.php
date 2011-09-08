@@ -517,6 +517,9 @@ class ChromePhp
 	 */
 	protected function _setCookie($data)
 	{
+		//header('X-Wf-Protocol-1' . ":" . 'http://meta.wildfirehq.org/Protocol/JsonStream/0.2');
+		//header('X-Wf-1-Plugin-1' . ":" . 'http://meta.firephp.org/Wildfire/Plugin/FirePHP/Library-FirePHPCore/0.3');
+
 		return setcookie(self::COOKIE_NAME, $this->_encode($data), time() + 30);
 	}
 
