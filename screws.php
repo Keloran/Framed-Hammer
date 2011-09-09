@@ -50,10 +50,11 @@ class Screws {
 			try {
 				include $this->cPath;
 			} catch(Exception $e) {
-				new Spanner($e);
+				throw new Spanner($e);
 			}
 		} else {
-			throw new Spanner("Class File not found", 101);
+			throw new Exception("Class File not found", 101);
+			#throw new Spanner("Class File not found", 101);
 		}
 	}
 
