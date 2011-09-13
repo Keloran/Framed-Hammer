@@ -1192,43 +1192,6 @@ class Form {
 			$cReturn = "<section class=\"" . $this->cSectionClass . "\">\n";
 		}
 
-		//form already opened
-		$cReturn .= "<form ";
-
-		//the method e.g. post
-		if (isset($this->cMethod) && $this->cMethod) {
-			$cReturn .= "method=\"" . $this->cMethod . "\" ";
-		} else {
-			$cReturn .= "method=\"post\" ";
-		}
-
-		//if there is a formname
-		if ($this->cFormName) { $cReturn .= " name=\"" . $this->cFormName . "\" "; }
-
-		//form has a class
-		if (isset($this->cFormClass)) { //fix lossing coupling
-			if ($this->cFormClass) { $cReturn .= "class=\"" . $this->cFormClass . "\" "; }
-		}
-
-		//form has an id
-		if (isset($this->cFormID) && $this->cFormID) { $cReturn .= "id=\"" . $this->cFormID . "\" "; }
-
-		//do the enctype
-		$cReturn .= "enctype=\"" . $this->cEncType . "\" ";
-
-		//get the action
-		if (isset($this->cFormAction) && $this->cFormAction) {
-			$cReturn .= "action=\"" . $this->cFormAction . "\" ";
-		} else {
-			$cReturn .= "action=\"\" ";
-		}
-
-		//charset set to utf8
-		$cReturn .= "accept-charset=\"UTF-8\" ";
-
-		//close the form opener
-		$cReturn .= ">\n";
-
 		//open the div
 		if (isset($this->cDivID) && $this->cDivID) {
 			$cReturn	.= "<article ";
@@ -1237,6 +1200,7 @@ class Form {
 			$cReturn	.= "<article ";
 			$bOpened	= true;
 		} else {
+			$cReturn	.= "<article>\n";
 			$bOpened	= false;
 		}
 
@@ -1276,6 +1240,43 @@ class Form {
 			}
 		}
 
+		//form already opened
+		$cReturn .= "<form ";
+
+		//the method e.g. post
+		if (isset($this->cMethod) && $this->cMethod) {
+			$cReturn .= "method=\"" . $this->cMethod . "\" ";
+		} else {
+			$cReturn .= "method=\"post\" ";
+		}
+
+		//if there is a formname
+		if ($this->cFormName) { $cReturn .= " name=\"" . $this->cFormName . "\" "; }
+
+		//form has a class
+		if (isset($this->cFormClass)) { //fix lossing coupling
+			if ($this->cFormClass) { $cReturn .= "class=\"" . $this->cFormClass . "\" "; }
+		}
+
+		//form has an id
+		if (isset($this->cFormID) && $this->cFormID) { $cReturn .= "id=\"" . $this->cFormID . "\" "; }
+
+		//do the enctype
+		$cReturn .= "enctype=\"" . $this->cEncType . "\" ";
+
+		//get the action
+		if (isset($this->cFormAction) && $this->cFormAction) {
+			$cReturn .= "action=\"" . $this->cFormAction . "\" ";
+		} else {
+			$cReturn .= "action=\"\" ";
+		}
+
+		//charset set to utf8
+		$cReturn .= "accept-charset=\"UTF-8\" ";
+
+		//close the form opener
+		$cReturn .= ">\n";
+
 		$bDoneButton 	= false;
 		$bDoneSurrowned	= false;
 		$aBBCodes		= array();
@@ -1304,12 +1305,13 @@ class Form {
 		//now close the surrowned
 		if ($bDoneSurrowned) { $cReturn .= $this->buttonSurrownedEnd(); }
 
-		if ($bOpened) {
-			$cReturn .= "</article>\n";
-		}
-
-		//close the form and its div
+		//close the form
 		$cReturn .= "</form>\n";
+
+		//article is always opened
+		$cReturn .= "</article>\n";
+
+		//close the section
 		$cReturn .= "</section>\n";
 
 		//if bbcode make sure the bbcode is added
