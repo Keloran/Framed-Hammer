@@ -1192,6 +1192,21 @@ class Form {
 			$cReturn = "<section class=\"" . $this->cSectionClass . "\">\n";
 		}
 
+		//form has a title
+		if (isset($this->cFormTitle)) {
+			if ($this->cFormTitle) {
+				$cReturn .= "<header>\n";
+				if ($this->cTitleClass) {
+					$cReturn .= "<h1 class=\"" . $this->cTitleClass . "\">\n";
+				} else {
+					$cReturn .= "<h1>\n";
+				}
+
+				$cReturn .= $this->cFormTitle . "</h1>\n";
+				$cReturn .= "</header>\n";
+			}
+		}
+
 		//open the div
 		if (isset($this->cDivID) && $this->cDivID) {
 			$cReturn	.= "<article ";
@@ -1223,21 +1238,6 @@ class Form {
 			$cReturn .= ">\n";
 		} else {
 			$cReturn .= "";
-		}
-
-		//form has a title
-		if (isset($this->cFormTitle)) {
-			if ($this->cFormTitle) {
-				$cReturn .= "<header>\n";
-				if ($this->cTitleClass) {
-					$cReturn .= "<h1 class=\"" . $this->cTitleClass . "\">\n";
-				} else {
-					$cReturn .= "<h1>\n";
-				}
-
-				$cReturn .= $this->cFormTitle . "</h1>\n";
-				$cReturn .= "</header>\n";
-			}
 		}
 
 		//form already opened
