@@ -29,6 +29,9 @@ class Form {
 	private $oInput;
 	private $oButton;
 
+	//this so a user can grab the rendered object
+	public $oFullForm;
+
 	//This is for seperation
 	public $oNails			= false;
 	private $oTemplate		= false;
@@ -1178,12 +1181,13 @@ class Form {
 
 		//status
 		if ($this->cStatus) {
-			$cReturn .= "<div id=\formStatus\">" . $this->cStatus . "</div>\n";
+			$cStatus	 = "<div id=\formStatus\">" . $this->cStatus . "</div>\n";
+			$cReturn 	.= $cStatus;
 		}
 
 		//open the form
 		if (!$this->cSectionClass) {
-			$cReturn = "<section class=\"formSection\">\n";
+			$cReturn 		= "<section class=\"formSection\">\n";
 		} else {
 			$cReturn = "<section class=\"" . $this->cSectionClass . "\">\n";
 		}

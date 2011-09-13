@@ -53,8 +53,8 @@ class Screws {
 				throw new Spanner($e);
 			}
 		} else {
-			throw new Exception("Class File not found", 101);
-			#throw new Spanner("Class File not found", 101);
+			//so that the class not exisitng can be handled by the user/file
+			throw new ClassException("Class File not found", 101);
 		}
 	}
 
