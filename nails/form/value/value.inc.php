@@ -246,7 +246,7 @@ class Form_Value {
 			//return the valid object
 			$mValue			= $oValid->validate($mValue);
 			$this->mValue	= $mValue->mValue;
-		} catch (ClassException $e) {
+		} catch (ErrorException $e) {
 			//do nothing
 		}
 
