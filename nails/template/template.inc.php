@@ -544,11 +544,14 @@ class Template extends Template_Abstract {
 			if ($this->bFormAdded) {
 				if ($this->oForms) {
 					$this->setVars('cForm', $this->oForms->fullForm($this->cTemplate));
+					$this->setVars("oForm", $this->oForms);
 				} else { //this is incase you didnt add the form but your trying to call it
 					$this->setVars("cForm", false);
+					$this->setVars("oForm", false);
 				}
 			} else {
 				$this->setVars("cForm", false);
+				$this->setVars("oForm", false);
 			}
 
 			//layout folder better name than core
