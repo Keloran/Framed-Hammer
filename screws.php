@@ -53,8 +53,8 @@ class Screws {
 				throw new Spanner($e);
 			}
 		} else {
+			//throw standard exception, so user/nail can handle individually
 			throw new Exception("Class File not found", 101);
-			#throw new Spanner("Class File not found", 101);
 		}
 	}
 
