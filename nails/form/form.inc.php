@@ -29,6 +29,9 @@ class Form {
 	private $oInput;
 	private $oButton;
 
+	//this so a user can grab the rendered object
+	public $oFullForm;
+
 	//This is for seperation
 	public $oNails			= false;
 	private $oTemplate		= false;
@@ -1178,14 +1181,63 @@ class Form {
 
 		//status
 		if ($this->cStatus) {
-			$cReturn .= "<div id=\formStatus\">" . $this->cStatus . "</div>\n";
+			$cStatus	 = "<div id=\formStatus\">" . $this->cStatus . "</div>\n";
+			$cReturn 	.= $cStatus;
 		}
 
 		//open the form
 		if (!$this->cSectionClass) {
-			$cReturn = "<section class=\"formSection\">\n";
+			$cReturn 		= "<section class=\"formSection\">\n";
 		} else {
 			$cReturn = "<section class=\"" . $this->cSectionClass . "\">\n";
+		}
+
+		//form has a title
+		if (isset($this->cFormTitle)) {
+			if ($this->cFormTitle) {
+				$cReturn .= "<header>\n";
+				if ($this->cTitleClass) {
+					$cReturn .= "<h1 class=\"" . $this->cTitleClass . "\">\n";
+				} else {
+					$cReturn .= "<h1>\n";
+				}
+
+				$cReturn .= $this->cFormTitle . "</h1>\n";
+				$cReturn .= "</header>\n";
+			}
+		}
+
+		//open the div
+		if (isset($this->cDivID) && $this->cDivID) {
+			$cReturn	.= "<article ";
+			$bOpened	= true;
+		} else if (isset($this->cDivClass) && $this->cDivClass) {
+			$cReturn	.= "<article ";
+			$bOpened	= true;
+		} else {
+			$cReturn	.= "<article>\n";
+			$bOpened	= false;
+		}
+
+		//div has an id
+		if (isset($this->cDivID)) {
+			if ($this->cDivID) {
+				$cReturn .= "id=\"" . $this->cDivID . "\"";
+			}
+		}
+
+		//div has a class
+		if (isset($this->cDivClass)) {
+			if ($this->cDivClass) {
+				$cReturn .= " class=\"" . $this->cDivClass . "\"";
+			}
+		}
+
+		//finish the start of the div
+		if ($bOpened) {
+			$cReturn .= ">\n";
+		} else {
+			$cReturn .= "";
 		}
 
 		//form already opened
@@ -1225,53 +1277,6 @@ class Form {
 		//close the form opener
 		$cReturn .= ">\n";
 
-		//open the div
-		if (isset($this->cDivID) && $this->cDivID) {
-			$cReturn	.= "<article ";
-			$bOpened	= true;
-		} else if (isset($this->cDivClass) && $this->cDivClass) {
-			$cReturn	.= "<article ";
-			$bOpened	= true;
-		} else {
-			$bOpened	= false;
-		}
-
-		//div has an id
-		if (isset($this->cDivID)) {
-			if ($this->cDivID) {
-				$cReturn .= "id=\"" . $this->cDivID . "\"";
-			}
-		}
-
-		//div has a class
-		if (isset($this->cDivClass)) {
-			if ($this->cDivClass) {
-				$cReturn .= " class=\"" . $this->cDivClass . "\"";
-			}
-		}
-
-		//finish the start of the div
-		if ($bOpened) {
-			$cReturn .= ">\n";
-		} else {
-			$cReturn .= "";
-		}
-
-		//form has a title
-		if (isset($this->cFormTitle)) {
-			if ($this->cFormTitle) {
-				$cReturn .= "<header>\n";
-				if ($this->cTitleClass) {
-					$cReturn .= "<h1 class=\"" . $this->cTitleClass . "\">\n";
-				} else {
-					$cReturn .= "<h1>\n";
-				}
-
-				$cReturn .= $this->cFormTitle . "</h1>\n";
-				$cReturn .= "</header>\n";
-			}
-		}
-
 		$bDoneButton 	= false;
 		$bDoneSurrowned	= false;
 		$aBBCodes		= array();
@@ -1300,12 +1305,13 @@ class Form {
 		//now close the surrowned
 		if ($bDoneSurrowned) { $cReturn .= $this->buttonSurrownedEnd(); }
 
-		if ($bOpened) {
-			$cReturn .= "</article>\n";
-		}
-
-		//close the form and its div
+		//close the form
 		$cReturn .= "</form>\n";
+
+		//article is always opened
+		$cReturn .= "</article>\n";
+
+		//close the section
 		$cReturn .= "</section>\n";
 
 		//if bbcode make sure the bbcode is added

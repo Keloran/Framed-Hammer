@@ -94,4 +94,22 @@ class Text {
 
 		return $cReturn . "...";
 	}
+
+	/**
+	 * Text::mynl2br()
+	 *
+	 * @param string $cText
+	 * @return string
+	 */
+	function mynl2br($cText) {
+		$aReplace = array(
+			"\r\n"	=> '<br />',
+			"\r"	=> '<br />',
+			"\n"	=> '<br />',
+			"\s"	=> '&nbsp;',
+			"\t"	=> '&nbsp;&nbsp;&nbsp;&nbsp;',
+		);
+
+		return strtr($cText, $aReplace);
+	}
 }
