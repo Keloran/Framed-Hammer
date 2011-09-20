@@ -156,7 +156,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 	}
 
 	//Start the session
-	if (!session_id()) { session_start(); }
+	if (session_status() !== 2) { session_start(); }
 
 	//set the address
 	if (isset($oHammer)) { $oHammer->setAddress($aFilter); }
