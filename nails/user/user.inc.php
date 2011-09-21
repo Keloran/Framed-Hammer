@@ -597,27 +597,6 @@ class User implements Nails_Interface {
 	}
 
 	/**
-	* User::getPassword()
-	*
-	* @desc This is used by createUser
-	* @param int $iLength This is used to state how long the password should be
-	* @return string
-	*/
-    private function genPassword($iLength) {
-    	$cRand = "";
-    	$aLetters	= range("a", "z");
-    	$aNumbers	= range(0, 9);
-    	$aContent	= array_merge($aLetters, $aNumbers);
-
-		for ($i = 0; $i < $iLength; $i++) {
-			$iRand = array_rand($aContent);
-			$cRand .= $aContent[$iRand];
-		}
-
-		return $cRand;
-	}
-
-	/**
 	* User::isTemp()
 	*
 	* @desc This is to check if the password is temp and needs to be changed

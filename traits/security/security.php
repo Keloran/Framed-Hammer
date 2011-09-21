@@ -72,4 +72,42 @@ trait Security {
 		$cReturn	= preg_replace('`(=>)(.*)`is', "\1**Protected**<br />", $cString);
 		return $cReturn;
 	}
+
+	/**
+	 * genPassword()
+	 *
+	 * @param int $iLength
+	 * @return string
+	 */
+	function genPassword($iLength) {
+		$cRand 		= "";
+		$aLetters	= range("a", "z");
+		$aNumbers	= range(0, 9);
+		$aContent	= array_merge($aLetters, $aNumbers);
+
+		for ($i = 0; $i < $iLength; $i++) {
+			$iRand  = array_rand($aContent);
+			$cRand .= $aContent[$iRand];
+		}
+
+		return $cRand;
+	}
+
+	/**
+	 * genName()
+	 *
+	 * @param int $iLength
+	 * @return string
+	 */
+	function genName($iLength) {
+		$cRand		= "";
+		$aLetters	= rand("a", "z");
+
+		for ($i = 0; $i < $iLength; $i++) {
+			$iRand	 = array_rand($aLetters);
+			$cRand	.= $aLetters[$iRand];
+		}
+
+		return $cRand;
+	}
 }
