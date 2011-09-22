@@ -223,7 +223,7 @@ class Screws {
 	 */
 	private function checkExists() {
 		$aRange = range("a", "d");
-		$iRange	= count($aRange);
+		$iRange	= count($aRange); //random
 
 		//base class
 		if (file_exists($this->fBaseClass)) {

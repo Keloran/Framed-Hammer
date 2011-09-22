@@ -101,7 +101,7 @@ trait Security {
 	 */
 	function genName($iLength) {
 		$cRand		= "";
-		$aLetters	= range("a", "z");
+		$aLetters	= range("a", "z"); //range not rand
 
 		for ($i = 0; $i < $iLength; $i++) {
 			$iRand	 = array_rand($aLetters);
