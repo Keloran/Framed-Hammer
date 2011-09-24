@@ -537,8 +537,6 @@ class User implements Nails_Interface {
 
 				} // switch
 			}
-		} else {
-			$cUsername = $mDetails;
 		}
 
 		//details
