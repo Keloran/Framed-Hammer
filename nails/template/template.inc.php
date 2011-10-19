@@ -585,7 +585,7 @@ class Template extends Template_Abstract {
 			//indented to show that stuff inside happens inside and then is cleaned after
 			$cTemplate	= false;
 			if (file_exists($this->cTemplate)) {
-				if (checkHeaders()) { ob_start(); }
+				if (!checkHeaders()) { ob_start(); }
 					extract($this->aVars, EXTR_SKIP);
 					include $this->cTemplate;
 					$cTemplate	.= ob_get_contents();
@@ -593,7 +593,7 @@ class Template extends Template_Abstract {
 					$cTemplate	.= $this->cExtraJS;
 
 				//if there is a started ob
-				#if (ob_get_level()) { ob_end_clean(); } //this seems like it should really break things
+				if (!checkHeaders()) { if (ob_get_level()) { ob_end_clean(); }}
 			} else {
 				$cTemplate	= $this->errorTemplate($this->cTemplate);
 			}
@@ -662,14 +662,14 @@ class Template extends Template_Abstract {
 		if ($this->cError) {
 			if (file_exists(SITEPATH . $cLayoutFolder . "templates/error.tpl")) {
 				//open the buffer
-				if (checkHeaders()) { ob_start("ob_process"); }
+				if (!checkHeaders()) { ob_start("ob_process"); }
 
 				//Custom error page
 				include SITEPATH . $cLayoutFolder . "templates/error.tpl";
 				$cTemplate = ob_get_contents();
 
 				//clean the buffer
-				if (checkHeaders()) { ob_end_clean(); }
+				if (!checkHeaders()) { ob_end_clean(); }
 			} else {
 				$cTemplate	 = "<section id=\"error\">\n<header>\n";
 				$cTemplate	.= "<h1>Error</h1>\n";

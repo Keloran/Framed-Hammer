@@ -261,7 +261,7 @@ class Spanner extends Exception {
 		//not a syntax error
 		if (!$bSyntax) {
 			//open buffer
-			if (checkHeaders()) { ob_start(); }
+			if (!checkHeaders()) { ob_start(); }
 
 			//now put the offline page
 			header("HTTP/1.1 404 File not Found");
@@ -277,7 +277,7 @@ class Spanner extends Exception {
 			echo $cMessage;
 
 			//close teh buffer
-			if (checkHeaders()) { ob_end_flush(); }
+			if (!checkHeaders()) { ob_end_flush(); }
 			die();
 		} else {
 			$cMessage  = "<section id=\"exceptiond\">\n";
