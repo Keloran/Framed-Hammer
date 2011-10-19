@@ -107,7 +107,7 @@ abstract class Template_Abstract implements Template_Interface {
 	*/
 	public function renderTemplate() {
 		//open the buffer
-		if (checkHeaders()) { ob_start(); }
+		if (!checkHeaders()) { ob_start(); }
 
 		extract($this->aVars, EXTR_SKIP);
 
@@ -115,7 +115,7 @@ abstract class Template_Abstract implements Template_Interface {
 		$cTemplate = ob_get_contents();
 
 		//make sure we are in an ob before cleaning
-		if (checkHeaders()) { if (ob_get_level()) { ob_end_clean(); }}
+		if (!checkHeaders()) { if (ob_get_level()) { ob_end_clean(); }}
 
 		return $cTemplate;
 	}
