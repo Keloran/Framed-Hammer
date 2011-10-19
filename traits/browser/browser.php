@@ -21,10 +21,8 @@ trait Browser {
 
 		//do we actually have browser cap, otherwise dont bother trying
 		if (ini_get("browscap")) {
-			ob_start();
 			$mGetBrowser = get_browser();
 			$bGetBrowser = true;
-			ob_end_clean();
 		}
 
 		//get_browser doesnt work on this server

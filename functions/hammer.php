@@ -226,6 +226,8 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 		}
 	} catch (Spanner $e) {
 		new Spanner($e->getMessage(), $e->getCode());
+	} catch ErrorException $e) {
+		new Spanner($e->getMessage(), $e->getCode());
 	} catch (Exception $e) {
 		new Spanner($e->getMessage(), $e->getCode());
 	}
@@ -289,4 +291,17 @@ function visitorIP() {
 	if ($cIP == "unknown") { $cIP = false; }
 
 	return $cIP;
+}
+
+/**
+ * checkHeaders()
+ *
+ * @todo -c proberlly should change default to true actually
+ * @return bool
+ */
+function checkHeaders() {
+	$bReturn	= false;
+	if (function_exists("headers_sent")) { $bReturn	= headers_sent(); }
+
+	return $bReturn;
 }

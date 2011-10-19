@@ -260,20 +260,24 @@ class Spanner extends Exception {
 
 		//not a syntax error
 		if (!$bSyntax) {
+			//open buffer
+			if (checkHeaders()) { ob_start(); }
+
 			//now put the offline page
-			ob_start();
-				header("HTTP/1.1 404 File not Found");
+			header("HTTP/1.1 404 File not Found");
 
-				//is stuff offline, e.g. database, it also redirects to homepage for normal stuffs,
-				//hopefulyl wont go into infinite loop
-				if ($bOffline) {
-					header("refresh: 5; url=http://hammer.develbox.info/offline.html?site=" . $cSite);
-				} else {
-					header("refresh 5; url=/");
-				}
+			//is stuff offline, e.g. database, it also redirects to homepage for normal stuffs,
+			//hopefulyl wont go into infinite loop
+			if ($bOffline) {
+				header("refresh: 5; url=http://hammer.develbox.info/offline.html?site=" . $cSite);
+			} else {
+				header("refresh 5; url=/");
+			}
 
-				echo $cMessage;
-			ob_end_flush();
+			echo $cMessage;
+
+			//close teh buffer
+			if (checkHeaders()) { ob_end_flush(); }
 			die();
 		} else {
 			$cMessage  = "<section id=\"exceptiond\">\n";
