@@ -226,7 +226,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 		}
 	} catch (Spanner $e) {
 		new Spanner($e->getMessage(), $e->getCode());
-	} catch ErrorException $e) {
+	} catch (ErrorException $e) {
 		new Spanner($e->getMessage(), $e->getCode());
 	} catch (Exception $e) {
 		new Spanner($e->getMessage(), $e->getCode());
