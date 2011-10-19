@@ -1328,12 +1328,15 @@ class Form {
 		}
 
 		//now that the form is allowed to proced
+		/*
 		ob_start();
 			print($cReturn);
 			$cObReturn = ob_get_contents();
 		ob_end_clean();
 
 		return $cObReturn;
+		*/
+		return $cReturn;
 	}
 
 	/**
