@@ -95,7 +95,9 @@ class Screws {
 	 * @return mixed
 	 */
 	public function __get($cName) {
-		return $this->aData[$cName];
+		if (isset($this->aData[$cName])) { return $this->aData[$cName]; }
+
+		return false;
 	}
 
 	/**
