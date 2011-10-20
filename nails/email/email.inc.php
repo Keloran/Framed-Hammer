@@ -160,17 +160,35 @@ class Email implements Nails_Interface {
 	 * @return pointer
 	 */
 	private function openConnection() {
-		$cTLS			= $this->bTLS ? "/tls/novalidate-cert" : "/notls/novalidate-cert";
-		$this->cIMAP	= "{" . $this->cHost . ":" . $this->iPort . $cTLS . "}INBOX";
+		$cTLS	= $this->bTLS ? "/tls/novalidate-cert" : "/notls/novalidate-cert";
+		$pIMAP	= false;
 
 		//is there a user, cause otherwise why bother
 		if ($this->cUser) {
 			try {
+				$this->cIMAP	= "{" . $this->cHost . ":" . $this->iPort . $cTLS . "}";
 				$pIMAP	= imap_open($this->cIMAP, $this->cUser, $this->cPass);
-				if ($pIMAP) { $this->pIMAP = $pIMAP; }
 			} catch (Spanner $e) {
-				throw new Spanner("E-Mail server down", 200); //200 doesnt get passed to email, since if the email server is down, i cant send/recieve anyway
+				try {
+					$this->cIMAP	= "{" . $this->cHost . ":" . $this->iPort . "}";
+					$pIMAP	= imap_open($this->cIMAP, $this->cUser, $this->cPass);
+				} catch (Spanner $e) {
+					try {
+						$this->cIMAP	= "{" . $this->cHost . ":" . $this->iPort . "}INBOX";
+						$pIMAP	= imap_open($this->cIMAP, $this->cUser, $this->cPass);
+					} catch (Spanner $e) {
+						$this->cIMAP	= "{" . $this->cHost . ":" . $this->iPort . $cTLS . "}INBOX";
+						$pIMAP	= imap_open($this->cIMAP, $this->cUser, $this->cPass);
+					}
+				}
 			}
+		}
+
+		//finally got one
+		if ($pIMAP) {
+			$this->pIMAP = $pIMAP;
+		} else {
+			throw new Spanner("E-Mail server down", 200); //200 doesnt get passed to email, since if the email server is down, i cant send/recieve anyway
 		}
 
 		return $this->pIMAP;
