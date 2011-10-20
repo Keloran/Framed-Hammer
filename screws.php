@@ -46,6 +46,10 @@ class Screws {
 		$this->definePaths();
 		$bExists = $this->checkExists();
 
+		//should really check if the class is inside a file thats been created
+		if (!$bExists) { $bExists = class_exists($cClass, false); }
+
+		//does the file exist
 		if ($bExists) {
 			try {
 				include $this->cPath;
