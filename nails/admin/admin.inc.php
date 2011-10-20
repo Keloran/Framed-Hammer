@@ -258,3 +258,14 @@ class Admin implements Nails_Interface {
 		$this->oDB->write("INSERT INTO admin_contest (dDated, cContest, iUserID) VALUES (NOW(), ?, ?)", $aInsert);
 	}
 }
+
+/**
+ * Admin_Exception
+ *
+ * @package
+ * @author keloran
+ * @copyright Copyright (c) 2011
+ * @version $Id$
+ * @access public
+ */
+class Admin_Exception extends Exception {}

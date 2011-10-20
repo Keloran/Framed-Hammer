@@ -23,11 +23,21 @@ if (!function_exists("printRead")) { include HAMMERPATH . "/spanner.php"; }
  * @return object
  */
 function getNail_Version($cNail, $oNail, $mParams = null) {
+	$cException = $cNail . "_Exception";
+
 	//just incase its a standalone and/or 3rd part
 	if (is_callable(array($cNail, "getInstance"))) {
-		return $cNail::getInstance($oNail, $mParams);
+		try {
+			return $cNail::getInstance($oNail, $mParams);
+		} catch ($cException $e) {
+			throw new Spanner($e->getMessage(), 9999);
+		}
 	} else {
-		return new $cNail($oNail, $mParams);
+		try {
+			return new $cNail($oNail, $mParams);
+		} catch ($cException $e) {
+			throw new Spanner($e->getMessage(), 9999);
+		}
 	}
 }
 
