@@ -160,7 +160,7 @@ class Email implements Nails_Interface {
 	 * @return pointer
 	 */
 	private function openConnection() {
-		$cTLS	= $this->bTLS ? "/tls/novalidate-cert" : "/notls/novalidate-cert";
+		$cTLS	= $this->bTLS ? "/novalidate-cert" : "/novalidate-cert";
 		$pIMAP	= false;
 
 		//is there a user, cause otherwise why bother
@@ -168,29 +168,13 @@ class Email implements Nails_Interface {
 			try {
 				$this->cIMAP	= "{" . $this->cHost . ":" . $this->iPort . $cTLS . "}";
 				$pIMAP	= imap_open($this->cIMAP, $this->cUser, $this->cPass);
-			} catch (Spanner $e) {
-				try {
-					$this->cIMAP	= "{" . $this->cHost . ":" . $this->iPort . "}";
-					$pIMAP	= imap_open($this->cIMAP, $this->cUser, $this->cPass);
-				} catch (Spanner $e) {
-					try {
-						$this->cIMAP	= "{" . $this->cHost . ":" . $this->iPort . "}INBOX";
-						$pIMAP	= imap_open($this->cIMAP, $this->cUser, $this->cPass);
-					} catch (Spanner $e) {
-						$this->cIMAP	= "{" . $this->cHost . ":" . $this->iPort . $cTLS . "}INBOX";
-						$pIMAP	= imap_open($this->cIMAP, $this->cUser, $this->cPass);
-					}
-				}
+			} catch (Exception $e) {
+				throw new Spanner("EMail Server Down", 200);
 			}
 		}
 
 		//finally got one
-		if ($pIMAP) {
-			$this->pIMAP = $pIMAP;
-		} else {
-			throw new Spanner("E-Mail server down", 200); //200 doesnt get passed to email, since if the email server is down, i cant send/recieve anyway
-		}
-
+		if ($pIMAP) { $this->pIMAP = $pIMAP; }
 		return $this->pIMAP;
 	}
 
