@@ -58,7 +58,7 @@ class Screws {
 			}
 		} else {
 			//so that the class not exisitng can be handled by the user/file
-			throw new ErrorException("Class File not found", 101);
+			throw new ErrorException($cClass . ": Class File not found", 101);
 		}
 	}
 
