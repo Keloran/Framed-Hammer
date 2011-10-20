@@ -161,7 +161,7 @@ class Email implements Nails_Interface {
 	 */
 	private function openConnection() {
 		$cTLS			= $this->bTLS ? "/tls/novalidate-cert" : "/notls/novalidate-cert";
-		$this->cIMAP	= "{" . $this->cHost . ":" . $this->iPort . $cTLS . "}";
+		$this->cIMAP	= "{" . $this->cHost . ":" . $this->iPort . $cTLS . "}INBOX";
 
 		//is there a user, cause otherwise why bother
 		if ($this->cUser) {
