@@ -141,3 +141,14 @@ class Organic {
 		return $aReturn;
 	}
 }
+
+/**
+ * Organic_Exception
+ *
+ * @package
+ * @author keloran
+ * @copyright Copyright (c) 2011
+ * @version $Id$
+ * @access public
+ */
+class Organic_Exception extends Exception {}

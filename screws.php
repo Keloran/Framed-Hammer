@@ -53,7 +53,7 @@ class Screws {
 		if ($bExists) {
 			try {
 				include $this->cPath;
-			} catch(Exception $e) {
+			} catch (Exception $e) {
 				throw new Spanner($e);
 			}
 		} else {

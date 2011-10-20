@@ -113,3 +113,14 @@ class Cache extends Cache_Abstract {
 		}
 	}
 }
+
+/**
+ * Cache_Exception
+ *
+ * @package
+ * @author keloran
+ * @copyright Copyright (c) 2011
+ * @version $Id$
+ * @access public
+ */
+class Cache_Exception extends Exception {}

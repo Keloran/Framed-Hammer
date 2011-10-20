@@ -430,9 +430,7 @@ class Hammer {
 		$cNail	= ucfirst($cName);
 
 		//Since we need to send the Nails object to pretty much everything
-		if (is_null($this->oNails)) {
-			$this->oNails	= new Nails($this->aFilters);
-		}
+		if (is_null($this->oNails)) { $this->oNails = new Nails($this->aFilters); }
 
 		return getNailed($cNail, $this->oNails, $mParams);
 	}
