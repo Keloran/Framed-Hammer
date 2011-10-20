@@ -29,13 +29,13 @@ function getNail_Version($cNail, $oNail, $mParams = null) {
 	if (is_callable(array($cNail, "getInstance"))) {
 		try {
 			return $cNail::getInstance($oNail, $mParams);
-		} catch ($cException $e) {
+		} catch (ErrorException $e) {
 			throw new Spanner($e->getMessage(), 9999);
 		}
 	} else {
 		try {
 			return new $cNail($oNail, $mParams);
-		} catch ($cException $e) {
+		} catch (ErrorException $e) {
 			throw new Spanner($e->getMessage(), 9999);
 		}
 	}
