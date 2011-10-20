@@ -151,6 +151,8 @@ class Email_Headers extends Email_Abstract {
 			$aHeaders[$j]['address']	= urlencode(trim($aHeaders[$j]['title']));
 			$aHeaders[$j]['uid']		= imap_uid($this->pIMAP, $this->iMID);
 			$aHeaders[$j]['size']		= $this->getHeader("Size");
+			$aHeaders[$j]['to']			= $this->getHeader("to");
+			$aHeaders[$j]['debug']		= $this->oHeaders;
 			$j++;
 		}
 
