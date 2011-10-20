@@ -48,23 +48,25 @@ class Email implements Nails_Interface {
 	 *
 	 */
 	public function __construct(Nails $oNails = null, $aDetails = false) {
-		$this->oNails 	= $oNails;
-		$this->oUser	= $oNails->getUser();
+		if (is_object($oNails)) {
+			$this->oNails 	= $oNails;
+			$this->oUser	= $oNails->getUser();
 
-		//get the version
-		if ($this->oNails->checkVersion("webmail", "1.2") == false) {
-			//1.2
-			$this->oNails->updateVersion("webmail", "1.2", false, "Added Spam Flag");
+			//get the version
+			if ($this->oNails->checkVersion("webmail", "1.2") == false) {
+				//1.2
+				$this->oNails->updateVersion("webmail", "1.2", false, "Added Spam Flag");
 
-			//1.1
-			$this->oNails->updateVersion("webmail", "1.1", false, "Fixed parser so it displays full urls, and added pagination");
+				//1.1
+				$this->oNails->updateVersion("webmail", "1.1", false, "Fixed parser so it displays full urls, and added pagination");
 
-			//1.0
-			$this->oNails->addVersion("webmail", "1.0");
+				//1.0
+				$this->oNails->addVersion("webmail", "1.0");
+			}
+
+			$iPaged			= $this->oUser->getSetting("pageLimit");
+			$this->iPaged	= $iPaged ?: 50;
 		}
-
-		$iPaged			= $this->oUser->getSetting("pageLimit");
-		$this->iPaged	= $iPaged ?: 50;
 
 		//get the email details
 		$bDetails = $this->getDetails($aDetails);
