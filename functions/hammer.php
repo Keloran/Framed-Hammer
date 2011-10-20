@@ -8,7 +8,7 @@
 date_default_timezone_set('UTC');
 
 //make sure that hammer path is set
-if (!defined("HAMMERPATH")) { define("HAMMERPATH", "../" . __DIR__); }
+if (!defined("HAMMERPATH")) { define("HAMMERPATH", (__DIR__ . "/../")); }
 
 //is spanner included
 if (!function_exists("printRead")) { include HAMMERPATH . "/spanner.php"; }
