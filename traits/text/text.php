@@ -8,7 +8,7 @@
  * @version $Id$
  * @access public
  */
-class Text {
+trait Text {
 	/**
 	 * stribet()
 	 *
