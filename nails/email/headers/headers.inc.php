@@ -104,6 +104,14 @@ class Email_Headers extends Email_Abstract {
 			if (!isset($mHeader['host'])) { foreach ($mHeader as $header) { $aReturn[] = $this->makeNice($header); }}
 		}
 
+		//now reduce it since there might only be 1
+		if (count($aReturn) <= 1) {
+			printRead($aReturn[0]);
+
+			foreach ($aReturn[0] as $cKey => $cValue) {
+			}
+		}
+
 		return $aReturn;
 	}
 
