@@ -59,11 +59,9 @@ class Email_Headers extends Email_Abstract {
 		if (isset($this->oHeaders->$cHeader)) {
 			$mHeader = $this->oHeaders->$cHeader;
 
-			printRead($this->oHeaders);die();
-
 			//now is that header an array, or jsut a string
 			if (is_array($mHeader)) {
-				foreach ($mHeader[0] as $cName => $cValue) {
+				foreach ($mHeader as $cName => $cValue) {
 					$mReturn[$cName] = $cValue;
 				}
 			} else {
