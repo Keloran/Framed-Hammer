@@ -89,6 +89,10 @@ class Email_Headers extends Email_Abstract {
 				$aReturn['email']	 = $mHeader->mailbox;
 				$aReturn['email']	.= "@";
 				$aReturn['email']	.= $mHeader->host;
+
+				//add this for parsers
+				$aReturn['host']	= $mHeader['host'];
+				$aReturn['box']		= $mHeader['mailbox'];
 			}
 		} else {
 			//name
@@ -102,6 +106,7 @@ class Email_Headers extends Email_Abstract {
 
 				//add this for parsers
 				$aReturn['host']	= $mHeader['host'];
+				$aReturn['box']		= $mHeader['mailbox'];
 			}
 
 			if (!isset($mHeader['host'])) { foreach ($mHeader as $header) { $aReturn[] = $this->makeNice($header); }}
