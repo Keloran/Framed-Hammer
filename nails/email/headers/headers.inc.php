@@ -106,10 +106,10 @@ class Email_Headers extends Email_Abstract {
 
 		//now reduce it since there might only be 1
 		if (count($aReturn) <= 1) {
-			printRead($aReturn[0]);
+			$aRet		= $aReturn;
+			$aReturn	= false;
 
-			foreach ($aReturn[0] as $cKey => $cValue) {
-			}
+			foreach ($aRet[0] as $cKey => $cValue) { $aReturn[$cKey] = $cValue; }
 		}
 
 		return $aReturn;
