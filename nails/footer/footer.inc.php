@@ -146,6 +146,10 @@ class Footer implements Nails_Interface {
 		$cDomain	= $this->oNails->getConfig("analytics-domain");
 		$cReturn	= false;
 
+		//arrays
+		if (is_array($cCode)) { $cCode		= $cCode['analytics']; }
+		if (is_array($cDomain)) { $cDomain	= $cDomain['analytics-domain']; }
+
 		//new google code
 		if ($cCode) {
 			$cReturn	 = "<script type=\"text/javascript\">\n";
