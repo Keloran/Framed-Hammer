@@ -37,6 +37,7 @@ class Email implements Nails_Interface {
 	private $bImages		= false;
 	private $bIgnoreImageFilter	= false;
 	private $aAttachments	= false;
+	private $oErrors		= false;
 
 	//server details
 	private $cHost		= false;
@@ -70,10 +71,10 @@ class Email implements Nails_Interface {
 
 		//get the email details
 		$bDetails = $this->getDetails($aDetails);
-		if ($bDetails) {
-			//open the connection
-			$this->openConnection();
-		}
+		if ($bDetails) { $this->openConnection(); } //open the connection
+
+		//errors
+		$oErrors	= imap_errors();
 	}
 
 	/**
