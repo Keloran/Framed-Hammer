@@ -79,24 +79,34 @@ class Email_Headers extends Email_Abstract {
 	 * @param array $aHeader
 	 * @return array
 	 */
-	public function makeNice($aHeader) {
+	public function makeNice($mHeader) {
 		$aReturn	= false;
 
-		//name
-		if (isset($aHeader['personal'])) { $aReturn['name']	= $aHeader['personal']; }
+		if (is_object($mHeader)) {
+			if (isset($mHeader->personal)) { $aReturn['name'] = $mHeader->personal; }
 
-		//email
-		if (isset($aHeader['mailbox']) && isset($aHeader['host'])) {
-				$aReturn['email']	 = $aHeader['mailbox'];
+			if (isset($mHeader->mailbox) && isset($mHeader->host)) {
+				$aReturn['email']	 = $mHeader->mailbox;
 				$aReturn['email']	.= "@";
-				$aReturn['email']	.= $aHeader['host'];
-		}
+				$aReturn['email']	.= $mHeader->host;
+			}
+		} else {
+			//name
+			if (isset($mHeader['personal'])) { $aReturn['name']	= $mHeader['personal']; }
 
-		if (!isset($aHeader['host'])) {
-			foreach ($aHeader as $header) {
-				printRead($header);die();
+			//email
+			if (isset($mHeader['mailbox']) && isset($mHeader['host'])) {
+				$aReturn['email']	 = $mHeader['mailbox'];
+				$aReturn['email']	.= "@";
+				$aReturn['email']	.= $mHeader['host'];
+			}
 
-				$aReturn[] = $this->makeNice($header);
+			if (!isset($mHeader['host'])) {
+				foreach ($mHeader as $header) {
+					printRead($header);die();
+
+					$aReturn[] = $this->makeNice($header);
+				}
 			}
 		}
 
