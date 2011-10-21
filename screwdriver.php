@@ -111,12 +111,14 @@ class Screwdriver {
 	 * @return null
 	 */
 	private function getPrefix($cSiteAddress = false) {
-		printRead($cSiteAddress);die();
-
 		// Get the language
 		if ($cSiteAddress) {
 			if (isset($_SERVER['SERVER_NAME'])) {
 				$cServerName	= $_SERVER['SERVER_NAME'];
+				printRead($cServerName);
+				printRead($cSiteAddress);
+				die();
+
 				$cPattern		= '`([a-z]+).' . $cSiteAddress . '`is';
 				preg_match($cPattern, $cServerName, $aMatches);
 				if (isset($aMatches[1])) {
