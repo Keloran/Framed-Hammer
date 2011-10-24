@@ -208,6 +208,7 @@ class Template_Layout extends Template_Abstract {
 				"FullPath2"	=> ($cLayout2 . $cTemplate2 . $cTemplate . ".tpl"),
 				"FullPath3"	=> ($cLayout3 . $cTemplate2 . $cTemplate . ".tpl"),
 				"FullPath4"	=> ($cLayout4 . $cTemplate2 . $cTemplate . ".tpl"),
+				"NewLayout"	=> $cNewLayout,
 			);
 			printRead($a);
 			die();
