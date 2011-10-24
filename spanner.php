@@ -264,7 +264,8 @@ class Spanner extends Exception {
 			if (!checkHeaders()) { ob_start(); }
 
 			//now put the offline page
-			header("HTTP/1.1 404 File not Found");
+			#header("HTTP/1.1 404 File not Found");
+			http_response_code(404);
 
 			//is stuff offline, e.g. database, it also redirects to homepage for normal stuffs,
 			//hopefulyl wont go into infinite loop

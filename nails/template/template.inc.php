@@ -658,7 +658,8 @@ class Template extends Template_Abstract {
 		}
 
 		//this was making validator fail for some reason
-		header("HTTP/1.0 404 Not Found");
+		#header("HTTP/1.0 404 Not Found");
+		http_response_code(404);
 		if ($this->cError) {
 			if (file_exists(SITEPATH . $cLayoutFolder . "templates/error.tpl")) {
 				//open the buffer
