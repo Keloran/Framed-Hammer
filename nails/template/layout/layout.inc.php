@@ -197,6 +197,8 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = SITEPATH . $cNewLayout . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl";
 			} else if (file_exists(SITEPATH . $cNewLayout . $cTemplate . ".tpl")) {
 				$cFinal = SITEPATH . $cNewLayout . $cTemplate . ".tpl";
+			} else if (file_exists(SITEPATH . $cNewLayout . $cCaller . "/" . $cTemplate . ".tpl")) {
+				$cFinal = SITEPATH . $cNewLayout . $cCaller . "/" . $cTemplate . ".tpl";
 			}
 		}
 
