@@ -316,4 +316,22 @@ abstract class Template_Abstract implements Template_Interface {
 
 		return $cPage;
 	}
+
+	/**
+	 * Template_Abstract::getCaller()
+	 *
+	 * @return string
+	 */
+	public function getCaller() {
+		$aDebug 	= debug_backtrace();
+		$cFile		= $aDebug[1]['file'];
+		$aFile		= explode("/", $cFile);
+		$iFile		= (count($aFile) - 1);
+
+		return array(
+			"aFile"	=> $aFile,
+			"iFile"	=> $iFile,
+			"cFile"	=> $cFile,
+		);
+	}
 }
