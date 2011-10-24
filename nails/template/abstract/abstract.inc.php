@@ -323,7 +323,7 @@ abstract class Template_Abstract implements Template_Interface {
 	 * @return string
 	 */
 	public function getCaller() {
-		$aDebug 	= debug_backtrace();
+		$aDebug 	= debug_backtrace(false, 7);
 		$cFile		= $aDebug[2]['file'];
 		$aFile		= explode("/", $cFile);
 		$iFile		= (count($aFile) - 1);

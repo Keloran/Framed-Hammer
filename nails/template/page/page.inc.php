@@ -157,38 +157,6 @@ class Template_Page extends Template_Abstract {
 				$cPath 		= $aDefault['path'];
 				$cTemplate	= $aDefault['template'];
 			}
-
-			/**
-			if ($this->cDefault) { //default page, e.g. forums
-				$cPage		= PAGES . $this->cDefault . $this->cFolder;
-				$cTemplate	= $cTemplate0;
-				$cTemplate1	= ($cTemplate ? $cTemplate : $this->cDefault) . $cExtra . ".tpl"; //extras
-				$cTemplate2 = ($cTemplate ? $cTemplate : $this->cDefault) . ".tpl"; //normal
-
-				//does it exist
-				if (file_exists($cPage . $cTemplate1)) { //extras
-					$cPath 		= $cPage . $cTemplate1;
-					$cTemplate	= $cTemplate1;
-				} else if (file_exists($cPage . $cTemplate2)) { //normal
-					$cPath		= $cPage . $cTemplate2;
-					$cTemplate	= $cTemplate2;
-				}
-			} else {
-				$cPage 		= PAGES . "news" . $this->cFolder;
-				$cTemplate	= $cTemplate0;
-				$cTemplate1	= ($cTemplate ? $cTemplate : "news") . $cExtra . ".tpl"; //extras
-				$cTemplate2 = ($cTemplate ? $cTemplate : "news") . ".tpl"; //normal
-
-				//does it exist
-				if (file_exists($cPage . $cTemplate1)) {
-					$cPath		= $cPage . $cTemplate1;
-					$cTemplate	= $cTemplate1;
-				} else if (file_exists($cPage . $cTemplate2)) {
-					$cPath		= $cPage . $cTemplate2;
-					$cTemplate	= $cTemplate2;
-				}
-			}
-			*/
 		}
 
 		//this is incase it doesnt exist at a higher level
@@ -304,65 +272,7 @@ class Template_Page extends Template_Abstract {
 						break;
 					}
 				}
-				/**
-
-				//forwards
-				for ($i = 2; $i < $this->extraParams; $i++) {
-					$cParam		 = "cParam" . $i;
-					$cParamPath	.= $cSep . $this->$cParam;
-
-					if (isset($this->$cParam)) {
-						$cTemplate	= $cTemplate0;
-						$cTemplate1	= ($cTemplate ? $cTemplate : $this->$cParam) . $cExtra . ".tpl"; //extras
-						$cTemplate2	= ($cTemplate ? $cTemplate : $this->$cParam) . ".tpl"; //normal
-						$cParam1	= PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cParamPath . $this->cFolder;
-
-						//check it exists
-						if (file_exists($cParam1 . $cTemplate1)) { //extras
-							$cPath		= $cParam1 . $cTemplate1;
-							$bForward	= true;
-							$cTemplate	= $cTemplate1;
-							break;
-						} else if (file_exists($cParam1 . $cTemplate2)) { //normal
-							$cPath		= $cParam1 . $cTemplate2;
-							$bForward	= true;
-							$cTemplate	= $cTemplate2;
-							break;
-						}
-					}
-				}
-				*/
 			}
-
-			/**
-			//backwards
-			if (!$bForward) {
-				krsort($this->extraParams);
-				for ($i = 0; $i < $this->extraParams; $i++) {
-					$cParam		 = "cParam" . $i;
-
-					//does it actually exist
-					if (isset($this->$cParam)) {
-						$cTemplate	= $cTemplate0;
-						$cTemplate1	= ($cTemplate ? $cTemplate : $this->$cParam) . $cExtra . ".tpl"; //iphone
-						$cTemplate2 = ($cTemplate ? $cTemplate : $this->$cParam) . ".tpl"; //normal
-
-						$cParam1	= PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $this->$cParam . $this->cFolder;
-
-						//does it exist
-						if (file_exists($cParam1 . $cTemplate1)) { //iphone
-							$cPath		= $cParam1 . $cTemplate1;
-							$cTemplate	= $cTemplate1;
-							break;
-						} else if (file_exists($cParam1 . $cTemplate2)) { //normal
-							$cPath		= $cParam1 . $cTemplate2;
-							$cTemplate	= $cTemplate2;
-							break;
-						}
-					}
-				}
-			}
-			*/
 		}
 
 		//since the page isnt actually real

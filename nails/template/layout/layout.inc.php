@@ -58,7 +58,6 @@ class Template_Layout extends Template_Abstract {
 		$aCaller	= $this->getCaller();
 		$cCaller	= false;
 
-
 		//if template is blank, get the file and its possible template
 		if (!$cTemplate) {
 			$aFile		= $aCaller['aFile'];
