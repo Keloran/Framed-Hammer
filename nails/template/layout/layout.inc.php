@@ -67,10 +67,8 @@ class Template_Layout extends Template_Abstract {
 		} else {
 			$aFile		= $aCaller['aFile'];
 			$iFile		= $aCaller['iFile'];
-			$cCaller	= substr($aFile[$iFile], 0, -4);
+			$cCaller	= $aCaller['caller'];
 		}
-
-		printRead($aCaller);die();
 
 
 		//SubFolder Layouts
