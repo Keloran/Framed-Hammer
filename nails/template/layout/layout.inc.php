@@ -136,6 +136,8 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = $cLayout4 . $cTemplate . ".tpl";
 			} else if (file_exists($cLayout4 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
 				$cFinal = $cLayout4 . $cTemplate2 . $cTemplate . ".tpl";
+			} else if (file_exists($cLayout4 . $cNewLayout2 . $cTemplate . ".tpl")) {
+				$cFinal = $cLayout4 . $cNewLayout2 . $cTemplate . ".tpl";
 			}
 		}
 
@@ -147,6 +149,8 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = $cLayout3 . $cTemplate . ".tpl";
 			} else if (file_exists($cLayout3 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
 				$cFinal = $cLayout3 . $cTemplate2 . $cTemplate . ".tpl";
+			} else if (file_exists($cLayout3 . $cNewLayout2 . $cTemplate . ".tpl")) {
+				$cFinal = $cLayout3 . $cNewLayout2 . $cTemplate . ".tpl";
 			}
 		}
 
@@ -158,6 +162,8 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = $cLayout2 . $cTemplate . ".tpl";
 			} else if (file_exists($cLayout2 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
 				$cFinal = $cLayout2 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl";
+			} else if (file_exists($cLayout2 . $cNewLayout2 . $cTemplate . ".tpl")) {
+				$cFinal = $cLayout2 . $cNewLayout2 . $cTemplate . ".tpl";
 			}
 		}
 
@@ -169,6 +175,8 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = $cLayout1 . $cTemplate . ".tpl";
 			} else if (file_exists($cLayout1 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
 				$cFinal = $cLayout1 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl";
+			} else if (file_exists($cLayout1 . $cNewLayout2 . $cTemplate . ".tpl")) {
+				$cFinal = $cLayout1 . $cNewLayout2 . $cTemplate . ".tpl";
 			}
 		}
 
@@ -180,6 +188,8 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = SITEPATH . $cLayout . $cTemplate . ".tpl";
 			} else if (file_exists(SITEPATH . $cNewLayout . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
 				$cFinal = SITEPATH . $cNewLayout . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl";
+			} else if (file_exists(SITEPATH . $cNewLayout . $cTemplate . ".tpl")) {
+				$cFinal = SITEPATH . $cNewLayout . $cTemplate . ".tpl";
 			}
 		}
 
