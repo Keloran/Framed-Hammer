@@ -329,10 +329,11 @@ abstract class Template_Abstract implements Template_Interface {
 		$iFile		= (count($aFile) - 1);
 
 		return array(
-			"debug"	=> $aDebug,
-			"aFile"	=> $aFile,
-			"iFile"	=> $iFile,
-			"cFile"	=> $cFile,
+			#"debug"		=> $aDebug,
+			"aFile"		=> $aFile,
+			"iFile"		=> $iFile,
+			"cFile"		=> $cFile,
+			"caller"	=> $aFile[6]
 		);
 	}
 }
