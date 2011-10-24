@@ -197,8 +197,8 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = SITEPATH . $cNewLayout . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl";
 			} else if (file_exists(SITEPATH . $cNewLayout . $cTemplate . ".tpl")) {
 				$cFinal = SITEPATH . $cNewLayout . $cTemplate . ".tpl";
-			} else if (file_exists(SITEPATH . $cNewLayout2 . $cCaller . "/" . $cTemplate . ".tpl")) {
-				$cFinal = SITEPATH . $cNewLayout2 . $cCaller . "/" . $cTemplate . ".tpl";
+			} else if (file_exists(SITEPATH . $cNewLayout . $cCaller . "/templates" . $cTemplate . ".tpl")) {
+				$cFinal = SITEPATH . $cNewLayout . $cCaller . "/templates/" . $cTemplate . ".tpl";
 			}
 		}
 
@@ -218,7 +218,7 @@ class Template_Layout extends Template_Abstract {
 				"FullPath3"	=> ($cLayout3 . $cTemplate2 . $cTemplate . ".tpl"),
 				"FullPath4"	=> ($cLayout4 . $cTemplate2 . $cTemplate . ".tpl"),
 				"NewLayout"	=> $cNewLayout,
-				"debug"		=> SITEPATH . $cNewLayout2 . $cCaller . "/" . $cTemplate . ".tpl",
+				"debug"		=> SITEPATH . $cNewLayout . $cCaller . "/templates/" . $cTemplate . ".tpl",
 			);
 			printRead($a);
 			die();
