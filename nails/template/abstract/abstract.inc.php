@@ -38,11 +38,26 @@ abstract class Template_Abstract implements Template_Interface {
 			foreach ($mVars as $cVarName => $cVar) {
                 $bNone = false;
 
-                if (is_int($cVarName)) { printRead($cVarName, "Name"); $bNone = true; }
-                if (is_int($cVar)) { printRead($cVar, "Var"); $bNone = true; }
-                if (is_int($mVars)) { printRead($mVars, "Vars"); $bNone = true; }
-                if (is_int($cName)) { printRead($cName, "TopName"); $bNone = true; }
-                if ($bNone) { die(); }
+                if (is_int($cVarName)) { 
+                    printRead("ERM1");
+                    printRead($cVarName, "Name"); 
+                    die();
+                }
+                if (is_int($cVar)) { 
+                    printRead("ERM2");
+                    printRead($cVar, "Var");
+                    die();
+                }
+                if (is_int($mVars)) { 
+                    printRead("ERM3");
+                    printRead($mVars, "Vars"); 
+                    die();
+                }
+                if (is_int($cName)) { 
+                    printRead("ERM4");
+                    printRead($cName, "TopName");
+                    die();
+                }
 
 				$this->aVars[$cName][$cVarName] = $cVar;
 			}
