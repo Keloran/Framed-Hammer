@@ -332,7 +332,7 @@ abstract class Template_Abstract implements Template_Interface {
 		printRead($aFile);die();
 
 		return array(
-			#"debug"		=> $aDebug,
+			"debug"		=> $aDebug,
 			"aFile"		=> $aFile,
 			"iFile"		=> $iFile,
 			"cFile"		=> $cFile,
