@@ -327,6 +327,7 @@ abstract class Template_Abstract implements Template_Interface {
 		$cFile		= $aDebug[3]['file'];
 		$aFile		= explode("/", $cFile);
 		$iFile		= (count($aFile) - 1);
+		$iCount		= count($aFile);
 
 		printRead($aDebug);die();
 
@@ -334,7 +335,7 @@ abstract class Template_Abstract implements Template_Interface {
 			"aFile"		=> $aFile,
 			"iFile"		=> $iFile,
 			"cFile"		=> $cFile,
-			"caller"	=> $aFile[6]
+			"caller"	=> $aFile[$iCount]
 		);
 	}
 }
