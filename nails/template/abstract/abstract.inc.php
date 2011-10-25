@@ -330,7 +330,7 @@ abstract class Template_Abstract implements Template_Interface {
             if ($debug['function'] == "setCoreTemplate") {
                 if (isset($debug['args'])) {
     				if (isset($debug['args'][0])) {
-    					$cFile	= $debug[3]['args'][0];
+    					$cFile	= $debug['args'][0];
                     }
 				}
 			}
