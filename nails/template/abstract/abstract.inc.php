@@ -40,21 +40,25 @@ abstract class Template_Abstract implements Template_Interface {
 
                 if (is_int($cVarName)) { 
                     printRead("ERM1");
+                    printRead($mVars);
                     printRead($cVarName, "Name"); 
                     die();
                 }
                 if (is_int($cVar)) { 
                     printRead("ERM2");
+                    printRead($mVars);
                     printRead($cVar, "Var");
                     die();
                 }
                 if (is_int($mVars)) { 
                     printRead("ERM3");
+                    printRead($cName);
                     printRead($mVars, "Vars"); 
                     die();
                 }
                 if (is_int($cName)) { 
                     printRead("ERM4");
+                    printRead($mVars);
                     printRead($cName, "TopName");
                     die();
                 }
