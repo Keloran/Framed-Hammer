@@ -38,7 +38,8 @@ abstract class Template_Abstract implements Template_Interface {
 			foreach ($mVars as $cVarName => $cVar) {
                 $bNone = false;
 
-                if (is_int($cVarName)) { 
+                if (is_int($cVarName)) {
+                    printRead(debug_backtrace());
                     printRead("ERM1");
                     printRead($mVars);
                     printRead($cVarName, "Name"); 
