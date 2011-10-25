@@ -55,8 +55,7 @@ class Template_Layout extends Template_Abstract {
 		$cLayout		= "/core/templates/"; //old way
 		$cFinal			= false;
 
-		$aCaller	= $this->getCaller();
-		$cCaller	= false;
+		$cCaller	= $this->getCaller();
 
 		//if template is blank, get the file and its possible template
 		if (!$cTemplate) {
@@ -66,7 +65,6 @@ class Template_Layout extends Template_Abstract {
 		} else {
 			$aFile		= $aCaller['aFile'];
 			$iFile		= $aCaller['iFile'];
-			$cCaller	= $aCaller['caller'];
 		}
 
 

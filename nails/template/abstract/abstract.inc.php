@@ -324,18 +324,16 @@ abstract class Template_Abstract implements Template_Interface {
 	 */
 	public function getCaller() {
 		$aDebug 	= debug_backtrace(false, 7);
-		$cFile		= $aDebug[3]['file'];
-		$aFile		= explode("/", $cFile);
-		$iFile		= (count($aFile) - 1);
-		$iCount		= count($aFile) - 1;
+		$cFile		= false;
 
-		printRead($aDebug);die();
+		if (isset($aDebug[3])) {
+			if (isset($aDebug[3]['args'])) {
+				if (isset($aDebug[3]['args'][0])) {
+					$cFile	= $aDebug[3]['args'][0];
+				}
+			}
+		}
 
-		return array(
-			"aFile"		=> $aFile,
-			"iFile"		=> $iFile,
-			"cFile"		=> $cFile,
-			"caller"	=> $aFile[$iCount]
-		);
+		return $cFile;
 	}
 }
