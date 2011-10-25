@@ -326,17 +326,14 @@ abstract class Template_Abstract implements Template_Interface {
 		$aDebug 	= debug_backtrace(false, 7);
 		$cFile		= false;
 
-		if (isset($aDebug[3])) {
-			if (isset($aDebug[3]['args'])) {
-				if (isset($aDebug[3]['args'][0])) {
-					$cFile	= $aDebug[3]['args'][0];
+        foreach ($aDebug AS $debug) {
+            if ($debug['function'] == "setCoreTemplate") {
+                if (isset($debug['args']) {
+    				if (isset($debug['args'][0])) {
+    					$cFile	= $debug[3]['args'][0];
+                    }
 				}
 			}
-		}
-
-		if ($cFile == "/Sites/Hammer/app/bugfixs/layout/menu/menu.php") {
-			printRead($aDebug);
-			die();
 		}
 
 		return $cFile;
