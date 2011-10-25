@@ -40,24 +40,12 @@ abstract class Template_Abstract implements Template_Interface {
                 $bNone = false;
 
                 if (is_int($cVarName)) {
-                    #printRead(debug_backtrace());
-                    printRead("ERM1");
-
-                    if ($this->aVars[$cName] == $cVarName) { 
-                        printRead($cName);
-                        printRead($this->aVars[$cName]); 
-                        die();
-                    }
                     if ($this->aVars[$cName][$cVarName] == $cVarName) { 
                         printRead($cName);
                         printRead($this->aVars[$cName]); 
+                        printRead($mVars);
                         die();
                     }
-
-                    printRead($mVars);
-                    printRead($this->aVars);
-                    printRead($cVarName, "Name"); 
-                    die();
                 }
 
 
