@@ -37,7 +37,7 @@ abstract class Template_Abstract implements Template_Interface {
 		if (is_array($mVars)) {
 			foreach ($mVars as $cVarName => $cVar) {                
                 //remove the previous entry
-                if ($this->aVars[$cName][$cVarName] == $cVarName) { unset($this->aVars[$cName][$cVarName]); }
+                if ($this->aVars[$cName][$cVarName] == $cVarName) { $cVarName = $cVarName . "_preset"; }
 
 				$this->aVars[$cName][$cVarName] = $cVar;
 			}
