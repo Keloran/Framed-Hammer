@@ -59,15 +59,8 @@ class Template_Layout extends Template_Abstract {
 
 		//if template is blank, get the file and its possible template
 		if (!$cTemplate) {
-			$aFile		= $aCaller['aFile'];
-			$iFile		= $aCaller['iFile'];
-			$cTemplate	= substr($aFile[$iFile], 0, -4);
-		} else {
-			$aFile		= $aCaller['aFile'];
-			$iFile		= $aCaller['iFile'];
+			$cTemplate	= substr($cCaller, 0, -4);
 		}
-
-
 		//SubFolder Layouts
 		$cTemplate2		= $cTemplate . $cSep;
 		$cNewLayout		= "/layout/";
