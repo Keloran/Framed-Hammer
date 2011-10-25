@@ -35,7 +35,7 @@ abstract class Template_Abstract implements Template_Interface {
 	*/
 	public final function setVars($cName, $mVars) {
 		if (is_array($mVars)) {
-            unset($this->aVars[$cName];
+            unset($this->aVars[$cName]);
 
 			foreach ($mVars as $cVarName => $cVar) { $this->aVars[$cName][$cVarName] = $cVar; }
 		} else {
