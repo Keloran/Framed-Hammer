@@ -334,6 +334,11 @@ abstract class Template_Abstract implements Template_Interface {
 			}
 		}
 
+		if ($cFile == "/Sites/Hammer/app/bugfixs/layout/menu/menu.php") {
+			printRead($aDebug);
+			die();
+		}
+
 		return $cFile;
 	}
 }
