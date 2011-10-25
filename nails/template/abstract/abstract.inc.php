@@ -34,9 +34,11 @@ abstract class Template_Abstract implements Template_Interface {
 	* @return null
 	*/
 	public final function setVars($cName, $mVars) {
-		if (is_array($mVars)) {
-            unset($this->aVars[$cName]);
+        //always unset the previous variable
+        //before setting it, avoid scalar conflicts
+        unset($this->aVars[$cName]);
 
+		if (is_array($mVars)) {
 			foreach ($mVars as $cVarName => $cVar) { $this->aVars[$cName][$cVarName] = $cVar; }
 		} else {
 			$this->aVars[$cName] = $mVars;
