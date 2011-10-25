@@ -36,6 +36,7 @@ abstract class Template_Abstract implements Template_Interface {
 	public final function setVars($cName, $mVars) {
 		if (is_array($mVars)) {
 			foreach ($mVars as $cVarName => $cVar) {
+                /*
                 $bNone = false;
 
                 if (is_int($cVarName)) {
@@ -51,6 +52,7 @@ abstract class Template_Abstract implements Template_Interface {
                     printRead($cName, "TopName");
                     die();
                 }
+                */
 
 				$this->aVars[$cName][$cVarName] = $cVar;
 			}
