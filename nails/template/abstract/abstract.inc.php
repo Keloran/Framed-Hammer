@@ -328,6 +328,9 @@ abstract class Template_Abstract implements Template_Interface {
 		$aFile		= explode("/", $cFile);
 		$iFile		= (count($aFile) - 1);
 
+
+		printRead($aFile);die();
+
 		return array(
 			#"debug"		=> $aDebug,
 			"aFile"		=> $aFile,

@@ -23,8 +23,6 @@ if (!function_exists("printRead")) { include HAMMERPATH . "/spanner.php"; }
  * @return object
  */
 function getNail_Version($cNail, $oNail, $mParams = null) {
-	$cException = $cNail . "_Exception";
-
 	//just incase its a standalone and/or 3rd part
 	if (is_callable(array($cNail, "getInstance"))) {
 		try {
