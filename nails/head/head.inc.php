@@ -550,15 +550,9 @@ class Head {
 	 * @return null
 	 */
 	public function addCSS($cCSS, $cLocation = null) {
-		if (strstr($cCSS, ".css")) {
-			$cCSS = substr($cCSS, -4);
-		}
+		if (strstr($cCSS, ".css")) { $cCSS = substr($cCSS, -4); }
 
-		if ($cLocation) {
-			if (!strstr($cLocation, "/")) {
-				$cLocation .= "/";
-			}
-		}
+		if ($cLocation) { if (!strstr($cLocation, "/")) { $cLocation .= "/"; }}
 
 		$iNum	= count($this->aAddedCSS);
 		if ($iNum) { $iNum++; }
