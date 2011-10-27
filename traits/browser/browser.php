@@ -102,7 +102,6 @@ trait Browser {
 				$mBrowser = "webkit";
 			} else if (preg_match("`(webkit)`i", $cBrowser)) { //webkit based, e.g. chrome
 				$mBrowser = "webkit";
-			}
 
 			} else if (preg_match("`(opera)`i", $cBrowser)) { //opera
 				$mBrowser = "opera";
