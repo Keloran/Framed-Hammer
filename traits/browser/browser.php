@@ -82,6 +82,9 @@ trait Browser {
 		if (isset($_SERVER['HTTP_USER_AGENT'])) {
 			$cBrowser = $_SERVER['HTTP_USER_AGENT'];
 
+			//see if its a mobile device first
+			$bMobile	= $this->mobileBrowser($cBrowser, true);
+
 			//Internet Explorer
 			if (preg_match("`(ie 7)`i", $cBrowser)) {
 				$mBrowser	= array("ie", "ie7");
@@ -102,8 +105,9 @@ trait Browser {
 				$mBrowser = "opera";
 			}
 
-			//detect if its a mobile
-			$mBrowser = $this->mobileBrowser($cBrowser);
+
+			//if its a mobile device, tell me what it is
+			if ($bMobile) { $mBrowser = $this->mobileBrowser($cBrowser); }
 		} else {
 			$mBrowser = false;
 		}
@@ -138,20 +142,28 @@ trait Browser {
 	 * @param mixed $mBrowser
 	 * @return bool
 	 */
-	function mobileBrowser($mBrowser = false) {
+	function mobileBrowser($mBrowser = false, $bBool = false) {
 		if (!$mBrowser) { $mBrowser = $this->getBrowser(); }
 
 		$cReturn	= $mBrowser;
+		$bReturn	= false;
 
 		if (preg_match("`(android)`i", $mBrowser)) {
-			$cReturn = "android";
+			$cReturn	= "android";
+			$bReturn	= true;
 		} else if (preg_match("`(iphone)`i", $mBrowser)) {
-			$cReturn = "iphone";
+			$cReturn	= "iphone";
+			$bReturn	= true;
 		} else if (preg_match("`(ipad)`i", $mBrowser)) {
-			$cReturn = "ipad";
+			$cReturn	= "ipad";
+			$bReturn	= true;
 		} else if (preg_match("`(MobileIE)`i", $mBrowser)) {
-			$cReturn = "mobileie";
+			$cReturn	= "mobileie";
+			$bReturn	= true;
 		}
+
+		//do we only want to test for, not yet return
+		if ($bBool) { return $bReturn; }
 
 		return $cReturn;
 	}
