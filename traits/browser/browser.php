@@ -98,7 +98,7 @@ trait Browser {
 			} else if (preg_match("`(firefox)`i", $cBrowser)) { //Firefox
 				$mBrowser = "firefox";
 
-			} else if (preg_match("`(ie 7)`i", $cBrowser)) { //Safari
+			} else if (preg_match("`(safari)`i", $cBrowser)) { //Safari
 				$mBrowser = "safari";
 
 			} else if (preg_match("`(opera)`i", $cBrowser)) { //opera
