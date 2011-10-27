@@ -96,8 +96,7 @@ class Session_Robots {
 		$aInsert	= false;
 
 		if (isset($_SERVER['HTTP_USER_AGENT'])) {
-			//$cBrowser = $_SERVER['HTTP_USER_AGENT'];
-			$cBrowser	= $this->getBrowser();
+			$cBrowser = $_SERVER['HTTP_USER_AGENT'];
 
 			//Get the robotname and
 			$cPattern	= "`(\()(.+?)((?:http://)([a-zA-Z0-9\-_.\/]+))(\))`is";
