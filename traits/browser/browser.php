@@ -90,25 +90,17 @@ trait Browser {
 				$mBrowser = "ie9";
 			} else if (stristr($cBrowser, "MSIE") || stristr($cBrowser, "MSie")) {
 				$mBrowser = array("ie", "ie6");
-			} else if (stristr($cBrowser, "Opera")) {
-				$mBrowser = "opera";
-			} else if (stristr($cBrowser, "iPhone")) {
-				$mBrowser = "iphone";
 			}
 
 			//Since we might have already got the iphone
 			if (stristr($cBrowser, "KHTML")) {
-				if (stristr($cBrowser, "Safari")) {
-					if ($mBrowser) {
-						$mBrowser = array("webkit", "iphone");
-					} else {
-						$mBrowser = "webkit";
-					}
-				} else if (stristr($cBrowser, "Konqueror")) {
-					$mBrowser = "khtml";
-				}
+				if (stristr($cBrowser, "Safari")) { $mBrowser = "webkit"; }
 			} else if (stristr($cBrowser, "Gecko")) {
-				$mBrowser = "gecko";
+				$mBrowser = "firefox";
+			} else if (stristr($cBrowser, "Opera")) {
+				$mBrowser = "opera";
+			} else {
+				$mBrowser = $this->mobileBrowser($cBrowser);
 			}
 		} else {
 			$mBrowser = false;
@@ -144,6 +136,7 @@ trait Browser {
 		if (!$mBrowser) { $mBrowser = $this->getBrowser(); }
 
 		$bReturn	= false;
+		printRead($mBrowser);die();
 
 		//is mBrowser an array
 		if (is_array($mBrowser)) {
