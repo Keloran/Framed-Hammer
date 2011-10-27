@@ -80,24 +80,23 @@ trait Browser {
 		if (isset($_SERVER['HTTP_USER_AGENT'])) {
 			$cBrowser = $_SERVER['HTTP_USER_AGENT'];
 
-			if (stristr($cBrowser, "MobileIE")) {
-				$mBrowser = array("ie", "mobileie");
-			} else if (stristr($cBrowser, "MSIE 7") || stristr($cBrowser, "MSie 7")) {
-				$mBrowser = array("ie", "ie7");
-			} else if (stristr($cBrowser, "MSIE 8") || stristr($cBrowser, "MSie 8")) {
-				$mBrowser = array("ie", "ie8");
-			} else if (stristr($cBrowser, "MSIE 9") || stristr($cBrowser, "MSie 9")) {
-				$mBrowser = "ie9";
-			} else if (stristr($cBrowser, "MSIE") || stristr($cBrowser, "MSie")) {
-				$mBrowser = array("ie", "ie6");
-			}
+			//Internet Explorer
+			if (preg_match("`(ie 7)`i", $cBrowser)) {
+				$mBrowser	= array("ie", "ie7");
+			} else if (preg_match("`(ie 8)`i", $cBrowser)) {
+				$mBrowser	= array("ie", "ie8");
+			} else if (preg_match("`(ie 9)`i", $cBrowser)) {
+				$mBrowser	= array("ie", "ie9");
+			} else if (preg_match("`(msie)`i", $cBrowser)) {
+				$mBrowser	= array("ie", "ie6");
 
-			//Since we might have already got the iphone
-			if (stristr($cBrowser, "Safari")) {
-				$mBrowser = "webkit";
-			} else if (stristr($cBrowser, "Gecko")) {
+			} else if (preg_match("`(firefox)`i", $cBrowser)) { //Firefox
 				$mBrowser = "firefox";
-			} else if (stristr($cBrowser, "Opera")) {
+
+			} else if (preg_match("`(ie 7)`i", $cBrowser)) { //Safari
+				$mBrowser = "safari";
+
+			} else if (preg_match("`(opera)`i", $cBrowser)) { //opera
 				$mBrowser = "opera";
 			}
 
@@ -140,12 +139,14 @@ trait Browser {
 
 		$cReturn	= $mBrowser;
 
-		if (stristr($mBrowser, "android")) {
-			$mBrowser = "android";
-		} else if (stristr($mBrowser, "iphone")) {
-			$mBrowser = "iphone";
-		} else if (stristr($mBrowser, "ipad")) {
-			$mBrowser = "ipad";
+		if (preg_match("`(android)`i", $mBrowser)) {
+			$cReturn = "android";
+		} else if (preg_match("`(iphone)`i", $mBrowser)) {
+			$cReturn = "iphone";
+		} else if (preg_match("`(ipad)`i", $mBrowser)) {
+			$cReturn = "ipad";
+		} else if (preg_match("`(MobileIE)`i", $mBrowser)) {
+			$cReturn = "mobileie";
 		}
 
 		return $cReturn;
