@@ -140,11 +140,11 @@ trait Browser {
 
 		$cReturn	= $mBrowser;
 
-		if (stristr($cBrowser, "android")) {
+		if (stristr($mBrowser, "android")) {
 			$mBrowser = "android";
-		} else if (stristr($cBrowser, "iphone")) {
+		} else if (stristr($mBrowser, "iphone")) {
 			$mBrowser = "iphone";
-		} else if (stristr($cBrowser, "ipad")) {
+		} else if (stristr($mBrowser, "ipad")) {
 			$mBrowser = "ipad";
 		}
 
