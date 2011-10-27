@@ -509,7 +509,7 @@ class Head {
     	//a page structure overrides the css
     	$cCSS .= $this->getAddedCSS();
 
-        return $cCSS;
+	return $cCSS;
     }
 
 	/**
