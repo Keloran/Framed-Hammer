@@ -105,9 +105,8 @@ trait Browser {
 				$mBrowser = "opera";
 			}
 
-
 			//if its a mobile device, tell me what it is
-			if ($bMobile) { $mBrowser = $this->mobileBrowser($cBrowser); }
+			if ($bMobile) { $mBrowser = array($mBrowser, $this->mobileBrowser($cBrowser)); }
 		} else {
 			$mBrowser = false;
 		}
