@@ -99,9 +99,10 @@ trait Browser {
 				$mBrowser = "firefox";
 			} else if (stristr($cBrowser, "Opera")) {
 				$mBrowser = "opera";
-			} else {
-				$mBrowser = $this->mobileBrowser($cBrowser);
 			}
+
+			//detect if its a mobile
+			$mBrowser = $this->mobileBrowser($cBrowser);
 		} else {
 			$mBrowser = false;
 		}
