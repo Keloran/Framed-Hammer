@@ -131,8 +131,6 @@ trait Browser {
 			}
 		}
 
-		printRead($mBrowser);die();
-
 		return $mBrowser;
 	}
 
