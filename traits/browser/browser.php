@@ -142,7 +142,7 @@ trait Browser {
 	 * @return bool
 	 */
 	function mobileBrowser($mBrowser = false, $bBool = false) {
-		if (!$mBrowser || is_arrya($mBrowser)) { $mBrowser = $this->getBrowser(false, true); }
+		if (!$mBrowser || is_array($mBrowser)) { $mBrowser = $this->getBrowser(false, true); }
 
 		$cReturn	= $mBrowser;
 		$bReturn	= false;
