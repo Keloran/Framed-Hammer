@@ -93,8 +93,8 @@ trait Browser {
 			}
 
 			//Since we might have already got the iphone
-			if (stristr($cBrowser, "KHTML")) {
-				if (stristr($cBrowser, "Safari")) { $mBrowser = "webkit"; }
+			if (stristr($cBrowser, "Safari")) {
+				$mBrowser = "webkit";
 			} else if (stristr($cBrowser, "Gecko")) {
 				$mBrowser = "firefox";
 			} else if (stristr($cBrowser, "Opera")) {
