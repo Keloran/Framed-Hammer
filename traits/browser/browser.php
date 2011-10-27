@@ -38,6 +38,7 @@ trait Browser {
 				break;
 
 			case "iphone":
+			case "ipad":
 			case "mobile-safari":
 				$mBrowser = array("safari", "iphone");
 				break;
@@ -77,6 +78,7 @@ trait Browser {
 		//this is a better method
 		if ($mGetBrowser) { return $mGetBrowser; }
 
+		//older method
 		if (isset($_SERVER['HTTP_USER_AGENT'])) {
 			$cBrowser = $_SERVER['HTTP_USER_AGENT'];
 
@@ -108,17 +110,19 @@ trait Browser {
 
 		//specific browser specified
 		if ($cSpecific) {
-			if (is_array($mBrowser)) {
-				if (in_array($cSpecific, $mBrowser)) {
-					$mBrowser	= true;
+			if ($mBrowser) {
+				if (is_array($mBrowser)) {
+					if (in_array($cSpecific, $mBrowser)) {
+						$mBrowser	= true;
+					} else {
+						$mBrowser	= false;
+					}
 				} else {
-					$mBrowser	= false;
-				}
-			} else {
-				if ($cSpecific == $mBrowser) {
-					$mBrowser = true;
-				} else {
-					$mBrowser = false;
+					if ($cSpecific == $mBrowser) {
+						$mBrowser = true;
+					} else {
+						$mBrowser = false;
+					}
 				}
 			}
 		}
@@ -159,16 +163,6 @@ trait Browser {
 	 * @return bool
 	 */
 	function IEBrowser($mBrowser = false) {
-		if (!$mBrowser) { $mBrowser = $this->getBrowser(); }
-
-		$bReturn = false;
-
-		if (is_array($mBrowser)) {
-			if (in_array("ie", $mBrowser)) { $bReturn = true; }
-		} else {
-			if ($mBrowser == "ie") { $bReturn = true; }
-		}
-
-		return $bReturn;
+		return $this->getBrowser("ie");
 	}
 }
