@@ -99,14 +99,23 @@ trait Browser {
 				$mBrowser = "firefox";
 
 			} else if (preg_match("`(safari)`i", $cBrowser)) { //Safari
-				$mBrowser = "safari";
+				$mBrowser = "webkit";
+			} else if (preg_match("`(webkit)`i", $cBrowser)) { //webkit based, e.g. chrome
+				$mBrowser = "webkit";
+			}
 
 			} else if (preg_match("`(opera)`i", $cBrowser)) { //opera
 				$mBrowser = "opera";
 			}
 
 			//if its a mobile device, tell me what it is
-			if ($bMobile) { $mBrowser = array($mBrowser, $this->mobileBrowser($cBrowser)); }
+			if ($bMobile) {
+				if (is_array($mBrowser)) {
+					$mBrowser[] = $this->mobileBrowser($cBrowser);
+				} else {
+					$mBrowser = array($mBrowser, $this->mobileBrowser($cBrowser));
+				}
+			}
 		} else {
 			$mBrowser = false;
 		}
