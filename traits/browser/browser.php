@@ -71,7 +71,7 @@ trait Browser {
 	 *
 	 * @return array
 	 */
-	function getBrowser($cSpecific = null) {
+	function getBrowser($cSpecific = null, $bAgent = false) {
 		$mBrowser 		= false;
 		$mGetBrowser	= $this->getBrowserCap();
 
@@ -130,6 +130,8 @@ trait Browser {
 			}
 		}
 
+		if ($bAgent) { return $cBrowser; }
+
 		return $mBrowser;
 	}
 
@@ -140,7 +142,7 @@ trait Browser {
 	 * @return bool
 	 */
 	function mobileBrowser($mBrowser = false, $bBool = false) {
-		if (!$mBrowser) { $mBrowser = $this->getBrowser(); }
+		if (!$mBrowser) { $mBrowser = $this->getBrowser(false, true); }
 
 		$cReturn	= $mBrowser;
 		$bReturn	= false;
