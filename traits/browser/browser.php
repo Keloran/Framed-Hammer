@@ -123,6 +123,8 @@ trait Browser {
 			}
 		}
 
+		printRead($mBrowser);die();
+
 		return $mBrowser;
 	}
 
@@ -135,29 +137,17 @@ trait Browser {
 	function mobileBrowser($mBrowser = false) {
 		if (!$mBrowser) { $mBrowser = $this->getBrowser(); }
 
-		$bReturn	= false;
-		printRead($mBrowser);die();
+		$cReturn	= $mBrowser;
 
-		//is mBrowser an array
-		if (is_array($mBrowser)) {
-			if (in_array("android", $mBrowser)) {
-				$bReturn	= true;
-			} else if (in_array("iphone", $mBrowser)) {
-				$bReturn	= true;
-			} else if (in_array("ipad", $mBrowser)) {
-				$bReturn	= true;
-			}
-		} else {
-			switch($mBrowser) {
-				case "android":
-				case "iphone":
-				case "ipad":
-					$bReturn = true;
-					break;
-			} // switch
+		if (stristr($cBrowser, "android")) {
+			$mBrowser = "android";
+		} else if (stristr($cBrowser, "iphone")) {
+			$mBrowser = "iphone";
+		} else if (stristr($cBrowser, "ipad")) {
+			$mBrowser = "ipad";
 		}
 
-		return $bReturn;
+		return $cReturn;
 	}
 
 	/**
