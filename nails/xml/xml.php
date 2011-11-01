@@ -171,6 +171,14 @@ class XML {
 	public function updateElement($cElement, $cValue, $cParent = false) {
 		$mElement	= $this->getElement($cElement, $cParent, true);
 
+		if ($cParent == "organic") {
+			printRead($mElement, "Returned");
+			printRead($cElement, "Called");
+			printRead($cParent, "Parent");
+			printRead($cValue, "Val");
+			die();
+		}
+
 		//there is an element to update
 		if ($mElement) {
 			$oElement	= $mElement->childNodes->item(0);
