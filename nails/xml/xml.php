@@ -173,6 +173,7 @@ class XML {
 
 		if ($cParent == "organic") {
 			printRead($mElement, "Returned");
+			printRead($mElement->getNodePath(), "Path");
 			printRead($cElement, "Called");
 			printRead($cParent, "Parent");
 			printRead($cValue, "Val");
