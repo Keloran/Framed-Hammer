@@ -25,34 +25,10 @@ class Session_Robots {
 	 * @param Nails $oNails
 	 */
 	private function __construct(Nails $oNails) {
+		$oNails->getNails("Session_Robots_Install");
+
 		$this->oNails	= $oNails;
 		$this->oDB		= $oNails->getDatabase();
-
-		//install
-		if ($this->oNails->checkInstalled("users_sessions_robots") == false) {
-			$this->install();
-		}
-
-		//versions
-		if ($this->oNails->checkVersion("users_sessions_robots", "1.3") == false) {
-			//1.1
-			$cSQL	= "ALTER TABLE `users_sessions_robots` ADD COLUMN `cFullRobotString` TEXT NOT NULL";
-			$this->oNails->updateVersion("users_sessions_robots", "1.1", $cSQL);
-
-			//1.2
-			$this->oNails->updateVersion("users_sessions_robots", "1.2");
-
-			//1.3
-			$cSQL	= "
-				CREATE TABLE IF NOT EXISTS `users_sessions_visitors` (
-					`iSessionID` INT NOT NULL AUTO_INCREMENT,
-					`cUserAgent` TEXT,
-					`tsDate` INT NOT NULL,
-					PRIMARY KEY (`iSessionID`)
-				) ENGINE = MyISAM
-			";
-			$this->oNails->updateVersion("users_sessions_robots", "1.3", $cSQL, "Add Visitors Sessions");
-		}
 	}
 
 	/**
@@ -74,18 +50,7 @@ class Session_Robots {
 	 *
 	 * @return null
 	 */
-	private function install() {
-		$this->oNails->addTable("
-				CREATE TABLE IF NOT EXISTS `users_sessions_robots` (
-					`iSessionID` INT NOT NULL AUTO_INCREMENT,
-					`cRobotName` VARCHAR (50),
-					`tsDate` INT NOT NULL,
-					`cRobotSite` TEXT,
-					PRIMARY KEY (`iSessionID`)
-				) ENGINE = MYISAM");
 
-		$this->oNails->addVersion("users_sessions_robots", "1.0");
-	}
 
 	/**
 	 * Session_Robots::getRobotDetails()

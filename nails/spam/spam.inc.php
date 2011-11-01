@@ -16,32 +16,10 @@ class Spam {
 	 * @param Nails $oNails
 	 */
 	public function __construct(Nails $oNails) {
+		$oNails->addVersion("Spam_Install");
+
 		$this->oNails 	= $oNails;
 		$this->oDB		= $oNails->getDatabase();
-
-		//check its installed, since might aswell put this stuff into a database
-		if ($this->oNails->checkInstalled("hammer_spam") == false) {
-			$this->install();
-		}
-	}
-
-	/**
-	 * Spam::install()
-	 *
-	 * @return null
-	 */
-	private function install() {
-		$this->oNails->addTable("
-			CREATE TABLE IF NOT EXISTS `hammer_spam` (
-				`iSpamID` INT NOT NULL AUTO_INCREMENT,
-				`cEmail` TEXT NOT NULL,
-				`iIP` INT NOT NULL,
-				PRIMARY KEY (`iSpamID`))
-			ENGINE=InnoDB");
-
-		$this->oNails->addVersion("hammer_spam", "1.0");
-
-		$this->oNails->sendLocation("install");
 	}
 
 	/**

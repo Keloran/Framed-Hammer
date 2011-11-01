@@ -26,6 +26,8 @@ class Messages implements Nails_Interface {
      *
      */
     private function __construct(Nails $oNails) {
+    	$oNails->getNails("Messages_Install")_;
+
         $this->oUser	= $oNails->getUser();
         $this->oSession	= $oNails->getSession();
     	$this->oDB		= $oNails->getDatabase();
@@ -34,41 +36,6 @@ class Messages implements Nails_Interface {
         $this->iUserID	= $this->oUser->getUserID();
         $this->iGroupID = $this->oUser->getUserGroupID();
         $this->iLimit   = $this->oUser->getUserLimit();
-
-		//check if installed
-        if ($oNails->checkInstalled("users_messages") == false) {
-        	$this->install();
-        }
-
-        //do the update
-        if ($oNails->checkVersion("messages", "1.2") == false) {
-        	//1.1
-        	$cSQL = "
-				CREATE TABLE IF NOT EXISTS `notifications_groups` (
-  					`iNotifyID` INT NOT NULL AUTO_INCREMENT,
-  					`iGroupID` INT(11) NOT NULL,
-  					`tsDated` TIMESTAMP NOT NULL ,
-  					`cMessage` VARCHAR(150) NULL ,
-  					`cPermission` VARCHAR(100) NULL,
-  					PRIMARY KEY (`iNotifyID`) ,
-  					INDEX `groups_time` (`iGroupID` ASC, `tsDated` DESC),
-  					INDEX `permissions` (`cPermission` ASC)
-  				) ENGINE = MEMORY";
-        	$oNails->updateVersion("messages", "1.1", $cSQL, "Added Groups Notifications");
-
-        	//1.2
-        	$cSQL = "
-				CREATE TABLE IF NOT EXISTS `notifications_users` (
-  					`iNotifyID` INT(11) NOT NULL AUTO_INCREMENT ,
-  					`iUserID` INT(11) NOT NULL ,
-  					`cMessage` VARCHAR(150) NULL DEFAULT NULL ,
-  					`tsDated` TIMESTAMP NOT NULL ,
-  					PRIMARY KEY (`iNotifyID`) ,
-  					INDEX `iUserID` (`iUserID` ASC, `tsDated` ASC) ,
-  					INDEX `fk_users_notify_users1` (`iUserID` ASC)
-    			) ENGINE = MEMORY";
-        	$oNails->updateVersion("messages", "1.2", $cSQL, "Added Users Notifications");
-        }
     }
 
     /**
@@ -83,31 +50,6 @@ class Messages implements Nails_Interface {
     	}
 
     	return self::$oMessages;
-    }
-
-    /**
-     * Messages::install()
-     *
-     * @return null
-     */
-    private function install() {
-        //Add the forums
-        $this->oNails->addTable("
-			CREATE TABLE IF NOT EXISTS `users_messages` (
-				`iMessageID` INT NOT NULL AUTO_INCREMENT,
-				`iRecieverID` INT NOT NULL,
-				`iSenderID` INT NOT NULL,
-				`cTitle` VARCHAR(150) NOT NULL,
-				`cMessage` TEXT NOT NULL,
-				`tsDate` INT NOT NULL,
-				`bRead` BOOL DEFAULT 0,
-				PRIMARY KEY (`iMessageID`)
-			) ENGINE = MYISAM");
-        $this->oNails->addIndexs("users_messages", array("iRecieverID", "iSenderID"));
-
-        $this->oNails->addVersion("users_messages", "1.0");
-
-    	$this->oNails->sendLocation("install");
     }
 
     /**

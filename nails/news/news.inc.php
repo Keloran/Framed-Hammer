@@ -31,6 +31,8 @@ class News implements Nails_Interface {
      *
      */
 	private function __construct(Nails $oNails) {
+		$oNails->getNails("News_Install");
+
     	$this->oNails		= $oNails;
 		$this->oUser		= $this->oNails->getUser();
 		$this->oSession		= $this->oNails->getSession();
@@ -46,19 +48,7 @@ class News implements Nails_Interface {
 		$this->oComments->iPage			= $oNails->iPage;
 
 		//get teh database object
-		if (is_null($this->oDB)) {
-			$this->oDB = $this->oNails->getDatabase();
-		}
-
-		//check installed
-		if ($this->oNails->checkInstalled("news") == false) {
-			$this->install();
-		}
-
-	    //do the update
-	    if ($this->oNails->checkVersion("news", "1.1") == false) {
-	    	$oNails->updateVersion("news", "1.1", false, "Updated to make HTML5 easier");
-	    }
+		if (is_null($this->oDB)) { $this->oDB = $this->oNails->getDatabase(); }
     }
 
 	/**
@@ -83,77 +73,6 @@ class News implements Nails_Interface {
     	}
 
     	return self::$oNews;
-    }
-
-    /**
-     * News::install()
-     *
-     * @return null
-     */
-    private function install() {
-        //Create the news table and its index`s
-        $this->oNails->addTable("
-			CREATE TABLE IF NOT EXISTS `news` (
-				`iNewsID` INT NOT NULL AUTO_INCREMENT,
-				`tsDate` INT NOT NULL,
-				`cTitle` VARCHAR(150) NOT NULL,
-				`cContent` TEXT NOT NULL,
-				`iUserID` INT NOT NULL,
-				`iCategoryID` INT NOT NULL DEFAULT 0,
-				`iImageID` INT NOT NULL DEFAULT 0,
-				PRIMARY KEY (`iNewsID`))
-			ENGINE=MYISAM");
-    	$aNews = array("iUserID", "iCategoryID", "iImageID");
-		$this->oNails->addIndexs("news", $aNews);
-
-        //Create the category table
-        $this->oNails->addTable("
-			CREATE TABLE IF NOT EXISTS `news_categorys` (
-				`iCategoryID` INT NOT NULL AUTO_INCREMENT,
-				`cCategory` VARCHAR(50) NOT NULL,
-				`cImageName` VARCHAR(50) NOT NULL,
-				PRIMARY KEY (`iCategoryID`))
-			ENGINE=MYISAM");
-
-        //Create the comments table
-        $this->oNails->addTable("
-			CREATE  TABLE IF NOT EXISTS `news_comments` (
-			  `iCommentID` INT NOT NULL AUTO_INCREMENT,
-			  `iNewsID` INT NOT NULL,
-			  `cComment` TEXT NULL DEFAULT NULL,
-			  `tsDate` INT NULL DEFAULT NULL,
-			  `iUserID` INT NULL DEFAULT NULL,
-			  PRIMARY KEY (`iCommentID`),
-			  INDEX `fk_news_comments_news` (`iNewsID` ASC))
-			ENGINE = InnoDB");
-		$this->oNails->addIndexs("news_comments", array("iNewsID", "iUserID"));
-
-    	//Create the images table
-    	$this->oNails->addTable("
-			CREATE TABLE IF NOT EXISTS `news_images` (
-				`iImageID` INT NOT NULL AUTO_INCREMENT,
-				`iNewsID` INT NOT NULL,
-				`cImage` VARCHAR(100) NOT NULL,
-				PRIMARY KEY (`iImageID`),
-				INDEX `fk_news_images`(`iNewsID` ASC))
-			ENGINE=InnoDB");
-		$this->oNails->addIndexs("news_images", "iNewsID");
-
-		//check if the groups table is there, if it is add the allowed to comment
-		//and news options, and their respective index's
-		if ($this->oNails->groupsInstalled()) {
-			$aGroups = array("newsComments", "news");
-			$this->oNails->addGroups($aGroups);
-
-			$aAdminAbilitys = array("news", "newsComments");
-			$this->oNails->addAbility("Admin", $aAdminAbilitys);
-
-			$this->oNails->addAbility("Registered", "newsComments");
-		}
-
-		$this->oNails->addVersion("news", "1.0");
-
-    	$this->oNails->sendLocation("install");
     }
 
 	/**
