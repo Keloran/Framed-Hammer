@@ -174,6 +174,8 @@ class XML {
 
 		if ($cParent == "organic" || $cParent == "users_sessions_robots") {
 			printRead($mElement, "Returned");
+			printRead($mElement->childNodes->item(0), "Item");
+			printRead($mElement->nodeValue, "Cur");
 			printRead($mElement->getNodePath(), "Path");
 			printRead($cElement, "Called");
 			printRead($cParent, "Parent");
