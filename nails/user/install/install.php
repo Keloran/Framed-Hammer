@@ -10,7 +10,7 @@
  */
 class User_Install {
 	private $oNails;
-
+	private $oDB;
 
 	/**
 	 * User_Install::__construct()
@@ -19,6 +19,7 @@ class User_Install {
 	 */
 	function __construct(Nails $oNails) {
 		$this->oNails	= $oNails;
+		$this->oDB		= $oNails->getDatabase();
 
 		$bInstalled	= $oNails->checkInstalled("users");
 		if ($bInstalled) {
