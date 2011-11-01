@@ -143,12 +143,8 @@ class Screws {
 
 		//its not the base class (e.g. Database)
 		if ($iClass >= 2) {
-			$cClass_b	= $cClass_a;
-
-			for ($i = 1; $i < $iClass; $i++) {
-				#$cClass_b = $cClass_a . "/" . $aClass[$i];
-				$cClass_b .= "/" . $aClass[$i];
-			}
+			$cClass_b 	 = $cClass_a;
+			$cClass_b	.= "/" . end($aClass);
 		} else {
 			$cClass_a	= $cClassName . "/" . $cClassName;
 		}

@@ -47,7 +47,9 @@ class Form {
 		if ($oTemplate instanceof Template) {
 			$this->oNails		= null;
 			$this->oNails		= $this->oTemplate->oNails;
-			$this->oNails->getNails("Form_Install");
+
+			if (is_object($this->oNails)) { $this->oNails->getNails("Form_Install"); }
+
 			$this->cFile		= $this->oTemplate->cFormTemplate;
 
 			//see if this can remove the extra stuff
