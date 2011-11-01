@@ -172,7 +172,7 @@ class XML {
 	public function updateElement($cElement, $cValue, $cParent = false) {
 		$mElement	= $this->getElement($cElement, $cParent, true);
 
-		if ($cParent == "organic" || $cParent == "users_sessions") {
+		if ($cParent == "organic" || $cParent == "users_sessions_robots") {
 			printRead($mElement, "Returned");
 			printRead($mElement->getNodePath(), "Path");
 			printRead($cElement, "Called");
