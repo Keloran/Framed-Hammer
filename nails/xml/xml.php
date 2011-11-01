@@ -172,29 +172,9 @@ class XML {
 	public function updateElement($cElement, $cValue, $cParent = false) {
 		$mElement	= $this->getElement($cElement, $cParent, true);
 
-		if ($cParent == "organic" || $cParent == "users_sessions_robots") {
-			printRead($mElement, "Returned");
-			printRead($mElement->childNodes->item(0), "Item");
-			printRead($mElement->nodeValue, "Cur");
-			printRead($mElement->getNodePath(), "Path");
-			printRead($cElement, "Called");
-			printRead($cParent, "Parent");
-			printRead($cValue, "Val");
-			printRead($this->getElement("boobs", $cParent, true), "test of boobs");
-			die();
-		}
-
-
-
 		//there is an element to update
-		if ($mElement) {
-			$oElement	= $mElement->childNodes->item(0);
-
+		if (is_object($mElement)) {
 			$mElement->nodeValue = $cValue;
-
-			//save the file
-			#$this->oDOM->formatOutput = true;
-			#$this->oDOM->save($this->cFile);
 		} else {
 			$this->addElement($cElement, $cValue, $cParent);
 		}
@@ -273,7 +253,7 @@ class XML {
 		$this->bUpdated = true;
 
 		//save the file
-		$this->saveFile();
+		#$this->saveFile();
 	}
 
 	/**
