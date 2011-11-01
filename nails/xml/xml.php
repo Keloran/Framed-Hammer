@@ -240,17 +240,15 @@ class XML {
 			$oParent	= $this->getElement($cRoot, false, true);
 		}
 
-		if ($cValue == "1.3") {
-			printRead($oParent, "ParentO");
-			printRead($cParent, "ParentC");
-			printRead($cRoot, "Root");
-			die();
-		}
-
 		//if no parent see if i can revert to the basic method
 		if (!$oParent) {
-			$oRoot 		= $this->oDOM->getElementsByTagName($cRoot);
+			//last try
+			$oRoot		= $this->oDOM->getElementsByTagName($cParent);
 			$oParent	= $oRoot->item(0);
+			if (!$ioParent) {
+				$oRoot 		= $this->oDOM->getElementsByTagName($cRoot);
+				$oParent	= $oRoot->item(0);
+			}
 		}
 
 		//if there is still no parent die
