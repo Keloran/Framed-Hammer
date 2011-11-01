@@ -187,8 +187,8 @@ class XML {
 			$mElement->nodeValue = $cValue;
 
 			//save the file
-			$this->oDOM->formatOutput = true;
-			$this->oDOM->save($this->cFile);
+			#$this->oDOM->formatOutput = true;
+			#$this->oDOM->save($this->cFile);
 		} else {
 			$this->addElement($cElement, $cValue, $cParent);
 		}
@@ -372,5 +372,9 @@ class XML {
 
 		$this->oRoot	= $oRoot;
 		return $oRoot;
+	}
+
+	public function __destruct() {
+		$this->saveFile();
 	}
 }
