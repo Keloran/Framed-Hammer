@@ -235,7 +235,7 @@ class XML {
 			$oParent	= $this->getElement($cRoot, false, true);
 		}
 
-		if ($cValue == "1.1") {
+		if ($cValue == "1.3") {
 			printRead($oParent, "ParentO");
 			printRead($cParent, "ParentC");
 			printRead($cRoot, "Root");
