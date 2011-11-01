@@ -144,30 +144,33 @@ class User_Install {
 	 * @return null
 	 */
 	private function addInstallGroups() {
-		$aEscape = array(
-			"Non-Registered",
-			"Non-Confirmed",
-			"Registered",
-			"Banned",
-			"Admin"
-		);
-		$this->oDB->write("INSERT INTO `users_groups` (cGroup) VALUES (?), (?), (?), (?), (?)", $aEscape);
+		$bInstalled	= $oNails->checkInstalled("users_groups");
+		if ($!$bInstalled) {
+			$aEscape = array(
+				"Non-Registered",
+				"Non-Confirmed",
+				"Registered",
+				"Banned",
+				"Admin"
+			);
+			$this->oDB->write("INSERT INTO `users_groups` (cGroup) VALUES (?), (?), (?), (?), (?)", $aEscape);
 
-		//add the groups
-		$this->oNails->addGroups("install");
-		$this->oNails->addAbility("Admin", "install");
+			//add the groups
+			$this->oNails->addGroups("install");
+			$this->oNails->addAbility("Admin", "install");
 
-		//check it
-		$aGroups = false;
-		$this->oDB->read("SELECT cGroup FROM users_groups");
-		while($this->oDB->nextRecord()){ $aGroups[] = $this->oDB->f("cGroup"); }
+			//check it
+			$aGroups = false;
+			$this->oDB->read("SELECT cGroup FROM users_groups");
+			while($this->oDB->nextRecord()){ $aGroups[] = $this->oDB->f("cGroup"); }
 
-		if (count($aGroups) == 5) {
-			$this->oNails->addVersion("users_groups", "1.0");
-			$this->oNails->sendLocation("install");
-		} else {
-			printRead("Stuff has gone wrong with the install of groups");
-			die();
+			if (count($aGroups) == 5) {
+				$this->oNails->addVersion("users_groups", "1.0");
+				$this->oNails->sendLocation("install");
+			} else {
+				printRead("Stuff has gone wrong with the install of groups");
+				die();
+			}
 		}
 	}
 }
