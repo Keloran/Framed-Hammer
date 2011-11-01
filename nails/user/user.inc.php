@@ -315,6 +315,8 @@ class User implements Nails_Interface {
 
     			}
     		}
+    	} else {
+    		$cUsername	= $mUsername;
     	}
 
 		$bExists = $this->checkExists($cUsername);
