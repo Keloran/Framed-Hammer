@@ -145,7 +145,7 @@ class User_Install {
 	 */
 	private function addInstallGroups() {
 		$bInstalled	= $oNails->checkInstalled("users_groups");
-		if ($!$bInstalled) {
+		if (!$bInstalled) {
 			$aEscape = array(
 				"Non-Registered",
 				"Non-Confirmed",
