@@ -245,7 +245,7 @@ class XML {
 			//last try
 			$oRoot		= $this->oDOM->getElementsByTagName($cParent);
 			$oParent	= $oRoot->item(0);
-			if (!$ioParent) {
+			if (!$oParent) {
 				$oRoot 		= $this->oDOM->getElementsByTagName($cRoot);
 				$oParent	= $oRoot->item(0);
 			}
