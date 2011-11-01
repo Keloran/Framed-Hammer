@@ -24,15 +24,15 @@ class Validator {
 		$this->oNails	= $oNails;
 
 		if (isset($this->oNails) && $this->oNails) {
-			if ($this->oNails->checkVersion("validator", "1.2") == false) {
-				//1.2
-				$this->oNails->updateVersion("validator", "1.2", false, "Moved to a seperate folder to make replacing easier");
+			$this->oNails->addVersion("validator", "1.0");
 
+			if ($this->oNails->checkVersion("validator", "1.2") == false) {
 				//1.1
 				$this->oNails->updateVersion("validator", "1.1", false, "De-Coupled");
 
-				//1.0
-				$this->oNails->addVersion("validator", "1.0");
+				//1.2
+				$this->oNails->updateVersion("validator", "1.2", false, "Moved to a seperate folder to make replacing easier");
+
 			}
 		}
 	}
