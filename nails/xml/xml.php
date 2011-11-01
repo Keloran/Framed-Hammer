@@ -12,6 +12,7 @@ class XML {
 	public static $oXML;
 
 	private $aData;
+	private $bUpdated;
 
 	/**
 	 * XML::__construct()
@@ -192,6 +193,8 @@ class XML {
 		} else {
 			$this->addElement($cElement, $cValue, $cParent);
 		}
+
+		$this->bUpdated = true;
 	}
 
 	/**
@@ -262,8 +265,10 @@ class XML {
 		//append the element
 		$oParent->appendChild($oElement);
 
+		$this->bUpdated = true;
+
 		//save the file
-		$this->saveFile();
+		#$this->saveFile();
 	}
 
 	/**
@@ -375,6 +380,6 @@ class XML {
 	}
 
 	public function __destruct() {
-		$this->saveFile();
+		if ($this->bUpdated) { $this->saveFile(); }
 	}
 }
