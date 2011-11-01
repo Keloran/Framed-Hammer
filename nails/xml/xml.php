@@ -180,8 +180,11 @@ class XML {
 			printRead($cElement, "Called");
 			printRead($cParent, "Parent");
 			printRead($cValue, "Val");
+			printRead($this->getElement("boobs", $cParent, true), "test of boobs");
 			die();
 		}
+
+
 
 		//there is an element to update
 		if ($mElement) {
