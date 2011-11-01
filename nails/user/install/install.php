@@ -164,13 +164,7 @@ class User_Install {
 			$this->oDB->read("SELECT cGroup FROM users_groups");
 			while($this->oDB->nextRecord()){ $aGroups[] = $this->oDB->f("cGroup"); }
 
-			if (count($aGroups) == 5) {
-				$this->oNails->addVersion("users_groups", "1.0");
-				$this->oNails->sendLocation("install");
-			} else {
-				printRead("Stuff has gone wrong with the install of groups");
-				die();
-			}
+			$this->oNails->addVersion("users_groups", "1.0");
 		}
 	}
 }
