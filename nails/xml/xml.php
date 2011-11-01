@@ -268,7 +268,7 @@ class XML {
 		$this->bUpdated = true;
 
 		//save the file
-		#$this->saveFile();
+		$this->saveFile();
 	}
 
 	/**
