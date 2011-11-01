@@ -489,7 +489,8 @@ class User implements Nails_Interface {
 		$oHammer	= Hammer::getHammer();
 		$oHead		= $oHammer->getHead();
 
-		$cAddress	= $oHammer->getConfig("address", $oHammer->getConfigKey());
+		$aAddress	= $oHammer->getConfig("address", $oHammer->getConfigKey());
+    	$cAddress	= $aAddress['address'];
 	    $aTitle		= $oHammer->getconfig("title");
     	$cTitle		= $aTitle['title'];
 
