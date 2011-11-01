@@ -184,7 +184,7 @@ class XML {
 		//save the file
 		#$this->saveFile();
 		if (!$mElement) {
-			printRead($mElement);
+			printRead($mElement, "Element");
 			die();
 		} else {
 			$this->saveFile();
