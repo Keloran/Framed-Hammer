@@ -182,7 +182,8 @@ class XML {
 		$this->bUpdated = true;
 
 		//save the file
-		$this->saveFile();
+		#$this->saveFile();
+		$mElement->ownerDocument->saveXML($mElement);
 	}
 
 	/**
@@ -234,6 +235,13 @@ class XML {
 			$oParent	= $this->getElement($cRoot, false, true);
 		}
 
+		if ($cValue == "1.3") {
+			printRead($oParent, "ParentO");
+			printRead($cParent, "ParentC");
+			printRead($cRoot, "Root");
+			die();
+		}
+
 		//if no parent see if i can revert to the basic method
 		if (!$oParent) {
 			$oRoot 		= $this->oDOM->getElementsByTagName($cRoot);
@@ -256,7 +264,8 @@ class XML {
 		$this->bUpdated = true;
 
 		//save the file
-		$this->saveFile();
+		$oParent->ownerDocument->saveXML($oParent);
+		#$this->saveFile();
 	}
 
 	/**
