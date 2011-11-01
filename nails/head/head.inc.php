@@ -68,18 +68,16 @@ class Head {
 
 	    	//do the upgrade of the head library
     		if ($this->oNails->checkVersion("head", "1.3") == false) {
-			//1.3
-			$this->oNails->updateVersion("head", "1.3", false, "Update to version 1.5 of jQuery, and version 1.8.9 of UI");
-
-    			//1.2
-    			$this->oNails->updateVersion("head", "1.2", false, "Tester of XML");
 
     			//1.1
     			$cSQL	= "CREATE TABLE IF NOT EXISTS `head_titles` (`iTitleID` INT NOT NULL AUTO_INCREMENT, `cPage` VARCHAR(50), `cAction` VARCHAR(50), `cChoice` VARCHAR(50), `iItem` INT, `cTitle` TEXT, PRIMARY KEY(`iTitleID`))";
     			$this->oNails->updateVersion("head", "1.1", $cSQL, "Added the title table");
 
-				//1.0
-				$this->oNails->addVersion("head", "1.0");
+    			//1.2
+    			$this->oNails->updateVersion("head", "1.2", false, "Tester of XML");
+
+    			//1.3
+    			$this->oNails->updateVersion("head", "1.3", false, "Update to version 1.5 of jQuery, and version 1.8.9 of UI");
 	    	}
 		}
 
@@ -195,6 +193,9 @@ class Head {
 			ENGINE = MyISAM");
 
 		$this->oNails->addVersion("keywords", "1.0");
+
+		//1.0
+		$this->oNails->addVersion("head", "1.0");
 
 		$this->oNails->sendLocation("install");
 	}
