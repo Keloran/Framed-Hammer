@@ -186,6 +186,7 @@ class XML {
 		if (!$mElement) {
 			printRead($mElement, "ElementM");
 			printRead($cElement, "ElementC");
+			printRead($cParent, "Parent");
 			die();
 		} else {
 			$this->saveFile();
