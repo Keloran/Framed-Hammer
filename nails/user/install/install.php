@@ -159,11 +159,6 @@ class User_Install {
 			$this->oNails->addGroups("install");
 			$this->oNails->addAbility("Admin", "install");
 
-			//check it
-			$aGroups = false;
-			$this->oDB->read("SELECT cGroup FROM users_groups");
-			while($this->oDB->nextRecord()){ $aGroups[] = $this->oDB->f("cGroup"); }
-
 			$this->oNails->addVersion("users_groups", "1.0");
 		}
 	}

@@ -187,7 +187,7 @@ class XML {
 			printRead($mElement);
 			die();
 		} else {
-			$mElement->ownerDocument->saveXML($mElement);
+			$this->save();
 		}
 	}
 
@@ -269,8 +269,7 @@ class XML {
 		$this->bUpdated = true;
 
 		//save the file
-		$oParent->ownerDocument->saveXML($oParent);
-		#$this->saveFile();
+		$this->saveFile();
 	}
 
 	/**
