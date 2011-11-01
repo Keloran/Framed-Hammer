@@ -24,19 +24,8 @@ class Admin implements Nails_Interface {
 	 * @param Nails $oNails
 	 */
 	private function __construct(Nails $oNails) {
+		$oNails->getNails("Admin_Install");
 		$this->oNails = $oNails;
-
-		//check its installed
-		if ($this->oNails->checkInstalled("admin") == false) {
-			$this->install();
-		}
-
-		//upgrade
-		if ($this->oNails->checkVersion("admin", "1.1") == false) {
-			//1.1
-			$cSQL	= "CREATE TABLE admin_contest (`iContestID` INT NOT NULL AUTO_INCREMENT, `dDated` DATETIME, `iUserID` INT NOT NULL, `cContest` VARCHAR(150), PRIMARY KEY(`iContestID`), INDEX(`iUserID`))";
-			$this->oNails->updateVersion("admin", "1.1", $cSQL);
-		}
 
 		$this->oDB 		= $this->oNails->getDatabase();
 		$this->oUser	= $this->oNails->getUser();
@@ -52,28 +41,6 @@ class Admin implements Nails_Interface {
 		$this->oUser	= null;
 	}
 
-	/**
-	 * Admin::install()
-	 *
-	 * @return null
-	 */
-	private function install() {
-		//Create the banned table
-		printRead("users_banned");
-		$this->oNails->addTable("
-			CREATE TABLE IF NOT EXISTS `users_banned` (
-				`iBannedID` INT NOT NULL AUTO_INCREMENT,
-				`iBannedIP` INT NOT NULL,
-				`iUserID`	INT NOT NULL,
-				PRIMARY KEY (`iBannedID`),
-				INDEX (`iBannedID`, `iUserID`)
-			) ENGINE = InnoDB");
-
-		$this->oNails->addGroups("admin");
-		$this->oNails->addAbility("admin", "Admin");
-
-		$this->oNails->addVersion("admin", "1.0");
-	}
 
 	/**
 	 * Admin::getInstance()
