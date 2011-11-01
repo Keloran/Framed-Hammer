@@ -183,7 +183,12 @@ class XML {
 
 		//save the file
 		#$this->saveFile();
-		$mElement->ownerDocument->saveXML($mElement);
+		if (!$mElement) {
+			printRead($mElement);
+			die();
+		} else {
+			$mElement->ownerDocument->saveXML($mElement);
+		}
 	}
 
 	/**
