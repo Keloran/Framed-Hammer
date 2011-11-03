@@ -278,7 +278,7 @@ class Nails extends Hammer {
 		if ($aLibrary) {
 			if (isset($aLibrary['version'])) {
 				$cOldVersion	= $aLibrary['version'];
-				$bCompare		= version_compare($cVersion, $cOldVersion, '>=');
+				$bCompare		= version_compare($cOldVersion, $cVersion, '>=');
 				$bReturn		= $bCompare;
 			}
 		}
