@@ -430,9 +430,7 @@ class Hammer {
 		$cNail	= ucfirst($cName);
 
 		//Since we need to send the Nails object to pretty much everything
-		if (is_null($this->oNails)) {
-			$this->oNails	= new Nails($this->aFilters);
-		}
+		if (is_null($this->oNails)) { $this->oNails = new Nails($this->aFilters); }
 
 		return getNailed($cNail, $this->oNails, $mParams);
 	}
@@ -552,7 +550,8 @@ class Hammer {
 		}
 
 		if (!$cLocation) {
-			header("HTTP/1.1 301 Moved Permanently");
+			#header("HTTP/1.1 301 Moved Permanently");
+			http_response_code(301);
 			$cLoc .= "/";
 		} else {
 			if (is_null(self::$oHammer)) {
@@ -565,7 +564,8 @@ class Hammer {
 
 			if ($cLocation == "refer") {
 				//now we have hammer, and user
-				header("HTTP/1.1 302 Found");
+				#header("HTTP/1.1 302 Found");
+				http_response_code(302);
 
 				//refer is login and your username is correct
 				if (isset($_SERVER['HTTP_REFERER']) && $oUser->getUserID() && (strstr($_SERVER['HTTP_REFERER'], "login"))) {
@@ -584,7 +584,8 @@ class Hammer {
 
 			//Install
 			} else if ($cLocation == "install") {
-				header("HTTP/1.1 200 Ok");
+				#header("HTTP/1.1 200 Ok");
+				http_response_code(200);
 				$cLoc .= "/";
 
 			//Other
@@ -595,7 +596,8 @@ class Hammer {
 				//the last slash is missing
 				if ($iLength !== $iPos) { $cLocation .= "/"; }
 
-				header("HTTP/1.1 303 See Other");
+				#header("HTTP/1.1 303 See Other");
+				http_response_code(303);
 				$cLoc .= $cLocation;
 			}
 		}

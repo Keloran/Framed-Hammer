@@ -55,15 +55,12 @@ class Template_Layout extends Template_Abstract {
 		$cLayout		= "/core/templates/"; //old way
 		$cFinal			= false;
 
+		$cCaller	= $this->getCaller();
+
 		//if template is blank, get the file and its possible template
 		if (!$cTemplate) {
-			$aDebug 	= debug_backtrace();
-			$cFile		= $aDebug[1]['file'];
-			$aFile		= explode("/", $cFile);
-			$iFile		= (count($aFile) - 1);
-			$cTemplate	= substr($aFile[$iFile], 0, -4);
+			$cTemplate	= substr($cCaller, 0, -4);
 		}
-
 		//SubFolder Layouts
 		$cTemplate2		= $cTemplate . $cSep;
 		$cNewLayout		= "/layout/";
@@ -136,6 +133,8 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = $cLayout4 . $cTemplate . ".tpl";
 			} else if (file_exists($cLayout4 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
 				$cFinal = $cLayout4 . $cTemplate2 . $cTemplate . ".tpl";
+			} else if (file_exists($cLayout4 . $cNewLayout2 . $cTemplate . ".tpl")) {
+				$cFinal = $cLayout4 . $cNewLayout2 . $cTemplate . ".tpl";
 			}
 		}
 
@@ -147,6 +146,8 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = $cLayout3 . $cTemplate . ".tpl";
 			} else if (file_exists($cLayout3 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
 				$cFinal = $cLayout3 . $cTemplate2 . $cTemplate . ".tpl";
+			} else if (file_exists($cLayout3 . $cNewLayout2 . $cTemplate . ".tpl")) {
+				$cFinal = $cLayout3 . $cNewLayout2 . $cTemplate . ".tpl";
 			}
 		}
 
@@ -158,6 +159,8 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = $cLayout2 . $cTemplate . ".tpl";
 			} else if (file_exists($cLayout2 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
 				$cFinal = $cLayout2 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl";
+			} else if (file_exists($cLayout2 . $cNewLayout2 . $cTemplate . ".tpl")) {
+				$cFinal = $cLayout2 . $cNewLayout2 . $cTemplate . ".tpl";
 			}
 		}
 
@@ -169,6 +172,8 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = $cLayout1 . $cTemplate . ".tpl";
 			} else if (file_exists($cLayout1 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
 				$cFinal = $cLayout1 . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl";
+			} else if (file_exists($cLayout1 . $cNewLayout2 . $cTemplate . ".tpl")) {
+				$cFinal = $cLayout1 . $cNewLayout2 . $cTemplate . ".tpl";
 			}
 		}
 
@@ -180,6 +185,10 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = SITEPATH . $cLayout . $cTemplate . ".tpl";
 			} else if (file_exists(SITEPATH . $cNewLayout . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl")) { //in a folder
 				$cFinal = SITEPATH . $cNewLayout . $cTemplate2 . $cNewLayout2 . $cTemplate . ".tpl";
+			} else if (file_exists(SITEPATH . $cNewLayout . $cTemplate . ".tpl")) {
+				$cFinal = SITEPATH . $cNewLayout . $cTemplate . ".tpl";
+			} else if (file_exists(SITEPATH . $cNewLayout . $cCaller . "/templates/" . $cTemplate . ".tpl")) {
+				$cFinal = SITEPATH . $cNewLayout . $cCaller . "/templates/" . $cTemplate . ".tpl";
 			}
 		}
 
@@ -198,6 +207,9 @@ class Template_Layout extends Template_Abstract {
 				"FullPath2"	=> ($cLayout2 . $cTemplate2 . $cTemplate . ".tpl"),
 				"FullPath3"	=> ($cLayout3 . $cTemplate2 . $cTemplate . ".tpl"),
 				"FullPath4"	=> ($cLayout4 . $cTemplate2 . $cTemplate . ".tpl"),
+				"NewLayout"	=> $cNewLayout,
+				"debug"		=> SITEPATH . $cNewLayout . $cCaller . "/templates/" . $cTemplate . ".tpl",
+				"Caller"	=> $cCaller,
 			);
 			printRead($a);
 			die();

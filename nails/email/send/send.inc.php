@@ -8,7 +8,9 @@ class Email_Send {
 	 * Email_Send::__construct()
 	 *
 	 */
-	function __construct() {
+	function __construct($oNails = false) {
+		if ($oNails) { $oNails->getNails("Email_Send_Install"); }
+
 		//set the inital boundary, can be reset by the user
 		$this->setBoundry();
 
@@ -100,9 +102,9 @@ class Email_Send {
 	 *
 	 * @return object
 	 */
-	public static function getInstance() {
+	public static function getInstance($oNails = false) {
 		if (is_null(self::$oSend)) {
-			self::$oSend = new Email_Send();
+			self::$oSend = new Email_Send($oNails);
 		}
 
 		return self::$oSend;

@@ -34,6 +34,8 @@ class Cache extends Cache_Abstract {
 	 * @param mixed $mParams
 	 */
 	private function __construct(Nails $oNails, $mParams = false) {
+		$oNails->getNails("Cache_Install");
+
 		//get the cache setting
 		$this->bUseCache	= false;
 		$cCache				= $oNails->getConfig("cacheSetting");
@@ -113,3 +115,14 @@ class Cache extends Cache_Abstract {
 		}
 	}
 }
+
+/**
+ * Cache_Exception
+ *
+ * @package
+ * @author keloran
+ * @copyright Copyright (c) 2011
+ * @version $Id$
+ * @access public
+ */
+class Cache_Exception extends Exception {}

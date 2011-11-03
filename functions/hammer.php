@@ -7,6 +7,12 @@
  */
 date_default_timezone_set('UTC');
 
+//make sure that hammer path is set
+if (!defined("HAMMERPATH")) { define("HAMMERPATH", (__DIR__ . "/../")); }
+
+//is spanner included
+if (!function_exists("printRead")) { include HAMMERPATH . "/spanner.php"; }
+
 /**
  * getNail_Version()
  *
@@ -17,15 +23,21 @@ date_default_timezone_set('UTC');
  * @return object
  */
 function getNail_Version($cNail, $oNail, $mParams = null) {
+	//just incase its a standalone and/or 3rd part
 	if (is_callable(array($cNail, "getInstance"))) {
-		return $cNail::getInstance($oNail, $mParams);
+		try {
+			return $cNail::getInstance($oNail, $mParams);
+		} catch (ErrorException $e) {
+			throw new Spanner($e->getMessage(), 9999);
+		}
 	} else {
-		return new $cNail($oNail, $mParams);
+		try {
+			return new $cNail($oNail, $mParams);
+		} catch (ErrorException $e) {
+			throw new Spanner($e->getMessage(), 9999);
+		}
 	}
 }
-
-//is spanner included
-if (!function_exists("printRead")) { include HAMMERPATH . "/spanner.php"; }
 
 /**
  * funcParam()
@@ -36,10 +48,7 @@ if (!function_exists("printRead")) { include HAMMERPATH . "/spanner.php"; }
  */
 function funcParam($cParam, $aArray) {
 	$mReturn	= false;
-
-	if (isset($aArray[$cParam])) {
-		$mReturn = $aArray[$cParam];
-	}
+	if (isset($aArray[$cParam])) { $mReturn = $aArray[$cParam]; }
 
 	return $mReturn;
 }
@@ -159,7 +168,7 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 	if (session_status() !== 2) { session_start(); }
 
 	//set the address
-	if (isset($oHammer)) { $oHammer->setAddress($aFilter); }
+	if (isset($oHammer) && is_object($oHammer)) { $oHammer->setAddress($aFilter); }
 
 	//do the try/catch of the modules
 	try {
@@ -226,6 +235,8 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 		}
 	} catch (Spanner $e) {
 		new Spanner($e->getMessage(), $e->getCode());
+	} catch (ErrorException $e) {
+		new Spanner($e->getMessage(), $e->getCode());
 	} catch (Exception $e) {
 		new Spanner($e->getMessage(), $e->getCode());
 	}
@@ -289,4 +300,17 @@ function visitorIP() {
 	if ($cIP == "unknown") { $cIP = false; }
 
 	return $cIP;
+}
+
+/**
+ * checkHeaders()
+ *
+ * @todo -c proberlly should change default to true actually
+ * @return bool
+ */
+function checkHeaders() {
+	$bReturn	= false;
+	if (function_exists("headers_sent")) { $bReturn	= headers_sent(); }
+
+	return $bReturn;
 }

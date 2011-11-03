@@ -37,6 +37,7 @@ class Email implements Nails_Interface {
 	private $bImages		= false;
 	private $bIgnoreImageFilter	= false;
 	private $aAttachments	= false;
+	private $oErrors		= false;
 
 	//server details
 	private $cHost		= false;
@@ -48,30 +49,22 @@ class Email implements Nails_Interface {
 	 *
 	 */
 	public function __construct(Nails $oNails = null, $aDetails = false) {
-		$this->oNails 	= $oNails;
-		$this->oUser	= $oNails->getUser();
+		if (is_object($oNails)) {
+			$oNails->getNails("Email_Install");
 
-		//get the version
-		if ($this->oNails->checkVersion("webmail", "1.2") == false) {
-			//1.2
-			$this->oNails->updateVersion("webmail", "1.2", false, "Added Spam Flag");
+			$this->oNails 	= $oNails;
+			$this->oUser	= $oNails->getUser();
 
-			//1.1
-			$this->oNails->updateVersion("webmail", "1.1", false, "Fixed parser so it displays full urls, and added pagination");
-
-			//1.0
-			$this->oNails->addVersion("webmail", "1.0");
+			$iPaged			= $this->oUser->getSetting("pageLimit");
+			$this->iPaged	= $iPaged ?: 50;
 		}
-
-		$iPaged			= $this->oUser->getSetting("pageLimit");
-		$this->iPaged	= $iPaged ?: 50;
 
 		//get the email details
 		$bDetails = $this->getDetails($aDetails);
-		if ($bDetails) {
-			//open the connection
-			$this->openConnection();
-		}
+		if ($bDetails) { $this->openConnection(); } //open the connection
+
+		//errors
+		$oErrors	= imap_errors();
 	}
 
 	/**
@@ -158,19 +151,21 @@ class Email implements Nails_Interface {
 	 * @return pointer
 	 */
 	private function openConnection() {
-		$cTLS			= $this->bTLS ? "/tls/novalidate-cert" : "/notls/novalidate-cert";
-		$this->cIMAP	= "{" . $this->cHost . ":" . $this->iPort . $cTLS . "}";
+		$cTLS	= $this->bTLS ? "/novalidate-cert" : "/novalidate-cert";
+		$pIMAP	= false;
 
 		//is there a user, cause otherwise why bother
 		if ($this->cUser) {
 			try {
+				$this->cIMAP	= "{" . $this->cHost . ":" . $this->iPort . $cTLS . "}";
 				$pIMAP	= imap_open($this->cIMAP, $this->cUser, $this->cPass);
-				if ($pIMAP) { $this->pIMAP = $pIMAP; }
-			} catch (Spanner $e) {
-				throw new Spanner("E-Mail server down", 200); //200 doesnt get passed to email, since if the email server is down, i cant send/recieve anyway
+			} catch (Exception $e) {
+				throw new Spanner("EMail Server Down", 200);
 			}
 		}
 
+		//finally got one
+		if ($pIMAP) { $this->pIMAP = $pIMAP; }
 		return $this->pIMAP;
 	}
 
@@ -197,22 +192,6 @@ class Email implements Nails_Interface {
 		if ($this->pIMAP) { return true; }
 
 		return false;
-	}
-
-	/**
-	 * Email::getSubs()
-	 *
-	 * @param string $cFolder
-	 * @return array
-	 */
-	public function getSubs($cFolder) {
-		$aSubs	= false;
-
-		if ($this->checkConnection()) {
-			$aSubs	= imap_lsub($this->pIMAP, $this->cIMAP, $cFolder);
-		}
-
-		return $aSubs;
 	}
 
 	/**
@@ -294,33 +273,6 @@ class Email implements Nails_Interface {
 		}
 
 		return $aReturn;
-	}
-
-	/**
-	 * Email::reOpenBox()
-	 *
-	 * @param string $cMailbox
-	 * @return pointer
-	 */
-	private function reOpenBox($cMailbox) {
-		$pIMAP	= false;
-
-		if ($this->checkConnection()) {
-			$pIMAP	= imap_reopen($this->pIMAP, $this->cIMAP . $cMailbox);
-		}
-
-		return $pIMAP;
-	}
-
-	/**
-	 * Email::reOpenBoxAgain()
-	 *
-	 * @desc this just calls reOpenBox its useless really
-	 * @param string $cMailbox e.g. INBOX
-	 * @return
-	 */
-	private function reOpenBoxAgain($cMailbox) {
-		return $this->reOpenBox($cMailbox);
 	}
 
 	/**
@@ -1434,211 +1386,6 @@ class Email implements Nails_Interface {
 	 */
 	public function addAttachment($cName) {
 		$this->aAttachments[]['file'] = $cName;
-	}
-
-	/**
-	 * Email::compose()
-	 *
-	 * @param array $aMessage
-	 * @return null
-	 */
-	public function compose($aMessage = false) {
-		$bTemplate		= false; //if your using a template this will get set to true
-		$cTemplate		= false; //the template name
-		$aParams		= false;
-		$mAttachments	= false;
-
-		$cBoundry	= "----Hammer_Mailer----" . md5(time()) . "\r\n";
-
-		//if its not an array dont do anything
-		if (!is_array($aMessage)) { return false; }
-
-		//set this to true since your using the new method,
-		//if you want html you will have added it in the array
-		$bTextOnly	= true;
-		foreach ($mInfo as $cKey => $mValue) {
-			switch ($cKey) {
-				case "to":
-					$cTo = $mValue;
-					break;
-
-				case "title":
-				case "subject":
-					$cSubject = $mValue;
-					break;
-
-					//html part of the email
-				case "content":
-				case "html":
-					$cContent	= $mValue;
-					$bTextOnly	= false;
-					break;
-
-					//text of the email
-				case "contentText":
-				case "text":
-					$cContentText = $mValue;
-					break;
-
-					//template thats to be used instead of written html
-				case "template":
-					$cTemplate	= $mValue;
-					$bTemplate	= true;
-					$bTextOnly	= false;
-					break;
-
-					//template params
-				case "templateParams":
-				case "params":
-					$aParams = $mValue;
-					break;
-
-					//From address
-				case "from":
-					$cFrom	= $mValue;
-					break;
-
-					//From name e.g. site.com
-				case "fromName":
-				case "fromname":
-					$cFromName	= $mValue;
-					break;
-
-					//is there a return address
-				case "return":
-				case "returnPath":
-				case "returnAddress":
-					$cReturn = $mValue;
-					break;
-			}
-		}
-
-		//now we might have attachments in the tmp table
-		$mAttachments = $this->aAttachments;
-
-		//From
-		if ($cFrom) {
-			if ($cFromName) { //there is a name set so has to be put in gt/lt tags
-				$cHeaders       = "From: " . $cFromName . " <" . $cFrom . ">\r\n";
-			} else { //no name set
-				$cHeaders       = "From: " . $cFrom . "\r\n";
-			}
-		}
-
-		//set the some of the headers
-		$cHeaders .= "X-Mailer: Hammer\r\n";
-		$cHeaders .= "User-Agent: Hammer\r\n";
-
-		//Is it text only
-		if ($bTextOnly) {
-			$cHeaders .= "Content-Type: text/plain; charset=UTF-8\r\n";
-		} else { //Headers to say its multipart
-			$cHeaders .= 'Content-Type: multipart/mixed; boundary="' . $cBoundry . '"' . "\r\n";
-		}
-
-		//return
-		if (!$cReturn) {
-			if ($cFrom) {
-				$cHeaders .= "Return-Path: " . $cFrom . "\r\n";
-				$cHeaders .= "Return-path: <" . $cFrom . ">\r\n";
-			}
-		} else {
-			$cHeaders .= "Return-Path: " . $cReturn . "\r\n";
-			$cHeaders .= "Return-path: <" . $cReturn . ">\r\n";
-		}
-
-		//mime needs to be the last one
-		$cHeaders .= "MIME-Version: 1.0\r\n";
-
-		if ($bTextOnly) {
-			$cBody = $cContentText . "\r\n";
-		} else {
-			//Text
-			$cBody  = "--" . $cBoundry . "\r\n";
-			$cBody .= "Content-Type: text/plain; charset=UTF-8\r\n";
-			$cBody .= "Content-Transfer-Encoding: 8bit\r\n";
-			$cBody .= $cContentText . "\r\n";
-
-			//HTML part
-			$cBody .= "--" . $cBoundry . "\r\n";
-			$cBody .= "Content-Type: text/html; charset=UTF-8\r\n";
-			$cBody .= "Content-Transfer-Encoding: 8bit\r\n";
-
-			//theres a template in place
-			if ($bTemplate) {
-				if ($cTemplate) {
-					$oHammer	= Hammer::getHammer();
-					$oTemplate	= $oHammer->getTemplate();
-					$oTemplate->setTemplate($cTemplate);
-
-					//theres some params to set
-					if ($aParams) {
-						foreach ($aParams as $cKey => $cValue) {
-							$oTemplate->setParams($cKey, $cValue);
-						}
-					}
-
-					$cBody .= $oTemplate->renderTemplate();
-				} else {
-					$cBody .= $cContent;
-				}
-			} else {
-				$cBody .= "<html>\r\n";
-				$cBody .= "<body style=\"font-family:Verdana, Verdana, Geneva, sans-serif; font-size:12px; color:#666666;\">\r\n";
-				$cBody .= $cContent;
-				$cBody .= "</body>\r\n";
-				$cBody .= "</html>\r\n";
-			}
-
-			//Close
-			$cBody .= "--" . $cBoundry . "--\r\n";
-
-			//now go through the attachments
-			if ($mAttachments) {
-				//single attachment
-				if (!isset($mAttachments[1]['file'])) {
-					$cBody .= "Content-Type: " . $this->getContentType($mAttachments['file']) . "\r\n";
-					$cBody .= "Content-Transfer-Encoding: BASE64\r\n";
-					$cBody .= "Content-Description: " . basename($mAttachments['file']) . "\r\n";
-
-					//get the file and its size
-					$cContent = file_get_contents($mAttachments['file']);
-					$cContent = base64_encode($cContent);
-					$cBody .= "Content-Length: " . strlen($cContent) . "\r\n";
-					$cBody .= $cContent . "\r\n";
-					$cBody .= "--" . $cBoundry . "--\r\n";
-
-				//multiple attachments
-				} else {
-					for ($k = 0; $k < count($mAttachments); $k++) {
-						$cBody .= "Content-Type: " . $this->getContentType($mAttachments[$k]['file']) . "\r\n";
-						$cBody .= "Content-Transfer-Encoding: BASE64\r\n";
-						$cBody .= "Content-Description: " . basename($mAttachments[$k]['file']) . "\r\n";
-
-						//get the file and its size
-						$cContent = file_get_contents($mAttachments[$k]['file']);
-						$cContent = base64_encode($cContent);
-						$cBody .= "Content-Length: " . strlen($cContent) . "\r\n";
-						$cBody .= $cContent . "\r\n";
-						$cBody .= "--" . $cBoundry . "--\r\n";
-					}
-				}
-			}
-		}
-
-		//see if -f should be used or not
-		$bLogin = false;
-		if (defined("emailed")) {
-			if (strstr($cFrom, emailed)) {
-				$bLogin = true;
-			}
-		}
-
-		if ($bLogin) {
-			return mail($cTo, $cSubject, $cBody, $cHeaders, "-f " . $cFrom);
-		} else {
-			return mail($cTo, $cSubject, $cBody, $cHeaders);
-		}
 	}
 
 	/**

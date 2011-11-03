@@ -585,7 +585,7 @@ class Template extends Template_Abstract {
 			//indented to show that stuff inside happens inside and then is cleaned after
 			$cTemplate	= false;
 			if (file_exists($this->cTemplate)) {
-				ob_start();
+				if (!checkHeaders()) { ob_start(); }
 					extract($this->aVars, EXTR_SKIP);
 					include $this->cTemplate;
 					$cTemplate	.= ob_get_contents();
@@ -593,7 +593,7 @@ class Template extends Template_Abstract {
 					$cTemplate	.= $this->cExtraJS;
 
 				//if there is a started ob
-				if (ob_get_level()) { ob_end_clean(); }
+				if (!checkHeaders()) { if (ob_get_level()) { ob_end_clean(); }}
 			} else {
 				$cTemplate	= $this->errorTemplate($this->cTemplate);
 			}
@@ -658,14 +658,19 @@ class Template extends Template_Abstract {
 		}
 
 		//this was making validator fail for some reason
-		header("HTTP/1.0 404 Not Found");
+		#header("HTTP/1.0 404 Not Found");
+		http_response_code(404);
 		if ($this->cError) {
 			if (file_exists(SITEPATH . $cLayoutFolder . "templates/error.tpl")) {
+				//open the buffer
+				if (!checkHeaders()) { ob_start("ob_process"); }
+
 				//Custom error page
-				ob_start("ob_process");
-					include SITEPATH . $cLayoutFolder . "templates/error.tpl";
-					$cTemplate = ob_get_contents();
-				ob_end_clean();
+				include SITEPATH . $cLayoutFolder . "templates/error.tpl";
+				$cTemplate = ob_get_contents();
+
+				//clean the buffer
+				if (!checkHeaders()) { ob_end_clean(); }
 			} else {
 				$cTemplate	 = "<section id=\"error\">\n<header>\n";
 				$cTemplate	.= "<h1>Error</h1>\n";

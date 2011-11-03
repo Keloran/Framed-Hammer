@@ -20,19 +20,10 @@ class Menu implements Nails_Interface {
 	 * @param Nails $oNails
 	 */
 	private function __construct(Nails $oNails) {
+		$oNails->getNails("Menu_Install");
+
 		$this->oNails	= $oNails;
 		$this->oDB		= $oNails->getDatabase();
-
-		//check if the menu system is installed
-		if ($this->oNails->checkInstalled("menu") == false) {
-			$this->install();
-		}
-
-		//do the update
-		if ($this->oNails->checkVersion("menu", "1.0") == false) {
-			//1.0
-			$this->oNails->updateVersion("menu", "1.0");
-		}
 	}
 
 	/**
@@ -47,20 +38,6 @@ class Menu implements Nails_Interface {
 		}
 
 		return self::$oMenu;
-	}
-
-	/**
-	 * Menu::install()
-	 *
-	 * @return null
-	 */
-	private function install() {
-		$this->oNails->addTable("CREATE TABLE IF NOT EXISTS `menu` (`iMenuID` INT NOT NULL AUTO_INCREMENT, `cPage` VARCHAR(100) NOT NULL, `cTitle` VARCHAR(150) NOT NULL, `cLink` TEXT NOT NULL, `iSort` INT NOT NULL, `iParentID` INT NOT NULL, `iChildren` INT NOT NULL, PRIMARY KEY(`iMenuID`)) ENGINE = MyISAM");
-		$this->oNails->addIndexs("menu", array("iSort", "iParentID", "iChildren"));
-
-		$this->oNails->addVersion("menu", "1.0");
-
-		$this->oNails->sendLocation("install");
 	}
 
 	/**

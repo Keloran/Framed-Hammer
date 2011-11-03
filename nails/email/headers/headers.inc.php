@@ -61,7 +61,7 @@ class Email_Headers extends Email_Abstract {
 
 			//now is that header an array, or jsut a string
 			if (is_array($mHeader)) {
-				foreach ($mHeader[0] as $cName => $cValue) {
+				foreach ($mHeader as $cName => $cValue) {
 					$mReturn[$cName] = $cValue;
 				}
 			} else {
@@ -79,17 +79,45 @@ class Email_Headers extends Email_Abstract {
 	 * @param array $aHeader
 	 * @return array
 	 */
-	public function makeNice($aHeader) {
+	public function makeNice($mHeader) {
 		$aReturn	= false;
 
-		//name
-		if (isset($aHeader['personal'])) { $aReturn['name']	= $aHeader['personal']; }
+		if (is_object($mHeader)) {
+			if (isset($mHeader->personal)) { $aReturn['name'] = $mHeader->personal; }
 
-		//email
-		if (isset($aHeader['mailbox']) && isset($aHeader['host'])) {
-				$aReturn['email']	 = $aHeader['mailbox'];
+			if (isset($mHeader->mailbox) && isset($mHeader->host)) {
+				$aReturn['email']	 = $mHeader->mailbox;
 				$aReturn['email']	.= "@";
-				$aReturn['email']	.= $aHeader['host'];
+				$aReturn['email']	.= $mHeader->host;
+
+				//add this for parsers
+				$aReturn['host']	= $mHeader['host'];
+				$aReturn['box']		= $mHeader['mailbox'];
+			}
+		} else {
+			//name
+			if (isset($mHeader['personal'])) { $aReturn['name']	= $mHeader['personal']; }
+
+			//email
+			if (isset($mHeader['mailbox']) && isset($mHeader['host'])) {
+				$aReturn['email']	 = $mHeader['mailbox'];
+				$aReturn['email']	.= "@";
+				$aReturn['email']	.= $mHeader['host'];
+
+				//add this for parsers
+				$aReturn['host']	= $mHeader['host'];
+				$aReturn['box']		= $mHeader['mailbox'];
+			}
+
+			if (!isset($mHeader['host'])) { foreach ($mHeader as $header) { $aReturn[] = $this->makeNice($header); }}
+		}
+
+		//now reduce it since there might only be 1
+		if (count($aReturn) <= 1) {
+			$aRet		= $aReturn;
+			$aReturn	= false;
+
+			foreach ($aRet[0] as $cKey => $cValue) { $aReturn[$cKey] = $cValue; }
 		}
 
 		return $aReturn;
@@ -151,6 +179,8 @@ class Email_Headers extends Email_Abstract {
 			$aHeaders[$j]['address']	= urlencode(trim($aHeaders[$j]['title']));
 			$aHeaders[$j]['uid']		= imap_uid($this->pIMAP, $this->iMID);
 			$aHeaders[$j]['size']		= $this->getHeader("Size");
+			$aHeaders[$j]['to']			= $this->getHeader("to");
+			$aHeaders[$j]['debug']		= $this->oHeaders;
 			$j++;
 		}
 

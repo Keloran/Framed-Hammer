@@ -47,24 +47,15 @@ class Form {
 		if ($oTemplate instanceof Template) {
 			$this->oNails		= null;
 			$this->oNails		= $this->oTemplate->oNails;
+
+			if (is_object($this->oNails)) { $this->oNails->getNails("Form_Install"); }
+
 			$this->cFile		= $this->oTemplate->cFormTemplate;
 
 			//see if this can remove the extra stuff
 			$this->oTemplate->oForms	= null;
 
-			if (isset($this->oNails) && $this->oNails) {
-				//Check the version and do any updats
-				if ($this->oNails->checkVersion("template_formed", "1.2") == false) {
-					//1.2
-					$this->oNails->updateVersion("template_formed", "1.2", false, "Moved so that it can be replaced easier");
 
-					//1.1
-					$this->oNails->updateVersion("template_formed", "1.1", false, "De-Coupled");
-
-					//1.0
-					$this->oNails->addVersion("template_formed", "1.0");
-				}
-			}
 		}
 
 		//Clear the form, so that singleton can be used
@@ -1328,12 +1319,15 @@ class Form {
 		}
 
 		//now that the form is allowed to proced
+		/*
 		ob_start();
 			print($cReturn);
 			$cObReturn = ob_get_contents();
 		ob_end_clean();
 
 		return $cObReturn;
+		*/
+		return $cReturn;
 	}
 
 	/**

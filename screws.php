@@ -46,15 +46,19 @@ class Screws {
 		$this->definePaths();
 		$bExists = $this->checkExists();
 
+		//should really check if the class is inside a file thats been created
+		if (!$bExists) { $bExists = class_exists($cClass, false); }
+
+		//does the file exist
 		if ($bExists) {
 			try {
 				include $this->cPath;
-			} catch(Exception $e) {
+			} catch (Exception $e) {
 				throw new Spanner($e);
 			}
 		} else {
 			//so that the class not exisitng can be handled by the user/file
-			throw new ErrorException("Class File not found", 101);
+			throw new ErrorException($cClass . ": Class File not found", 101);
 		}
 	}
 
@@ -91,7 +95,9 @@ class Screws {
 	 * @return mixed
 	 */
 	public function __get($cName) {
-		return $this->aData[$cName];
+		if (isset($this->aData[$cName])) { return $this->aData[$cName]; }
+
+		return false;
 	}
 
 	/**
@@ -132,11 +138,13 @@ class Screws {
 		$cClass_b	= $aClass[0];
 		$cClass_c	= $cClassName;
 
+		//se if its a namespace
+		$cClass_d	= str_replace("\\", "/", $cClassName);
+
 		//its not the base class (e.g. Database)
 		if ($iClass >= 2) {
-			for ($i = 1; $i < $iClass; $i++) {
-				$cClass_b = $cClass_a . "/" . $aClass[$i];
-			}
+			$cClass_b 	 = $cClass_a;
+			$cClass_b	.= "/" . end($aClass);
 		} else {
 			$cClass_a	= $cClassName . "/" . $cClassName;
 		}
@@ -144,6 +152,7 @@ class Screws {
 		$this->cClass_a 	= $cClass_a;
 		$this->cClass_b 	= $cClass_b;
 		$this->cClass_c		= $cClass_c;
+		$this->cClass_d		= $cClass_d;
 		$this->cClassName	= $cClassName;
 	}
 
@@ -160,6 +169,9 @@ class Screws {
 		//without the inc bit
 		$this->fHammerClass_c	= HAMMERPATH	. "/nails/" . $this->cClass_a	. ".php";
 		$this->fHammerClass_d	= HAMMERPATH	. "/nails/" . $this->cClass_b	. ".php";
+
+		//see if there is anything in namespaces
+		$this->fHammerClass_e	= HAMMERPATH	. "/nails/" . $this->cClass_d	. ".php";
 
 		//Traits
 		$this->fHammerClass_Trait	= HAMMERPATH . "/traits/" . $this->cClass_a . ".php";
@@ -191,10 +203,12 @@ class Screws {
 		//site class
 		$this->fSiteClass_a	= USERNAILS	. $this->cClass_a	. ".inc.php";
 		$this->fSiteClass_b	= USERNAILS	. $this->cClass_b	. ".inc.php";
+		$this->fSiteClass_e	= USERNAILS . $this->cClass_d	. ".inc.php";
 
 		//without the inc bit
 		$this->fSiteClass_c	= USERNAILS . $this->cClass_a	. ".php";
 		$this->fSiteClass_d	= USERNAILS . $this->cClass_b	. ".php";
+		$this->fSiteClass_f	= USERNAILS	. $this->cClass_d	. ".php";
 
 		//Traits
 		$this->fSiteClass_Trait = USERNAILS . "/traits/" . $this->cClass_a . ".php";
@@ -222,7 +236,7 @@ class Screws {
 	 * @return bool
 	 */
 	private function checkExists() {
-		$aRange = range("a", "d");
+		$aRange = range("a", "f");
 		$iRange	= count($aRange); //random
 
 		//base class

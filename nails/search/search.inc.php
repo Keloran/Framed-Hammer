@@ -19,38 +19,11 @@ class Search implements Nails_Interface {
      *
      */
     private function __construct(Nails $oNails) {
+    	$oNails->getNails("Search_Install");
+
     	$this->oNails	= $oNails;
     	$this->oDB		= $oNails->getDatabase();
-
-    	if ($this->oNails->checkInstalled("search") == false) {
-    		$this->install();
-    	}
-
-        //check for versions, since this lib will get changed alot later
-        if ($this->oNails->checkVersion("search", "1.1") == false) {
-        	//1.1
-        	$cSQL = " ALTER TABLE `search` ADD COLUMN cSearchQuery TEXT NOT NULL ";
-        	$this->oNails->updateVersion("search", "1.1", $cSQL, "Added actually full query to the results");
-        }
     }
-
-	/**
-	 * Search::install()
-	 *
-	 * @return null
-	 */
-	private function install() {
-		$this->oDB->write("
-			CREATE TABLE IF NOT EXISTS `search` (
-				iSearchID INT NOT NULL AUTO_INCREMENT,
-				cSearch VARCHAR(200),
-				cSource TEXT,
-				dDated DATETIME,
-					PRIMARY KEY (iSearchID),
-					INDEX (dDated)
-			)");
-		$this->oNails->addVersion("search", 1.0);
-	}
 
     /**
      * Search::getInstance()

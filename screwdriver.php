@@ -110,11 +110,21 @@ class Screwdriver {
 	 * @param string $cSiteAddress
 	 * @return null
 	 */
-	private function getPrefix($cSiteAddress = false) {
+	private function getPrefix($mSiteAddress = false) {
+		$cSiteAddress = false;
+
 		// Get the language
-		if ($cSiteAddress) {
+		if ($mSiteAddress) {
 			if (isset($_SERVER['SERVER_NAME'])) {
 				$cServerName	= $_SERVER['SERVER_NAME'];
+
+				//just incase
+				if (is_array($mSiteAddress)) {
+					$cSiteAddress = $mSiteAddress['address'];
+				} else {
+					$cSiteAddress = $mSiteAddress;
+				}
+
 				$cPattern		= '`([a-z]+).' . $cSiteAddress . '`is';
 				preg_match($cPattern, $cServerName, $aMatches);
 				if (isset($aMatches[1])) {

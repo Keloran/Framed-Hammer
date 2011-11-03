@@ -21,10 +21,8 @@ trait Browser {
 
 		//do we actually have browser cap, otherwise dont bother trying
 		if (ini_get("browscap")) {
-			ob_start();
 			$mGetBrowser = get_browser();
 			$bGetBrowser = true;
-			ob_end_clean();
 		}
 
 		//get_browser doesnt work on this server
@@ -40,6 +38,7 @@ trait Browser {
 				break;
 
 			case "iphone":
+			case "ipad":
 			case "mobile-safari":
 				$mBrowser = array("safari", "iphone");
 				break;
@@ -72,45 +71,49 @@ trait Browser {
 	 *
 	 * @return array
 	 */
-	function getBrowser($cSpecific = null) {
+	function getBrowser($cSpecific = null, $bAgent = false) {
 		$mBrowser 		= false;
 		$mGetBrowser	= $this->getBrowserCap();
 
 		//this is a better method
 		if ($mGetBrowser) { return $mGetBrowser; }
 
+		//older method
 		if (isset($_SERVER['HTTP_USER_AGENT'])) {
 			$cBrowser = $_SERVER['HTTP_USER_AGENT'];
 
-			if (stristr($cBrowser, "MobileIE")) {
-				$mBrowser = array("ie", "mobileie");
-			} else if (stristr($cBrowser, "MSIE 7") || stristr($cBrowser, "MSie 7")) {
-				$mBrowser = array("ie", "ie7");
-			} else if (stristr($cBrowser, "MSIE 8") || stristr($cBrowser, "MSie 8")) {
-				$mBrowser = array("ie", "ie8");
-			} else if (stristr($cBrowser, "MSIE 9") || stristr($cBrowser, "MSie 9")) {
-				$mBrowser = "ie9";
-			} else if (stristr($cBrowser, "MSIE") || stristr($cBrowser, "MSie")) {
-				$mBrowser = array("ie", "ie6");
-			} else if (stristr($cBrowser, "Opera")) {
+			//see if its a mobile device first
+			$bMobile	= $this->mobileBrowser($cBrowser, true);
+
+			//Internet Explorer
+			if (preg_match("`(ie 7)`i", $cBrowser)) {
+				$mBrowser	= array("ie", "ie7");
+			} else if (preg_match("`(ie 8)`i", $cBrowser)) {
+				$mBrowser	= array("ie", "ie8");
+			} else if (preg_match("`(ie 9)`i", $cBrowser)) {
+				$mBrowser	= array("ie", "ie9");
+			} else if (preg_match("`(msie)`i", $cBrowser)) {
+				$mBrowser	= array("ie", "ie6");
+
+			} else if (preg_match("`(firefox)`i", $cBrowser)) { //Firefox
+				$mBrowser = "firefox";
+
+			} else if (preg_match("`(safari)`i", $cBrowser)) { //Safari
+				$mBrowser = "webkit";
+			} else if (preg_match("`(webkit)`i", $cBrowser)) { //webkit based, e.g. chrome
+				$mBrowser = "webkit";
+
+			} else if (preg_match("`(opera)`i", $cBrowser)) { //opera
 				$mBrowser = "opera";
-			} else if (stristr($cBrowser, "iPhone")) {
-				$mBrowser = "iphone";
 			}
 
-			//Since we might have already got the iphone
-			if (stristr($cBrowser, "KHTML")) {
-				if (stristr($cBrowser, "Safari")) {
-					if ($mBrowser) {
-						$mBrowser = array("webkit", "iphone");
-					} else {
-						$mBrowser = "webkit";
-					}
-				} else if (stristr($cBrowser, "Konqueror")) {
-					$mBrowser = "khtml";
+			//if its a mobile device, tell me what it is
+			if ($bMobile) {
+				if (is_array($mBrowser)) {
+					$mBrowser[] = $this->mobileBrowser($cBrowser);
+				} else {
+					$mBrowser = array($mBrowser, $this->mobileBrowser($cBrowser));
 				}
-			} else if (stristr($cBrowser, "Gecko")) {
-				$mBrowser = "gecko";
 			}
 		} else {
 			$mBrowser = false;
@@ -118,20 +121,24 @@ trait Browser {
 
 		//specific browser specified
 		if ($cSpecific) {
-			if (is_array($mBrowser)) {
-				if (in_array($cSpecific, $mBrowser)) {
-					$mBrowser	= true;
+			if ($mBrowser) {
+				if (is_array($mBrowser)) {
+					if (in_array($cSpecific, $mBrowser)) {
+						$mBrowser	= true;
+					} else {
+						$mBrowser	= false;
+					}
 				} else {
-					$mBrowser	= false;
-				}
-			} else {
-				if ($cSpecific == $mBrowser) {
-					$mBrowser = true;
-				} else {
-					$mBrowser = false;
+					if ($cSpecific == $mBrowser) {
+						$mBrowser = true;
+					} else {
+						$mBrowser = false;
+					}
 				}
 			}
 		}
+
+		if ($bAgent) { return $cBrowser; }
 
 		return $mBrowser;
 	}
@@ -142,31 +149,30 @@ trait Browser {
 	 * @param mixed $mBrowser
 	 * @return bool
 	 */
-	function mobileBrowser($mBrowser = false) {
-		if (!$mBrowser) { $mBrowser = $this->getBrowser(); }
+	function mobileBrowser($mBrowser = false, $bBool = false) {
+		if (!$mBrowser || is_array($mBrowser)) { $mBrowser = $this->getBrowser(false, true); }
 
+		$cReturn	= $mBrowser;
 		$bReturn	= false;
 
-		//is mBrowser an array
-		if (is_array($mBrowser)) {
-			if (in_array("android", $mBrowser)) {
-				$bReturn	= true;
-			} else if (in_array("iphone", $mBrowser)) {
-				$bReturn	= true;
-			} else if (in_array("ipad", $mBrowser)) {
-				$bReturn	= true;
-			}
-		} else {
-			switch($mBrowser) {
-				case "android":
-				case "iphone":
-				case "ipad":
-					$bReturn = true;
-					break;
-			} // switch
+		if (preg_match("`(android)`i", $mBrowser)) {
+			$cReturn	= "android";
+			$bReturn	= true;
+		} else if (preg_match("`(iphone)`i", $mBrowser)) {
+			$cReturn	= "iphone";
+			$bReturn	= true;
+		} else if (preg_match("`(ipad)`i", $mBrowser)) {
+			$cReturn	= "ipad";
+			$bReturn	= true;
+		} else if (preg_match("`(MobileIE)`i", $mBrowser)) {
+			$cReturn	= "mobileie";
+			$bReturn	= true;
 		}
 
-		return $bReturn;
+		//do we only want to test for, not yet return
+		if ($bBool) { return $bReturn; }
+
+		return $cReturn;
 	}
 
 	/**
@@ -176,16 +182,6 @@ trait Browser {
 	 * @return bool
 	 */
 	function IEBrowser($mBrowser = false) {
-		if (!$mBrowser) { $mBrowser = $this->getBrowser(); }
-
-		$bReturn = false;
-
-		if (is_array($mBrowser)) {
-			if (in_array("ie", $mBrowser)) { $bReturn = true; }
-		} else {
-			if ($mBrowser == "ie") { $bReturn = true; }
-		}
-
-		return $bReturn;
+		return $this->getBrowser("ie");
 	}
 }

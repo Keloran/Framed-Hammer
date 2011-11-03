@@ -12,6 +12,7 @@ class XML {
 	public static $oXML;
 
 	private $aData;
+	private $bUpdated;
 
 	/**
 	 * XML::__construct()
@@ -172,16 +173,23 @@ class XML {
 		$mElement	= $this->getElement($cElement, $cParent, true);
 
 		//there is an element to update
-		if ($mElement) {
-			$oElement	= $mElement->childNodes->item(0);
-
+		if (is_object($mElement)) {
 			$mElement->nodeValue = $cValue;
-
-			//save the file
-			$this->oDOM->formatOutput = true;
-			$this->oDOM->save($this->cFile);
 		} else {
 			$this->addElement($cElement, $cValue, $cParent);
+		}
+
+		$this->bUpdated = true;
+
+		//save the file
+		#$this->saveFile();
+		if (!$mElement) {
+			printRead($mElement, "ElementM");
+			printRead($cElement, "ElementC");
+			printRead($cParent, "Parent");
+			die();
+		} else {
+			$this->saveFile();
 		}
 	}
 
@@ -236,8 +244,13 @@ class XML {
 
 		//if no parent see if i can revert to the basic method
 		if (!$oParent) {
-			$oRoot 		= $this->oDOM->getElementsByTagName($cRoot);
+			//last try
+			$oRoot		= $this->oDOM->getElementsByTagName($cParent);
 			$oParent	= $oRoot->item(0);
+			if (!$oParent) {
+				$oRoot 		= $this->oDOM->getElementsByTagName($cRoot);
+				$oParent	= $oRoot->item(0);
+			}
 		}
 
 		//if there is still no parent die
@@ -252,6 +265,8 @@ class XML {
 
 		//append the element
 		$oParent->appendChild($oElement);
+
+		$this->bUpdated = true;
 
 		//save the file
 		$this->saveFile();
@@ -363,5 +378,9 @@ class XML {
 
 		$this->oRoot	= $oRoot;
 		return $oRoot;
+	}
+
+	public function __destruct() {
+		if ($this->bUpdated) { $this->saveFile(); }
 	}
 }

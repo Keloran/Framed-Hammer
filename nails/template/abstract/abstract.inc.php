@@ -34,10 +34,12 @@ abstract class Template_Abstract implements Template_Interface {
 	* @return null
 	*/
 	public final function setVars($cName, $mVars) {
+        //always unset the previous variable
+        //before setting it, avoid scalar conflicts
+        unset($this->aVars[$cName]);
+
 		if (is_array($mVars)) {
-			foreach ($mVars as $cVarName => $cVar) {
-				$this->aVars[$cName][$cVarName] = $cVar;
-			}
+			foreach ($mVars as $cVarName => $cVar) { $this->aVars[$cName][$cVarName] = $cVar; }
 		} else {
 			$this->aVars[$cName] = $mVars;
 		}
@@ -106,14 +108,16 @@ abstract class Template_Abstract implements Template_Interface {
 	* @return string
 	*/
 	public function renderTemplate() {
-		ob_start();
-			extract($this->aVars, EXTR_SKIP);
-			
-			include $this->cTemplate;
-			$cTemplate = ob_get_contents();
+		//open the buffer
+		if (!checkHeaders()) { ob_start(); }
+
+		extract($this->aVars, EXTR_SKIP);
+
+		include $this->cTemplate;
+		$cTemplate = ob_get_contents();
 
 		//make sure we are in an ob before cleaning
-		if (ob_get_level()) { ob_end_clean(); }
+		if (!checkHeaders()) { if (ob_get_level()) { ob_end_clean(); }}
 
 		return $cTemplate;
 	}
@@ -313,5 +317,27 @@ abstract class Template_Abstract implements Template_Interface {
 		}
 
 		return $cPage;
+	}
+
+	/**
+	 * Template_Abstract::getCaller()
+	 *
+	 * @return string
+	 */
+	public function getCaller() {
+		$aDebug 	= debug_backtrace(false, 7);
+		$cFile		= false;
+
+        foreach ($aDebug AS $debug) {
+            if ($debug['function'] == "getCore") {
+                if (isset($debug['args'])) {
+    				if (isset($debug['args'][0])) {
+    					$cFile	= $debug['args'][0];
+                    }
+				}
+			}
+		}
+
+		return $cFile;
 	}
 }
