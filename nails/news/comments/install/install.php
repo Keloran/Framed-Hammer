@@ -45,4 +45,7 @@ class News_Comments_Install{
 
 		$this->oNails->addVersion("news_comments", "1.0");
 	}
+	
+	private function upgrade() {
+	}
 }
