@@ -406,7 +406,7 @@ class Head {
     	}
 
     	//is there a resource domain set
-    	if (isset($this->aHead['resource']) && isset($this->aHead['resource']['css'])) { $cFolder_b = "http://" . $this->aHead['resource']['css']; }
+    	if (isset($this->aHead['resource']) && isset($this->aHead['resource']['css'])) { $cFolder_b = "http://" . $this->aHead['resource']['css'] . "/"; }
 
     	//is it a single css or multiple
 		if (!is_array($mCSS)) {
@@ -484,7 +484,7 @@ class Head {
 					}
 				} else {
 					$cFolder = "/css/";
-					if (isset($this->aHead['resource']) && isset($this->aHead['resource']['css'])) { $cFolder = "http://" . $this->aHead['resource']['css']; }
+					if (isset($this->aHead['resource']) && isset($this->aHead['resource']['css'])) { $cFolder = "http://" . $this->aHead['resource']['css'] . "/"; }
 
 					if ($this->cDocType == "html5") {
 						$cReturn .= "<link rel=\"stylesheet\" href=\"" . $cFolder . $aCSS['location'] . $aCSS['file'] . ".css\" />\n";
@@ -549,7 +549,7 @@ class Head {
     	}
 
     	//if there is a resource domain
-    	if (isset($this->aHead['resource']) && isset($this->aHead['resource']['css'])) { $cFolder_b = "http://" . $this->aHead['resource']['css']; }
+    	if (isset($this->aHead['resource']) && isset($this->aHead['resource']['css'])) { $cFolder_b = "http://" . $this->aHead['resource']['css'] . "/"; }
 
 		//if there are multiple browser css'
     	if (is_array($mBrowser)) {
@@ -636,7 +636,7 @@ class Head {
 		$cJS 	= $this->cJS;
 
     	//is there a resource domian set
-    	if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js']; }
+    	if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js'] . "/"; }
 
 		//theres quite a few of them
 		if ($aJS) {
@@ -672,7 +672,7 @@ class Head {
 			}
 		} else {
 			$cFolder	= is_dir(SITEPATH . "/javascript/") ? "/javascript/" : "/js/";
-			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js']; }
+			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js'] . "/"; }
 
 			if ($this->cDocType == "html5") {
 				$this->cJS .= "<script src=\"" . $cFolder . $cJS . ".js\"></script>\n";
@@ -705,7 +705,7 @@ class Head {
 
 			//Path could be js, or javascript
 			$cFolder	= is_dir(SITEPATH . "/javascript/") ? "/javascript/" : "/js/";
-			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js']; }
+			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js'] . "/"; }
 
 			$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $cJS . ".js\"></script>\n";
 		}
@@ -722,12 +722,12 @@ class Head {
     	//if its not hosted locally load the google version
 		if (file_exists(SITEPATH . "/js/"  . $this->cJSFrameworkName . ".js")) {
 			$cFolder = "/js/";
-			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js']; }
+			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js'] . "/"; }
 
 			$cReturn = "<script type=\"text/javascript\" src=\"" . $cFolder . $this->cJSFrameworkName . ".js\"></script>\n";
 		} else if (file_exists(SITEPATH . "/js/" . $this->cJSFrameworkName . ".min.js")) {
 			$cFolder = "/js/";
-			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js']; }
+			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js'] . "/"; }
 
 			$cReturn = "<script type=\"text/javascript\" src=\"" . $cFolder . $this->cJSFrameworkName . ".min.js\"></script>\n";
 		} else {
