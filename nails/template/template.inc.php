@@ -575,7 +575,12 @@ class Template extends Template_Abstract {
 
 			//Get rid of the hammer object reference for templates tehy dont need it
 			if (strstr($this->cTemplate, "tpl")) {
-				unset($this->aVars["oHammer"]);
+				unset($this->aVars["this"]); //security
+				unset($this->aVars["oHammer"]); //security
+
+				//even though they should be unset, set them to false to make sure
+				$this->aVars["this"] 	= false;
+				$this->aVars["oHammer"] = false;
 			}
 
 			$this->setVars("cExtraJS", $this->cExtraJS);
