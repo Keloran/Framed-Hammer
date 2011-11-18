@@ -1057,6 +1057,13 @@ class Head {
 		$aReturn['css']			= $this->oNails->getConfig("css", $this->oNails->getConfigKey());
 		$aReturn['domain']		= $this->oNails->getConfig("address", $this->oNails->getConfigKey());
 
+		$aTest	= $aReturn;
+		foreach ($aTest as $key => $value) {
+			printRead($key, "key");
+			printRead($value, "value");
+		}
+		die();
+
 		//Because Javascript can have multiple sub elements
 		$aJS					= $this->oNails->getConfig("javascript", $this->oNails->getConfigKey());
 		if (isset($aJS[0])) {
