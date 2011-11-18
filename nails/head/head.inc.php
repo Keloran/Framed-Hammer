@@ -1077,7 +1077,7 @@ class Head {
 		if ($cJS) { $aReturn['resource']['js']		= ($cJS . $aReturn['address']); }
 
 		//Because Javascript can have multiple sub elements
-		$aJS					= $this->oNails->getConfig("javascript", "head")['javascript'];
+		$aJS					= $this->oNails->getConfig("javascript", "head");
 		if (isset($aJS[0])) {
 			if (strlen($aJS[0]) >= 2) {
 				foreach ($aJS as $aJSPart) {
