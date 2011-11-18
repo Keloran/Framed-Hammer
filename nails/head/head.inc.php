@@ -1051,23 +1051,14 @@ class Head {
 	private function makeHead() {
 		$aReturn	= false;
 
-		$aReturn['title']		= $this->oNails->getConfig("title", "head");
-		$aReturn['keywords']	= $this->oNails->getConfig("keywords", "head");
-		$aReturn['description']	= $this->oNails->getConfig("description", "head");
-		$aReturn['css']			= $this->oNails->getConfig("css", "head");
-		$aReturn['address']		= $this->oNails->getConfig("address", "head");
+		$aReturn['title']		= $this->oNails->getConfig("title", "head")['title'];
+		$aReturn['keywords']	= $this->oNails->getConfig("keywords", "head")['keywords'];
+		$aReturn['description']	= $this->oNails->getConfig("description", "head")['description'];
+		$aReturn['css']			= $this->oNails->getConfig("css", "head")['css'];
+		$aReturn['address']		= $this->oNails->getConfig("address", "head")['address'];
 
-		$aReturn['resource']['css']	= $this->oNails->getConfig("css", "resourceDomains");
-		$aReturn['resource']['js']	= $this->oNails->getConfig("js", "resourceDomains");
-
-		$aTest	= $aReturn;
-		foreach ($aTest as $key => $value) {
-			if (is_array($value)) {
-				foreach ($value as $key1 => $value) {
-					if ($key == $key1) { $aReturn[$key] = $value; }
-				}
-			}
-		}
+		$aReturn['resource']['css']	= $this->oNails->getConfig("css", "resourceDomains")['css'];
+		$aReturn['resource']['js']	= $this->oNails->getConfig("js", "resourceDomains")['js'];
 
 		//Because Javascript can have multiple sub elements
 		$aJS					= $this->oNails->getConfig("javascript", $this->oNails->getConfigKey());
