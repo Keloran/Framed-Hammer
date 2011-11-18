@@ -1051,11 +1051,14 @@ class Head {
 	private function makeHead() {
 		$aReturn	= false;
 
-		$aReturn['title']		= $this->oNails->getConfig("title", $this->oNails->getConfigKey());
-		$aReturn['keywords']	= $this->oNails->getConfig("keywords", $this->oNails->getConfigKey());
-		$aReturn['description']	= $this->oNails->getConfig("description", $this->oNails->getConfigKey());
-		$aReturn['css']			= $this->oNails->getConfig("css", $this->oNails->getConfigKey());
-		$aReturn['domain']		= $this->oNails->getConfig("address", $this->oNails->getConfigKey());
+		$aReturn['title']		= $this->oNails->getConfig("title", "head");
+		$aReturn['keywords']	= $this->oNails->getConfig("keywords", "head");
+		$aReturn['description']	= $this->oNails->getConfig("description", "head");
+		$aReturn['css']			= $this->oNails->getConfig("css", "head");
+		$aReturn['address']		= $this->oNails->getConfig("address", "head");
+
+		$aReturn['resource']['css']	= $this->oNails->getConfig("css", "resourceDomains");
+		$aReturn['resource']['js']	= $this->oNails->getConfig("js", "resourceDomains");
 
 		$aTest	= $aReturn;
 		foreach ($aTest as $key => $value) {
