@@ -1062,8 +1062,10 @@ class Head {
 
 		$aTest	= $aReturn;
 		foreach ($aTest as $key => $value) {
-			foreach ($value as $key1 => $value) {
-				if ($key == $key1) { $aReturn[$key] = $value; }
+			if (is_array($value)) {
+				foreach ($value as $key1 => $value) {
+					if ($key == $key1) { $aReturn[$key] = $value; }
+				}
 			}
 		}
 
