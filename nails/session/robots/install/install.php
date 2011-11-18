@@ -24,6 +24,11 @@ class Session_Robots_Install {
 		}
 	}
 
+	/**
+	 * Session_Robots_Install::upgrade()
+	 *
+	 * @return
+	 */
 	private function upgrade() {
 		if ($this->oNails->checkVersion("session_robots", "1.3") == false) {
 			//1.1
@@ -46,6 +51,11 @@ class Session_Robots_Install {
 		}
 	}
 
+	/**
+	 * Session_Robots_Install::install()
+	 *
+	 * @return
+	 */
 	private function install() {
 		$this->oNails->addTable("
 				CREATE TABLE IF NOT EXISTS `users_sessions_robots` (

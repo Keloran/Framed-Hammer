@@ -71,6 +71,9 @@ class Head {
 	    	}
 		}
 
+		//get the resource paths
+		printRead($this->aHead);
+
 		$mBrowser		= $this->getBrowser();
 		$this->bMobile	= $this->mobileBrowser($mBrowser);
 		$this->bWarning = $this->IEBrowser($mBrowser);
@@ -1048,10 +1051,11 @@ class Head {
 	private function makeHead() {
 		$aReturn	= false;
 
-		$aReturn['title']	= $this->oNails->getConfig("title", $this->oNails->getConfigKey());
+		$aReturn['title']		= $this->oNails->getConfig("title", $this->oNails->getConfigKey());
 		$aReturn['keywords']	= $this->oNails->getConfig("keywords", $this->oNails->getConfigKey());
 		$aReturn['description']	= $this->oNails->getConfig("description", $this->oNails->getConfigKey());
-		$aReturn['css']		= $this->oNails->getConfig("css", $this->oNails->getConfigKey());
+		$aReturn['css']			= $this->oNails->getConfig("css", $this->oNails->getConfigKey());
+		$aReturn['domain']		= $this->oNails->getConfig("address", $this->oNails->getConfigKey());
 
 		//Because Javascript can have multiple sub elements
 		$aJS					= $this->oNails->getConfig("javascript", $this->oNails->getConfigKey());
