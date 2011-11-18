@@ -462,7 +462,7 @@ class Head {
     	//a page structure overrides the css
     	$cCSS .= $this->getAddedCSS();
 
-	return $cCSS;
+		return $cCSS;
     }
 
 	/**
@@ -483,10 +483,13 @@ class Head {
 						$cReturn .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $aCSS['location'] . $aCSS['file'] . "\" />\n";
 					}
 				} else {
+					$cFolder = "/css/";
+					if (isset($this->aHead['resource']) && isset($this->aHead['resource']['css'])) { $cFolder = "http://" . $this->aHead['resource']['css']; }
+
 					if ($this->cDocType == "html5") {
-						$cReturn .= "<link rel=\"stylesheet\" href=\"/css/" . $aCSS['location'] . $aCSS['file'] . ".css\" />\n";
+						$cReturn .= "<link rel=\"stylesheet\" href=\"" . $cFolder . $aCSS['location'] . $aCSS['file'] . ".css\" />\n";
 					} else {
-						$cReturn .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"/css/" . $aCSS['location'] . $aCSS['file'] . ".css\" />\n";
+						$cReturn .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder . $aCSS['location'] . $aCSS['file'] . ".css\" />\n";
 					}
 				}
 			}
@@ -668,10 +671,13 @@ class Head {
 				$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cJS . "\"</script>\n";
 			}
 		} else {
+			$cFolder	= is_dir(SITEPATH . "/javascript/") ? "/javascript/" : "/js/";
+			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js']; }
+
 			if ($this->cDocType == "html5") {
-				$this->cJS .= "<script src=\"/js/" . $cJS . ".js\"></script>\n";
+				$this->cJS .= "<script src=\"" . $cFolder . $cJS . ".js\"></script>\n";
 			} else {
-				$this->cJS .= "<script type=\"text/javascript\" src=\"/js/" . $cJS . ".js\"></script>\n";
+				$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $cJS . ".js\"></script>\n";
 			}
 		}
 	}
@@ -699,6 +705,7 @@ class Head {
 
 			//Path could be js, or javascript
 			$cFolder	= is_dir(SITEPATH . "/javascript/") ? "/javascript/" : "/js/";
+			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js']; }
 
 			$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $cJS . ".js\"></script>\n";
 		}
@@ -714,9 +721,15 @@ class Head {
     private function loadJSFramework() {
     	//if its not hosted locally load the google version
 		if (file_exists(SITEPATH . "/js/"  . $this->cJSFrameworkName . ".js")) {
-			$cReturn = "<script type=\"text/javascript\" src=\"/js/" . $this->cJSFrameworkName . ".js\"></script>\n";
+			$cFolder = "/js/";
+			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js']; }
+
+			$cReturn = "<script type=\"text/javascript\" src=\"" . $cFolder . $this->cJSFrameworkName . ".js\"></script>\n";
 		} else if (file_exists(SITEPATH . "/js/" . $this->cJSFrameworkName . ".min.js")) {
-			$cReturn = "<script type=\"text/javascript\" src=\"/js/" . $this->cJSFrameworkName . ".min.js\"></script>\n";
+			$cFolder = "/js/";
+			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js']; }
+
+			$cReturn = "<script type=\"text/javascript\" src=\"" . $cFolder . $this->cJSFrameworkName . ".min.js\"></script>\n";
 		} else {
 			if (isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] == 443)) {
 				$cHTTP = "https";
@@ -854,10 +867,7 @@ class Head {
     public function returnJS() {
     	$cReturn	= "";
 
-    	if ($this->bJSFramework) {
-    		$cReturn .= $this->loadJSFramework();
-    	}
-
+    	if ($this->bJSFramework) { $cReturn .= $this->loadJSFramework(); }
     	$cReturn .= $this->getJS();
 
     	return $cReturn;
