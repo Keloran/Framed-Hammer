@@ -1059,10 +1059,10 @@ class Head {
 
 		$aTest	= $aReturn;
 		foreach ($aTest as $key => $value) {
-			printRead($key, "key");
-			printRead($value, "value");
+			foreach ($value as $key1 => $value) {
+				if ($key == $key1) { $aReturn[$key] = $value; }
+			}
 		}
-		die();
 
 		//Because Javascript can have multiple sub elements
 		$aJS					= $this->oNails->getConfig("javascript", $this->oNails->getConfigKey());
