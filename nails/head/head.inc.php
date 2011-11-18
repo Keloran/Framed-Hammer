@@ -57,22 +57,15 @@ class Head {
 		$this->cAddress	= $this->oNails->cAddress;
 
 	    //Do the style
-	    if ($cStyle) {
-	    	$this->cStyled = $cStyle;
-	    }
+	    if ($cStyle) { $this->cStyled = $cStyle; }
 
 		if (!$bNoInstall) {
 			//this is mainly for emails
 	    	if (!defined("SITEADDRESS")) {
-				$aAddress	= $this->oNails->getConfig("address", $this->oNails->getConfigKey());
-	    		$cAddress	= $aAddress['address'];
-
+				$cAddress	= $this->oNails->getConfig("address", "head")['address'];
 	    		define("SITEADDRESS", $cAddress);
 	    	}
 		}
-
-		//get the resource paths
-		printRead($this->aHead);
 
 		$mBrowser		= $this->getBrowser();
 		$this->bMobile	= $this->mobileBrowser($mBrowser);
@@ -394,7 +387,8 @@ class Head {
 		if (isset($this->cCSS)) { if ($this->cCSS) { $cCSS_a = $this->cCSS; }} //this is to avoid a memory loss when apache segfaults
 
 		//set the css
-		$mConfigCSS	= $this->oNails->getConfig("css", $this->oNails->getConfigKey());
+    	$mConfigCSS = false;
+    	if (isset($this->aHead['css'])) { $mConfigCSS = $this->aHead['css']; }
 		$mCSS		= ($cFile ? $cFile : ($cCSS_a ? $cCSS_a : $mConfigCSS));
     	$cTrue		= false;
     	$cPath		= false;
@@ -411,6 +405,10 @@ class Head {
     		$cFolder_b	= "/stylesheet/";
     	}
 
+    	//is there a resource domain set
+    	if (isset($this->aHead['resource']) && isset($this->aHead['resource']['css'])) { $cFolder_b = "http://" . $this->aHead['resource']['css']; }
+
+    	//is it a single css or multiple
 		if (!is_array($mCSS)) {
 			//A file has been set which overwrites any styles
 			if (strstr($mCSS, ".css")) {
@@ -547,7 +545,10 @@ class Head {
     		$cFolder_b	= "/stylesheet/";
     	}
 
+    	//if there is a resource domain
+    	if (isset($this->aHead['resource']) && isset($this->aHead['resource']['css'])) { $cFolder_b = "http://" . $this->aHead['resource']['css']; }
 
+		//if there are multiple browser css'
     	if (is_array($mBrowser)) {
     		for ($i = 0; $i < count($mBrowser); $i++) {
 		    	if ($cStyled) {
@@ -619,11 +620,10 @@ class Head {
 		$aHead	= $this->aHead;
     	$aJS	= false;
 
-		$aJSReturn	= $this->oNails->getConfig("javascript", $this->oNails->getConfigKey());
+    	$aJSReturn	= false;
+    	if (isset($this->aHead['javascript'])) { $aJSReturn = $this->aHead['javascript']; }
 		if (is_array($aJSReturn)) {
-			foreach ($aJSReturn as $iJSNum => $cJSName) {
-				$aJS[]	= $cJSName;
-			}
+			foreach ($aJSReturn as $iJSNum => $cJSName) { $aJS[] = $cJSName; }
 		}
 
     	//Folder could be js, or javascript
@@ -632,22 +632,23 @@ class Head {
     	//get the returned js
 		$cJS 	= $this->cJS;
 
+    	//is there a resource domian set
+    	if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js']; }
+
 		//theres quite a few of them
 		if ($aJS) {
-		        for($i = 0; $i < count($aJS); $i++) {
-    		       	if ($this->bJSFramework) {
-    		       		$cJSPath	= $cFolder . $this->cJSFrameworkName . "." . $aJS[$i] . ".js";
+		    for($i = 0; $i < count($aJS); $i++) {
+				if ($this->bJSFramework) {
+					$cJSPath	= $cFolder . $this->cJSFrameworkName . "." . $aJS[$i] . ".js";
 
-    		       		//append the jquery[framework] part to the name, since all js files should start with the framework,
-    		       		//e.g. jquery.menu.js, in loader all you put is menu if your turning on google framework loader
-    		       		if (file_exists(SITEPATH . $cJSPath)) {
-        					$cJS .= "<script type=\"text/javascript\" src=\"" . $cJSPath . "\"></script>\n";
-    		       		}
-		           	} else {
-						$cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $aJS[$i] . ".js\"></script>\n";
-	        	   	}
-        		}
-	        }
+					//append the jquery[framework] part to the name, since all js files should start with the framework,
+					//e.g. jquery.menu.js, in loader all you put is menu if your turning on google framework loader
+					if (file_exists(SITEPATH . $cJSPath)) { $cJS .= "<script type=\"text/javascript\" src=\"" . $cJSPath . "\"></script>\n"; }
+				} else {
+					$cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $aJS[$i] . ".js\"></script>\n";
+				}
+			}
+		}
 
         return $cJS;
     }
@@ -1057,11 +1058,16 @@ class Head {
 		$aReturn['css']			= $this->oNails->getConfig("css", "head")['css'];
 		$aReturn['address']		= $this->oNails->getConfig("address", "head")['address'];
 
-		$aReturn['resource']['css']	= $this->oNails->getConfig("css", "resourceDomains")['css'];
-		$aReturn['resource']['js']	= $this->oNails->getConfig("js", "resourceDomains")['js'];
+		//get the resource domains if they exist
+		$cCSS	= $this->oNails->getConfig("css", "resourceDomains")['css'];
+		$cJS	= $this->oNails->getConfig("js", "resourceDomains")['js'];
+
+		//now mash them with the address
+		if ($cCSS) { $aReturn['resource']['css']	= ($cCSS . $aReturn['address']); }
+		if ($cJS) { $aReturn['resource']['js']		= ($cJS . $aReturn['address']); }
 
 		//Because Javascript can have multiple sub elements
-		$aJS					= $this->oNails->getConfig("javascript", $this->oNails->getConfigKey());
+		$aJS					= $this->oNails->getConfig("javascript", "head")['javascript'];
 		if (isset($aJS[0])) {
 			if (strlen($aJS[0]) >= 2) {
 				foreach ($aJS as $aJSPart) {
