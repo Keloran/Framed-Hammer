@@ -45,6 +45,8 @@ class Database_PDO extends PDO implements Database_Interface {
 			parent::__construct($cDSN, $cUsername, $cPassword);
 		} catch (PDOException $e) {
 			throw new Spanner($e->getMessage(), 1000);
+		} catch (Exception $e) {
+			throw new Spanner($e->getMessage(), 1000);
 		}
 
 		$this->doInitial();

@@ -100,12 +100,12 @@ class Hammer {
 	/**
  	* Hammer::__construct()
 	*
-    * @param string $cSite
+	* @param string $cSite
 	* @param string $cSkin
 	* @param array $aFilter
 	*
 	* @return null
-    */
+	*/
 	public function __construct($cSite = false, $aFilter = null) {
 		//Since there is an error throw it, this is very unlikelly to ever be called
 		if ($this->cError) {
@@ -129,7 +129,7 @@ class Hammer {
 		$this->setAddress($aFilter);
 	}
 
-    /**
+	/**
 	* Hammer::getHammer()
 	*
 	* @desc Gets the object of Hammer
