@@ -29,6 +29,11 @@ class Gallery_Install {
 		}
 	}
 
+	/**
+	 * Gallery_Install::upgrade()
+	 *
+	 * @return
+	 */
 	private function upgrade() {
 		if ($this->oNails->checkVersion("gallery", "1.5") == false) {
 			//1.1
@@ -48,6 +53,11 @@ class Gallery_Install {
 		}
 	}
 
+	/**
+	 * Gallery_Install::install()
+	 *
+	 * @return
+	 */
 	private function install() {
 		$this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `gallery` (
@@ -141,6 +151,11 @@ class Gallery_Install {
 		$this->oNails->updateVersion("gallery", "1.4", $cSQL, "Added Exposure");
 	}
 
+	/**
+	 * Gallery_Install::hawk()
+	 *
+	 * @return
+	 */
 	public function hawk() {
 		$cSQL	= "CREATE TABLE IF NOT EXISTS `image_comment` (
 			`iCommentID` INT NOT NULL AUTO_INCREMENT,
