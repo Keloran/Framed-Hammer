@@ -42,7 +42,7 @@ class Twitter implements Nails_Interface {
 	 */
 	static function getInstance(Nails $oNails) {
 		if (is_null(self::$oTwitter)) {
-			self::$oTwitter = new Gallery($oNails);
+			self::$oTwitter = new Twitter($oNails);
 		}
 
 		return self::$oTwitter;
