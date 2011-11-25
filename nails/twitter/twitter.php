@@ -120,7 +120,7 @@ class Twitter implements Nails_Interface {
 	}
 
 	public function getDetails() {
-		$oAuth	= new OAuth($this->cKey, $this->cSecret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
+		$oAuth	= new OAuth($this->cKey, $this->cSecret, OAUTH_SIG_METHOD_HMACSHA1,OAUTH_AUTH_TYPE_URI);
 		$oAuth->enableDebug();
 
 		$aDetails	= $this->load();
