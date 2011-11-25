@@ -45,7 +45,7 @@ class Twitter_Install {
 	 */
 	function install() {
 		$this->oNails->addTable("
-			CREATE TABLE IF NOT EXISTS `twitter` )
+			CREATE TABLE IF NOT EXISTS `twitter` (
 				`iUserID` INT NOT NULL,
 				`username` VARCHAR(32) DEFAULT NULL,
 				`state` SMALLINT DEFAULT 0,
@@ -56,7 +56,7 @@ class Twitter_Install {
 				`location` VARCHAR(80) DEFAULT NULL,
 				`followers` SMALLINT DEFAULT 0,
 				`mtime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-				PRIMARY KEY (`iUserID`)");
+				PRIMARY KEY (`iUserID`))");
 		$this->addVersion("1.0", "twitter");
 	}
 }
