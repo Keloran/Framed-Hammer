@@ -125,7 +125,7 @@ class Twitter implements Nails_Interface {
 
 		$aDetails	= $this->load();
 		if ($aDetails['state'] == 0) { //need to auth
-			$aRequest	= $oAuth->getRequestToken("https://twitter.com/oauth/request_token");
+			$aRequest	= $oAuth->getRequestToken("https://api.twitter.com/oauth/request_token");
 
 			$aNewDetails[]	= $this->oUser->getUsername();
 			$aNewDetails[]	= 1;
@@ -134,14 +134,14 @@ class Twitter implements Nails_Interface {
 			$aNewDetails[]	= "New Auth";
 			$this->save($aNewDetails);
 
-			$this->oNails->sendLocation("http://twitter.com/oauth/authorize?oauth_token=" . $aRequest['oauth_token']);
+			$this->oNails->sendLocation("https://api.twitter.com/oauth/authorize?oauth_token=" . $aRequest['oauth_token']);
 		} else if ($aDetails['state'] == 1) { //the call back from twitter
 			printRead($this->oNails);
 		}
 
 		//stage 2 authorized
 		$oAuth->setToken($aDetails['token'], $aDetails['secret']);
-		$oAuth->fetch("https://twitter.com/account/verify_credentials.json");
+		$oAuth->fetch("https://api.twitter.com/1/account/verify_credentials.json");
 		$oJSON	= json_decode($oAuth->getLastResponse());
 
 		printRead($oJSON);die();
