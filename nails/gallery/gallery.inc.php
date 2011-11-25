@@ -523,4 +523,44 @@ class Gallery implements Nails_Interface {
 		$aInsert	= array($cGallery, $this->iUserID);
 		$this->oDB->write("INSERT INTO gallery_user (cLabel, iUserID) VALUES (?, ?)", $aInsert);
 	}
+
+	/**
+	 * Gallery::addComment()
+	 *
+	 * @param int $iImageID
+	 * @param int $iUserID
+	 * @param string $cComment
+	 * @return null
+	 */
+	public function addComment($iImageID, $iUserID, $cComment) {
+		$aInsert = array($iImageID, $iUserID, $cComment);
+		$this->oDB->write("INSERT INTO image_comment (iImageID, iUserID, cComment) VALUES (?, ?, ?)", $aInsert);
+	}
+
+	/**
+	 * Gallery::getComments()
+	 *
+	 * @param int $iImageID
+	 * @return array
+	 */
+	public function getComments($iImageID = false) {
+		if (!$iImageID) { return false; }
+		$aReturn	= false;
+		$i			= 0;
+
+		$this->oDB->read("
+			SELECT cUsername, cComment, users.iUserID
+			FROM image_comment
+			JOIN users ON users.iUserID = image_comment.iUserID
+			WHERE iImageID = ?
+			ORDER BY iCommentID ASC", $iImageID);
+		while ($this->oDB->nextRecord()) {
+			$aReturn[$i]['comment']		= $this->oDB->f('cComment');
+			$aReturn[$i]['username']	= $this->oDB->f('cUsername');
+			$aReturn[$i]['userid']		= $this->oDB->f('iUserID');
+			$i++;
+		}
+
+		return $aReturn;
+	}
 }

@@ -30,22 +30,21 @@ class Gallery_Install {
 	}
 
 	private function upgrade() {
-		if ($this->oNails->checkVersion("gallery", "1.4") == false) {
+		if ($this->oNails->checkVersion("gallery", "1.5") == false) {
 			//1.1
-			$cSQL = "ALTER TABLE `gallery` ADD COLUMN `bPrivate` BOOL NOT NULL";
-			$this->oNails->updateVersion("gallery", "1.1", $cSQL, "Added Private setting");
+			$this->rapier();
 
 			//1.2
-			$cSQL = "ALTER TABLE `gallery` ADD COLUMN `cFileSmall` TEXT, ADD COLUMN `cFileMedium` TEXT";
-			$this->oNails->updateVersion("gallery", "1.2", $cSQL);
+			$this->aruba();
 
 			//1.3
-			$cSQL = "ALTER TABLE `gallery_user` ADD COLUMN `bPrivate` BOOL NOT NULL";
-			$this->oNails->updateVersion("gallery", "1.3", $cSQL, "Added Private Flag");
+			$this->plato();
 
 			//1.4
-			$cSQL = "ALTER TABLE `gallery_exif` ADD COLUMN `cExposureMode` TEXT NULL DEFAULT NULL";
-			$this->oNails->updateVersion("gallery", "1.4", $cSQL, "Added Exposure");
+			$this->denali();
+
+			//1.5
+			$this->hawk();
 		}
 	}
 
@@ -100,5 +99,56 @@ class Gallery_Install {
 		$this->oNails->addVersion("gallery_user", "1.0");
 
 		$this->oNails->sendLocation("install");
+	}
+
+	/**
+	 * Gallery_Install::rapier()
+	 *
+	 * @return null
+	 */
+	public function rapier() {
+		$cSQL = "ALTER TABLE `gallery` ADD COLUMN `bPrivate` BOOL NOT NULL";
+		$this->oNails->updateVersion("gallery", "1.1", $cSQL, "Added Private setting");
+	}
+
+	/**
+	 * Gallery_Install::aruba()
+	 *
+	 * @return
+	 */
+	public function aruba() {
+		$cSQL = "ALTER TABLE `gallery` ADD COLUMN `cFileSmall` TEXT, ADD COLUMN `cFileMedium` TEXT";
+		$this->oNails->updateVersion("gallery", "1.2", $cSQL);
+	}
+
+	/**
+	 * Gallery_Install::plato()
+	 *
+	 * @return
+	 */
+	public function plato() {
+		$cSQL = "ALTER TABLE `gallery_user` ADD COLUMN `bPrivate` BOOL NOT NULL";
+		$this->oNails->updateVersion("gallery", "1.3", $cSQL, "Added Private Flag");
+	}
+
+	/**
+	 * Gallery_Install::denali()
+	 *
+	 * @return
+	 */
+	public function denali() {
+		$cSQL = "ALTER TABLE `gallery_exif` ADD COLUMN `cExposureMode` TEXT NULL DEFAULT NULL";
+		$this->oNails->updateVersion("gallery", "1.4", $cSQL, "Added Exposure");
+	}
+
+	public function hawk() {
+		$cSQL	= "CREATE TABLE IF NOT EXISTS `image_comment` (
+			`iCommentID` INT NOT NULL AUTO_INCREMENT,
+			`iImageID` INT NOT NULL,
+			`iUserID` INT NOT NULL,
+			`cComment` TEXT,
+			PRIMARY KEY (`iCommentID`)
+		)";
+		$this->oNails->updateVersion("gallery", "1.5", $cSQL, "Added Comment Support");
 	}
 }
