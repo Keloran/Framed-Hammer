@@ -81,6 +81,8 @@ class Twitter implements Nails_Interface {
 	 * @return
 	 */
 	public function load($bAll = false) {
+		$aReturn	= false;
+
 		if ($this->iUserID) {
 			$this->oDB->read("SELECT username, state, token, secret, description FROM twitter WHERE iUserID = ? LIMIT 1", $this->iUserID);
 			if ($this->oDB->nextRecord()) {
@@ -90,11 +92,9 @@ class Twitter implements Nails_Interface {
 				$aReturn['secret']		= $this->oDB->f('secret');
 				$aReturn['description']	= $this->oDB->f('description');
 			}
-
-			return $aReturn;
 		}
 
-		return false;
+		return $aReturn;
 	}
 
 	/**
