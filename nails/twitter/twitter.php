@@ -164,7 +164,7 @@ class Twitter implements Nails_Interface {
 		$aDetails	= $this->load();
 
 		$this->oAuth->setToken($aDetails['token'], $aDetails['secret']);
-		$this->oAuth->fetch("https://api.twitter.com/1/statuses/home_timeline.json?count=5&include_entities=true");
+		$this->oAuth->fetch("https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&count=5&screen_name=" . $aDetails['username']);
 		$oJSON	= json_decode($this->oAuth->getLastResponse());
 
 		printRead($oJSON);die();
