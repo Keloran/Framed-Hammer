@@ -57,6 +57,6 @@ class Twitter_Install {
 				`followers` SMALLINT DEFAULT 0,
 				`mtime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 				PRIMARY KEY (`iUserID`))");
-		$this->oNails->addVersion("1.0", "twitter");
+		$this->oNails->addVersion("twitter", "1.0");
 	}
 }
