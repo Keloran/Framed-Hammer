@@ -20,6 +20,7 @@ class Twitter implements Nails_Interface {
 	public $oDB			= false;
 	public $oImage		= false;
 	public $oUser		= false;
+	public $oAuth		= false;
 
 	/**
 	 * Twitter::__construct()
@@ -33,6 +34,11 @@ class Twitter implements Nails_Interface {
 		$this->iUserID	= $this->oUser->getUserID();
 
 		$this->oDB		= $this->oNails->getDatabase();
+
+		$oAuth	= new OAuth($this->cKey, $this->cSecret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
+		$oAuth->enableDebug();
+
+		$this->oAuth	= $oAuth;
 	}
 
 	/**
@@ -125,12 +131,9 @@ class Twitter implements Nails_Interface {
 	 * @return null
 	 */
 	public function getDetails() {
-		$oAuth	= new OAuth($this->cKey, $this->cSecret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
-		$oAuth->enableDebug();
-
 		$aDetails	= $this->load();
 		if ($aDetails['state'] == 0) { //need to auth
-			$aRequest	= $oAuth->getRequestToken("https://api.twitter.com/oauth/request_token");
+			$aRequest	= $this->oAuth->getRequestToken("https://api.twitter.com/oauth/request_token");
 
 			$aNewDetails[]	= $this->oUser->getUsername();
 			$aNewDetails[]	= 1;
@@ -145,9 +148,9 @@ class Twitter implements Nails_Interface {
 		}
 
 		//stage 2 authorized
-		$oAuth->setToken($aDetails['token'], $aDetails['secret']);
-		$oAuth->fetch("https://api.twitter.com/1/account/verify_credentials.json");
-		$oJSON	= json_decode($oAuth->getLastResponse());
+		$this->oAuth->setToken($aDetails['token'], $aDetails['secret']);
+		$this->oAuth->fetch("https://api.twitter.com/1/account/verify_credentials.json");
+		$oJSON	= json_decode($this->oAuth->getLastResponse());
 
 		$aNewDetails[]	= (string)$oJSON->screen_name;
 		$aNewDetails[]	= (string)$oJSON->status->text;
@@ -155,11 +158,15 @@ class Twitter implements Nails_Interface {
 		$aNewDetails[]	= (string)$oJSON->location;
 		$aNewDetails[]	= (int)$oJSON->followers_count;
 		$this->update($aNewDetails);
-
-		printRead($oJSON);die();
 	}
 
 	public function getLatestTweets() {
+		$aDetails	= $this->load();
 
+		$this->oAuth->setToken($aDetails['token'], $aDetails['secret']);
+		$this->oAuth->fetch("ttps://api.twitter.com/1/statuses/public_timeline.json?count=5&include_entities=true");
+		$oJSON	= json_decode($this->oAuth->getLastResponse());
+
+		printRead($oJSON);die();
 	}
 }

@@ -63,7 +63,21 @@ class Twitter_Install {
 	private function ocelot() {
 		$this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `twitter_details` (
-				iUserID` INT NOT NULL,
+				`iUserID` INT NOT NULL,
+				`cDescription` VARCHAR(255) DEFAULT NULL,
+				`iFollowers` SMALLINT DEFAULT 0,
+				`iFollowing` SMALLINT DEFAULT 0,
+				`cImage` TEXT DEFAULT NULL,
+				`cLocation` VARCHAR(80) DEFAULT NULL,
+				PRIMARY KEY (`iUserID`))");
+
+		$this->oNails->addTable("
+			CREATE TABLE IF NOT EXISTS `twitter_tweets` (
+				`iUserID` INT NOT NULL,
+				`iTweetID` BIGINT NOT NULL,
 				");
+
+		$cSQL	= "ALTER TABLE twitter DROP COLUMN description,  DROP COLUMN status, DROP COLUMN followers, DROP COLUMN location";
+		$this->oNails->updateVersion("twitter", "1.1", $cSQL, "Make details, and drop old columns");
 	}
 }
