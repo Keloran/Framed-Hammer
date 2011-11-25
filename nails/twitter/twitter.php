@@ -119,6 +119,11 @@ class Twitter implements Nails_Interface {
 		}
 	}
 
+	/**
+	 * Twitter::getDetails()
+	 *
+	 * @return null
+	 */
 	public function getDetails() {
 		$oAuth	= new OAuth($this->cKey, $this->cSecret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
 		$oAuth->enableDebug();
@@ -150,5 +155,11 @@ class Twitter implements Nails_Interface {
 		$aNewDetails[]	= (string)$oJSON->location;
 		$aNewDetails[]	= (int)$oJSON->followers_count;
 		$this->update($aNewDetails);
+
+		printRead($oJSON);die();
+	}
+
+	public function getLatestTweets() {
+
 	}
 }

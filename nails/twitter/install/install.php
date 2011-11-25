@@ -17,7 +17,7 @@ class Twitter_Install {
 	 *
 	 * @param Nails $oNails
 	 */
-	function __construct(Nails $oNails) {
+	public function __construct(Nails $oNails) {
 		$this->oNails	= $oNails;
 		$this->oDB		= $oNails->getDatabase();
 
@@ -34,7 +34,7 @@ class Twitter_Install {
 	 *
 	 * @return null
 	 */
-	function upgrade() {
+	public function upgrade() {
 
 	}
 
@@ -43,7 +43,7 @@ class Twitter_Install {
 	 *
 	 * @return null
 	 */
-	function install() {
+	public function install() {
 		$this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `twitter` (
 				`iUserID` INT NOT NULL,
@@ -58,5 +58,12 @@ class Twitter_Install {
 				`mtime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 				PRIMARY KEY (`iUserID`))");
 		$this->oNails->addVersion("twitter", "1.0");
+	}
+
+	private function ocelot() {
+		$this->oNails->addTable("
+			CREATE TABLE IF NOT EXISTS `twitter_details` (
+				iUserID` INT NOT NULL,
+				");
 	}
 }
