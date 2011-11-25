@@ -130,7 +130,7 @@ class Twitter implements Nails_Interface {
 			$aNewDetails[]	= $this->oUser->getUsername();
 			$aNewDetails[]	= 1;
 			$aNewDetails[]	= $aRequest['oauth_token'];
-			$aNewDetails[]	= $aRequest['oath_token_secret'];
+			$aNewDetails[]	= $aRequest['oauth_token_secret'];
 			$aNewDetails[]	= "New Auth";
 			$this->save($aNewDetails);
 
