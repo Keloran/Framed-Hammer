@@ -70,7 +70,7 @@ class Twitter implements Nails_Interface {
 	public function update($aRecord) {
 		if ($this->iUserID) {
 			$aRecord[] = $this->iUserID;
-			$this->oDB->write("UPDATE twitter SET username = ?, state = ?, token = ?, secret = ?, description = ? WHERE iUserID = ? LIMIT 1", $aRecord);
+			$this->oDB->write("UPDATE twitter SET username = ?, status = ?, description = ?, location = ?, followers = ? WHERE iUserID = ? LIMIT 1", $aRecord);
 		}
 	}
 
@@ -138,5 +138,19 @@ class Twitter implements Nails_Interface {
 		} else if ($aDetails['state'] == 1) { //the call back from twitter
 			printRead($this->oNails);
 		}
+
+		//stage 2 authorized
+		$oAuth->setToken($aDetails['token'], $aDetails['secret']);
+		$oAuth->fetch("https://twitter.com/account/verify_credentials.json");
+		$oJSON	= json_decode($oAuth->getLastResponse());
+
+		printRead($oJSON);die();
+
+		$aNewDetails[]	= (string)$oJSON->screen_name;
+		$aNewDetails[]	= (string)$oJSON->status->text;
+		$aNewDetails[]	= (string)$oJSON->description;
+		$aNewDetails[]	= (string)$oJSON->location;
+		$aNewDetails[]	= (int)$oJSON->followers_count;
+		$this->update($aNewDetails);
 	}
 }
