@@ -120,7 +120,7 @@ class Twitter implements Nails_Interface {
 	}
 
 	public function getDetails() {
-		$oAuth	= new OAuth($this->cKey, $this->cSecret, OAUTH_SIG_METHOD_HMACSHA1,OAUTH_AUTH_TYPE_URI);
+		$oAuth	= new OAuth($this->cKey, $this->cSecret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
 		$oAuth->enableDebug();
 
 		$aDetails	= $this->load();
@@ -140,7 +140,6 @@ class Twitter implements Nails_Interface {
 		}
 
 		//stage 2 authorized
-		printRead($aDetails);die();
 		$oAuth->setToken($aDetails['token'], $aDetails['secret']);
 		$oAuth->fetch("https://api.twitter.com/1/account/verify_credentials.json");
 		$oJSON	= json_decode($oAuth->getLastResponse());
