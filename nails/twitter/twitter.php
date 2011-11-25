@@ -140,6 +140,7 @@ class Twitter implements Nails_Interface {
 		}
 
 		//stage 2 authorized
+		printRead($aDetails);die();
 		$oAuth->setToken($aDetails['token'], $aDetails['secret']);
 		$oAuth->fetch("https://api.twitter.com/1/account/verify_credentials.json");
 		$oJSON	= json_decode($oAuth->getLastResponse());
