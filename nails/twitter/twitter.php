@@ -77,6 +77,7 @@ class Twitter implements Nails_Interface {
 		if ($this->iUserID) {
 			$aRecord[] = $this->iUserID;
 			$this->oDB->write("UPDATE twitter SET username = ?, status = ?, description = ?, location = ?, followers = ? WHERE iUserID = ? LIMIT 1", $aRecord);
+			$this->oDB->write("INSERT INTO twitter (cTweet, iUserID, ");
 		}
 	}
 
@@ -161,11 +162,17 @@ class Twitter implements Nails_Interface {
 	}
 
 	public function getLatestTweets() {
+		$this->oDB->read("
+			SELECT cTweet, ");
+
+
 		$aDetails	= $this->load();
 
 		$this->oAuth->setToken($aDetails['token'], $aDetails['secret']);
 		$this->oAuth->fetch("https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&count=5&screen_name=" . $aDetails['username']);
 		$oJSON	= json_decode($this->oAuth->getLastResponse());
+
+
 
 		printRead($oJSON);die();
 	}

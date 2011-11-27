@@ -35,7 +35,10 @@ class Twitter_Install {
 	 * @return null
 	 */
 	public function upgrade() {
-
+		if ($this->oNails->checkVersion("twitter", "1.1") == false) {
+			//1.1
+			$this->ocelot();
+		}
 	}
 
 	/**
@@ -60,6 +63,11 @@ class Twitter_Install {
 		$this->oNails->addVersion("twitter", "1.0");
 	}
 
+	/**
+	 * Twitter_Install::ocelot()
+	 *
+	 * @return
+	 */
 	private function ocelot() {
 		$this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `twitter_details` (
@@ -73,11 +81,15 @@ class Twitter_Install {
 
 		$this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `twitter_tweets` (
+				`iTweetID` BIGINT NOT NULL AUTO_INCREMENT,
 				`iUserID` INT NOT NULL,
-				`iTweetID` BIGINT NOT NULL,
-				");
+				`cTweet` VARCHAR(140),
+				`iReTweet` SMALLINT DEFAULT 0,
+				`cScreenName` VARCHAR(32) DEFAULT NULL,
+				`tsTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+				PRIMARY KEY (`iTweetID`))");
 
-		$cSQL	= "ALTER TABLE twitter DROP COLUMN description,  DROP COLUMN status, DROP COLUMN followers, DROP COLUMN location";
+		$cSQL	= "ALTER TABLE twitter DROP COLUMN description,  DROP COLUMN status, DROP COLUMN followers, DROP COLUMN location, DROP COLUMN mtime";
 		$this->oNails->updateVersion("twitter", "1.1", $cSQL, "Make details, and drop old columns");
 	}
 }
