@@ -226,7 +226,7 @@ class Twitter implements Nails_Interface {
 				$aReturn[$j]['reTweet']	= (int)$oJSON[$i]->retweet_count;
 
 				//is it a retweet or normal
-				if ($oJSON[$i]->retweeted_status) {
+				if (isset($oJSON[$i]->retweeted_status)) {
 					$aReturn[$j]['screenName']	= (string)$oJSON[$i]->retweeted_status->user->screen_name;
 					$aReturn[$j]['tweet']		= (string)$oJSON[$i]->retweeted_status->text;
 				} else {
