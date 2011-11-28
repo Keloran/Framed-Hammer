@@ -289,7 +289,7 @@ class Twitter implements Nails_Interface {
 		$this->oDB->read("
 			SELECT cTweet, iFollowers, iFollowing, cImage, cScreenName, iReTweet, iTweetID
 			FROM twitter_tweets
-			JOIN twitter_details ON (twitter_tweets.iUserID = twitter_details.iUserID
+			JOIN twitter_details ON (twitter_tweets.iUserID = twitter_details.iUserID)
 			WHERE twitter_tweets.iUserID = ?
 			ORDER BY twitter_details.iTweetID
 			LIMIT 5", $this->iUserID);
