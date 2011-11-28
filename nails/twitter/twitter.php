@@ -298,7 +298,7 @@ class Twitter implements Nails_Interface {
 			FROM twitter_tweets AS tt
 			JOIN twitter_details AS td ON (tt.iUserID = td.iUserID)
 			WHERE tt.iUserID = ?
-			ORDER BY tt.iTweetID
+			ORDER BY tt.iTweetID DESC
 			LIMIT 5", $this->iUserID);
 		while ($this->oDB->nextRecord()) {
 			$aTweets[$j]['tweet']		= $this->oDB->f('cTweet');
