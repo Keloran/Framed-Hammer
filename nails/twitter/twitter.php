@@ -257,6 +257,8 @@ class Twitter implements Nails_Interface {
 		//see if we need to pull new data
 		$iMinus		= 36000;
 		$iStatus	= 0;
+		$iTime		= time();
+		$mTime		= ($iTime - $iMinus);
 		$this->oDB->read("SELECT mtime FROM twitter WHERE iUserID = ? LIMIT 1", $this->iUserID);
 		if ($this->oDB->nextRecord()) { $iStatus = strtotime($this->oDB->f('mtime')); }
 
@@ -265,7 +267,7 @@ class Twitter implements Nails_Interface {
 		while ($this->oDB->nextRecord()) { $aTweetIDs[]	= $this->oDB->f('iTweetID'); }
 
 		//do we need todo an update
-		if ($iStatus >= (time() - $iMinus)) {
+		if ($iStatus >= $mTime) {
 			$this->getDetails();
 			$aLatest	= $this->getLatest();
 
@@ -282,9 +284,9 @@ class Twitter implements Nails_Interface {
 			printRead(array(
 				"time"	=> time(),
 				"minus"	=> $iMinus,
-				"mtime"	=> (time() - $iMinus),
+				"mtime"	=> $mTime,
 				"status"	=> $iStatus,
-				"check"		=> ($iStatus >= (time() - $iMinus)),
+				"check"		=> ($iStatus >= $mTime),
 			));
 			die();
 		}
