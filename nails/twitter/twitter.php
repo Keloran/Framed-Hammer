@@ -278,6 +278,8 @@ class Twitter implements Nails_Interface {
 					$this->addTweet($aLatest[$i]);
 				}
 			}
+		} else {
+			die("erm");
 		}
 
 		//get the latest 5 tweets from table
