@@ -250,7 +250,7 @@ class Twitter implements Nails_Interface {
 		$j			= 0;
 		$aReturn	= false;
 		$aTweets	= false;
-		$aTweetIDs	= false;
+		$aTweetIDs	= array();
 
 		//see if we need to pull new data
 		$iMinus		= 36000;
