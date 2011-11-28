@@ -199,6 +199,11 @@ class Twitter implements Nails_Interface {
 		$this->update($aNewDetails);
 	}
 
+	/**
+	 * Twitter::getLatest()
+	 *
+	 * @return array
+	 */
 	private function getLatest() {
 		$aReturn	= false;
 		$j			= 0;
@@ -231,6 +236,8 @@ class Twitter implements Nails_Interface {
 				$j++;
 			}
 		}
+
+		printRead($aReturn);die();
 
 		return $aReturn;
 	}
