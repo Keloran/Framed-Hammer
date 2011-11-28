@@ -93,7 +93,7 @@ class Twitter implements Nails_Interface {
 			$aUpdate[]	= $aRecord['image'];
 			$aUpdate[]	= $aRecord['location'];
 			$aUpdate[]	= $this->iUserID;
-			$this->oDB->write("UPDATE twitter_details SET iFollowers = ?, iFollowing = ?, cDescription = ?, cImage = ?, cLocation = ? WHERE iUserID = ? LIMIT 1", $aUpdate);
+			$this->oDB->write("REPLACE INTO twitter_details SET iFollowers = ?, iFollowing = ?, cDescription = ?, cImage = ?, cLocation = ?, iUserID = ?", $aUpdate);
 
 			$this->touch();
 		}
