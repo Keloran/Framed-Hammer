@@ -61,9 +61,20 @@ class Twitter implements Nails_Interface {
 	 * @return null
 	 */
 	public function save($aRecord) {
+		$cScreenName	= $aRecord['username'];
+		$iState			= $aRecord['state'];
+		$cToken			= $aRecord['token'];
+		$cSecret		= $aRecord['secret'];
+		$aRecord		= false;
+
 		if ($this->iUserID) {
-			$aRecord[] = $this->iUserID;
-			$this->oDB->write("REPLACE INTO twitter (username, state, token, secret, description, iUserID) VALUES (?, ?, ?, ?, ?, ?)", $aRecord);
+			$aRecord[]	= $cScreenName;
+			$aRecord[]	= $iState;
+			$aRecord[]	= $cToken;
+			$aRecord[]	= $cSecret;
+			$aRecord[]	= $this->iUserID;
+
+			$this->oDB->write("REPLACE INTO twitter (username, state, token, secret, iUserID) VALUES (?, ?, ?, ?, ?)", $aRecord);
 		}
 	}
 
@@ -74,10 +85,30 @@ class Twitter implements Nails_Interface {
 	 * @return
 	 */
 	public function update($aRecord) {
+		$cTweet			= $aRecord['tweet'];
+		$iReTweet		= $aRecord['reTweet'];
+		$cScreeName		= $aRecord['screenName'];
+		$iTweetID		= $aRecord['tweetID'];
+		$aUpdate		= false;
+
 		if ($this->iUserID) {
-			$aRecord[] = $this->iUserID;
-			$this->oDB->write("UPDATE twitter SET username = ?, status = ?, description = ?, location = ?, followers = ? WHERE iUserID = ? LIMIT 1", $aRecord);
-			$this->oDB->write("INSERT INTO twitter (cTweet, iUserID, ");
+			$aUpdate[]	= $cTweet;
+			$aUpdate[]	= $this->iUserID;
+			$aUpdate[]	= $iTweetID;
+			$aUpdate[]	= $iReTweet;
+			$aUpdate[]	= $cScreenName;
+			$this->oDB->write("INSERT INTO twitter_tweets (cTweet, iUserID, iTweetID, iReTweet, cScreeName) VALUES (?, ?, ?, ?, ?)", $aUpdate);
+
+			$aUpdate	= false;
+			$aUpdate[]	= $aRecord['followers'];
+			$aUpdate[]	= $aRecord['following'];
+			$aUpdate[]	= $aRecord['description'];
+			$aUpdate[]	= $aRecord['image'];
+			$aUpdate[]	= $aRecord['location'];
+			$aUpdate[]	= $this->iUserID;
+			$this->oDB->write("UPDATE twitter_details SET iFollowers = ?, iFollowing = ?, cDescription = ?, cImage = ?, cLocation = ? WHERE iUserID = ? LIMIT 1", $aUpdate);
+
+			$this->touch();
 		}
 	}
 
@@ -91,13 +122,12 @@ class Twitter implements Nails_Interface {
 		$aReturn	= false;
 
 		if ($this->iUserID) {
-			$this->oDB->read("SELECT username, state, token, secret, description FROM twitter WHERE iUserID = ? LIMIT 1", $this->iUserID);
+			$this->oDB->read("SELECT username, state, token, secret FROM twitter WHERE iUserID = ? LIMIT 1", $this->iUserID);
 			if ($this->oDB->nextRecord()) {
 				$aReturn['username']	= $this->oDB->f('username');
 				$aReturn['state']		= $this->oDB->f('state');
 				$aReturn['token']		= $this->oDB->f('token');
 				$aReturn['secret']		= $this->oDB->f('secret');
-				$aReturn['description']	= $this->oDB->f('description');
 			}
 		}
 
@@ -136,11 +166,10 @@ class Twitter implements Nails_Interface {
 		if ($aDetails['state'] == 0) { //need to auth
 			$aRequest	= $this->oAuth->getRequestToken("https://api.twitter.com/oauth/request_token");
 
-			$aNewDetails[]	= $this->oUser->getUsername();
-			$aNewDetails[]	= 1;
-			$aNewDetails[]	= $aRequest['oauth_token'];
-			$aNewDetails[]	= $aRequest['oauth_token_secret'];
-			$aNewDetails[]	= "New Auth";
+			$aNewDetails['username']	= $this->oUser->getUsername();
+			$aNewDetails['state']		= 1;
+			$aNewDetails['token']		= $aRequest['oauth_token'];
+			$aNewDetails['secret']		= $aRequest['oauth_token_secret'];
 			$this->save($aNewDetails);
 
 			$this->oNails->sendLocation("https://api.twitter.com/oauth/authorize?oauth_token=" . $aRequest['oauth_token']);
@@ -153,17 +182,32 @@ class Twitter implements Nails_Interface {
 		$this->oAuth->fetch("https://api.twitter.com/1/account/verify_credentials.json");
 		$oJSON	= json_decode($this->oAuth->getLastResponse());
 
-		$aNewDetails[]	= (string)$oJSON->screen_name;
-		$aNewDetails[]	= (string)$oJSON->status->text;
-		$aNewDetails[]	= (string)$oJSON->description;
-		$aNewDetails[]	= (string)$oJSON->location;
-		$aNewDetails[]	= (int)$oJSON->followers_count;
+		printRead($oJSON);die();
+
+		//add the elements to the insert array
+		$aNewDetails['screenName']	= (string)$oJSON->user->screen_name;
+		$aNewDetails['description']	= (string)$oJSON->user->description;
+		$aNewDetails['location']	= (string)$oJSON->user->location;
+		$aNewDetails['followers']	= (int)$oJSON->user->followers_count;
+		$aNewDetails['following']	= (int)$oJSON->user->friends_count;
+		$aNewDetails['image']		= (string)$oJSON->user->profile_image_url_https;
+		$aNewDetails['tweet']		= (string)$oJSON->status->text;
+
+		//is it retweet, in which case i want the retweet info not the default info
+		$iReTweet					= 0;
+		$aNewDetails['reTweet']		= $iReTweet	= (int)$oJSON->retweeted;
+		if ($iReTweet) {
+			$aNewDetails['tweet']		= (string)$oJSON->retweeted_status->text;
+			$aNewDetails['screenName']	= (string)$oJSON->retweeted_status->screen_name;
+		}
+
 		$this->update($aNewDetails);
 	}
 
 	public function getLatestTweets() {
-		$this->oDB->read("
-			SELECT cTweet, ");
+		$iMinus	= 36000;
+
+		$this->oDB->read("SELECT cTweet, ");
 
 
 		$aDetails	= $this->load();

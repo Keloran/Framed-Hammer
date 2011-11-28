@@ -81,15 +81,15 @@ class Twitter_Install {
 
 		$this->oNails->addTable("
 			CREATE TABLE IF NOT EXISTS `twitter_tweets` (
-				`iTweetID` BIGINT NOT NULL AUTO_INCREMENT,
+				`iTweetID` BIGINT NOT NULL,
 				`iUserID` INT NOT NULL,
 				`cTweet` VARCHAR(140),
 				`iReTweet` SMALLINT DEFAULT 0,
 				`cScreenName` VARCHAR(32) DEFAULT NULL,
-				`tsTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+				`tsTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 				PRIMARY KEY (`iTweetID`))");
 
-		$cSQL	= "ALTER TABLE twitter DROP COLUMN description,  DROP COLUMN status, DROP COLUMN followers, DROP COLUMN location, DROP COLUMN mtime";
+		$cSQL	= "ALTER TABLE twitter DROP COLUMN description,  DROP COLUMN status, DROP COLUMN followers, DROP COLUMN location";
 		$this->oNails->updateVersion("twitter", "1.1", $cSQL, "Make details, and drop old columns");
 	}
 }
