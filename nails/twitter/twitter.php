@@ -258,7 +258,7 @@ class Twitter implements Nails_Interface {
 		$iMinus		= 36000;
 		$iStatus	= 0;
 		$this->oDB->read("SELECT mtime FROM twitter WHERE iUserID = ? LIMIT 1", $this->iUserID);
-		if ($this->oDB->nextRecord()) { $iStatus = $this->oDB->f('mtime'); }
+		if ($this->oDB->nextRecord()) { $iStatus = strtotime($this->oDB->f('mtime')); }
 
 		//get teh latest 5 tweetids
 		$this->oDB->read("SELECT iTweetID FROM twitter_tweet WHERE iUserID = ? LIMIT 5", $this->iUserID);
