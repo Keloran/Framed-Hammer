@@ -107,4 +107,8 @@ class Twitter_Install {
 
 		$this->oNails->updateVersion("twitter", "1.2",  false, "Add UserID indexs");
 	}
+
+	private function revolver() {
+
+	}
 }
