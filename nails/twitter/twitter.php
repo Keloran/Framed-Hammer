@@ -263,7 +263,7 @@ class Twitter implements Nails_Interface {
 		if ($this->oDB->nextRecord()) { $iStatus = strtotime($this->oDB->f('mtime')); }
 
 		//get teh latest 5 tweetids
-		$this->oDB->read("SELECT iTweetID FROM twitter_tweet WHERE iUserID = ? LIMIT 5", $this->iUserID);
+		$this->oDB->read("SELECT iTweetID FROM twitter_tweets WHERE iUserID = ? LIMIT 5", $this->iUserID);
 		while ($this->oDB->nextRecord()) { $aTweetIDs[]	= $this->oDB->f('iTweetID'); }
 
 		//do we need todo an update
@@ -285,9 +285,9 @@ class Twitter implements Nails_Interface {
 		//get the latest 5 tweets from table
 		$this->oDB->read("
 			SELECT cTweet, iFollowers, iFollowing, cImage, cScreenName, iReTweet, iTweetID
-			FROM twitter_tweet
-			JOIN twitter_details ON (twitter_tweet.iUserID = twitter_details.iUserID
-			WHERE twitter_tweet.iUserID = ?
+			FROM twitter_tweets
+			JOIN twitter_details ON (twitter_tweets.iUserID = twitter_details.iUserID
+			WHERE twitter_tweets.iUserID = ?
 			ORDER BY twitter_details.iTweetID
 			LIMIT 5", $this->iUserID);
 		while ($this->oDB->nextRecord()) {
