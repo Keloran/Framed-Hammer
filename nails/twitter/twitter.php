@@ -117,7 +117,7 @@ class Twitter implements Nails_Interface {
 			$aUpdate[]	= $iTweetID;
 			$aUpdate[]	= $iReTweet;
 			$aUpdate[]	= $cScreenName;
-			$this->oDB->write("INSERT INTO twitter_tweets (cTweet, iUserID, iTweetID, iReTweet, cScreeName) VALUES (?, ?, ?, ?, ?)", $aUpdate);
+			$this->oDB->write("INSERT INTO twitter_tweets (cTweet, iUserID, iTweetID, iReTweet, cScreenName) VALUES (?, ?, ?, ?, ?)", $aUpdate);
 		}
 	}
 
