@@ -61,20 +61,32 @@ class Twitter implements Nails_Interface {
 	 * @return null
 	 */
 	private function save($aRecord) {
-		$cScreenName	= $aRecord['username'];
+        $cScreenName    = false;
+
 		$iState			= $aRecord['state'];
 		$cToken			= $aRecord['token'];
 		$cSecret		= $aRecord['secret'];
+        if (isset($aRecord['username'])) { 	$cScreenName	= $aRecord['username']; }
+
 		$aRecord		= false;
 
-		if ($this->iUserID) {
-			$aRecord[]	= $cScreenName;
-			$aRecord[]	= $iState;
-			$aRecord[]	= $cToken;
-			$aRecord[]	= $cSecret;
-			$aRecord[]	= $this->iUserID;
+        if ($this->iUserID) {
+            if ($cScreenName) {
+	    		$aUpdate[]	= $cScreenName;
+		    	$aUpdate[]	= $iState;
+	    		$aUpdate[]	= $cToken;
+		    	$aUpdate[]	= $cSecret;
+			    $aUpdate[]	= $this->iUserID;
 
-			$this->oDB->write("REPLACE INTO twitter (username, state, token, secret, iUserID) VALUES (?, ?, ?, ?, ?)", $aRecord);
+    			$this->oDB->write("REPLACE INTO twitter (username, state, token, secret, iUserID) VALUES (?, ?, ?, ?, ?)", $aUpdate);
+            } else {
+                $aUpdate[] = $iState;
+                $aUpdate[] = $cToken;
+                $aUpdate[] = $cSecret;
+                $aUpdate[] = $this->iUserID;
+
+                $this->oDB->write("REPLACE INTO twitter (state, token, secret, iUserID) VALUES (?, ?, ?, ?)", $aUpdate);
+            }
 		}
 	}
 
@@ -177,7 +189,7 @@ class Twitter implements Nails_Interface {
 		if ($aDetails['state'] == 0) { //need to auth
 			$aRequest	= $this->oAuth->getRequestToken("https://api.twitter.com/oauth/request_token");
 
-			$aNewDetails['username']	= $aRequest['username'];
+			#$aNewDetails['username']	= $aRequest['username'];
 			$aNewDetails['state']		= 1;
 			$aNewDetails['token']		= $aRequest['oauth_token'];
 			$aNewDetails['secret']		= $aRequest['oauth_token_secret'];
