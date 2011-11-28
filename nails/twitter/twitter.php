@@ -108,7 +108,7 @@ class Twitter implements Nails_Interface {
 	private function addTweet($aRecord) {
 		$cTweet			= $aRecord['tweet'];
 		$iReTweet		= $aRecord['reTweet'];
-		$cScreeName		= $aRecord['screenName'];
+		$cScreenName	= $aRecord['screenName'];
 		$iTweetID		= $aRecord['id'];
 
 		if ($this->iUserID) {
