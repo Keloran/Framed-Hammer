@@ -60,7 +60,7 @@ class Twitter implements Nails_Interface {
 	 * @param mixed $aRecord
 	 * @return null
 	 */
-	public function save($aRecord) {
+	private function save($aRecord) {
 		$cScreenName	= $aRecord['username'];
 		$iState			= $aRecord['state'];
 		$cToken			= $aRecord['token'];
@@ -84,21 +84,8 @@ class Twitter implements Nails_Interface {
 	 * @param array $aRecord
 	 * @return
 	 */
-	public function update($aRecord) {
-		$cTweet			= $aRecord['tweet'];
-		$iReTweet		= $aRecord['reTweet'];
-		$cScreeName		= $aRecord['screenName'];
-		$iTweetID		= $aRecord['tweetID'];
-		$aUpdate		= false;
-
+	private function update($aRecord) {
 		if ($this->iUserID) {
-			$aUpdate[]	= $cTweet;
-			$aUpdate[]	= $this->iUserID;
-			$aUpdate[]	= $iTweetID;
-			$aUpdate[]	= $iReTweet;
-			$aUpdate[]	= $cScreenName;
-			$this->oDB->write("INSERT INTO twitter_tweets (cTweet, iUserID, iTweetID, iReTweet, cScreeName) VALUES (?, ?, ?, ?, ?)", $aUpdate);
-
 			$aUpdate	= false;
 			$aUpdate[]	= $aRecord['followers'];
 			$aUpdate[]	= $aRecord['following'];
@@ -113,12 +100,34 @@ class Twitter implements Nails_Interface {
 	}
 
 	/**
+	 * Twitter::addTweet()
+	 *
+	 * @param array $aRecord
+	 * @return null
+	 */
+	private function addTweet($aRecord) {
+		$cTweet			= $aRecord['tweet'];
+		$iReTweet		= $aRecord['reTweet'];
+		$cScreeName		= $aRecord['screenName'];
+		$iTweetID		= $aRecord['id'];
+
+		if ($this->iUserID) {
+			$aUpdate[]	= $cTweet;
+			$aUpdate[]	= $this->iUserID;
+			$aUpdate[]	= $iTweetID;
+			$aUpdate[]	= $iReTweet;
+			$aUpdate[]	= $cScreenName;
+			$this->oDB->write("INSERT INTO twitter_tweets (cTweet, iUserID, iTweetID, iReTweet, cScreeName) VALUES (?, ?, ?, ?, ?)", $aUpdate);
+		}
+	}
+
+	/**
 	 * Twitter::load()
 	 *
 	 * @param bool $bAll
 	 * @return
 	 */
-	public function load($bAll = false) {
+	private function load($bAll = false) {
 		$aReturn	= false;
 
 		if ($this->iUserID) {
@@ -139,7 +148,7 @@ class Twitter implements Nails_Interface {
 	 *
 	 * @return null
 	 */
-	public function touch() {
+	private function touch() {
 		if ($this->iUserID) {
 			$this->oDB->write("UPDATE twitter SET mtime = CURRENT_TIMESTAMP WHERE iUserID = ? LIMIT 1", $this->iUserID);
 		}
@@ -182,42 +191,107 @@ class Twitter implements Nails_Interface {
 		$this->oAuth->fetch("https://api.twitter.com/1/account/verify_credentials.json");
 		$oJSON	= json_decode($this->oAuth->getLastResponse());
 
-		printRead($oJSON);die();
-
-		//add the elements to the insert array
-		$aNewDetails['screenName']	= (string)$oJSON->user->screen_name;
-		$aNewDetails['description']	= (string)$oJSON->user->description;
-		$aNewDetails['location']	= (string)$oJSON->user->location;
-		$aNewDetails['followers']	= (int)$oJSON->user->followers_count;
-		$aNewDetails['following']	= (int)$oJSON->user->friends_count;
-		$aNewDetails['image']		= (string)$oJSON->user->profile_image_url_https;
-		$aNewDetails['tweet']		= (string)$oJSON->status->text;
-
-		//is it retweet, in which case i want the retweet info not the default info
-		$iReTweet					= 0;
-		$aNewDetails['reTweet']		= $iReTweet	= (int)$oJSON->retweeted;
-		if ($iReTweet) {
-			$aNewDetails['tweet']		= (string)$oJSON->retweeted_status->text;
-			$aNewDetails['screenName']	= (string)$oJSON->retweeted_status->screen_name;
-		}
-
+		$aNewDetails['description']	= (string)$oJSON->description;
+		$aNewDetails['following']	= (int)$oJSON->friends_count;
+		$aNewDetails['followers']	= (int)$oJSON->followers_count;
+		$aNewDetails['image']		= (string)$oJSON->profile_image_url_https;
+		$aNewDetails['location']	= (string)$oJSON->location;
 		$this->update($aNewDetails);
 	}
 
+	private function getLatest() {
+		$aReturn	= false;
+		$j			= 0;
+
+		if ($this->iUserID) {
+			$aDetails	= $this->load();
+
+			$this->oAuth->setToken($aDetails['token'], $aDetails['secret']);
+			$this->oAuth->fetch("https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&count=5&screen_name=" . $aDetails['username']);
+			$oJSON	= json_decode($this->oAuth->getLastResponse());
+
+			//go through the tweets and get only info we want
+			for ($i = 0; $i < count($oJSON); $i++) {
+				$aReturn[$j]['tweet']	= (string)$oJSON[$i]->text;
+
+				$iTweet	= (int)$oJSON[$i]->id;
+				if (!$iTweet) { $iTweet = (double)$oJSON[$i]->id; }
+				$aReturn[$j]['id']		= $iTweet;
+
+				$aReturn[$j]['reTweet']	= (int)$oJSON[$i]->retweet_count;
+
+				//is it a retweet or normal
+				if ($oJSON[$i]->retweeted_status) {
+					$aReturn[$j]['screenName']	= (string)$oJSON[$i]->retweeted_status->user->screen_name;
+					$aReturn[$j]['tweet']		= (string)$oJSON[$i]->retweeted_status->text;
+				} else {
+					$aReturn[$j]['screenName']	= (string)$oJSON[$i]->user->screen_name;
+				}
+
+				$j++;
+			}
+		}
+
+		return $aReturn;
+	}
+
+	/**
+	 * Twitter::getLatestTweets()
+	 *
+	 * @return array
+	 */
 	public function getLatestTweets() {
-		$iMinus	= 36000;
+		$i			= 0;
+		$j			= 0;
+		$aReturn	= false;
+		$aTweets	= false;
+		$aTweetIDs	= false;
 
-		$this->oDB->read("SELECT cTweet, ");
+		//see if we need to pull new data
+		$iMinus		= 36000;
+		$iStatus	= 0;
+		$this->oDB->read("SELECT mtime FROM twitter WHERE iUserID = ? LIMIT 1", $this->iUserID);
+		if ($this->oDB->nextRecord()) { $iStatus = $this->oDB->f('mtime'); }
 
+		//get teh latest 5 tweetids
+		$this->oDB->read("SELECT iTweetID FROM twitter_tweet WHERE iUserID = ? LIMIT 5", $this->iUserID);
+		while ($this->oDB->nextRecord()) { $aTweetIDs[]	= $this->oDB->f('iTweetID'); }
 
-		$aDetails	= $this->load();
+		//do we need todo an update
+		if ($iStatus >= (time() - $iMinus)) {
+			$this->getDetails();
+			$aLatest	= $this->getLatest();
 
-		$this->oAuth->setToken($aDetails['token'], $aDetails['secret']);
-		$this->oAuth->fetch("https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&count=5&screen_name=" . $aDetails['username']);
-		$oJSON	= json_decode($this->oAuth->getLastResponse());
+			//add an new tweets
+			for ($i = 0; $i < count($aLatest); $i++) {
+				$iTweet	= $aLatest[$i]['id'];
+				if (in_array($iTweet, $aTweetIDs)) {
+					continue;
+				} else {
+					$this->addTweet($aLatest[$i]);
+				}
+			}
+		}
 
+		//get the latest 5 tweets from table
+		$this->oDB->read("
+			SELECT cTweet, iFollowers, iFollowing, cImage, cScreenName, iReTweet, iTweetID
+			FROM twitter_tweet
+			JOIN twitter_details ON (twitter_tweet.iUserID = twitter_details.iUserID
+			WHERE twitter_tweet.iUserID = ?
+			ORDER BY twitter_details.iTweetID
+			LIMIT 5", $this->iUserID);
+		while ($this->oDB->nextRecord()) {
+			$aTweets[$j]['tweet']		= $this->oDB->f('cTweet');
+			$aTweets[$j]['id']			= $this->oDB->f('iTweetID');
+			$aTweets[$j]['followers']	= $this->oDB->f('iFollowers');
+			$aTweets[$j]['following']	= $this->oDB->f('iFollowing');
+			$aTweets[$j]['image']		= $this->oDB->f('cImage');
+			$aTweets[$j]['name']		= $this->oDB->f('cScreenName');
+			$aTweets[$j]['retweets']	= $this->oDB->f('iReTweet');
+			$j++;
+		}
 
-
-		printRead($oJSON);die();
+		return $aTweets;
 	}
 }

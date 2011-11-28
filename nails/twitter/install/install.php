@@ -35,9 +35,12 @@ class Twitter_Install {
 	 * @return null
 	 */
 	public function upgrade() {
-		if ($this->oNails->checkVersion("twitter", "1.1") == false) {
+		if ($this->oNails->checkVersion("twitter", "1.2") == false) {
 			//1.1
 			$this->ocelot();
+
+			//1.2
+			$this->catapiller();
 		}
 	}
 
@@ -91,5 +94,17 @@ class Twitter_Install {
 
 		$cSQL	= "ALTER TABLE twitter DROP COLUMN description,  DROP COLUMN status, DROP COLUMN followers, DROP COLUMN location";
 		$this->oNails->updateVersion("twitter", "1.1", $cSQL, "Make details, and drop old columns");
+	}
+
+	/**
+	 * Twitter_Install::catapiller()
+	 *
+	 * @return
+	 */
+	private function catapiller() {
+		$this->oDB->write("ALTER TABLE twitter_detils ADD INDEX (`iUserID`)");
+		$this->oDB->write("ALTER TABLE twitter_tweets ADD INDEX (`iUserID`), ADD INDEX (`iTweetID`)");
+
+		$this->oNails->updateVersion("twitter", "1.2",  false, "Add UserID indexs");
 	}
 }
