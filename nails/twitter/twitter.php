@@ -265,7 +265,7 @@ class Twitter implements Nails_Interface {
 		while ($this->oDB->nextRecord()) { $aTweetIDs[]	= $this->oDB->f('iTweetID'); }
 
 		//do we need todo an update
-		if ($mTime > $iStatus) {
+		if (($mTime > $iStatus) || !(count($aTweetIDs)) {
 			$this->getDetails();
 			$aLatest	= $this->getLatest();
 
