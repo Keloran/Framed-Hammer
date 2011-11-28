@@ -279,7 +279,14 @@ class Twitter implements Nails_Interface {
 				}
 			}
 		} else {
-			die("erm");
+			printRead(array(
+				"time"	=> time(),
+				"minus"	=> $iMinus,
+				"mtime"	=> (time() - $iMinus),
+				"status"	=> $iStatus,
+				"check"		=> ($iStatus >= (time() - $iMinus)),
+			));
+			die();
 		}
 
 		//get the latest 5 tweets from table
