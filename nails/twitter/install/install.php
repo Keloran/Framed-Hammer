@@ -35,12 +35,15 @@ class Twitter_Install {
 	 * @return null
 	 */
 	public function upgrade() {
-		if ($this->oNails->checkVersion("twitter", "1.2") == false) {
+		if ($this->oNails->checkVersion("twitter", "1.3") == false) {
 			//1.1
 			$this->ocelot();
 
 			//1.2
 			$this->catapiller();
+
+			//1.3
+			$this->revolver();
 		}
 	}
 
@@ -108,7 +111,13 @@ class Twitter_Install {
 		$this->oNails->updateVersion("twitter", "1.2",  false, "Add UserID indexs");
 	}
 
+	/**
+	 * Twitter_Install::revolver()
+	 *
+	 * @return
+	 */
 	private function revolver() {
-
+		$cSQL	= "ALTER TABLE twitter_tweets ADD COLUMN `cImage` TEXT DEFAULT NULL";
+		$this->oNails->updateVersion("twitter", "1.3", $cSQL, "Add user image to the tweet for when retweet");
 	}
 }

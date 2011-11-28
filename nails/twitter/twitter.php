@@ -110,6 +110,7 @@ class Twitter implements Nails_Interface {
 		$iReTweet		= $aRecord['reTweet'];
 		$cScreenName	= $aRecord['screenName'];
 		$iTweetID		= $aRecord['id'];
+		$cImage			= $aRecord['image'];
 
 		if ($this->iUserID) {
 			$aUpdate[]	= $cTweet;
@@ -117,7 +118,8 @@ class Twitter implements Nails_Interface {
 			$aUpdate[]	= $iTweetID;
 			$aUpdate[]	= $iReTweet;
 			$aUpdate[]	= $cScreenName;
-			$this->oDB->write("INSERT INTO twitter_tweets (cTweet, iUserID, iTweetID, iReTweet, cScreenName) VALUES (?, ?, ?, ?, ?)", $aUpdate);
+			$aUpdate[]	= $cImage;
+			$this->oDB->write("INSERT INTO twitter_tweets (cTweet, iUserID, iTweetID, iReTweet, cScreenName, cImage) VALUES (?, ?, ?, ?, ?, ?)", $aUpdate);
 		}
 	}
 
@@ -223,13 +225,15 @@ class Twitter implements Nails_Interface {
 				if (!$iTweet) { $iTweet = (double)$oJSON[$i]->id; }
 				$aReturn[$j]['id']		= $iTweet;
 
-				$aReturn[$j]['reTweet']	= (int)$oJSON[$i]->retweet_count;
+				$aReturn[$j]['reTweet']		= (int)$oJSON[$i]->retweet_count;
 				$aReturn[$j]['screenName']	= (string)$oJSON[$i]->user->screen_name;
+				$aReturn[$j]['image']		= (string)$oJSON[$i]->user->profile_image_url_https;
 
 				//is it a retweet or normal
 				if (isset($oJSON[$i]->retweeted_status)) {
 					$aReturn[$j]['screenName']	= (string)$oJSON[$i]->retweeted_status->user->screen_name;
 					$aReturn[$j]['tweet']		= (string)$oJSON[$i]->retweeted_status->text;
+					$aReturn[$j]['image']		= (string)$oJSON[$i]->retweeted_status->profile_image_url_https;
 				}
 
 				$j++;
@@ -239,79 +243,92 @@ class Twitter implements Nails_Interface {
 		return $aReturn;
 	}
 
+	private function tweetUpdate() {
+		if ($this->iUserID) {
+			$i			= 0;
+			$aReturn	= false;
+			$aTweetIDs	= array();
+
+			//see if we need to pull new data
+			$iMinus		= 36000;
+			$iStatus	= 0;
+			$iTime		= time();
+			$mTime		= ($iTime - $iMinus);
+			$this->oDB->read("SELECT mtime FROM twitter WHERE iUserID = ? LIMIT 1", $this->iUserID);
+			if ($this->oDB->nextRecord()) { $iStatus = strtotime($this->oDB->f('mtime')); }
+
+			//get teh latest 5 tweetids
+			$this->oDB->read("SELECT iTweetID FROM twitter_tweets WHERE iUserID = ? LIMIT 5", $this->iUserID);
+			while ($this->oDB->nextRecord()) { $aTweetIDs[]	= $this->oDB->f('iTweetID'); }
+
+			//do we update
+			$bUpdate	= false;
+			if ($mTime > $iStatus) { $bUpdate = true; }
+			if (count($aTweetIDs) == 0) { $bUpdate = true; }
+
+			//do we need todo an update
+			if ($bUpdate) {
+				$this->getDetails();
+				$aLatest	= $this->getLatest();
+
+				//add an new tweets
+				for ($i = 0; $i < count($aLatest); $i++) {
+					$iTweet	= $aLatest[$i]['id'];
+					if (in_array($iTweet, $aTweetIDs)) {
+						continue;
+					} else {
+						$this->addTweet($aLatest[$i]);
+					}
+				}
+			}
+		}
+	}
+
 	/**
 	 * Twitter::getLatestTweets()
 	 *
 	 * @return array
 	 */
 	public function getLatestTweets() {
-		$i			= 0;
 		$j			= 0;
-		$aReturn	= false;
 		$aTweets	= false;
-		$aTweetIDs	= array();
 
-		//see if we need to pull new data
-		$iMinus		= 36000;
-		$iStatus	= 0;
-		$iTime		= time();
-		$mTime		= ($iTime - $iMinus);
-		$this->oDB->read("SELECT mtime FROM twitter WHERE iUserID = ? LIMIT 1", $this->iUserID);
-		if ($this->oDB->nextRecord()) { $iStatus = strtotime($this->oDB->f('mtime')); }
+		if ($this->iUserID) {
+			$this->tweetUpdate();
 
-		//get teh latest 5 tweetids
-		$this->oDB->read("SELECT iTweetID FROM twitter_tweets WHERE iUserID = ? LIMIT 5", $this->iUserID);
-		while ($this->oDB->nextRecord()) { $aTweetIDs[]	= $this->oDB->f('iTweetID'); }
-
-		//do we update
-		$bUpdate	= false;
-		if ($mTime > $iStatus) { $bUpdate = true; }
-		if (count($aTweetIDs) == 0) { $bUpdate = true; }
-
-		//do we need todo an update
-		if ($bUpdate) {
-			$this->getDetails();
-			$aLatest	= $this->getLatest();
-
-			//add an new tweets
-			for ($i = 0; $i < count($aLatest); $i++) {
-				$iTweet	= $aLatest[$i]['id'];
-				if (in_array($iTweet, $aTweetIDs)) {
-					continue;
-				} else {
-					$this->addTweet($aLatest[$i]);
-				}
+			//get the latest 5 tweets from table
+			$this->oDB->read("
+				SELECT
+					tt.cTweet,
+					tt.cScreenName,
+					tt.iReTweet,
+					tt.iTweetID,
+					tt.cImage AS tweetImage,
+					td.iFollowers,
+					td.iFollowing,
+					td.cImage AS myImage
+				FROM twitter_tweets AS tt
+				JOIN twitter_details AS td ON (tt.iUserID = td.iUserID)
+				WHERE tt.iUserID = ?
+				ORDER BY tt.iTweetID DESC
+				LIMIT 5", $this->iUserID);
+			while ($this->oDB->nextRecord()) {
+				$aTweets[$j]['tweet']		= $this->oDB->f('cTweet');
+				$aTweets[$j]['id']			= $this->oDB->f('iTweetID');
+				$aTweets[$j]['followers']	= $this->oDB->f('iFollowers');
+				$aTweets[$j]['following']	= $this->oDB->f('iFollowing');
+				$aTweets[$j]['myImage']		= $this->oDB->f('myImage');
+				$aTweets[$j]['tweetImage']	= $this->oDB->f('tweetImage');
+				$aTweets[$j]['name']		= $this->oDB->f('cScreenName');
+				$aTweets[$j]['retweets']	= $this->oDB->f('iReTweet');
+				$j++;
 			}
 		}
 
-		//get the latest 5 tweets from table
-		$this->oDB->read("
-			SELECT
-				tt.cTweet,
-				tt.cScreenName,
-				tt.iReTweet,
-				tt.iTweetID,
-				td.iFollowers,
-				td.iFollowing,
-				td.cImage
-			FROM twitter_tweets AS tt
-			JOIN twitter_details AS td ON (tt.iUserID = td.iUserID)
-			WHERE tt.iUserID = ?
-			ORDER BY tt.iTweetID DESC
-			LIMIT 5", $this->iUserID);
-		while ($this->oDB->nextRecord()) {
-			$aTweets[$j]['tweet']		= $this->oDB->f('cTweet');
-			$aTweets[$j]['id']			= $this->oDB->f('iTweetID');
-			$aTweets[$j]['followers']	= $this->oDB->f('iFollowers');
-			$aTweets[$j]['following']	= $this->oDB->f('iFollowing');
-			$aTweets[$j]['image']		= $this->oDB->f('cImage');
-			$aTweets[$j]['name']		= $this->oDB->f('cScreenName');
-			$aTweets[$j]['retweets']	= $this->oDB->f('iReTweet');
-			$j++;
-		}
-
-		printRead($aTweets);die();
-
 		return $aTweets;
+	}
+
+	public function createTweet($cTweet) {
+
 	}
 }
