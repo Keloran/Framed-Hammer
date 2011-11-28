@@ -287,11 +287,18 @@ class Twitter implements Nails_Interface {
 
 		//get the latest 5 tweets from table
 		$this->oDB->read("
-			SELECT cTweet, iFollowers, iFollowing, cImage, cScreenName, iReTweet, iTweetID
-			FROM twitter_tweets
-			JOIN twitter_details ON (twitter_tweets.iUserID = twitter_details.iUserID)
-			WHERE twitter_tweets.iUserID = ?
-			ORDER BY twitter_details.iTweetID
+			SELECT
+				tt.cTweet,
+				tt.cScreenName,
+				tt.iReTweet,
+				tt.iTweetID,
+				td.iFollowers,
+				td.iFollowing,
+				td.cImage
+			FROM twitter_tweets AS tt
+			JOIN twitter_details AS td ON (tt.iUserID = td.iUserID)
+			WHERE tt.iUserID = ?
+			ORDER BY td.iTweetID
 			LIMIT 5", $this->iUserID);
 		while ($this->oDB->nextRecord()) {
 			$aTweets[$j]['tweet']		= $this->oDB->f('cTweet');
