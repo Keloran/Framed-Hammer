@@ -102,7 +102,7 @@ class Twitter_Install {
 	 * @return
 	 */
 	private function catapiller() {
-		$this->oDB->write("ALTER TABLE twitter_detils ADD INDEX (`iUserID`)");
+		$this->oDB->write("ALTER TABLE twitter_details ADD INDEX (`iUserID`)");
 		$this->oDB->write("ALTER TABLE twitter_tweets ADD INDEX (`iUserID`), ADD INDEX (`iTweetID`)");
 
 		$this->oNails->updateVersion("twitter", "1.2",  false, "Add UserID indexs");
