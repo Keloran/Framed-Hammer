@@ -292,6 +292,8 @@ class Twitter implements Nails_Interface {
 			$j++;
 		}
 
+		printRead($aTweets);die();
+
 		return $aTweets;
 	}
 }
