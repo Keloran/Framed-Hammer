@@ -207,7 +207,7 @@ class Twitter implements Nails_Interface {
 		} else if ($aDetails['state'] == 1) { //the call back from twitter
             $aGet           = $this->oNails->realGet;
 
-            $this->oAuth->setToken($aGet['oauth_token'], $aGet['oauth_secret']);
+            $this->oAuth->setToken($aGet['oauth_token'], $aDetails['secret']);
             $aInfo          = $this->oAuth->getAccessToken("https://twitter.com/oauth/access_token");
 
         
