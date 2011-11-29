@@ -538,10 +538,12 @@ class Hammer {
 	 * Hammer::sendLocation()
 	 *
 	 * @desc Will send the user to a specified location e.g. /home
-	 * @param string $cLocation
+	 * @param string $cLocation Where to send to
+     * @param int $iTime how long is the refresh time, e.g. for forums
+     * @param bool $bForced do we want a / on the end or not, on means force the one i say
 	 * @return null
 	 */
-	public static function sendLocation($cLocation = false, $iTime = null) {
+	public static function sendLocation($cLocation = false, $iTime = null, $bForced = false) {
 		if ($iTime) {
 			$cLoc  = "refresh: " . $iTime;
 			$cLoc .= "; url=";
@@ -594,7 +596,9 @@ class Hammer {
 				$iPos		= strrpos($cLocation, "/");
 
 				//the last slash is missing
-				if ($iLength !== $iPos) { $cLocation .= "/"; }
+                if (!$bForced) {
+    				if ($iLength !== $iPos) { $cLocation .= "/"; }
+                }
 
 				#header("HTTP/1.1 303 See Other");
 				http_response_code(303);
