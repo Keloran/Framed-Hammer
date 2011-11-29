@@ -205,7 +205,10 @@ class Twitter implements Nails_Interface {
 
 			$this->oNails->sendLocation("https://api.twitter.com/oauth/authorize?oauth_token=" . $aRequest['oauth_token'], false, true);
 		} else if ($aDetails['state'] == 1) { //the call back from twitter
-			printRead($this->oNails);
+            $aGet           = $this->oNails->realGet;
+            $this->oAuth->setToken($aGet['oauth_token'], $aGet['oauth_secret']);
+            $aInfo          = $this->oAuth->getAccessToken("https://twitter.com/oauth/access_token");
+            printRead($aInfo);die();
 		}
 
 		//stage 2 authorized
