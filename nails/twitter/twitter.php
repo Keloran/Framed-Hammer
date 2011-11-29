@@ -216,7 +216,7 @@ class Twitter implements Nails_Interface {
             $aNewDetails['secret']      = $aInfo['oauth_token_secret'];
             $this->save($aNewDetails);
             
-            $this->sendLocation($this->cCallback);
+            $this->oNails->sendLocation($this->cCallback);
 		}
 
 		//stage 2 authorized
