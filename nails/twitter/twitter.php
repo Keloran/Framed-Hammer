@@ -373,7 +373,9 @@ class Twitter implements Nails_Interface {
             $this->oAuth->setToken($aDetails['token'], $aDetails['secret']);
 
         	$aTweet	= array(
-        		"status"	=> $cTweet
+        		"status"	        => $cTweet,
+                "trim_use"          => true,
+                "include_entities"  => true
         	);
 
         	$this->oAuth->fetch("https://api.twitter.com/1/statuses/update.json", $aTweet, OAUTH_HTTP_METHOD_POST, $aAgent);
