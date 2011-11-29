@@ -14,6 +14,7 @@ class Twitter implements Nails_Interface {
 
 	private $cKey		= "SmdcqSqTA4gRU8heJftdg";
 	private $cSecret	= "GI4lY0NH9VXj86toje2FwIlfEEyeS4vryXECQNLaI";
+    private $cCallback  = false;
 
 	private static $oTwitter;
 
@@ -39,6 +40,13 @@ class Twitter implements Nails_Interface {
 		$oAuth->enableDebug();
 
 		$this->oAuth	= $oAuth;
+
+        $cCallback      = $this->oNails->getConfig("callback", "twitter")['callback'];
+        if ($cCallback) {
+            $this->cCallback    = $cCallback;
+        } else {
+            $this->cCallback    = $_SERVER['SERVER_NAME'];
+        }
 	}
 
 	/**
@@ -187,7 +195,7 @@ class Twitter implements Nails_Interface {
 	public function getDetails() {
 		$aDetails	= $this->load();
 		if ($aDetails['state'] == 0) { //need to auth
-			$aRequest	= $this->oAuth->getRequestToken("https://api.twitter.com/oauth/request_token");
+			$aRequest	= $this->oAuth->getRequestToken("https://api.twitter.com/oauth/request_token", $this->cCallback);
 
 			#$aNewDetails['username']	= $aRequest['username'];
 			$aNewDetails['state']		= 1;
