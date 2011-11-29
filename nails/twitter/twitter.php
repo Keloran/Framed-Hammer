@@ -210,9 +210,11 @@ class Twitter implements Nails_Interface {
             $this->oAuth->setToken($aGet['oauth_token'], $aDetails['secret']);
             $aInfo          = $this->oAuth->getAccessToken("https://twitter.com/oauth/access_token");
 
-        
-            printRead($aInfo);
-            die();
+            $aNewDetails['username']    = $aInfo['screen_name'];
+            $aNewDetails['state']       = 2;
+            $aNewDetails['token']       = $aInfo['oauth_token'];
+            $aNewDetails['secret']      = $aInfo['oauth_token_secret'];
+            $this->save($aNewDetails);
 		}
 
 		//stage 2 authorized
