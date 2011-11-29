@@ -45,7 +45,7 @@ class Twitter implements Nails_Interface {
         if ($cCallback) {
             $this->cCallback    = $cCallback;
         } else {
-            $this->cCallback    = $_SERVER['SERVER_NAME'];
+            $this->cCallback    = "http://" . $_SERVER['SERVER_NAME'];
         }
 	}
 
