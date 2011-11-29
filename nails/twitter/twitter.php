@@ -215,7 +215,7 @@ class Twitter implements Nails_Interface {
             $aNewDetails['token']       = $aInfo['oauth_token'];
             $aNewDetails['secret']      = $aInfo['oauth_token_secret'];
             $this->save($aNewDetails);
-            
+
             $this->oNails->sendLocation($this->cCallback);
 		}
 
@@ -274,6 +274,11 @@ class Twitter implements Nails_Interface {
 		return $aReturn;
 	}
 
+	/**
+	 * Twitter::tweetUpdate()
+	 *
+	 * @return null
+	 */
 	private function tweetUpdate() {
 		if ($this->iUserID) {
 			$i			= 0;
@@ -360,6 +365,21 @@ class Twitter implements Nails_Interface {
 	}
 
 	public function createTweet($cTweet) {
+		$aAgent	= array("User-Agent" 	=> "Tweet Hammer");
 
+        if ($this->iUserID) {
+            $aDetails   = $this->load();
+
+            $this->oAuth->setToken($aDetails['token'], $aDetails['secret']);
+
+        	$aTweet	= array(
+        		"status"	=> $cTweet
+        	);
+
+        	$this->oAuth->fetch("https://api.twitter.com/1/statuses/update.json", $aTweet, OAUTH_HTTP_METHOD_POST, $aAgent);
+        	$oJSON	= json_decode($this->oAuth->getLastResponse());
+        	printRead($oJSON);
+        	die();
+        }
 	}
 }
