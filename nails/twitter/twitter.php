@@ -188,7 +188,6 @@ class Twitter implements Nails_Interface {
 		$aDetails	= $this->load();
 		if ($aDetails['state'] == 0) { //need to auth
 			$aRequest	= $this->oAuth->getRequestToken("https://api.twitter.com/oauth/request_token");
-            printRead($aRequest);die();
 
 			#$aNewDetails['username']	= $aRequest['username'];
 			$aNewDetails['state']		= 1;
