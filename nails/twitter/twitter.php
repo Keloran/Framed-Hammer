@@ -378,8 +378,20 @@ class Twitter implements Nails_Interface {
 
         	$this->oAuth->fetch("https://api.twitter.com/1/statuses/update.json", $aTweet, OAUTH_HTTP_METHOD_POST, $aAgent);
         	$oJSON	= json_decode($this->oAuth->getLastResponse());
-        	printRead($oJSON);
-        	die();
+
+        	//now save the tweet so we dont need to pull it
+        	$aRecord['tweet']		= (string)$oJSON->text;
+        	$aRecord['reTweet']		= 0;
+        	$aRecord['screenName']	= (string)$oJSON->user->screen_name;
+        	$aRecord['image']		= (string)$oJSON->user->profile_image_url_https;
+
+        	$iTweet	= (int)$oJSON->id;
+        	if ($iTweet) {
+        		$aRecord['id']			= (int)$oJSON->id;
+        	} else {
+        		$aRecord['id']			= (double)$oJSON->id;
+        	}
+        	$this->addTweet($aRecord);
         }
 	}
 }
