@@ -15,7 +15,7 @@ class Twitter implements Nails_Interface {
 	private $cKey		= "SmdcqSqTA4gRU8heJftdg";
 	private $cSecret	= "GI4lY0NH9VXj86toje2FwIlfEEyeS4vryXECQNLaI";
     private $cCallback  = false;
-    private $aAgent     = false;
+    private $aAgent     = array("User-Agent" => "Tweet Hammer");
 
 	private static $oTwitter;
 
@@ -48,9 +48,6 @@ class Twitter implements Nails_Interface {
         } else {
             $this->cCallback    = "http://" . $_SERVER['SERVER_NAME'];
         }
-
-        //set the agent
-        $this->aAgent   = array("User-Agent"    => "Tweet Hammer");
 	}
 
 	/**
@@ -368,6 +365,12 @@ class Twitter implements Nails_Interface {
 		return $aTweets;
 	}
 
+	/**
+	 * Twitter::createTweet()
+	 *
+	 * @param string $cTweet
+	 * @return bool
+	 */
 	public function createTweet($cTweet) {
         $bReturn    = false;
 
@@ -407,6 +410,12 @@ class Twitter implements Nails_Interface {
         return $bReturn;
 	}
 
+    /**
+     * Twitter::retweet()
+     *
+     * @param int $iTweet
+     * @return bool
+     */
     public function retweet($iTweet) {
         $bReturn    = false;
 
@@ -424,7 +433,7 @@ class Twitter implements Nails_Interface {
                 $aRecord['reTweet']     = (int)$oJSON->retweet_count;
                 $aRecord['screenName']  = (string)$oJSON->retweeted_status->user->screen_name;
                 $aRecord['image']       = (string)$oJSON->retweeted_status->user->profile_image_url_https;
-            
+
                 $iTweet = (int)$oJSON->id;
                 if ($iTweet) {
                     $aRecord['id']  = (int)$oJSON->id;
@@ -440,6 +449,12 @@ class Twitter implements Nails_Interface {
         return $bReturn;
     }
 
+    /**
+     * Twitter::getTimeline()
+     *
+     * @param integer $iCount
+     * @return array
+     */
     public function getTimeline($iCount = 20) {
         $aReturn    = false;
         $j          = 0;
