@@ -470,7 +470,31 @@ class Twitter implements Nails_Interface {
             //is there actually a response
             if ($oJSON) {
                 for ($i = 0; $i < $iCount; $i++) {
-                    $aReturn[$j]['tweet']       = (string)$oJSON[$i]->text;
+                    //get the text
+                    $cText  = (string)$oJSON[$i]->text;
+                    if (isset($oJSON[$i]->retweeted_status)) {
+                        $cText = (string)$oJSON[$i]->retweeted_status->text;
+                    }
+
+                    //are there any urls if so replace
+                    if (isset($oJSON[$i]->entities)) {
+                        if (isset($oJSON[$i]->entities->urls)) {
+                            for ($z = 0; $z < count($oJSON[$i]->entities->urls); $z++) {
+                                $cURL   = (string)$oJSON[$i]->entities->urls[$z]->expanded_url;
+                                $iStart = (int)$oJSON[$i]->entities->urls[$z]->indices[0];
+                                $iEnd   = (int)$oJSON[$i]->entities->urls[$z]->indices[1];
+                                $iLen   = $iEnd - $iStart;
+
+                                $cRest   = substr($cText, $iStart, $iLen);
+                                $cRest  .= "<a href=\"" . $cURL . "\">" . $cURL . "</a>";
+                                $cRest  .= substr($cText, $iEnd);
+                                $cText   = $cRest;
+                            }
+                        }
+                    }
+
+
+                    $aReturn[$j]['tweet']       = $cText;
                     $aReturn[$j]['reTweet']     = (int)$oJSON[$i]->retweet_count;
                     $aReturn[$j]['screenName']  = (string)$oJSON[$i]->user->screen_name;
                     $aReturn[$j]['image']       = (string)$oJSON[$i]->user->profile_image_url_https;
