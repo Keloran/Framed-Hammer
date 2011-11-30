@@ -505,8 +505,6 @@ class Twitter implements Nails_Interface {
 			}
 		}
 
-			if ($oJSON[$i]->id == 141906737392394240) { printRead($oJSON[$i]);die(); }
-
 
                     $aReturn[$j]['tweet']       = $cText;
                     $aReturn[$j]['reTweet']     = (int)$oJSON[$i]->retweet_count;
