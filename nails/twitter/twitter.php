@@ -15,6 +15,7 @@ class Twitter implements Nails_Interface {
 	private $cKey		= "SmdcqSqTA4gRU8heJftdg";
 	private $cSecret	= "GI4lY0NH9VXj86toje2FwIlfEEyeS4vryXECQNLaI";
     private $cCallback  = false;
+    private $aAgent     = false;
 
 	private static $oTwitter;
 
@@ -47,6 +48,9 @@ class Twitter implements Nails_Interface {
         } else {
             $this->cCallback    = "http://" . $_SERVER['SERVER_NAME'];
         }
+
+        //set the agent
+        $this->aAgent   = array("User-Agent"    => "Tweet Hammer");
 	}
 
 	/**
@@ -365,7 +369,7 @@ class Twitter implements Nails_Interface {
 	}
 
 	public function createTweet($cTweet) {
-		$aAgent	= array("User-Agent" 	=> "Tweet Hammer");
+        $bReturn    = false;
 
         if ($this->iUserID) {
             $aDetails   = $this->load();
@@ -378,22 +382,89 @@ class Twitter implements Nails_Interface {
                 "include_entities"  => true
         	);
 
-        	$this->oAuth->fetch("https://api.twitter.com/1/statuses/update.json", $aTweet, OAUTH_HTTP_METHOD_POST, $aAgent);
+        	$this->oAuth->fetch("https://api.twitter.com/1/statuses/update.json", $aTweet, OAUTH_HTTP_METHOD_POST, $this->aAgent);
         	$oJSON	= json_decode($this->oAuth->getLastResponse());
 
-        	//now save the tweet so we dont need to pull it
-        	$aRecord['tweet']		= (string)$oJSON->text;
-        	$aRecord['reTweet']		= 0;
-        	$aRecord['screenName']	= (string)$oJSON->user->screen_name;
-        	$aRecord['image']		= (string)$oJSON->user->profile_image_url_https;
+            if ($oJSON) {
+            	//now save the tweet so we dont need to pull it
+            	$aRecord['tweet']		= (string)$oJSON->text;
+            	$aRecord['reTweet']		= 0;
+        	    $aRecord['screenName']	= (string)$oJSON->user->screen_name;
+            	$aRecord['image']		= (string)$oJSON->user->profile_image_url_https;
 
-        	$iTweet	= (int)$oJSON->id;
-        	if ($iTweet) {
-        		$aRecord['id']			= (int)$oJSON->id;
-        	} else {
-        		$aRecord['id']			= (double)$oJSON->id;
-        	}
-        	$this->addTweet($aRecord);
+            	$iTweet	= (int)$oJSON->id;
+            	if ($iTweet) {
+        	    	$aRecord['id']			= (int)$oJSON->id;
+            	} else {
+            		$aRecord['id']			= (double)$oJSON->id;
+            	}
+        	    $this->addTweet($aRecord);
+
+                $bReturn = true;
+            }
         }
+
+        return $bReturn;
 	}
+
+    public function retweet($iTweet) {
+        $bReturn    = false;
+
+        if ($this->iUserID) {
+            $aDetails   = $this->load();
+
+            $this->oAuth->setToken($aDetails['token'], $aDetails['secret']);
+
+            $this->oAuth->fetch("https://api.twitter.com/1/statuses/retweet/" . $iTweet . ".json", false, OAUTH_HTTP_METHOD_POST, $this->aAgent);
+            $oJSON  = json_decode($this->oAuth->getLastResponse());
+
+            if ($oJSON) {
+                //now save it
+                $aRecord['tweet']       = (string)$oJSON->retweeted_status->text;
+                $aRecord['reTweet']     = (int)$oJSON->retweet_count;
+                $aRecord['screenName']  = (string)$oJSON->retweeted_status->user->screen_name;
+                $aRecord['image']       = (string)$oJSON->retweeted_status->user->profile_image_url_https;
+            
+                $iTweet = (int)$oJSON->id;
+                if ($iTweet) {
+                    $aRecord['id']  = (int)$oJSON->id;
+                } else {
+                    $aRecord['id']  = (double)$oJSON->id;
+                }
+                $this->addTweet($aRecord);
+
+                $bReturn = true;
+            }
+        }
+
+        return $bReturn;
+    }
+
+    public function getTimeline($iCount = 20) {
+        $aReturn    = false;
+        $j          = 0;
+
+        if ($this->iUserID) {
+            $aDetails   = $this->load();
+
+            $this->oAuth->setToken($aDetails['token'], $aDetails['secret']);
+
+            $this->oAuth->fetch("https://api.twitter.com/1/status/home_timeline.json?include_entities=true&count=" . $iCount);
+            $oJSON  = json_decode($this->oAuth0>getLastResonse());
+
+            //is there actually a response
+            if ($oJSON) {
+                for ($i = 0; $i < $iCount; $i++) {
+                    $aReturn[$j]['tweet']       = (string)$oJSON[$i]->text;
+                    $aReturn[$j]['reTweet']     = (int)$oJSON[$i]->retweet_count;
+                    $aReturn[$j]['screenName']  = (string)$oJSON[$i]->user->screen_name;
+                    $aReturn[$j]['image']       = (string)$oJSON[$i]->user->profile_image_url_https;
+                    $aReturn[$j]['id']          = $oJSON[$i]->id;
+                    $j++;
+                }
+            }
+        }
+
+        return $aReturn;
+    }
 }
