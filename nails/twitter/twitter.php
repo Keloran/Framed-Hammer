@@ -466,6 +466,7 @@ class Twitter implements Nails_Interface {
 
             $this->oAuth->fetch("https://api.twitter.com/1/statuses/home_timeline.json?include_entities=true&include_rts=true&count=" . $iCount);
             $oJSON  = json_decode($this->oAuth->getLastResponse());
+printRead($oJSON);die();
 
             //is there actually a response
             if ($oJSON) {
@@ -475,6 +476,7 @@ class Twitter implements Nails_Interface {
                     $aReturn[$j]['screenName']  = (string)$oJSON[$i]->user->screen_name;
                     $aReturn[$j]['image']       = (string)$oJSON[$i]->user->profile_image_url_https;
                     $aReturn[$j]['id']          = $oJSON[$i]->id;
+		    $aReturn[$j]['dated']	= (string)$oJSON[$i]->created_at;
                     $j++;
                 }
             }
