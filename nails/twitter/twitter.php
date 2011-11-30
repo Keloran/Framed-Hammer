@@ -483,15 +483,29 @@ class Twitter implements Nails_Interface {
                                 $cURL   = (string)$oJSON[$i]->entities->urls[$z]->expanded_url;
                                 $iStart = (int)$oJSON[$i]->entities->urls[$z]->indices[0];
                                 $iEnd   = (int)$oJSON[$i]->entities->urls[$z]->indices[1];
-                                $iLen   = $iEnd - $iStart;
 
-                                $cRest   = substr($cText, $iStart, $iLen);
+                                $cRest   = substr($cText, 0, $iStart);
                                 $cRest  .= "<a href=\"" . $cURL . "\">" . $cURL . "</a>";
                                 $cRest  .= substr($cText, $iEnd);
                                 $cText   = $cRest;
                             }
                         }
-                    }
+                    } else if (isset($oJSON[$i]->retweeted_status->entities)) {
+			if (isset($oJSON[$i]->retweeted_status->entities->urls)) {
+				for ($z = 0; $z < count($oJSON[$i]->retweeted_status->entities->urls), $z++) {
+					$cURL	= (string)$oJSON[$i]->retweeted_status->entities->urls[$z]->expanded_url;
+					$iStart	= (int)$oJSON[$i]->retweeted_status->entities->urls[$z]->indices[0];
+					$iEnd	= (int)$oJSON[$i]->retweeted_status->entities->urls[$z]->indices[1];
+				
+					$cRest	 = substr($cText, 0, $iStart);
+					$cRest	.= "<a href=\"" . $cURL . "\">" . $cURL . "</a>";
+					$cRest	.= substr($cText, $iEnd);
+					$cText   = $cRest;
+				}
+			}
+		}
+
+			if ($oJSON[$i]->id == 141906737392394240) { printRead($oJSON[$i]);die(); }
 
 
                     $aReturn[$j]['tweet']       = $cText;
