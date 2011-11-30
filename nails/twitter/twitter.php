@@ -478,8 +478,7 @@ class Twitter implements Nails_Interface {
 
                     //are there any urls if so replace
                     if (isset($oJSON[$i]->entities)) {
-                        if (isset($oJSON[$i]->entities->urls)) {
-                            for ($z = 0; $z < count($oJSON[$i]->entities->urls); $z++) {
+                    	for ($z = 0; $z < count($oJSON[$i]->entities->urls); $z++) {
                                 $cURL   = (string)$oJSON[$i]->entities->urls[$z]->expanded_url;
                                 $iStart = (int)$oJSON[$i]->entities->urls[$z]->indices[0];
                                 $iEnd   = (int)$oJSON[$i]->entities->urls[$z]->indices[1];
@@ -488,20 +487,17 @@ class Twitter implements Nails_Interface {
                                 $cRest  .= "<a href=\"" . $cURL . "\">" . $cURL . "</a>";
                                 $cRest  .= substr($cText, $iEnd);
                                 $cText   = $cRest;
-                            }
                         }
                     } else if (isset($oJSON[$i]->retweeted_status->entities)) {
-			if (isset($oJSON[$i]->retweeted_status->entities->urls)) {
-				for ($z = 0; $z < count($oJSON[$i]->retweeted_status->entities->urls), $z++) {
-					$cURL	= (string)$oJSON[$i]->retweeted_status->entities->urls[$z]->expanded_url;
-					$iStart	= (int)$oJSON[$i]->retweeted_status->entities->urls[$z]->indices[0];
-					$iEnd	= (int)$oJSON[$i]->retweeted_status->entities->urls[$z]->indices[1];
+			for ($z = 0; $z < count($oJSON[$i]->retweeted_status->entities->urls); $z++) {
+				$cURL	= (string)$oJSON[$i]->retweeted_status->entities->urls[$z]->expanded_url;
+				$iStart	= (int)$oJSON[$i]->retweeted_status->entities->urls[$z]->indices[0];
+				$iEnd	= (int)$oJSON[$i]->retweeted_status->entities->urls[$z]->indices[1];
 				
-					$cRest	 = substr($cText, 0, $iStart);
-					$cRest	.= "<a href=\"" . $cURL . "\">" . $cURL . "</a>";
-					$cRest	.= substr($cText, $iEnd);
-					$cText   = $cRest;
-				}
+				$cRest	 = substr($cText, 0, $iStart);
+				$cRest	.= "<a href=\"" . $cURL . "\">" . $cURL . "</a>";
+				$cRest	.= substr($cText, $iEnd);
+				$cText   = $cRest;
 			}
 		}
 
