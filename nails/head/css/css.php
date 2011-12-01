@@ -9,6 +9,9 @@
  * @access public
  */
 class head_css {
+	//Traits
+	use Browser;
+
 	private $aData;
 	private $oNails;
 
