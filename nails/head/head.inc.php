@@ -36,6 +36,7 @@ class Head {
 	private $oDB		= false;
 	private $oNails		= false;
 	private $aData		= false;
+	private $oCSS;
 
     /**
      * Head::__construct()
@@ -45,7 +46,8 @@ class Head {
 		$oNails->getNails("Head_Install");
 
 		$this->oNails	= $oNails;
-		$this->oDB	= $this->oNails->oDB;
+		$this->oDB		= $this->oNails->oDB;
+		$this->oCSS		= $this->oNails->getNails("Head_CSS");
 
 		$this->aHead	= $this->makeHead();
 
@@ -375,128 +377,6 @@ class Head {
     	return $cReturn;
     }
 
-    /**
-     * Head::getCSS()
-     *
-     * @param string $cFile Filename of the css file
-     * @param string $cStyle Dictate the style that should be used, so that it can be easily changed, without overwriting files
-     * @return
-     */
-    public function getCSS($cFile = false, $cStyle = false) {
-    	$cCSS_a = false;
-		if (isset($this->cCSS)) { if ($this->cCSS) { $cCSS_a = $this->cCSS; }} //this is to avoid a memory loss when apache segfaults
-
-		//set the css
-    	$mConfigCSS = false;
-    	if (isset($this->aHead['css'])) { $mConfigCSS = $this->aHead['css']; }
-		$mCSS		= ($cFile ? $cFile : ($cCSS_a ? $cCSS_a : $mConfigCSS));
-    	$cTrue		= false;
-    	$cPath		= false;
-
-    	//set the default
-    	$cCSS	= "";
-
-    	//the folder can be css, or stylesheet
-    	$cFolder_a	= SITEPATH . "/css/";
-    	$cFolder_b	= "/css/";
-
-    	if (is_dir(SITEPATH . "/stylesheet/")) {
-    		$cFolder_a	= SITEPATH . "/stylesheet/";
-    		$cFolder_b	= "/stylesheet/";
-    	}
-
-    	//is there a resource domain set
-    	if (isset($this->aHead['resource']) && isset($this->aHead['resource']['css'])) { $cFolder_b = "http://" . $this->aHead['resource']['css'] . "/"; }
-
-    	//is it a single css or multiple
-		if (!is_array($mCSS)) {
-			//A file has been set which overwrites any styles
-			if (strstr($mCSS, ".css")) {
-				$cPath	= $mCSS;
-				$cTrue	= SITEPATH . $mCSS;
-			} else {
-				$cPath	= $cFolder_b . $mCSS . ".css";
-				$cTrue	= $cFolder_a . $mCSS . ".css";
-			}
-		} else {
-			foreach ($mCSS as $cFontName => $cStyleSheet) {
-				if (!strstr($cStyleSheet, ".css")) {
-					$cStyleSheet	.= ".css";
-				}
-
-				if (file_exists($cFolder_a . $cStyleSheet)) {
-					$cCSS	.= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $cStyleSheet . "\" />\n";
-				}
-			}
-		}
-
-		//This odd
-		$this->cCSS = $cPath;
-
-		//Styles
-		if ($this->cStyled) {
-			$cStyled = $this->cStyled;
-		} else {
-			$cStyled = $cStyle;
-		}
-
-		if (file_exists($cTrue)) {
-			if (file_exists($cFolder_a . "style.css")) {
-				$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . "/style.css\" />\n";
-				$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $this->cCSS . "\" />\n";
-			} else {
-				$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $this->cCSS . "\" />\n";
-			}
-		} else {
-			if ($cStyled && file_exists($cFolder_b . $cStyled . "/style.css")) {
-				$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $cStyled . "/style.css\" />\n";
-			} else {
-				$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . "/style.css\" />\n";
-			}
-		}
-
-        // Here so it overrides the default style
-        $mBrowser = $this->getBrowser();
-        $cCSS .= $this->getBrowserCSS($mBrowser, $cStyled);
-
-    	//a page structure overrides the css
-    	$cCSS .= $this->getAddedCSS();
-
-		return $cCSS;
-    }
-
-	/**
-	 * Head::getAddedCSS()
-	 *
-	 * @desc This adds the css file to the head
-	 * @return string
-	 */
-	private function getAddedCSS() {
-		$cReturn	= "";
-
-		if ($this->aAddedCSS) {
-			foreach ($this->aAddedCSS as $aCSS) {
-				if (strstr($aCSS['location'], "http")) {
-					if ($this->cDocType == "html5") {
-						$cReturn .= "<link rel=\"stylesheet\" href=\"" . $aCSS['location'] . $aCSS['file'] . "\" />\n";
-					} else {
-						$cReturn .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $aCSS['location'] . $aCSS['file'] . "\" />\n";
-					}
-				} else {
-					$cFolder = "/css/";
-					if (isset($this->aHead['resource']) && isset($this->aHead['resource']['css'])) { $cFolder = "http://" . $this->aHead['resource']['css'] . "/"; }
-
-					if ($this->cDocType == "html5") {
-						$cReturn .= "<link rel=\"stylesheet\" href=\"" . $cFolder . $aCSS['location'] . $aCSS['file'] . ".css\" />\n";
-					} else {
-						$cReturn .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder . $aCSS['location'] . $aCSS['file'] . ".css\" />\n";
-					}
-				}
-			}
-		}
-
-		return $cReturn;
-	}
 
 	/**
 	 * Head::addCSS()
@@ -506,84 +386,20 @@ class Head {
 	 * @return null
 	 */
 	public function addCSS($cCSS, $cLocation = null) {
-		if (strstr($cCSS, ".css")) { $cCSS = substr($cCSS, -4); }
-
-		if ($cLocation) { if (!strstr($cLocation, "/")) { $cLocation .= "/"; }}
-
-		$iNum	= count($this->aAddedCSS);
-		if ($iNum) { $iNum++; }
-
-		$aCSS = array(
-			$iNum	=> array(
-				'location'	=> $cLocation,
-				'file'		=> $cCSS
-			)
-		);
-
-		if (is_array($this->aAddedCSS)) {
-			$aAdded = array_merge($this->aAddedCSS, $aCSS);
-		} else {
-			$aAdded	= $aCSS;
-		}
-
-		$this->aAddedCSS = $aAdded;
+		$oCSS	= $this->oCSS;
+		$oCSS->addCSS($cCSS, $cLocation);
 	}
 
-    /**
-    * Head::getBrowserCSS()
-    *
-    * @param mixed $mBrowser
-    * @param string $cStyled
-    * @return string
-    */
-    private function getBrowserCSS($mBrowser, $cStyled = false) {
-    	$cCSS		= "";
-
-    	//The stylefolder can be stylesheets, or css
-    	$cFolder_a	= SITEPATH . "/css/";
-    	$cFolder_b	= "/css/";
-
-    	if (is_dir(SITEPATH . "/stylesheet/")) {
-    		$cFolder_a	=  SITEPATH . "/stylesheet/";
-    		$cFolder_b	= "/stylesheet/";
-    	}
-
-    	//if there is a resource domain
-    	if (isset($this->aHead['resource']) && isset($this->aHead['resource']['css'])) { $cFolder_b = "http://" . $this->aHead['resource']['css'] . "/"; }
-
-		//if there are multiple browser css'
-    	if (is_array($mBrowser)) {
-    		for ($i = 0; $i < count($mBrowser); $i++) {
-		    	if ($cStyled) {
-    				if (file_exists($cFolder_a . $cStyled . "/" . $mBrowser[$i] . ".css")) {
-    			    		$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $cStyled . "/" . $mBrowser[$i] . ".css	\" />\n";
-    	    			}
-		    	} else {
-    			    if (file_exists($cFolder_a . $mBrowser[$i] . ".css")) {
-    			        $cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $mBrowser[$i] . ".css\" />\n";
-    				}
-    			}
-    		}
-
-    		//This is to get it to render in chrome-frame, since this is mainly only useful for html5
-    		if (($this->cDocType == "html5") && ($mBrowser[0] == "ie")) {
-    			header("X-UA-Compatible: chrome=1");
-    			$cCSS .= "<meta http-equiv=\"X-UA-Compatible\" content=\"chrome=1\" />\n"; //Whilst not really a css tag, its easier to stick it here for validation reasons
-    		}
-    	} else {
-    		if ($cStyled) {
-    		    if (file_exists($cFolder_a . $cStyled . "/" . $mBrowser . ".css")) {
-    		    	$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $cStyled . "/" . $mBrowser . ".css	\" />\n";
-    			}
-    		} else {
-    		    if (file_exists($cFolder_a . $mBrowser . ".css")) {
-    		        $cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $mBrowser . ".css\" />\n";
-    			}
-    		}
-    	}
-
-    	return $cCSS;
-    }
+	/**
+	 * getCSS()
+	 *
+	 * @param string $cFile
+	 * @return string
+	 */
+	public function getCSS($cFile = false) {
+		$oCSS	= $this->oCSS;
+		return $oCSS->getCSS($cFile);
+	}
 
 	/**
 	 * Head::addCache()
