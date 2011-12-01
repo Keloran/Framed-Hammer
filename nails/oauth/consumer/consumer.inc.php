@@ -8,7 +8,7 @@
  * @version $Id$
  * @access public
  */
-class Oauth_Consumer {
+class oauth_Consumer {
 	public $cKey;
 	public $cSecret;
 	public $cCallBack;
@@ -26,6 +26,11 @@ class Oauth_Consumer {
 		$this->cCallBack	= $cCallBack;
 	}
 
+	/**
+	 * Oauth_Consumer::__toString()
+	 *
+	 * @return string
+	 */
 	function __toString() {
 		return "OAuthConsumer[key=" . $this->cKey . ", secret=" . $this->cSecret . "]";
 	}

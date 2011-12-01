@@ -8,7 +8,7 @@
  * @version $Id$
  * @access public
  */
-class Oauth_Token {
+class oauth_Token {
 	public $cKey;
 	public $cSecret;
 
@@ -23,10 +23,24 @@ class Oauth_Token {
 		$this->cSecret	= $cSecret;
 	}
 
+	/**
+	 * Oauth_Token::to_string()
+	 *
+	 * @return string
+	 */
 	private function to_string() {
-		$cReturn	 = "oauth_token=" . Oauth_Util::urlEncodeRFC3986($this->cKey);
-		$cReturn	.= "&auth_token_secret=" . Oauth_Util::urlEncodeRFC3986($this->cSecret);
+		$cReturn	 = "oauth_token=" . oauth_Util::urlEncodeRFC3986($this->cKey);
+		$cReturn	.= "&auth_token_secret=" . oauth_Util::urlEncodeRFC3986($this->cSecret);
 
 		return $cReturn;
+	}
+
+	/**
+	 * Oauth_Token::__toString()
+	 *
+	 * @return string
+	 */
+	function __toString() {
+		return $this->to_string();
 	}
 }
