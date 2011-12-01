@@ -496,6 +496,7 @@ class Head {
 	public function addFrameworkCSS($cName) {
 		$oJS	= $this->oJS;
 		return $oJS->addFrameworkCSS($cName);
+	}
 
     /**
      * Head::setJSFramework()
