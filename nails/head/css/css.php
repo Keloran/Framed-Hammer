@@ -15,12 +15,15 @@ class head_css {
 	function __construct(Nails $oNails) {
 		$this->oNails	= $oNails;
 
+		$aGet		= $this->oNails->getConfig("address", "head");
+		$cAddress	= $aGet['address'];
+
 		$aGet				= $this->oNails->getConfig("css", "head");
 		$aResource['css'] 	= $aGet['css'];
 
 		$aGet	= $this->oNails->getConfig("css", "resourceDomains");
 		$cCSS	= $aGet['css'];
-		if ($cCSS) { $aResource['resource']	= ($cCSS . $aReturn['address']); }
+		if ($cCSS) { $aResource['resource']	= ($cCSS . $cAddress); }
 
 		$this->aResource = $aResource;
 	}
