@@ -45,7 +45,7 @@ class head_js {
 
 		$aGet	= $this->oNails->getConfig("js", "resourceDomains");
 		$cJS	= $aGet['js'];
-		if ($cCSS) { $aResource['resource']	= ($cJS . $cAddress); }
+		if ($cJS) { $aResource['resource']	= ($cJS . $cAddress); }
 
 		$this->aResource = $aResource;
 	}
