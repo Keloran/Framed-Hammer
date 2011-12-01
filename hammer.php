@@ -436,7 +436,12 @@ class Hammer {
 		$oNail	= $cNail . "_class";
 
 		//is it in the registry
-		if (isset($this->aRegistry[$oNail])) { return $this->aRegistry[$oNail]; }
+		if (isset($this->aRegistry[$oNail])) {
+			$this->$oNail	= false;
+			return $this->aRegistry[$oNail];
+		} else {
+			$this->oNail	= true;
+		}
 
 		//Since we need to send the Nails object to pretty much everything
 		if (is_null($this->oNails)) { $this->oNails = new Nails($this->aFilters); }
