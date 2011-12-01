@@ -258,37 +258,17 @@ class head_js {
 
 		$cReturn = false;
 		if ($this->bJSFrameworkUI) {
-			$iNum = count($this->aAddedCSS);
-			if ($iNum) { $iNum++; }
-
 			$cLocation  = "http://ajax.googleapis.com/ajax/libs/";
 			$cLocation .= $this->cJSFrameworkName . "ui/";
 			$cLocation .= $this->cJSFrameworkUIVersion .= "/";
 			$cLocation .= "themes/" . $cName . "/";
 
 			$cNamed		= $this->cJSFrameworkName . "-ui.css";
-
-			$aCSS		= array(
-				$iNum	=> array(
-					"location"	=> $cLocation,
-					"file"		=> $cNamed
-				)
-			);
-
-			if (is_array($this->aAddedCSS)) {
-				$aAdded = array_merge($this->aAddedCSS, $aCSS);
-			} else {
-				$aAdded = $aCSS;
-			}
-
-			$this->aAddedCSS = $aAdded;
+			$oCSS->addCSS($cNamed, $cLocation);
 		}
 
 		//if its a mobile
 		if ($this->bMobile) {
-			$iNum = count($this->aAddedCSS);
-			if ($iNum) { $iNum++; }
-
 			$cLocation	 = "http://code.jquery.com/";
 			$cLocation	.= $this->cJSFrameworkMobileName . "/";
 			$cLocation	.= $this->cJSFrameworkMobileVersion . "/";
@@ -297,24 +277,8 @@ class head_js {
 			$cNamed	.= $this->cJSFrameworkMobileName . "-";
 			$cNamed	.= $this->cJSFrameworkMobileVersion;
 			$cNamed	.= ".min.css";
-
-			$aCSS		= array(
-				$iNum	=> array(
-					"location"	=> $cLocation,
-					"file"		=> $cNamed
-				)
-			);
-
-			if (is_array($this->aAddedCSS)) {
-				$aAdded = array_merge($this->aAddedCSS, $aCSS);
-			} else {
-				$aAdded = $aCSS;
-			}
-
-			$this->aAddedCSS = $aAdded;
+			$oCSS->addCSS($cNamed, $cLocation);
 		}
-
-		return $cReturn;
 	}
 
 	/**
