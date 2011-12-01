@@ -97,6 +97,9 @@ class Hammer {
 	/** @var string $cSkin */
 	public $cSkin		= false;
 
+	//registry
+	private $aRegistry	= array();
+
 	/**
  	* Hammer::__construct()
 	*
@@ -430,18 +433,18 @@ class Hammer {
 		$cNail	= ucfirst($cName);
 
 		//for the registry
-		$cNamed	= $cNail . "_class";
+		$oNail	= $cNail . "_class";
 
 		//is it in the registry
-		if (isset($this->$cNamed)) { return $this->$cNamed; }
+		if (isset($this->aRegistry[$oNail])) { return $this->aRegistry[$oNail]; }
 
 		//Since we need to send the Nails object to pretty much everything
 		if (is_null($this->oNails)) { $this->oNails = new Nails($this->aFilters); }
 
 		//add to the registry and then return
-		$mReturn 		= getNailed($cNail, $this->oNails, $mParams);
-		$this->$cNamed	= $mReturn;
-		return $mReturn;
+		$mReturn 					= getNailed($cNail, $this->oNails, $mParams);
+		$this->aRegistry[$oNail]	= $mReturn;
+		return $this->aRegistry[$oNail];
 	}
 
 	/**

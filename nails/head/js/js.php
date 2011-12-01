@@ -239,6 +239,14 @@ class head_js {
 		return $cReturn;
 	}
 
+	/**
+	 * head_js::setJSFramework()
+	 *
+	 * @param string $cName
+	 * @param string $cVersion
+	 * @param bool $bUI
+	 * @return null
+	 */
 	public function setJSFramework($cName = false, $cVersion = false, $bUI = false) {
 		$cJSName		= $cName 	?: $this->cJSFrameworkName;
 		$cJSVersion		= $cVersion	?: $this->cJSFrameworkVersion;
@@ -253,6 +261,12 @@ class head_js {
 		if ($bUI) { $this->bJSFrameworkUI = true; }
 	}
 
+	/**
+	 * head_js::addFrameworkCSS()
+	 *
+	 * @param string $cName
+	 * @return null
+	 */
 	public function addFrameworkCSS($cName) {
 		$oCSS	= $this->oNails->getNails("Head_CSS");
 

@@ -464,17 +464,8 @@ class Head {
 	* @return null
 	*/
 	public function addFrameworkJS($cJS) {
-		if ($this->cJSFrameworkName) {
-			$cJS	= $this->cJSFrameworkName . "." . $cJS;
-
-			//Path could be js, or javascript
-			$cFolder	= is_dir(SITEPATH . "/javascript/") ? "/javascript/" : "/js/";
-			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js'] . "/"; }
-
-			$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $cJS . ".js\"></script>\n";
-		}
-
-		return false;
+		$oJS	= $this->oJS;
+		$oJS->addFrameworkJS($cJS);
 	}
 
     /**

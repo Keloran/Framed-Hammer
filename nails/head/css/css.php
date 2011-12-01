@@ -45,7 +45,7 @@ class head_css {
 	 * @return null
 	 */
 	public function __set($cName, $mValue) {
-		$this->aData[$cName]	= $mValue;
+		$this->aData[$cName] = $mValue;
 	}
 
 	/**
