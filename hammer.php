@@ -441,7 +441,7 @@ class Hammer {
 		//add to the registry and then return
 		$mReturn 		= getNailed($cNail, $this->oNails, $mParams);
 		$this->$cNamed	= $mReturn;
-
+		return $mReturn;
 	}
 
 	/**
