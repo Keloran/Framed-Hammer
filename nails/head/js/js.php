@@ -270,6 +270,11 @@ class head_js {
 	public function addFrameworkCSS($cName) {
 		$oCSS	= $this->oNails->getNails("Head_CSS");
 
+		printRead($oCSS);
+		printRead($this->oNails);
+		printRead($this->oNails->getNails("Head_CSS"));
+		die();
+
 		$cReturn = false;
 		if ($this->bJSFrameworkUI) {
 			$cLocation  = "http://ajax.googleapis.com/ajax/libs/";
