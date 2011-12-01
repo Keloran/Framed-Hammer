@@ -30,6 +30,8 @@ class Head {
 	private $oCSS;
 	private $oJS;
 
+	public $bJSFrameworkUI = false;
+
     /**
      * Head::__construct()
      *
@@ -509,7 +511,9 @@ class Head {
      * @return void
      */
     public function returnJS() {
-    	$oJS	= $this->oJS;
+    	$oJS					= $this->oJS;
+    	$oJS->bJSFrameworkUI	= $this->bJSFrameworkUI;
+
     	return $oJS->fullLoad();
     }
 
