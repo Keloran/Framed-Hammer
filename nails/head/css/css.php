@@ -15,6 +15,12 @@ class head_css {
 	private $aData;
 	private $oNails;
 
+	/**
+	 * __construct()
+	 *
+	 * @param Nails $oNails
+	 * @return null
+	 */
 	function __construct(Nails $oNails) {
 		$this->oNails	= $oNails;
 

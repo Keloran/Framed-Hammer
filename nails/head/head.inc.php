@@ -14,18 +14,7 @@ class Head {
 
 	public $cDocType	= "xhtml";
 
-	//jQuery
-	public $bJSFramework			= false;
-	public $bJSFrameworkUI			= false;
 
-	public $cJSFrameworkVersion			= "1.6.3";
-	public $cJSFrameworkSubVersion		= "1.6";
-	public $cJSFrameworkName			= "jquery";
-	public $cJSFrameworkUIVersion		= "1.8.16";
-	public $cJSFrameworkMobileName		= "mobile";
-	public $cJSFrameworkMobileVersion 	= "1.0b1";
-
-	public $bJS			= true;
 	public $bWarning	= true;
 	public $bMobile		= false;
 
@@ -36,7 +25,10 @@ class Head {
 	private $oDB		= false;
 	private $oNails		= false;
 	private $aData		= false;
+
+	//children
 	private $oCSS;
+	private $oJS;
 
     /**
      * Head::__construct()
@@ -48,6 +40,7 @@ class Head {
 		$this->oNails	= $oNails;
 		$this->oDB		= $this->oNails->oDB;
 		$this->oCSS		= $this->oNails->getNails("Head_CSS");
+		$this->oJS		= $this->oNails->getNails("Head_JS");
 
 		$this->aHead	= $this->makeHead();
 
@@ -436,40 +429,8 @@ class Head {
      * @return
      */
     private function getJS() {
-		$aHead	= $this->aHead;
-    	$aJS	= false;
-
-    	$aJSReturn	= false;
-    	if (isset($this->aHead['javascript'])) { $aJSReturn = $this->aHead['javascript']; }
-		if (is_array($aJSReturn)) {
-			foreach ($aJSReturn as $iJSNum => $cJSName) { $aJS[] = $cJSName; }
-		}
-
-    	//Folder could be js, or javascript
-    	$cFolder = is_dir(SITEPATH . "/javascript/") ? "/javascript/" : "/js/";
-
-    	//get the returned js
-		$cJS 	= $this->cJS;
-
-    	//is there a resource domian set
-    	if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js'] . "/"; }
-
-		//theres quite a few of them
-		if ($aJS) {
-		    for($i = 0; $i < count($aJS); $i++) {
-				if ($this->bJSFramework) {
-					$cJSPath	= $cFolder . $this->cJSFrameworkName . "." . $aJS[$i] . ".js";
-
-					//append the jquery[framework] part to the name, since all js files should start with the framework,
-					//e.g. jquery.menu.js, in loader all you put is menu if your turning on google framework loader
-					if (file_exists(SITEPATH . $cJSPath)) { $cJS .= "<script type=\"text/javascript\" src=\"" . $cJSPath . "\"></script>\n"; }
-				} else {
-					$cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $aJS[$i] . ".js\"></script>\n";
-				}
-			}
-		}
-
-        return $cJS;
+    	$oJS	= $this->oJS;
+    	return $oJS->getJS();
     }
 
 	/**
@@ -480,22 +441,8 @@ class Head {
 	* @param bool $bExternal This is so external ones can be used
 	*/
 	public function addJS($cJS, $bExternal = false) {
-		if ($bExternal) {
-			if ($this->cDocType == "html5") {
-				$this->cJS .= "<script src=\"" . $cJS . "\"</script>\n";
-			} else {
-				$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cJS . "\"</script>\n";
-			}
-		} else {
-			$cFolder	= is_dir(SITEPATH . "/javascript/") ? "/javascript/" : "/js/";
-			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js'] . "/"; }
-
-			if ($this->cDocType == "html5") {
-				$this->cJS .= "<script src=\"" . $cFolder . $cJS . ".js\"></script>\n";
-			} else {
-				$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $cJS . ".js\"></script>\n";
-			}
-		}
+		$oJS	= $this->oJS;
+		$oJS->addJS($cJS, $bExternal);
 	}
 
 	/**
@@ -505,7 +452,8 @@ class Head {
 	 * @return null
 	 */
 	public function addJSExtras($cJS) {
-		$this->cJS .= "<script type=\"text/javascript\">" . $cJS . "</script>\n";
+		$oJS	= $this->oJS;
+		$oJS->addJSExtras($cJS);
 	}
 
 	/**
@@ -535,53 +483,8 @@ class Head {
      * @return
      */
     private function loadJSFramework() {
-    	//if its not hosted locally load the google version
-		if (file_exists(SITEPATH . "/js/"  . $this->cJSFrameworkName . ".js")) {
-			$cFolder = "/js/";
-			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js'] . "/"; }
-
-			$cReturn = "<script type=\"text/javascript\" src=\"" . $cFolder . $this->cJSFrameworkName . ".js\"></script>\n";
-		} else if (file_exists(SITEPATH . "/js/" . $this->cJSFrameworkName . ".min.js")) {
-			$cFolder = "/js/";
-			if (isset($this->aHead['resource']) && isset($this->aHead['resource']['js'])) { $cFolder = "http://" . $this->aHead['resource']['js'] . "/"; }
-
-			$cReturn = "<script type=\"text/javascript\" src=\"" . $cFolder . $this->cJSFrameworkName . ".min.js\"></script>\n";
-		} else {
-			if (isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] == 443)) {
-				$cHTTP = "https";
-			} else {
-				$cHTTP = "http";
-			}
-
-			$cPath  = $cHTTP . "://ajax.googleapis.com/ajax/libs/";
-			$cPath .= $this->cJSFrameworkName . "/";
-			$cPath .= $this->cJSFrameworkVersion . "/";
-			$cPath .= $this->cJSFrameworkName . ".min.js";
-
-		    	$cReturn	 = "<script src=\"" . $cPath . "\" type=\"text/javascript\"></script>\n";
-
-			//now do we want the ui aswell
-			if ($this->bJSFrameworkUI) {
-				$cReturn .= "<script src=\"" . $cHTTP;
-				$cReturn .= "://ajax.googleapis.com/ajax/libs/";
-				$cReturn .= $this->cJSFrameworkName . "ui/";
-				$cReturn .= $this->cJSFrameworkUIVersion . "";
-				$cReturn .= $this->cJSFrameworkName . "-ui";
-				$cReturn .= ".min.js\" type=\"text/javascript\"></script>\n";
-			}
-
-			//are we a mobile version
-			if ($this->bMobile) {
-				$cReturn	.= "<script src=\"http://code.jquery.com/";
-				$cReturn	.= $this->cJSFrameworkMobileName . "/";
-				$cReturn	.= $this->cJSFrameworkMobileVersion . "/";
-				$cReturn	.= $this->cJSFrameworkName . "." . $this->cJSFrameworkMobileName;
-				$cReturn	.= "-" . $this->cJSFrameworkMobileVersion;
-				$cReturn	.= ".min.js\" type=\"text/javascritpt\"></script>\n";
-			}
-		}
-
-    	return $cReturn;
+    	$oJS	= $this->oJS;
+    	return $oJS->loadJSFramework();
     }
 
 	/**
@@ -591,66 +494,8 @@ class Head {
 	 * @return string
 	 */
 	public function addFrameworkCSS($cName) {
-		$cReturn = false;
-		if ($this->bJSFrameworkUI) {
-			$iNum = count($this->aAddedCSS);
-			if ($iNum) { $iNum++; }
-
-			$cLocation  = "http://ajax.googleapis.com/ajax/libs/";
-			$cLocation .= $this->cJSFrameworkName . "ui/";
-			$cLocation .= $this->cJSFrameworkUIVersion .= "/";
-			$cLocation .= "themes/" . $cName . "/";
-
-			$cNamed		= $this->cJSFrameworkName . "-ui.css";
-
-			$aCSS		= array(
-				$iNum	=> array(
-					"location"	=> $cLocation,
-					"file"		=> $cNamed
-				)
-			);
-
-			if (is_array($this->aAddedCSS)) {
-				$aAdded = array_merge($this->aAddedCSS, $aCSS);
-			} else {
-				$aAdded = $aCSS;
-			}
-
-			$this->aAddedCSS = $aAdded;
-		}
-
-		//if its a mobile
-		if ($this->bMobile) {
-			$iNum = count($this->aAddedCSS);
-			if ($iNum) { $iNum++; }
-
-			$cLocation	 = "http://code.jquery.com/";
-			$cLocation	.= $this->cJSFrameworkMobileName . "/";
-			$cLocation	.= $this->cJSFrameworkMobileVersion . "/";
-
-			$cNamed	 = $this->cJSFrameworkName . ".";
-			$cNamed	.= $this->cJSFrameworkMobileName . "-";
-			$cNamed	.= $this->cJSFrameworkMobileVersion;
-			$cNamed	.= ".min.css";
-
-			$aCSS		= array(
-				$iNum	=> array(
-					"location"	=> $cLocation,
-					"file"		=> $cNamed
-				)
-			);
-
-			if (is_array($this->aAddedCSS)) {
-				$aAdded = array_merge($this->aAddedCSS, $aCSS);
-			} else {
-				$aAdded = $aCSS;
-			}
-
-			$this->aAddedCSS = $aAdded;
-		}
-
-		return $cReturn;
-	}
+		$oJS	= $this->oJS;
+		return $oJS->addFrameworkCSS($cName);
 
     /**
      * Head::setJSFramework()
@@ -660,17 +505,8 @@ class Head {
      * @return
      */
     public function setJSFramework($cName = false, $cVersion = false, $bUI = false) {
-    	$cJSName		= $cName 	?: $this->cJSFrameworkName;
-    	$cJSVersion		= $cVersion	?: $this->cJSFrameworkVersion;
-		$cJSSubVersion	= $cVersion	?: $this->cJSFrameworkSubVersion;
-
-    	$this->cJSFrameworkName			= $cJSName;
-    	$this->cJSFrameworkVersion		= $cJSVersion;
-    	$this->bJSFramework				= true;
-		$this->cJSFrameworkSubVersion	= $cJSSubVersion;
-
-		//is the ui set
-		if ($bUI) { $this->bJSFrameworkUI = true; }
+    	$oJS	= $this->oJS;
+    	$oJS->setJSFramework($cName, $cVersion, $bUI);
     }
 
     /**
@@ -681,12 +517,8 @@ class Head {
      * @return void
      */
     public function returnJS() {
-    	$cReturn	= "";
-
-    	if ($this->bJSFramework) { $cReturn .= $this->loadJSFramework(); }
-    	$cReturn .= $this->getJS();
-
-    	return $cReturn;
+    	$oJS	= $this->oJS;
+    	return $oJS->fullLoad();
     }
 
     /**
@@ -809,13 +641,7 @@ class Head {
 		$cReturn .= $this->getMetaTags();
 		//$cReturn .= $this->getRSS();
 
-		if ($this->bJS) {
-			//jQuery
-			if ($this->bJSFramework) {  $cReturn .= $this->loadJSFramework(); }
-
-			//get custom js
-			$cReturn .= $this->getJS();
-		}
+		$cReturn .= $this->returnJS();
 
 		//Favicon
 		$cFavi	= false;

@@ -429,10 +429,16 @@ class Hammer {
 	public function getNail($cName, $mParams = false) {
 		$cNail	= ucfirst($cName);
 
+		//is it in the registry
+		if (isset($this->aRegistry[$cName])) { return $this->aRegistry[$cName]; }
+
 		//Since we need to send the Nails object to pretty much everything
 		if (is_null($this->oNails)) { $this->oNails = new Nails($this->aFilters); }
 
-		return getNailed($cNail, $this->oNails, $mParams);
+		//add to the registry and then return
+		$mReturn 					= getNailed($cNail, $this->oNails, $mParams);
+		$this->aRegistry[$cName]	= $mReturn;
+		return $mReturn;
 	}
 
 	/**
