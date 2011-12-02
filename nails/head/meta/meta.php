@@ -65,7 +65,6 @@ class Head_Meta {
 
 	public function getKeywords() {
 		$cKeyword	= "";
-
 		if ($this->cPageKeywords) {
 			$cKeyword = $this->cPageKeywords;
 		} else {
@@ -83,10 +82,10 @@ class Head_Meta {
 					}
 				}
 			}
-
-			$cKeyword .= $this->cKeywords;
 		}
 
+		$cKeyword	.= $this->cKeywords; 
+return false;
 		$cKeywords = "<meta name=\"keywords\" content=\"" . $cKeyword . "\" />\n";
 		return $cKeywords;
 	}
