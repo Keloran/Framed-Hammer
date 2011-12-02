@@ -270,13 +270,7 @@ class head_js {
 	 * @return null
 	 */
 	public function addFrameworkCSS($cName) {
-		$oCSS	= $this->oNails->getNails("Head_CSS");
-
-		printRead($oCSS);
-		printRead($this->oNails);
-		printRead($this->oNails->getNails("Head_CSS"));
-		printRead($this->oCSS);
-		die();
+		$oCSS	= $this->oCSS;
 
 		$cReturn = false;
 		if ($this->bJSFrameworkUI) {
