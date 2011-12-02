@@ -144,12 +144,6 @@ class Form_Input extends Form_Abstract {
 	 * @param string $cType
 	 * @return string
 	 */
-	/**
-	 * Form_Input::validate()
-	 *
-	 * @param string $cType
-	 * @return string
-	 */
 	public function validate($cType = "text") {
 		$mReturn	= false;
 

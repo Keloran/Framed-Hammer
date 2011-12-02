@@ -117,8 +117,12 @@ abstract class Form_Abstract implements Form_Interface {
 		}
 
 		//title
-		if (isset($this->aElement[$cName]['title'])) {
-			$cReturn .= " title=\"" . $this->aElement[$cName]['title'] . "\"";
+		if (isset($this->aElement[$cName]['title'])) { //make sure its set
+			if ($this->aElement[$cName]['title']) { //now make sure its not false
+				$cReturn .= " title=\"" . $this->aElement[$cName]['title'] . "\"";
+			} else { //it is false so set it to the name
+				$cReturn .= " title=\"" . $this->aElement[$cName]['id'] . "\"";
+			}
 		}
 
 		//Finally return it
