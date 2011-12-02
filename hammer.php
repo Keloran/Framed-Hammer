@@ -436,19 +436,30 @@ class Hammer {
 		$oNail	= $cNail . "_class";
 
 		//is it in the registry
-		if (isset($this->aRegistry[$oNail])) {
-			$this->$oNail	= false;
-			return $this->aRegistry[$oNail];
-		} else {
-			$this->oNail	= true;
+		if (!isset($this->aRegistry[$oNail])) {
+			//Since we need to send the Nails object to pretty much everything
+			if (is_null($this->oNails)) { $this->oNails = new Nails($this->aFilters); }
+
+			//add to the registry and then return
+			if (is_callable(array($cNail, "getInstance"))) {
+				try {
+					$this->aRegistry[$oNail] = $cNail::getInstance($this->oNails, $mParams);
+				} catch (ErrorException $e) {
+					throw new Spanner($e->getMessage(), 9999);
+				} catch (Exception $e) {
+					throw new Spanner($e->getMessage(), 9999);
+				}
+			} else {
+				try {
+					$this->aRegistry[$oNail] = new $cNail($this->oNails, $mParams);
+				} catch (ErrorException $e) {
+					throw new Spanner($e->getMessage(), 9999);
+				} catch (Exception $e) {
+					throw new Spanner($e->getMessage(), 9999);
+				}
+			}
 		}
 
-		//Since we need to send the Nails object to pretty much everything
-		if (is_null($this->oNails)) { $this->oNails = new Nails($this->aFilters); }
-
-		//add to the registry and then return
-		$mReturn 					= getNailed($cNail, $this->oNails, $mParams);
-		$this->aRegistry[$oNail]	= $mReturn;
 		return $this->aRegistry[$oNail];
 	}
 

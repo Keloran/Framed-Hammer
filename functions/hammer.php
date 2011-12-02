@@ -14,36 +14,6 @@ if (!defined("HAMMERPATH")) { define("HAMMERPATH", (__DIR__ . "/../")); }
 if (!function_exists("printRead")) { include HAMMERPATH . "/spanner.php"; }
 
 /**
- * getNail_Version()
- *
- * @desc Since this is 5.4 only, include it in fn file
- * @param string $cNail
- * @param string $oNail
- * @param mixed $mParams
- * @return object
- */
-function getNail_Version($cNail, $oNail, $mParams = null) {
-	//just incase its a standalone and/or 3rd part
-	if (is_callable(array($cNail, "getInstance"))) {
-		try {
-			return $cNail::getInstance($oNail, $mParams);
-		} catch (ErrorException $e) {
-			throw new Spanner($e->getMessage(), 9999);
-		} catch (Exception $e) {
-			throw new Spanner($e->getMessage(), 9999);
-		}
-	} else {
-		try {
-			return new $cNail($oNail, $mParams);
-		} catch (ErrorException $e) {
-			throw new Spanner($e->getMessage(), 9999);
-		} catch (Exception $e) {
-			throw new Spanner($e->getMessage(), 9999);
-		}
-	}
-}
-
-/**
  * funcParam()
  *
  * @param string $cParam
@@ -270,18 +240,6 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 	}
 
 	return $cReturn;
-}
-
-/**
- * getNailed()
- *
- * @param string $cNail
- * @param object $oNail
- * @param mixed $mParams
- * @return object
- */
-function getNailed($cNail, $oNail, $mParams = null) {
-	return getNail_Version($cNail, $oNail, $mParams);
 }
 
 /**
