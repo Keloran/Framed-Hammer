@@ -2,6 +2,7 @@
 trait Warnings {
 	function getWarnings($cExtra = false) {
 		$cWarnings	= false;
+		$cReturn	= false;
 
 		//get the default warnings
 		if (ini_get("register_globals")) { 			$cWarnings	.= "You have register_globals turned on, this is a bad idea, turn it off<br />\n"; }
