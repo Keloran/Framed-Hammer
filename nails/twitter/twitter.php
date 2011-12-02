@@ -371,7 +371,7 @@ class Twitter implements Nails_Interface {
 	 * @param string $cTweet
 	 * @return bool
 	 */
-	public function createTweet($cTweet) {
+	public function createTweet($cTweet, $iTweet = false) {
         $bReturn    = false;
 
         if ($this->iUserID) {
@@ -379,11 +379,15 @@ class Twitter implements Nails_Interface {
 
             $this->oAuth->setToken($aDetails['token'], $aDetails['secret']);
 
+        	//create the tweet request
         	$aTweet	= array(
         		"status"	        => $cTweet,
-                "trim_use"          => true,
+                "trim_user"         => true,
                 "include_entities"  => true
         	);
+
+        	//reply to a tweet
+        	if ($iTweet) { $aTweet['in_reply_to_status_id'] = $iTweet; }
 
         	$this->oAuth->fetch("https://api.twitter.com/1/statuses/update.json", $aTweet, OAUTH_HTTP_METHOD_POST, $this->aAgent);
         	$oJSON	= json_decode($this->oAuth->getLastResponse());
@@ -493,7 +497,7 @@ class Twitter implements Nails_Interface {
 				$cURL	= (string)$oJSON[$i]->retweeted_status->entities->urls[$z]->expanded_url;
 				$iStart	= (int)$oJSON[$i]->retweeted_status->entities->urls[$z]->indices[0];
 				$iEnd	= (int)$oJSON[$i]->retweeted_status->entities->urls[$z]->indices[1];
-				
+
 				$cRest	 = substr($cText, 0, $iStart);
 				$cRest	.= "<a href=\"" . $cURL . "\">" . $cURL . "</a>";
 				$cRest	.= substr($cText, $iEnd);
