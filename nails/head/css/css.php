@@ -282,7 +282,7 @@ class head_css {
 		$this->aAddedCSS = $aAdded;
 
 		//debug
-		if ($cCSS == "humanity") { printRead($this); die(); }
+		if ($cCSS == "jquery-ui") { printRead($this); die(); }
 	}
 
 
