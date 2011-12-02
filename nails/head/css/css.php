@@ -134,7 +134,7 @@ class head_css {
 	 *
 	 * @return string
 	 */
-	private function getAddedCSS() {
+	public function getAddedCSS() {
 		$cReturn	= "";
 
 		if ($this->aAddedCSS) {
