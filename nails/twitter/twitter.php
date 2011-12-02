@@ -478,20 +478,28 @@ class Twitter implements Nails_Interface {
 
                     //are there any urls if so replace
                     if (isset($oJSON[$i]->entities)) {
-                        if (isset($oJSON[$i]->entities->urls)) {
-                            for ($z = 0; $z < count($oJSON[$i]->entities->urls); $z++) {
+                    	for ($z = 0; $z < count($oJSON[$i]->entities->urls); $z++) {
                                 $cURL   = (string)$oJSON[$i]->entities->urls[$z]->expanded_url;
                                 $iStart = (int)$oJSON[$i]->entities->urls[$z]->indices[0];
                                 $iEnd   = (int)$oJSON[$i]->entities->urls[$z]->indices[1];
-                                $iLen   = $iEnd - $iStart;
 
-                                $cRest   = substr($cText, $iStart, $iLen);
+                                $cRest   = substr($cText, 0, $iStart);
                                 $cRest  .= "<a href=\"" . $cURL . "\">" . $cURL . "</a>";
                                 $cRest  .= substr($cText, $iEnd);
                                 $cText   = $cRest;
-                            }
                         }
-                    }
+                    } else if (isset($oJSON[$i]->retweeted_status->entities)) {
+			for ($z = 0; $z < count($oJSON[$i]->retweeted_status->entities->urls); $z++) {
+				$cURL	= (string)$oJSON[$i]->retweeted_status->entities->urls[$z]->expanded_url;
+				$iStart	= (int)$oJSON[$i]->retweeted_status->entities->urls[$z]->indices[0];
+				$iEnd	= (int)$oJSON[$i]->retweeted_status->entities->urls[$z]->indices[1];
+				
+				$cRest	 = substr($cText, 0, $iStart);
+				$cRest	.= "<a href=\"" . $cURL . "\">" . $cURL . "</a>";
+				$cRest	.= substr($cText, $iEnd);
+				$cText   = $cRest;
+			}
+		}
 
 
                     $aReturn[$j]['tweet']       = $cText;
@@ -499,6 +507,7 @@ class Twitter implements Nails_Interface {
                     $aReturn[$j]['screenName']  = (string)$oJSON[$i]->user->screen_name;
                     $aReturn[$j]['image']       = (string)$oJSON[$i]->user->profile_image_url_https;
                     $aReturn[$j]['id']          = $oJSON[$i]->id;
+		    $aReturn[$j]['dated']	= (string)$oJSON[$i]->created_at;
                     $j++;
                 }
             }
