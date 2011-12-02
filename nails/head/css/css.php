@@ -259,6 +259,9 @@ class head_css {
 	 * @return null
 	 */
 	public function addCSS($cCSS, $cLocation = null) {
+		//debug
+		if ($cCSS == "jquery-ui.css") { printRead($this); die(); }
+
 		if (strstr($cCSS, ".css")) { $cCSS = substr($cCSS, -4); }
 
 		if ($cLocation) { if (!strstr($cLocation, "/")) { $cLocation .= "/"; }}
@@ -280,9 +283,6 @@ class head_css {
 		}
 
 		$this->aAddedCSS = $aAdded;
-
-		//debug
-		if ($cCSS == "jquery-ui") { printRead($this); die(); }
 	}
 
 
