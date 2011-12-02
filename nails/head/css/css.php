@@ -259,13 +259,7 @@ class head_css {
 	 * @return null
 	 */
 	public function addCSS($cCSS, $cLocation = null) {
-		//debug
-		if ($cCSS == "jquery-ui.css") { printRead($cCSS); }
-
-		if (strstr($cCSS, ".css")) { $cCSS = substr($cCSS, -4); }
-
-		if ($cCSS == "jquery-ui.css") { printRead($cCSS); die(); }
-
+		if (strstr($cCSS, ".css")) { $cCSS = substr($cCSS, 0, -4); }
 		if ($cLocation) { if (!strstr($cLocation, "/")) { $cLocation .= "/"; }}
 
 		$iNum	= count($this->aAddedCSS);
