@@ -11,6 +11,10 @@ trait Security {
 		if (function_exists("hash")) { //has isnt installed so revert to sha1
 			if ($iStrength) {
 				switch ($iStrength) {
+					case 4:
+						return hash_hmac("sha1", $cString, "HammerHash");
+						break;
+
 					case 3:
 						$cHash = "sha512";
 						break;
