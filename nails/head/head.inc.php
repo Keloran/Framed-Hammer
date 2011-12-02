@@ -612,7 +612,7 @@ class Head {
 			$cReturn .= $this->getWarnings();
 		}
 
-		header_register_callback(array($this, "doHeader(test)"));
+		header_register_callback(array($this, "doHeader"));
 
 		return $cReturn;
 	}

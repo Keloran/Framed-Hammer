@@ -192,8 +192,6 @@ trait Browser {
 	 * @return null
 	 */
 	function doHeader($iLength = 0) {
-		printRead($iLength);die();
-
 		if ($this->iCache) { $iLength = $this->iCache; }
 		$iLength = $iLength ? $iLength : 0;
 
