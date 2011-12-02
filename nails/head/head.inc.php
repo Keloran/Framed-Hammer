@@ -639,9 +639,6 @@ class Head {
 
 		$cReturn .= $this->returnJS();
 
-		printRead($this->oCSS);
-		die();
-
 		//Favicon
 		$cFavi	= false;
 		if (file_exists(SITEPATH . "/favicon.ico")) {
