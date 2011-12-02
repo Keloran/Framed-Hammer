@@ -184,4 +184,31 @@ trait Browser {
 	function IEBrowser($mBrowser = false) {
 		return $this->getBrowser("ie");
 	}
+
+	/**
+	 * doHeader()
+	 *
+	 * @param integer $iLength
+	 * @return null
+	 */
+	function doHeader($iLength = 0) {
+		if ($this->iCache) { $iLength = $this->iCache; }
+		$iLength = $iLength ? $iLength : 0;
+
+		//have the headers already been sent
+		if ($iLength) {
+			$tsDay	= 86400;
+			$tsWeek = time() + ($tsDay * $iLength);
+			$cCache	= "max-age=7200, must-revalidate";
+		} else {
+			$tsWeek	= time() - 1000;
+			$cCache = "no-store, no-cache, must-revalidate";
+			header('Pragma: no-cache');
+		}
+		$dWeek	= date("r", $tsWeek);
+
+		header('Expires: ' . $dWeek);
+		header('Cache-Control: ' . $cCache);
+		header('Cache-Control: post-check=0, pre-check=0', FALSE);
+	}
 }

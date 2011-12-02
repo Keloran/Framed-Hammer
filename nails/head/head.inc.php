@@ -385,35 +385,6 @@ class Head {
 		return $oCSS->getCSS($cFile);
 	}
 
-	/**
-	 * Head::addCache()
-	 *
-	 * @param int $iLength
-	 * @return
-	 */
-	public function addCache($iLength = false) {
-		if ($this->iCache) { $iLength = $this->iCache; }
-		$iLength = $iLength ? $iLength : 0;
-
-		//have the headers already been sent
-		if (!headers_sent()) {
-			if ($iLength) {
-				$tsDay	= 86400;
-				$tsWeek = time() + ($tsDay * $iLength);
-				$cCache	= "max-age=7200, must-revalidate";
-			} else {
-				$tsWeek	= time() - 1000;
-				$cCache = "no-store, no-cache, must-revalidate";
-				header('Pragma: no-cache');
-			}
-			$dWeek	= date("r", $tsWeek);
-
-			header('Expires: ' . $dWeek);
-			header('Cache-Control: ' . $cCache);
-			header('Cache-Control: post-check=0, pre-check=0', FALSE);
-		}
-	}
-
     /**
      * Head::getJS()
      *
@@ -579,8 +550,6 @@ class Head {
      * @return
      */
 	public function getFullHead($cFile = false, $bBody = false) {
-		$this->addCache();
-
 		//Get the HTML header info, e.g. if its html5/4 or xhtml 1.1
 		$cReturn = $this->getDocType();
 		$cReturn .= "<head>\n";
@@ -642,6 +611,8 @@ class Head {
 		} else {
 			$cReturn .= $this->getWarnings();
 		}
+
+		header_register_callback(array($this, "doHeader"));
 
 		return $cReturn;
 	}
