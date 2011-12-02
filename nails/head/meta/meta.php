@@ -99,7 +99,7 @@ class Head_Meta {
 		if ($this->cPageDescription) {
 			$cDescriptions = $this->cPageDescription;
 		} else {
-			$cDescriptions	= $this->cDescription
+			$cDescriptions	= $this->cDescription;
 		}
 
 		$cDescription = "<meta name=\"description\" content=\"" . $cDescriptions . "\" />\n";
