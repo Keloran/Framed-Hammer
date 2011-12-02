@@ -294,10 +294,6 @@ class head_js {
 			$cNamed	.= ".min.css";
 			$oCSS->addCSS($cNamed, $cLocation);
 		}
-
-		printRead($cNamed);
-		printRead($cName);
-		printRead($this);
 		printRead($oCSS);die();
 	}
 
