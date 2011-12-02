@@ -85,9 +85,7 @@ class Head_Meta {
 		}
 
 		$cKeyword	.= $this->cKeywords; 
-return false;
-		$cKeywords = "<meta name=\"keywords\" content=\"" . $cKeyword . "\" />\n";
-		return $cKeywords;
+		return "<meta name=\"keywords\" content=\"" . $cKeyword . "\" />\n";
 	}
 
 	/**
