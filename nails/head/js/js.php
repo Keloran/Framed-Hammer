@@ -296,11 +296,6 @@ class head_js {
 		}
 	}
 
-	public function getAddedCSS() {
-		$oCSS	= $this->oCSS;
-		return $oCSS->getAddedCSS();
-	}
-
 	/**
 	 * head_js::fullLoad()
 	 *
@@ -314,7 +309,6 @@ class head_js {
 			if ($this->bJSFramework) {  $cReturn .= $this->loadJSFramework(); }
 
 			//get custom js
-			$cReturn	.= $this->getAddedCSS();
 			$cReturn 	.= $this->getJS();
 		}
 
