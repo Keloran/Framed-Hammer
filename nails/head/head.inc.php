@@ -487,7 +487,8 @@ class Head {
 	 * @return string
 	 */
 	public function addFrameworkCSS($cName) {
-		$oJS	= $this->oJS;
+		$oJS					= $this->oJS;
+		$oJS->bJSFrameworkUI	= $this->bJSFrameworkUI;
 		return $oJS->addFrameworkCSS($cName);
 	}
 
