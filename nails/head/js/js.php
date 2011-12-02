@@ -8,7 +8,7 @@
  * @version $Id$
  * @access public
  */
-class head_js {
+class Head_JS {
 	//Traits
 	#use Browser;
 

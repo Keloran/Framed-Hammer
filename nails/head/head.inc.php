@@ -247,31 +247,10 @@ class Head {
      * @return
      */
     public function getKeywords() {
-    	$cKeyword	= "";
-
-		if ($this->cPageKeywords) {
-			$cKeyword = $this->cPageKeywords;
-		} else {
-	    	if ($this->cPage) {
-    			if ($this->iItem) {
-    				$aSelect = array($this->cPage, $this->iItem);
-    				$this->oDB->read("SELECT cKeywords FROM keywords WHERE cPage = ? AND iItem = ? LIMIT 1", $aSelect);
-    				if ($this->oDB->nextRecord()) {
-    					$cKeyword .= $this->oDB->f('cKeywords') . ",";
-    				}
-				} else {
-					$this->oDB->read("SELECT cKeywords FROM keywords WHERE cPage = ? AND iItem = 0 LIMIT 1", $this->cPage);
-					if ($this->oDB->nextRecord()) {
-						$cKeyword .= $this->oDB->f('cKeywords') . ",";
-					}
-				}
-			}
-
-			$cKeyword .= $this->oNails->getConfig("keywords", $this->oNails->getConfigKey())['keywords'];
-		}
-
-        $cKeywords = "<meta name=\"keywords\" content=\"" . $cKeyword . "\" />\n";
-        return $cKeywords;
+    	$oMeta					= $this->oNails->getNails("Head_Meta");
+    	$oMeta->cPage			= $this->cPage;
+    	$oMeta->cPageKeywords	= $this->cPageKeywords;
+    	return $oMeta->getKeywords();
     }
 
     /**
@@ -290,14 +269,9 @@ class Head {
      * @return
      */
     public function getDescription() {
-    	if ($this->cPageDescription) {
-    		$cDescriptions = $this->cPageDescription;
-    	} else {
-			$cDescriptions	= $this->oNails->getConfig("description", $this->oNails->getConfigKey())['description'];
-	    }
-
-	    $cDescription = "<meta name=\"description\" content=\"" . $cDescriptions . "\" />\n";
-        return $cDescription;
+    	$oMeta						= $this->oNails->getNails("Head_Meta");
+    	$oMeta->cPageDescription	= $this->cPageDescription;
+    	return $oMeta->getDescription();
     }
 
     /**
@@ -306,60 +280,8 @@ class Head {
      * @return
      */
     public function getMetaTags() {
-		$aTags		= $this->oNails->getConfig("metaData", $this->oNails->getConfigKey());
-    	$cCan		= false;
-    	$bViewPort	= false;
-
-    	//get the browser, since there might be a viewport tag for iphone
-    	#$mBrowser	= getBrowser();
-    	$bViewPort	= $this->bMobile;
-
-		//The initial tag to denote it as made with Hammer
-		$cReturn = "<meta name=\"Generator\" content=\"Hammer Framework\" />\n";
-
-		if (count($aTags) > 0) {
-			foreach($aTags as $cTag => $cValue) {
-				if (($cTag == "viewport") && ($bViewPort == false)) { continue; } //Skip the viewport on non iphones
-				if ($cTag == "metaData") { continue; } //since this is invalid
-
-				if (strstr($cTag, "|")) {
-					$iSplitPos = strpos($cTag, "|");
-					$cTag_a = substr($cTag, 0, $iSplitPos);
-					$cTag_b = substr($cTag, $iSplitPos + 1, strlen($cTag));
-
-					if ($this->cDocType == "html5") {
-						$cReturn .= "<meta name=\"" . $cTag_b . "\" content=\"" . $cValue . "\" />\n";
-					} else {
-						$cReturn .= "<meta name=\"" . $cTag_b . "\" http-equiv=\"" . $cTag_b . "\" content=\"" . $cValue . "\" />\n";
-					}
-				} else {
-					if ($this->cDocType == "html5") {
-						$cReturn .= "<meta name=\"" . $cTag . "\" content=\"" . $cValue . "\" />\n";
-					} else {
-						$cReturn .= "<meta name=\"" . $cTag . "\" http-equiv=\"" . $cTag . "\" content=\"" . $cValue . "\" />\n";
-					}
-				}
-			}
-		}
-
-    	//Canoical
-    	if ($this->cPage) {
-    		if ($this->cAddress) {
-    			$cCan = $this->cAddress . "/";
-    		} else {
-    			if (isset($_SERVER['SERVER_NAME'])) {
-    					$cCan = $_SERVER['SERVER_NAME'];
-    			}
-    		}
-
-			if (isset($_SERVER['HTTPS'])) {
-				$cHTTP = "https";
-			} else {
-				$cHTTP = "http";
-			}
-    	}
-
-    	return $cReturn;
+    	$oMeta	= $this->oNails->getNails("Head_Meta");
+    	return $oMeta->getMetaTags();
     }
 
 	/**
@@ -556,9 +478,6 @@ class Head {
 
 		//get the css first to speed up page load
 		$cReturn .= $this->getCSS($cFile);
-
-		//always add the charset
-		$cReturn .= "<meta charset=\"utf-8\" />\n";
 
 		//Base
 		if (isset($_SERVER['SERVER_NAME'])) {

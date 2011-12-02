@@ -8,7 +8,7 @@
  * @version $Id$
  * @access public
  */
-class head_css {
+class Head_CSS {
 	//Traits
 	use Browser;
 
