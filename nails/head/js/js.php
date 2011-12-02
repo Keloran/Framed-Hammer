@@ -221,7 +221,7 @@ class head_js {
 				$cReturn .= "<script src=\"" . $cHTTP;
 				$cReturn .= "://ajax.googleapis.com/ajax/libs/";
 				$cReturn .= $this->cJSFrameworkName . "ui/";
-				$cReturn .= $this->cJSFrameworkUIVersion . "";
+				$cReturn .= $this->cJSFrameworkUIVersion . "/";
 				$cReturn .= $this->cJSFrameworkName . "-ui";
 				$cReturn .= ".min.js\" type=\"text/javascript\"></script>\n";
 			}
