@@ -280,6 +280,9 @@ class head_css {
 		}
 
 		$this->aAddedCSS = $aAdded;
+
+		//debug
+		if ($cCSS == "humanity") { printRead($this); die(); }
 	}
 
 
