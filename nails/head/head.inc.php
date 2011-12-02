@@ -531,7 +531,8 @@ class Head {
 			$cReturn .= $this->getWarnings();
 		}
 
-		header_register_callback(array($this, "doHeader"));
+		//do the header call for caching
+		$this->doHeader();
 
 		return $cReturn;
 	}
