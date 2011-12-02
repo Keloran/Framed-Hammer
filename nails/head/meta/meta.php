@@ -9,7 +9,7 @@
  * @access public
  */
 class Head_Meta {
-	use browser;
+	#use browser;
 
 	private $aData;
 	private $oDB;
@@ -84,8 +84,8 @@ class Head_Meta {
 			}
 		}
 
-		$cKeyword	.= $this->cKeywords; 
-return false;
+		$cKeyword	.= $this->cKeywords;
+		return false; //temp fix because its causing a segfault otherwise
 		$cKeywords = "<meta name=\"keywords\" content=\"" . $cKeyword . "\" />\n";
 		return $cKeywords;
 	}
