@@ -124,7 +124,7 @@ class Head_Meta {
 		//The initial tag to denote it as made with Hammer
 		$cReturn = "<meta name=\"Generator\" content=\"Hammer Framework\" />\n";
 
-		if (count($aTags) > 0) {
+		if ($aTags) {
 			foreach($aTags as $cTag => $cValue) {
 				if (($cTag == "viewport") && ($bViewPort == false)) { continue; } //Skip the viewport on non iphones
 				if ($cTag == "metaData") { continue; } //since this is invalid
