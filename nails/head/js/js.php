@@ -295,6 +295,8 @@ class head_js {
 			$oCSS->addCSS($cNamed, $cLocation);
 		}
 
+		printRead($cNamed);
+		printRead($cName);
 		printRead($this);
 		printRead($oCSS);die();
 	}
