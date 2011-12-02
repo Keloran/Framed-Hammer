@@ -30,8 +30,9 @@ class Head_Meta {
 		$cKeywords			= $aGet['keywords'];
 		$this->cKeywords	= $cKeywords;
 
+		$aMeta			= false;
 		$aGet			= $this->oNails->getConfig("metaData", $this->oNails->getConfigKey());
-		$aMeta			= $aGet['metaData'];
+		if (isset($aGet['metaData'])) { $aMeta	= $aGet['metaData']; }
 		$this->aMeta	= $aMeta;
 
 		$aGet				= $this->oNails->getConfig("description", $this->oNails->getConfigKey());
