@@ -42,7 +42,7 @@ class Head {
 		$this->oNails	= $oNails;
 		$this->oDB		= $this->oNails->oDB;
 		$this->oCSS		= $this->oNails->getNails("Head_CSS");
-		$this->oJS		= $this->oNails->getNails("Head_JS");
+		$this->oJS		= $this->oNails->getNails("Head_JS", $this->oCSS);
 
 		$this->aHead	= $this->makeHead();
 
@@ -386,7 +386,7 @@ class Head {
 	}
 
 	/**
-	 * getCSS()
+	 * Head::getCSS()
 	 *
 	 * @param string $cFile
 	 * @return string

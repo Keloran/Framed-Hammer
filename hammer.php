@@ -98,7 +98,7 @@ class Hammer {
 	public $cSkin		= false;
 
 	//registry
-	private $aRegistry	= array();
+	public $aRegistry	= array();
 
 	/**
  	* Hammer::__construct()

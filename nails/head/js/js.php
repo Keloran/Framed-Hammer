@@ -14,6 +14,7 @@ class head_js {
 
 	private $aData;
 	private $oNails;
+	private $oCSS;
 
 	//jQuery
 	public $bJSFramework			= false;
@@ -34,8 +35,9 @@ class head_js {
 	 * @param Nails $oNails
 	 * @return null
 	 */
-	function __construct(Nails $oNails) {
+	function __construct(Nails $oNails, $oCSS) {
 		$this->oNails	= $oNails;
+		$this->oCSS		= $oCSS;
 
 		$aGet		= $this->oNails->getConfig("address", "head");
 		$cAddress	= $aGet['address'];
@@ -273,6 +275,7 @@ class head_js {
 		printRead($oCSS);
 		printRead($this->oNails);
 		printRead($this->oNails->getNails("Head_CSS"));
+		printRead($this->oCSS);
 		die();
 
 		$cReturn = false;
