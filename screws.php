@@ -54,10 +54,15 @@ class Screws {
 			try {
 				include $this->cPath;
 			} catch (Exception $e) {
-				throw new Spanner($e);
+				throw new Spanner($e->getMessage);
 			}
 
 			//now we will do the install if there is a class path
+			try {
+				$this->doInstall();
+			} catch (Exception $e) {
+				throw new Spanner($e->getMessage);
+			}
 		} else {
 			//so that the class not exisitng can be handled by the user/file
 			throw new ErrorException($cClass . ": Class File not found", 101);
@@ -306,7 +311,6 @@ class Screws {
 		return false;
 	}
 
-
 	/**
 	 * Screws::doInstall()
 	 *
@@ -325,7 +329,7 @@ class Screws {
 				include $cInstallFile;
 
 				//call the install
-				$oInstall	= $cInstallClass($oNails);
+				$oInstall	= new $cInstallClass($oNails);
 			} catch (Exception $e) {
 				throw new Spanner($e->getMessage, 101010);
 			}
