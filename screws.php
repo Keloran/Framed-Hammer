@@ -58,6 +58,11 @@ class Screws {
 			}
 
 			//now we will do the install if there is a class path
+			if ($cClass == "Session") {
+				printRead(array($cClass, $this->cClassPath));
+				die();
+			}
+
 			if ($this->cClassPath) {
 				try {
 					$this->doInstall($cClass, $this->cClassPath);
