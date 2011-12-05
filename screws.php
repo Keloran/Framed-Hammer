@@ -54,14 +54,16 @@ class Screws {
 			try {
 				include $this->cPath;
 			} catch (Exception $e) {
-				throw new Spanner($e->getMessage);
+				throw new Spanner($e->getMessage());
 			}
 
 			//now we will do the install if there is a class path
-			try {
-				$this->doInstall();
-			} catch (Exception $e) {
-				throw new Spanner($e->getMessage);
+			if ($this->cClassPath) {
+				try {
+					$this->doInstall($cClass, $this->cClassPath);
+				} catch (Exception $e) {
+					throw new Spanner($e->getMessage());
+				}
 			}
 		} else {
 			//so that the class not exisitng can be handled by the user/file
@@ -317,10 +319,11 @@ class Screws {
 	 * @return null
 	 */
 	private function doInstall($cClass = false, $cPath = false) {
-		if (file_exists($cPath . "/install/install.php")) {
-			$cInstallFile	= $cPath . "/install/install.php";
-			$cInstallClass	= $cClass . "_install";
+		$cInstallFile	= $cPath . "/install/install.php";
+		$cInstallClass	= $cClass . "_install";
+		$cInstallPath	= $cPath . "/install/install.php";
 
+		if (file_exists($cInstallPath)) {
 			try {
 				//get nails
 				$oNails	= new Nails();
@@ -331,8 +334,18 @@ class Screws {
 				//call the install
 				$oInstall	= new $cInstallClass($oNails);
 			} catch (Exception $e) {
-				throw new Spanner($e->getMessage, 101010);
+				throw new Spanner($e->getMessage(), 101010);
 			}
+		} else {
+			$debug	= array(
+				"Path"		=> $cPath,
+				"Install"	=> $cInstallFile,
+				"Class"		=> $cClass,
+				"Installer"	=> $cClass . "_install"
+			);
+
+			printRead($debug);
+			die();
 		}
 	}
 }
