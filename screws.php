@@ -348,6 +348,9 @@ class Screws {
 				//call the install
 				$oInstall	= new $cInstallClass($oNails);
 			} catch (Exception $e) {
+				printRead($aDebug);
+				die();
+
 				throw new Spanner($e->getMessage(), 101010);
 			}
 		}
