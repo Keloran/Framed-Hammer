@@ -325,7 +325,10 @@ class Screws {
 	 * @return null
 	 */
 	private function doInstall($cClass = false, $cPath = false) {
-		$iLength		= strlen($cClass) + 1;
+		$aName			= explode("_", $cClass);
+		$cLast			= end($aName);
+		$iLength		= $cLast;
+
 		$cPathed		= $cPath;
 		$cPath			= substr($cPath, 0, -$iLength);
 
