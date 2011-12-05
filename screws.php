@@ -338,9 +338,6 @@ class Screws {
 				//get nails
 				$oNails	= new Nails();
 
-				//get the file
-				include $cInstallFile;
-
 				//call the install
 				$oInstall	= new $cInstallClass($oNails);
 			} catch (Exception $e) {
