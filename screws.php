@@ -318,7 +318,7 @@ class Screws {
 	 * @return null
 	 */
 	private function doInstall($cClass = false, $cPath = false) {
-		$iLength		= strlen($cClass);
+		$iLength		= strlen($cClass) + 1;
 		$cPath			= substr($cPath, 0, -$iLength);
 
 		$cInstallFile	= $cPath . "/install/install.php";
