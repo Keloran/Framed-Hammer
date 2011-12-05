@@ -48,8 +48,6 @@ class Form {
 			$this->oNails		= null;
 			$this->oNails		= $this->oTemplate->oNails;
 
-			if (is_object($this->oNails)) { $this->oNails->getNails("Form_Install"); }
-
 			$this->cFile		= $this->oTemplate->cFormTemplate;
 
 			//see if this can remove the extra stuff

@@ -21,7 +21,6 @@ class Validator {
 	 *
 	 */
 	private function __construct(Nails $oNails) {
-		$oNails->getNails("Validator_Install");
 		$this->oNails	= $oNails;
 	}
 

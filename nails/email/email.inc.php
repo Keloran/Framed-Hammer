@@ -50,8 +50,6 @@ class Email implements Nails_Interface {
 	 */
 	public function __construct(Nails $oNails = null, $aDetails = false) {
 		if (is_object($oNails)) {
-			$oNails->getNails("Email_Install");
-
 			$this->oNails 	= $oNails;
 			$this->oUser	= $oNails->getUser();
 

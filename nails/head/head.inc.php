@@ -37,8 +37,6 @@ class Head {
      *
      */
 	private function __construct(Nails $oNails, $cStyle = false, $bNoInstall = null) {
-		$oNails->getNails("Head_Install");
-
 		$this->oNails	= $oNails;
 		$this->oDB		= $this->oNails->oDB;
 		$this->oCSS		= $this->oNails->getNails("Head_CSS");

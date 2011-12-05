@@ -23,7 +23,6 @@ class Gallery implements Nails_Interface {
 	 *
 	 */
 	private function __construct(Nails $oNails) {
-		$oNails->getNails("Gallery_Install");
 		$this->oNails	= $oNails;
 
 		$this->oUser	= $this->oNails->getUser();

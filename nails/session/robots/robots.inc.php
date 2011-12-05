@@ -25,8 +25,6 @@ class Session_Robots {
 	 * @param Nails $oNails
 	 */
 	private function __construct(Nails $oNails) {
-		$oNails->getNails("Session_Robots_Install");
-
 		$this->oNails	= $oNails;
 		$this->oDB		= $oNails->getDatabase();
 	}

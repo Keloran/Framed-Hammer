@@ -26,8 +26,6 @@ class Messages implements Nails_Interface {
      *
      */
     private function __construct(Nails $oNails) {
-    	$oNails->getNails("Messages_Install")_;
-
         $this->oUser	= $oNails->getUser();
         $this->oSession	= $oNails->getSession();
     	$this->oDB		= $oNails->getDatabase();

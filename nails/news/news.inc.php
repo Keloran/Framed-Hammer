@@ -31,8 +31,6 @@ class News implements Nails_Interface {
      *
      */
 	private function __construct(Nails $oNails) {
-		$oNails->getNails("News_Install");
-
     	$this->oNails		= $oNails;
 		$this->oUser		= $this->oNails->getUser();
 		$this->oSession		= $this->oNails->getSession();

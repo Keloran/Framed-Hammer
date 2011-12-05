@@ -33,9 +33,6 @@ class User implements Nails_Interface {
      * @access protected
      */
     private function __construct(Nails $oNails, $bNoInstall = null) {
-    	//do the install or upgrade
-    	$oNails->getNails("User_Install");
-
     	//assign the vars
 		$this->oNails	= $oNails;
 		$this->oDB		= $this->oNails->getDatabase();

@@ -28,8 +28,6 @@ class News_Comments implements Nails_Interface {
 	 * @param Nails $oNails
 	 */
 	private function __construct(Nails $oNails) {
-		$oNails->getNails("News_Comments_Install");
-
 		$this->oNails	= $oNails;
 		$this->oDB	= $oNails->getDatabase();
 		$this->oSession	= $oNails->getSession();

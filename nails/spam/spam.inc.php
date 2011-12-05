@@ -16,8 +16,6 @@ class Spam {
 	 * @param Nails $oNails
 	 */
 	public function __construct(Nails $oNails) {
-		$oNails->addVersion("Spam_Install");
-
 		$this->oNails 	= $oNails;
 		$this->oDB		= $oNails->getDatabase();
 	}

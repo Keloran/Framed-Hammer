@@ -33,8 +33,6 @@ class Forum implements Nails_Interface {
      *
      */
     private function __construct(Nails $oNails) {
-    	$oNails->getNails("Forum_Install");
-
     	$this->oNails	= $oNails;
 
 		$this->oUser	= $this->oNails->getUser();

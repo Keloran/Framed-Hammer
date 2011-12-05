@@ -29,7 +29,6 @@ class Twitter implements Nails_Interface {
 	 *
 	 */
 	private function __construct(Nails $oNails) {
-		$oNails->getNails("Twitter_Install");
 		$this->oNails	= $oNails;
 
 		$this->oUser	= $this->oNails->getUser();

@@ -19,8 +19,6 @@ class Search implements Nails_Interface {
      *
      */
     private function __construct(Nails $oNails) {
-    	$oNails->getNails("Search_Install");
-
     	$this->oNails	= $oNails;
     	$this->oDB		= $oNails->getDatabase();
     }

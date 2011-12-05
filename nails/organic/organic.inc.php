@@ -20,8 +20,6 @@ class Organic {
 	 * @param Nails $oNails
 	 */
 	private function __construct(Nails $oNails) {
-		$oNails->getNails("Organic_Install");
-
 		$this->oNails	= $oNails;
 		$this->oDB	= $oNails->getDatabase();
 	}
