@@ -29,7 +29,7 @@ class Session {
 	 *
 	 */
 	private function __construct(Nails $oNails) {
-		$oNails->getNails("Session_Install");
+		#$oNails->getNails("Session_Install");
 
 		$this->oNails	= $oNails;
 		$this->oDB		= $oNails->getDatabase();

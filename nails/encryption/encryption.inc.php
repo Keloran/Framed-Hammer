@@ -26,19 +26,13 @@ class Encryption extends Nails {
 	 */
 	private function __construct() {
 		parent::_construct();
-		$aConfig			= $this->getConfig("Encrypt");
+		$aConfig			= $this->getConfig("Encrypt", "App");
 		$this->cCryptKey	= $aConfig['key'];
 
 		$iIVSize	= mcrypt_get_iv_size($this->cAlgorithm, $this->cMode);
 		$cIV		= mcrypt_create_iv($iIVSize, $this->cRandSrc);
 
 		$this->cIV	= $cIV;
-
-		//do the upgrade
-		if ($this->checkVersion("encryption", "1.0") == false) {
-			//1.0
-			$this->addVersion("encryption", "1.0");
-		}
 	}
 
 	/**

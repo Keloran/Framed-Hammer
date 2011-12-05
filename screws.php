@@ -56,6 +56,8 @@ class Screws {
 			} catch (Exception $e) {
 				throw new Spanner($e);
 			}
+
+			//now we will do the install if there is a class path
 		} else {
 			//so that the class not exisitng can be handled by the user/file
 			throw new ErrorException($cClass . ": Class File not found", 101);
@@ -171,13 +173,20 @@ class Screws {
 		$this->fHammerClass_d	= HAMMERPATH	. "/nails/" . $this->cClass_b	. ".php";
 
 		//see if there is anything in namespaces
-		$this->fHammerClass_e	= HAMMERPATH	. "/nails/" . $this->cClass_d	. ".php";
+		$this->fHammerClass_e		= HAMMERPATH	. "/nails/" . $this->cClass_d	. ".php";
 
 		//Traits
 		$this->fHammerClass_Trait	= HAMMERPATH . "/traits/" . $this->cClass_a . ".php";
 
 		//Base class, this is only for things like spanner
 		$this->fBaseClass		= HAMMERPATH	. "/" 		. $this->cClassName	. ".php";
+
+		//get the paths
+		$this->fHammerClass_a_Path	= HAMMERPATH	. "/nails/" . $this->cClass_a;
+		$this->fHammerClass_b_Path	= HAMMERPATH	. "/nails/" . $this->cClass_b;
+		$this->fHammerClass_c_Path	= HAMMERPATH	. "/nails/" . $this->cClass_a;
+		$this->fHammerClass_d_Path	= HAMMERPATH	. "/nails/" . $this->cClass_b;
+		$this->fHammerClass_e_Path	= HAMMERPATH	. "/nails/" . $this->cClass_d;
 
 		//if the dir exists
 		if (is_dir(SITEPATH . "/nails")) {
@@ -213,6 +222,14 @@ class Screws {
 		//Traits
 		$this->fSiteClass_Trait = USERNAILS . "/traits/" . $this->cClass_a . ".php";
 
+		//get the paths
+		$this->fSiteClass_a_Path	= USERNAILS . $this->cClass_a;
+		$this->fSiteClass_b_Path	= USERNAILS . $this->cClass_b;
+		$this->fSiteClass_c_Path	= USERNAILS . $this->cClass_d;
+		$this->fSiteClass_d_Path	= USERNAILS . $this->cClass_a;
+		$this->fSiteClass_e_Path	= USERNAILS . $this->cClass_b;
+		$this->fSiteClass_f_Path	= USERNAILS . $this->cClass_d;
+
 		return $bReturn;
 	}
 
@@ -228,6 +245,12 @@ class Screws {
 		//without the inc bit
 		$this->fSiteClass_c	= SITEPATH . "/libs/"	. $this->cClass_a	. ".php";
 		$this->fSiteClass_d	= SITEPATH . "/libs/"	. $this->cClass_b	. ".php";
+
+		//get the paths
+		$this->fSiteClass_a_Path	= SITEPATH . "/libs/" . $this->cClass_a;
+		$this->fSiteClass_b_Path	= SITEPATH . "/libs/" . $this->cClass_b;
+		$this->fSiteClass_c_Path	= SITEPATH . "/libs/" . $this->cClass_a;
+		$this->fSiteClass_d_Path	= SITEPATH . "/libs/" . $this->cClass_b;
 	}
 
 	/**
@@ -247,20 +270,26 @@ class Screws {
 
 		//now do the site classes
 		for ($i = 0; $i < $iRange; $i++) {
-			$cClass	= "fSiteClass_";
+			$cClass	 = "fSiteClass_";
 			$cClass .= $aRange[$i];
+			$cPath	 = $cClass . "_Path";
+
 			if (file_exists($this->$cClass)) {
-				$this->cPath = $this->$cClass;
+				$this->cPath 		= $this->$cClass;
+				$this->cClassPath	= $this->$cPath;
 				return true;
 			}
 		}
 
 		//now do the hammer classes
 		for ($i = 0; $i < $iRange; $i++) {
-			$cClass	= "fHammerClass_";
+			$cClass	 = "fHammerClass_";
 			$cClass .= $aRange[$i];
+			$cPath	 = $cClass . "_Path";
+
 			if (file_exists($this->$cClass)) {
-				$this->cPath = $this->$cClass;
+				$this->cPath 		= $this->$cClass;
+				$this->cClassPath	= $this->$cPath;
 				return true;
 			}
 		}
@@ -275,6 +304,32 @@ class Screws {
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * Screws::doInstall()
+	 *
+	 * @return null
+	 */
+	private function doInstall($cClass = false, $cPath = false) {
+		if (file_exists($cPath . "/install/install.php")) {
+			$cInstallFile	= $cPath . "/install/install.php";
+			$cInstallClass	= $cClass . "_install";
+
+			try {
+				//get nails
+				$oNails	= new Nails();
+
+				//get the file
+				include $cInstallFile;
+
+				//call the install
+				$oInstall	= $cInstallClass($oNails);
+			} catch (Exception $e) {
+				throw new Spanner($e->getMessage, 101010);
+			}
+		}
 	}
 }
 

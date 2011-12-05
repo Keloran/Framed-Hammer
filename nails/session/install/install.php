@@ -30,15 +30,17 @@ class Session_Install {
 	}
 
 	private function upgrade() {
-		if ($this->oNails->checkVersion("session", "1.2") == false) {
+		if ($this->oNails->checkVersion("session", "1.3") == false) {
 			//1.1
 			$cSQL	= "ALTER TABLE `users_sessions` CHANGE COLUMN `cIP` `cIP` INT NULL DEFAULT '0' AFTER `cReason`";
 			$this->oNails->updateVersion("session", "1.1", $cSQL, "Updated to now use ip2long rather than stoping it as a strig, needs to keep as c for old calls");
 
-
 			//1.2
 			$cSQL = "ALTER TABLE `users_sessions` ADD COLUMN `cBrowser` varchar(255)";
 			$this->oNails->updateVersion("session", "1.2", $cSQL, "Added Browser so that I can target browsers");
+
+			//1.3
+			$this->oNails->updateVersion("session", "1.3", false, "Updated to autoinstall");
 		}
 	}
 
