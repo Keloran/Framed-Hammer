@@ -326,17 +326,11 @@ class Screws {
 		$cInstallPath	= $cPath . "/install/install.php";
 
 		$aDebug	= array(
-				"Path"		=> $cPath,
-				"Install"	=> $cInstallFile,
-				"Class"		=> $cClass,
-				"Installer"	=> $cClass . "_install"
-			);
-
-		//now we will do the install if there is a class path
-		if ($cClass == "Session") {
-			printRead($aDebug);
-			die();
-		}
+			"Path"		=> $cPath,
+			"Install"	=> $cInstallFile,
+			"Class"		=> $cClass,
+			"Installer"	=> $cClass . "_install"
+		);
 
 		if (file_exists($cInstallPath)) {
 			//see if i can call it
