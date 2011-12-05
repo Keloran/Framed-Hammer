@@ -324,6 +324,17 @@ class Screws {
 		$cInstallPath	= $cPath . "/install/install.php";
 
 		if (file_exists($cInstallPath)) {
+			$debug	= array(
+				"Path"		=> $cPath,
+				"Install"	=> $cInstallFile,
+				"Class"		=> $cClass,
+				"Installer"	=> $cClass . "_install"
+			);
+
+			printRead($debug);
+			die();
+
+			//see if i can call it
 			try {
 				//get nails
 				$oNails	= new Nails();
@@ -336,16 +347,6 @@ class Screws {
 			} catch (Exception $e) {
 				throw new Spanner($e->getMessage(), 101010);
 			}
-		} else {
-			$debug	= array(
-				"Path"		=> $cPath,
-				"Install"	=> $cInstallFile,
-				"Class"		=> $cClass,
-				"Installer"	=> $cClass . "_install"
-			);
-
-			printRead($debug);
-			die();
 		}
 	}
 }
