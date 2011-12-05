@@ -57,12 +57,6 @@ class Screws {
 				throw new Spanner($e->getMessage());
 			}
 
-			//now we will do the install if there is a class path
-			if ($cClass == "Session") {
-				printRead(array($cClass, $this->cClassPath));
-				die();
-			}
-
 			if ($this->cClassPath) {
 				try {
 					$this->doInstall($cClass, $this->cClassPath);
@@ -328,17 +322,20 @@ class Screws {
 		$cInstallClass	= $cClass . "_install";
 		$cInstallPath	= $cPath . "/install/install.php";
 
-		if (file_exists($cInstallPath)) {
-			$debug	= array(
+		$aDebug	= array(
 				"Path"		=> $cPath,
 				"Install"	=> $cInstallFile,
 				"Class"		=> $cClass,
 				"Installer"	=> $cClass . "_install"
 			);
 
-			printRead($debug);
+		//now we will do the install if there is a class path
+		if ($cClass == "Session") {
+			printRead($aDebug);
 			die();
+		}
 
+		if (file_exists($cInstallPath)) {
 			//see if i can call it
 			try {
 				//get nails
