@@ -57,11 +57,18 @@ class Screws {
 				throw new Spanner($e->getMessage());
 			}
 
-			if ($this->cClassPath) {
-				try {
-					$this->doInstall($cClass, $this->cClassPath);
-				} catch (Exception $e) {
-					throw new Spanner($e->getMessage());
+			//now make sure not todo this in a loop
+			$bSkip	= false;
+			if (substr($cClass, -7) == "install") { $bSkip = true; }
+
+			//now do the installer unless skipped
+			if (!$bSkip) {
+				if ($this->cClassPath) {
+					try {
+						$this->doInstall($cClass, $this->cClassPath);
+					} catch (Exception $e) {
+						throw new Spanner($e->getMessage());
+					}
 				}
 			}
 		} else {
