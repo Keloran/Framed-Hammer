@@ -543,10 +543,6 @@ class Template extends Template_Abstract {
 		if ($this->bChecked) {
 			if ($this->bFormAdded) {
 				if ($this->oForms) {
-					printRead($this->cTemplate);
-					printRead($this);
-					die();
-
 					$this->setVars('cForm', $this->oForms->fullForm($this->cTemplate));
 					$this->setVars("oForm", $this->oForms);
 				} else { //this is incase you didnt add the form but your trying to call it
