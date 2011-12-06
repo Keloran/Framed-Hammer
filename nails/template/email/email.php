@@ -54,10 +54,11 @@ class Template_Email extends Template_Abstract {
 	public function setTemplate($cTemplate = null) {
 		$cReturn	= false;
 
+		//fallback
+		$cPath		= SITEPATH . "/templates/" . $cTemplate;
+
 		$this->cFolder	= SITEPATH . "/layout/emails/";
-		if (file_exists($this->cFolder . $cTemplate)) {
-			$cPath = $this->cFolder . $cTemplate;
-		}
+		if (file_exists($this->cFolder . $cTemplate)) { $cPath = $this->cFolder . $cTemplate; }
 
 		//since the page isnt actually real
 		if (strstr($cPath, "http:")) { return false; }
