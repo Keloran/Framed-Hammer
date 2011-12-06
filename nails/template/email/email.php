@@ -54,6 +54,8 @@ class Template_Email extends Template_Abstract {
 	public function setTemplate($cTemplate = null) {
 		$cReturn	= false;
 
+		$cTemplate	= $cTemplate . ".tpl";
+
 		//fallback
 		$cPath		= SITEPATH . "/templates/" . $cTemplate;
 
