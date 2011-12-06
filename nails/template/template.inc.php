@@ -197,6 +197,17 @@ class Template extends Template_Abstract {
 	}
 
 	/**
+	 * Template::getLayout()
+	 *
+	 * @param string $cPage
+	 * @param bool $bEcho
+	 * @return string
+	 */
+	public function getLayout($cPage, $bEcho = null) {
+		return $this->getCore($cPage, $bEcho);
+	}
+
+	/**
 	* Template::indexTemplate()
 	*
 	* @param string $cTemplate
@@ -246,25 +257,16 @@ class Template extends Template_Abstract {
 	*/
 	private function getCoreTemplate($cTemplate = false) {
 		return $this->setCoreTemplate($cTemplate);
+	}
 
-		//Since this gets added to
-		if (is_dir(SITEPATH . "/layout")) {
-			$cLayoutFolder	= "/layout/";
-		} else {
-			$cLayoutFolder	= "/core/";
-		}
-
-		if (($this->cSkin) && is_dir(SITEPATH . $cLayoutFolder . $this->cSkin)) {
-			if (file_exists(SITEPATH . $cLayoutFolder . $this->cSkin . "/templates/" . $cTemplate . ".tpl")) {
-				$cLayoutFolder	.= $this->cSkin . "/";
-			}
-		} else {
-			if (file_exists(SITEPATH . $cLayoutFolder . "/templates/" . $cTemplate . ".tpl")) {
-				$this->cTemplate = SITEPATH . $cLayoutFolder . "templates/" . $cTemplate . ".tpl";
-			} else {
-				throw new Spaner($cTemplate . " Layout Template not found", 505);
-			}
-		}
+	/**
+	 * Template::setLayout()
+	 *
+	 * @param string $cTemplate
+	 * @return string
+	 */
+	public function setLayout($cTemplate = false) {
+		return $this->setCoreTemplate($cTemplate);
 	}
 
 	/**
