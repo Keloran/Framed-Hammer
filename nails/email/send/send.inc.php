@@ -358,8 +358,7 @@ class Email_Send {
 
 			$cReturn = $oTemplate->renderTemplate();
 		}
-printRead($this);die();
-
+		
 		$this->cFinalTemplate = $cReturn;
 		return $this->cFinalTemplate;
 	}
