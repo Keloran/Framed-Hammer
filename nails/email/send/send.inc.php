@@ -9,8 +9,6 @@ class Email_Send {
 	 *
 	 */
 	function __construct($oNails = false) {
-		if ($oNails) { $oNails->getNails("Email_Send_Install"); }
-
 		//set the inital boundary, can be reset by the user
 		$this->setBoundry();
 
@@ -206,7 +204,7 @@ class Email_Send {
 
 		//actually send the message
 		if ($bLogin) {
-			return mail($this->cTo, $this->cSubject, $this->cBody, $this->cHeaders, $cLogin);
+			return imap_mail($this->cTo, $this->cSubject, $this->cBody, $this->cHeaders, false, false, $this->cFrom);
 		} else {
 			return mail($this->cTo, $this->cSubject, $this->cBody, $this->cHeaders);
 		}

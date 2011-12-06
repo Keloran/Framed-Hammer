@@ -290,7 +290,7 @@ class User implements Nails_Interface {
      * @param string $cEmail
      * @return bool
      */
-    public function register($mUsername, $cPassword = false, $cPassword2 = false, $cEmail = false) {
+    public function register($mUsername, $cPassword = false, $cPassword2 = false, $cEmail = false, $cTemplate = false, $aParams = false) {
     	if (is_array($mUsername)) {
     		foreach ($mUsername as $mKey => $mValue) {
     			switch ($mKey){
@@ -310,6 +310,13 @@ class User implements Nails_Interface {
     					$cEmail	= $mValue;
     					break;
 
+    				case "template":
+    					$cTemplate	= $mValue;
+    					break;
+
+    				case "params":
+    					$aParams = $mValue;
+    					break;
     			}
     		}
     	} else {
@@ -341,7 +348,7 @@ class User implements Nails_Interface {
 				(?, MD5(?), ?, UNIX_TIMESTAMP(), ?, ?, 2)", $aEscape);
 		$iUserID = $this->oDB->insertID();
 
-		$this->sendConfirm($cEmail, $cRegisterHash, $iUserID, true);
+		$this->sendConfirm($cEmail, $cRegisterHash, $iUserID, $cTemplate, $aParams);
 
 		return true;
     }
@@ -480,7 +487,7 @@ class User implements Nails_Interface {
      * @param int $iUserID
      * @return null
      */
-    public function sendConfirm($cEmail, $cRegisterHash, $iUserID) {
+    public function sendConfirm($cEmail, $cRegisterHash, $iUserID, $cTemplate = false, $aParams = false) {
 		$oHammer	= Hammer::getHammer();
 		$oHead		= $oHammer->getHead();
 
@@ -498,7 +505,21 @@ class User implements Nails_Interface {
 		if (defined("DEV") && defined("NOMAIL")) {
 			throw new Spanner($cMessage, 600);
 		} else {
-			$this->sendMail($cEmail, $cTitle, $cMessage, "Admin", "admin@" . $cAddress);
+			if ($cTemplate) {
+				$aSend	= array(
+					"to"				=> $cEmail,
+					"subject"			=> $cTitle,
+					"templateParams"	=> $aParams,
+					"template"			=> $cTemplate,
+					"fromName"			=> "Admin",
+					"text"				=> $cMessage,
+					"from"				=> "admin@" . $cAddress
+				);
+
+				$this->sendMail($aSend);
+			} else {
+				$this->sendMail($cEmail, $cTitle, $cMessage, $cMessage, "admin@" . $cAddress, "Admin");
+			}
 		}
     }
 
