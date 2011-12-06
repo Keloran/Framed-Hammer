@@ -231,7 +231,7 @@ class Email_Send {
 			}
 
 			//HTML part
-			if ($this->cHTML) {
+			if ($this->cHTML || $this->cTemplate) {
 				$this->cBody .= "--" . $this->cBoundry . "\r\n";
 				$this->cBody .= "Content-Type: text/html; charset=UTF-8\r\n";
 				$this->cBody .= "Content-Transfer-Encoding: 8bit\r\n";
@@ -340,12 +340,8 @@ class Email_Send {
 
 		//is there a template set
 		if ($this->cTemplate) {
-			printRead("tester");die();
-
 			$oHammer 	= Hammer::getHammer();
 			$oTemplate	= $oHammer->getTemplate();
-
-			$oTemplate->setTemplate($this->cTemplate);
 
 			//is tehre any template params
 			if (isset($this->mTempParams)) {
@@ -357,6 +353,8 @@ class Email_Send {
 					$oTemplate->setVars("content", $this->mTempParams);
 				}
 			}
+
+			$oTemplate->setEmailTemplate($this->cTemplate);
 
 			$cReturn = $oTemplate->renderTemplate();
 		}
