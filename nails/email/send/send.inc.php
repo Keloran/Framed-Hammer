@@ -343,8 +343,6 @@ class Email_Send {
 			$oHammer 	= Hammer::getHammer();
 			$oTemplate	= $oHammer->getTemplate();
 
-			$oTemplate->setTemplate($this->cTemplate);
-
 			//is tehre any template params
 			if (isset($this->mTempParams)) {
 				if (is_array($this->mTempParams)) {
@@ -355,6 +353,8 @@ class Email_Send {
 					$oTemplate->setVars("content", $this->mTempParams);
 				}
 			}
+
+			$oTemplate->setEmailTemplate($this->cTemplate);
 
 			$cReturn = $oTemplate->renderTemplate();
 		}
