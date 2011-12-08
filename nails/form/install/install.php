@@ -47,12 +47,12 @@ class Form_Install {
 	private function upgrade() {
 		if (isset($this->oNails) && $this->oNails) {
 			//Check the version and do any updats
-			if ($this->oNails->checkVersion("template_formed", "1.2") == false) {
+			if ($this->oNails->checkVersion("form", "1.2") == false) {
 				//1.1
-				$this->oNails->updateVersion("template_formed", "1.1", false, "De-Coupled");
+				$this->oNails->updateVersion("form", "1.1", false, "De-Coupled");
 
 				//1.2
-				$this->oNails->updateVersion("template_formed", "1.2", false, "Moved so that it can be replaced easier");
+				$this->oNails->updateVersion("form", "1.2", false, "Moved so that it can be replaced easier");
 			}
 		}
 	}
