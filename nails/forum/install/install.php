@@ -12,7 +12,7 @@ class Forum_Install {
 		$this->oNails	= $oNails;
 		$this->oDB		= $oNails->getDatabase();
 
-		$bInstalled	= $oNails->checkInstalled("forum");
+		$bInstalled	= $oNails->checkInstalled("forums");
 		if ($bInstalled) {
 			$this->upgrade();
 		} else {

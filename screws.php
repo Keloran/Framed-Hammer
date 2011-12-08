@@ -336,6 +336,7 @@ class Screws {
 		$cInstallFile	= $cPath . "/install/install.php";
 		$cInstallClass	= $cClass . "_install";
 		$cInstallPath	= $cPath . "/install/install.php";
+		$cChecker	= $cPath . "/" . $cClass . "/install/install.php";
 
 		$aDebug	= array(
 			"Path"		=> $cPath,
@@ -348,22 +349,33 @@ class Screws {
 			"Last"		=> $cLast,
 			"Length"	=> $iLength,
 			"nLength"	=> -$iLength,
+			"checker"	=> $cChecker,
 		);
 		$oInstall	= false;
 
-		if (file_exists($cInstallPath)) {
-			//see if i can call it
-			try {
-				//get nails
-				$oNails	= new Nails();
-
-				//call the install
-				$oInstall	= new $cInstallClass($oNails);
-			} catch (Exception $e) {
-				printRead($aDebug);
-				die();
-
-				throw new Spanner($e->getMessage(), 101010);
+		if (file_exists($cInstallPath) || file_exists($cChecker)) {
+			if (file_exists($cChecker)) {
+				try {
+					$oNails 	= new Nails();
+					$oInstall	= new $cInstallClass($oNails);
+				} catch (Exception $e) {
+					if (!strstr($e->getMessage(), "not found")) {
+						printRead($e->getMessage());
+						printRead($aDebug);
+						die();
+					}
+				}
+			} else if (file_exists($cInstallPath)) {
+				try {
+					$oNails		= new Nails();
+					$oInstall	= new $cInstallClass($oNails);
+				} catch (Exception $e) {
+					if (!strstr($e->getMessage(), "not found")) {
+						printRead($e->getMessage());
+						printRead($aDebug);
+						die();
+					}
+				}
 			}
 		}
 	}
