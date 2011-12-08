@@ -613,11 +613,17 @@ class User implements Nails_Interface {
 	* @param int $iUserID What is the id of the user that needs the perm
 	* @return bool
 	*/
-    public function addSpecial($cAllowed, $iUserID) {
-    	$cAllowed = "b" . ucfirst($cAllowed);
+    public function addSpecial($cAllowed, $iUserID, $bForceAllow = false) {
+    	$cAllowed 	= "b" . ucfirst($cAllowed);
+    	$bAllowed	= false;
 
-		if ($this->canDoThis("addAbilitys")) {
-			$aInsert = array($cAllowed, $iUserID);
+    	//can we add an ability
+    	if ($this->canDoThis("addAbilitys")) { $bAllowed = true; }
+    	if ($bForceAllwoed) { $bAllowed = true; }
+
+    	//is the action allowed
+    	if ($bAllowed) {
+    		$aInsert = array($cAllowed, $iUserID);
 			$this->oDB->write("INSERT INTO users_special_privs (cAllowed, iUserID) VALUES (?, ?)", $aInsert);
 			if ($this->oDB->insertID()) {
 				return true;
