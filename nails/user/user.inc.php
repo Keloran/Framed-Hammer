@@ -393,6 +393,7 @@ class User implements Nails_Interface {
 			foreach ($mDetails as $cKey => $mValue) {
 				switch($cKey){
 					case "login":
+					case "username":
 						$cUsername = $mValue;
 						break;
 
