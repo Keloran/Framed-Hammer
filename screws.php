@@ -327,10 +327,11 @@ class Screws {
 	private function doInstall($cClass = false, $cPath = false) {
 		$aName			= explode("_", $cClass);
 		$cLast			= end($aName);
-		$iLength		= $cLast;
+		$iLength		= strlen($cLast);
 
 		$cPathed		= $cPath;
 		$cPath			= substr($cPath, 0, -$iLength);
+		if (!$cPath) { $cPath	= substr($cPathed, 0, -$iLength); }
 
 		$cInstallFile	= $cPath . "/install/install.php";
 		$cInstallClass	= $cClass . "_install";
@@ -342,7 +343,13 @@ class Screws {
 			"Class"		=> $cClass,
 			"Installer"	=> $cClass . "_install",
 			"Pathed"	=> $cPathed,
+			"InstallPath"	=> $cInstallPath,
+			"Name"		=> $aName,
+			"Last"		=> $cLast,
+			"Length"	=> $iLength,
+			"nLength"	=> -$iLength,
 		);
+		$oInstall	= false;
 
 		if (file_exists($cInstallPath)) {
 			//see if i can call it
