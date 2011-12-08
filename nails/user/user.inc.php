@@ -619,7 +619,7 @@ class User implements Nails_Interface {
 
     	//can we add an ability
     	if ($this->canDoThis("addAbilitys")) { $bAllowed = true; }
-    	if ($bForceAllwoed) { $bAllowed = true; }
+    	if ($bForceAllow) { $bAllowed = true; }
 
     	//is the action allowed
     	if ($bAllowed) {
