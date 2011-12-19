@@ -74,6 +74,7 @@ class Form {
 	 */
 	public function __set($cName, $mValue) {
 		$this->aData[$cName]	= $mValue;
+		return $this;
 	}
 
 	/**
@@ -83,9 +84,11 @@ class Form {
 	 * @return mixed
 	 */
 	public function __get($cName) {
-		if (isset($this->aData[$cName])) {
-			return $this->aData[$cName];
-		}
+		$mReturn	= false;
+
+		if (isset($this->aData[$cName])) { $mReturn	= $this->aData[$cName]; }
+
+		return $mReturn;
 	}
 
 	/**
@@ -109,6 +112,7 @@ class Form {
 	 * @desc this is for old sites and is no-longer in use, order is now determined organic
 	 */
 	public function setOrder() {
+		return $this;
 	}
 
 	/**
@@ -204,9 +208,7 @@ class Form {
 	 * @return
 	 */
 	public function setTitle($cTitle, $cClass = false) {
-		if ($cClass) {
-			$this->cTitleClass = $cClass;
-		}
+		if ($cClass) { $this->cTitleClass = $cClass; }
 
 		$this->cFormTitle = $cTitle;
 	}
@@ -1168,97 +1170,88 @@ class Form {
 			return $cReturn;
 		}
 
-		//status
-		if ($this->cStatus) {
-			$cStatus	 = "<div id=\formStatus\">" . $this->cStatus . "</div>\n";
-			$cReturn 	.= $cStatus;
-		}
-
 		//open the form
-		if (!$this->cSectionClass) {
-			$cReturn 		= "<section class=\"formSection\">\n";
+		if ($this->cSectionClass || $this->cSectionID) {
+			$cReturn	.= "<section ";
+
+			if ($this->cSectionClass) { $cReturn .= " class=\"" . $this->cSectionClass . "\" "; }
+			if ($this->cSectionID) { $cReturn .= " id=\"" . $this->cSectionID . "\" "; }
+
+			$cReturn .= ">\n";
 		} else {
-			$cReturn = "<section class=\"" . $this->cSectionClass . "\">\n";
+			$cReturn .= "<section class=\"formSection\">\n";
 		}
 
 		//form has a title
-		if (isset($this->cFormTitle)) {
-			if ($this->cFormTitle) {
-				$cReturn .= "<header>\n";
-				if ($this->cTitleClass) {
-					$cReturn .= "<h1 class=\"" . $this->cTitleClass . "\">\n";
-				} else {
-					$cReturn .= "<h1>\n";
-				}
+		if ($this->cFormTitle) {
+			$cReturn .= "<header>\n";
+			$cReturn .= "<h1";
+			if ($this->cTitleClass) { $cReturn .= " class=\"" . $this->cTitleClass . "\" "; }
+			$cReturm .= ">\n";
 
-				$cReturn .= $this->cFormTitle . "</h1>\n";
-				$cReturn .= "</header>\n";
-			}
+			$cReturn .= $this->cFormTitle . "</h1>\n";
+			$cReturn .= "</header>\n";
 		}
 
-		//open the div
-		if (isset($this->cDivID) && $this->cDivID) {
-			$cReturn	.= "<article ";
+		//status
+		if ($this->cStatus) {
+			$cReturn	.= "<article class=\formStatus\" ";
+			if ($this->cFormID) { $cReturn .= "id=\"" . $this->cFormID . "Status\" "; }
+			$cReturn	.= ">" . $this->cStatus . "</article>\n";
+		}
+
+		//div/section properties set
+		if ($this->cDivID || $this->cArticleID) {
 			$bOpened	= true;
-		} else if (isset($this->cDivClass) && $this->cDivClass) {
-			$cReturn	.= "<article ";
+		} else if ($this->cDivClass || $this->cArticleClass) {
 			$bOpened	= true;
-		} else {
-			$cReturn	.= "<article>\n";
-			$bOpened	= false;
 		}
 
 		//div has an id
-		if (isset($this->cDivID)) {
-			if ($this->cDivID) {
-				$cReturn .= "id=\"" . $this->cDivID . "\"";
-			}
-		}
+		if ($bOpened) {
+			$cClassed	= false;
+			$cIDed		= false;
 
-		//div has a class
-		if (isset($this->cDivClass)) {
-			if ($this->cDivClass) {
-				$cReturn .= " class=\"" . $this->cDivClass . "\"";
-			}
+			//has an id been set
+			if ($this->cDivID) { $cIDed = " id=\"" . $this->cDivID . "\" "; }
+			if ($this->cArticleID) { $cIDed = " id=\"" . $this->cArticleID . "\" "; }
+
+			//has a class been set
+			if ($this->cDivClass) { $cClassed = " class=\"" . $this->cDivClass . "\" "; }
+			if ($this->cArticleClass) { $cClassed = " class=\"" . $this->cArticleClass . "\" "; }
+
+			$cReturn .= "<article ";
+			$cReturn .= $cIDed;
+			$cReturn .= $cClassed;
+			$cReturn .= ">\n";
+		} else {
+			$cReturn .= "<article>\n";
 		}
 
 		//finish the start of the div
-		if ($bOpened) {
-			$cReturn .= ">\n";
-		} else {
-			$cReturn .= "";
-		}
+		if ($bOpened) { $cReturn .= ">\n"; }
 
 		//form already opened
 		$cReturn .= "<form ";
 
 		//the method e.g. post
-		if (isset($this->cMethod) && $this->cMethod) {
-			$cReturn .= "method=\"" . $this->cMethod . "\" ";
-		} else {
-			$cReturn .= "method=\"post\" ";
-		}
+		if (!$this->cMethod) { $this->cMethod = "post"; }
+		$cReturn .= " method=\"" . $this->cMethod . "\" ";
 
 		//if there is a formname
 		if ($this->cFormName) { $cReturn .= " name=\"" . $this->cFormName . "\" "; }
 
 		//form has a class
-		if (isset($this->cFormClass)) { //fix lossing coupling
-			if ($this->cFormClass) { $cReturn .= "class=\"" . $this->cFormClass . "\" "; }
-		}
+		if ($this->cFormClass) { $cReturn .= " class=\"" . $this->cFormClass . "\" "; }
 
 		//form has an id
-		if (isset($this->cFormID) && $this->cFormID) { $cReturn .= "id=\"" . $this->cFormID . "\" "; }
+		if ($this->cFormID) { $cReturn .= " id=\"" . $this->cFormID . "\" "; }
 
 		//do the enctype
-		$cReturn .= "enctype=\"" . $this->cEncType . "\" ";
+		$cReturn .= " enctype=\"" . $this->cEncType . "\" ";
 
 		//get the action
-		if (isset($this->cFormAction) && $this->cFormAction) {
-			$cReturn .= "action=\"" . $this->cFormAction . "\" ";
-		} else {
-			$cReturn .= "action=\"\" ";
-		}
+		$cReturn .= "action=\"" . $this->cFormAction . "\" ";
 
 		//charset set to utf8
 		$cReturn .= "accept-charset=\"UTF-8\" ";
