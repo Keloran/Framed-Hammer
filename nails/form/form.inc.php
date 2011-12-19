@@ -1160,6 +1160,7 @@ class Form {
 	 */
 	public function fullForm($cTemplate = null) {
 		$cReturn	= false;
+		$bOpened	= false;
 
 		//this is to stop forms without buttons, searchforms can force this true
 		if (!$this->checkForButtons()) {
