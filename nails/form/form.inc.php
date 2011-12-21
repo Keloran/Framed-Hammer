@@ -1188,7 +1188,7 @@ class Form {
 			$cReturn .= "<header>\n";
 			$cReturn .= "<h1";
 			if ($this->cTitleClass) { $cReturn .= " class=\"" . $this->cTitleClass . "\" "; }
-			$cReturm .= ">\n";
+			$cReturn .= ">\n";
 
 			$cReturn .= $this->cFormTitle . "</h1>\n";
 			$cReturn .= "</header>\n";
