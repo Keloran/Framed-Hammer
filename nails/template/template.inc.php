@@ -200,9 +200,6 @@ class Template extends Template_Abstract {
 		//We want to echo it, to make structure.struct pages nicer
 		if ($bEcho) {
 			echo $this->renderTemplate();
-
-			printRead($this);
-			die();
 			return false;
 		} else {
 			return $this->renderTemplate();
@@ -543,15 +540,6 @@ class Template extends Template_Abstract {
 	public function renderTemplate($bEcho = null, $bDebug = null) {
 		$cReturn	= false;
 		$cTemplate	= false;
-
-		/*
-		//make sure its been called
-		if (!$this->bCalled) { return $this->errorTemplate("You haven't called setTemplate"); }
-		if (!$this->bSetCalled) { return $this->errorTemplate("You haven't called setTemplate"); }
-
-		//sometimes this does work
-		if (!$this->bChecked && file_exists($this->cTemplate)) { $this->bChecked = true; }
-		*/
 
 		//remove the option of pages for templates
 		if (strstr($this->oType->cTemplate, "http:")) { return false; }
