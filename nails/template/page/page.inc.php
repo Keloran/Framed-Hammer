@@ -286,7 +286,9 @@ class Template_Page extends Template_Abstract {
 
 		//if there really isnt one yet
 		if (!$cPath) {
-
+			if (file_exists(SITEPATH . "/pages/" . $cTemplate . "/templates/" . $cTemplate . ".tpl")) {
+				$cPath	= SITEPATH . "/pages/" . $cTemplate . "/templates/" . $cTemplate . ".tpl";
+			}
 		}
 
 		//since the page isnt actually real
