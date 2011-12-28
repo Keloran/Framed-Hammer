@@ -240,9 +240,12 @@ class Template extends Template_Abstract {
 	* @param string $cTemplate
 	* @return null
 	*/
-	public function setCoreTemplate($cTemplate = false) {
+	public function setCoreTemplate($cTemplate = false, $bDebug = false) {
 		$oTemplate	= new Template_Layout($this->aParams);
 		$cTemplate	= $oTemplate->setTemplate($cTemplate);
+
+		//debug will kill it
+		if ($bDebug) { $oTemplate->debug(); }
 
 		$this->cTemplate	= $cTemplate;
 		$this->bChecked		= true;
@@ -265,8 +268,8 @@ class Template extends Template_Abstract {
 	 * @param string $cTemplate
 	 * @return string
 	 */
-	public function setLayout($cTemplate = false) {
-		return $this->setCoreTemplate($cTemplate);
+	public function setLayout($cTemplate = false, $bDebug = false) {
+		return $this->setCoreTemplate($cTemplate, $bDebug);
 	}
 
 	/**

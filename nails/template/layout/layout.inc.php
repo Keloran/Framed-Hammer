@@ -74,6 +74,7 @@ class Template_Layout extends Template_Abstract {
 
 		//is it the old way or new
 		if (is_dir(SITEPATH . "/layout/")) { $cLayout = "/layout/templates/"; }
+		$this->addDebug("Layout", $cLayout);
 
 		//browser checker
 		if ($this->getBrowser("iphone")) {
@@ -90,6 +91,7 @@ class Template_Layout extends Template_Abstract {
 				$cLayout1	= PAGES . $this->cPage . $cNewLayout;
 			}
 		}
+		$this->addDebug("Layout 1", $cLayout1);
 
 		//is it an action layout
 		if ($this->cAction) {
@@ -99,6 +101,7 @@ class Template_Layout extends Template_Abstract {
 				$cLayout2	= PAGES . $this->cPage . $cSep . $this->cAction . $cLayout;
 			}
 		}
+		$this->addDebug("Layout 2", $cLayout2);
 
 		//is it a choice layout
 		if ($this->cChoice) {
@@ -108,6 +111,7 @@ class Template_Layout extends Template_Abstract {
 				$cLayout3	= PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cLayout;
 			}
 		}
+		$this->addDebug("Layout 3", $cLayout3);
 
 		//now extra params
 		if (isset($this->extraParams) && ($this->extraParams)) {
@@ -124,6 +128,7 @@ class Template_Layout extends Template_Abstract {
 				}
 			}
 		}
+		$this->addDebug("Layout 4", $cLayout4);
 
 		//is there a param layout, and does it have the template in there
 		if ($cLayout4) {
@@ -176,6 +181,7 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = $cLayout1 . $cNewLayout2 . $cTemplate . ".tpl";
 			}
 		}
+		$this->addDebug("Final 1", $cFinal);
 
 		//now if no final set it must be at the very bottom layer
 		if (!$cFinal) {
@@ -191,28 +197,25 @@ class Template_Layout extends Template_Abstract {
 				$cFinal = SITEPATH . $cNewLayout . $cCaller . "/templates/" . $cTemplate . ".tpl";
 			}
 		}
+		$this->addDebug("Final 2", $cFinal);
+
+
+
+
+
+		$this->addDebug("Template 1", $cTemplate);
+		$this->addDebug("Template 2", $cTemplate2);
+		$this->addDebug("Full Path", (SITEPATH . $cLayout . $cTemplate2 . $cTemplate . ".tpl"));
+		$this->addDebug("Full Path 1", ($cLayout1 . $cTemplate2 . $cTemplate . ".tpl"));
+		$this->addDebug("Full Path 2", ($cLayout2 . $cTemplate2 . $cTemplate . ".tpl"));
+		$this->addDebug("Full Path 3", ($cLayout3 . $cTemplate2 . $cTemplate . ".tpl"));
+		$this->addDebug("Full Path 4", ($cLayout4 . $cTemplate2 . $cTemplate . ".tpl"));
+		$this->addDebug("New Layout", $cNewLayout);
+		$this->addDebug("Caller", $cCaller);
+		$this->addDebug("Debugged", SITEPATH . $cNewLayout . $cCaller . "/templates/" . $cTemplate . ".tpl");
 
 		if (!$cFinal) {
-			$a = array(
-				"Layout"	=> $cLayout,
-				"Layout1"	=> $cLayout1,
-				"Layout2"	=> $cLayout2,
-				"Layout3"	=> $cLayout3,
-				"Layout4"	=> $cLayout4,
-				"Final"		=> $cFinal,
-				"Template1"	=> $cTemplate,
-				"Template2"	=> $cTemplate2,
-				"FullPath"	=> (SITEPATH . $cLayout . $cTemplate2 . $cTemplate . ".tpl"),
-				"FullPath1"	=> ($cLayout1 . $cTemplate2 . $cTemplate . ".tpl"),
-				"FullPath2"	=> ($cLayout2 . $cTemplate2 . $cTemplate . ".tpl"),
-				"FullPath3"	=> ($cLayout3 . $cTemplate2 . $cTemplate . ".tpl"),
-				"FullPath4"	=> ($cLayout4 . $cTemplate2 . $cTemplate . ".tpl"),
-				"NewLayout"	=> $cNewLayout,
-				"debug"		=> SITEPATH . $cNewLayout . $cCaller . "/templates/" . $cTemplate . ".tpl",
-				"Caller"	=> $cCaller,
-			);
-			printRead($a);
-			die();
+			$this->debug();
 
 			throw new Spanner("Layout template: " . $cTemplate . " doesnt exist", 550);
 		}

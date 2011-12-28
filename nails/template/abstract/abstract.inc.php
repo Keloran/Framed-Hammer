@@ -14,6 +14,7 @@ abstract class Template_Abstract implements Template_Interface {
 	protected $mParams;
 	protected $cDefault;
 	protected $aData;
+	protected $aDebug;
 
 	/**
 	* Template_Abstract::setTemplate
@@ -339,5 +340,26 @@ abstract class Template_Abstract implements Template_Interface {
 		}
 
 		return $cFile;
+	}
+
+	/**
+	 * Template_Abstract::addDebug()
+	 *
+	 * @param string $cName
+	 * @param mixed $mValue
+	 * @return null
+	 */
+	public function addDebug($cName, $mValue) {
+		$this->aDebug[$cName] = $mValue;
+	}
+
+	/**
+	 * Template_Abstract::debugTemplates()
+	 *
+	 * @return null
+	 */
+	public function debugTemplates() {
+		printRead($this->aDebug);
+		die();
 	}
 }
