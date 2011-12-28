@@ -123,51 +123,16 @@ class Template extends Template_Abstract {
 	 * @return string
 	 */
 	private function getMainPageNew($cDefault = null, $bEcho = null, $aDefaultLayout = null) {
-		$this->oType	= false;
+		$oMain	= Template_Content();
+		$oMain->setDefaultLayout($aDefaultLayout);
+		$oMain->setTemplate();
 
-		//open the container
-		if ($aDefaultLayout) {
-			$cReturn = $aDefaultLayout[0];
-		} else {
-			$cReturn = "<div id=\"mainArea\">\n";
-		}
+		$this->oType	= $oMain;
 
-		//page
-		$cPage = $this->getPage($cDefault);
-		$this->cDefault	= $cDefault;
+		$cReturn	 = $oMain->cStarter;
+		$cReturn	.= $this->renderTemplate();
+		$cReturn	.= $oMain0->cEnder;
 
-		//action
-		if ($this->cAction) {
-			$cAction	= $this->getAction();
-			$cPage		= $cAction ? $cAction : $cPage;
-		}
-
-		//choice
-		if ($this->cChoice) {
-			$cChoice	= $this->getChoice();
-			$cPage		= $cChoice ? $cChoice : $cPage;
-		}
-
-		//others
-		if (isset($this->extraParams) && ($this->extraParams)) {
-			$cOther		= $this->getOther();
-			$cPage		= $cOther ? $cOther : $cPage;
-		}
-
-		//do something with it now
-		if (isset($cPage)) {
-			$this->cTemplate = $cPage;
-			$cReturn .= $this->renderTemplate();
-		} else {
-			$cReturn .= $this->cError;
-		}
-
-		//close the container
-		if ($aDefaultLayout) {
-			$cReturn .= $aDefaultLayout[1];
-		} else {
-			$cReturn .= "</div>\n";
-		}
 
 		//Echo it rather htan returning
 		if ($bEcho) {
@@ -175,7 +140,6 @@ class Template extends Template_Abstract {
 		} else {
 			return $cReturn;
 		}
-
 	}
 
 	/**
