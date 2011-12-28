@@ -193,7 +193,7 @@ class Template_Page extends Template_Abstract {
 			if ($cPath) { $cPath2 = $cPath; }
 		}
 		$this->addDebug("Path 2", $cPath);
-		$this->addDebug("Template 2", $cTemplate)$cTemplate;
+		$this->addDebug("Template 2", $cTemplate);
 
 		//choice
 		if ($this->cChoice) {
