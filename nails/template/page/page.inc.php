@@ -158,6 +158,8 @@ class Template_Page extends Template_Abstract {
 				$cTemplate	= $aDefault['template'];
 			}
 		}
+		$this->addDebug("Path 1", $cPath);
+		$this->addDebug("Template 1", $cTemplate);
 
 		//this is incase it doesnt exist at a higher level
 		if ($cPath) { $cPath1 = $cPath; }
@@ -190,6 +192,8 @@ class Template_Page extends Template_Abstract {
 			//just in case
 			if ($cPath) { $cPath2 = $cPath; }
 		}
+		$this->addDebug("Path 2", $cPath);
+		$this->addDebug("Template 2", $cTemplate)$cTemplate;
 
 		//choice
 		if ($this->cChoice) {
@@ -228,6 +232,8 @@ class Template_Page extends Template_Abstract {
 			//just incase
 			if ($cPath) { $cPath3 = $cPath; }
 		}
+		$this->addDebug("Path 3", $cPath);
+		$this->addDebug("Template 3", $cTemplate);
 
 		//extra params, e.g. page/action/choice/asda/beep
 		if (isset($this->extraParams) && ($this->extraParams)) {
@@ -293,6 +299,8 @@ class Template_Page extends Template_Abstract {
 			if (!$cTemplate) {
 				return false;
 			} else {
+				$this->debugTemplates();
+
 				throw new Spanner($cTemplate . " template doesnt exist at " . $cFinalPath, 500);
 			}
 		}
