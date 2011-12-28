@@ -109,6 +109,9 @@ abstract class Template_Abstract implements Template_Interface {
 	* @return string
 	*/
 	public function renderTemplate() {
+		//make sure its not a template since that cant have hammer access
+		if (!strstr($this->cTemplate, ".tpl")) { $this->createTemplate(); }
+
 		//open the buffer
 		if (!checkHeaders()) { ob_start(); }
 
