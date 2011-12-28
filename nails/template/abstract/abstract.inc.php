@@ -112,7 +112,7 @@ abstract class Template_Abstract implements Template_Interface {
 		//open the buffer
 		if (!checkHeaders()) { ob_start(); }
 
-		extract($this->aVars, EXTR_SKIP);
+		if ($this->aVars) { extract($this->aVars, EXTR_SKIP); }
 
 		include $this->cTemplate;
 		$cTemplate = ob_get_contents();
