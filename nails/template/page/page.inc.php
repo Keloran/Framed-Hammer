@@ -291,6 +291,7 @@ class Template_Page extends Template_Abstract {
 				$cPath4	= SITEPATH . "/pages/" . $cTemplate . "/templates/" . $cTemplate . ".tpl";
 			}
 		}
+		$this->addDebug("Path 5", $cPath4);
 
 		//since the page isnt actually real
 		if (strstr($cPath, "http:")) { return false; }
