@@ -211,9 +211,10 @@ class Template_Layout extends Template_Abstract {
 
 		if (!$cFinal) {
 			$this->debugTemplates();
-
 			throw new Spanner("Layout template: " . $cTemplate . " doesnt exist", 550);
 		}
+
+		$this->cTemplate = $cFinal;
 
 		return $cFinal;
 	}
