@@ -46,6 +46,10 @@ abstract class Template_Abstract implements Template_Interface {
 		}
 	}
 
+	public function setSubVars($cName, $mVars) {
+		return $this->setVars($cName, $mVars);
+	}
+
 	/**
 	* Template_Abstract::setParams()
 	*

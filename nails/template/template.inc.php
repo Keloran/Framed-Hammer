@@ -100,6 +100,14 @@ class Template extends Template_Abstract {
 		return self::$oTemplate;
 	}
 
+	public function setVars($cName, $mVars) {
+		if ($this->oType) {
+			$this->oType->setVars($cName, $mVars);
+		} else {
+			$this->setSubVars($cName, $mVars);
+		}
+	}
+
 	/**
 	 * Template::getMainPageNew()
 	 *
@@ -558,26 +566,13 @@ class Template extends Template_Abstract {
 		if ($this->bChecked) {
 			if ($this->bFormAdded) {
 				if ($this->oForms) {
-					if ($this->oType) {
-						$this->oType->setVars('cForm', $this->oForms->fullForm($this->cTemplate));
-						$this->oType->setVars("oForm", $this->oForms);
-					}
-
 					$this->setVars('cForm', $this->oForms->fullForm($this->cTemplate));
 					$this->setVars("oForm", $this->oForms);
 				} else { //this is incase you didnt add the form but your trying to call it
-					if ($this->oType) {
-						$this->oType->setVars("cForm", false);
-						$this->oType->setVars("oForm", false);
-					}
 					$this->setVars("cForm", false);
 					$this->setVars("oForm", false);
 				}
 			} else {
-				if ($this->oType) {
-					$this->oType->setVars("cForm", false);
-					$this->oType->setVars("oForm", false);
-				}
 				$this->setVars("cForm", false);
 				$this->setVars("oForm", false);
 			}
@@ -595,8 +590,6 @@ class Template extends Template_Abstract {
 			if (!file_exists(SITEPATH . "templates/structure.struct")) { //really old method
 				if (!file_exists(SITEPATH . "layout/structure.struct")) { //newer method
 					if (!isset($oHammer)) { $oHammer = Hammer::getHammer(); }
-
-					if ($this->oType) { $this->oType->setVars("oHammer", $oHammer); }
 					$this->setVars("oHammer", $oHammer);
 				}
 			}
@@ -611,11 +604,6 @@ class Template extends Template_Abstract {
 				$this->aVars["oHammer"] = false;
 			}
 
-			if ($this->oType) {
-				$this->oType->setVars("cExtraJS", $this->cExtraJS);
-				$this->oType->setVars("cPagination", $this->cPagination);
-				$this->oType->setVars('cJS', $this->cJS);
-			}
 			$this->setVars("cExtraJS", $this->cExtraJS);
 			$this->setVars("cPagination", $this->cPagination);
 			$this->setVars('cJS', $this->cJS);
