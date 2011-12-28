@@ -565,80 +565,65 @@ class Template extends Template_Abstract {
 		}
 
 		//its been checked
-		if ($this->bChecked) {
-			if ($this->bFormAdded) {
-				if ($this->oForms) {
-					$this->oType->setVars('cForm', $this->oForms->fullForm($this->cTemplate));
-					$this->oType->setVars("oForm", $this->oForms);
-				} else { //this is incase you didnt add the form but your trying to call it
-					$this->oType->setVars("cForm", false);
-					$this->oType->setVars("oForm", false);
-				}
-			} else {
+		if ($this->bFormAdded) {
+			if ($this->oForms) {
+				$this->oType->setVars('cForm', $this->oForms->fullForm($this->cTemplate));
+				$this->oType->setVars("oForm", $this->oForms);
+			} else { //this is incase you didnt add the form but your trying to call it
 				$this->oType->setVars("cForm", false);
 				$this->oType->setVars("oForm", false);
 			}
-
-			//layout folder better name than core
-			if (($this->cSkin) && is_dir(SITEPATH . "/layout/" . $this->cSkin)) {
-				$cLayoutPath	= "/layout/" . $this->cSkin . "/";
-			} else if (is_dir(SITEPATH . "/layout")) {
-				$cLayoutPath = "/layout/";
-			} else {
-				$cLayoutPath = "/core/";
-			}
-
-			//check for old style
-			if (!file_exists(SITEPATH . "templates/structure.struct")) { //really old method
-				if (!file_exists(SITEPATH . "layout/structure.struct")) { //newer method
-					if (!isset($oHammer)) { $oHammer = Hammer::getHammer(); }
-					$this->oType->setVars("oHammer", $oHammer);
-				}
-			}
-
-			/**
-			//Get rid of the hammer object reference for templates tehy dont need it
-			if (strstr($this->cTemplate, "tpl")) {
-				unset($this->aVars["this"]); //security
-				unset($this->aVars["oHammer"]); //security
-
-				//even though they should be unset, set them to false to make sure
-				$this->aVars["this"] 	= false;
-				$this->aVars["oHammer"] = false;
-			}
-			*/
-
-			$this->oType->setVars("cExtraJS", $this->cExtraJS);
-			$this->oType->setVars("cPagination", $this->cPagination);
-			$this->oType->setVars('cJS', $this->cJS);
-
-			//debug
-			if ($bDebug) { $this->debugTemplates(); }
-
-			printRead($this->oType);
-			die();
-
-			//so that it does it before the others
-			if ($this->oType) { return $this->oType->renderTemplate($bEcho); }
-
-			//indented to show that stuff inside happens inside and then is cleaned after
-			$cTemplate	= false;
-			if (file_exists($this->cTemplate)) {
-				if (!checkHeaders()) { ob_start(); }
-					extract($this->aVars, EXTR_SKIP);
-					include $this->cTemplate;
-					$cTemplate	.= ob_get_contents();
-					$cTemplate	.= $this->cJS;
-					$cTemplate	.= $this->cExtraJS;
-
-				//if there is a started ob
-				if (!checkHeaders()) { if (ob_get_level()) { ob_end_clean(); }}
-			} else {
-				$cTemplate	= $this->errorTemplate($this->cTemplate);
-			}
-
-			$cReturn	= $cTemplate;
+		} else {
+			$this->oType->setVars("cForm", false);
+			$this->oType->setVars("oForm", false);
 		}
+
+		//layout folder better name than core
+		if (($this->cSkin) && is_dir(SITEPATH . "/layout/" . $this->cSkin)) {
+			$cLayoutPath	= "/layout/" . $this->cSkin . "/";
+		} else if (is_dir(SITEPATH . "/layout")) {
+			$cLayoutPath = "/layout/";
+		} else {
+			$cLayoutPath = "/core/";
+		}
+
+		//check for old style
+		if (!file_exists(SITEPATH . "templates/structure.struct")) { //really old method
+			if (!file_exists(SITEPATH . "layout/structure.struct")) { //newer method
+				if (!isset($oHammer)) { $oHammer = Hammer::getHammer(); }
+				$this->oType->setVars("oHammer", $oHammer);
+			}
+		}
+
+		$this->oType->setVars("cExtraJS", $this->cExtraJS);
+		$this->oType->setVars("cPagination", $this->cPagination);
+		$this->oType->setVars('cJS', $this->cJS);
+
+		//debug
+		if ($bDebug) { $this->debugTemplates(); }
+
+		printRead($this->oType);
+		die();
+
+		//so that it does it before the others
+		if ($this->oType) { return $this->oType->renderTemplate($bEcho); }
+
+		//indented to show that stuff inside happens inside and then is cleaned after
+		$cTemplate	= false;
+		if (file_exists($this->cTemplate)) {
+			if (!checkHeaders()) { ob_start(); }
+				extract($this->aVars, EXTR_SKIP);
+				include $this->cTemplate;
+				$cTemplate	.= ob_get_contents();
+				$cTemplate	.= $this->cJS;
+				$cTemplate	.= $this->cExtraJS;
+
+			//if there is a started ob
+			if (!checkHeaders()) { if (ob_get_level()) { ob_end_clean(); }}
+		} else {
+			$cTemplate	= $this->errorTemplate($this->cTemplate);
+		}
+		$cReturn	= $cTemplate;
 
 		//do we echo or return it
 		if ($bEcho) {
