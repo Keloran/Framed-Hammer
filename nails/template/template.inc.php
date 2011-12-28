@@ -602,9 +602,6 @@ class Template extends Template_Abstract {
 		//debug
 		if ($bDebug) { $this->debugTemplates(); }
 
-		printRead($this->oType);
-		die();
-
 		//so that it does it before the others
 		if ($this->oType) { return $this->oType->renderTemplate($bEcho); }
 

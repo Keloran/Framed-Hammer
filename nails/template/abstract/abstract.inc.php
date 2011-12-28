@@ -120,8 +120,6 @@ abstract class Template_Abstract implements Template_Interface {
 			//even though they should be unset, set them to false to make sure
 			$this->aVars["this"] 	= false;
 			$this->aVars["oHammer"] = false;
-		} else {
-			$this->createTemplate();
 		}
 
 		//open the buffer
