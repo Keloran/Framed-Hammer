@@ -618,6 +618,8 @@ class Template extends Template_Abstract {
 			//so that it does it before the others
 			if ($this->oType) { return $this->oType->renderTemplate($bEcho); }
 
+			printRead($this->oType);die();
+
 			//indented to show that stuff inside happens inside and then is cleaned after
 			$cTemplate	= false;
 			if (file_exists($this->cTemplate)) {
