@@ -175,6 +175,8 @@ class Template_Core extends Template_Abstract {
 			throw new Spanner("Layout Controller: " . $cTemplate . " doesnt exist", 550);
 		}
 
+		$this->cTemplate	= $cFinal;
+
 		return $cFinal;
 	}
 }
