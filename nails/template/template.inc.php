@@ -53,6 +53,8 @@ class Template extends Template_Abstract {
 	public $cSkin		= false;
 	public $bChecked	= false;
 
+	private $oType		= false;
+
 	//Skin Settings
 	public $cSkinSetting	= false;
 
@@ -187,6 +189,8 @@ class Template extends Template_Abstract {
 
 		$this->cTemplate	= $cReturn;
 
+		$this->oType		= $oPage;
+
 		//We want to echo it, to make structure.struct pages nicer
 		if ($bEcho) {
 			echo $this->renderTemplate();
@@ -231,6 +235,8 @@ class Template extends Template_Abstract {
 		$oStruct->createTemplate();
 		$this->bCalled	= true;
 
+		$this->oType	= $oStruct;
+
 		return $oStruct->renderTemplate(); //render the actual site/layout
 	}
 
@@ -249,6 +255,8 @@ class Template extends Template_Abstract {
 
 		$this->cTemplate	= $cTemplate;
 		$this->bChecked		= true;
+
+		$this->oType	= $oTemplate;
 	}
 
 	/**
@@ -302,6 +310,8 @@ class Template extends Template_Abstract {
 		//is there anything returned
 		if ($cReturn) { $this->bThere	= true; }
 
+		$this->oType	= $oPage;
+
 		return $cReturn;
 	}
 
@@ -318,6 +328,8 @@ class Template extends Template_Abstract {
 
 		$cReturn			= $oRender->setTemplate($cTemplate);
 		$this->cTemplate	= $cReturn;
+
+		$this->oType	= $oRender;
 
 		return $cReturn;
 	}
@@ -517,7 +529,7 @@ class Template extends Template_Abstract {
 	 * @param bool $bEcho Echo the template rather than returning it
 	 * @return mixed
 	 */
-	public function renderTemplate($bEcho = null) {
+	public function renderTemplate($bEcho = null, $bDebug) {
 		$cReturn	= false;
 		$cTemplate	= false;
 
@@ -526,11 +538,7 @@ class Template extends Template_Abstract {
 		if (!$this->bSetCalled) { return $this->errorTemplate("You haven't called setTemplate"); }
 
 		//sometimes this does work
-		if ($this->bChecked == false) {
-			if (file_exists($this->cTemplate)) {
-				$this->bChecked = true;
-			}
-		}
+		if (!$this->bChecked && file_exists($this->cTemplate)) { $this->bChecked = true; }
 
 		//remove the option of pages for templates
 		if (strstr($this->cTemplate, "http:")) { return false; }
@@ -591,6 +599,9 @@ class Template extends Template_Abstract {
 			$this->setVars("cExtraJS", $this->cExtraJS);
 			$this->setVars("cPagination", $this->cPagination);
 			$this->setVars('cJS', $this->cJS);
+
+			//so that it does it before the others
+			if ($this->oType) { return $oType->renderTemplate(); }
 
 			//indented to show that stuff inside happens inside and then is cleaned after
 			$cTemplate	= false;
