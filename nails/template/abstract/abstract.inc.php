@@ -118,6 +118,10 @@ abstract class Template_Abstract implements Template_Interface {
 			$this->aVars["oHammer"] = false;
 		}
 
+		if ($this->cTemplate == "/Sites/Hammer/app/r3view/layout/header/templates/header.tpl") {
+			printRead($this);
+			die();
+		}
 
 		//open the buffer
 		if (!checkHeaders()) { ob_start(); }
