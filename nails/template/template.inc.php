@@ -613,7 +613,7 @@ class Template extends Template_Abstract {
 			if ($bDebug) { $this->debugTemplates(); }
 
 			//so that it does it before the others
-			if ($this->oType) { return $this->oType->renderTemplate(); }
+			if ($this->oType) { return $this->oType->renderTemplate($bEcho); }
 
 			//indented to show that stuff inside happens inside and then is cleaned after
 			$cTemplate	= false;

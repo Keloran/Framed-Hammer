@@ -112,7 +112,7 @@ abstract class Template_Abstract implements Template_Interface {
 	* @desc Since this does the same thing everytime might aswell make it part of the abstract
 	* @return string
 	*/
-	public function renderTemplate() {
+	public function renderTemplate($bEcho = null) {
 		if (strstr($this->cTemplate, "tpl")) {
 			unset($this->aVars["this"]); //security
 			unset($this->aVars["oHammer"]); //security
@@ -142,6 +142,12 @@ abstract class Template_Abstract implements Template_Interface {
 
 		//make sure we are in an ob before cleaning
 		if (!checkHeaders()) { if (ob_get_level()) { ob_end_clean(); }}
+
+		//since its called for echo
+		if ($bEcho) {
+			echo $cTemplate;
+			return false;
+		}
 
 		return $cTemplate;
 	}
