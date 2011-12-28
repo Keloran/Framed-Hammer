@@ -215,7 +215,7 @@ class Template_Layout extends Template_Abstract {
 		$this->addDebug("Debugged", SITEPATH . $cNewLayout . $cCaller . "/templates/" . $cTemplate . ".tpl");
 
 		if (!$cFinal) {
-			$this->debug();
+			$this->debugTemplates();
 
 			throw new Spanner("Layout template: " . $cTemplate . " doesnt exist", 550);
 		}

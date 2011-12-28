@@ -245,7 +245,7 @@ class Template extends Template_Abstract {
 		$cTemplate	= $oTemplate->setTemplate($cTemplate);
 
 		//debug will kill it
-		if ($bDebug) { $oTemplate->debug(); }
+		if ($bDebug) { $oTemplate->debugTemplates(); }
 
 		$this->cTemplate	= $cTemplate;
 		$this->bChecked		= true;
