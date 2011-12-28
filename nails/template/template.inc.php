@@ -200,6 +200,9 @@ class Template extends Template_Abstract {
 		//We want to echo it, to make structure.struct pages nicer
 		if ($bEcho) {
 			echo $this->renderTemplate();
+
+			printRead($this);
+			die();
 			return false;
 		} else {
 			return $this->renderTemplate();

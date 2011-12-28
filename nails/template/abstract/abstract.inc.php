@@ -122,11 +122,6 @@ abstract class Template_Abstract implements Template_Interface {
 			$this->aVars["oHammer"] = false;
 		}
 
-		if (!strstr($this->cTemplate, "struct")) {
-			printRead($this);
-			die();
-		}
-
 		//open the buffer
 		ob_start();
 			if ($this->aVars) { extract($this->aVars, EXTR_SKIP); }
