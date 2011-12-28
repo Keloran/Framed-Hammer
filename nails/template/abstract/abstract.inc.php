@@ -128,20 +128,18 @@ abstract class Template_Abstract implements Template_Interface {
 		}
 
 		//open the buffer
-		if (!checkHeaders()) { ob_start(); }
+		ob_start();
+			if ($this->aVars) { extract($this->aVars, EXTR_SKIP); }
+			if (!$this->cTemplate) {
+				printRead($this);
+				die();
+			}
 
-		if ($this->aVars) { extract($this->aVars, EXTR_SKIP); }
+			include $this->cTemplate;
+			$cTemplate = ob_get_contents();
 
-		if (!$this->cTemplate) {
-			printRead($this);
-			die();
-		}
-
-		include $this->cTemplate;
-		$cTemplate = ob_get_contents();
-
-		//make sure we are in an ob before cleaning
-		if (!checkHeaders()) { if (ob_get_level()) { ob_end_clean(); }}
+			//make sure we are in an ob before cleaning
+		if (ob_get_level()) { ob_end_clean(); }
 
 		//since its called for echo
 		if ($bEcho) {
