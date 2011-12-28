@@ -36,7 +36,7 @@ class News_Install{
 	 */
 	private function upgrade() {
 		if ($this->oNails->checkVersion("news", "1.1") == false) {
-			$oNails->updateVersion("news", "1.1", false, "Updated to make HTML5 easier");
+			$this->oNails->updateVersion("news", "1.1", false, "Updated to make HTML5 easier");
 		}
 	}
 
