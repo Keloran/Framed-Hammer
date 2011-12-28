@@ -122,6 +122,7 @@ class Template_Page extends Template_Abstract {
 		$cPath1		= false;
 		$cPath2		= false;
 		$cPath3		= false;
+		$cPath4		= false;
 		$cTemplate0	= $cTemplate;
 		$cTemplate1	= false;
 		$cTemplate2	= false;
@@ -287,18 +288,21 @@ class Template_Page extends Template_Abstract {
 		//if there really isnt one yet
 		if (!$cPath) {
 			if (file_exists(SITEPATH . "/pages/" . $cTemplate . "/templates/" . $cTemplate . ".tpl")) {
-				$cPath	= SITEPATH . "/pages/" . $cTemplate . "/templates/" . $cTemplate . ".tpl";
+				$cPath4	= SITEPATH . "/pages/" . $cTemplate . "/templates/" . $cTemplate . ".tpl";
 			}
 		}
 
 		//since the page isnt actually real
 		if (strstr($cPath, "http:")) { return false; }
 
-		$cFinalPath	= false;
 		//now try the paths
+		$cFinalPath	= false;
+		if ($cPath1 && !$cFinalPath) { $cFinalPath = $cPath4; }
 		if ($cPath3 && !$cFinalPath) { $cFinalPath = $cPath3; }
 		if ($cPath2 && !$cFinalPath) { $cFinalPath = $cPath2; }
 		if ($cPath1 && !$cFinalPath) { $cFinalPath = $cPath1; }
+
+		$this->cTemplate	= $cFinalPath;
 
 		//there is no path at all
 		if ($cFinalPath) {
@@ -314,7 +318,5 @@ class Template_Page extends Template_Abstract {
 				throw new Spanner($cTemplate . " template doesnt exist at " . $cFinalPath, 500);
 			}
 		}
-
-		$this->cTemplate	= $cPath;
 	}
 }
