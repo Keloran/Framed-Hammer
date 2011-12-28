@@ -109,8 +109,15 @@ abstract class Template_Abstract implements Template_Interface {
 	* @return string
 	*/
 	public function renderTemplate() {
-		//make sure its not a template since that cant have hammer access
-		if (!strstr($this->cTemplate, ".tpl")) { $this->createTemplate(); }
+		if (strstr($this->cTemplate, "tpl")) {
+			unset($this->aVars["this"]); //security
+			unset($this->aVars["oHammer"]); //security
+
+			//even though they should be unset, set them to false to make sure
+			$this->aVars["this"] 	= false;
+			$this->aVars["oHammer"] = false;
+		}
+
 
 		//open the buffer
 		if (!checkHeaders()) { ob_start(); }
