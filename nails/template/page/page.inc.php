@@ -280,6 +280,14 @@ class Template_Page extends Template_Abstract {
 				}
 			}
 		}
+		$this->addDebug("Path 4", $cPath);
+		$this->addDebug("Template 4", $cTemplate);
+
+
+		//if there really isnt one yet
+		if (!$cPath) {
+
+		}
 
 		//since the page isnt actually real
 		if (strstr($cPath, "http:")) { return false; }
