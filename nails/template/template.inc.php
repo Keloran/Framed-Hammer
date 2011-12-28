@@ -529,7 +529,7 @@ class Template extends Template_Abstract {
 	 * @param bool $bEcho Echo the template rather than returning it
 	 * @return mixed
 	 */
-	public function renderTemplate($bEcho = null, $bDebug) {
+	public function renderTemplate($bEcho = null, $bDebug = null) {
 		$cReturn	= false;
 		$cTemplate	= false;
 
@@ -599,6 +599,9 @@ class Template extends Template_Abstract {
 			$this->setVars("cExtraJS", $this->cExtraJS);
 			$this->setVars("cPagination", $this->cPagination);
 			$this->setVars('cJS', $this->cJS);
+
+			//debug
+			if ($bDebug) { $this->debugTemplates(); }
 
 			//so that it does it before the others
 			if ($this->oType) { return $oType->renderTemplate(); }
