@@ -49,7 +49,7 @@ class Template_Content extends Template_Abstract {
  	* @param string $cTemplate
  	* @return string
  	*/
-	public function setTemplate($cTemplate = null) {
+	public function setTemplate($cDefault = null) {
 		$cReturn	= $this->cStarter;
 		$cPage		= false;
 

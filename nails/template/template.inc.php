@@ -123,9 +123,9 @@ class Template extends Template_Abstract {
 	 * @return string
 	 */
 	private function getMainPageNew($cDefault = null, $bEcho = null, $aDefaultLayout = null) {
-		$oMain	= new Template_Content();
+		$oMain	= new Template_Content($cDefault);
 		$oMain->setDefaultLayout($aDefaultLayout);
-		$oMain->setTemplate();
+		$oMain->setTemplate($cDefault);
 
 		$this->oType	= $oMain;
 
