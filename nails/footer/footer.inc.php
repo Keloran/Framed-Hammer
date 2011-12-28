@@ -102,7 +102,13 @@ class Footer implements Nails_Interface {
 	 * @return string
 	 */
 	public function getReInvigorate() {
-		$cCode		= $this->oNails->getConfig("code", "reinvigorate");
+		$mCode		= $this->oNails->getConfig("code", "reinvigorate");
+		if (is_array($mCode)) {
+			$cCode = $mCode['code'];
+		} else {
+			 $cCode = $mCode;
+		}
+
 		$cReturn	= false;
 
 		if ($cCode) {
@@ -142,13 +148,21 @@ class Footer implements Nails_Interface {
 	 * @return string
 	 */
 	public function getGoogleAnalytics($bOld = null) {
-		$cCode		= $this->oNails->getConfig("analytics");
-		$cDomain	= $this->oNails->getConfig("analytics-domain");
+		$mode		= $this->oNails->getConfig("analytics");
+		$mDomain	= $this->oNails->getConfig("analytics-domain");
 		$cReturn	= false;
 
 		//arrays
-		if (is_array($cCode)) { $cCode		= $cCode['analytics']; }
-		if (is_array($cDomain)) { $cDomain	= $cDomain['analytics-domain']; }
+		if (is_array($mCode)) {
+			$cCode = $mCode['analytics'];
+		} else {
+			$ccode = $mCode;
+		}
+		if (is_array($mDomain)) {
+			$cDomain = $mDomain['analytics-domain'];
+		} else {
+			$cDomain = $mDomain;
+		}
 
 		//new google code
 		if ($cCode) {
