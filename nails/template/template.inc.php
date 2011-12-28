@@ -100,6 +100,13 @@ class Template extends Template_Abstract {
 		return self::$oTemplate;
 	}
 
+	/**
+	 * Template::setVars()
+	 *
+	 * @param mixed $cName
+	 * @param mixed $mVars
+	 * @return null
+	 */
 	public function setVars($cName, $mVars) {
 		if ($this->oType) { return $this->oType->setVars($cName, $mVars); }
 
@@ -116,6 +123,8 @@ class Template extends Template_Abstract {
 	 * @return string
 	 */
 	private function getMainPageNew($cDefault = null, $bEcho = null, $aDefaultLayout = null) {
+		$this->oType	= false;
+
 		//open the container
 		if ($aDefaultLayout) {
 			$cReturn = $aDefaultLayout[0];
