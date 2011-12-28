@@ -101,11 +101,9 @@ class Template extends Template_Abstract {
 	}
 
 	public function setVars($cName, $mVars) {
-		if ($this->oType) {
-			return $this->oType->setVars($cName, $mVars);
-		} else {
-			return $this->setSubVars($cName, $mVars);
-		}
+		if ($this->oType) { return $this->oType->setVars($cName, $mVars); }
+
+		return false;
 	}
 
 	/**
@@ -543,38 +541,39 @@ class Template extends Template_Abstract {
 		$cReturn	= false;
 		$cTemplate	= false;
 
+		/*
 		//make sure its been called
 		if (!$this->bCalled) { return $this->errorTemplate("You haven't called setTemplate"); }
 		if (!$this->bSetCalled) { return $this->errorTemplate("You haven't called setTemplate"); }
 
 		//sometimes this does work
 		if (!$this->bChecked && file_exists($this->cTemplate)) { $this->bChecked = true; }
+		*/
 
 		//remove the option of pages for templates
-		if (strstr($this->cTemplate, "http:")) { return false; }
+		if (strstr($this->oType->cTemplate, "http:")) { return false; }
+
 
 		//since the template doesnt exist, yet somehow it has been checked
-		if (!$this->cTemplate) {
-			$this->setTemplate(); //this sometimes doesnt get called
+		if (!$this->oType->cTemplate) {
+			$this->oType->setTemplate(); //this sometimes doesnt get called
 
-			if (!file_exists($this->cTemplate)) {
-				return $this->errorTemplate($this->cTemplate);
-			}
+			if (!file_exists($this->oType->cTemplate)) { return $this->errorTemplate($this->oType->cTemplate); }
 		}
 
 		//its been checked
 		if ($this->bChecked) {
 			if ($this->bFormAdded) {
 				if ($this->oForms) {
-					$this->setVars('cForm', $this->oForms->fullForm($this->cTemplate));
-					$this->setVars("oForm", $this->oForms);
+					$this->oType->setVars('cForm', $this->oForms->fullForm($this->cTemplate));
+					$this->oType->setVars("oForm", $this->oForms);
 				} else { //this is incase you didnt add the form but your trying to call it
-					$this->setVars("cForm", false);
-					$this->setVars("oForm", false);
+					$this->oType->setVars("cForm", false);
+					$this->oType->setVars("oForm", false);
 				}
 			} else {
-				$this->setVars("cForm", false);
-				$this->setVars("oForm", false);
+				$this->oType->setVars("cForm", false);
+				$this->oType->setVars("oForm", false);
 			}
 
 			//layout folder better name than core
@@ -590,10 +589,11 @@ class Template extends Template_Abstract {
 			if (!file_exists(SITEPATH . "templates/structure.struct")) { //really old method
 				if (!file_exists(SITEPATH . "layout/structure.struct")) { //newer method
 					if (!isset($oHammer)) { $oHammer = Hammer::getHammer(); }
-					$this->setVars("oHammer", $oHammer);
+					$this->oType->setVars("oHammer", $oHammer);
 				}
 			}
 
+			/**
 			//Get rid of the hammer object reference for templates tehy dont need it
 			if (strstr($this->cTemplate, "tpl")) {
 				unset($this->aVars["this"]); //security
@@ -603,10 +603,11 @@ class Template extends Template_Abstract {
 				$this->aVars["this"] 	= false;
 				$this->aVars["oHammer"] = false;
 			}
+			*/
 
-			$this->setVars("cExtraJS", $this->cExtraJS);
-			$this->setVars("cPagination", $this->cPagination);
-			$this->setVars('cJS', $this->cJS);
+			$this->oType->setVars("cExtraJS", $this->cExtraJS);
+			$this->oType->setVars("cPagination", $this->cPagination);
+			$this->oType->setVars('cJS', $this->cJS);
 
 			//debug
 			if ($bDebug) { $this->debugTemplates(); }
