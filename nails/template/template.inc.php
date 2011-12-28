@@ -240,10 +240,10 @@ class Template extends Template_Abstract {
 	public function getStructure($cStructure = null) {
 		$oStruct = Template_Structure::getInstance($this->aParams);
 		$oStruct->setTemplate($cStructure);
-		$oStruct->createTemplate();
+		#$oStruct->createTemplate();
 		$this->bCalled	= true;
 
-		$this->oType	= $oStruct;
+		#$this->oType	= $oStruct;
 
 		return $oStruct->renderTemplate(); //render the actual site/layout
 	}
