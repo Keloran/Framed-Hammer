@@ -123,7 +123,7 @@ class Template extends Template_Abstract {
 	 * @return string
 	 */
 	private function getMainPageNew($cDefault = null, $bEcho = null, $aDefaultLayout = null) {
-		$oMain	= Template_Content();
+		$oMain	= new Template_Content();
 		$oMain->setDefaultLayout($aDefaultLayout);
 		$oMain->setTemplate();
 
