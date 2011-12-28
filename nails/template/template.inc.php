@@ -522,6 +522,8 @@ class Template extends Template_Abstract {
 		if (!$this->oType->cTemplate) {
 			$this->oType->setTemplate(); //this sometimes doesnt get called
 
+			printRead($this->oType);
+
 			if (!file_exists($this->oType->cTemplate)) { return $this->errorTemplate($this->oType->cTemplate); }
 		}
 
