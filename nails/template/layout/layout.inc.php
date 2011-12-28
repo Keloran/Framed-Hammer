@@ -71,6 +71,7 @@ class Template_Layout extends Template_Abstract {
 		$cLayout2		= false;
 		$cLayout3		= false;
 		$cLayout4		= false;
+		$cLayout5		= false;
 
 		//is it the old way or new
 		if (is_dir(SITEPATH . "/layout/")) { $cLayout = "/layout/templates/"; }
@@ -85,31 +86,22 @@ class Template_Layout extends Template_Abstract {
 
 		//does the page have a layout folder
 		if ($this->cPage) {
-			if (is_dir(PAGES . $this->cPage . $cLayout)) {
-				$cLayout1	= PAGES . $this->cPage . $cLayout;
-			} else if (is_dir(PAGES . $this->cPage . $cNewLayout)) {
-				$cLayout1	= PAGES . $this->cPage . $cNewLayout;
-			}
+			if (is_dir(PAGES . $this->cPage . $cLayout)) { $cLayout1 	= PAGES . $this->cPage . $cLayout; }
+			if (is_dir(PAGES . $this->cPage . $cNewLayout)) { $cLayout1	= PAGES . $this->cPage . $cNewLayout; }
 		}
 		$this->addDebug("Layout 1", $cLayout1);
 
 		//is it an action layout
 		if ($this->cAction) {
-			if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cLayout)) {
-				$cLayout2	= PAGES . $this->cPage . $cSep . $this->cAction . $cLayout;
-			} else if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cNewLayout)) {
-				$cLayout2	= PAGES . $this->cPage . $cSep . $this->cAction . $cLayout;
-			}
+			if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cLayout)) { $cLayout2 		= PAGES . $this->cPage . $cSep . $this->cAction . $cLayout; }
+			if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cNewLayout)) { $cLayout2	= PAGES . $this->cPage . $cSep . $this->cAction . $cLayout; }
 		}
 		$this->addDebug("Layout 2", $cLayout2);
 
 		//is it a choice layout
 		if ($this->cChoice) {
-			if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cLayout)) {
-				$cLayout3	= PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cLayout;
-			} else if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cNewLayout)) {
-				$cLayout3	= PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cLayout;
-			}
+			if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cLayout)) { $cLayout3		= PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cLayout; }
+			if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cNewLayout)) { $cLayout3	= PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cLayout; }
 		}
 		$this->addDebug("Layout 3", $cLayout3);
 
@@ -122,13 +114,16 @@ class Template_Layout extends Template_Abstract {
 				if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $cParam . $cLayout)) {
 					$cLayout4 = PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $cParam . $cLayout;
 					break;
-				} else if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $cParam . $cNewLayout)) {
+				}
+
+				if (is_dir(PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $cParam . $cNewLayout)) {
 					$cLayout4 = PAGES . $this->cPage . $cSep . $this->cAction . $cSep . $this->cChoice . $cSep . $cParam . $cLayout;
 					break;
 				}
 			}
 		}
 		$this->addDebug("Layout 4", $cLayout4);
+
 
 		//is there a param layout, and does it have the template in there
 		if ($cLayout4) {
