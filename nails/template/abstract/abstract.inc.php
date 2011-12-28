@@ -44,6 +44,8 @@ abstract class Template_Abstract implements Template_Interface {
 		} else {
 			$this->aVars[$cName] = $mVars;
 		}
+
+		return false;
 	}
 
 	public function setSubVars($cName, $mVars) {

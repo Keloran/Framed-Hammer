@@ -102,9 +102,9 @@ class Template extends Template_Abstract {
 
 	public function setVars($cName, $mVars) {
 		if ($this->oType) {
-			$this->oType->setVars($cName, $mVars);
+			return $this->oType->setVars($cName, $mVars);
 		} else {
-			$this->setSubVars($cName, $mVars);
+			return $this->setSubVars($cName, $mVars);
 		}
 	}
 
