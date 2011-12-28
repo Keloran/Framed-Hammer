@@ -314,5 +314,7 @@ class Template_Page extends Template_Abstract {
 				throw new Spanner($cTemplate . " template doesnt exist at " . $cFinalPath, 500);
 			}
 		}
+
+		$this->cTemplate	= $cPath;
 	}
 }
