@@ -280,7 +280,7 @@ class Template extends Template_Abstract {
 	 * @return null
 	 */
 	public function setTemplate($cTemplate = null, $cAltPage = null) {
-		if ($this->oType) { return $this->oType->setTemplate($cTemplate, $cAltPage); }
+		#if ($this->oType) { return $this->oType->setTemplate($cTemplate, $cAltPage); }
 
 		$oPage				= new Template_Page($this->aParams);
 		$oPage->setDefault($this->cDefault);
