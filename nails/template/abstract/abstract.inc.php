@@ -117,6 +117,11 @@ abstract class Template_Abstract implements Template_Interface {
 
 		if ($this->aVars) { extract($this->aVars, EXTR_SKIP); }
 
+		if (!$this->cTemplate) {
+			printRead($this);
+			die();
+		}
+
 		include $this->cTemplate;
 		$cTemplate = ob_get_contents();
 
