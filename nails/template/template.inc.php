@@ -281,7 +281,7 @@ class Template extends Template_Abstract {
 	 */
 	public function setTemplate($cTemplate = null, $cAltPage = null) {
 		if (!$cTemplate) {
-			printRead(debug_backtrace());
+			printRead($this);
 			die();
 		}
 
