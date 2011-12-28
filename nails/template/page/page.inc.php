@@ -298,12 +298,13 @@ class Template_Page extends Template_Abstract {
 
 		//now try the paths
 		$cFinalPath	= false;
-		if ($cPath1 && !$cFinalPath) { $cFinalPath = $cPath4; }
+		if ($cPath4 && !$cFinalPath) { $cFinalPath = $cPath4; }
 		if ($cPath3 && !$cFinalPath) { $cFinalPath = $cPath3; }
 		if ($cPath2 && !$cFinalPath) { $cFinalPath = $cPath2; }
 		if ($cPath1 && !$cFinalPath) { $cFinalPath = $cPath1; }
 
 		$this->cTemplate	= $cFinalPath;
+		$this->addDebug("Final", $cFinalPath);
 
 		//there is no path at all
 		if ($cFinalPath) {
