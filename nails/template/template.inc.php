@@ -131,7 +131,7 @@ class Template extends Template_Abstract {
 
 		$cReturn	 = $oMain->cStarter;
 		$cReturn	.= $this->renderTemplate();
-		$cReturn	.= $oMain0->cEnder;
+		$cReturn	.= $oMain->cEnder;
 
 
 		//Echo it rather htan returning
