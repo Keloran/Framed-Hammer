@@ -257,6 +257,8 @@ class Template extends Template_Abstract {
 		$this->bChecked		= true;
 
 		$this->oType	= $oTemplate;
+
+		return $oTemplate;
 	}
 
 	/**
