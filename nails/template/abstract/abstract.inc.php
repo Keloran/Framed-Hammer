@@ -99,6 +99,8 @@ abstract class Template_Abstract implements Template_Interface {
 	* @return null
 	*/
 	public function createTemplate() {
+		return false;
+
 		if (!isset($oHammer)) {
 			$oHammer	= Hammer::getHammer();
 
