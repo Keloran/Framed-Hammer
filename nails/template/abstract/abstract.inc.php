@@ -34,7 +34,7 @@ abstract class Template_Abstract implements Template_Interface {
 	* @param mixed $mVar This is the property of the variable
 	* @return null
 	*/
-	public final function setVars($cName, $mVars) {
+	public function setVars($cName, $mVars) {
         //always unset the previous variable
         //before setting it, avoid scalar conflicts
         unset($this->aVars[$cName]);
