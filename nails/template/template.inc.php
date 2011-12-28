@@ -199,11 +199,6 @@ class Template extends Template_Abstract {
 
 		//We want to echo it, to make structure.struct pages nicer
 		if ($bEcho) {
-			if ($cPage == "header") {
-				printRead($oPage);
-				die();
-			}
-
 			echo $this->renderTemplate();
 			return false;
 		} else {
