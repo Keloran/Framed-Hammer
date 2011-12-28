@@ -280,17 +280,12 @@ class Template extends Template_Abstract {
 	 * @return null
 	 */
 	public function setTemplate($cTemplate = null, $cAltPage = null) {
-		if (!$cTemplate) {
-			printRead($this);
-			die();
-		}
-
-		$oPage				= new Template_Page($this->aParams);
+		$oPage			= new Template_Page($this->aParams);
 		$oPage->setDefault($this->cDefault);
 		$this->bCalled		= true;
 		$this->bSetCalled	= true;
 
-		$cReturn			= $oPage->setTemplate($cTemplate, $cAltPage);
+		$cReturn		= $oPage->setTemplate($cTemplate, $cAltPage);
 		$this->cTemplate	= $cReturn;
 
 		//is there anything returned
