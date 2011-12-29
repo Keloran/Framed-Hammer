@@ -199,7 +199,7 @@ abstract class Template_Abstract {
 	 * @return string
 	 */
 	protected function getPage($cDefault = null) {
-		$cReturn		= false;
+		$cPage	= false;
 
 		//there is no page so it must be the default
 		if (!$this->cPage) {
@@ -221,21 +221,13 @@ abstract class Template_Abstract {
 			}
 		}
 
-		printRead($this);
-		printRead($cPage);
-		die();
-
 		//now check the default exists
 		if (!file_exists($cPage)) { $this->cError = "Sorry the default page doesnt seem to exist either ( " . $this->cDefault . " )"; }
 
 		//now if there is no error return
-		if (!$this->cError) {
-			$cReturn = $cPage;
-		} else {
-			if ($this->bDebug) { $this->debugTemplates(); }
-		}
+		if ($this->cError && $this->bDebug) { $this->debugTemplates(); }
 
-		return $cReturn;
+		return $cPage;
 	}
 
 	/**
