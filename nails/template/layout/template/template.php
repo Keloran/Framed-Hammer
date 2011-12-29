@@ -8,15 +8,19 @@
  * @version $Id$
  * @access public
  */
-class Template_Layout extends Template_Abstract {
+class Template_Layout_Template extends Template_Abstract {
+	private $oLayout;
+
 	/**
 	 * Template_Layout::__construct()
 	 *
 	 * @param mixed $mParams
 	 * @param string $cTemplate
 	 */
-	public function __construct($mParams, $cTemplate = false) {
-		$this->setParams($mParams);
+	public function __construct($oTemplate, $cTemplate = false) {
+		$this->oLayout	= $oTemplate;
+
+		$this->setParams($oTemplate->aParams);
 
 		if ($cTemplate) { $this->setTemplate($cTemplate); }
 	}
@@ -31,6 +35,12 @@ class Template_Layout extends Template_Abstract {
 		$cReturn	= false;
 		$cCaller	= $this->getCaller();
 		$this->addDebug("Caller", $cCaller);
+
+		//no template given but we know its parent
+		if (!$cTemplate) {
+			if ($this->oLayout->cLayout) { 			$cTemplate = $this->oLayout->cLayout; }
+			if ($this->oLayout->cLayoutTemplate) {	$cTemplate = $this->oLayout->cLayoutTemplate; }
+		}
 
 		$cLayout	= SITEPATH . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl";
 		$this->addDebug("Original Layout Template", $cLayout);

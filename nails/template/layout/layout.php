@@ -28,7 +28,9 @@ class Template_Layout extends Template_Abstract {
 	 * @return string
 	 */
 	public function setTemplate($cTemplate = null) {
-		$cCaller	= $this->getCaller();
+		$cCaller				= $this->getCaller();
+		$this->cLayout			= $cCaller;
+		$this->cLayoutTemplate	= $cTemplate;
 
 		if ($cTemplate) {
 			$cLayout	= SITEPATH . "/layout/" . $cTemplate . "/" . $cTemplate . ".php";

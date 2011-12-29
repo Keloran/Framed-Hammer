@@ -150,7 +150,6 @@ class Template extends Template_Abstract {
 		$oLayout->setTemplate($cLayout);
 
 		$this->oType	= $oLayout;
-
 		$cRender		= $oLayout->renderTemplate();
 
 		//echo or not
@@ -161,20 +160,18 @@ class Template extends Template_Abstract {
 
 	public function setLayout($cTemplate = null) {
 		if ($this->oType instanceof Template_Layout) {
-			printRead($this->oType);
-			die();
+			$oLayout	= new Template_Layout_Template($this->oType);
+			$oLayout->setTemplate($cTemplate);
+
+			$this->oType	= $oLayout;
+			$cRender		= $oLayout->renderTemplate();
+
+			//echo or not
+			if ($bEcho) { echo $cRender; }
+
+			return $cRender;
 		}
-		printRead($this);
-		die();
 
-
-		$oLayout	= new Template_Layout_Template($this->aParams);
-
-		//set debug
-		if ($this->bDebug) { $oLayout->doDebug(); }
-
-		$oLayout->setTemplate($cTemplate);
-
-		$this->oType	= $oLayout;
+		return false;
 	}
 }
