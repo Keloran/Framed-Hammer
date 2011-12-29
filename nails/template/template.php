@@ -13,7 +13,7 @@ class Template extends Template_Abstract {
 
 	private $oNails;
 	private $oForms;
-	private $bDebug;
+	protected $bDebug;
 	private $oType;
 
 	/**
