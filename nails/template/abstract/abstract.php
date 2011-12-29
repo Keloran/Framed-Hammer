@@ -134,20 +134,6 @@ abstract class Template_Abstract {
 	}
 
 	/**
-	 * Template_Abstract::isFile()
-	 *
-	 * @param string $cTemplate
-	 * @return bool
-	 */
-	public function isFile($cTemplate) {
-		$bReturn = false;
-
-		if (file_exists($cTemplate)) { $bReturn = true; }
-
-		return $bReturn;
-	}
-
-	/**
 	 * Template_Abstract::getForm()
 	 *
 	 * @return null
@@ -178,7 +164,7 @@ abstract class Template_Abstract {
 		if (!$this->cTemplate) { return false; }
 
 		//make sure its actually a file
-		if (!$this->isFile($this->cTemplate)) { return false; }
+		if (!file_exists($this->cTemplate)) { return false; }
 
 		//get the form if there is one
 		$this->getForm();
