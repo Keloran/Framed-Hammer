@@ -126,11 +126,29 @@ class Template extends Template_Abstract {
 		$oStruct->createHammer();
 
 		$this->oType	= $oStruct;
+		$cRender		= $oStruct->renderTemplate();
 
-		if ($bEcho) { echo $oStruct->renderTemplate(); }
+		if ($bEcho) { echo $cRender; }
 
-		return $oStruct->renderTemplate();
+		return $cRender;
 	}
 
+	public function getLayout($cLayout = null, $bEcho = null) {
+		$oLayout	= new Template_Layout($this->aParams);
 
+		//set debug
+		if ($this->bDebug) { $oLayout->doDebug(); }
+
+		//set the template
+		$oLayout->setTemplate($cLayout);
+
+		$this->oType	= $oLayout;
+
+		$cRender		= $oLayout->renderTemplate();
+
+		//echo or not
+		if ($bEcho) { echo $cRender; }
+
+		return $cRender;
+	}
 }
