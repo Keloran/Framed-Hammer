@@ -152,11 +152,9 @@ class Template extends Template_Abstract {
 		$oStruct->setTemplate($cStructure);
 		$this->giveHammer();
 
-		$cRender		= $oStruct->renderTemplate();
+		if ($bEcho) { echo $oStruct->renderTemplate(); }
 
-		if ($bEcho) { echo $cRender; }
-
-		return $cRender;
+		return $oStruct;
 	}
 
 	/**
@@ -179,12 +177,10 @@ class Template extends Template_Abstract {
 		$oLayout->setTemplate($cLayout);
 		$this->giveHammer();
 
-		$cRender		= $oLayout->renderTemplate();
-
 		//echo or not
-		if ($bEcho) { echo $cRender; }
+		if ($bEcho) { echo $oLayout->renderTemplate(); }
 
-		return $cRender;
+		return $oLayout;
 	}
 
 	/**
@@ -200,12 +196,11 @@ class Template extends Template_Abstract {
 			$oLayout->setTemplate($cTemplate);
 
 			$this->oType	= $oLayout;
-			$cRender		= $oLayout->renderTemplate();
 
 			//echo or not
-			if ($bEcho) { echo $cRender; }
+			if ($bEcho) { echo $oLayout->renderTemplate(); }
 
-			return $cRender;
+			return $oLayout;
 		}
 
 		return false;
