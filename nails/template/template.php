@@ -87,8 +87,10 @@ class Template extends Template_Abstract {
 	 * @return null
 	 */
 	private function giveHammer() {
-		$this->oType->setVars("oHammer", $this->oHammer);
-		$this->oType->setVars("Hammer", $this->oHammer);
+		if ($this->oType) {
+			$this->oType->setVars("oHammer", $this->oHammer);
+			$this->oType->setVars("Hammer", $this->oHammer);
+		}
 	}
 
 	/**
@@ -139,6 +141,9 @@ class Template extends Template_Abstract {
 	public function getStructure($cStructure = null, $bEcho = null) {
 		$oStruct	= Template_Structure::getInstance($this->aParams);
 
+		//set the type
+		$this->oType	= $oStruct;
+
 		//set debug
 		if ($this->bDebug) { $oStruct->doDebug(); }
 
@@ -146,7 +151,6 @@ class Template extends Template_Abstract {
 		$oStruct->setTemplate($cStructure);
 		$this->giveHammer();
 
-		$this->oType	= $oStruct;
 		$cRender		= $oStruct->renderTemplate();
 
 		if ($bEcho) { echo $cRender; }
