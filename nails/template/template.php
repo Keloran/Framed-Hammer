@@ -175,7 +175,7 @@ class Template extends Template_Abstract {
 		return false;
 	}
 
-	public function addForm($mObject) {
+	public function addForm($mObject = null) {
 		if (is_object($mObject)) {
 			$this->oForm	= $mObject;
 		} else {
