@@ -159,6 +159,21 @@ abstract class Template_Abstract {
 	}
 
 	/**
+	 * Template_Abstract::getForm()
+	 *
+	 * @return null
+	 */
+	private function getForm() {
+		if ($this->oForm) {
+			$cForm	= $this->oForm->fullForm();
+			$this->setVars("cForm", $cForm);
+			$this->setVars("oForm", $this->oForm);
+		}
+
+		return false;
+	}
+
+	/**
 	 * Template_Abstract::renderTemplate()
 	 *
 	 * @param bool $bEcho
@@ -175,6 +190,9 @@ abstract class Template_Abstract {
 
 		//add hammer always but remove on next level
 		$this->createHammer();
+
+		//get the form if there is one
+		$this->getForm();
 
 		//templates dont have access to $this or $hammer
 		if (strstr($this->cTemplate, "tpl")) { $this->removeParents(); }
@@ -445,6 +463,7 @@ abstract class Template_Abstract {
 	public function addForm($bObject = null) {
 		$oForm			= new Form($this);
 		$oForm->bObject	= $bObject;
+		$this->oForm	= $oForm;
 
 		return $oForm;
 	}
