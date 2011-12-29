@@ -9,7 +9,7 @@
  * @access public
  */
 class Template_Structure extends Template_Abstract {
-	#use Address, Cookie;
+	use Address, Cookie;
 
 	/**
 	 * Template_Structure::__construct()
