@@ -1,88 +1,69 @@
 <?php
+/**
+ * Template_Content
+ *
+ * @package
+ * @author Keloran
+ * @copyright Copyright (c) 2011
+ * @version $Id$
+ * @access public
+ */
 class Template_Content extends Template_Abstract {
-	//Traits
-	use Browser;
-
-	public $aParams;
-	public $cTemplate;
-
-	protected $aVars;
-
-	//split stuff, e.g. page/action
-	protected $cPage;
-	protected $cAction;
-	protected $cChoice;
-	protected $aOthers;
-	private $cSkin;
-
-	//instance
-	static $oContent;
-
 	/**
- 	* Template_Layout::__construct()
- 	*
- 	* @param mixed $mParams
- 	* @param string $cTemplate
- 	*/
+	 * Template_Content::__construct()
+	 *
+	 * @param mixed $mParms
+	 * @param string $cTemplate
+	 */
 	public function __construct($mParams, $cTemplate = null) {
 		$this->setParams($mParams);
 
-		//since we have a template set
-		if ($cTemplate) {
-			$this->setTemplate($cTemplate);
-		}
-	}
-
-	public function setDefaultLayout($aDefault = false) {
-		if ($aDefault) {
-			$this->cStarter	= $aDefault[0];
-			$this->cEnder	= $aDefault[1];
-		} else {
-			$this->cStarter = "<div id=\"mainArea\">\n";
-			$this->cEnder	= "</div>\n";
-		}
+		if ($cTemplate) { $this->setTemplate($cTemplate); }
 	}
 
 	/**
- 	* Template_Layout::setTemplate()
- 	*
- 	* @param string $cTemplate
- 	* @return string
- 	*/
+	 * Template_Content::setLayout()
+	 *
+	 * @param array $aLayout
+	 * @return null
+	 */
+	public function setLayout($aLayout = null) {
+		if ($aLayout) {
+			$this->cStarter	= $aLayout[0];
+			$this->cEnder	= $aLayout[1];
+		}
+	}
+
 	public function setTemplate($cDefault = null) {
-		$cReturn	= $this->cStarter;
-		$cPage		= false;
+		$cPage			= $this->getPage($cDefault);
+		$this->cDefault = $cDefault;
 
-		//page
-		$cPage = $this->getPage($cDefault);
-		$this->cDefault	= $cDefault;
-
-		//action
+		//is there an action
 		if ($this->cAction) {
 			$cAction	= $this->getAction();
-			$cPage		= $cAction ? $cAction : $cPage;
+			$cPage		= $cAction ?: $cPage;
 		}
 
-		//choice
+		//is there a choice
 		if ($this->cChoice) {
 			$cChoice	= $this->getChoice();
-			$cPage		= $cChoice ? $cChoice : $cPage;
+			$cPage		= $cChoice ?: $cPage;
 		}
 
-		//others
-		if (isset($this->extraParams) && ($this->extraParams)) {
-			$cOther		= $this->getOther();
-			$cPage		= $cOther ? $cOther : $cPage;
+		//if there are others
+		if (isset($this->extraParams) && $this->extraParams) {
+			$cOther	= $this->getOther();
+			$cPage	= $cOther ?: $cPage;
 		}
 
 		$this->setVars("defaultPage", $cDefault);
 
 		if ($cPage) {
 			$this->cTemplate	= $cPage;
-		} else{
-			 $this->cTemplate	= $this->cError;
+		} else {
+			$this->cTemplate	= $this->cError;
 		}
 
-		return $this->cReturn;
+		return $this->cTemplate;
 	}
 }
