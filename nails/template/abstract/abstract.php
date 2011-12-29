@@ -173,12 +173,6 @@ abstract class Template_Abstract {
 			$this->setVars("oForm", false);
 		}
 
-		if (strstr($this->cTemplate, "loginArea.tpl")) {
-			$this->removeParents();
-			printRead($this);
-			die();
-		}
-
 		return false;
 	}
 
