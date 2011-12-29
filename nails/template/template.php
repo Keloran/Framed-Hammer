@@ -178,7 +178,7 @@ class Template extends Template_Abstract {
 		//echo or not
 		if ($bEcho) { echo $oLayout->renderTemplate(); }
 
-		return $oLayout;
+		return $oLayout->renderTemplate();
 	}
 
 	/**
@@ -195,10 +195,7 @@ class Template extends Template_Abstract {
 
 			$this->oType	= $oLayout;
 
-			//echo or not
-			if ($bEcho) { echo $oLayout->renderTemplate(); }
-
-			return $oLayout;
+			return $oLayout->renderTemplate();
 		}
 
 		return false;
