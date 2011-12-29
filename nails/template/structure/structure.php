@@ -163,10 +163,10 @@ class Template_Structure extends Template_Abstract {
 	private function getLayout($bFilter = false) {
 		$bSpecial 	= false;
 
-		$cBrand	= $this->bBrand ? $this->getBrand() : false;
+		$cBrand	= $this->bBrand ? $this->getBrand($bFilter) : false;
 		$this->addDebug("Layout 1", $cLayout1);
 
-		$cLanguage	= $this->bLanguage ? $this->getLanguage() : false;
+		$cLanguage	= $this->bLanguage ? $this->getLanguage($bFilter) : false;
 		$this->addDebug("Layout 2", $cLayout2);
 
 		if (substr($cLayout1, -2, 2) == "//") { $cLayout1 = substr($cLayout1, 0, (strlen($cLayout1) - 1)); }
