@@ -406,7 +406,7 @@ abstract class Template_Abstract {
 
 		//go through the debug
 		foreach ($aDebug AS $debug) {
-			if (($aDebug['function'] == "getCore") || ($aDebug['function'] == "setLayout")) {
+			if (($debug['function'] == "getCore") || ($debug['function'] == "setLayout")) {
 				if (isset($debug['args']) && isset($debug['args'][0])) {
 					$cFile = $debug['args'][0];
 					$this->addDebug("Back Trace", $debug);

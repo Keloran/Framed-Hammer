@@ -8,7 +8,7 @@
  * @version $Id$
  * @access public
  */
-class Template_Layout extends Template_Abstract{
+class Template_Layout extends Template_Abstract {
 	/**
 	 * Template_Layout::__construct()
 	 *
