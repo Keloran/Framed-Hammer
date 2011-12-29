@@ -163,7 +163,7 @@ abstract class Template_Abstract {
 		if (strstr($this->cTemplate, "tpl")) { $this->removeParents(); }
 
 		if (strstr($this->cTemplate, "welcome")) {
-			printRead($this, array("firephp"));
+			printRead($this->cTemplate, array("firephp"));
 			die();
 		}
 
