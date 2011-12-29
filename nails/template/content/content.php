@@ -41,6 +41,8 @@ class Template_Content extends Template_Abstract {
 	 * @return string
 	 */
 	public function setTemplate($cDefault = null) {
+		if ($this->cDefault) { $cDefault = $this->cDefault; }
+
 		$cPage			= $this->getPage($cDefault);
 		$this->cDefault = $cDefault;
 
