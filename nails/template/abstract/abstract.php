@@ -442,7 +442,7 @@ abstract class Template_Abstract {
 	 * @param bool $bObject
 	 * @return object
 	 */
-	public function addForm($bObject = false) {
+	public function addForm($bObject = null) {
 		$oForm			= new Form($this);
 		$oForm->bObject	= $bObject;
 
