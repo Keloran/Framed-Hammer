@@ -66,6 +66,10 @@ class Template_Content extends Template_Abstract {
 
 		$this->setVars("defaultPage", $cDefault);
 
+		printRead($this);
+		printRead($cPage);
+		die();
+
 		if ($cPage) {
 			$this->cTemplate	= $cPage;
 		} else {
