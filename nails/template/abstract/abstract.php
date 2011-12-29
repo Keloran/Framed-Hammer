@@ -168,6 +168,9 @@ abstract class Template_Abstract {
 			$cForm	= $this->oForm->fullForm();
 			$this->setVars("cForm", $cForm);
 			$this->setVars("oForm", $this->oForm);
+		} else {
+			$this->setVars("cForm", false);
+			$this->setVars("oForm", false);
 		}
 
 		if (strstr($this->cTemplate, "loginArea.tpl")) {
