@@ -133,6 +133,13 @@ class Template extends Template_Abstract {
 		return $cRender;
 	}
 
+	/**
+	 * Template::getLayout()
+	 *
+	 * @param string $cLayout
+	 * @param bool $bEcho
+	 * @return string
+	 */
 	public function getLayout($cLayout = null, $bEcho = null) {
 		$oLayout	= new Template_Layout($this->aParams);
 
@@ -150,5 +157,19 @@ class Template extends Template_Abstract {
 		if ($bEcho) { echo $cRender; }
 
 		return $cRender;
+	}
+
+	public function setLayout($cTemplate = null) {
+		$oLayout	= new Template_Layout_Template($this->aParams);
+
+		printRead($this);
+		die();
+
+		//set debug
+		if ($this->bDebug) { $oLayout->doDebug(); }
+
+		$oLayout->setTemplate($cTemplate);
+
+		$this->oType	= $oLayout;
 	}
 }
