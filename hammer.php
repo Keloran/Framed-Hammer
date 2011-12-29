@@ -522,19 +522,22 @@ class Hammer {
 	* @return object
 	*/
 	public function addTemplate($cTemplate = null) {
-		$cSkinSetting	= false;
-		$cSkin			= $cSkinSetting ? $cSkinSetting : "brand";
+		if (!isset($this->aRegistry["oTemplate"])) {
+			$cSkinSetting	= false;
+			$cSkin			= $cSkinSetting ?: "brand";
 
-		$this->cSkinSetting	= $cSkin;
-		$this->cSiteCalled	= $this->cSited;
+			$this->cSkinSetting	= $cSkin;
+			$this->cSiteCalled	= $this->cSited;
 
-		//get the template object
-		$oReturn	= Template::getInstance($this->aData, $this->cSited, $cSkinSetting);
+			//get the template object
+			$oReturn		= Template::getInstance($this->aData, $this->cSited, $cSkinSetting);
 
-		//set the template always, and then if just echo called, no errors
-		$oReturn->setTemplate($cTemplate);
+			//set the template always, and then if just echo called, no errors
+			$oReturn->setTemplate($cTemplate);
+			$this->aRegistry["oTemplate"] = $oReturn;
+		}
 
-		return $oReturn;
+		return $this->aRegistry["oTemplate"];
 	}
 
 	/**
