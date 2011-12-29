@@ -118,6 +118,7 @@ class Template extends Template_Abstract {
 		$oMain->setLayout($aLayout);
 
 		$oMain->setVars("error", $this->cError);
+		$this->giveHammer();
 
 		//do the render
 		$cReturn	 = $oMain->cStarter;
