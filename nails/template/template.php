@@ -160,10 +160,10 @@ class Template extends Template_Abstract {
 	}
 
 	public function setLayout($cTemplate = null) {
-		$oLayout	= new Template_Layout_Template($this->aParams);
-
 		printRead($this);
 		die();
+
+		$oLayout	= new Template_Layout_Template($this->aParams);
 
 		//set debug
 		if ($this->bDebug) { $oLayout->doDebug(); }
