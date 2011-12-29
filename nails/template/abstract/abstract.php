@@ -163,12 +163,14 @@ abstract class Template_Abstract {
 		//now make sure we have a template otherwise just do nothing
 		if (!$this->cTemplate) { return false; }
 
+		/**
 		//make sure its actually a file
 		if (!file_exists($this->cTemplate)) {
 			printRead($this->cTemplate);
 			die();
 			return false;
 		}
+		*/
 
 		//get the form if there is one
 		$this->getForm();
