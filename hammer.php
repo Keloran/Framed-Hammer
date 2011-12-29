@@ -184,6 +184,19 @@ class Hammer {
 	}
 
 	/**
+	 * Hammer::getHammerObject()
+	 *
+	 * @param string $cSite
+	 * @param array $aFilter
+	 * @return object
+	 */
+	public static function getHammerObject($cSite = null, $aFilter = null) {
+		if (is_null(self::$oHammer)) { self::$oHammer = new Hammer($cSite, $aFilter); }
+
+		return self::$oHammer;
+	}
+
+	/**
 	 * Hammer::rootConfig()
 	 *
 	 * @param string $cKey

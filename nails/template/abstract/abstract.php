@@ -143,7 +143,7 @@ abstract class Template_Abstract {
 		if (isset($oHammer)) { return false; }
 		if (isset($this->aVars['oHammer'])) { return false; }
 
-		$oHammer	= Hammer::getHammer();
+		$oHammer	= Hammer::getHammerObject();
 		$this->setVars("oHammer", $oHammer);
 		$this->setVars("Hammer", $oHammer);
 	}
