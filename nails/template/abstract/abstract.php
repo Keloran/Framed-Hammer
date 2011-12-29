@@ -435,4 +435,17 @@ abstract class Template_Abstract {
 
 		return $cFile;
 	}
+
+	/**
+	 * Template_Abstract::addForm()
+	 *
+	 * @param bool $bObject
+	 * @return object
+	 */
+	public function addForm($bObject = false) {
+		$oForm			= new Form($this);
+		$oForm->bObject	= $bObject;
+
+		return $oForm;
+	}
 }
