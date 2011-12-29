@@ -358,6 +358,12 @@ abstract class Template_Abstract implements Template_Interface {
     					$cFile	= $debug['args'][0];
                     }
 				}
+			} else if ($debug['function'] == "setLayout") {
+				if (isset($debug['args'])) {
+					if (isset($debug['args'][0])) {
+						$cFile = $debug['args'][0];
+					}
+				}
 			}
 		}
 

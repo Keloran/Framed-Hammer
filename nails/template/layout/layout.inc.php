@@ -124,7 +124,6 @@ class Template_Layout extends Template_Abstract {
 		}
 		$this->addDebug("Layout 4", $cLayout4);
 
-
 		//is there a param layout, and does it have the template in there
 		if ($cLayout4) {
 			if (file_exists($cLayout4 . $cTemplate . $cExtra . ".tpl")) { //extras
@@ -194,10 +193,7 @@ class Template_Layout extends Template_Abstract {
 		}
 		$this->addDebug("Final 2", $cFinal);
 
-
-
-
-
+		//debug
 		$this->addDebug("Template 1", $cTemplate);
 		$this->addDebug("Template 2", $cTemplate2);
 		$this->addDebug("Full Path", (SITEPATH . $cLayout . $cTemplate2 . $cTemplate . ".tpl"));
