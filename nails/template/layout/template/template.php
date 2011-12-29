@@ -42,6 +42,9 @@ class Template_Layout_Template extends Template_Abstract {
 			if ($this->oLayout->cLayoutTemplate) {	$cTemplate = $this->oLayout->cLayoutTemplate; }
 		}
 
+		//dont need the layout object now so kill it
+		$this->oLayout	= null;
+
 		$cLayout	= SITEPATH . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl";
 		$this->addDebug("Original Layout Template", $cLayout);
 
