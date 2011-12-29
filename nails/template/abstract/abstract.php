@@ -202,15 +202,14 @@ abstract class Template_Abstract {
 		$cReturn		= false;
 		$this->cDefault	= "news";
 		$this->cPage	= "news";
-		$cPage			= PAGES . $this->cDefault . "/" . $this->cDefault . ".php";
 
 		//there is no page so it must be the default
 		if (!$this->cPage) {
 			if ($cDefault) { //a default has been given so use this
 				$this->cPage	= $cDefault;
 				$this->cDefault	= $cDefault;
-				$cPage			= PAGES . $this->cDefault . "/" . $this->cDefault . ".php";
 			}
+			$cPage	= PAGES . $this->cDefault . "/" . $this->cDefault . ".php";
 		} else { //we are in a page
 			$cPage	= PAGES . $this->cPage . "/" . $this->cPage . ".php";
 
@@ -220,6 +219,9 @@ abstract class Template_Abstract {
 				$this->addDebug("Error", $this->cError);
 			}
 		}
+
+		printRead($this);
+		die();
 
 		//now check the default exists
 		if (!file_exists($cPage)) { $this->cError = "Sorry the default page doesnt seem to exist either ( " . $this->cDefault . " )"; }
