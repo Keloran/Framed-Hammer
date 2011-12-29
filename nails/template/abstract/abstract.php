@@ -195,9 +195,6 @@ abstract class Template_Abstract {
 		//make sure its actually a file
 		if (!$this->isFile($this->cTemplate)) { return false; }
 
-		//add hammer always but remove on next level
-		#$this->createHammer();
-
 		//get the form if there is one
 		$this->getForm();
 
