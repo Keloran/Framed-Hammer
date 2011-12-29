@@ -153,11 +153,14 @@ abstract class Template_Abstract {
 	public function renderTemplate($bEcho = null) {
 		$cReturn	= false;
 
-		//templates dont have access to $this or $hammer
-		if (strstr($this->cTemplate, "tpl")) { $this->removeParents(); }
-
 		//now make sure we have a template otherwise just do nothing
 		if (!$this->cTemplate) { return false; }
+
+		//add hammer always but remove on next level
+		$this->createHammer();
+
+		//templates dont have access to $this or $hammer
+		if (strstr($this->cTemplate, "tpl")) { $this->removeParents(); }
 
 		//start the buffer so that we can process the request
 		ob_start();
