@@ -111,9 +111,7 @@ class Hammer {
 	*/
 	public function __construct($cSite = false, $aFilter = null) {
 		//Since there is an error throw it, this is very unlikelly to ever be called
-		if ($this->cError) {
-			throw new Spanner($this->cError, 50);
-		}
+		if ($this->cError) { throw new Spanner($this->cError, 50); }
 
 		//Set the site stuff
 		//Will be used in cache eventually
@@ -277,16 +275,14 @@ class Hammer {
 	 */
 	public function setAddress($aFilters = null, $cSite = false) {
 		$cSiteAddress	= isset($this->cSiteAddy) ? $this->cSiteAddy : $cSite; //This sets the address, used for language/brand
-		$aFilter	= $this->aFilters ? $this->aFilters : $aFilters; //do the filters already exist
+		$aFilter		= $this->aFilters ?: $aFilters; //do the filters already exist
 
 		$oScrewDriver	= new ScrewDriver($aFilter, $cSiteAddress);
-		$aAddress	= $oScrewDriver->finalAddress();
+		$aAddress		= $oScrewDriver->finalAddress();
 
 		//Set the variables
 		if ($aAddress) {
-			foreach ($aAddress as $cName => $cValue) {
-				$this->$cName	= $cValue;
-			}
+			foreach ($aAddress as $cName => $cValue) { $this->$cName = $cValue; }
 		}
 	}
 

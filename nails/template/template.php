@@ -85,7 +85,7 @@ class Template extends Template_Abstract {
 
 		//set the type for calling of render afterwards
 		$this->oType	= $oMain;
-		$oMain->createHammer();
+		#$oMain->createHammer();
 
 		//set the debug
 		if ($this->bDebug) { $oMain->doDebug(); }
@@ -124,7 +124,7 @@ class Template extends Template_Abstract {
 
 		//set the template
 		$oStruct->setTemplate($cStructure);
-		$oStruct->createHammer();
+		#$oStruct->createHammer();
 
 		$this->oType	= $oStruct;
 		$cRender		= $oStruct->renderTemplate();
@@ -146,7 +146,7 @@ class Template extends Template_Abstract {
 
 		//set the type
 		$this->oType	= $oLayout;
-		$oLayout->createHammer();
+		#$oLayout->createHammer();
 
 		//set debug
 		if ($this->bDebug) { $oLayout->doDebug(); }
