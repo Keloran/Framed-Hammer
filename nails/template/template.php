@@ -33,6 +33,7 @@ class Template extends Template_Abstract {
 		//params
 		$this->aParams	= $aParams;
 		$this->setParams($aParams);
+		$this->createHammer();
 	}
 
 	/**
@@ -69,6 +70,25 @@ class Template extends Template_Abstract {
 	 */
 	public function setDebug() {
 		$this->bDebug	= true;
+	}
+
+	/**
+	 * Template::createHammer()
+	 *
+	 * @return null
+	 */
+	private function createHammer() {
+		if (!$this->oHammer) { $this->oHammer = Hammer::getHammer(); }
+	}
+
+	/**
+	 * Template::giveHammer()
+	 *
+	 * @return null
+	 */
+	private function giveHammer() {
+		$this->oType->setVars("oHammer", $this->oHammer);
+		$this->oType->setVars("Hammer", $this->oHammer);
 	}
 
 	/**
@@ -124,7 +144,7 @@ class Template extends Template_Abstract {
 
 		//set the template
 		$oStruct->setTemplate($cStructure);
-		$oStruct->createHammer();
+		$this->giveHammer();
 
 		$this->oType	= $oStruct;
 		$cRender		= $oStruct->renderTemplate();

@@ -134,21 +134,6 @@ abstract class Template_Abstract {
 	}
 
 	/**
-	 * Template_Abstract::createHammer()
-	 *
-	 * @return null
-	 */
-	public function createHammer() {
-		//check if there is a hammer in the space
-		if (isset($oHammer)) { return false; }
-		if (isset($this->aVars['oHammer'])) { return false; }
-
-		$oHammer	= Hammer::getHammerObject();
-		$this->setVars("oHammer", $oHammer);
-		$this->setVars("Hammer", $oHammer);
-	}
-
-	/**
 	 * Template_Abstract::isFile()
 	 *
 	 * @param string $cTemplate
