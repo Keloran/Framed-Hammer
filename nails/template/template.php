@@ -158,6 +158,13 @@ class Template extends Template_Abstract {
 		return $cRender;
 	}
 
+	/**
+	 * Template::setLayout()
+	 *
+	 * @param string $cTemplate
+	 * @param bool $bEcho
+	 * @return string
+	 */
 	public function setLayout($cTemplate = null, $bEcho = null) {
 		if ($this->oType instanceof Template_Layout) {
 			$oLayout	= new Template_Layout_Template($this->oType);
@@ -175,6 +182,12 @@ class Template extends Template_Abstract {
 		return false;
 	}
 
+	/**
+	 * Template::addForm()
+	 *
+	 * @param mixed $mObject
+	 * @return object
+	 */
 	public function addForm($mObject = null) {
 		if (is_object($mObject)) {
 			$this->oForm	= $mObject;
@@ -183,5 +196,11 @@ class Template extends Template_Abstract {
 		}
 
 		return $this->oForm;
+	}
+
+	public function renderTemplate() {
+		if ($this->oType) { return $this->oType->renderTemplate(); }
+
+		return false;
 	}
 }
