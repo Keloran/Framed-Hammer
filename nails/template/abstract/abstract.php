@@ -221,6 +221,7 @@ abstract class Template_Abstract {
 		}
 
 		printRead($this);
+		printRead($cDefault);
 		die();
 
 		//now check the default exists
