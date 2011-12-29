@@ -116,7 +116,7 @@ class Template extends Template_Abstract {
 	 * @return string
 	 */
 	public function getStructure($cStructure = null, $bEcho = null) {
-		$oStruct	= new Template_Structure($this->aParams);
+		$oStruct	= Template_Structure::getInstance($this->aParams);
 
 		//set debug
 		if ($this->bDebug) { $oStruct->doDebug(); }
@@ -208,5 +208,21 @@ class Template extends Template_Abstract {
 		if ($this->oType) { return $this->oType->renderTemplate($bEcho); }
 
 		return false;
+	}
+
+	/**
+	 * Template::__destruct()
+	 *
+	 */
+	public function __destruct() {
+		$this->oHammer	= null;
+		$this->oNails	= null;
+		$this->oForms	= null;
+		$this->cForm	= null;
+		$this->oType	= null;
+
+		unset($this->oNails);
+		unset($this->oForms);
+		unset($this->oType);
 	}
 }

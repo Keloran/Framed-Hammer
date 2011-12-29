@@ -11,14 +11,28 @@
 class Template_Structure extends Template_Abstract {
 	use Address, Cookie;
 
+	static $oStructure;
+
 	/**
 	 * Template_Structure::__construct()
 	 *
 	 * @param array $aParams
 	 */
-	function __construct($aParams) {
+	public function __construct($aParams) {
 		$this->setParams($aParams);
 		$this->aSetParams	= $aParams;
+	}
+
+	/**
+	 * Template_Structure::getInstance()
+	 *
+	 * @param array $aParams
+	 * @return object
+	 */
+	public static function getInstance($aParams) {
+		if (is_null(self::$oStructure)) { self::$oStructure = new Template_Structure($aParams); }
+
+		return self::$oStructure;
 	}
 
 	/**
