@@ -164,13 +164,13 @@ class Template_Structure extends Template_Abstract {
 		$bSpecial 	= false;
 
 		$cBrand	= $this->bBrand ? $this->getBrand($bFilter) : false;
-		$this->addDebug("Layout 1", $cLayout1);
+		$this->addDebug("Layout 1", $cBrand);
 
 		$cLanguage	= $this->bLanguage ? $this->getLanguage($bFilter) : false;
-		$this->addDebug("Layout 2", $cLayout2);
+		$this->addDebug("Layout 2", $cLanguage);
 
-		if (substr($cLayout1, -2, 2) == "//") { $cLayout1 = substr($cLayout1, 0, (strlen($cLayout1) - 1)); }
-		if (substr($cLayout2, -2, 2) == "//") { $cLayout2 = substr($cLayout2, 0, (strlen($cLayout2) - 1)); }
+		if (substr($cBrand, -2, 2) == "//") { $cBrand = substr($cBrand, 0, (strlen($cBrand) - 1)); }
+		if (substr($cLanguage, -2, 2) == "//") { $cLanguage = substr($cLayout2, 0, (strlen($cLanguage) - 1)); }
 
 		//set the default structure
 		if ($this->bNormal) {
