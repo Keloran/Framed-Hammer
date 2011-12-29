@@ -116,7 +116,7 @@ class Template extends Template_Abstract {
 	 * @return string
 	 */
 	public function getStructure($cStructure = null, $bEcho = null) {
-		$oStruct	= Template_Structure($this->aParams);
+		$oStruct	= new Template_Structure($this->aParams);
 
 		//set debug
 		if ($this->bDebug) { $oStruct->doDebug(); }
