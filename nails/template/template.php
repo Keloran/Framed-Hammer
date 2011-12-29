@@ -144,13 +144,16 @@ class Template extends Template_Abstract {
 	public function getLayout($cLayout = null, $bEcho = null) {
 		$oLayout	= new Template_Layout($this->aParams);
 
+		//set the type
+		$this->oType	= $oLayout;
+		$oLayout->createHammer();
+
 		//set debug
 		if ($this->bDebug) { $oLayout->doDebug(); }
 
 		//set the template
 		$oLayout->setTemplate($cLayout);
 
-		$this->oType	= $oLayout;
 		$cRender		= $oLayout->renderTemplate();
 
 		//echo or not
