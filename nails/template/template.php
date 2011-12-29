@@ -158,7 +158,7 @@ class Template extends Template_Abstract {
 		return $cRender;
 	}
 
-	public function setLayout($cTemplate = null) {
+	public function setLayout($cTemplate = null, $bEcho = null) {
 		if ($this->oType instanceof Template_Layout) {
 			$oLayout	= new Template_Layout_Template($this->oType);
 			$oLayout->setTemplate($cTemplate);
