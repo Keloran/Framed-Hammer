@@ -108,5 +108,29 @@ class Template extends Template_Abstract {
 		return $cReturn;
 	}
 
+	/**
+	 * Template::getStructure()
+	 *
+	 * @param string $cStructure
+	 * @param bool $bEcho
+	 * @return string
+	 */
+	public function getStructure($cStructure = null, $bEcho = null) {
+		$oStruct	= Template_Structure($this->aParams);
+
+		//set debug
+		if ($this->bDebug) { $oStruct->doDebug(); }
+
+		//set the template
+		$oStruct->setTemplate($cStructure);
+		$oStruct->createHammer();
+
+		$this->oType	= $oStruct;
+
+		if ($bEcho) { echo $oStruct->renderTemplate(); }
+
+		return $oStuct->renderTemplate();
+	}
+
 
 }
