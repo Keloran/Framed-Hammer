@@ -162,6 +162,11 @@ abstract class Template_Abstract {
 		//templates dont have access to $this or $hammer
 		if (strstr($this->cTemplate, "tpl")) { $this->removeParents(); }
 
+		if (strstr($this->cTemplate, "welcome")) {
+			printRead($this);
+			die();
+		}
+
 		//start the buffer so that we can process the request
 		ob_start();
 			if ($this->aVars) { extract($this->aVars, EXTR_SKIP); } //skip on override
