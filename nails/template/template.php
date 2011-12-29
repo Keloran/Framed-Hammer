@@ -83,6 +83,10 @@ class Template extends Template_Abstract {
 		//open the object
 		$oMain	= new Template_Content($this->aParams);
 
+		//set the type for calling of render afterwards
+		$this->oType	= $oMain;
+		$oMain->createHammer();
+
 		//set the debug
 		if ($this->bDebug) { $oMain->doDebug(); }
 
@@ -92,9 +96,6 @@ class Template extends Template_Abstract {
 		$oMain->setLayout($aLayout);
 
 		$oMain->setVars("error", $this->cError);
-
-		//set the type for calling of render afterwards
-		$this->oType	= $oMain;
 
 		//do the render
 		$cReturn	 = $oMain->cStarter;
