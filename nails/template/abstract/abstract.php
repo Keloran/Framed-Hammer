@@ -221,6 +221,10 @@ abstract class Template_Abstract {
 			}
 		}
 
+		printRead($this);
+		printRead($cPage);
+		die();
+
 		//now check the default exists
 		if (!file_exists($cPage)) { $this->cError = "Sorry the default page doesnt seem to exist either ( " . $this->cDefault . " )"; }
 
