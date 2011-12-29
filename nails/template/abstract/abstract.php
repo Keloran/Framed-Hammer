@@ -139,6 +139,10 @@ abstract class Template_Abstract {
 	 * @return null
 	 */
 	public function createHammer() {
+		//check if there is a hammer in the space
+		if ($oHammer) { return false; }
+		if ($this->aVars['oHammer']) { return false; }
+
 		$oHammer	= Hammer::getHammer();
 		$this->setVars("oHammer", $oHammer);
 		$this->setVars("Hammer", $oHammer);
