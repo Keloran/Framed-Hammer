@@ -72,4 +72,8 @@ class Template_Content extends Template_Abstract {
 
 		return $this->cTemplate;
 	}
+
+	public function setDefault($cDefault = null) {
+		$this->cDefault	= $cDefault;
+	}
 }
