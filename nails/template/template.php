@@ -152,7 +152,7 @@ class Template extends Template_Abstract {
 		$oStruct->setTemplate($cStructure);
 		$this->giveHammer();
 
-		return $oStruct->renderTemplate();
+		return $oStruct->renderTemplate($bEcho);
 	}
 
 	/**
@@ -176,9 +176,7 @@ class Template extends Template_Abstract {
 		$this->giveHammer();
 
 		//echo or not
-		if ($bEcho) { echo $oLayout->renderTemplate(); }
-
-		return $oLayout->renderTemplate();
+		return $oLayout->renderTemplate($bEcho);
 	}
 
 	/**
