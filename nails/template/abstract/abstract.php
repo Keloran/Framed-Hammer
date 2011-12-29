@@ -145,6 +145,20 @@ abstract class Template_Abstract {
 	}
 
 	/**
+	 * Template_Abstract::isFile()
+	 *
+	 * @param string $cTemplate
+	 * @return bool
+	 */
+	public function isFile($cTemplate) {
+		$bReturn = false;
+
+		if (file_exists($cTemplate)) { $bReturn = true; }
+
+		return $bReturn;
+	}
+
+	/**
 	 * Template_Abstract::renderTemplate()
 	 *
 	 * @param bool $bEcho
@@ -156,16 +170,14 @@ abstract class Template_Abstract {
 		//now make sure we have a template otherwise just do nothing
 		if (!$this->cTemplate) { return false; }
 
+		//make sure its actually a file
+		if (!$this->isFile($this->cTemplate)) { return false; }
+
 		//add hammer always but remove on next level
 		$this->createHammer();
 
 		//templates dont have access to $this or $hammer
 		if (strstr($this->cTemplate, "tpl")) { $this->removeParents(); }
-
-		if (strstr($this->cTemplate, "welcome")) {
-			printRead($this->cTemplate, array("firephp"));
-			die();
-		}
 
 		//start the buffer so that we can process the request
 		ob_start();
