@@ -129,7 +129,7 @@ class Template extends Template_Abstract {
 
 		if ($bEcho) { echo $oStruct->renderTemplate(); }
 
-		return $oStuct->renderTemplate();
+		return $oStruct->renderTemplate();
 	}
 
 
