@@ -146,6 +146,10 @@ class Template extends Template_Abstract {
 
 		//set the type
 		$this->oType	= $oLayout;
+
+		printRead($this);
+		die();
+
 		#$oLayout->createHammer();
 
 		//set debug
