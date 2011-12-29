@@ -32,7 +32,7 @@ class Template_Structure extends Template_Abstract {
 		$this->cSetTemplate		= $cTemplate;
 		$cLayout				= false;
 
-		$bMobile	= $this->mobileBrowser();
+		$bMobile	= $this->mobileBrowser(false, true);
 		$bUseNormal	= $this->getCookie("useNormal") ?: false;
 
 		//do we use the normal layout or the mobile one
