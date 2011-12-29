@@ -198,8 +198,8 @@ class Template extends Template_Abstract {
 		return $this->oForm;
 	}
 
-	public function renderTemplate() {
-		if ($this->oType) { return $this->oType->renderTemplate(); }
+	public function renderTemplate($bEcho = null) {
+		if ($this->oType) { return $this->oType->renderTemplate($bEcho); }
 
 		return false;
 	}
