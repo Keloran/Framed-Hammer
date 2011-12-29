@@ -96,6 +96,9 @@ class Template extends Template_Abstract {
 		//set the type for calling of render afterwards
 		$this->oType	= $oMain;
 
+		printRead($oMain);
+		die();
+
 		//do the render
 		$cReturn	 = $oMain->cStarter;
 		$cReturn	.= $oMain->renderTemplate();

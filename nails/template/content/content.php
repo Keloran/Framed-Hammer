@@ -72,10 +72,6 @@ class Template_Content extends Template_Abstract {
 			$this->cTemplate	= $this->cError;
 		}
 
-		printRead($this);
-		printRead($cPage);
-		die();
-
 		return $this->cTemplate;
 	}
 
