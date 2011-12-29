@@ -160,8 +160,13 @@ class Template extends Template_Abstract {
 	}
 
 	public function setLayout($cTemplate = null) {
+		if ($this->oType instanceof Template_Layout) {
+			printRead($this->oType);
+			die();
+		}
 		printRead($this);
 		die();
+
 
 		$oLayout	= new Template_Layout_Template($this->aParams);
 
