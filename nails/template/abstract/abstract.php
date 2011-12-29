@@ -58,7 +58,7 @@ abstract class Template_Abstract {
 	 * @param string $cTemplate
 	 * @return null
 	 */
-	protected function setTemplate($cTemplate = null) {
+	public function setTemplate($cTemplate = null) {
 		$this->cTemplate	= $cTemplate;
 	}
 

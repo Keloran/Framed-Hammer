@@ -34,6 +34,12 @@ class Template_Content extends Template_Abstract {
 		}
 	}
 
+	/**
+	 * Template_Content::setTemplate()
+	 *
+	 * @param string $cDefault
+	 * @return string
+	 */
 	public function setTemplate($cDefault = null) {
 		$cPage			= $this->getPage($cDefault);
 		$this->cDefault = $cDefault;
