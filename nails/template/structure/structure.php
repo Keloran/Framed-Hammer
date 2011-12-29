@@ -85,7 +85,7 @@ class Template_Structure extends Template_Abstract {
 		$this->addDebug("Filtered", $bFilter);
 		$this->addDebug("Filter", $this->cFilter);
 
-		$cLayout	= $this->getLayout();
+		$cLayout	= $this->getLayout($bFilter);
 
 		$this->cTemplate = $cLayout;
 
@@ -158,10 +158,9 @@ class Template_Structure extends Template_Abstract {
 	 * Template_Structure::getLayout()
 	 *
 	 * @param bool $bFilter
-	 * @param string $cLayout
 	 * @return string
 	 */
-	private function getLayout($bFilter, $cLayout) {
+	private function getLayout($bFilter = false) {
 		$bSpecial 	= false;
 
 		$cBrand	= $this->bBrand ? $this->getBrand() : false;
