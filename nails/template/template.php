@@ -171,16 +171,12 @@ class Template extends Template_Abstract {
 		//set the type
 		$this->oType	= $oLayout;
 
-		printRead($this);
-		die();
-
-		#$oLayout->createHammer();
-
 		//set debug
 		if ($this->bDebug) { $oLayout->doDebug(); }
 
 		//set the template
 		$oLayout->setTemplate($cLayout);
+		$this->giveHammer();
 
 		$cRender		= $oLayout->renderTemplate();
 
