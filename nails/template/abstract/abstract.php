@@ -170,6 +170,11 @@ abstract class Template_Abstract {
 			$this->setVars("oForm", $this->oForm);
 		}
 
+		if (strstr($this->cTemplate, "userArea")) {
+			printRead($this);
+			die();
+		}
+
 		return false;
 	}
 
