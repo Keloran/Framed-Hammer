@@ -50,14 +50,14 @@ class Template_Structure extends Template_Abstract {
 		$this->addDebug("Default Structure", $cOriginal);
 
 		$cOriginalMobile	= "mobile.struct";
-		$this->addDebug("Default Mobile Structure", $cOrignalMobile);
+		$this->addDebug("Default Mobile Structure", $cOriginalMobile);
 
 		if ($cTemplate) {
 			$cStruct	= $cTemplate . ".struct";
 			$cMobile	= $cTemplate . "." . $cOriginalMobile;
 		} else {
 			$cStruct	= $cOriginal;
-			$cMobile	= $cOrigialMobile;
+			$cMobile	= $cOriginalMobile;
 		}
 		$this->cStruct			= $cStruct;
 		$this->cMobileStruct	= $cMobile;
