@@ -168,7 +168,7 @@ abstract class Template_Abstract {
 		$cReturn	= false;
 
 		//clean the buffer before we do anything
-		while(ob_get_level()) { ob_end_clean(); }
+		if(ob_get_level()) { ob_end_clean(); }
 
 		//now make sure we have a template otherwise just do nothing
 		if (!$this->cTemplate) { return false; }
