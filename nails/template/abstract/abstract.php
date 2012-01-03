@@ -19,7 +19,6 @@ abstract class Template_Abstract {
 	protected $aDebug;
 	protected $bDebug;
 	protected $bFormed;
-	protected $bRendered;
 
 	public $cError;
 	public $cCaller;
@@ -167,9 +166,6 @@ abstract class Template_Abstract {
 	public function renderTemplate($bEcho = null) {
 		$cReturn	= false;
 
-		//clean the buffer before we do anything
-		ob_end_clean();
-
 		//now make sure we have a template otherwise just do nothing
 		if (!$this->cTemplate) { return false; }
 
@@ -184,7 +180,6 @@ abstract class Template_Abstract {
 			if ($this->aVars) { extract($this->aVars, EXTR_SKIP); } //skip on override
 			include $this->cTemplate;
 		$cReturn	= ob_get_clean();
-		#ob_end_clean();
 
 		//are we echoing the results or retuning
 		if ($bEcho) { echo $cReturn; }
