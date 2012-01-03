@@ -185,8 +185,8 @@ abstract class Template_Abstract {
 		ob_start();
 			if ($this->aVars) { extract($this->aVars, EXTR_SKIP); } //skip on override
 			include $this->cTemplate;
-			$cReturn	= ob_get_contents();
-		ob_end_clean();
+		$cReturn	= ob_get_clean();
+		#ob_end_clean();
 
 		//are we echoing the results or retuning
 		if ($bEcho) { echo $cReturn; }
