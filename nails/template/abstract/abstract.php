@@ -140,14 +140,17 @@ abstract class Template_Abstract {
 	 * @return null
 	 */
 	private function getForm() {
+		$cForm	= false;
+		$oForm	= false;
+
+		//it exists
 		if ($this->oForm) {
 			$cForm	= $this->oForm->fullForm();
-			$this->setVars("cForm", $cForm);
-			$this->setVars("oForm", $this->oForm);
-		} else {
-			$this->setVars("cForm", false);
-			$this->setVars("oForm", false);
+			$oForm	= $this->oForm;
 		}
+
+		$this->setVars("cForm", $cForm);
+		$this->setVars("oForm", $oForm);
 
 		return false;
 	}
@@ -163,11 +166,6 @@ abstract class Template_Abstract {
 
 		//now make sure we have a template otherwise just do nothing
 		if (!$this->cTemplate) { return false; }
-
-		if ($this->cCaller == "content") {
-			printRead($this);
-			die();
-		}
 
 		//get the form if there is one
 		$this->getForm();
