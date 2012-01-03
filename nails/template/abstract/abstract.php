@@ -18,6 +18,7 @@ abstract class Template_Abstract {
 	protected $aData;
 	protected $aDebug;
 	protected $bDebug;
+	protected $bFormed;
 
 	public $cError;
 	public $cCaller;
@@ -151,6 +152,7 @@ abstract class Template_Abstract {
 
 		$this->setVars("cForm", $cForm);
 		$this->setVars("oForm", $oForm);
+		$this->bFormed	= true;
 
 		return false;
 	}
@@ -168,7 +170,7 @@ abstract class Template_Abstract {
 		if (!$this->cTemplate) { return false; }
 
 		//get the form if there is one
-		$this->getForm();
+		if (!$this->bFormed) { $this->getForm(); }
 
 		//templates dont have access to $this or $hammer
 		if (strstr($this->cTemplate, "tpl")) { $this->removeParents(); }
