@@ -179,21 +179,24 @@ abstract class Template_Abstract {
 		}
 
 		//start the buffer so that we can process the request
-		if (!$this->bRendered) {
-			ob_start();
-				if ($this->aVars) { extract($this->aVars, EXTR_SKIP); } //skip on override
-				include $this->cTemplate;
-				$cReturn	= ob_get_contents();
-			ob_end_clean();
+		#ob_start();
+			if ($this->aVars) { extract($this->aVars, EXTR_SKIP); } //skip on override
+			include $this->cTemplate;
+			$cReturn	= ob_get_contents();
+		#ob_end_clean();
 
-			$this->bRendered = true;
-		}
+		$this->killTemplate();
 
 		//are we echoing the results or retuning
 		if ($bEcho) { echo $cReturn; }
 
 		//still return just incase
 		return $cReturn;
+	}
+
+	private function killTemplate() {
+		$this->aVars		= null;
+		$this->cTemplate	= null;
 	}
 
 	/**
