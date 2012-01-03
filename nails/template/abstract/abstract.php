@@ -19,6 +19,7 @@ abstract class Template_Abstract {
 	protected $aDebug;
 	protected $bDebug;
 	protected $bFormed;
+	protected $bRendered;
 
 	public $cError;
 	public $cCaller;
@@ -178,11 +179,15 @@ abstract class Template_Abstract {
 		}
 
 		//start the buffer so that we can process the request
-		ob_start();
-			if ($this->aVars) { extract($this->aVars, EXTR_SKIP); } //skip on override
-			include $this->cTemplate;
-			$cReturn	= ob_get_contents();
-		ob_end_clean();
+		if (!$this->bRendered) {
+			ob_start();
+				if ($this->aVars) { extract($this->aVars, EXTR_SKIP); } //skip on override
+				include $this->cTemplate;
+				$cReturn	= ob_get_contents();
+			ob_end_clean();
+
+			$this->bRendered = true;
+		}
 
 		//are we echoing the results or retuning
 		if ($bEcho) { echo $cReturn; }
