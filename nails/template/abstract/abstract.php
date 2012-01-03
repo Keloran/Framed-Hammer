@@ -167,6 +167,9 @@ abstract class Template_Abstract {
 	public function renderTemplate($bEcho = null) {
 		$cReturn	= false;
 
+		//clean the buffer before we do anything
+		if (ob_get_level()) { ob_end_clean(); }
+
 		//now make sure we have a template otherwise just do nothing
 		if (!$this->cTemplate) { return false; }
 
@@ -179,24 +182,17 @@ abstract class Template_Abstract {
 		}
 
 		//start the buffer so that we can process the request
-		#ob_start();
+		ob_start();
 			if ($this->aVars) { extract($this->aVars, EXTR_SKIP); } //skip on override
 			include $this->cTemplate;
 			$cReturn	= ob_get_contents();
-		#ob_end_clean();
-
-		$this->killTemplate();
+		ob_end_clean();
 
 		//are we echoing the results or retuning
 		if ($bEcho) { echo $cReturn; }
 
 		//still return just incase
 		return $cReturn;
-	}
-
-	private function killTemplate() {
-		$this->aVars		= null;
-		$this->cTemplate	= null;
 	}
 
 	/**
