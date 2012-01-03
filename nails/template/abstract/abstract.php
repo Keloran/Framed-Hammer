@@ -177,7 +177,7 @@ abstract class Template_Abstract {
 
 		//start the buffer so that we can process the request
 		#ob_start();
-			if ($this->aVars) { extract($this->aVars, EXTR_SKIP); } //skip on override
+			extract($this->aVars, EXTR_SKIP); //skip on override
 			include $this->cTemplate;
 		#$cReturn	= ob_get_clean();
 
