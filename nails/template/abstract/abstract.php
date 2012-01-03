@@ -173,7 +173,9 @@ abstract class Template_Abstract {
 		if (!$this->bFormed) { $this->getForm(); }
 
 		//templates dont have access to $this or $hammer
-		if (strstr($this->cTemplate, "tpl")) { $this->removeParents(); }
+		if ($this->cCaller === "layout_template" ) {
+			if (strstr($this->cTemplate, "tpl")) { $this->removeParents(); }
+		}
 
 		//start the buffer so that we can process the request
 		ob_start();
