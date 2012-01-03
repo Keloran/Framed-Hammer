@@ -43,26 +43,40 @@ class Template_Content extends Template_Abstract {
 	public function setTemplate($cDefault = null) {
 		if ($this->cDefault) { $cDefault = $this->cDefault; }
 
+		//so that i can debug
+		$cPage		= false;
+		$cAction	= false;
+		$cChoice	= false;
+		$cOther		= false;
+
 		$cPage			= $this->getPage($cDefault);
 		$this->cDefault = $cDefault;
+		$this->addDebug("Page", $cPage);
+		$this->addDebug("Default", $cDefault);
 
 		//is there an action
 		if ($this->cAction) {
 			$cAction	= $this->getAction();
 			$cPage		= $cAction ?: $cPage;
 		}
+		$this->addDebug("Action", $cAction);
+		$this->addDebug("Action Page", $cPage);
 
 		//is there a choice
 		if ($this->cChoice) {
 			$cChoice	= $this->getChoice();
 			$cPage		= $cChoice ?: $cPage;
 		}
+		$this->addDebug("Choice", $cChoice);
+		$this->addDebug("Choice Page", $cPage);
 
 		//if there are others
 		if (isset($this->extraParams) && $this->extraParams) {
 			$cOther	= $this->getOther();
 			$cPage	= $cOther ?: $cPage;
 		}
+		$this->addDebug("Other", $cOther);
+		$this->addDebug("Other Page", $cPage);
 
 		$this->setVars("defaultPage", $cDefault);
 
@@ -71,6 +85,8 @@ class Template_Content extends Template_Abstract {
 		} else {
 			$this->cTemplate	= $this->cError;
 		}
+
+		$this->cCaller	= "content";
 
 		return $this->cTemplate;
 	}

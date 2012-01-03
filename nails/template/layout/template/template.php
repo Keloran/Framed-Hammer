@@ -107,7 +107,8 @@ class Template_Layout_Template extends Template_Abstract {
 		//is tehre an error and is debug turned on
 		if ($this->cError && $this->bDebug) { $this->debugTemplates(); }
 
-		$this->cTemplate = $cLayout;
+		$this->cTemplate	= $cLayout;
+		$this->cCaller		= "layout_template";
 
 		return $cLayout;
 	}

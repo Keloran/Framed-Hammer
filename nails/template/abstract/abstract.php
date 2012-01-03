@@ -20,6 +20,7 @@ abstract class Template_Abstract {
 	protected $bDebug;
 
 	public $cError;
+	public $cCaller;
 
 	/**
 	 * Template_Abstract::doDebug()
@@ -162,6 +163,11 @@ abstract class Template_Abstract {
 
 		//now make sure we have a template otherwise just do nothing
 		if (!$this->cTemplate) { return false; }
+
+		if ($this->cCaller == "content") {
+			printRead($this);
+			die();
+		}
 
 		//get the form if there is one
 		$this->getForm();

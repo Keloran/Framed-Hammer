@@ -275,7 +275,8 @@ class Template_Structure extends Template_Abstract {
 			//debug if it fails
 			if ($this->bDebug && $this->cError) { $this->debugTemplates(); }
 
-			$this->cTemplate = $cStructure;
+			$this->cTemplate	= $cStructure;
+			$this->cCaller		= "structure";
 
 			return $cStructure;
 		}
