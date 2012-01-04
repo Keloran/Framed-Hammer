@@ -17,6 +17,6 @@ class Template_Content_Template extends Template_Abstract {
 	}
 
 	public function setTemplate($cTemplate) {
-
+		return $cTemplate;
 	}
 }
