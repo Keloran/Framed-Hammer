@@ -27,23 +27,35 @@ class oReader {
 		//options that are set later
 		$this->mOriginal	= $mString;
 		$this->aFile		= debug_backtrace();
-		$this->cFormated	= print_r($mString, 1);
+		$this->cFormated	= print_r($mString, true);
 		$this->bScreen		= true;
 
 		//Show the methods of the class your trying diagnose
-		if (is_object($mString)) { $this->cMethods = print_r(get_class_methods($mString), 1); }
+		if (is_object($mString)) { $this->cMethods = print_r(get_class_methods($mString), true); }
 	}
 
 	/**
-	 * oReader::makeNewLines()
+	 * oReader::makeScreenLines()
 	 *
 	 * @param string $cString
 	 * @return string
 	 */
-	private function makeNewLines($cString) {
+	private function makeScreenLines($cString) {
 		$cString	= str_replace(" ", "&nbsp;", $cString);
 		$cString	= preg_replace("{[\t]+}", "&nbsp;&nbsp;&nbsp;&nbsp;", $cString);
 		$cString	= nl2br($cString);
+
+		return $cString;
+	}
+
+	/**
+	 * oReader::makeConsoleLines()
+	 *
+	 * @param string $cString
+	 * @return string
+	 */
+	private function makeConsoleLines($cString) {
+		$cString	= preg_replace("{[\t]+}", "    ", $cString);
 
 		return $cString;
 	}
@@ -82,12 +94,27 @@ class oReader {
 	}
 
 	/**
+	 * oReader::makeStripper()
+	 *
+	 * @return null
+	 */
+	private function makeStripper() {
+		//turn on console output
+		if ($this->bFile) { $this->bStripper	= true; }
+		if ($this->bFirePHP) { $this->bStripper	= true; }
+		if ($this->bConsole) { $this->bStripper	= true; }
+	}
+
+	/**
 	 * oReader::doOutput()
 	 *
 	 * @desc this is because construct wont do echo
 	 * @return mixed
 	 */
 	public function doOutput() {
+		//do we have to strip the content into console type
+		$this->makeStripper();
+
 		//it wants color, so
 		if ($this->bColor) {
 			$this->cOutput	 = $this->colorMe($this->cFormated);
@@ -98,22 +125,22 @@ class oReader {
 		}
 
 		//if its console then it needs a different method
-		if ($this->bFirePHP || $this->bConsole) {
+		if ($this->bStripper) {
 			$this->cConsole	 = $this->cFormated;
 			$this->cConsole	.= $this->cMethods;
 		}
 
 		//turn it into new lines
-		$this->cOutput	= $this->makeNewLines($this->cOutput);
+		$this->cOutput	= $this->makeScreenLines($this->cOutput);
+		if ($this->bStripper) { $this->cConsole	= $this->makeConsoleLines($this->cConsole); }
 
 		//Protect stuff
-		$this->cConsole	= $this->protectMe($this->cConsole);
 		$this->cOutput	= $this->protectMe($this->cOutput);
-
+		if ($this->bStripper) { $this->cConsole	= $this->protectMe($this->cConsole); }
 
 		//now do we want a header
-		if ($this->bEmail) { $this->cEmail = $this->cOutput; }
-		if ($this->bConsole || $this->bFirePHP) { $this->cConsole = $this->makeHeader($this->cConsole, true); }
+		if ($this->bEmail) { $this->cEmail 		= $this->cOutput; }
+		if ($this->bStripper) { $this->cConsole = $this->makeHeader($this->cConsole, true); }
 
 		//get the output anyway
 		$this->cOutput	= $this->makeHeader($this->cOutput);
@@ -132,10 +159,11 @@ class oReader {
 		$this->cOutput = $cFinal;
 
 		//Console remove all the tags since not in use for console, and firephp
-		if ($this->bConsole || $this->bFirePHP) {
+		if ($this->bStripper) {
 			$this->cConsole = str_replace("<br />", "\n", $this->cConsole);
 			$this->cConsole = strip_tags($this->cConsole);
 
+			//do we want to use FirePHP / ChromePHP
 			if ($this->bFirePHP) {
 				//now check the size
 				if (strlen($this->cConsole) >= 1200) { //1200 for now
@@ -143,6 +171,12 @@ class oReader {
 				}
 
 				$this->FirePHP($this->cConsole, $this->cLevel);
+			}
+
+			if ($this->bFile) {
+				$fFile	= tempnam(HAMMERPATH . "/logs/", "debug");
+				file_put_contents($fFile, $this->cConsole);
+				$this->cOutput	= $fFile;
 			}
 		}
 
@@ -224,11 +258,11 @@ class oReader {
 				$cString = $cStart .= $cRest;
 			}
 
-		//XML highlught
+			//XML highlught
 		} else if (strstr($cString, "<?xml")) {
 			$cString	= $this->xml_highlight($cString);
 
-		//SQL highlight
+			//SQL highlight
 		} else if ((stristr($cString, "SELECT")) && (stristr($cString, "FROM"))) {
 			$cString	= $this->sql_highlight($cString);
 		}

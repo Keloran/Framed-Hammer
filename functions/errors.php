@@ -20,6 +20,7 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 	$bFirePHP	= false;
 	$bScreen	= true;
 	$cName		= false;
+	$bFile		= false;
 
 	//are hte options an array
 	if (is_array($mOptions)) {
@@ -49,6 +50,10 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 
 				case "noscreen":
 					$bScreen 	= false;
+					break;
+
+				case "file":
+					$bFile		= true;
 					break;
 
 				default:
@@ -84,6 +89,10 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 				$bScreen	= false;
 				break;
 
+			case "file":
+				$bFile		= true;
+				break;
+
 			default:
 				$cName	= $mOptions;
 				break;
@@ -101,6 +110,7 @@ function printRead($mString, $mOptions = null, $cFireLevel = null) {
 	if ($bFirePHP) {	$oReader->bFirePHP	= true; }
 	if ($cName) {		$oReader->cName		= $cName; }
 	if (!$bScreen) {	$oReader->bScreen	= false; }
+	if ($bFile) {		$oReader->bFile		= true; }
 
 	//is there a fire level given
 	if ($cFireLevel) { $oReader->cLevel = $cFireLevel; }
