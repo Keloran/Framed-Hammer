@@ -40,7 +40,7 @@ class Template_Content_Template extends Template_Abstract {
 		if (!$cTemplate) { $cTemplate	= $cCaller; }
 
 		//Original
-		$cLayout	= PAGES . $cCaller . "/templates/" . $cTemplate . ".tpl";
+		$cLayout	= PAGES . $cTemplate . "/templates/" . $cTemplate . ".tpl";
 		$this->addDebug("Original", $cLayout);
 
 		//page
