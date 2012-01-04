@@ -71,8 +71,8 @@ trait Layout {
 			$cReturn .= "</div>";
 		}
 
-		$this->addVars("pagination", $cReturn);
-		$this->addVars("cPagination", $cReturn);
+		$this->setVars("pagination", $cReturn);
+		$this->setVars("cPagination", $cReturn);
 
 		return $cReturn;
 	}
