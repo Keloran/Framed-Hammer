@@ -174,6 +174,7 @@ abstract class Template_Abstract {
 
 		if (strstr($this->cTemplate, "latester")) {
 			printRead($this->getCaller(true));
+			printRead("erm");
 			die();
 		}
 
