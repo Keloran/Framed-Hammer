@@ -23,9 +23,6 @@ class Template_Content_Template extends Template_Abstract {
 		$this->setParams($oTemplate->aParams);
 
 		if ($cTemplate) { $this->setTemplate($cTemplate); }
-
-		printRead($this->aParams);
-		die();
 	}
 
 	/**

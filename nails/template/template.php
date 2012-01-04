@@ -143,6 +143,7 @@ class Template extends Template_Abstract {
 		if ($this->oType instanceof Template_Content) {
 			$oContent	= new Template_Content_Template($this->oType);
 			$oContent->setTemplate($cTemplate);
+			$oContent->setParams($this->aParams);
 
 			//since set template might have been done before
 			if ($this->oType->aVars) {
