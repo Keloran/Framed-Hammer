@@ -279,4 +279,16 @@ class Template extends Template_Abstract {
 	public function setCoreTemplate($cTemplate) {
 		return $this->setLayout($cTemplate);
 	}
+
+	/**
+	 * Template::setTemplate()
+	 *
+	 * @param string $cTemplate
+	 * @return object
+	 */
+	public function setTemplate($cTemplate = null) {
+		if ($this->oType instanceof Template_Content) { return $this->getContent($cTemplate); }
+
+		return false;
+	}
 }
