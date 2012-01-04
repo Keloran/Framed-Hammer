@@ -91,8 +91,6 @@ class Template_Content_Template extends Template_Abstract {
 		//error found
 		if ($this->cError && $this->bDebug) { $this->debugTemplates(); }
 
-		$this->debugTemplates();
-
 		$this->cTemplate	= $cLayout;
 		$this->cCaller		= "content_template";
 

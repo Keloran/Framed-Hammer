@@ -219,6 +219,11 @@ class Template extends Template_Abstract {
 	public function setLayout($cTemplate = null, $bEcho = null) {
 		if ($this->oType instanceof Template_Layout) {
 			$oLayout	= new Template_Layout_Template($this->oType);
+
+			//set the params just incase
+			$oLayout->setParams($this->aParams);
+
+			//set the template
 			$oLayout->setTemplate($cTemplate);
 
 			$this->oType	= $oLayout;
