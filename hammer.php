@@ -539,7 +539,7 @@ class Hammer {
 		}
 
 		if ($cTemplate == "latest") {
-			printRead($this->aRegistry);
+			printRead($this->aRegistry, "email");
 			die();
 		}
 
