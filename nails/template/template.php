@@ -244,7 +244,7 @@ class Template extends Template_Abstract {
 		return $this->oForm;
 	}
 
-	public function setTemplate($cTemplate) {
+	public function setTemplate($cTemplate = null) {
 		if (!$this->oType) { $this->getContent($cTemplate); }
 
 		$this->oType->setTemplate($cTemplate);
