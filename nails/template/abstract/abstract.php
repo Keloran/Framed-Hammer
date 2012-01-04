@@ -422,12 +422,12 @@ abstract class Template_Abstract {
 					if (isset($debug['args']) && isset($debug['args'][0])) {
 						$cFile = $debug['args'][0];
 						$this->addDebug("Back Trace", $debug);
-						$aDebugger['file'][] = $cFile;
 					}
 					break;
 			}
 
-			$aDebugger['function'][] = $debug['function'];
+			$aDebugger['function'][] 	= $debug['function'];
+			$aDebugger['args'][]		= $debug['args'];
 		}
 
 		//debug caller function
