@@ -145,7 +145,8 @@ class Template extends Template_Abstract {
 			$oContent->setTemplate($cTemplate);
 
 			if ($cTemplate == "latester") {
-				printRead($this);
+				printRead($this->oType->aVars);
+				printRead($this->oType);
 				die();
 			}
 
