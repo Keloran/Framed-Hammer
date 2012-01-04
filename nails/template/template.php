@@ -80,7 +80,7 @@ class Template extends Template_Abstract {
 	private function createHammer() {
 		if (!$this->oHammer) { $this->oHammer = Hammer::getHammer(); }
 
-		printRead($this);
+		printRead($this, "file");
 		die();
 	}
 
