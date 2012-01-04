@@ -167,7 +167,11 @@ abstract class Template_Abstract {
 		$cReturn	= false;
 
 		if ($this->cCaller == "content") {
-			printRead(get_defined_vars());
+			printRead(array(
+				"Variables"	=> get_defined_vars(),
+				"Constants"	=> get_defined_constants(),
+				"Functions"	=> get_defined_functions()
+			));
 			die();
 		}
 
