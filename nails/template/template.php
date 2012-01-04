@@ -152,7 +152,7 @@ class Template extends Template_Abstract {
 		$oContent->setTemplate($cTemplate);
 
 		$oContent->setVars("error", $this->cError);
-		$this->giveHammer();
+		#$this->giveHammer();
 
 		return $oContent;
 	}
