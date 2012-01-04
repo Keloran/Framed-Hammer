@@ -533,7 +533,7 @@ class Hammer {
 			$oReturn		= Template::getInstance($this->aData, $this->cSited, $cSkinSetting);
 
 			//set the template always, and then if just echo called, no errors
-			$oReturn->setTemplate($cTemplate);
+			#$oReturn->setTemplate($cTemplate);
 			$this->aRegistry["oTemplate"] = $oReturn;
 		}
 

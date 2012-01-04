@@ -116,6 +116,7 @@ class Template extends Template_Abstract {
 		$oMain->setTemplate($cDefault);
 		$oMain->setLayout($aLayout);
 
+		//set the vars
 		$oMain->setVars("error", $this->cError);
 		$this->giveHammer();
 
@@ -134,6 +135,31 @@ class Template extends Template_Abstract {
 
 		//return the string
 		return $cReturn;
+	}
+
+	/**
+	 * Template::getContent()
+	 *
+	 * @param string $cTemplate
+	 * @param bool $bEcho
+	 * @return string
+	 */
+	public function getContent($cTemplate = null, $bEcho = null) {
+		$oContent 		= new Template_Content($this->aParams);
+
+		//set the type
+		$this->oType	= $oContent;
+
+		//set debug
+		if ($this->bDebug) { $oContent->doDebug(); }
+
+		//set the template
+		#$oContent->setTemplate($cTemplate);
+
+		$oContent->setVars("error", $this->cError);
+		$this->giveHammer();
+
+		return $oContent;
 	}
 
 	/**
