@@ -151,8 +151,6 @@ class Template extends Template_Abstract {
 		//set debug
 		if ($this->bDebug) { $oContent->doDebug(); }
 
-		die("tester");
-
 		//set the template
 		#$oContent->setTemplate($cTemplate);
 
