@@ -31,7 +31,13 @@ class Template_Content_Template extends Template_Abstract {
 	 * @param string $cTemplate
 	 * @return string
 	 */
-	public function setTemplate($cTemplate) {
+	public function setTemplate($cTemplate = null) {
+		$cReturn	= false;
+		$cCaller	= $this->getCaller();
+		$this->addDebug("Caller", $cCaller);
+
+		$this->debugTemplates();
+
 		$this->cTemplate	= $cTemplate;
 
 		return $cTemplate;
