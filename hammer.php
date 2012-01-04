@@ -532,11 +532,6 @@ class Hammer {
 		$oReturn			= Template::getInstance($this->aData, $this->cSited, $cSkinSetting);
 		#$oReturn->oHammer	= $this;
 
-		if ($cTemplate == "latest") {
-			printRead($oReturn, "firephp");
-			die();
-		}
-
 		return $oReturn;
 	}
 
