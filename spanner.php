@@ -358,7 +358,7 @@ class Spanner extends Exception {
 		if (isset($this->cPrevious)) { $cMessage .= "<p>Previous: " . $this->cPrevious . "</p>\n"; }
 
 		//Defined Vars
-		$cMessage .= "<p>Defined Vars " . var_dump(get_defined_vars()) . "</p>\n";
+		$cMessage .= "<p>Defined Vars " . print_r(get_defined_vars(), true) . "</p>\n";
 
 		//GPR
 	    $cMessage .= "<p>Full REQUEST is " . print_r($_REQUEST, true) . "</p>\n";
