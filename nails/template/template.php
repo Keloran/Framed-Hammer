@@ -140,21 +140,17 @@ class Template extends Template_Abstract {
 	 * @return string
 	 */
 	public function getContent($cTemplate = null, $bEcho = null) {
-		$oContent 		= new Template_Content($this->aParams);
+		if ($this->oType instanceof Template_Content) {
+			$oContent	= new Template_Content_Template($this->oType);
+			$oContent->setTemplate($cTemplate);
 
-		//set the type
-		$this->oType	= $oContent;
+			$this->oType	= $oContent;
 
-		//set debug
-		if ($this->bDebug) { $oContent->doDebug(); }
+			return $oContent;
+		}
 
-		//set the template
-		$oContent->setTemplate($cTemplate);
-
-		$oContent->setVars("error", $this->cError);
-		#$this->giveHammer();
-
-		return $oContent;
+		printRead($this->oType);
+		die();
 	}
 
 	/**

@@ -12,9 +12,9 @@ class Template_Layout_Template extends Template_Abstract {
 	private $oLayout;
 
 	/**
-	 * Template_Layout::__construct()
+	 * Template_Layout_Template::__construct()
 	 *
-	 * @param mixed $mParams
+	 * @param object $oTemplate
 	 * @param string $cTemplate
 	 */
 	public function __construct($oTemplate, $cTemplate = false) {
@@ -26,7 +26,7 @@ class Template_Layout_Template extends Template_Abstract {
 	}
 
 	/**
-	 * Template_Layout::setTemplate()
+	 * Template_Layout_Template::setTemplate()
 	 *
 	 * @param string $cTemplate
 	 * @return string
