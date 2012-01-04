@@ -144,6 +144,9 @@ class Template extends Template_Abstract {
 			$oContent	= new Template_Content_Template($this->oType);
 			$oContent->setTemplate($cTemplate);
 
+			printRead($this->aVars);
+			die();
+
 			$this->oType	= $oContent;
 
 			return $oContent;
@@ -232,24 +235,6 @@ class Template extends Template_Abstract {
 		}
 
 		return $this->oForm;
-	}
-
-	/**
-	 * Template::setTemplate()
-	 *
-	 * @param string $cTemplate
-	 * @return object
-	 */
-	public function setTemplate($cTemplate = null) {
-		if (!$this->oType && $cTemplate) {
-			$this->getContent($cTemplate);
-			if ($this->aVars) {
-				printRead($this->aVars);
-				die();
-			}
-		}
-
-		return $this->oType->setTemplate($cTemplate);
 	}
 
 	/**
