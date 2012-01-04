@@ -415,11 +415,15 @@ abstract class Template_Abstract {
 
 		//go through the debug
 		foreach ($aDebug AS $debug) {
-			if (($debug['function'] == "getCore") || ($debug['function'] == "setLayout")) {
-				if (isset($debug['args']) && isset($debug['args'][0])) {
-					$cFile = $debug['args'][0];
-					$this->addDebug("Back Trace", $debug);
-				}
+			switch($debug['function']) {
+				case "getCore":
+				case "setLayout":
+				case "getMainPage":
+					if (isset($debug['args']) && isset($debug['args'][0])) {
+						$cFile = $debug['args'][0];
+						$this->addDebug("Back Trace", $debug);
+					}
+					break;
 			}
 
 			$aDebugger[] = $debug['function'];
