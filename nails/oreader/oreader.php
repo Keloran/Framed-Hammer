@@ -174,6 +174,9 @@ class oReader {
 			}
 
 			if ($this->bFile) {
+				//add newline to start of keys
+				$this->cConsole	= str_replace("[", "\n[", $this->cConsole);
+
 				$fFile	= tempnam(HAMMERPATH . "/logs/", "debug");
 				file_put_contents($fFile, $this->cConsole);
 				$this->cOutput	= $fFile;
