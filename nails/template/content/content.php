@@ -45,13 +45,11 @@ class Template_Content extends Template_Abstract {
 	public function setTemplate($cDefault = null) {
 		if ($this->cDefault) { $cDefault = $this->cDefault; }
 
-		if (!$this->bTraverse) {
-			printRead(array(
-				"Template"	=> $cDefault,
-				"Caller"	=> $this->getCaller()
-			));
-			die();
-		}
+		printRead(array(
+			"Template"	=> $cDefault,
+			"Caller"	=> $this->getCaller()
+		));
+		die();
 
 		//so that i can debug
 		$cPage		= false;
