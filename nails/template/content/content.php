@@ -47,7 +47,7 @@ class Template_Content extends Template_Abstract {
 
 		printRead(array(
 			"Template"	=> $cDefault,
-			"Caller"	=> $this->getCaller()
+			"Caller"	=> $this->getCaller(true)
 		));
 		die();
 

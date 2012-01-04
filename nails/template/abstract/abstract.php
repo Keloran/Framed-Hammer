@@ -408,9 +408,10 @@ abstract class Template_Abstract {
 	 *
 	 * @return string
 	 */
-	public function getCaller() {
-		$aDebug	= debug_backtrace(false, 7);
-		$cFile	= false;
+	public function getCaller($bDebug = false) {
+		$aDebug		= debug_backtrace(false, 7);
+		$cFile		= false;
+		$aDebugger	= false;
 
 		//go through the debug
 		foreach ($aDebug AS $debug) {
@@ -420,7 +421,12 @@ abstract class Template_Abstract {
 					$this->addDebug("Back Trace", $debug);
 				}
 			}
+
+			$aDebugger[] = $debug['function'];
 		}
+
+		//debug caller function
+		if ($bDebug) { return $aDebugger; }
 
 		//no file, and debug is turned on
 		if (!$cFile && $this->bDebug) { $this->debugTemplates(); }
