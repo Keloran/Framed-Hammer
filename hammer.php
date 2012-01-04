@@ -539,7 +539,7 @@ class Hammer {
 		}
 
 		if ($cTemplate == "latest") {
-			printRead($this);
+			printRead($this->aRegistry);
 			die();
 		}
 
