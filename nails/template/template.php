@@ -197,7 +197,8 @@ class Template extends Template_Abstract {
 
 			$this->oType	= $oLayout;
 
-			return $oLayout->renderTemplate();
+			#return $oLayout->renderTemplate();
+			return $oLayout;
 		}
 
 		return false;
