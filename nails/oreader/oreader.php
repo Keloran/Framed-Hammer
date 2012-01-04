@@ -167,7 +167,7 @@ class oReader {
 			if ($this->bFirePHP) {
 				//now check the size
 				if (strlen($this->cConsole) >= 3000) { //3000 for now
-					$this->cConsole = "Output will cause 502 on php-fpm";
+					$this->cConsole = "Output will cause 502 on php-fpm, length was " . strlen($this->cConsole);
 				}
 
 				$this->FirePHP($this->cConsole, $this->cLevel);
