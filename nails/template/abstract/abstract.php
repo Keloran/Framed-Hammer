@@ -169,14 +169,11 @@ abstract class Template_Abstract {
 		//now make sure we have a template otherwise just do nothing
 		if (!$this->cTemplate) { return false; }
 
+		//no type has been given
+		if (!$this->oType) { return false; }
+
 		//get the form if there is one
 		if (!$this->bFormed) { $this->getForm(); }
-
-		if (strstr($this->cTemplate, "latester")) {
-			printRead($this->getCaller(true));
-			printRead("erm");
-			die();
-		}
 
 		//start the buffer so that we can process the request
 		ob_start();

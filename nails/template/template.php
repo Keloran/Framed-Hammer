@@ -120,11 +120,6 @@ class Template extends Template_Abstract {
 		$oMain->setVars("error", $this->cError);
 		$this->giveHammer();
 
-		$cRender	= $oMain->renderTemplate();
-		printRead($cRender);
-		die();
-
-
 		//do the render
 		$cReturn	 = $oMain->cStarter;
 		$cReturn	.= $oMain->renderTemplate();
@@ -145,7 +140,7 @@ class Template extends Template_Abstract {
 	 * @return string
 	 */
 	public function getContent($cTemplate = null, $bEcho = null) {
-		$oContent 		= new Template_Content($this->aParams);
+		$oContent 		= new Template_($this->aParams);
 
 		//set no traverse
 		$oContent->bTraverse	= false;
@@ -155,6 +150,8 @@ class Template extends Template_Abstract {
 
 		//set debug
 		if ($this->bDebug) { $oContent->doDebug(); }
+
+		die("tester");
 
 		//set the template
 		#$oContent->setTemplate($cTemplate);
