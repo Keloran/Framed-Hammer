@@ -147,6 +147,9 @@ class Template extends Template_Abstract {
 	public function getContent($cTemplate = null, $bEcho = null) {
 		$oContent 		= new Template_Content($this->aParams);
 
+		//set no traverse
+		$oContent->bTraverse	= false;
+
 		//set the type
 		$this->oType	= $oContent;
 
