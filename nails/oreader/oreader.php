@@ -166,7 +166,7 @@ class oReader {
 			//do we want to use FirePHP / ChromePHP
 			if ($this->bFirePHP) {
 				//now check the size
-				if (strlen($this->cConsole) >= 1200) { //1200 for now
+				if (strlen($this->cConsole) >= 1500) { //1200 for now
 					$this->cConsole = "Output will cause 502 on php-fpm";
 				}
 
