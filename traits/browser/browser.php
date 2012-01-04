@@ -28,7 +28,11 @@ trait Browser {
 		//get_browser doesnt work on this server
 		if (!$bGetBrowser) { return $mReturn; }
 
+		//no browser object
 		$oBrowser	= $mGetBrowser;
+		if (!$oBrowser) { return false; }
+
+		//switch
 		$cBrowser	= strtolower($oBrowser->browser);
 		switch ($cBrowser) {
 			case "chrome":
