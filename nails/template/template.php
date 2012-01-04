@@ -141,9 +141,6 @@ class Template extends Template_Abstract {
 	 */
 	public function getContent($cTemplate = null, $bEcho = null) {
 		if ($this->oType instanceof Template_Content) {
-			printRead(get_class($this->oType));
-			die();
-
 			$oContent	= new Template_Content_Template($this->oType);
 			$oContent->setTemplate($cTemplate);
 
