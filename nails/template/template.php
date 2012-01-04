@@ -82,6 +82,7 @@ class Template extends Template_Abstract {
 		if (!$this->oHammer) { $this->oHammer = new Hammer(); }
 
 		printRead($this, "file");
+		die();
 	}
 
 	/**
