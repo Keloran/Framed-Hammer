@@ -132,14 +132,14 @@ class oReader {
 
 		//turn it into new lines
 		$this->cOutput	= $this->makeScreenLines($this->cOutput);
-		$this->cConsole	= $this->makeConsoleLines($this->cConsole);
+		if ($this->bStripper) { $this->cConsole	= $this->makeConsoleLines($this->cConsole); }
 
 		//Protect stuff
-		$this->cConsole	= $this->protectMe($this->cConsole);
 		$this->cOutput	= $this->protectMe($this->cOutput);
+		if ($this->bStripper) { $this->cConsole	= $this->protectMe($this->cConsole); }
 
 		//now do we want a header
-		if ($this->bEmail) { $this->cEmail = $this->cOutput; }
+		if ($this->bEmail) { $this->cEmail 		= $this->cOutput; }
 		if ($this->bStripper) { $this->cConsole = $this->makeHeader($this->cConsole, true); }
 
 		//get the output anyway
