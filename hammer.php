@@ -530,7 +530,7 @@ class Hammer {
 
 		//get the template object
 		$oReturn			= Template::getInstance($this->aData, $this->cSited, $cSkinSetting);
-		#$oReturn->oHammer	= $this;
+		if ($cTemplate) { $oReturn->getContent($cTemplate); }
 
 		return $oReturn;
 	}
