@@ -245,7 +245,7 @@ class Template extends Template_Abstract {
 	}
 
 	public function setTemplate($cTemplate = null) {
-		if (!$this->oType) { $this->getContent($cTemplate); }
+		if (!$this->oType && $cTemplate) { $this->getContent($cTemplate); }
 
 		$this->oType->setTemplate($cTemplate);
 	}
