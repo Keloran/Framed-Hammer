@@ -132,7 +132,7 @@ class oReader {
 		$this->cOutput = $cFinal;
 
 		//Console remove all the tags since not in use for console, and firephp
-		if ($this->bConsole || $this->bFirePHP) {
+		if ($this->bConsole || $this->bFirePHP || $this->bFile) {
 			$this->cConsole = str_replace("<br />", "\n", $this->cConsole);
 			$this->cConsole = strip_tags($this->cConsole);
 
