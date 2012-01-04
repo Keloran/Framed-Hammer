@@ -144,10 +144,11 @@ class Template extends Template_Abstract {
 			$oContent	= new Template_Content_Template($this->oType);
 			$oContent->setTemplate($cTemplate);
 
-			if ($cTemplate == "latester") {
-				printRead($this->oType->aVars, "file");
-				printRead($this->oType);
-				die();
+			//since set template might have been done before
+			if ($this->oType->aVars) {
+				foreach ($this->oType->aVars as $cKey => $mValue) {
+					$oContent->setVars($cKey, $mValue);
+				}
 			}
 
 			$this->oType	= $oContent;
