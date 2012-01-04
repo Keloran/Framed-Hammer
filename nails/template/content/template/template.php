@@ -40,16 +40,60 @@ class Template_Content_Template extends Template_Abstract {
 		if (!$cTemplate) { $cTemplate	= $cCaller; }
 
 		//Original
-		$cOriginal	= SITEPATH . "/pages/" . $cCaller . "/templates/" . $cTemplate . ".tpl";
+		$cLayout	= PAGES . $cCaller . "/templates/" . $cTemplate . ".tpl";
+		$this->addDebug("Original", $cLayout);
 
 		//page
 		if ($this->cPage) {
-
+			$bFound	= false;
+			if (file_exists(PAGES . $this->cPage . "/templates/" . $cCaller . ".tpl")) {
+				$cLayout	= PAGES . $this->cPage . "/templates/" . $cCaller . ".tpl";
+				$bFound		= true;
+			}
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/templates/" . $cTemplate . ".tpl")) {
+				$cLayout	= PAGES . $this->cPage . "/templates/" . $cTemplate . ".tpl";
+				$bFound		= true;
+			}
+			$this->addDebug("Page", $cLayout);
 		}
 
-		printRead($this->cPage);
-		die();
+		//action
+		if ($this->cAction) {
+			$bFound	= false;
+			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/templates/" . $cCaller . ".tpl")) {
+				$cLayout	= PAGES . $this->cPage . "/" . $this->cAction . "/templates/" . $cCaller . ".tpl";
+				$bFound		= true;
+			}
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/templates/" . $cTemplate . ".tpl")) {
+				$cLayout	= PAGES . $this->cPage . "/" . $this->cAction . "/templates/" . $cTemplate . ".tpl";
+				$bFound		= true;
+			}
+			$this->addDebug("Action", $cLayout);
+		}
 
-		return $cTemplate;
+		//choice
+		if ($this->cChoice) {
+			$bFound	= false;
+			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/templates/" . $cCaller . ".tpl")) {
+				$cLayout	= PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/templates/" . $cCaller . ".tpl";
+				$bFound		= true;
+			}
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/templates/" . $cTemplate . ".tpl")) {
+				$cLayout	= PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/templates/" . $cTemplate . ".tpl";
+				$bFound		= true;
+			}
+			$this->addDebug("Choice", $cLayout);
+		}
+
+		//last check to make sure
+		if (!file_exists($cLayout)) { $this->cError = "No Template for " . $cCaller . " found, template requested was " . $cTemplate; }
+
+		//error found
+		if ($this->cError && $this->bDebug) { $this->debugTemplates(); }
+
+		$this->cTemplate	= $cLayout;
+		$this->cCaller		= "content_template";
+
+		return $cLayout;
 	}
 }

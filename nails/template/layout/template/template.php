@@ -35,6 +35,7 @@ class Template_Layout_Template extends Template_Abstract {
 		$cReturn	= false;
 		$cCaller	= $this->getCaller();
 		$this->addDebug("Caller", $cCaller);
+		$bFound		= false;
 
 		//no template given but we know its parent
 		if (!$cTemplate) {
@@ -50,34 +51,44 @@ class Template_Layout_Template extends Template_Abstract {
 
 		//page
 		if ($this->cPage) {
+			$bFound	= false;
 			if (file_exists(PAGES . $this->cPage . "/layout/templates/" . $cCaller . ".tpl")) {
-				$cLayout = PAGES . $this->cPage . "/layout/templates/" . $cCaller . ".tpl";
+				$cLayout	= PAGES . $this->cPage . "/layout/templates/" . $cCaller . ".tpl";
+				$bFound		= true;
 			}
-			if (file_exists(PAGES . $this->cPage . "/layout/templates/" . $cTemplate . ".tpl")) {
-				$cLayout = PAGES . $this->cPage . "/layout/templates/" . $cTemplate . ".tpl";
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/layout/templates/" . $cTemplate . ".tpl")) {
+				$cLayout	= PAGES . $this->cPage . "/layout/templates/" . $cTemplate . ".tpl";
+				$bFound		= true;
 			}
-			if (file_exists(PAGES . $this->cPage . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl")) {
-				$cLayout = PAGES . $this->cPage . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl";
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl")) {
+				$cLayout 	= PAGES . $this->cPage . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl";
+				$bFound		= true;
 			}
-			if (file_exists(PAGES . $this->cPage . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl")) {
-				$cLayout = PAGES . $this->cPage . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl";
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl")) {
+				$cLayout 	= PAGES . $this->cPage . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl";
+				$bFound		= true;
 			}
 			$this->addDebug("Page Layout Template", $cLayout);
 		}
 
 		//action
 		if ($this->cAction) {
+			$bFound	= false;
 			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cCaller . ".tpl")) {
-				$cLayout = PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cCaller . ".tpl";
+				$cLayout	= PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cCaller . ".tpl";
+				$bFound		= true;
 			}
-			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cTemplate . ".tpl")) {
-				$cLayout = PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cTemplate . ".tpl";
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cTemplate . ".tpl")) {
+				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cTemplate . ".tpl";
+				$bFound		= true;
 			}
-			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl")) {
-				$cLayout = PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl";
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl")) {
+				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl";
+				$bFound		= true;
 			}
-			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl")) {
-				$cLayout = PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl";
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl")) {
+				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl";
+				$bFound		= true;
 			}
 
 			$this->addDebug("Action Layout Template", $cLayout);
@@ -85,17 +96,22 @@ class Template_Layout_Template extends Template_Abstract {
 
 		//choice
 		if ($this->cChoice) {
+			$bFound	= false;
 			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cCaller . ".tpl")) {
-				$cLayout = PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cCaller . ".tpl";
+				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cCaller . ".tpl";
+				$bFound		= true;
 			}
-			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cTemplate . ".tpl")) {
-				$cLayout = PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cTemplate . ".tpl";
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cTemplate . ".tpl")) {
+				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cTemplate . ".tpl";
+				$bFound		= true;
 			}
-			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl")) {
-				$cLayout = PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl";
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl")) {
+				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl";
+				$bFound		= true;
 			}
-			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl")) {
-				$cLayout = PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl";
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl")) {
+				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl";
+				$bFound		= true;
 			}
 
 			$this->addDebug("Choice Layout Template", $cLayout);

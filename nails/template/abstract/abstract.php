@@ -170,8 +170,8 @@ abstract class Template_Abstract {
 		//now make sure we have a template otherwise just do nothing
 		if (!$this->cTemplate) { return false; }
 
-		//no type has been given
-		#if (!$this->oType) { return false; }
+		//remove the parents
+		$this->removeParents();
 
 		//get the form if there is one
 		if (!$this->bFormed) { $this->getForm(); }
@@ -195,14 +195,19 @@ abstract class Template_Abstract {
 	 * @return null
 	 */
 	private function removeParents() {
-		unset($this->aVars["this"]);
-		unset($this->aVars["Hammer"]);
-		unset($this->aVars["oHammer"]);
+		switch($this->cCaller) {
+			case "content_template":
+			case "layout_template":
+				unset($this->aVars["this"]);
+				unset($this->aVars["Hammer"]);
+				unset($this->aVars["oHammer"]);
 
-		//make absolute certain
-		$this->aVars["this"]	= false;
-		$this->aVars["Hammer"]	= false;
-		$this->aVars["oHammer"]	= false;
+				//make absolute certain
+				$this->aVars["this"]	= false;
+				$this->aVars["Hammer"]	= false;
+				$this->aVars["oHammer"]	= false;
+				break;
+		}
 	}
 
 	/**
