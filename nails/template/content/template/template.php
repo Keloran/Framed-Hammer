@@ -1,4 +1,13 @@
 <?php
+/**
+ * Template_Content_Template
+ *
+ * @package
+ * @author keloran
+ * @copyright Copyright (c) 2012
+ * @version $Id$
+ * @access public
+ */
 class Template_Content_Template extends Template_Abstract {
 	private $oContent;
 
@@ -16,7 +25,15 @@ class Template_Content_Template extends Template_Abstract {
 		if ($cTemplate) { $this->setTemplate($cTemplate); }
 	}
 
+	/**
+	 * Template_Content_Template::setTemplate()
+	 *
+	 * @param string $cTemplate
+	 * @return string
+	 */
 	public function setTemplate($cTemplate) {
+		$this->cTemplate	= $cTemplate;
+
 		return $cTemplate;
 	}
 }
