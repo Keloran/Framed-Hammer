@@ -75,6 +75,7 @@ abstract class Template_Abstract {
 		//unset the previous to stop scalar conflict
 		unset($this->aVars[$cName]);
 
+		//now add back to the array
 		if (is_array($mVars)) {
 			foreach ($mVars as $cVar => $mValue) {
 				$this->aVars[$cName][$cVar]	= $mValue;

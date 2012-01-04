@@ -152,10 +152,10 @@ class Template extends Template_Abstract {
 		if ($this->bDebug) { $oContent->doDebug(); }
 
 		//set the template
-		#$oContent->setTemplate($cTemplate);
+		$oContent->setTemplate($cTemplate);
 
-		#$oContent->setVars("error", $this->cError);
-		#$this->giveHammer();
+		$oContent->setVars("error", $this->cError);
+		$this->giveHammer();
 
 		return $oContent;
 	}
@@ -244,6 +244,12 @@ class Template extends Template_Abstract {
 		return $this->oForm;
 	}
 
+	/**
+	 * Template::setTemplate()
+	 *
+	 * @param string $cTemplate
+	 * @return object
+	 */
 	public function setTemplate($cTemplate = null) {
 		if (!$this->oType && $cTemplate) {
 			$this->getContent($cTemplate);
@@ -253,7 +259,7 @@ class Template extends Template_Abstract {
 			}
 		}
 
-		$this->oType->setTemplate($cTemplate);
+		return $this->oType->setTemplate($cTemplate);
 	}
 
 	/**
