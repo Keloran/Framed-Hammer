@@ -533,7 +533,7 @@ class Hammer {
 		#$oReturn->oHammer	= $this;
 
 		if ($cTemplate == "latest") {
-			printRead($this->aRegistry['oTemplate'], "firephp");
+			printRead($oReturn, "firephp");
 			die();
 		}
 
