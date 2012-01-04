@@ -522,28 +522,22 @@ class Hammer {
 	* @return object
 	*/
 	public function addTemplate($cTemplate = null) {
-		if (!isset($this->aRegistry["oTemplate"])) {
-			$cSkinSetting	= false;
-			$cSkin			= $cSkinSetting ?: "brand";
+		$cSkinSetting	= false;
+		$cSkin			= $cSkinSetting ?: "brand";
 
-			$this->cSkinSetting	= $cSkin;
-			$this->cSiteCalled	= $this->cSited;
+		$this->cSkinSetting	= $cSkin;
+		$this->cSiteCalled	= $this->cSited;
 
-			//get the template object
-			$oReturn			= Template::getInstance($this->aData, $this->cSited, $cSkinSetting);
-			$oReturn->oHammer	= $this;
-
-			//set the template always, and then if just echo called, no errors
-			#$oReturn->setTemplate($cTemplate);
-			$this->aRegistry["oTemplate"] = $oReturn;
-		}
+		//get the template object
+		$oReturn			= Template::getInstance($this->aData, $this->cSited, $cSkinSetting);
+		#$oReturn->oHammer	= $this;
 
 		if ($cTemplate == "latest") {
 			printRead($this->aRegistry['oTemplate'], "firephp");
 			die();
 		}
 
-		return $this->aRegistry["oTemplate"];
+		return $oReturn;
 	}
 
 	/**
