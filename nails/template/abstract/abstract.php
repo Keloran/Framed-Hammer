@@ -9,7 +9,7 @@
  * @access public
  */
 abstract class Template_Abstract {
-	use Browser;
+	use Browser, Mailer;
 
 	protected $aVars;
 	protected $cTemplate;
