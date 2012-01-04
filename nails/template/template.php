@@ -111,6 +111,9 @@ class Template extends Template_Abstract {
 		//set the debug
 		if ($this->bDebug) { $oMain->doDebug(); }
 
+		//no layout do the default
+		if (!$aLayout) { $aLayout = array("<div id=\"mainArea\">","</div>\n"); }
+
 		//set the default
 		$oMain->setDefault($cDefault);
 		$oMain->setTemplate($cDefault);
@@ -122,11 +125,8 @@ class Template extends Template_Abstract {
 
 		//do the render
 		$cReturn	 = $oMain->cStarter;
-		#$cReturn	.= $oMain->renderTemplate();
+		$cReturn	.= $oMain->renderTemplate();
 		$cReturn	.= $oMain->cEnder;
-
-		printRead($aLayout);
-		die();
 
 		//are we in echo
 		if ($bEcho) { echo $cReturn; }
