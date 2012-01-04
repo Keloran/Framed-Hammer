@@ -36,8 +36,6 @@ class Template_Content_Template extends Template_Abstract {
 		$cCaller	= $this->getCaller();
 		$this->addDebug("Caller", $cCaller);
 
-		$this->debugTemplates();
-
 		$this->cTemplate	= $cTemplate;
 
 		return $cTemplate;
