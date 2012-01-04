@@ -50,8 +50,8 @@ class Template_Content extends Template_Abstract {
 				"Template"	=> $cDefault,
 				"Caller"	=> $this->getCaller(true)
 			));
+			die();
 		}
-		die();
 
 		//so that i can debug
 		$cPage		= false;
