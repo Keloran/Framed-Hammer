@@ -172,6 +172,11 @@ abstract class Template_Abstract {
 		//get the form if there is one
 		if (!$this->bFormed) { $this->getForm(); }
 
+		if (strstr($this->cTemplate, "latester")) {
+			printRead($this->getCaller(true);
+			die();
+		}
+
 		//start the buffer so that we can process the request
 		ob_start();
 			extract($this->aVars, EXTR_OVERWRITE); //skip on override
