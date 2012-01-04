@@ -357,7 +357,11 @@ class Spanner extends Exception {
 		//class previous
 		if (isset($this->cPrevious)) { $cMessage .= "<p>Previous: " . $this->cPrevious . "</p>\n"; }
 
-	    $cMessage .= "<p>Full REQUEST is . " . print_r($_REQUEST, true) . "</p>\n";
+		//Defined Vars
+		$cMessage .= "<p>Defined Vars " . var_dump(get_defined_vars()); . "</p>\n";
+
+		//GPR
+	    $cMessage .= "<p>Full REQUEST is " . print_r($_REQUEST, true) . "</p>\n";
 		$cMessage .= "<p>Full GET is " . print_r($_GET, true) . "</p>\n";
 		$cMessage .= "<p>Full POST is " . print_r($_POST, true) . "</p>\n";
 
