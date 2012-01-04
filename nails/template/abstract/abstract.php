@@ -172,28 +172,17 @@ abstract class Template_Abstract {
 		//get the form if there is one
 		if (!$this->bFormed) { $this->getForm(); }
 
-		//templates dont have access to $this or $hammer
-		if ($this->cCaller === "layout_template" ) { $this->removeParents(); }
-
 		//start the buffer so that we can process the request
-		#ob_start();
+		ob_start();
 			extract($this->aVars, EXTR_SKIP); //skip on override
 			include $this->cTemplate;
-		#$cReturn	= ob_get_clean();
+		$cReturn	= ob_get_clean();
 
 		//are we echoing the results or retuning
 		if ($bEcho) { echo $cReturn; }
 
-		//clean the vars
-		$this->cleanVars();
-
 		//still return just incase
 		return $cReturn;
-	}
-
-	private function cleanVars() {
-		$this->aVars		= null;
-		$this->cTemplate	= null;
 	}
 
 	/**

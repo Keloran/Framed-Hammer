@@ -107,7 +107,6 @@ class Template extends Template_Abstract {
 
 		//set the type for calling of render afterwards
 		$this->oType	= $oMain;
-		#$oMain->createHammer();
 
 		//set the debug
 		if ($this->bDebug) { $oMain->doDebug(); }
@@ -119,6 +118,11 @@ class Template extends Template_Abstract {
 
 		$oMain->setVars("error", $this->cError);
 		$this->giveHammer();
+
+		$cRender	= $oMain->renderTemplate();
+		printRead($cRender);
+		die();
+
 
 		//do the render
 		$cReturn	 = $oMain->cStarter;
