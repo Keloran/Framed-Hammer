@@ -170,7 +170,7 @@ abstract class Template_Abstract {
 		if (!$this->cTemplate) { return false; }
 
 		//no type has been given
-		if (!$this->oType) { return false; }
+		#if (!$this->oType) { return false; }
 
 		//get the form if there is one
 		if (!$this->bFormed) { $this->getForm(); }
