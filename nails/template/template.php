@@ -80,6 +80,9 @@ class Template extends Template_Abstract {
 	private function createHammer() {
 		#if (!$this->oHammer) { $this->oHammer = Hammer::getHammer(); }
 		if (!$this->oHammer) { $this->oHammer = $this->oNails; }
+
+		printRead($this);
+		die();
 	}
 
 	/**
