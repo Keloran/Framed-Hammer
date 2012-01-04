@@ -142,8 +142,12 @@ class Template extends Template_Abstract {
 	public function getContent($cTemplate = null, $bEcho = null) {
 		if ($this->oType instanceof Template_Content) {
 			$oContent	= new Template_Content_Template($this->oType);
-			$oContent->setTemplate($cTemplate);
+
+			//set the params
 			$oContent->setParams($this->aParams);
+
+			//set the template
+			$oContent->setTemplate($cTemplate);
 
 			//since set template might have been done before
 			if ($this->oType->aVars) {
