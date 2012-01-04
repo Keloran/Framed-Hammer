@@ -82,12 +82,27 @@ class oReader {
 	}
 
 	/**
+	 * oReader::makeStripper()
+	 *
+	 * @return null
+	 */
+	private function makeStripper() {
+		//turn on console output
+		if ($this->bFile) { $this->bStripper	= true; }
+		if ($this->bFirePHP) { $this->bStripper	= true; }
+		if ($this->bConsole) { $this->bStripper	= true; }
+	}
+
+	/**
 	 * oReader::doOutput()
 	 *
 	 * @desc this is because construct wont do echo
 	 * @return mixed
 	 */
 	public function doOutput() {
+		//do we have to strip the content into console type
+		$this->makeStripper();
+
 		//it wants color, so
 		if ($this->bColor) {
 			$this->cOutput	 = $this->colorMe($this->cFormated);
@@ -98,7 +113,7 @@ class oReader {
 		}
 
 		//if its console then it needs a different method
-		if ($this->bFirePHP || $this->bConsole) {
+		if ($this->bStripper) {
 			$this->cConsole	 = $this->cFormated;
 			$this->cConsole	.= $this->cMethods;
 		}
@@ -110,10 +125,9 @@ class oReader {
 		$this->cConsole	= $this->protectMe($this->cConsole);
 		$this->cOutput	= $this->protectMe($this->cOutput);
 
-
 		//now do we want a header
 		if ($this->bEmail) { $this->cEmail = $this->cOutput; }
-		if ($this->bConsole || $this->bFirePHP) { $this->cConsole = $this->makeHeader($this->cConsole, true); }
+		if ($this->bStripper) { $this->cConsole = $this->makeHeader($this->cConsole, true); }
 
 		//get the output anyway
 		$this->cOutput	= $this->makeHeader($this->cOutput);
@@ -132,7 +146,7 @@ class oReader {
 		$this->cOutput = $cFinal;
 
 		//Console remove all the tags since not in use for console, and firephp
-		if ($this->bConsole || $this->bFirePHP || $this->bFile) {
+		if ($this->bStripper) {
 			$this->cConsole = str_replace("<br />", "\n", $this->cConsole);
 			$this->cConsole = strip_tags($this->cConsole);
 
