@@ -144,6 +144,12 @@ class oReader {
 
 				$this->FirePHP($this->cConsole, $this->cLevel);
 			}
+
+			if ($this->bFile) {
+				$fFile	= tempnam(HAMMERPATH . "/logs/", "debug");
+				file_put_contents($fFile, $this->cConsole);
+				$this->cOutput	= $fFile;
+			}
 		}
 
 		//now are we returning or echoing
