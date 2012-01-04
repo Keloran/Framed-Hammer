@@ -534,7 +534,7 @@ class Hammer {
 			$oReturn->oHammer	= $this;
 
 			//set the template always, and then if just echo called, no errors
-			$oReturn->setTemplate($cTemplate);
+			#$oReturn->setTemplate($cTemplate);
 			$this->aRegistry["oTemplate"] = $oReturn;
 		}
 
