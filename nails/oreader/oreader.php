@@ -27,23 +27,35 @@ class oReader {
 		//options that are set later
 		$this->mOriginal	= $mString;
 		$this->aFile		= debug_backtrace();
-		$this->cFormated	= print_r($mString, 1);
+		$this->cFormated	= print_r($mString, true);
 		$this->bScreen		= true;
 
 		//Show the methods of the class your trying diagnose
-		if (is_object($mString)) { $this->cMethods = print_r(get_class_methods($mString), 1); }
+		if (is_object($mString)) { $this->cMethods = print_r(get_class_methods($mString), true); }
 	}
 
 	/**
-	 * oReader::makeNewLines()
+	 * oReader::makeScreenLines()
 	 *
 	 * @param string $cString
 	 * @return string
 	 */
-	private function makeNewLines($cString) {
+	private function makeScreenLines($cString) {
 		$cString	= str_replace(" ", "&nbsp;", $cString);
 		$cString	= preg_replace("{[\t]+}", "&nbsp;&nbsp;&nbsp;&nbsp;", $cString);
 		$cString	= nl2br($cString);
+
+		return $cString;
+	}
+
+	/**
+	 * oReader::makeConsoleLines()
+	 *
+	 * @param string $cString
+	 * @return string
+	 */
+	private function makeConsoleLines($cString) {
+		$cString	= preg_replace("{[\t]+}", "    ", $cString);
 
 		return $cString;
 	}
@@ -119,7 +131,8 @@ class oReader {
 		}
 
 		//turn it into new lines
-		$this->cOutput	= $this->makeNewLines($this->cOutput);
+		$this->cOutput	= $this->makeScreenLines($this->cOutput);
+		$this->cConsole	= $this->makeConsoleLines($this->cConsole);
 
 		//Protect stuff
 		$this->cConsole	= $this->protectMe($this->cConsole);
@@ -150,6 +163,7 @@ class oReader {
 			$this->cConsole = str_replace("<br />", "\n", $this->cConsole);
 			$this->cConsole = strip_tags($this->cConsole);
 
+			//do we want to use FirePHP / ChromePHP
 			if ($this->bFirePHP) {
 				//now check the size
 				if (strlen($this->cConsole) >= 1200) { //1200 for now
