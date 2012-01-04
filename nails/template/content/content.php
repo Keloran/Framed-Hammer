@@ -91,6 +91,12 @@ class Template_Content extends Template_Abstract {
 		return $this->cTemplate;
 	}
 
+	/**
+	 * Template_Content::setDefault()
+	 *
+	 * @param string $cDefault
+	 * @return null
+	 */
 	public function setDefault($cDefault = null) {
 		$this->cDefault	= $cDefault;
 	}

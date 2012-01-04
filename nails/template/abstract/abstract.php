@@ -166,6 +166,11 @@ abstract class Template_Abstract {
 	public function renderTemplate($bEcho = null) {
 		$cReturn	= false;
 
+		if ($this->cCaller == "content") {
+			printRead(get_defined_vars());
+			die();
+		}
+
 		//now make sure we have a template otherwise just do nothing
 		if (!$this->cTemplate) { return false; }
 
