@@ -122,8 +122,11 @@ class Template extends Template_Abstract {
 
 		//do the render
 		$cReturn	 = $oMain->cStarter;
-		$cReturn	.= $oMain->renderTemplate();
+		#$cReturn	.= $oMain->renderTemplate();
 		$cReturn	.= $oMain->cEnder;
+
+		printRead($cReturn);
+		die();
 
 		//are we in echo
 		if ($bEcho) { echo $cReturn; }
