@@ -187,87 +187,77 @@ class Template_Structure extends Template_Abstract {
 		if (substr($cLanguage, -2, 2) == "//") { $cLanguage = substr($cLayout2, 0, (strlen($cLanguage) - 1)); }
 
 		//set the default structure
-		if ($this->bNormal) {
-			$cStructure	= SITEPATH . "/layout/" . $this->cStruct;
-		} else {
-			$cStructure	= SITEPATH . "/layout/" . $this->cMobileStruct;
-		}
-		$this->addDebug("Default Structure", $cStructure);
+		$cNormal	= SITEPATH . "/layout/" . $this->cStruct;
+		$cMobile	= SITEPATH . "/layout/" . $this->cMobileStruct;
+		$this->addDebug("Default Normal Structure", $cNormal);
+		$this->addDebug("Default Mobile Structure", $cMobile);
 
 		//is there a brand
 		if ($cBrand) {
-			if ($this->bNormal) {
-				if (file_exists($cBrand . $this->cStruct)) {
-					$cStructure = $cBrand . $this->cStruct;
-					$bSpecial	= true;
-				}
-			} else {
-				if (file_exists($cBrand . $this->cMobileStruct)) {
-					$cStructure = $cBrand . $this->cMobileStruct;
-					$bSpecial	= true;
-				}
+			if (file_exists($cBrand . $this->cStruct)) {
+				$cNormal = $cBrand . $this->cStruct;
+				$bSpecial	= true;
 			}
-
-			$this->addDebug("Brand Structure", $cStructure);
+			if (file_exists($cBrand . $this->cMobileStruct)) {
+				$cMobile = $cBrand . $this->cMobileStruct;
+				$bSpecial	= true;
+			}
+			$this->addDebug("Brand Normal Structure", $cNormal);
+			$this->addDebug("Brand Mobile Structure", $cMobile);
 		}
 
 		//is tehre a language
 		if ($cLanguage) {
-			if ($this->bNormal) {
-				if (file_exists($cLanguage . $this->cStruct)) {
-					$cStructure = $cLanguage . $this->cStruct;
-					$bSpecial	= true;
-				}
-			} else {
-				if (file_exists($cLanguage . $this->cMobileStruct)) {
-					$cStructure	= $cLanguage . $this->cStruct;
-					$bSpecial	= true;
-				}
+			if (file_exists($cLanguage . $this->cStruct)) {
+				$cNormal = $cLanguage . $this->cStruct;
+				$bSpecial	= true;
 			}
-
-			$this->addDebug("Language Structure", $cStructure);
+			if (file_exists($cLanguage . $this->cMobileStruct)) {
+				$cMobile	= $cLanguage . $this->cStruct;
+				$bSpecial	= true;
+			}
+			$this->addDebug("Language Normal Structure", $cNormal);
+			$this->addDebug("Language Mobile Structure", $cMobile);
 		}
 
 		//if there isnt a special set we need to go through the normal way
 		if (!$bSpecial) {
 			//is there a page
 			if ($this->cPage) {
-				if ($this->bNormal) {
-					if (file_exists(PAGES . $this->cPage . "/layout/" . $this->cStruct)) { $cStructure = PAGES . "/" . $this->cPage . "/layout/" . $this->cStruct; }
-				} else {
-					if (file_exists(PAGES . $this->cPage . "/layout/" . $this->cMobileStruct)) { $cStructure = PAGES . $this->cPage . "/layout/" . $this->cMobileStruct; }
-				}
+				if (file_exists(PAGES . $this->cPage . "/layout/" . $this->cStruct)) { $cNormal = PAGES . "/" . $this->cPage . "/layout/" . $this->cStruct; }
+				if (file_exists(PAGES . $this->cPage . "/layout/" . $this->cMobileStruct)) { $cMobile = PAGES . $this->cPage . "/layout/" . $this->cMobileStruct; }
 
-				$this->addDebug("Page Structure", $cStructure);
+				$this->addDebug("Page Normal Structure", $cNormal);
+				$this->addDebug("Page Mobile Structure", $cMobile);
 			}
 
 			//action
 			if ($this->cAction) {
-				if ($this->bNormal) {
-					if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $this->cStruct)) { $cStructure = PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $this->cStruct; }
-				} else {
-					if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $this->cMobileStruct)) {
-						$cStructure = PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $this->cMobileStruct;
-					}
-				}
+				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $this->cStruct)) { $cNormal = PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $this->cStruct; }
+				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $this->cMobileStruct)) { $cMobile = PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $this->cMobileStruct; }
 
-				$this->addDebug("Action Structure", $cStructure);
+				$this->addDebug("Action Normal Structure", $cNormal);
+				$this->addDebug("Action Mobile Structure", $cMobile);
 			}
 
 			//choice
 			if ($this->cChoice) {
-				if ($this->bNormal) {
-					if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $this->cStruct)) {
-						$cStructure	= PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $this->cStruct;
-					}
-				} else {
-					if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $this->cMobileStruct)) {
-						$cStructure = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice. "/layout/" . $this->cMobileStruct;
-					}
+				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $this->cStruct)) {
+					$cNormal = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $this->cStruct;
+				}
+				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $this->cMobileStruct)) {
+					$cMobile = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice. "/layout/" . $this->cMobileStruct;
 				}
 
-				$this->addDebug("Choice Structure", $cStructure);
+				$this->addDebug("Choice Normal Structure", $cNormal);
+				$this->addDebug("Choice Mobile Structure", $cMobile);
 			}
+
+			//does the normal one exist
+			if (file_exists($cNormal)) { $cStructure = $cNormal; }
+
+			//does the mobile one actually exist
+			if (!$this->bNormal && file_exists($cMobile)) { $cStructure = $cMobile; }
 
 			//one last check since it might be default only
 			if (!file_exists($cStructure)) { $this->cError = "Structure seems to be completlly missing"; }
