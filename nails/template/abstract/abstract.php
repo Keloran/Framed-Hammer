@@ -173,7 +173,7 @@ abstract class Template_Abstract {
 		if (!$this->bFormed) { $this->getForm(); }
 
 		if (strstr($this->cTemplate, "latester")) {
-			printRead($this->getCaller(true);
+			printRead($this->getCaller(true));
 			die();
 		}
 
