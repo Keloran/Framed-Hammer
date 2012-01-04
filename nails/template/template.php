@@ -247,4 +247,15 @@ class Template extends Template_Abstract {
 		unset($this->oForms);
 		unset($this->oType);
 	}
+
+	#LEGACY
+	/**
+	 * Template::setCoreTemplate()
+	 *
+	 * @param string $cTemplate
+	 * @return object
+	 */
+	public function setCoreTemplate($cTemplate) {
+		return $this->setLayout($cTemplate);
+	}
 }
