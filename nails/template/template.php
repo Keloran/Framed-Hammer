@@ -125,7 +125,7 @@ class Template extends Template_Abstract {
 		#$cReturn	.= $oMain->renderTemplate();
 		$cReturn	.= $oMain->cEnder;
 
-		printRead($cReturn);
+		printRead($aLayout);
 		die();
 
 		//are we in echo
