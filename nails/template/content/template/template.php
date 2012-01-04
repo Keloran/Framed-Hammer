@@ -36,7 +36,19 @@ class Template_Content_Template extends Template_Abstract {
 		$cCaller	= $this->getCaller();
 		$this->addDebug("Caller", $cCaller);
 
-		$this->cTemplate	= $cTemplate;
+		//no template used, so use caller
+		if (!$cTemplate) { $cTemplate	= $cCaller; }
+
+		//Original
+		$cOriginal	= SITEPATH . "/pages/" . $cCaller . "/templates/" . $cTemplate . ".tpl";
+
+		//page
+		if ($this->cPage) {
+
+		}
+
+		printRead($this->cPage);
+		die();
 
 		return $cTemplate;
 	}
