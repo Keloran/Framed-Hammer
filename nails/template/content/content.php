@@ -45,10 +45,12 @@ class Template_Content extends Template_Abstract {
 	public function setTemplate($cDefault = null) {
 		if ($this->cDefault) { $cDefault = $this->cDefault; }
 
-		printRead(array(
-			"Template"	=> $cDefault,
-			"Caller"	=> $this->getCaller(true)
-		));
+		if ($cDefault == "latester") {
+			printRead(array(
+				"Template"	=> $cDefault,
+				"Caller"	=> $this->getCaller(true)
+			));
+		}
 		die();
 
 		//so that i can debug
