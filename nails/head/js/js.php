@@ -185,8 +185,8 @@ class Head_JS {
 			if (file_exists($cFolder . $cJS . ".js") || file_exists($cCheck . $cJS . ".js")) {
 				$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $cJS . ".js\"></script>\n";
 				return false;
-			} else if (file_exists($cCheck . "/" . $this->cJSFrameworkName . "/" . $cJSOriginal . ".js")) {
-				$this->cJS .= "<script type=\"" . $cFolder . "/" . $this->cJSFrameworkName . "/" . $cJSOriginal . ".js\"></script>\n";
+			} else if (file_exists($cCheck . $this->cJSFrameworkName . "/" . $cJSOriginal . ".js")) {
+				$this->cJS .= "<script type=\"" . $cFolder . $this->cJSFrameworkName . "/" . $cJSOriginal . ".js\"></script>\n";
 				return false;
 			}
 		}
