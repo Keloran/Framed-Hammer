@@ -344,9 +344,10 @@ class Template extends Template_Abstract {
 	 * Template::getCore()
 	 *
 	 * @param string $cTemplate
+	 * @param bool $bEcho
 	 * @return object
 	 */
-	public function getCore($cTemplate) {
-		return $this->getLayout($cTemplate);
+	public function getCore($cTemplate = null, $bEcho = null) {
+		return $this->getLayout($cTemplate, $bEcho);
 	}
 }
