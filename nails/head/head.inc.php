@@ -156,6 +156,10 @@ class Head {
 		$aTitle	= $this->oNails->getConfig("title", $this->oNails->getConfigKey());
 		$aBrand = $this->oNails->getConfig("brand", $this->oNails->getConfigKey());
 
+    	//if there is no brand, but there is a title
+    	if (!$aBrand) { $aBrand = $aTitle; }
+
+    	//is it an array
 		if (is_array($aBrand)) {
 			$cTitle = $aBrand[0];
 			$bLower = $aBrand[1]['case'];
