@@ -461,4 +461,16 @@ abstract class Template_Abstract {
 
 		return $oForm;
 	}
+
+	/**
+	 * Template_Abstract::addValidate()
+	 *
+	 * @return object
+	 */
+	public function addValidate() {
+		$oValidate			= $this->oHammer->getValidator();
+		$this->oValidate	= $oValidate;
+
+		return $oValidate;
+	}
 }

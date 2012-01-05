@@ -330,4 +330,8 @@ class Template extends Template_Abstract {
 
 		return false;
 	}
+
+	public function getValidate() {
+		$this->oType->oForm->addValidate();
+	}
 }
