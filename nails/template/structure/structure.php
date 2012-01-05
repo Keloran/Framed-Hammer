@@ -224,8 +224,11 @@ class Template_Structure extends Template_Abstract {
 		if (!$bSpecial) {
 			//is there a page
 			if ($this->cPage) {
+				if (file_exists(PAGES . $this->cPage . "/" . $this->cStruct)) { $cNormal = PAGES . "/" . $this->cPage . "/" . $this->cStruct; }
 				if (file_exists(PAGES . $this->cPage . "/layout/" . $this->cStruct)) { $cNormal = PAGES . "/" . $this->cPage . "/layout/" . $this->cStruct; }
+
 				if (file_exists(PAGES . $this->cPage . "/layout/" . $this->cMobileStruct)) { $cMobile = PAGES . $this->cPage . "/layout/" . $this->cMobileStruct; }
+				if (file_exists(PAGES . $this->cPage . "/" . $this->cMobileStruct)) { $cMobile = PAGES . $this->cPage . "/" . $this->cMobileStruct; }
 
 				$this->addDebug("Page Normal Structure", $cNormal);
 				$this->addDebug("Page Mobile Structure", $cMobile);
@@ -233,7 +236,10 @@ class Template_Structure extends Template_Abstract {
 
 			//action
 			if ($this->cAction) {
+				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cStruct)) { $cNormal = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cStruct; }
 				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $this->cStruct)) { $cNormal = PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $this->cStruct; }
+
+				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cMobileStruct)) { $cMobile = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cMobileStruct; }
 				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $this->cMobileStruct)) { $cMobile = PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $this->cMobileStruct; }
 
 				$this->addDebug("Action Normal Structure", $cNormal);
@@ -242,8 +248,15 @@ class Template_Structure extends Template_Abstract {
 
 			//choice
 			if ($this->cChoice) {
+				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/" . $this->cStruct)) {
+					$cNormal = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/" . $this->cStruct
+				}
 				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $this->cStruct)) {
 					$cNormal = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $this->cStruct;
+				}
+
+				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/" / $this->cMobileStruct)) {
+					$cMobile = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/" / $this->cMobileStruct;
 				}
 				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $this->cMobileStruct)) {
 					$cMobile = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice. "/layout/" . $this->cMobileStruct;
