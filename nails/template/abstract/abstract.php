@@ -468,7 +468,8 @@ abstract class Template_Abstract {
 	 * @return object
 	 */
 	public function addValidate() {
-		$oValidate			= $this->oHammer->getValidator();
+		$oHammer			= Hammer::getHammer();
+		$oValidate			= $oHammer->getValidator();
 		$this->oValidate	= $oValidate;
 
 		return $oValidate;
