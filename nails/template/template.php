@@ -330,13 +330,4 @@ class Template extends Template_Abstract {
 
 		return false;
 	}
-
-	/**
-	 * Template::getForm()
-	 *
-	 * @return object
-	 */
-	public function getForm() {
-		return $this->addForm();
-	}
 }
