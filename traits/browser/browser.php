@@ -31,6 +31,7 @@ trait Browser {
 		//no browser object
 		$oBrowser	= $mGetBrowser;
 		if (!$oBrowser) { return false; }
+		if (!isset($oBrowser->brower)) { return false; }
 
 		//switch
 		$cBrowser	= strtolower($oBrowser->browser);
