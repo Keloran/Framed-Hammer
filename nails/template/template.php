@@ -163,7 +163,7 @@ class Template extends Template_Abstract {
 			}
 
 			//add the form if it was added afterwards
-			if ($this->oForm) { $this->addForm($this->oForm); }
+			if ($this->oForm) { $this->oType->oForm = $this->oForm; }
 
 			return $oContent;
 		}
