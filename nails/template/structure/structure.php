@@ -249,7 +249,7 @@ class Template_Structure extends Template_Abstract {
 			//choice
 			if ($this->cChoice) {
 				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/" . $this->cStruct)) {
-					$cNormal = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/" . $this->cStruct
+					$cNormal = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/" . $this->cStruct;
 				}
 				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $this->cStruct)) {
 					$cNormal = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $this->cStruct;
