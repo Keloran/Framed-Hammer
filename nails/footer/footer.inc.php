@@ -102,6 +102,8 @@ class Footer implements Nails_Interface {
 	 * @return string
 	 */
 	public function getReInvigorate() {
+		return false; //temp till get this fixed
+
 		$mCode		= $this->oNails->getConfig("code", "reinvigorate");
 		if (is_array($mCode)) {
 			$cCode = $mCode['code'];
