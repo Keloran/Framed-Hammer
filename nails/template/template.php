@@ -331,7 +331,12 @@ class Template extends Template_Abstract {
 		return false;
 	}
 
+	/**
+	 * Template::getValidate()
+	 *
+	 * @return object
+	 */
 	public function getValidate() {
-		$this->oType->oForm->addValidate();
+		return $this->oType->addValidate();
 	}
 }
