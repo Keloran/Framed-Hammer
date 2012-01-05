@@ -151,26 +151,22 @@ class Head {
      * @return
      */
     public function getTitle() {
+    	$mKey 	= $this->oNails->getConfigKey();
+    	$bLower	= true;
+
 	   	//seperator, most people will be happy with ..::..
-		$cSep	= $this->oNails->getConfig("seperator", $this->oNails->getConfigKey());
-		$aTitle	= $this->oNails->getConfig("title", $this->oNails->getConfigKey());
-		$aBrand = $this->oNails->getConfig("brand", $this->oNails->getConfigKey());
+		$cSep	= $this->oNails->getConfig("seperator", $mKey);
+		$aTitle	= $this->oNails->getConfig("title", $mKey);
+		$aBrand = $this->oNails->getConfig("brand", $mKey);
+    	$aCase	= $this->oNails->getConfig("case", $mKey);
 
-    	//if there is no brand, but there is a title
-    	if (!$aBrand) { $aBrand = $aTitle; }
+    	//set them depending on which is alive
+    	if (isset($aBrand['brand']))) { $aBrand = $aBrand['brand']; }
+    	if (isset($aTitle['title'])) { $aBrand = $aTitle['brand']; }
+    	if (isset($cSep['seperator'])) { $cSep = $cSep['seperator']; }
+    	if (isset($aCase['case'])) { $bLower = $aCase['case']; }
 
-    	printRead($aBrand);
-    	die();
-
-    	//is it an array
-		if (is_array($aBrand)) {
-			$cTitle = $aBrand[0];
-			$bLower = $aBrand[1]['case'];
-		} else {
-			$cTitle = $aBrand['title'];
-			$bLower	= true;
-		}
-
+    	//page title
 		if (!$this->cPageTitle) { $this->cPageTitle = $aTitle['title']; }
 
     	//theres some attributes
@@ -197,7 +193,7 @@ class Head {
 		}
 
 		if (is_array($cSep)) { $cSep = false; }
-	    	$cBrand		= $cBrand ? $cBrand : "Hammer";
+	    $cBrand		= $cBrand ? $cBrand : "Hammer";
 
 		//lower or not the title
 		if (!$this->bTitleMixed) {
