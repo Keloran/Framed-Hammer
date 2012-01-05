@@ -339,4 +339,14 @@ class Template extends Template_Abstract {
 	public function getValidate() {
 		return $this->oType->addValidate();
 	}
+
+	/**
+	 * Template::getCore()
+	 *
+	 * @param string $cTemplate
+	 * @return object
+	 */
+	public function getCore($cTemplate) {
+		return $this->getLayout($cTemplate);
+	}
 }
