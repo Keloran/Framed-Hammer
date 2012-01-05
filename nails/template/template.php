@@ -146,6 +146,9 @@ class Template extends Template_Abstract {
 		if ($this->oType instanceof Template_Content) {
 			$oContent	= new Template_Content_Template($this->oType);
 
+			//set the type
+			$this->oType	= $oContent;
+
 			//set the params
 			$oContent->setParams($this->aParams);
 
@@ -159,7 +162,8 @@ class Template extends Template_Abstract {
 				}
 			}
 
-			$this->oType	= $oContent;
+			//add the form if it was added afterwards
+			if ($this->oForm) { $this->addForm($this->oForm); }
 
 			return $oContent;
 		}
@@ -325,5 +329,14 @@ class Template extends Template_Abstract {
 		if ($this->oType instanceof Template_Content) { return $this->getContent($cTemplate); }
 
 		return false;
+	}
+
+	/**
+	 * Template::getForm()
+	 *
+	 * @return object
+	 */
+	public function getForm() {
+		return $this->addForm();
 	}
 }
