@@ -159,6 +159,9 @@ class Head {
     	//if there is no brand, but there is a title
     	if (!$aBrand) { $aBrand = $aTitle; }
 
+    	printRead($aBrand);
+    	die();
+
     	//is it an array
 		if (is_array($aBrand)) {
 			$cTitle = $aBrand[0];
