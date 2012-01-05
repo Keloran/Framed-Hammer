@@ -162,7 +162,7 @@ class Head {
 
     	//set them depending on which is alive
     	if (isset($aBrand['brand'])) { $aBrand = $aBrand['brand']; }
-    	if (isset($aTitle['title'])) { $aBrand = $aTitle['title']; }
+    	if (isset($aTitle['title'])) { $cTitle = $aTitle['title']; }
     	if (isset($cSep['seperator'])) { $cSep = $cSep['seperator']; }
     	if (isset($aCase['case'])) { $bLower = $aCase['case']; }
 
@@ -189,11 +189,11 @@ class Head {
 				$cBrand = $aBrand;
 			}
 		} else {
-			$cBrand	= $cTitle ? $cTitle : $aBrand;
+			$cBrand	= $cTitle ?: $aBrand;
 		}
 
 		if (is_array($cSep)) { $cSep = false; }
-	    $cBrand		= $cBrand ? $cBrand : "Hammer";
+	    $cBrand		= $cBrand ?: "Hammer";
 
 		//lower or not the title
 		if (!$this->bTitleMixed) {
@@ -202,7 +202,7 @@ class Head {
 			$cTitle	= $this->cPageTitle;
 		}
 
-    	$cSeperator	= $cSep					? $cSep	 						: " ..::.. ";
+    	$cSeperator	= $cSep ?: " ..::.. ";
 
 		//page title is for SEO purposes
     	if ($this->cPageTitle) {
