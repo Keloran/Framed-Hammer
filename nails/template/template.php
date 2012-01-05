@@ -239,6 +239,28 @@ class Template extends Template_Abstract {
 	}
 
 	/**
+	 * Template::setEmailTemplate()
+	 *
+	 * @param string $cTemplate
+	 * @return string
+	 */
+	public function setEmailTemplate($cTemplate = null)  {
+		$oTemplate	= new Template_Email($this->aParams);
+
+		//set the type
+		$this->oType	= $oTemplate;
+
+		//set debug
+		if ($this->bDebug) { $oTemplate->doDebug(); }
+
+		//set the template
+		$oTemplate->setTemplate($cTemplate);
+		$this->giveHammer();
+
+		return $oTemplate->renderTemplate();
+	}
+
+	/**
 	 * Template::addForm()
 	 *
 	 * @param mixed $mObject
