@@ -152,7 +152,7 @@ class Head {
      */
     public function getTitle() {
     	$mKey 	= $this->oNails->getConfigKey();
-    	$bLower	= true;
+    	$bLower	= false;
 
 	   	//seperator, most people will be happy with ..::..
 		$cSep	= $this->oNails->getConfig("seperator", $mKey);
