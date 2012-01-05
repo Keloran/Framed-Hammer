@@ -255,8 +255,8 @@ class Template_Structure extends Template_Abstract {
 					$cNormal = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $this->cStruct;
 				}
 
-				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/" / $this->cMobileStruct)) {
-					$cMobile = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/" / $this->cMobileStruct;
+				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/" . $this->cMobileStruct)) {
+					$cMobile = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/" . $this->cMobileStruct;
 				}
 				if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $this->cMobileStruct)) {
 					$cMobile = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice. "/layout/" . $this->cMobileStruct;
