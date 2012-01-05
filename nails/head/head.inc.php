@@ -162,7 +162,7 @@ class Head {
 
     	//set them depending on which is alive
     	if (isset($aBrand['brand'])) { $aBrand = $aBrand['brand']; }
-    	if (isset($aTitle['title'])) { $aBrand = $aTitle['brand']; }
+    	if (isset($aTitle['title'])) { $aBrand = $aTitle['title']; }
     	if (isset($cSep['seperator'])) { $cSep = $cSep['seperator']; }
     	if (isset($aCase['case'])) { $bLower = $aCase['case']; }
 
