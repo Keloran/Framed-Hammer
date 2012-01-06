@@ -150,7 +150,7 @@ class Footer implements Nails_Interface {
 	 * @return string
 	 */
 	public function getGoogleAnalytics($bOld = null) {
-		$mode		= $this->oNails->getConfig("analytics");
+		$mCode		= $this->oNails->getConfig("analytics");
 		$mDomain	= $this->oNails->getConfig("analytics-domain");
 		$cReturn	= false;
 
