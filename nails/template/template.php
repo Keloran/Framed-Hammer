@@ -86,7 +86,7 @@ class Template extends Template_Abstract {
 	 *
 	 * @return null
 	 */
-	private function giveHammer($oType) {
+	private function giveHammer($oType = null) {
 		if ($oType) {
 			$oType->setVars("oHammer", $this->oHammer);
 			$oType->setVars("Hammer", $this->oHammer);
