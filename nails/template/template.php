@@ -236,7 +236,7 @@ class Template extends Template_Abstract {
 			$oLayout->setTemplate($cTemplate);
 
 			//see if i can strip the parents
-			$oTemplate->stripHammer();
+			$oLayout->stripHammer();
 
 			return $oLayout;
 		} else {
