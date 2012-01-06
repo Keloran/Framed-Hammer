@@ -52,6 +52,7 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 		unset($this->aVars['oHammer']);
 		unset($this->aVars['hammer']);
 		unset($this->aVars['Hammer']);
+		unset($this->aData['oHammer']);
 
 		//now return the object
 		printRead($this, "Template Object");
