@@ -230,7 +230,7 @@ class Template extends Template_Abstract {
 			//since set template might have been done before
 			if ($this->oType->aVars) {
 				foreach ($this->oType->aVars as $cKey => $mValue) {
-					$oContent->setVars($cKey, $mValue);
+					$oLayout->setVars($cKey, $mValue);
 				}
 			}
 
