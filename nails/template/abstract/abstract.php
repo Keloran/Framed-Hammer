@@ -115,7 +115,10 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 		$this->removeParents();
 
 		//get the form if there is one
-		if (!$this->bFormed) { $this->getForm(); }
+		if (!$this->bFormed) { $this->getForm(); }\
+
+		//add defaults
+		$this->addDefaults();
 
 		//start the buffer so that we can process the request
 		ob_start();

@@ -6,14 +6,6 @@ abstract class Template_Abstract_Extend {
 	protected $aVars;
 
 	/**
-	 * Template_Abstract_Extend::__construct()
-	 *
-	 */
-	public function __construct() {
-		$this->setVars("cJS", false);
-	}
-
-	/**
 	 * Template_Abstract_Extend::__isset()
 	 *
 	 * @param string $cName
@@ -67,5 +59,9 @@ abstract class Template_Abstract_Extend {
 		} else {
 			$this->aVars[$cName] = $mVars;
 		}
+	}
+
+	public function addDefaults() {
+		$this->setVars("cJS", false);
 	}
 }
