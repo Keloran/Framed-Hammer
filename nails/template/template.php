@@ -146,6 +146,13 @@ class Template extends Template_Abstract {
 		if ($this->oType instanceof Template_Content) {
 			$oContent	= new Template_Content_Template($this->oType);
 
+			//since set template might have been done before
+			if ($this->oType->aVars) {
+				foreach ($this->oType->aVars as $cKey => $mValue) {
+					$oContent->setVars($cKey, $mValue);
+				}
+			}
+
 			//set the type
 			$this->oType	= $oContent;
 
@@ -154,13 +161,6 @@ class Template extends Template_Abstract {
 
 			//set the template
 			$oContent->setTemplate($cTemplate);
-
-			//since set template might have been done before
-			if ($this->oType->aVars) {
-				foreach ($this->oType->aVars as $cKey => $mValue) {
-					$oContent->setVars($cKey, $mValue);
-				}
-			}
 
 			//add the form if it was added afterwards
 			if ($this->oForm) { $this->oType->oForm = $this->oForm; }
@@ -227,15 +227,22 @@ class Template extends Template_Abstract {
 		if ($this->oType instanceof Template_Layout) {
 			$oLayout	= new Template_Layout_Template($this->oType);
 
+			//since set template might have been done before
+			if ($this->oType->aVars) {
+				foreach ($this->oType->aVars as $cKey => $mValue) {
+					$oContent->setVars($cKey, $mValue);
+				}
+			}
+
+			//set the type
+			$this->oType	= $oLayout;
+
 			//set the params just incase
 			$oLayout->setParams($this->aParams);
 
 			//set the template
 			$oLayout->setTemplate($cTemplate);
 
-			$this->oType	= $oLayout;
-
-			#return $oLayout->renderTemplate();
 			return $oLayout;
 		}
 
