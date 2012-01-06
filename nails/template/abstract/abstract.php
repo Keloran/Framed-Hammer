@@ -46,8 +46,12 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 	 * @return null
 	 */
 	public function debugTemplates() {
-		if ($this->aDebug || $this->oType->aDebug) {
-			printRead($this->oType->aDebug, "Type Debug");
+		$bDebug	= false;
+		if (isset($this->aDebug)) { $bDebug = true; }
+		if (isset($this->oType) && isset($this->oType->aDebug)) { $bDebug = true; }
+
+		if ($bDebug) {
+			if (isset($this->oType)) { printRead($this->oType->aDebug, "Type Debug"); }
 			printRead($this->aDebug, "Top Level Debug");
 
 			//get rid of hammer for debug
@@ -57,7 +61,7 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 
 			//now return the object
 
-			pritnRead($this->oType, "Type Object");
+			if (isset($this->oType)) { printRead($this->oType, "Type Object"); }
 			printRead($this, "Template Object");
 			die();
 		}
