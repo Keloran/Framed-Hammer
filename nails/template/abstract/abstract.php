@@ -367,6 +367,7 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 		$aDebugger	= false;
 
 		//go through the debug
+		$i	= 0;
 		foreach ($aDebug AS $debug) {
 			switch($debug['function']) {
 				case "getCore":
@@ -374,7 +375,8 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 				case "getMainPage":
 					if (isset($debug['args']) && isset($debug['args'][0])) {
 						$cFile = $debug['args'][0];
-						$this->addDebug("Back Trace", $debug);
+						$this->addDebug("Back Trace" . $i, $debug);
+						$i++;
 					}
 					break;
 			}
