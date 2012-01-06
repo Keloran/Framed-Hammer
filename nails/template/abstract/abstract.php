@@ -8,14 +8,11 @@
  * @version $Id$
  * @access public
  */
-abstract class Template_Abstract {
-	use Browser, Mailer, Layout;
-
+abstract class Template_Abstract extends Template_Abstract_Extend {
 	protected $aVars;
 	protected $cTemplate;
 	protected $mParams;
 	protected $cDefault;
-	protected $aData;
 	protected $aDebug;
 	protected $bDebug;
 	protected $bFormed;
@@ -99,41 +96,6 @@ abstract class Template_Abstract {
 				$this->$cName	= $mParam;
 			}
 		}
-	}
-
-	/**
-	 * Template_Abstract::__set()
-	 *
-	 * @param string $cName
-	 * @param mixed $mValue
-	 * @return null
-	 */
-	public function __set($cName, $mValue) {
-		$this->aData[$cName] = $mValue;
-	}
-
-	/**
-	 * Template_Abstract::__get()
-	 *
-	 * @param string $cName
-	 * @return mixed
-	 */
-	public function __get($cName) {
-		if (isset($this->aData[$cName])) { return $this->aData[$cName]; }
-
-		return false;
-	}
-
-	/**
-	 * Template_Abstract::__isset()
-	 *
-	 * @param string $cName
-	 * @return bool
-	 */
-	public function __isset($cName) {
-		if (isset($this->aData[$cName])) { return true; }
-
-		return false;
 	}
 
 	/**
