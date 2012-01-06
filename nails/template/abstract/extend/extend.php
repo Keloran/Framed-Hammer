@@ -3,13 +3,14 @@ class Template_Abstract_Extend {
 	use Browser, Mailer, Layout;
 
 	private $aData;
+	protected $aVars;
 
 	/**
 	 * Template_Abstract_Extend::__construct()
 	 *
 	 */
 	public function __construct() {
-
+		$this->setVars("cJS", false);
 	}
 
 	/**
@@ -47,5 +48,24 @@ class Template_Abstract_Extend {
 		$this->aData[$cName] = $mValue;
 	}
 
+	/**
+	 * Template_Abstract_Extend::setVars()
+	 *
+	 * @param string $cName
+	 * @param mixed $mVars
+	 * @return null
+	 */
+	public function setVars($cName, $mVars) {
+		//unset the previous to stop scalar conflict
+		unset($this->aVars[$cName]);
 
+		//now add back to the array
+		if (is_array($mVars)) {
+			foreach ($mVars as $cVar => $mValue) {
+				$this->aVars[$cName][$cVar]	= $mValue;
+			}
+		} else {
+			$this->aVars[$cName] = $mVars;
+		}
+	}
 }

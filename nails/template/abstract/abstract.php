@@ -9,7 +9,7 @@
  * @access public
  */
 abstract class Template_Abstract extends Template_Abstract_Extend {
-	protected $aVars;
+
 	protected $cTemplate;
 	protected $mParams;
 	protected $cDefault;
@@ -59,27 +59,6 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 	 */
 	public function setTemplate($cTemplate = null) {
 		$this->cTemplate	= $cTemplate;
-	}
-
-	/**
-	 * Template_Abstract::setVars()
-	 *
-	 * @param string $cName
-	 * @param mixed $mVars
-	 * @return null
-	 */
-	public function setVars($cName, $mVars) {
-		//unset the previous to stop scalar conflict
-		unset($this->aVars[$cName]);
-
-		//now add back to the array
-		if (is_array($mVars)) {
-			foreach ($mVars as $cVar => $mValue) {
-				$this->aVars[$cName][$cVar]	= $mValue;
-			}
-		} else {
-			$this->aVars[$cName] = $mVars;
-		}
 	}
 
 	/**
