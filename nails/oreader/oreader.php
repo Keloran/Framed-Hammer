@@ -56,7 +56,7 @@ class oReader {
 	 */
 	private function makeConsoleLines($cString) {
 		$cString	= preg_replace("{[\t]+}", "    ", $cString);
-		$cString	= trim(preg_replace('/\s+/g', '', $cString));
+		$cString	= trim(preg_replace('/\s+/i', '', $cString));
 
 		return $cString;
 	}
