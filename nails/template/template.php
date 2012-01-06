@@ -235,6 +235,9 @@ class Template extends Template_Abstract {
 			//set the template
 			$oLayout->setTemplate($cTemplate);
 
+			//see if i can strip the parents
+			$oTemplate->stripHammer();
+
 			return $oLayout;
 		} else {
 			throw new Spanner("Template parent isnt a layout, " . $cTemplate, 300);

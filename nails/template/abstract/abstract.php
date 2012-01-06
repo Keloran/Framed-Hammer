@@ -171,6 +171,23 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 	}
 
 	/**
+	 * Template_Abstract::stripHammer()
+	 *
+	 * @desc This is so I can manually strip hammer
+	 * @return null
+	 */
+	public function stripHammer() {
+		unset($this->aVars["this"]);
+		unset($this->aVars["Hammer"]);
+		unset($this->aVars["oHammer"]);
+
+		//make absolute certain
+		$this->aVars["this"]	= false;
+		$this->aVars["Hammer"]	= false;
+		$this->aVars["oHammer"]	= false;
+	}
+
+	/**
 	 * Template_Abstract::getPage()
 	 *
 	 * @param string $cDefault
