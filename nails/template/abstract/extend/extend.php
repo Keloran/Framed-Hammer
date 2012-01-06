@@ -1,5 +1,5 @@
 <?php
-class Template_Abstract_Extend {
+abstract class Template_Abstract_Extend {
 	use Browser, Mailer, Layout;
 
 	private $aData;
