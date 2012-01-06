@@ -85,5 +85,7 @@ abstract class Template_Abstract_Extend {
 		$this->aVars["this"]	= false;
 		$this->aVars["Hammer"]	= false;
 		$this->aVars["oHammer"]	= false;
+
+		$this->oHammer	= null;
 	}
 }

@@ -186,6 +186,8 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 		$this->aVars["Hammer"]	= false;
 		$this->aVars["oHammer"]	= false;
 
+		$this->oHammer	= null
+
 		//strip hammer from a higher level
 		$this->stripHammerUpper();
 	}
