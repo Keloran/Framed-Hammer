@@ -193,8 +193,6 @@ class oReader {
 		} else {
 			if ($this->bScreen) {
 				if ($this->bConsole) {
-					die("ffs");
-
 					echo $this->cConsole;
 				} else if ($this->bEmail) {
 					echo $this->cEmail;
