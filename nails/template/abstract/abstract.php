@@ -375,7 +375,8 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 				case "getMainPage":
 					if (isset($debug['args']) && isset($debug['args'][0])) {
 						$cFile = $debug['args'][0];
-						$this->addDebug("Back Trace" . $i, $debug);
+						$this->addDebug("Back Trace " . $i, $debug);
+						$this->addDebug("Full Back Trace " . $i, $aDebug);
 						$i++;
 					}
 					break;
