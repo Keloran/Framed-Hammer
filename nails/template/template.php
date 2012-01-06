@@ -86,10 +86,15 @@ class Template extends Template_Abstract {
 	 *
 	 * @return null
 	 */
-	private function giveHammer() {
-		if ($this->oType) {
-			$this->oType->setVars("oHammer", $this->oHammer);
-			$this->oType->setVars("Hammer", $this->oHammer);
+	private function giveHammer($oType) {
+		if ($oType) {
+			$oType->setVars("oHammer", $this->oHammer);
+			$oType->setVars("Hammer", $this->oHammer);
+		} else {
+			if ($this->oType) {
+				$this->oType->setVars("oHammer", $this->oHammer);
+				$this->oType->setVars("Hammer", $this->oHammer);
+			}
 		}
 	}
 
@@ -207,7 +212,7 @@ class Template extends Template_Abstract {
 
 		//set the template
 		if ($cLayout) { $oLayout->setTemplate($cLayout); }
-		$this->giveHammer();
+		$this->giveHammer($oLayout);
 
 		//echo or not
 		return $oLayout->renderTemplate($bEcho);
