@@ -146,12 +146,8 @@ class Template extends Template_Abstract {
 		if ($this->oType instanceof Template_Content) {
 			$oContent	= new Template_Content_Template($this->oType);
 
-			//since set template might have been done before
-			if ($this->oType->aVars) {
-				foreach ($this->oType->aVars as $cKey => $mValue) {
-					$oContent->setVars($cKey, $mValue);
-				}
-			}
+			//fix the vars in case layout was called outside of the set of type
+			$this->fixVars($this->oType->aVars, $oContent);
 
 			//set the type
 			$this->oType	= $oContent;
@@ -227,12 +223,8 @@ class Template extends Template_Abstract {
 		if ($this->oType instanceof Template_Layout) {
 			$oLayout	= new Template_Layout_Template($this->oType);
 
-			//since set template might have been done before
-			if ($this->oType->aVars) {
-				foreach ($this->oType->aVars as $cKey => $mValue) {
-					$oLayout->setVars($cKey, $mValue);
-				}
-			}
+			//fix the vars in case layout was called outside of the set of type
+			$this->fixVars($this->oType->aVars, $oLayout);
 
 			//set the type
 			$this->oType	= $oLayout;

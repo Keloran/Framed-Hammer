@@ -76,4 +76,20 @@ trait Layout {
 
 		return $cReturn;
 	}
+
+	/**
+	 * fixVars()
+	 *
+	 * @param array $aVars
+	 * @param object $oType
+	 * @return null
+	 */
+	public function fixVars($aVars, $oType) {
+		//since set template might have been done before
+		if ($aVars) {
+			foreach ($aVars as $cKey => $mValue) {
+				$oType->setVars($cKey, $mValue);
+			}
+		}
+	}
 }
