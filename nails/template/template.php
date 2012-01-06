@@ -236,6 +236,8 @@ class Template extends Template_Abstract {
 			$oLayout->setTemplate($cTemplate);
 
 			return $oLayout;
+		} else {
+			throw new Spanner("Template parent isnt a layout, " . $cTemplate, 300);
 		}
 
 		return false;
