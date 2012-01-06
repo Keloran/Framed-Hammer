@@ -176,9 +176,6 @@ class oReader {
 				file_put_contents($fFile, $this->cConsole);
 				$this->cOutput	= $fFile;
 			}
-
-			//do it again to make sure
-			$this->cConsole = str_replace("<br />", "\n", $this->cConsole);
 		}
 
 		//now are we returning or echoing
