@@ -37,6 +37,20 @@ class Template_Layout_Template extends Template_Abstract {
 		$this->addDebug("Caller", $cCaller);
 		$bFound		= false;
 
+		$cCallerLayout	= SITEPATH . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl";
+		$this->addDebug("Original Layout Template with Caller", $cCallerLayout);
+
+		$cTemplateLayout	= SITEPATH . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl";
+		$this->addDebug("Original Layout Template", $cTemplateLayout);
+
+		//set teh default layout
+		if (!$cTemplate) {
+			$cLayout = $cCallerLayout;
+		} else {
+			$cLayout = $cTemplateLayout;
+		}
+		$this->addDebug("Default Layout Template", $cLayout);
+
 		//no template given but we know its parent
 		if (!$cTemplate) {
 			if ($this->oLayout->cLayout) { 			$cTemplate = $this->oLayout->cLayout; }
@@ -45,9 +59,6 @@ class Template_Layout_Template extends Template_Abstract {
 
 		//dont need the layout object now so kill it
 		$this->oLayout	= null;
-
-		$cLayout	= SITEPATH . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl";
-		$this->addDebug("Original Layout Template", $cLayout);
 
 		//page
 		if ($this->cPage) {
