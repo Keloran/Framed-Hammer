@@ -61,8 +61,29 @@ abstract class Template_Abstract_Extend {
 		}
 	}
 
+	/**
+	 * Template_Abstract_Extend::addDefaults()
+	 *
+	 * @return null
+	 */
 	public function addDefaults() {
 		//set cJS to blank
 		if (!isset($this->aVars['cJS'])) { $this->setVars("cJS", false); }
+	}
+
+	/**
+	 * Template_Abstract_Extend::stripHammerUpper()
+	 *
+	 * @return null
+	 */
+	public function stripHammerUpper() {
+		unset($this->aVars["this"]);
+		unset($this->aVars["Hammer"]);
+		unset($this->aVars["oHammer"]);
+
+		//make absolute certain
+		$this->aVars["this"]	= false;
+		$this->aVars["Hammer"]	= false;
+		$this->aVars["oHammer"]	= false;
 	}
 }
