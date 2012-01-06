@@ -46,16 +46,18 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 	 * @return null
 	 */
 	public function debugTemplates() {
-		printRead($this->aDebug, "Debug");
+		if ($this->aDebug) {
+			printRead($this->aDebug, "Debug");
 
-		//get rid of hammer for debug
-		unset($this->aVars['oHammer']);
-		unset($this->aVars['hammer']);
-		unset($this->aVars['Hammer']);
+			//get rid of hammer for debug
+			unset($this->aVars['oHammer']);
+			unset($this->aVars['hammer']);
+			unset($this->aVars['Hammer']);
 
-		//now return the object
-		printRead($this, "Template Object");
-		die();
+			//now return the object
+			printRead($this, "Template Object");
+			die();
+		}
 	}
 
 	/**
