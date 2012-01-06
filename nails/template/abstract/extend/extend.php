@@ -1,6 +1,6 @@
 <?php
 class Template_Abstract_Extend {
-	#use Browser, Mailer, Layout;
+	use Browser, Mailer, Layout;
 
 	private $aData;
 
