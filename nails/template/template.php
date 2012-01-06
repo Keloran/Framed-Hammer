@@ -148,6 +148,7 @@ class Template extends Template_Abstract {
 
 			//fix the vars in case layout was called outside of the set of type
 			$this->fixVars($this->oType->aVars, $oContent);
+			$this->fixVars($this->aVars, $oContent);
 
 			//set the type
 			$this->oType	= $oContent;
@@ -225,6 +226,7 @@ class Template extends Template_Abstract {
 
 			//fix the vars in case layout was called outside of the set of type
 			$this->fixVars($this->oType->aVars, $oLayout);
+			$this->fixVars($this->aVars, $oLayout);
 
 			//set the type
 			$this->oType	= $oLayout;
