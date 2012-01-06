@@ -37,10 +37,6 @@ class Template_Layout_Template extends Template_Abstract {
 		$this->addDebug("Caller", $cCaller);
 		$bFound		= false;
 
-		if ($cTemplate == "nonuser") {
-			$this->debugTemplates();
-		}
-
 		//no template given but we know its parent
 		if (!$cTemplate) {
 			if ($this->oLayout->cLayout) { 			$cTemplate = $this->oLayout->cLayout; }
@@ -129,6 +125,10 @@ class Template_Layout_Template extends Template_Abstract {
 
 		$this->cTemplate	= $cLayout;
 		$this->cCaller		= "layout_template";
+
+		if ($cTemplate == "nonuser") {
+			$this->debugTemplates();
+		}
 
 		return $cLayout;
 	}
