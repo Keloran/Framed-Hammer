@@ -62,6 +62,7 @@ abstract class Template_Abstract_Extend {
 	}
 
 	public function addDefaults() {
-		$this->setVars("cJS", false);
+		//set cJS to blank
+		if (!isset($this->aVars['cJS']) { $this->setVars("cJS", false); }
 	}
 }
