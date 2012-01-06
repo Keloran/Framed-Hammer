@@ -205,7 +205,7 @@ class Template extends Template_Abstract {
 		$oLayout	= new Template_Layout($this->aParams);
 
 		//set the type
-		#$this->oType	= $oLayout;
+		$this->oParentType	= $oLayout;
 
 		//set debug
 		if ($this->bDebug) { $oLayout->doDebug(); }
@@ -226,11 +226,11 @@ class Template extends Template_Abstract {
 	 * @return string
 	 */
 	public function setLayout($cTemplate = null, $bEcho = null) {
-		if ($this->oType instanceof Template_Layout) {
+		if ($this->oParentType instanceof Template_Layout) {
 			$oLayout	= new Template_Layout_Template($this->oType);
 
 			//fix the vars in case layout was called outside of the set of type
-			$this->fixVars($this->oType->aVars, $oLayout);
+			$this->fixVars($this->oParentType->aVars, $oLayout);
 			$this->fixVars($this->aVars, $oLayout);
 
 			//set the type
