@@ -137,10 +137,6 @@ class Template_Layout_Template extends Template_Abstract {
 		$this->cTemplate	= $cLayout;
 		$this->cCaller		= "layout_template";
 
-		if ($cTemplate == "nonuser") {
-			$this->debugTemplates();
-		}
-
 		return $cLayout;
 	}
 }
