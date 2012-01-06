@@ -200,7 +200,7 @@ class Template extends Template_Abstract {
 		$oLayout	= new Template_Layout($this->aParams);
 
 		//set the type
-		$this->oType	= $oLayout;
+		#$this->oType	= $oLayout;
 
 		//set debug
 		if ($this->bDebug) { $oLayout->doDebug(); }
