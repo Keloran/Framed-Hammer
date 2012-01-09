@@ -166,7 +166,8 @@ class Validator {
 
 	        //Embeded
 			'<object width="\1" height="\2"><param name="movie" value="\3" /><embed src="\3" width="\1" height="\2"></embed></object>',
-			'<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/\1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>',
+			'<iframe width="560" height="349" src="http://www.youtube.com/embed/\3?theme=light&color=red" frameborder="0" allowfullscreen></iframe>',
+			#'<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/\1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>',
 
 	        '<strong>Quote:</strong><div class="quote">"<em>\1</em>"</div>',
 	        '<strong>Quote:</strong><div class="quote">"<em>\2</em>"<a href="/forums/quoteid/\1">Goto Reply</a></div>',

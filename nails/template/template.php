@@ -211,7 +211,7 @@ class Template extends Template_Abstract {
 		if ($this->bDebug) { $oLayout->doDebug(); }
 
 		//set the template
-		if ($cLayout) { $oLayout->setTemplate($cLayout); }
+		$oLayout->setTemplate($cLayout);
 		$this->giveHammer($oLayout);
 
 		//echo or not
