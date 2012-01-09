@@ -1299,7 +1299,15 @@ class Form {
 
 		//if bbcode make sure the bbcode is added
 		if ($this->bBBCode) {
-			$cReturn .= "<script type=\"text/javascript\" src=\"/js/jquery.bbcode.js\"></script>\n";
+			if (file_exists(SITEPATH . "/js/jquery/bbcode.js")) {
+				$cCode	= "/js/jquery/bbcode.js";
+			} else if (file_exists(SITEPATH . "/js/jquery.bbcode.js")) {
+				$cCode = "/js/jquery.bbcode.js";
+			} else {
+				$cCode = false;
+			}
+
+			$cReturn .= "<script type=\"text/javascript\" src=\"" . $cCode . "\"></script>\n";
 			$cReturn .= "<link href=\"/css/bbcode.css\" type=\"text/css\" rel=\"stylesheet\" />\n";
 
 			//add bbcode to the elements now we have it loaded
