@@ -233,7 +233,8 @@ class Screws {
 		$this->fSiteClass_f	= USERNAILS	. $this->cClass_d	. ".php";
 
 		//Traits
-		$this->fSiteClass_Trait = SITEPATH . "/traits/" . $this->cClass_a . ".php";
+		$this->fSiteClass_Trait_a = SITEPATH . "/traits/" . $this->cClass_a . ".php";
+		$this->fSiteClass_Trait_b = USERNAILS . "/traits/" . $this->cClass_a . ".php";
 
 		//get the paths
 		$this->fSiteClass_a_Path	= USERNAILS . $this->cClass_a;
@@ -308,8 +309,11 @@ class Screws {
 		}
 
 		//Check the traits
-		if (file_exists($this->fSiteClass_Trait)) {
-			$this->cPath = $this->fSiteClass_Trait;
+		if (file_exists($this->fSiteClass_Trait_a)) {
+			$this->cPath = $this->fSiteClass_Trait_a;
+			return true;
+		} else if (file_exists($this->fSiteClass_Trait_b)) {
+			$this->cPath = $this->fSiteClass_Trait_b;
 			return true;
 		} else if (file_exists($this->fHammerClass_Trait)) {
 			$this->cPath = $this->fHammerClass_Trait;
