@@ -153,6 +153,7 @@ class Head {
     public function getTitle() {
     	$mKey 	= $this->oNails->getConfigKey();
     	$bLower	= false;
+    	$cCase	= false;
 
 	   	//seperator, most people will be happy with ..::..
 		$cSep	= $this->oNails->getConfig("seperator", $mKey);
@@ -200,7 +201,13 @@ class Head {
 
 		//lower or not the title
 		if (!$this->bTitleMixed) {
-			$cTitle		= $this->bTitleLower	? strtolower($this->cPageTitle) : ucwords($this->cPageTitle);
+			if ($cCase == "lowercase") {
+				$cTitle	= strtolower($this->cPageTitle);
+			} else if ($cCase == "none") {
+				$cTitle = $this->cPageTitle;
+			} else {
+				$cTitle		= $this->bTitleLower	? strtolower($this->cPageTitle) : ucwords($this->cPageTitle);
+			}
 		} else {
 			$cTitle	= $this->cPageTitle;
 		}
