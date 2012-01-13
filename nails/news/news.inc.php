@@ -10,7 +10,7 @@
  */
 class News implements Nails_Interface {
 	//Traits
-	use Text;
+	use Text, Address;
 
 	private $oUser;
 	private $oSession;
@@ -137,7 +137,7 @@ class News implements Nails_Interface {
 			$aReturn[$i]['dated']		= $aReturn[$i]['datePosted'];
 			$aReturn[$i]['title']		= $aReturn[$i]['cTitle'];
 
-			$aReturn[$i]['seotitle']	= makeSEO($aReturn[$i]['title']);
+			$aReturn[$i]['seotitle']	= $this->makeSEO($aReturn[$i]['title']);
 			$aReturn[$i]['timetag']		= $this->oDB->f('timeTag');
 
 			$i++;
@@ -220,7 +220,7 @@ class News implements Nails_Interface {
             $aReturn[$i]['dated']		= $aReturn[$i]['datePosted'];
             $aReturn[$i]['title']		= $aReturn[$i]['cTitle'];
 
-        	$aReturn[$i]['seotitle']	= makeSEO($this->oDB->f('cTitle'));
+        	$aReturn[$i]['seotitle']	= $this->makeSEO($this->oDB->f('cTitle'));
         	$aReturn[$i]['timetag']		= $this->oDB->f('timeTag');
 
 			$i++;
@@ -330,7 +330,7 @@ class News implements Nails_Interface {
 			$aReturn['comments']	= $aReturn['numComments'];
 			$aReturn['dated']		= $aReturn['datePosted'];
 
-        	$aReturn['seotitle']	= makeSEO($aReturn['title']);
+        	$aReturn['seotitle']	= $this->makeSEO($aReturn['title']);
         	$aReturn['timetag']		= $this->oDB->f('timeTag');
         }
 
@@ -424,7 +424,7 @@ class News implements Nails_Interface {
             $aReturn[$i]['posterid']	= $this->oDB->f('iUserID');
             $aReturn[$i]['comments']	= $this->oDB->f('numComments');
 
-			$aReturn[$i]['seotitle']	= makeSEO($aReturn[$i]['title']);
+			$aReturn[$i]['seotitle']	= $this->makeSEO($aReturn[$i]['title']);
         	$aReturn[$i]['timetag']		= $this->oDB->f('timeTag');
 
             //brings inline with other nails
@@ -489,7 +489,7 @@ class News implements Nails_Interface {
 			$aResult[$i]['items']['dated']		= $this->oDB->f('datePosted');
 			$aResult[$i]['items']['comments']	= $this->oDB->f('numComments');
 
-			$aResult[$i]['items']['seotitle']	= makeSEO($aResult[$i]['items']['title']);
+			$aResult[$i]['items']['seotitle']	= $this->makeSEO($aResult[$i]['items']['title']);
 			$aResult[$i]['items']['timetag']	= $this->oDB->f('timeTag');
 
 			$i++;
