@@ -233,7 +233,7 @@ class Screws {
 		$this->fSiteClass_f	= USERNAILS	. $this->cClass_d	. ".php";
 
 		//Traits
-		$this->fSiteClass_Trait = USERNAILS . "/traits/" . $this->cClass_a . ".php";
+		$this->fSiteClass_Trait = SITEPATH . "/traits/" . $this->cClass_a . ".php";
 
 		//get the paths
 		$this->fSiteClass_a_Path	= USERNAILS . $this->cClass_a;
