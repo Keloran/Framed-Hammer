@@ -235,7 +235,7 @@ class Screws {
 		//Traits
 		$this->fSiteClass_Trait = SITEPATH . "/traits/" . $this->cClass_a . ".php";
 		if (strstr($this->cClass, "makeShort")) {
-			printRead($this);die();
+			print_r($this);die();
 		}
 
 		//get the paths
