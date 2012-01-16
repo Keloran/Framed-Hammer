@@ -186,6 +186,10 @@ function errorHandler($errno, $errstr, $errfile, $errline) {
 			break;
 	}
 
+	//skip unfixables
+	if (strstr($cError, "Unknown on line 0")) { return false; }
+
+	//create the exception object
 	$oError	= new Spanner($cError, $errno);
 
 	//print a nice error

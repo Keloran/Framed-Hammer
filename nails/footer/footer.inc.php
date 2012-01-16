@@ -158,7 +158,7 @@ class Footer implements Nails_Interface {
 		if (is_array($mCode)) {
 			$cCode = $mCode['analytics'];
 		} else {
-			$ccode = $mCode;
+			$cCode = $mCode;
 		}
 		if (is_array($mDomain)) {
 			$cDomain = $mDomain['analytics-domain'];
