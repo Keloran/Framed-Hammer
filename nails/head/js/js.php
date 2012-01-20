@@ -186,7 +186,7 @@ class Head_JS {
 				$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $cJS . ".js\"></script>\n";
 				return false;
 			} else if (file_exists($cCheck . $this->cJSFrameworkName . "/" . $cJSOriginal . ".js")) {
-				$this->cJS .= "<script type=\"" . $cFolder . $this->cJSFrameworkName . "/" . $cJSOriginal . ".js\"></script>\n";
+				$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $this->cJSFrameworkName . "/" . $cJSOriginal . ".js\"></script>\n";
 				return false;
 			}
 		}
