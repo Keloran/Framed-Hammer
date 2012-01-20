@@ -389,7 +389,7 @@ class Hammer {
 		}
 
 		//is there a return, and does it have a single value
-		if ($mReturn) {
+		if ($mReturn && $bSingle) {
 			if (count($mReturn) == 1) {
 				$mReturn1 = $mReturn;
 				foreach ($mReturn1 as $cKey => $mValue) {
