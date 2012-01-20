@@ -32,12 +32,21 @@ class Template_Layout extends Template_Abstract {
 		$this->cLayout			= $cCaller;
 		$this->cLayoutTemplate	= $cTemplate;
 
+		//new style
 		if ($cTemplate) {
 			$cLayout	= SITEPATH . "/layout/" . $cTemplate . "/" . $cTemplate . ".php";
 		} else {
 			$cLayout	= SITEPATH . "/layout/" . $cCaller . "/" . $cCaller . ".php";
 		}
 		$this->addDebug("Original Layout", $cLayout);
+
+		//old style
+		if ($cTemplate) {
+			$cLayoutO	= SITEPATH . "/layout/" . $cTemplate . ".php";
+		} else {
+			$cLayoutO	= SITEPATH . "/layout/" . $cCaller . ".php";
+		}
+		$this->addDebug("Old Style Original Layout", $cLayoutO);
 
 		//page
 		if ($this->cPage) {
@@ -76,7 +85,13 @@ class Template_Layout extends Template_Abstract {
 		}
 
 		//last check
-		if (!file_exists($cLayout)) { $this->cError = "Layout doesn't seem to exist at all for " . $cCaller . " looking for " . $cTemplate; }
+		if (!file_exists($cLayout)) {
+			if (!file_exists($cLayoutO)) {
+				$this->cError = "Layout doesn't seem to exist at all for " . $cCaller . " looking for " . $cTemplate;
+			} else {
+				$cLayout = $cLayoutO;
+			}
+		}
 
 		//is debug turned on
 		if ($this->cError && $this->bDebug) { $this->debugTemplates(); }
