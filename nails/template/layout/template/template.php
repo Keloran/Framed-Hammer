@@ -37,17 +37,29 @@ class Template_Layout_Template extends Template_Abstract {
 		$this->addDebug("Caller", $cCaller);
 		$bFound		= false;
 
+		//new style caller
 		$cCallerLayout	= SITEPATH . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl";
 		$this->addDebug("Original Layout Template with Caller", $cCallerLayout);
 
+		//new style dictated template
 		$cTemplateLayout	= SITEPATH . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl";
 		$this->addDebug("Original Layout Template", $cTemplateLayout);
 
+		//old style caller
+		$cOldStyleCaller	= SITEPATH . "/layout/templates/" . $cCaller . ".tpl";
+		$this->addDebug("Old Style Original Layout Template with Caller", $cOldStyleCaller);
+
+		//old style with dictated template
+		$cOldStyleLayout	= SITEPATH . "/layout/templates/" . $cTemplate . ".tpl";
+		$this->addDebug("Old Style Original Layout Template", $cOldStyleLayout);
+
 		//set teh default layout
 		if (!$cTemplate) {
-			$cLayout = $cCallerLayout;
+			$cLayout 	= $cCallerLayout;
+			$cLayoutO	= $cOldStyleLayout;
 		} else {
-			$cLayout = $cTemplateLayout;
+			$cLayout 	= $cTemplateLayout;
+			$cLayoutO	= $cOldStyleCaller;
 		}
 		$this->addDebug("Default Layout Template", $cLayout);
 
@@ -129,7 +141,13 @@ class Template_Layout_Template extends Template_Abstract {
 		}
 
 		//last check just incase
-		if (!file_exists($cLayout)) { $this->cError = "No Template for " . $cCaller . " found, template requested was " . $cTemplate; }
+		if (!file_exists($cLayout)) {
+			if (!file_exists($cLayoutO)) {
+				$this->cError = "No Template for " . $cCaller . " found, template requested was " . $cTemplate;
+			} else {
+				$cLayout = $cLayoutO;
+			}
+		}
 
 		//is tehre an error and is debug turned on
 		if ($this->cError && $this->bDebug) { $this->debugTemplates(); }
