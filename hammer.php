@@ -350,8 +350,8 @@ class Hammer {
      * @param string $cAttribute This is used to get an attribute of the element, e.g. <title case="lower">Stuff</title>
      * @return mixed
      */
-	public function getConfig($cElement = false, $cKey = false, $cAttribute = false) {
-		$mReturn = false;
+	public function getConfig($cElement = false, $cKey = false, $cAttribute = false, $bSingle = true) {
+		$mReturn 	= false;
 
 		//are we using the old method
 		if (function_exists("Config")) {
@@ -369,7 +369,7 @@ class Hammer {
 			//now do we need to change the name of some things
 		    switch ($cElement) {
 	    		case "javascript":
-	    			$cElement = "js";
+	    			$cElement	= "js";
 	    			break;
 		    }
 
@@ -386,6 +386,16 @@ class Hammer {
 			}
 		} else {
 			$mReturn	= self::getConfigStat($cElement, $cKey, $cAttribute);
+		}
+
+		//is there a return, and does it have a single value
+		if ($mReturn) {
+			if (count($mReturn) == 1) {
+				$mReturn1 = $mReturn;
+				foreach ($mReturn1 as $cKey => $mValue) {
+					$mReturn = $mReturn1[$cKey];
+				}
+			}
 		}
 
 	    return $mReturn;
@@ -524,7 +534,7 @@ class Hammer {
 	public function addTemplate($cTemplate = null) {
 		$cSkinSetting	= false;
 		$cSkin			= $cSkinSetting ?: "brand";
-		$bDebug			= $this->getConfig("template", "debug");
+		$bDebug			= $this->getConfig("template", "debug", false, true);
 
 		//skin settings
 		$this->cSkinSetting	= $cSkin;
