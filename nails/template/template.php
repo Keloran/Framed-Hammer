@@ -31,7 +31,10 @@ class Template extends Template_Abstract {
 		if ($cSite) { $this->cSiteCalled	= $cSite; }
 
 		//debug
-		if ($bDebug) { $this->doDebug(); }
+		if ($bDebug) {
+			$this->doDebug();
+			$this->setDebug();
+		}
 
 		//params
 		$this->aParams	= $aParams;
