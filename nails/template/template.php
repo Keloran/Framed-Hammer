@@ -238,6 +238,9 @@ class Template extends Template_Abstract {
 		if ($this->oParentType instanceof Template_Layout) {
 			$oLayout	= new Template_Layout_Template($this->oType);
 
+			//turn on debug
+			if ($this->bDebug) { $oLayout->doDebug(); }
+
 			//fix the vars in case layout was called outside of the set of type
 			$this->fixVars($this->oParentType->aVars, $oLayout);
 			$this->fixVars($this->aVars, $oLayout);
