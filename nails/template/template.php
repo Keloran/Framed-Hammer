@@ -23,12 +23,15 @@ class Template extends Template_Abstract {
 	 * @param string $cSite
 	 * @param string $cSkinSetting
 	 */
-	public function __construct($aParams, $cSite = false, $cSkinSetting = false) {
+	public function __construct($aParams, $cSite = false, $cSkinSetting = false, $bDebug = false) {
 		//skin
 		$this->cSkinSetting	= $cSkinSetting ?: "brand";
 
 		//site
 		if ($cSite) { $this->cSiteCalled	= $cSite; }
+
+		//debug
+		if ($bDebug) { $this->doDebug(); }
 
 		//params
 		$this->aParams	= $aParams;

@@ -524,12 +524,14 @@ class Hammer {
 	public function addTemplate($cTemplate = null) {
 		$cSkinSetting	= false;
 		$cSkin			= $cSkinSetting ?: "brand";
+		$bDebug			= $this->getConfig("template", "debug");
 
+		//skin settings
 		$this->cSkinSetting	= $cSkin;
 		$this->cSiteCalled	= $this->cSited;
 
 		//get the template object
-		$oReturn			= Template::getInstance($this->aData, $this->cSited, $cSkinSetting);
+		$oReturn			= Template::getInstance($this->aData, $this->cSited, $cSkinSetting, $bDebug);
 		if ($cTemplate) { $oReturn->getContent($cTemplate); }
 
 		return $oReturn;
