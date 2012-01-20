@@ -350,7 +350,7 @@ class Hammer {
      * @param string $cAttribute This is used to get an attribute of the element, e.g. <title case="lower">Stuff</title>
      * @return mixed
      */
-	public function getConfig($cElement = false, $cKey = false, $cAttribute = false, $bSingle = true) {
+	public function getConfig($cElement = false, $cKey = false, $cAttribute = false, $bSingle = false) {
 		$mReturn 	= false;
 
 		//are we using the old method
