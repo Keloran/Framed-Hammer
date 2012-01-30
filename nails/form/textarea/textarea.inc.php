@@ -52,12 +52,13 @@ class Form_TextArea extends Form_Abstract {
 		$cName	= $this->cName;
 
 		//bbcode options
-		if ($this->aElement[$cName]['bbCode_Options']) { $this->cBBCodeOptions = json_encode($this->aElement[$cName]['bbCode_Options']); }
+		if (isset($this->aElement[$cName]['bbCode_Options'])) {
+			if ($this->aElement[$cName]['bbCode_Options']) { $this->cBBCodeOptions = json_encode($this->aElement[$cName]['bbCode_Options']); }
+		}
 
 		//surrowned
 		if (!isset($this->aElement[$cName]['bbCode'])) {
 			$cReturn 		= $this->startSurrowned($cName);
-			$this->bBBCode	= true;
 		} else {
 			$cReturn = false;
 		}
@@ -66,6 +67,7 @@ class Form_TextArea extends Form_Abstract {
 		$cReturn .= $this->createLabel($cName);
 
 		if (isset($this->aElement[$cName]['bbCode'])) {
+			$this->bBBCode	= true;
 			$cReturn .= "<div id=\"bbContainer_" . $this->aElement[$cName]['id'] . "\">\n<div id=\"" . $this->aElement[$cName]['id'] . "bbCode\" class=\"bbCode\"></div>\n";
 			$cReturn .= $this->startSurrowned($cName);
 		}
