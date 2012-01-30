@@ -11,7 +11,8 @@
 class Form_TextArea extends Form_Abstract {
 	public $cFormElementType 	= "textarea";
 	public $cFormElementName	= false;
-	public $cbbOptions			= "{singleLine: true}";
+	public $cBBCodeOptions		= "{singleLine: true}";
+	public $bBBCode				= false;
 
 	/**
 	 * Form_TextArea::__construct()
@@ -50,9 +51,13 @@ class Form_TextArea extends Form_Abstract {
 	public function createElement() {
 		$cName	= $this->cName;
 
+		//bbcode options
+		if ($this->aElement[$cName]['bbCode_Options']) { $this->cBBCodeOptions = json_encode($this->aElement[$cName]['bbCode_Options']); }
+
 		//surrowned
 		if (!isset($this->aElement[$cName]['bbCode'])) {
-			$cReturn = $this->startSurrowned($cName);
+			$cReturn 		= $this->startSurrowned($cName);
+			$this->bBBCode	= true;
 		} else {
 			$cReturn = false;
 		}
@@ -105,6 +110,11 @@ class Form_TextArea extends Form_Abstract {
 		return $cReturn;
 	}
 
+	/**
+	 * Form_TextArea::validate()
+	 *
+	 * @return
+	 */
 	public function validate() {
 
 	}

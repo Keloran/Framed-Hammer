@@ -1277,7 +1277,8 @@ class Form {
 					}
 				} else if ($oFormed->cFormElementType == "textarea") {
 					$aBBCodes[$bi]['name']		= $oFormed->cFormElementName;
-					$aBBCodes[$bi]['options']	= $oFormed->cbbOptions;
+					$aBBCodes[$bi]['options']	= $oFormed->cBBCodeOptions;
+					$aBBCodes[$bi]['bBBCode']	= $oFormed->bBBCode;
 					$bi++;
 				}
 
@@ -1313,7 +1314,9 @@ class Form {
 			//add bbcode to the elements now we have it loaded
 			$cReturn .= "<script type=\"text/javascript\">\n";
 			for ($i = 0; $i < count($aBBCodes); $i++) {
-				$cReturn .= "$(\"#" . $aBBCodes[$i]['name'] . "\").bbCode(" . $aBBCodes[$i]['options'] . ");\n";
+				if ($aBBCodes[$i]['bBBCode']) {
+					$cReturn .= "$(\"#" . $aBBCodes[$i]['name'] . "\").bbCode(" . $aBBCodes[$i]['options'] . ");\n";
+				}
 			}
 			$cReturn .= "</script>\n";
 		}

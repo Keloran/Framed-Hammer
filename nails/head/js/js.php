@@ -22,7 +22,7 @@ class Head_JS {
 	public $cJSFrameworkVersion			= "1.7.1";
 	public $cJSFrameworkSubVersion		= "1.7";
 	public $cJSFrameworkName			= "jquery";
-	public $cJSFrameworkUIVersion		= "1.8.16";
+	public $cJSFrameworkUIVersion		= "1.8.17";
 	public $cJSFrameworkMobileName		= "mobile";
 	public $cJSFrameworkMobileVersion 	= "1.0";
 
