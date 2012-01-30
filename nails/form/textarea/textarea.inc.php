@@ -53,7 +53,9 @@ class Form_TextArea extends Form_Abstract {
 
 		//bbcode options
 		if (isset($this->aElement[$cName]['bbCode_Options'])) {
-			if ($this->aElement[$cName]['bbCode_Options']) { $this->cBBCodeOptions = json_encode($this->aElement[$cName]['bbCode_Options']); }
+			if ($this->aElement[$cName]['bbCode_Options']) {
+				$this->cBBCodeOptions = json_encode($this->aElement[$cName]['bbCode_Options']);
+			}
 		}
 
 		//surrowned
