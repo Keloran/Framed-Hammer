@@ -9,6 +9,8 @@
  * @access public
  */
 class Forum_Content implements Nails_Interface {
+	use Address;
+
 	private $oNails;
 	private $oForums;
 	private $oContent;
@@ -39,14 +41,14 @@ class Forum_Content implements Nails_Interface {
 		$iReturn	= false;
 		if (!$this->oNails->cChoice) { return $iReturn; } //return null since we have no topic
 
-		$cTopic		= "%" . unSEO($this->oNails->cChoice) . "%";
+		$cTopic		= "%" . $this->unSEO($this->oNails->cChoice) . "%";
 		$this->oDB->read("SELECT iTopicID FROM forums_topics WHERE cTitle LIKE (?) LIMIT 1", $cTopic);
 		if ($this->oDB->nextRecord()) {
 			$iReturn	= $this->oDB->f('iTopicID');
 		}
 
 		$this->iTopicID		= $iReturn;
-		$this->cTopicTitle	= unSEO($this->oNails->cChoice);
+		$this->cTopicTitle	= $this->unSEO($this->oNails->cChoice);
 
 		return $this->iTopicID;
 	}

@@ -1277,7 +1277,8 @@ class Form {
 					}
 				} else if ($oFormed->cFormElementType == "textarea") {
 					$aBBCodes[$bi]['name']		= $oFormed->cFormElementName;
-					$aBBCodes[$bi]['options']	= $oFormed->cbbOptions;
+					$aBBCodes[$bi]['options']	= $oFormed->cBBCodeOptions;
+					$aBBCodes[$bi]['bBBCode']	= $oFormed->bBBCode;
 					$bi++;
 				}
 
@@ -1299,13 +1300,23 @@ class Form {
 
 		//if bbcode make sure the bbcode is added
 		if ($this->bBBCode) {
-			$cReturn .= "<script type=\"text/javascript\" src=\"/js/jquery.bbcode.js\"></script>\n";
+			if (file_exists(SITEPATH . "/js/jquery/bbcode.js")) {
+				$cCode	= "/js/jquery/bbcode.js";
+			} else if (file_exists(SITEPATH . "/js/jquery.bbcode.js")) {
+				$cCode = "/js/jquery.bbcode.js";
+			} else {
+				$cCode = false;
+			}
+
+			$cReturn .= "<script type=\"text/javascript\" src=\"" . $cCode . "\"></script>\n";
 			$cReturn .= "<link href=\"/css/bbcode.css\" type=\"text/css\" rel=\"stylesheet\" />\n";
 
 			//add bbcode to the elements now we have it loaded
 			$cReturn .= "<script type=\"text/javascript\">\n";
 			for ($i = 0; $i < count($aBBCodes); $i++) {
-				$cReturn .= "$(\"#" . $aBBCodes[$i]['name'] . "\").bbCode(" . $aBBCodes[$i]['options'] . ");\n";
+				if ($aBBCodes[$i]['bBBCode']) {
+					$cReturn .= "$(\"#" . $aBBCodes[$i]['name'] . "\").bbCode(" . $aBBCodes[$i]['options'] . ");\n";
+				}
 			}
 			$cReturn .= "</script>\n";
 		}

@@ -1,4 +1,21 @@
 <?php
+#http://www.csgnetwork.com/phonenumcvtrev.html
+define("ADMIN_ERROR", 23646);
+define("CACHE_ERROR", 22243);
+define("CHARTS_ERROR", 242787);
+define("CURL_ERROR", 2875);
+define("DATABASE_ERROR", 32822273);
+define("EMAIL_ERROR", 36245);
+define("ENCRYPTION_ERROR", 3627978466);
+define("FOOTER_ERROR", 366837);
+define("FORM_ERROR", 3676);
+define("FORUM_ERROR", 36786);
+define("GALLERY_ERROR", 4255379);
+define("GOOGLE_ERROR", 466453);
+define("HEAD_ERROR", 4323);
+define("IMAGE_ERROR", 46243);
+
+
 /**
  * printRead()
  *
@@ -169,6 +186,10 @@ function errorHandler($errno, $errstr, $errfile, $errline) {
 			break;
 	}
 
+	//skip unfixables
+	if (strstr($cError, "Unknown on line 0")) { return false; }
+
+	//create the exception object
 	$oError	= new Spanner($cError, $errno);
 
 	//print a nice error

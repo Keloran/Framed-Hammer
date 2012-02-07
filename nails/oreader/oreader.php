@@ -55,8 +55,6 @@ class oReader {
 	 * @return string
 	 */
 	private function makeConsoleLines($cString) {
-		$cString	= preg_replace("{[\t]+}", "    ", $cString);
-
 		return $cString;
 	}
 
@@ -166,8 +164,8 @@ class oReader {
 			//do we want to use FirePHP / ChromePHP
 			if ($this->bFirePHP) {
 				//now check the size
-				if (strlen($this->cConsole) >= 1200) { //1200 for now
-					$this->cConsole = "Output will cause 502 on php-fpm";
+				if (strlen($this->cConsole) >= 3000) { //3000 for now
+					$this->cConsole = "Output will cause 502 on php-fpm, length was " . strlen($this->cConsole);
 				}
 
 				$this->FirePHP($this->cConsole, $this->cLevel);

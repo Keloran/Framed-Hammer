@@ -48,4 +48,75 @@ trait Address {
 
 		return $cReturn;
 	}
+
+	/**
+	 * makeSEO()
+	 *
+	 * @param string $cString
+	 * @return string
+	 */
+	function makeSEO($cString) {
+		$aPattern = array(
+			//And
+			"&amp;",
+
+			//Spaces
+			" ",
+			"\s",
+			"%20"
+		);
+
+		$aReplace = array(
+			//And
+			"and",
+
+			//Spaces
+			"_",
+			"_",
+			"_"
+		);
+
+		return strtolower(str_replace($aPattern, $aReplace, $cString));
+	}
+
+	/**
+	 * unSEO()
+	 *
+	 * @param string $cString
+	 * @return string
+	 */
+	function unSEO($cString) {
+		$aPattern = array(
+			//And
+			"and",
+
+			//Spaces
+			"_",
+			"%20",
+		);
+
+		$aReplace = array(
+			//And
+			"&amp;",
+
+			//Spaces
+			" ",
+			" ",
+		);
+
+		return strtolower(str_replace($aPattern, $aReplace, $cString));
+	}
+
+	/**
+	 * removeQueryVar()
+	 *
+	 * @param string $cUrl
+	 * @param string $cKey
+	 * @return string
+	 */
+	function removeQueryVar($cUrl, $cKey) {
+		$cUrl = preg_replace('/(.*)(?|&)' . $cKey . '=[^&]+?(&)(.*)/i', '$1$2$4', $cUrl . '&');
+		$cUrl = substr($cUrl, 0, -1);
+		return $cUrl;
+	}
 }

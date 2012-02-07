@@ -9,6 +9,8 @@
  * @access public
  */
 class Screwdriver {
+	use Address;
+
 	//get|set
 	private $aData;
 
@@ -243,36 +245,6 @@ class Screwdriver {
 
 		$this->iParam++;
 		$jParams++;
-	}
-
-	/**
-	 * Screwdriver::makeSEO()
-	 *
-	 * @param string $cString
-	 * @return string
-	 */
-	private function makeSEO($cString) {
-		$aPattern = array(
-			//And
-			"&amp;",
-
-			//Spaces
-			" ",
-			"\s",
-			"%20"
-		);
-
-		$aReplace = array(
-			//And
-			"and",
-
-			//Spaces
-			"_",
-			"_",
-			"_"
-		);
-
-		return strtolower(str_replace($aPattern, $aReplace, $cString));
 	}
 
 	/**

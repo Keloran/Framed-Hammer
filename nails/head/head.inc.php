@@ -10,7 +10,7 @@
  */
 class Head {
 	//Traits
-	use Browser, Warnings;
+	use Browser, Warnings, Address;
 
 	public $cDocType	= "xhtml";
 
@@ -151,19 +151,26 @@ class Head {
      * @return
      */
     public function getTitle() {
+    	$mKey 	= $this->oNails->getConfigKey();
+    	$bLower	= false;
+    	$cCase	= false;
+
 	   	//seperator, most people will be happy with ..::..
-		$cSep	= $this->oNails->getConfig("seperator", $this->oNails->getConfigKey());
-		$aTitle	= $this->oNails->getConfig("title", $this->oNails->getConfigKey());
-		$aBrand = $this->oNails->getConfig("brand", $this->oNails->getConfigKey());
+		$cSep	= $this->oNails->getConfig("seperator", $mKey);
+		$aTitle	= $this->oNails->getConfig("title", $mKey);
+		$aBrand = $this->oNails->getConfig("brand", $mKey);
+    	$aCase	= $this->oNails->getConfig("case", $mKey);
 
-		if (is_array($aBrand)) {
-			$cTitle = $aBrand[0];
-			$bLower = $aBrand[1]['case'];
-		} else {
-			$cTitle = $aBrand['title'];
-			$bLower	= true;
-		}
+    	//set them depending on which is alive
+    	if (isset($aBrand['brand'])) { $aBrand = $aBrand['brand']; }
+    	if (isset($aTitle['title'])) { $cTitle = $aTitle['title']; }
+    	if (isset($cSep['seperator'])) { $cSep = $cSep['seperator']; }
+    	if (isset($aCase['case'])) {
+    		$bLower = $aCase['case'];
+    		$cCase	= $aCase['case'];
+    	}
 
+    	//page title
 		if (!$this->cPageTitle) { $this->cPageTitle = $aTitle['title']; }
 
     	//theres some attributes
@@ -186,36 +193,60 @@ class Head {
 				$cBrand = $aBrand;
 			}
 		} else {
-			$cBrand	= $cTitle ? $cTitle : $aBrand;
+			$cBrand	= $cTitle ?: $aBrand;
 		}
 
 		if (is_array($cSep)) { $cSep = false; }
-	    	$cBrand		= $cBrand ? $cBrand : "Hammer";
+	    $cBrand		= $cBrand ?: "Hammer";
 
 		//lower or not the title
 		if (!$this->bTitleMixed) {
-			$cTitle		= $this->bTitleLower	? strtolower($this->cPageTitle) : ucwords($this->cPageTitle);
+			if ($cCase == "lowercase") {
+				$cTitle	= strtolower($this->cPageTitle);
+			} else if ($cCase == "none") {
+				$cTitle = $this->cPageTitle;
+			} else {
+				$cTitle		= $this->bTitleLower	? strtolower($this->cPageTitle) : ucwords($this->cPageTitle);
+			}
 		} else {
 			$cTitle	= $this->cPageTitle;
 		}
 
-    	$cSeperator	= $cSep					? $cSep	 						: " ..::.. ";
+    	$cSeperator	= $cSep ?: " ..::.. ";
 
 		//page title is for SEO purposes
     	if ($this->cPageTitle) {
     		$cTitle = "<title>" . $cTitle . $cSeperator . $cBrand . "</title>\n";
     	} else {
 	    	if ($this->cPage) {
-	    		$cPageTitle 	= ucwords(unSEO($this->cPage));
+	    		if ($cCase == "lowercase") {
+	    			$cPageTitle = strtolower($this->unSEO($this->cPage));
+	    		} else if ($cCase == "none") {
+	    			$cPageTitle	= $this->unSEO($this->cPage);
+	    		} else {
+	    			$cPageTitle 	= ucwords($this->unSEO($this->cPage));
+	    		}
 
 	    		//Action
     			if ($this->cAction) {
-    				$cActionTitle	= ucwords(unSEO($this->cAction));
+    				if ($cCase == "lowercase") {
+    					$cActionTitle = strtolower($this->unSEO($this->cAction));
+    				} else if ($cCase = "none") {
+    					$cActionTitle = $this->unSEO($this->cAction);
+    				} else {
+    					$cActionTitle	= ucwords($this->unSEO($this->cAction));
+    				}
     				$cTitle			= "<title>" . $cActionTitle . $cSeperator . $cPageTitle . $cSeperator . $cBrand . "</title>\n";
 
     				//Choice
     				if ($this->cChoice) {
-    					$cChoiceTitle = ucwords(unSEO($this->cChoice));
+    					if ($cCase == "lowercase") {
+    						$cChoiceTitle = strtolower($this->unSEO($this->cChoice));
+    					} else if ($cCase == "none") {
+    						$cChoiceTitle = $this->unSEO($this->cChoice);
+    					} else {
+    						$cChoiceTitle = ucwords($this->unSEO($this->cChoice));
+    					}
     					$cTitle		= "<title>" . $cChoiceTitle . $cSeperator . $cActionTitle . $cSeperator . $cPageTitle . $cSeperator . $cBrand . "</title>\n";
     				}
 				} else {

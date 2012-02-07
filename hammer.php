@@ -111,9 +111,7 @@ class Hammer {
 	*/
 	public function __construct($cSite = false, $aFilter = null) {
 		//Since there is an error throw it, this is very unlikelly to ever be called
-		if ($this->cError) {
-			throw new Spanner($this->cError, 50);
-		}
+		if ($this->cError) { throw new Spanner($this->cError, 50); }
 
 		//Set the site stuff
 		//Will be used in cache eventually
@@ -181,6 +179,19 @@ class Hammer {
 		$oHammer->setAddress($aFilter, $cSiteAddy);
 
 		return $oHammer;
+	}
+
+	/**
+	 * Hammer::getHammerObject()
+	 *
+	 * @param string $cSite
+	 * @param array $aFilter
+	 * @return object
+	 */
+	public static function getHammerObject($cSite = null, $aFilter = null) {
+		if (is_null(self::$oHammer)) { self::$oHammer = new Hammer($cSite, $aFilter); }
+
+		return self::$oHammer;
 	}
 
 	/**
@@ -264,16 +275,14 @@ class Hammer {
 	 */
 	public function setAddress($aFilters = null, $cSite = false) {
 		$cSiteAddress	= isset($this->cSiteAddy) ? $this->cSiteAddy : $cSite; //This sets the address, used for language/brand
-		$aFilter	= $this->aFilters ? $this->aFilters : $aFilters; //do the filters already exist
+		$aFilter		= $this->aFilters ?: $aFilters; //do the filters already exist
 
 		$oScrewDriver	= new ScrewDriver($aFilter, $cSiteAddress);
-		$aAddress	= $oScrewDriver->finalAddress();
+		$aAddress		= $oScrewDriver->finalAddress();
 
 		//Set the variables
 		if ($aAddress) {
-			foreach ($aAddress as $cName => $cValue) {
-				$this->$cName	= $cValue;
-			}
+			foreach ($aAddress as $cName => $cValue) { $this->$cName = $cValue; }
 		}
 	}
 
@@ -341,8 +350,8 @@ class Hammer {
      * @param string $cAttribute This is used to get an attribute of the element, e.g. <title case="lower">Stuff</title>
      * @return mixed
      */
-	public function getConfig($cElement = false, $cKey = false, $cAttribute = false) {
-		$mReturn = false;
+	public function getConfig($cElement = false, $cKey = false, $cAttribute = false, $bSingle = false) {
+		$mReturn 	= false;
 
 		//are we using the old method
 		if (function_exists("Config")) {
@@ -360,7 +369,7 @@ class Hammer {
 			//now do we need to change the name of some things
 		    switch ($cElement) {
 	    		case "javascript":
-	    			$cElement = "js";
+	    			$cElement	= "js";
 	    			break;
 		    }
 
@@ -377,6 +386,16 @@ class Hammer {
 			}
 		} else {
 			$mReturn	= self::getConfigStat($cElement, $cKey, $cAttribute);
+		}
+
+		//is there a return, and does it have a single value
+		if ($mReturn && $bSingle) {
+			if (count($mReturn) == 1) {
+				$mReturn1 = $mReturn;
+				foreach ($mReturn1 as $cKey => $mValue) {
+					$mReturn = $mReturn1[$cKey];
+				}
+			}
 		}
 
 	    return $mReturn;
@@ -514,16 +533,16 @@ class Hammer {
 	*/
 	public function addTemplate($cTemplate = null) {
 		$cSkinSetting	= false;
-		$cSkin			= $cSkinSetting ? $cSkinSetting : "brand";
+		$cSkin			= $cSkinSetting ?: "brand";
+		$bDebug			= $this->getConfig("template", "debug", false, true);
 
+		//skin settings
 		$this->cSkinSetting	= $cSkin;
 		$this->cSiteCalled	= $this->cSited;
 
 		//get the template object
-		$oReturn	= Template::getInstance($this->aData, $this->cSited, $cSkinSetting);
-
-		//set the template always, and then if just echo called, no errors
-		$oReturn->setTemplate($cTemplate);
+		$oReturn			= Template::getInstance($this->aData, $this->cSited, $cSkinSetting, $bDebug);
+		if ($cTemplate) { $oReturn->getContent($cTemplate); }
 
 		return $oReturn;
 	}

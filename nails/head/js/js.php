@@ -22,7 +22,7 @@ class Head_JS {
 	public $cJSFrameworkVersion			= "1.7.1";
 	public $cJSFrameworkSubVersion		= "1.7";
 	public $cJSFrameworkName			= "jquery";
-	public $cJSFrameworkUIVersion		= "1.8.16";
+	public $cJSFrameworkUIVersion		= "1.8.17";
 	public $cJSFrameworkMobileName		= "mobile";
 	public $cJSFrameworkMobileVersion 	= "1.0";
 
@@ -173,13 +173,22 @@ class Head_JS {
 	 */
 	public function addFrameworkJS($cJS) {
 		if ($this->cJSFrameworkName) {
-			$cJS	= $this->cJSFrameworkName . "." . $cJS;
+			$cJSOriginal	= $cJS;
+			$cJS			= $this->cJSFrameworkName . "." . $cJS;
 
 			//Path could be js, or javascript
 			$cFolder	= is_dir(SITEPATH . "/javascript/") ? "/javascript/" : "/js/";
+			$cCheck		= SITEPATH . $cFolder;
+
 			if (isset($this->aResource['resource'])) { $cFolder = "http://" . $this->aResource['resource'] . "/"; }
 
-			$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $cJS . ".js\"></script>\n";
+			if (file_exists($cFolder . $cJS . ".js") || file_exists($cCheck . $cJS . ".js")) {
+				$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $cJS . ".js\"></script>\n";
+				return false;
+			} else if (file_exists($cCheck . $this->cJSFrameworkName . "/" . $cJSOriginal . ".js")) {
+				$this->cJS .= "<script type=\"text/javascript\" src=\"" . $cFolder . $this->cJSFrameworkName . "/" . $cJSOriginal . ".js\"></script>\n";
+				return false;
+			}
 		}
 
 		return false;

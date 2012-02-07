@@ -101,10 +101,14 @@ class Head_CSS {
 				if ($cStyled) {
 					if (file_exists($cFolder_a . $cStyled . "/" . $mBrowser[$i] . ".css")) {
 						$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $cStyled . "/" . $mBrowser[$i] . ".css	\" />\n";
+					} else if (file_exists($cFolder_a . $cStyled . "/" . $mBrowser[$i] . "/style.css")) {
+						$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $cStyled . "/" . $mBrowser[$i] . "/style.css\" />\n";
 					}
 				} else {
 					if (file_exists($cFolder_a . $mBrowser[$i] . ".css")) {
 						$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $mBrowser[$i] . ".css\" />\n";
+					} else if (file_exists($cFolder_a . $mBrowser[$i] . "/style.css")) {
+						$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $mBrowser[$i] . "/style.css\" />\n";
 					}
 				}
 			}
@@ -118,10 +122,14 @@ class Head_CSS {
 			if ($cStyled) {
 				if (file_exists($cFolder_a . $cStyled . "/" . $mBrowser . ".css")) {
 					$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $cStyled . "/" . $mBrowser . ".css	\" />\n";
+				} else if (file_exists($cFolder_a . $cStyled . "/" . $mBrowser . "/style.css")) {
+					$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $cStyled . "/" . $mBrowser . "/style.css\" />\n";
 				}
 			} else {
 				if (file_exists($cFolder_a . $mBrowser . ".css")) {
 					$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $mBrowser . ".css\" />\n";
+				} else if (file_exists($cFolder_a . $mBrowser . "/style.css")) {
+					$cCSS .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"" . $cFolder_b . $mBrowser . "/style.css\" />\n";
 				}
 			}
 		}

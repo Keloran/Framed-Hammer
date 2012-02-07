@@ -102,6 +102,8 @@ class Footer implements Nails_Interface {
 	 * @return string
 	 */
 	public function getReInvigorate() {
+		return false; //temp till get this fixed
+
 		$mCode		= $this->oNails->getConfig("code", "reinvigorate");
 		if (is_array($mCode)) {
 			$cCode = $mCode['code'];
@@ -148,7 +150,7 @@ class Footer implements Nails_Interface {
 	 * @return string
 	 */
 	public function getGoogleAnalytics($bOld = null) {
-		$mode		= $this->oNails->getConfig("analytics");
+		$mCode		= $this->oNails->getConfig("analytics");
 		$mDomain	= $this->oNails->getConfig("analytics-domain");
 		$cReturn	= false;
 
@@ -156,7 +158,7 @@ class Footer implements Nails_Interface {
 		if (is_array($mCode)) {
 			$cCode = $mCode['analytics'];
 		} else {
-			$ccode = $mCode;
+			$cCode = $mCode;
 		}
 		if (is_array($mDomain)) {
 			$cDomain = $mDomain['analytics-domain'];

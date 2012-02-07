@@ -129,6 +129,7 @@ class Admin implements Nails_Interface {
 		if ($cAdminPage == $this->oNails->cPage) {
 			if (!defined("admininsecure")) {
 				$bAdminExists	= file_exists(PAGES . "/" . $cAdminPage . "/secure.php"); //helps if there is a secure location
+				if (!$bAdminExists) { $bAdminExists = file_exists(PAGES . "/" . $cAdminPage . "/secure/secure.php"); } //just incase its in new style
 
 				//are they actually logged in at all
 				if (!$bLogged) { $this->oNails->sendLocation("/login/"); }
