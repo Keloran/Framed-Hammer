@@ -157,7 +157,7 @@ class Screwdriver {
 	 */
 	private function setAddress() {
 		$jParams	= 1;
-		$iFiltered	= 1;
+		$iFiltered	= 0;
 		$cName		= false;
 		$cName_b	= false;
 		$cName_c	= false;
