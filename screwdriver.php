@@ -198,10 +198,8 @@ class Screwdriver {
 			}
 
 			//now add the new ones
-			if ($this->iFilters !== $jParams) {
-				$this->iParam = $jParams;
-				$jParams++;
-			}
+			if ($this->iFilters < $this->iParams) { $jParams++; }
+			if ($this->iFilters !== $jParams) { $this->iParam = $jParams; }
 
 			//filter the items
 			$cOriginal = filter_var($this->aGET[$i], $cSant);
