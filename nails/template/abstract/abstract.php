@@ -326,7 +326,7 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 
 
 				$cPath1 = $cPath . "/" . $this->$cParam . ".php";
-				$cPath2 = $cPath . "/" . $cTemplate . ".tpl";
+				$cPath2 = $cPath . "/" . $this->$cParam . "/" . $this->$cParam . ".php";
 
 				if (file_exists($cPath1)) {
 					$cLayout	= $cPath1;
