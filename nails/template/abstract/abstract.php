@@ -312,7 +312,7 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 		$aExtras		= array();
 		$iStart			= 0;
 		$cFinalParam	= PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice;
-		$cLayout		= false;
+		$cPage			= false;
 
 		if ($this->iExtras) {
 			$bFound	= false;
