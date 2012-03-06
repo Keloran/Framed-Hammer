@@ -309,8 +309,40 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 	protected function getOther() {
 		$cReturn		= false;
 		$bForward		= false;
+		$aExtras		= array();
 		$iStart			= 0;
 		$cFinalParam	= PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice;
+		$cLayout		= false;
+
+		if ($this->iExtras) {
+			$bFound	= false;
+			for ($i = $this->iExtras; $i > 0; $i--) {
+				$cPath = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice;
+				for ($j = 1; $j < ($i + 1); $j++) {
+					$cParam = "cParam" . $j;
+					$cPath .= "/" . $this->$cParam;
+					$aExtras[] = $cPath;
+				}
+
+
+				$cPath1 = $cPath . "/" . $this->$cParam . ".php";
+				$cPath2 = $cPath . "/" . $cTemplate . ".tpl";
+
+				if (file_exists($cPath1)) {
+					$cLayout	= $cPath1;
+					$bFound		= true;
+				}
+				if (!$bFound && file_exists($cPath2)) {
+					$cLayout	= $cPath2;
+					$bFound		= true;
+				}
+
+				//since we dont need to go further down the chain
+				if ($bFound == true) { break; }
+			}
+		}
+		printRead($cLayout);
+		die();
 
 		//is there one forwards
 		if (isset($this->cParam1)) {
