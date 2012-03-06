@@ -140,6 +140,30 @@ class Template_Layout_Template extends Template_Abstract {
 			$this->addDebug("Choice Layout Template", $cLayout);
 		}
 
+		//Now do the others
+		$cPath1 = false;
+		$cPath2 = false;
+		if ($this->iExtras) {
+			$bFound	= false;
+			for ($i = $this->iExtras; $i > 0; $i--) {
+				$cPath = PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice;
+				for ($j = 1; $j < ($i + 1); $j++) {
+					$cParam = "cParam" . $j;
+					$cPath .= "/" . $this->$cParam;
+					$aExtras[] = $cPath;
+				}
+				$cPath = $cPath . "/layout/templates/" . $cTemplate . ".tpl";
+
+				if (file_exists($cPath)) {
+					$cLayout	= $cPath;
+					$bFound		= true;
+				}
+
+				//since we dont need to go further down the chain
+				if ($bFound == true) { break; }
+			}
+		}
+
 		//last check just incase
 		if (!file_exists($cLayout)) {
 			if (!file_exists($cLayoutO)) {
