@@ -162,6 +162,7 @@ class Screwdriver {
 		$cName_b	= false;
 		$cName_c	= false;
 		$cOriginal	= false;
+		$iExtras	= 0;
 
 		//go through the params
 		for ($i = 0; $i < $this->iGET; $i++) { //the full amount of params
@@ -201,7 +202,8 @@ class Screwdriver {
 
 			//now add the new ones
 			if ($this->iFilters !== $jParams) {
-				$this->iParam = $jParams;
+				$this->iParam 	= $jParams;
+				$iExtras		= $jParams;
 				if ($iFiltered >= ($this->iFilters + 1)) { $jParams++; }
 			}
 
@@ -253,6 +255,7 @@ class Screwdriver {
 
 		$this->aReturn['iParams'] 	= $this->iParam;
 		$this->aReturn['jParams']	= $jParams;
+		$this->aReturn['iExtras']	= $iExtras;
 
 		$this->iParam++;
 	}
