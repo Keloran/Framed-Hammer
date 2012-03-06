@@ -157,6 +157,7 @@ class Screwdriver {
 	 */
 	private function setAddress() {
 		$jParams	= 1;
+		$iFiltered	= 1;
 		$cName		= false;
 		$cName_b	= false;
 		$cName_c	= false;
@@ -186,6 +187,7 @@ class Screwdriver {
 				foreach ($this->aFilters as $cFilter) {
 					$cName = "c" . ucfirst($cFilter);
 					if (isset($this->aReturn[$cName])) {
+						$iFiltered++;
 						continue;
 					} else {
 						break;
@@ -199,9 +201,8 @@ class Screwdriver {
 
 			//now add the new ones
 			if ($this->iFilters !== $jParams) {
-				$jParams++;
+				if ($iFiltered >= $this->iFilters) { $jParams++; }
 
-				if ($jParams == $this->iFilters) { $jParams = 1; }
 				$this->iParam = $jParams;
 			}
 
