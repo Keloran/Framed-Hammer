@@ -247,13 +247,15 @@ class Screwdriver {
 			$this->aReturn[$cName_c]	= $cOriginal;
 			$this->aReturn[$cNonSEO]	= $cSEO;
 			$this->aReturn[$cNonUgly]	= $cUnSEO;
+
+			//this should be here
+			$jParams++;
 		}
 
 		$this->aReturn['iParams'] 	= $this->iParam;
 		$this->aReturn['jParams']	= $jParams;
 
 		$this->iParam++;
-		$jParams++;
 	}
 
 	/**
