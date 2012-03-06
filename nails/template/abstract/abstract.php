@@ -329,11 +329,11 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 				$cPath2 = $cPath . "/" . $this->$cParam . "/" . $this->$cParam . ".php";
 
 				if (file_exists($cPath1)) {
-					$cLayout	= $cPath1;
+					$cPage		= $cPath1;
 					$bFound		= true;
 				}
 				if (!$bFound && file_exists($cPath2)) {
-					$cLayout	= $cPath2;
+					$cPage		= $cPath2;
 					$bFound		= true;
 				}
 
@@ -341,90 +341,14 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 				if ($bFound == true) { break; }
 			}
 		}
-		printRead($cPath1);
-		printRead($cPath2);
-		die("t-");
 
-		//is there one forwards
-		if (isset($this->cParam1)) {
-			$cParamPath	= "/" . $this->cParam1;
-
-			//try it forward
-			for ($i = 2; $i < $this->extraParams; $i++) {
-				$cParam	= "cParam" . $i;
-				if ($this->$cParam) { //does the param actually exist
-					$cParam1	= $cFinalParam . $cParamPath . ".php";
-					$this->addDebug("Param 1", $cParam1);
-
-					$cParam2	= $cFinalParam . $cParamPath . "/" . $this->$cParam . ".php";
-					$this->addDebug("Param 2", $cParam2);
-
-					//does any of them exist
-					if (file_exists($cParam1)) {
-						$cPage		= $cParam1;
-						$bForward	= true;
-					} else if (file_exists($cParam2)) {
-						$cPage		= $cParam2;
-						$bForward	= true;
-					}
-
-					//has it been found
-					if ($bForward) {
-						break;
-					} else {
-						$cParamPath .= "/" . $this->$cParam;
-					}
-				}
-			}
-
-			//try it backwards
-			if (!$bFoward) {
-				$iFinalParam	= $this->extraParams;
-				$cInterParam	= false;
-
-				//get the last one
-				for ($i = $iFinalParam; $i > 0; $i--) {
-					$cThisParam		= $cParam . $i;
-					$cNextParam		= false;
-					$iLastParam		= $i;
-					$cFinalParam1	= false;
-
-					//make sure that the top param actually exists
-					if (isset($this->$cThisParam)) {
-						//now we need to add up the path from the beginning
-						for ($j = 0; $j < $iLastParam; $j++) {
-							$cNextParam	= "cParam" . $j;
-
-							//add a slash to end
-							if ($j == 1) { $cInterParam .= "/"; }
-							$cInterParam	.= $cNextParam . "/";
-							$this->addDebug("Inter Param", $cInterParam);
-
-							$cFinalParam1	= $cInterParam . $cNextParam;
-							$this->addDebug("Final Param 1", $cFinalParam1);
-						}
-
-						$cFinalParam1 	.= ".php";
-						$cFinalParam2	 = $cFinalParam . $cFinalParam1;
-						$this->addDebug("Final Param 2", $cFinalParam2);
-
-						//check if it exists
-						if (file_exists($cFinalParam2)) {
-							$cPage	= $cFinalParam2;
-							break;
-						}
-					}
-				}
-			}
-
-			//debug
-			if (!$cPage) {
-				$this->cError	= "Nothing seems to exist";
-				if ($this->bDebug) { $this->debugTemplates(); }
-			}
-
-			return $cPage;
+		//debug
+		if (!$cPage) {
+			$this->cError	= "Nothing seems to exist";
+			if ($this->bDebug) { $this->debugTemplates(); }
 		}
+
+		return $cPage;
 	}
 
 	/**
