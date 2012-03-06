@@ -116,14 +116,6 @@ class Template_Content_Template extends Template_Abstract {
 			}
 		}
 
-		printRead($this->iExtras);
-		printRead($aExtras);
-		printRead($cLayout);
-		printRead($cCaller);
-		printRead($cPath1);
-		printRead($cPath2);
-		die();
-
 		//last check to make sure
 		if (!file_exists($cLayout)) { $this->cError = "No Template for " . $cCaller . " found, template requested was " . $cTemplate; }
 
