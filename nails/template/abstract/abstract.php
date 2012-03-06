@@ -341,8 +341,9 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 				if ($bFound == true) { break; }
 			}
 		}
-		printRead($cLayout);
-		die();
+		printRead($cPath1);
+		printRead($cPath2);
+		die("t-");
 
 		//is there one forwards
 		if (isset($this->cParam1)) {
