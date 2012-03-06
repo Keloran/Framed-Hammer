@@ -86,6 +86,8 @@ class Template_Content_Template extends Template_Abstract {
 		}
 
 		//Now do the others
+		$cPath1 = false;
+		$cPath2 = false;
 		if ($this->iExtras) {
 			$bFound	= false;
 			for ($i = $this->iExtras; $i > 0; $i--) {
@@ -95,12 +97,15 @@ class Template_Content_Template extends Template_Abstract {
 					$cPath .= "/" . $this->$cParam;
 				}
 
-				if (file_exists($cPath . "/templates/" . $cCaller . "./tpl"))				 {
-					$cLayout	= $cPath . "/templates/" . $cCaller . ".tpl";
+				$cPath1 = $cPath . "/templates/" . $cCaller . ".tpl";
+				$cPath2 = $cPath . "/templates/" . $cTemplate . ".tpl";
+
+				if (file_exists($cPath1))				 {
+					$cLayout	= $cPath1;
 					$bFound		= true;
 				}
-				if (!$bFound && file_exists($cPath . "/templates/" . $cTemplate . ".tpl")) {
-					$cLayout	= $cPath . "/templates/" . $cTemplate . ".tpl";
+				if (!$bFound && file_exists($cPath2)) {
+					$cLayout	= $cPath2;
 					$bFound		= true;
 				}
 
@@ -108,6 +113,14 @@ class Template_Content_Template extends Template_Abstract {
 				if ($bFound == true) { break; }
 			}
 		}
+
+		printRead($this->iExtras);
+		printRead($aExtras);
+		printRead($cLayout);
+		printRead($cCaller);
+		printRead($cPath1);
+		printRead($cPath2);
+		die();
 
 		//last check to make sure
 		if (!file_exists($cLayout)) { $this->cError = "No Template for " . $cCaller . " found, template requested was " . $cTemplate; }
