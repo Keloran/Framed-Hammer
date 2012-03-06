@@ -120,20 +120,20 @@ class Template_Layout_Template extends Template_Abstract {
 		//choice
 		if ($this->cChoice) {
 			$bFound	= false;
-			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cCaller . ".tpl")) {
-				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cCaller . ".tpl";
+			if (file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/templates/" . $cCaller . ".tpl")) {
+				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/templates/" . $cCaller . ".tpl";
 				$bFound		= true;
 			}
-			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cTemplate . ".tpl")) {
-				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/layout/templates/" . $cTemplate . ".tpl";
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/templates/" . $cTemplate . ".tpl")) {
+				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/templates/" . $cTemplate . ".tpl";
 				$bFound		= true;
 			}
-			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl")) {
-				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl";
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl")) {
+				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $cCaller . "/templates/" . $cCaller . ".tpl";
 				$bFound		= true;
 			}
-			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl")) {
-				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl";
+			if (!$bFound && file_exists(PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl")) {
+				$cLayout 	= PAGES . $this->cPage . "/" . $this->cAction . "/" . $this->cChoice . "/layout/" . $cCaller . "/templates/" . $cTemplate . ".tpl";
 				$bFound		= true;
 			}
 
@@ -160,8 +160,6 @@ class Template_Layout_Template extends Template_Abstract {
 				//since we dont need to go further down the chain
 				if ($bFound == true) { break; }
 			}
-			printRead($cPath);
-			die();
 		}
 
 		//last check just incase
