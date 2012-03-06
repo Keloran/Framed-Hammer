@@ -102,7 +102,7 @@ class Template_Content_Template extends Template_Abstract {
 				$cPath1 = $cPath . "/templates/" . $cCaller . ".tpl";
 				$cPath2 = $cPath . "/templates/" . $cTemplate . ".tpl";
 
-				if (file_exists($cPath1))				 {
+				if (file_exists($cPath1)) {
 					$cLayout	= $cPath1;
 					$bFound		= true;
 				}

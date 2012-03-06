@@ -141,8 +141,6 @@ class Template_Layout_Template extends Template_Abstract {
 		}
 
 		//Now do the others
-		$cPath1 = false;
-		$cPath2 = false;
 		if ($this->iExtras) {
 			$bFound	= false;
 			for ($i = $this->iExtras; $i > 0; $i--) {
@@ -162,6 +160,8 @@ class Template_Layout_Template extends Template_Abstract {
 				//since we dont need to go further down the chain
 				if ($bFound == true) { break; }
 			}
+			printRead($cPath);
+			die();
 		}
 
 		//last check just incase
