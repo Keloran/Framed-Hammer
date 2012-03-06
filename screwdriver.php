@@ -96,6 +96,9 @@ class Screwdriver {
 		if ($aFilters) { $this->aFilters = $aFilters; }
 		$this->iFilters = count($this->aFilters);
 
+		$this->aReturn['aFilters']	= $this->aFilters;
+		$this->aReturn['iFilters']	= $this->iFilters;
+
 		//set the number of params above the standard
 		$this->iParam	= (count($this->aFilters) + 1);
 
