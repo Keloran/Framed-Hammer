@@ -33,6 +33,7 @@ class Template_Content_Template extends Template_Abstract {
 	 */
 	public function setTemplate($cTemplate = null) {
 		$cReturn	= false;
+		$aExtras	= false;
 		$cCaller	= $this->getCaller();
 		$this->addDebug("Caller", $cCaller);
 
@@ -95,6 +96,7 @@ class Template_Content_Template extends Template_Abstract {
 				for ($j = 1; $j < ($i + 1); $j++) {
 					$cParam = "cParam" . $j;
 					$cPath .= "/" . $this->$cParam;
+					$aExtras[] = $cPath;
 				}
 
 				$cPath1 = $cPath . "/templates/" . $cCaller . ".tpl";
