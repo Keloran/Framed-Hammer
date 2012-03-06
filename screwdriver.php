@@ -200,7 +200,7 @@ class Screwdriver {
 			//now add the new ones
 			if ($this->iFilters !== $jParams) {
 				$this->iParam = $jParams;
-				$this->aReturn['debug'] = true;
+				$jParams++;
 			}
 
 			//filter the items
@@ -247,9 +247,6 @@ class Screwdriver {
 			$this->aReturn[$cName_c]	= $cOriginal;
 			$this->aReturn[$cNonSEO]	= $cSEO;
 			$this->aReturn[$cNonUgly]	= $cUnSEO;
-
-			//this should be here
-			$jParams++;
 		}
 
 		$this->aReturn['iParams'] 	= $this->iParam;
