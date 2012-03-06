@@ -246,7 +246,8 @@ class Screwdriver {
 			$this->aReturn[$cNonUgly]	= $cUnSEO;
 		}
 
-		$this->aReturn['iParams'] = $this->iParam;
+		$this->aReturn['iParams'] 	= $this->iParam;
+		$this->aReturn['jParams']	= $jParams;
 
 		$this->iParam++;
 		$jParams++;
