@@ -72,8 +72,8 @@ class Template_Content extends Template_Abstract {
 		$this->addDebug("Choice", $cChoice);
 		$this->addDebug("Choice Page", $cPage);
 
-		//if there are others
-		if (isset($this->extraParams) && $this->extraParams) {
+		//Get Others
+		if ($this->iExtras) {
 			$cOther	= $this->getOther();
 			$cPage	= $cOther ?: $cPage;
 		}
