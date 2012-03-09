@@ -78,6 +78,9 @@ function Hammer($cSite, $aFilter = false, $aOptions = null) {
 	$cStructure	= false;
 	$bNoInstall	= false;
 
+	//predefine stuff
+	$oHammer	= false;
+
 	//see if this fixes the slash-stack fault
 	removeEndSlash();
 

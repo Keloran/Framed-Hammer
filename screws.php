@@ -51,12 +51,6 @@ class Screws {
 
 		//does the file exist
 		if ($bExists) {
-			try {
-				include $this->cPath;
-			} catch (Exception $e) {
-				throw new Spanner($e->getMessage());
-			}
-
 			//now make sure not todo this in a loop
 			$bSkip	= false;
 			if (substr($cClass, -7) == "install") { $bSkip = true; }
@@ -70,6 +64,12 @@ class Screws {
 						throw new Spanner($e->getMessage());
 					}
 				}
+			}
+
+			try {
+				include $this->cPath;
+			} catch (Exception $e) {
+				throw new Spanner($e->getMessage());
 			}
 		} else {
 			//so that the class not exisitng can be handled by the user/file
