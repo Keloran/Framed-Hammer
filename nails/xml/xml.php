@@ -254,7 +254,10 @@ class XML {
 		}
 
 		//if there is still no parent die
-		if (!$oParent) { printRead("Erm somet really went wrong"); }
+		if (!$oParent) {
+			printRead("Erm somet really went wrong");
+			die();
+		}
 
 		//if value
 		if ($cValue) {
