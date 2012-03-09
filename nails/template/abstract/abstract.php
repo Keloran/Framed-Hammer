@@ -338,13 +338,16 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 				}
 
 				//since we dont need to go further down the chain
-				if ($bFound == true) { break; }
+				if ($bFound == true) {
+					break;
+				} else {
+					$this->cError = "Sorry " . $this->$cParam . " Doesn't Seem To Exist";
+				}
 			}
 		}
 
 		//debug
 		if (!$cPage) {
-			$this->cError	= "Nothing seems to exist";
 			if ($this->bDebug) { $this->debugTemplates(); }
 		}
 
