@@ -3,7 +3,11 @@ abstract class Template_Abstract_Extend {
 	use Browser, Mailer, Layout;
 
 	private $aData;
+
 	protected $aVars;
+	protected $cTemplate;
+
+	public $cError;
 
 	/**
 	 * Template_Abstract_Extend::__isset()
@@ -87,5 +91,45 @@ abstract class Template_Abstract_Extend {
 		$this->aVars["oHammer"]	= false;
 
 		$this->oHammer	= null;
+	}
+
+
+	public function errorTemplate($cCalled = false) {
+		http_response_code(404); //set page to not found
+		$cTemplate	= false;
+
+		if ($this->cError) {
+			//is there a site error template
+			if (file_exists(SITEPATH . "/layout/error.tpl")) {
+				ob_start();
+					include SITEPATH . "/layout/error.tpl";
+					$cTemplate	= ob_get_contents();
+				ob_end_clean();
+			} else {
+				$cTemplate	= "<section id=\"error\">\n";
+				$cTemplate .= "<header>\n";
+				$cTemplate .= "<h1>Error</h1>\n";
+				$cTemplate .= "</header>\n";
+				$cTemplate .= "<article>\n";
+				$cTemplate .= $this->cError . "\n";
+
+				//is there a referer page
+				if (isset($_SERVER['HTTP_REFERER'])) {
+					$cTemplate .= "<hr />\n";
+					$cTemplate .= "<a href=\"" . $_SERVER['HTTP_REFERER'] . "\" title=\"Back\">Back</a>\n";
+				} else {
+					$cTemplate .= "<hr />\n";
+					$cTemplate .= "<a href=\"/\" title=\"Back\">Back</a>\n";
+				}
+
+				$cTemplate .= "</article>\n";
+				$cTemplate .= "</section>\n";
+			}
+
+			return $cTemplate;
+		} else {
+			$this->cError = "Page Not Found";
+			return $this->errorTemplate();
+		}
 	}
 }

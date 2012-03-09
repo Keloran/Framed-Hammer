@@ -9,15 +9,12 @@
  * @access public
  */
 abstract class Template_Abstract extends Template_Abstract_Extend {
-
-	protected $cTemplate;
 	protected $mParams;
 	protected $cDefault;
 	protected $aDebug;
 	protected $bDebug;
 	protected $bFormed;
 
-	public $cError;
 	public $cCaller;
 
 	/**
@@ -128,7 +125,7 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 		if (!$this->cTemplate) { return false; }
 
 		//final check just incase somehow it got here and it still dindt exist
-		if (!file_exists($this->cTemplate)) { return false; }
+		if (!file_exists($this->cTemplate)) { return $this->errorTemplate(); }
 
 		//remove the parents
 		$this->removeParents();
