@@ -385,9 +385,10 @@ class Spanner extends Exception {
 
 		//remove the brs and replace with newlines
 		if ($bConsole) {
+			$cMessage = str_replace("&nbsp;", " ", $cMessage);
 			$cMessage = str_replace("<br />", "\n", $cMessage);
 			$cMessage = str_replace("\n\n", "\n", $cMessage);
-			$cMessage = str_replace(array("<p>", "</p>"), array("\n--------\n", "\n--------\n"), $cMessage);
+			$cMessage = str_replace(array("<p>", "</p>"), array("", "\n--------\n"), $cMessage);
 		}
 
 		return $cMessage;
