@@ -41,6 +41,8 @@ class Admin_Install {
 				INDEX (`iBannedID`, `iUserID`)
 			) ENGINE = InnoDB");
 
+		$this->oNails->getUsers();
+
 		$this->oNails->addGroups("admin");
 		$this->oNails->addAbility("admin", "Admin");
 
