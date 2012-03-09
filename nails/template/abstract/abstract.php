@@ -127,6 +127,9 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 		//now make sure we have a template otherwise just do nothing
 		if (!$this->cTemplate) { return false; }
 
+		//final check just incase somehow it got here and it still dindt exist
+		if (!file_exists($this->cTemplate)) { return false; }
+
 		//remove the parents
 		$this->removeParents();
 
