@@ -35,12 +35,12 @@ class Messages_Install {
 	 * @return
 	 */
 	private function upgrade() {
-		if ($oNails->checkVersion("messages", "1.2") == false) {
+		if ($this->oNails->checkVersion("messages", "1.2") == false) {
 			//1.1
-			$oNails->updateVersion("messages", "1.1", false, "Added Groups Notifications");
+			$this->oNails->updateVersion("messages", "1.1", false, "Added Groups Notifications");
 
 			//1.2
-			$oNails->updateVersion("messages", "1.2", false, "Added Users Notifications");
+			$this->oNails->updateVersion("messages", "1.2", false, "Added Users Notifications");
 		}
 	}
 
