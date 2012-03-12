@@ -371,8 +371,8 @@ class Nails extends Hammer {
 		$aNail	= false;
 
 		//since nails might have subnails
-		if (strstr($cName, "_")) {
-			$aNail 	= explode("_", $cName);
+		if (strstr($cNail, "_")) {
+			$aNail 	= explode("_", $cNail);
 			$cNail	= false;
 			for ($i = 0; $i < count($aNail); $i++) {
 				$cNail .= $aNail[$i] . "/";
