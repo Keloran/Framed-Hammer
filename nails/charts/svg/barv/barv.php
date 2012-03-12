@@ -32,7 +32,7 @@ class Charts_SVG_BarV {
 		$aData = $this->aData;
 
 		$cOutput  = "<defs>\n";
-		$cOutput .= "<filter id='flt'>\n";
+		$cOutput .= "<filter id='flt' filterUnits='userSpaceOnUse' x='0' y='0' width='1200' height='1200'>\n";
 		$cOutput .= "<feGaussianBlur in='SourceAlpha' stdDeviation='0.5' result='blur' />\n";
 
 		$cOutput .= "<feSpecularLighting in='blur' surfaceScale='5' specularConstant='0.5' specularExponent='10' result='specOut' style='lighting-color: #FFF'>\n";
@@ -54,7 +54,7 @@ class Charts_SVG_BarV {
 
 			//Filter
 			$cFilter 	= false;
-			if (isset($this->aOptions['filter'])) { $cFilter = " style='filter: url(" . $this->aOptions['filter'] . ")' "; }
+			if (isset($this->aOptions['filter'])) { $cFilter = " filter='url(" . $this->aOptions['filter'] . ")' "; }
 
 			if (isset($this->aOptions["bAnimated"])) {
 				$cOutput .= "<rect x='" . $iX . "' y='" . $iBarY . "' width='15' height='0' fill='" . $cColor . "'" . $cFilter . " transform='rotate(-180 100 100)'>\n";
