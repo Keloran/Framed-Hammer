@@ -1,4 +1,3 @@
-
 <?php
 class Charts_Data {
 	var $cDesc 	= false;

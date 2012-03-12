@@ -44,13 +44,6 @@ class Session_Robots {
 	}
 
 	/**
-	 * Session_Robots::install()
-	 *
-	 * @return null
-	 */
-
-
-	/**
 	 * Session_Robots::getRobotDetails()
 	 *
 	 * @return array
