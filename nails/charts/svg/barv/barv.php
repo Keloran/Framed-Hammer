@@ -52,12 +52,16 @@ class Charts_SVG_BarV {
 			$iHeight	= $oObject->iPercent * 2;
 			$iPercent	= number_format($oObject->iPercent, 2, ",", ".");
 
+			//Filter
+			$cFilter 	= false;
+			if (isset($this->aOptions['filter'])) { $cFilter = " style='filter: url(" . $this->aOptions['filter'] . ")' "; }
+
 			if (isset($this->aOptions["bAnimated"])) {
-				$cOutput .= "<rect x='" . $iX . "' y='" . $iBarY . "' width='15' height='0' fill='" . $cColor . "' style='filter: url(#flt)' transform='rotate(-180 100 100)'>\n";
+				$cOutput .= "<rect x='" . $iX . "' y='" . $iBarY . "' width='15' height='0' fill='" . $cColor . "'" . $cFilter . " transform='rotate(-180 100 100)'>\n";
 				$cOutput .= "<animate attributeName='height' attributeType='XML' begin='0s' dur='1s' fill='freeze' from='0' to='" . $iHeight . "' />\n";
 				$cOutput .= "</rect>\n";
 			} else {
-				$cOutput .= "<rect x='" . $iX . "' y='" . $iBarY . "' width='15' height='" . $iHeight . "' fill='" . $cColor . "' style='filter: url(#flt)' transform='rotate(-180 100 100)' />\n";
+				$cOutput .= "<rect x='" . $iX . "' y='" . $iBarY . "' width='15' height='" . $iHeight . "' fill='" . $cColor . "'" . $cFilter . " transform='rotate(-180 100 100)' />\n";
 			}
 
 			$iX = $iX + 27;
