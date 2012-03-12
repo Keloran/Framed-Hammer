@@ -34,14 +34,6 @@ class Spam_Install{
 	 * @return
 	 */
 	private function install() {
-		$this->oNails->addTable("
-			CREATE TABLE IF NOT EXISTS `hammer_spam` (
-				`iSpamID` INT NOT NULL AUTO_INCREMENT,
-				`cEmail` TEXT NOT NULL,
-				`iIP` INT NOT NULL,
-				PRIMARY KEY (`iSpamID`))
-			ENGINE=InnoDB");
-
 		$this->oNails->addVersion("spam", "1.0");
 
 		$this->oNails->sendLocation("install");

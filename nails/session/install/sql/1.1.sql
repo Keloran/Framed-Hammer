@@ -1,0 +1,1 @@
+ALTER TABLE `users_sessions` CHANGE COLUMN `cIP` `cIP` INT NULL DEFAULT '0' AFTER `cReason`;

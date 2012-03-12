@@ -310,6 +310,8 @@ class Nails extends Hammer {
 				}
 			}
 
+			$this->doSQL($cLibrary, $cVersion);
+
 			//do the update
 			return $this->updateXML($cLibrary, $cVersion, $cChangelog);
 		}
@@ -347,11 +349,53 @@ class Nails extends Hammer {
 	*/
 	public function addVersion($cLibrary, $cVersion) {
 		if ($this->checkXMLVersion($cLibrary, $cVersion) == false) {
+			$this->doSQL($cLibrary, $cVersion);
 			$this->addXML($cLibrary, $cVersion);
 			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 * Nails::doSQL()
+	 *
+	 * @desc Do a file version of the SQL instead of inline
+	 * @param string $cNail
+	 * @param string $cVersion
+	 * @return null
+	 */
+	private function doSQL($cNail, $cVersion = false) {
+		if (!$cVersion) { $cVersion = "1.0"; }
+		$cSQL	= false;
+		$aNail	= false;
+
+		//since nails might have subnails
+		if (strstr($cName, "_")) {
+			$aNail 	= explode("_", $cName);
+			$cNail	= false;
+			for ($i = 0; $i < count($aNail); $i++) {
+				$cNail .= $aNail[$i] . "/";
+			}
+		}
+
+		//does the file exist, since version might have changed without sql
+		if (file_exists(HAMMERPATH . "/nails/" . $cNail . "/install/sql/" . $cVersion . ".sql")) {
+			$cSQL = HAMMERPATH . "/nails/" . $cNail . "/install/sql/" . $cVersion . ".sql";
+		} else if (file_exists(USERNAILS . "/" . $cNail . "/install/sql/" . $cVersion . ".sql")) {
+			$cSQL = USERNAILS . "/" . $cNail . "/install/sql/" . $cVersion . ".sql";
+		}
+
+		//does the sql exist
+		if ($cSQL) {
+			$cFile 	= file_get_contents($cSQL);
+			$aSQL	= explode(";", $cFile);
+			for ($i = 0; $i < count($aSQL); $i++) {
+				if ($aSQL[$i]) {
+					$this->oDB->write($aSQL[$i]);
+				}
+			}
+		}
 	}
 
 	/**

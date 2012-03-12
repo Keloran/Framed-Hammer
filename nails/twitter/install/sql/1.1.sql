@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS `twitter_details` (
+	`iUserID` INT NOT NULL,
+	`cDescription` VARCHAR(255) DEFAULT NULL,
+	`iFollowers` SMALLINT DEFAULT 0,
+	`iFollowing` SMALLINT DEFAULT 0,
+	`cImage` TEXT DEFAULT NULL,
+	`cLocation` VARCHAR(80) DEFAULT NULL,
+	PRIMARY KEY (`iUserID`)
+);
+
+CREATE TABLE IF NOT EXISTS `twitter_tweets` (
+	`iTweetID` BIGINT NOT NULL,
+	`iUserID` INT NOT NULL,
+	`cTweet` VARCHAR(140),
+	`iReTweet` SMALLINT DEFAULT 0,
+	`cScreenName` VARCHAR(32) DEFAULT NULL,
+	`tsTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`iTweetID`)
+);
+
+ALTER TABLE twitter DROP COLUMN description,  DROP COLUMN status, DROP COLUMN followers, DROP COLUMN location;

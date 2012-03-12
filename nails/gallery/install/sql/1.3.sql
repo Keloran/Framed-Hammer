@@ -1,0 +1,1 @@
+ALTER TABLE `gallery_user` ADD COLUMN `bPrivate` BOOL NOT NULL

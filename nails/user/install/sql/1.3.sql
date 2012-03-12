@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD COLUMN `bTemp` BOOL NOT NULL

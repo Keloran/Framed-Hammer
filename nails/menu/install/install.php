@@ -34,9 +34,6 @@ class Menu_Install {
 	}
 
 	private function install() {
-		$this->oNails->addTable("CREATE TABLE IF NOT EXISTS `menu` (`iMenuID` INT NOT NULL AUTO_INCREMENT, `cPage` VARCHAR(100) NOT NULL, `cTitle` VARCHAR(150) NOT NULL, `cLink` TEXT NOT NULL, `iSort` INT NOT NULL, `iParentID` INT NOT NULL, `iChildren` INT NOT NULL, PRIMARY KEY(`iMenuID`)) ENGINE = MyISAM");
-		$this->oNails->addIndexs("menu", array("iSort", "iParentID", "iChildren"));
-
 		$this->oNails->addVersion("menu", "1.0");
 
 		$this->oNails->sendLocation("install");

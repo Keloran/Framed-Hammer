@@ -1,0 +1,1 @@
+ALTER TABLE `users_sessions_robots` ADD COLUMN `cFullRobotString` TEXT NOT NULL;

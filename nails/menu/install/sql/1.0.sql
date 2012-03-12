@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS `menu` (
+	`iMenuID` INT NOT NULL AUTO_INCREMENT,
+	`cPage` VARCHAR(100) NOT NULL,
+	`cTitle` VARCHAR(150) NOT NULL,
+	`cLink` TEXT NOT NULL,
+	`iSort` INT NOT NULL,
+	`iParentID` INT NOT NULL,
+	`iChildren` INT NOT NULL,
+	PRIMARY KEY(`iMenuID`),
+	INDEX (`iSort`),
+	INDEX (`iParentID`),
+	INDEX (`iChildren`)
+) ENGINE = MyISAM;

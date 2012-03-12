@@ -1,0 +1,1 @@
+ALTER TABLE `gallery_exif` ADD COLUMN `cExposureMode` TEXT NULL DEFAULT NULL

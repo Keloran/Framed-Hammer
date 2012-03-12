@@ -30,22 +30,9 @@ class News_Comments_Install{
 	}
 
 	private function install() {
-		//Create the comments table
-		$this->oNails->addTable("
-			CREATE  TABLE IF NOT EXISTS `news_comments` (
-			  `iCommentID` INT NOT NULL AUTO_INCREMENT,
-			  `iNewsID` INT NOT NULL,
-			  `cComment` TEXT NULL DEFAULT NULL,
-			  `tsDate` INT NULL DEFAULT NULL,
-			  `iUserID` INT NULL DEFAULT NULL,
-			  PRIMARY KEY (`iCommentID`),
-			  INDEX `fk_news_comments_news` (`iNewsID` ASC))
-			ENGINE = InnoDB");
-		$this->oNails->addIndexs("news_comments", array("iNewsID", "iUserID"));
-
 		$this->oNails->addVersion("news_comments", "1.0");
 	}
-	
+
 	private function upgrade() {
 	}
 }

@@ -1,0 +1,1 @@
+ALTER TABLE twitter_tweets ADD COLUMN `cImage` TEXT DEFAULT NULL;

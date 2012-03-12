@@ -1,0 +1,1 @@
+ALTER TABLE `search` ADD COLUMN cSearchQuery TEXT NOT NULL;

@@ -37,8 +37,7 @@ class Search_Install {
 	private function upgrade() {
 		if ($this->oNails->checkVersion("search", "1.1") == false) {
 			//1.1
-			$cSQL = " ALTER TABLE `search` ADD COLUMN cSearchQuery TEXT NOT NULL ";
-			$this->oNails->updateVersion("search", "1.1", $cSQL, "Added actually full query to the results");
+			$this->oNails->updateVersion("search", "1.1", false, "Added actually full query to the results");
 		}
 	}
 
@@ -48,15 +47,6 @@ class Search_Install {
 	 * @return
 	 */
 	private function install() {
-		$this->oDB->write("
-			CREATE TABLE IF NOT EXISTS `search` (
-				iSearchID INT NOT NULL AUTO_INCREMENT,
-				cSearch VARCHAR(200),
-				cSource TEXT,
-				dDated DATETIME,
-					PRIMARY KEY (iSearchID),
-					INDEX (dDated)
-			)");
 		$this->oNails->addVersion("search", 1.0);
 	}
 }

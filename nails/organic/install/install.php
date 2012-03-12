@@ -30,15 +30,6 @@ class Organic_Install {
 	 * @return
 	 */
 	private function install() {
-		$this->oDB->write("
-			CREATE TABLE IF NOT EXISTS `organic` (
-				`iOrganic` INT NOT NULL AUTO_INCREMENT,
-				`cHost` VARCHAR(100),
-				`cOrganic` VARCHAR(150),
-				`dDated` DATETIME,
-					PRIMARY KEY (`iOrganic`),
-					INDEX(`dDated`, `cOrganic`)
-			)");
 		$this->oNails->addVersion("organic", "1.0");
 
 		$this->oNails->sendLocation("install");
@@ -46,8 +37,7 @@ class Organic_Install {
 
 	private function upgrade() {
 		if ($this->oNails->checkVersion("organic", "1.2") == false) {
-			$cSQL = "ALTER TABLE `organic` ADD COLUMN `cUnParsed` TEXT";
-			$this->oNails->updateVersion("organic", "1.1", $cSQL);
+			$this->oNails->updateVersion("organic", "1.1");
 
 			$this->oNails->updateVersion("organic", "1.2", false, "XML Testing");
 		}

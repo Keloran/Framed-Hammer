@@ -1,0 +1,1 @@
+ALTER TABLE `gallery` ADD COLUMN `cFileSmall` TEXT, ADD COLUMN `cFileMedium` TEXT

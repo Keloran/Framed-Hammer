@@ -1,0 +1,1 @@
+ALTER TABLE `users_sessions` ADD COLUMN `cBrowser` varchar(255);
