@@ -66,7 +66,7 @@ class Charts_SVG_BarH {
 				$cOutput .= "<text x='" . $iX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;' fill='" . $this->aOptions['fontcolor'] . "'>" . $oObject->cDesc . "</text>\n";
 
 				$cOutput .= "<text x='" . $iDescX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right; visibility: hidden;' fill='" . $this->aOptions['fontcolor'] . "'>" . $oObject->iValue . " [" . $iPercent . "%]\n";
-				$cOutput .= "<animate attributeName='visibility' attributeType='CSS' begin='1s' dur='200s' fill='freeze' from='hidden' to='visible' calcMode='discrete' />\n";
+				$cOutput .= "<animate attributeName='visibility' attributeType='CSS' begin='1s' dur='0.1s' fill='freeze' from='hidden' to='visible' calcMode='discrete' />\n";
 				$cOutput .= "</text>\n";
 			} else {
 				$cOutput .= "<rect x='" . $iBarX . "' y='" . $iY . "' width='" . $iWidth . "' height='15' fill='" . $cColor . "'" . $cFilter . "/>\n";
