@@ -59,14 +59,15 @@ class Charts_SVG_BarH {
 			if (isset($this->aOptions['filter'])) { $cFilter = " style='filter: url(" . $this->aOptions['filter'] . ")' "; }
 
 			if (isset($this->aOptions["bAnimated"])) {
-				$cOutput .= "<rect x='" . $iBarX . "' y='" . $iY . "' width='0' height='15' fill='" . $cColor . "'" . $cFilter . ">\n";
+				$cOutput .= "<rect x='" . $iBarX . "' y='" . $iY . "' width='0' height='15' fill='" . $cColor . "'" . $cFilter . " id='graph" . $iY . "'>\n";
 				$cOutput .= "<animate attributeName='width' attributeType='XML' begin='0s' dur='1s' fill='freeze' from='0' to='" . $iWidth . "' />\n";
 				$cOutput .= "</rect>\n";
 
 				$cOutput .= "<text x='" . $iX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;' fill='" . $this->aOptions['fontcolor'] . "'>" . $oObject->cDesc . "</text>\n";
 
-				$cOutput .= "<text x='" . $iDescX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right; visibility: hidden;' fill='" . $this->aOptions['fontcolor'] . "'>" . $oObject->iValue . " [" . $iPercent . "%]\n";
+				$cOutput .= "<text x='" . $iDescX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right; visibility: hidden;' fill='" . $this->aOptions['fontcolor'] . "'>&nbsp;" . $oObject->iValue . " [" . $iPercent . "%]\n";
 				$cOutput .= "<animate attributeName='visibility' attributeType='CSS' begin='1s' dur='0.1s' fill='freeze' from='hidden' to='visible' calcMode='discrete' />\n";
+				$cOutput .= "<set attributeName='visibility' from='hidden' to='visible' begin='graph" . $iY . ".mouseover' end='graph" . $iY . ".mouseout' />\n";
 				$cOutput .= "</text>\n";
 			} else {
 				$cOutput .= "<rect x='" . $iBarX . "' y='" . $iY . "' width='" . $iWidth . "' height='15' fill='" . $cColor . "'" . $cFilter . "/>\n";
