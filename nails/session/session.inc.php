@@ -321,6 +321,7 @@ class Session {
 		if ($this->oDB->nextRecord()) {
 			$aData[0]['visitors']	= $this->oDB->f('visitors');
 			$aData[0]['day']		= date("l", $iInit);
+			$aData[0]['date']		= date("d/m/Y", $iInit);
 			$aData[0]['diff']		= 0;
 		}
 
@@ -333,6 +334,7 @@ class Session {
 				if ($this->oDB->nextRecord()) {
 					$aData[$i]['visitors']	= $this->oDB->f('visitors');
 					$aData[$i]['day']		= date("l", $iInit);
+					$aData[$i]['date']		= date("d/m/Y", $iInit);
 					$aData[$i]['diff']		= ($aData[$i]['visitors'] - $aData[$i - 1]['visitors']);
 				}
 			}
