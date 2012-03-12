@@ -10,7 +10,7 @@
  */
 class Charts {
 	//Traits
-	use Browser
+	use Browser;
 
 	var $aPreData 	= false;
 
