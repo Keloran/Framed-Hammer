@@ -44,6 +44,9 @@ class Charts_SVG_Create {
 		$jCount	= count($this->aData);
 		$kCount	= 0;
 
+		$iXO	= $iX;
+		$iYO	= $iY;
+
 		foreach ($aData as $oObject) {
 			$iTextY = ($iY + 15);
 			$iTextX = ($iX + 20);
@@ -56,8 +59,6 @@ class Charts_SVG_Create {
 
 					$iTextY	= ($jY + 15);
 					$iTextX = $jX;
-
-					$jY += 20;
 
 					$iX	= $jX;
 					$iY	= $jY;
@@ -77,7 +78,7 @@ class Charts_SVG_Create {
 		$iWidth		= ($iWidth * $kCount);
 
 		//box around it
-		$cSVG .= "<rect x='" . $iX . "' y='" . $iY . "' width='" . $iWidth . "' height='" . $iHeight . "' fill='none' stroke='" . $cFontColor . "' />\n";
+		$cSVG .= "<rect x='" . $iXO . "' y='" . $iYO . "' width='" . $iWidth . "' height='" . $iHeight . "' fill='none' stroke='" . $cFontColor . "' />\n";
 
 		$cReturn = $cContent . $cSVG;
 
