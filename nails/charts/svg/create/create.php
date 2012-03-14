@@ -42,6 +42,7 @@ class Charts_SVG_Create {
 		$jY		= ($iY + 5);
 		$jX		= ($iX + 5);
 		$jCount	= count($this->aData);
+		$kCount	= 0;
 
 		foreach ($aData as $oObject) {
 			$iTextY = ($iY + 15);
@@ -50,7 +51,7 @@ class Charts_SVG_Create {
 			//set to side
 			if ($jCount >= 15) {
 				if (($iCount % 20 == 0)) {
-					$jX	= ($jX + 210);
+					$jX	= ($jX + ($kCount * 210));
 
 					$iTextY	= ($jY + 15);
 					$iTextX = $jX;
@@ -59,6 +60,8 @@ class Charts_SVG_Create {
 
 					$iX	= $jX;
 					$iY	= $jY;
+				} else {
+					$kCount++;
 				}
 			}
 
