@@ -30,7 +30,7 @@ class Session_Install {
 	}
 
 	private function upgrade() {
-		if ($this->oNails->checkVersion("session", "1.3") == false) {
+		if ($this->oNails->checkVersion("session", "1.4") == false) {
 			//1.1
 			$this->oNails->updateVersion("session", "1.1", false, "Updated to now use ip2long rather than stoping it as a strig, needs to keep as c for old calls");
 
@@ -39,6 +39,9 @@ class Session_Install {
 
 			//1.3
 			$this->oNails->updateVersion("session", "1.3", false, "Updated to autoinstall");
+
+			//1.4
+			$this->oNails->updateVersion("session", "1.4", false, "Add Visitors Sessions");
 		}
 	}
 
