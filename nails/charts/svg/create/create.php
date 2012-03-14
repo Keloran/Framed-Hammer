@@ -65,9 +65,9 @@ class Charts_SVG_Create {
 	function createOutput($cSVG) {
 		$cData  = "<?xml version='1.0' encoding='UTF-8' ?>\n";
 		$cData .= "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n";
-		$cData .= "<svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n\n";
+		$cData .= "<svg xmlns='http://www.w3.org/2000/svg' version='1.1'>";
 		$cData .= $cSVG;
-		$cData .= "</svg>\n";
+		$cData .= "</svg>";
 
 		return $cData;
 	}
