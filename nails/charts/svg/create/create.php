@@ -50,7 +50,7 @@ class Charts_SVG_Create {
 			//set to side
 			if ($jCount >= 15) {
 				if (($iCount % 20 == 0)) {
-					$jX	= ($jX + 120);
+					$jX	= ($jX + 210);
 
 					$iTextY	= ($jY + 15);
 					$iTextX = $jX;
