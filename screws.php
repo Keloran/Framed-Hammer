@@ -333,32 +333,34 @@ class Screws {
 		$cLast			= end($aName);
 		$iLength		= strlen($cLast);
 
-		$cPathed		= $cPath;
-		$cPath			= substr($cPath, 0, -$iLength);
+		$cPathed				= $cPath;
+		$cPath					= substr($cPath, 0, -$iLength);
 		if (!$cPath) { $cPath	= substr($cPathed, 0, -$iLength); }
 
 		$cInstallFile	= $cPath . "/install/install.php";
 		$cInstallClass	= $cClass . "_install";
 		$cInstallPath	= $cPath . "/install/install.php";
-		$cChecker	= $cPath . "/" . $cClass . "/install/install.php";
+		$cChecker		= $cPath . "/" . $cClass . "/install/install.php";
+		$cChecker2		= $cPathed . "/install/install.php";
 
 		$aDebug	= array(
-			"Path"		=> $cPath,
-			"Install"	=> $cInstallFile,
-			"Class"		=> $cClass,
-			"Installer"	=> $cClass . "_install",
-			"Pathed"	=> $cPathed,
+			"Path"			=> $cPath,
+			"Install"		=> $cInstallFile,
+			"Class"			=> $cClass,
+			"Installer"		=> $cClass . "_install",
+			"Pathed"		=> $cPathed,
 			"InstallPath"	=> $cInstallPath,
-			"Name"		=> $aName,
-			"Last"		=> $cLast,
-			"Length"	=> $iLength,
-			"nLength"	=> -$iLength,
-			"checker"	=> $cChecker,
+			"Name"			=> $aName,
+			"Last"			=> $cLast,
+			"Length"		=> $iLength,
+			"nLength"		=> -$iLength,
+			"checker"		=> $cChecker,
+			"checker2"		=> $cChecker2,
 		);
 		$oInstall	= false;
 
-		if (file_exists($cInstallPath) || file_exists($cChecker)) {
-			if (file_exists($cChecker)) {
+		if (file_exists($cInstallPath) || file_exists($cChecker) || file_exists($cChecker2)) {
+			if (file_exists($cChecker)) { //Checker 1
 				try {
 					$oNails 	= new Nails();
 					$oInstall	= new $cInstallClass($oNails);
@@ -369,7 +371,18 @@ class Screws {
 						die();
 					}
 				}
-			} else if (file_exists($cInstallPath)) {
+			} else if (file_exists($cChecker2)) { //Checker 2
+				try {
+					$oNails 	= new Nails();
+					$oInstall	= new $cInstallClass($oNails);
+				} catch (Exception $e) {
+					if (!strstr($e->getMessage(), "not found")) {
+						printRead($e->getMessage());
+						printRead($aDebug);
+						die();
+					}
+				}
+			} else if (file_exists($cInstallPath)) { //not sure why it would get here
 				try {
 					$oNails		= new Nails();
 					$oInstall	= new $cInstallClass($oNails);
