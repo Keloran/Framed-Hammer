@@ -67,14 +67,14 @@ class Charts_SVG_Create {
 			}
 
 			$cColor = $oObject->cColor;
-			$cSVG .= "<rect x='" . $iX . "' y='" . $iY . "' width='15' height='15' fill='" . $cColor . "' stroke='black' />\n";
+			$cSVG .= "<rect x='" . $iX . "' y='" . $iY . "' width='15' height='15' fill='" . $cColor . "' stroke='" . $cFontColor . "' />\n";
 			$cSVG .= "<text x='" . $iTextX . "' y='" . $iTextY . "' font-size='12' fill='" . $cFontColor . "'>" . $oObject->cDesc . " - " . $oObject->iPercentLegend . "% (" . $oObject->iValue . ")</text>\n";
 
 			$iY += 20;
 			$iCount++;
 		}
 
-		$iHeight 	= ($iHeight * $kCount);
+		$iHeight 	= (($iHeight * $kCount) + 5);
 		$iWidth		= (($iWidth * ($kCount * 2)) + 10);;
 
 		//box around it
