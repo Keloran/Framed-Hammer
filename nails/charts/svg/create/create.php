@@ -33,7 +33,7 @@ class Charts_SVG_Create {
 		$iHeight 	= isset($this->aOptions["iHeight"]) 	? $this->aOptions["iHeight"] 	: 200;
 		$cFontColor	= isset($this->aOptions['fontcolor'])	? $this->aOptions['fontcolor']	: 'black';
 
-		$cSVG = "<rect x='" . $iX . "' y='" . $iY . "' width='" . $iWidth . "' height='" . $iHeight . "' fill='none' stroke='black' />\n";
+		$cSVG = "<rect x='" . $iX . "' y='" . $iY . "' width='" . $iWidth . "' height='" . $iHeight . "' fill='none' stroke='" . $cFontColor . "' />\n";
 
 		$iY 	= ($iY + 5);
 		$iX 	= ($iX + 5);
