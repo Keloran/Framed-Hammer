@@ -50,12 +50,15 @@ class Charts_SVG_Create {
 			//set to side
 			if ($jCount >= 15) {
 				if ($iCount >= 10) {
-					$jX	= (strlen($oObject->cDesc . " - " . $oObject->iPercentLegend . "% (" . $oObject->iValue . ")") + 10);
+					$jX	= ($iX + (strlen($oObject->cDesc . " - " . $oObject->iPercentLegend . "% (" . $oObject->iValue . ")") + 10));
 
 					$iTextY	= ($jY + 15);
 					$iTextX = $jX;
 
 					$jY += 20;
+
+					$iX	= $jX;
+					$iY	= $jY;
 				}
 			}
 
