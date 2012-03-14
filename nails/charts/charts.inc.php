@@ -12,16 +12,16 @@ class Charts {
 	//Traits
 	use Browser;
 
-	var $aPreData 	= false;
+	public $aPreData 	= false;
 
-	var $iChartType	= 1; //1 = Pie, 2 = BarH, 3 = BarV
-	var $cContent	= false;
-	var $aOptions	= false;
-	var $aData		= false;
-	var $cType		= "PNG"; //Default type of render
+	public $iChartType	= 1; //1 = Pie, 2 = BarH, 3 = BarV
+	public $cContent	= false;
+	public $aOptions	= false;
+	public $aData		= false;
+	public $cType		= "PNG"; //Default type of render
 
-	var $oCreate	= false;
-	var $oType		= false;
+	public $oCreate		= false;
+	public $oType		= false;
 
 	static $oCharts;
 	private $oNails;
@@ -82,12 +82,22 @@ class Charts {
 	}
 
 	/**
+	 * Charts::addData()
+	 *
+	 * @param array $aData
+	 * @return null
+	 */
+	public function addData($aData) {
+		$this->aPreData[]	= $aData;
+	}
+
+	/**
 	 * Chart::setData()
 	 *
 	 * @param array $aData
 	 * @return
 	 */
-	function setData(){
+	public function setData(){
 		$aTmp = $this->aData;
 		$iSum = 0;
 
@@ -125,7 +135,7 @@ class Charts {
 	 * @param int $cType
 	 * @return
 	 */
-	function createChart($aOptions = false, $cType = false){
+	public function createChart($aOptions = false, $cType = false){
 		if ($aOptions) { $this->aOptions = $aOptions; }
 
 		//it shouldnt be an array
@@ -178,7 +188,7 @@ class Charts {
 	 * @desc this is for ones that require a legend be made outside of the main graph (e.g. PNG)
 	 * @return
 	 */
-	function createLegend() {
+	public function createLegend() {
 		return $this->oCreate->makeLegend();
 	}
 
@@ -189,7 +199,7 @@ class Charts {
 	 * @param string $cFontColor default black
 	 * @return
 	 */
-	function renderChart($bLegend = false, $cFontColor = 'black') {
+	public function renderChart($bLegend = false, $cFontColor = 'black') {
 		if ($bLegend) {
 			$cReturn	= $this->oCreate->makeLegend($this->cContent, $cFontColor);
 			$cReturn 	= $this->oCreate->createOutput($cReturn);
