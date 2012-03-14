@@ -33,7 +33,7 @@ class Charts_SVG_Create {
 		$iHeight 	= isset($this->aOptions["iHeight"]) 	? $this->aOptions["iHeight"] 	: 200;
 		$cFontColor	= isset($this->aOptions['fontcolor'])	? $this->aOptions['fontcolor']	: 'black';
 
-		$cSVG = "<rect x='" . $iX . "' y='" . $iY . "' width='" . $iWidth . "' height='" . $iHeight . "' fill='none' stroke='" . $cFontColor . "' />\n";
+		$cSVG = "";
 
 		$iY 	= ($iY + 5);
 		$iX 	= ($iX + 5);
@@ -61,7 +61,6 @@ class Charts_SVG_Create {
 
 					$iX	= $jX;
 					$iY	= $jY;
-				} else {
 					$kCount++;
 				}
 			}
@@ -73,6 +72,12 @@ class Charts_SVG_Create {
 			$iY += 20;
 			$iCount++;
 		}
+
+		$iHeight 	= ($iHeight * $kCount);
+		$iWidth		= ($iWidth * $kCount);
+
+		//box around it
+		$cSVG .= "<rect x='" . $iX . "' y='" . $iY . "' width='" . $iWidth . "' height='" . $iHeight . "' fill='none' stroke='" . $cFontColor . "' />\n";
 
 		$cReturn = $cContent . $cSVG;
 
