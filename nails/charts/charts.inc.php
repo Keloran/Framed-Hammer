@@ -84,11 +84,11 @@ class Charts {
 	/**
 	 * Charts::addData()
 	 *
-	 * @param array $aData
+	 * @param object $aData
 	 * @return null
 	 */
-	public function addData($aData) {
-		$this->aPreData[]	= $aData;
+	public function addData(Charts_Data $oData) {
+		$this->aPreData[]	= $oData;
 	}
 
 	/**
