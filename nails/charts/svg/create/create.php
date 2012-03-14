@@ -35,14 +35,30 @@ class Charts_SVG_Create {
 
 		$cSVG = "<rect x='" . $iX . "' y='" . $iY . "' width='" . $iWidth . "' height='" . $iHeight . "' fill='none' stroke='black' />\n";
 
-		$iY = $iY + 5;
-		$iX = $iX + 5;
+		$iY 	= ($iY + 5);
+		$iX 	= ($iX + 5);
 		$iCount = 0;
-		$aData = $this->aData;
+		$aData 	= $this->aData;
+		$jY		= ($iY + 5);
+		$jX		= ($iX + 5);
+		$jCount	= count($this->aData);
 
 		foreach ($aData as $oObject) {
-			$iTextY = $iY + 15;
-			$iTextX = $iX + 20;
+			$iTextY = ($iY + 15);
+			$iTextX = ($iX + 20);
+
+			//set to side
+			if ($jCount >= 15) {
+				if ($iCount >= 10) {
+					$jX	= (strlen($oObject->cDesc . " - " . $oObject->iPercentLegend . "% (" . $oObject->iValue . ")") + 10);
+
+					$iTextY	= ($jY + 15);
+					$iTextX = $jX;
+
+					$jY += 20;
+				}
+			}
+
 			$cColor = $oObject->cColor;
 			$cSVG .= "<rect x='" . $iX . "' y='" . $iY . "' width='15' height='15' fill='" . $cColor . "' stroke='black' />\n";
 			$cSVG .= "<text x='" . $iTextX . "' y='" . $iTextY . "' font-size='12' fill='" . $cFontColor . "'>" . $oObject->cDesc . " - " . $oObject->iPercentLegend . "% (" . $oObject->iValue . ")</text>\n";
