@@ -76,11 +76,15 @@ class Charts_PNG_Create {
 		//if there is a chart image passed
 		if ($pChart) {
 			$pNewImage	= imagecreatetruecolor(((imagesx($pChart) + imagesx($imLegendImage)) + 5), imagesy($pChart));
-			$imBack		= imagecolorallocate($pNewImage, 255, 255, 255);
-			ImageFill($pNewImage, 0, 0, $imBack);
+			imagealphablending($pNewImage, true);
+			imagesavealpha($pNewImage, true);
 
-			return imagecopymerge($pChart, $pNewImage, 0, 0, 0, 0, imagesx($pChart), imagesy($pChart), 100);
-			imagecopymerge($imLegendImage, $pNewImage, (imagesx($pChart) + 5), 0, 0, 0, imagesx($imLegendImage), imagesy($imLegendImage), 100);
+			imagealphablending($pChart, true);
+			imagesavealpha($pChart, true);
+
+			imagecopy($pNewImage, $pChart, 0, 0, 0, 0, imagesx($pChart), imagesy($pChart), 100);
+			imagecopymerge($pNewImage, $imLegendImage, (imagesx($pChart) + 5), 0, 0, 0, imagesx($imLegendImage), imagesy($imLegendImage), 100);
+
 			return $pNewImage;
 		}
 
