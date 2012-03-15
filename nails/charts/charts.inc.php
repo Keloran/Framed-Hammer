@@ -201,8 +201,13 @@ class Charts {
 	 */
 	public function renderChart($bLegend = false, $cFontColor = 'black') {
 		if ($bLegend) {
-			$cReturn 	= $this->oCreate->createOutput($this->cContent);
-			$cReturn	= $this->oCreate->makeLegend($cReturn, $cFontColor);
+			if ($this->cType == "PNG") {
+				$cReturn 	= $this->oCreate->createOutput($this->cContent);
+				$cReturn	= $this->oCreate->makeLegend($cReturn, $cFontColor);
+			} else {
+				$cReturn	= $this->oCreate->makeLegend($this->cContent, $cFontColor);
+				$cReturn 	= $this->oCreate->createOutput($cReturn);
+			}
 		} else {
 			$cReturn 	= $this->oCreate->createOutput($this->cContent);
 		}
