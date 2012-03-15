@@ -63,7 +63,8 @@ class Charts_PNG_Pie {
 		$i = 0;
 		foreach ($aData as $oObject) {
 			//color
-			$cColor			= $this->getColor($i);
+			#$cColor			= $this->getColor($i);
+			$cColor			= $oObject->cColor;
 			$iColR			= hexdec(substr($cColor, 1, 2));
 			$iColG			= hexdec(substr($cColor, 3, 2));
 			$iColB			= hexdec(substr($cColor, 5, 2));

@@ -56,7 +56,8 @@ class Charts_PNG_BarV {
 		$iWidth	= 450 / count($aData);
 
 		foreach ($aData as $oObject) {
-			$cColor			= $this->getColor($i);
+			#$cColor			= $this->getColor($i);
+			$cColor			= $oObject->cColor;
 			$iColR			= hexdec(substr($cColor, 1, 2));
 			$iColG			= hexdec(substr($cColor, 3, 2));
 			$iColB			= hexdec(substr($cColor, 5, 2));
