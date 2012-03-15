@@ -83,7 +83,7 @@ class Charts_PNG_Create {
 			imagesavealpha($pChart, true);
 
 			imagecopy($pNewImage, $pChart, 0, 0, 0, 0, imagesx($pChart), imagesy($pChart));
-			imagecopymerge($pNewImage, $imLegendImage, (imagesx($pChart) + 5), 0, 0, 0, imagesx($imLegendImage), imagesy($imLegendImage));
+			imagecopy($pNewImage, $imLegendImage, (imagesx($pChart) + 5), 0, 0, 0, imagesx($imLegendImage), imagesy($imLegendImage));
 
 			return $pNewImage;
 		}
