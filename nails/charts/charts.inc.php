@@ -144,10 +144,6 @@ class Charts {
 		//set teh font color
 		if (!isset($this->aOptions['fontcolor'])) { $this->aOptions['fontcolor'] = 'black'; }
 
-		//since we cant make a massive image/svg
-		if (count($this->aPreData) > 15) { $cType = "barv"; }
-		if (count($this->aPreData) > 25) { $cType = "pie"; }
-
 		//Type
 		switch($cType) {
 			case "barv":
