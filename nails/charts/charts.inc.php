@@ -201,7 +201,7 @@ class Charts {
 	 */
 	public function renderChart($bLegend = false, $cFontColor = 'black') {
 		if ($bLegend) {
-			$cReturn 	= $this->oCreate->createOutput($cReturn);
+			$cReturn 	= $this->oCreate->createOutput($this->cContent);
 			$cReturn	= $this->oCreate->makeLegend($cReturn, $cFontColor);
 		} else {
 			$cReturn 	= $this->oCreate->createOutput($this->cContent);
