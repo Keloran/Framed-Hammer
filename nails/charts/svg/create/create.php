@@ -75,7 +75,10 @@ class Charts_SVG_Create {
 		}
 
 		//if kCount = 0, set to 1 so border is rendered
-		if ($kCount == 0) { $kCount = 1; }
+		if ($kCount == 0) {
+			$kCount = 1;
+			$iHeight = ($iHeight + ($iCount * 150));
+		}
 		$iHeight 	= (($iHeight * $kCount) + 5);
 		$iWidth		= (($iWidth * ($kCount * 2)) + 10);;
 
