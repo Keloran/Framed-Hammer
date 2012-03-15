@@ -12,24 +12,12 @@ class Charts_PNG_Create {
 	}
 
 	/**
-	 * Charts_PNG_Create::getColor()
-	 *
-	 * @param int $iID
-	 * @return string
-	 */
-	function getColor($iID) {
-		$cColor = $this->aColors[$iID % count($this->aColors)];
-
-		return $cColor;
-	}
-
-	/**
 	 * Charts_PNG_Create::makeLegend()
 	 *
 	 * @param string $cContent
 	 * @return string
 	 */
-	function makeLegend() {
+	function makeLegend($pChart = false) {
 		$aData	= $this->aData;
 
 		//load the font
@@ -83,6 +71,12 @@ class Charts_PNG_Create {
 			ImageString($imLegendImage, $iFont, '20', $yOffset, $cText, $imTextColor);
 			$yOffset = $yOffset + 15;
 			$i++;
+		}
+
+		//if there is a chart image passed
+		if ($pChart) {
+			imagecopymerge($imLegendImage, $pChart, imagesx($pChart), 0, 0, 0, imagesx($imLegendImage), imagesy($imLegendImage), 100);
+			return $pChart;
 		}
 
 		return $imLegendImage;

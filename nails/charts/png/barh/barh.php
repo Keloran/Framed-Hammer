@@ -25,18 +25,6 @@ class Charts_PNG_BarH {
 	}
 
 	/**
-	 * Charts_PNG_BarH::getColor()
-	 *
-	 * @param int $iID
-	 * @return strin
-	 */
-	function getColor($iID) {
-		$cColor = $this->aColors[$iID % count($this->aColors)];
-
-		return $cColor;
-	}
-
-	/**
 	 * Charts_PNG_BarH::renderChart()
 	 *
 	 * @return string

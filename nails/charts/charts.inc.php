@@ -188,8 +188,8 @@ class Charts {
 	 * @desc this is for ones that require a legend be made outside of the main graph (e.g. PNG)
 	 * @return
 	 */
-	public function createLegend() {
-		return $this->oCreate->makeLegend();
+	public function createLegend($pImage = false) {
+		return $this->oCreate->makeLegend($pImage);
 	}
 
 	/**

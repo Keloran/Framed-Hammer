@@ -25,18 +25,6 @@ class Charts_PNG_BarV {
 	}
 
 	/**
-	 * Charts_PNG_BarV::getColor()
-	 *
-	 * @param int $iID
-	 * @return string
-	 */
-	function getColor($iID) {
-		$cColor = $this->aColors[$iID % count($this->aColors)];
-
-		return $cColor;
-	}
-
-	/**
 	 * Charts_PNG_BarV::renderChart()
 	 *
 	 * @return string

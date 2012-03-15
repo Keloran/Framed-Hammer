@@ -77,10 +77,11 @@ class Charts_SVG_Create {
 		//if kCount = 0, set to 1 so border is rendered
 		if ($kCount == 0) {
 			$kCount = 1;
-			$iHeight = ($iHeight + ($iCount * 150));
+			$iHeight = ($iHeight + ($iCount * 10));
 		}
 		$iHeight 	= (($iHeight * $kCount) + 5);
-		$iWidth		= (($iWidth * ($kCount * 2)) + 10);;
+		$iWidth		= (($iWidth * ($kCount * 2)) + 10);
+		$iYO		= ($iYO - 3);
 
 		//box around it
 		$cSVG .= "<rect x='" . $iXO . "' y='" . $iYO . "' width='" . $iWidth . "' height='" . $iHeight . "' fill='none' stroke='" . $cFontColor . "' />\n";
