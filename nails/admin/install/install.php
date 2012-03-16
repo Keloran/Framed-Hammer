@@ -30,10 +30,8 @@ class Admin_Install {
 	}
 
 	private function install() {
-		//Create the banned table
-		printRead("users_banned");
-
-		$this->oNails->getUser();
+		$oUser	= $this->oNails->getUser();
+		$oUser->getUserID();
 
 		$this->oNails->addVersion("admin", "1.0");
 		$this->oNails->sendLocation("install");
