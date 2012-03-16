@@ -21,6 +21,9 @@ class User_Install {
 		$this->oNails	= $oNails;
 
 		$bInstalled	= $oNails->checkInstalled("users");
+		printRead($bInstalled);
+		die("check");
+
 		if ($bInstalled) {
 			$this->upgrade();
 		} else {
