@@ -20,7 +20,7 @@ class User_Install {
 	function __construct(Nails $oNails) {
 		$this->oNails	= $oNails;
 
-		$bInstalled	= $oNails->checkInstalled("user");
+		$bInstalled	= $oNails->checkInstalled("users");
 		if ($bInstalled) {
 			$this->upgrade();
 		} else {
