@@ -362,6 +362,8 @@ class Nails extends Hammer {
 				$this->doSQL($cLibrary, $cVersion);
 			}
 
+			if ($cLibrary == "users") { echo "doing";die(); }
+
 			$this->addXML($cLibrary, $cVersion);
 			return true;
 		}
@@ -403,7 +405,7 @@ class Nails extends Hammer {
 			$cFile 	= file_get_contents($cSQL);
 			$aSQL	= explode(";", $cFile);
 			for ($i = 0; $i < count($aSQL); $i++) {
-				if ($aSQL[$i]) {
+				if (strlen($aSQL[$i]) >= 2) {
 					$this->oDB->write($aSQL[$i]);
 				}
 			}
