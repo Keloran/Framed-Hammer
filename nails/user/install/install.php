@@ -53,7 +53,7 @@ class User_Install {
 
 			//1.4
 			printRead("1.4 Start");
-			$this->oNails->updateVersion("users", 1.4, falsw, "Added Notifications");
+			$this->oNails->updateVersion("users", 1.4, false, "Added Notifications");
 			printRead("1.4 End");
 
 			//1.5
