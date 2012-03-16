@@ -296,7 +296,7 @@ class Nails extends Hammer {
 	* @param string	$cChangelog	The changelog for this version of the library
 	* @return false
 	*/
-	public function updateVersion($cLibrary, $cVersion, $mSQL = false, $cChangelog = false) {
+	public function updateVersion($cLibrary, $cVersion, $mSQL = false, $cChangelog = false, $cNailName = false) {
 		if ($this->checkVersion($cLibrary, $cVersion) == false) {
 			//update the table with the stuff you want todo, it might not actually have a database update, just a version update
 			if ($mSQL) {
@@ -310,7 +310,12 @@ class Nails extends Hammer {
 				}
 			}
 
-			$this->doSQL($cLibrary, $cVersion);
+			//if the nail is actualyl called something different
+			if ($cNailName) {
+				$this->doSQL($cNailName, $cVersion);
+			} else {
+				$this->doSQL($cLibrary, $cVersion);
+			}
 
 			//do the update
 			return $this->updateXML($cLibrary, $cVersion, $cChangelog);
@@ -347,9 +352,16 @@ class Nails extends Hammer {
 	* @param string $cVersion
 	* @return false
 	*/
-	public function addVersion($cLibrary, $cVersion) {
+	public function addVersion($cLibrary, $cVersion, $cNailName = false) {
 		if ($this->checkXMLVersion($cLibrary, $cVersion) == false) {
-			$this->doSQL($cLibrary, $cVersion);
+
+			//if the library is actually called something different
+			if ($cNailName) {
+				$this->doSQL($cNailName, $cVersion);
+			} else {
+				$this->doSQL($cLibrary, $cVersion);
+			}
+
 			$this->addXML($cLibrary, $cVersion);
 			return true;
 		}

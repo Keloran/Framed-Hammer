@@ -20,10 +20,7 @@ class User_Install {
 	function __construct(Nails $oNails) {
 		$this->oNails	= $oNails;
 
-		$bInstalled	= $oNails->checkInstalled("users");
-		printRead($bInstalled);
-		die("check");
-
+		$bInstalled	= $oNails->checkInstalled("user");
 		if ($bInstalled) {
 			$this->upgrade();
 		} else {
@@ -41,32 +38,32 @@ class User_Install {
 		if ($this->oNails->checkVersion("users", 1.6) == false) {
 			//1.1
 			printRead("1.1 Start");
-			$this->oNails->updateVersion("users", 1.1, false, "Added the special Privs table");
+			$this->oNails->updateVersion("users", 1.1, false, "Added the special Privs table", "user");
 			printRead("1.1 End");
 
 			//1.2
 			printRead("1.2 Start");
-			$this->oNails->updateVersion("users", 1.2, false, "De-Coupled");
+			$this->oNails->updateVersion("users", 1.2, false, "De-Coupled", "user");
 			printRead("1.2 End");
 
 			//1.3
 			printRead("1.3 Start");
-			$this->oNails->updateVersion("users", 1.3, false, "Added Temp flag for passwords");
+			$this->oNails->updateVersion("users", 1.3, false, "Added Temp flag for passwords", "user");
 			printRead("1.3 End");
 
 			//1.4
 			printRead("1.4 Start");
-			$this->oNails->updateVersion("users", 1.4, false, "Added Notifications");
+			$this->oNails->updateVersion("users", 1.4, false, "Added Notifications", "user");
 			printRead("1.4 End");
 
 			//1.5
 			printRead("1.5 Start");
-			$this->oNails->updateVersion("users", 1.5, false, "Updated MD5 fields to 65 chars");
+			$this->oNails->updateVersion("users", 1.5, false, "Updated MD5 fields to 65 chars", "user");
 			printRead("1.5 End");
 
 			//1.6
 			printRead("1.6 Start");
-			$this->oNails->updateVersion("users", 1.6, false, "Added Deleted and Banned flags");
+			$this->oNails->updateVersion("users", 1.6, false, "Added Deleted and Banned flags", "user");
 			printRead("1.6 End");
 		}
 	}
@@ -79,7 +76,7 @@ class User_Install {
 	private function install() {
 		//Install the groups
 		printRead("Add Version");
-		$this->oNails->addVersion("users", "1.0");
+		$this->oNails->addVersion("users", "1.0", "user");
 
 		printRead("Add Groups");
 	}
