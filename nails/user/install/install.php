@@ -19,7 +19,6 @@ class User_Install {
 	 */
 	function __construct(Nails $oNails) {
 		$this->oNails	= $oNails;
-		$this->oDB		= $oNails->getDatabase();
 
 		$bInstalled	= $oNails->checkInstalled("users");
 		if ($bInstalled) {

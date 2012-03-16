@@ -19,7 +19,6 @@ class Admin_Install {
 	 */
 	function __construct(Nails $oNails) {
 		$this->oNails	= $oNails;
-		$this->oDB		= $oNails->getDatabase();
 
 		$bInstalled	= $oNails->checkInstalled("admin");
 		if ($bInstalled) {
@@ -30,7 +29,7 @@ class Admin_Install {
 	}
 
 	private function install() {
-		$this->oNails->getUser();
+		$oUsers	= new User_Install($this->oNails);
 
 		$this->oNails->addVersion("admin", "1.0");
 		$this->oNails->sendLocation("install");
@@ -39,7 +38,7 @@ class Admin_Install {
 	private function upgrade() {
 		if ($this->oNails->checkVersion("admin", "1.1") == false) {
 			//make sure this is always done
-			$this->oNails->getUser();
+			$oUsers	= new User_Install($this->oNails);
 
 			$this->oNails->updateVersion("admin", "1.1");
 		}
