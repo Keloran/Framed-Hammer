@@ -8,7 +8,10 @@ CREATE TABLE IF NOT EXISTS admin_contest (
 );
 
 ALTER TABLE `users_groups` ADD COLUMN `bAdmin` BOOL NOT NULL;
+ALTER TABLE `users_groups` ADD INDEX (`bAdmin`);
 UPDATE `users_groups` SET bAdmin = 1 WHERE iGroupID = 5;
 
 ALTER TABLE `users_groups` ADD COLUMN `bAddAbilitys` BOOL NOT NULL;
+ALTER TABLE `users_groups` ADD INDEX (`bAddAbilitys`);
 UPDATE `users_groups` SET bAddAbilitys = 1 WHERE iGroupID = 5;
+
