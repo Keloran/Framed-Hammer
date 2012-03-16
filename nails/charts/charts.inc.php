@@ -89,6 +89,8 @@ class Charts {
 	 */
 	public function addData(Charts_Data $oData) {
 		$this->aPreData[]	= $oData;
+
+		return $this;
 	}
 
 	/**
