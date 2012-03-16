@@ -362,7 +362,7 @@ class Nails extends Hammer {
 				$this->doSQL($cLibrary, $cVersion);
 			}
 
-			$this->addXML($cLibrary, $cVersion); }
+			$this->addXML($cLibrary, $cVersion);
 			return true;
 		}
 
