@@ -307,37 +307,31 @@ class Session {
 	 */
 	public function getVisitors($iStart = false, $iEnd = false) {
 		$aData	= false;
+		$i		= 0;
 
 		if (!$iStart) { $iStart = strtotime("yesterday"); }
 		if (!$iEnd) { $iEnd	= time(); }
 
-		//get the number of days between
-		$iDays	= (($iEnd - $iStart) / 86400);
-		$iInit	= $iStart;
+		$this->oDB->read("
+			SELECT
+				COUNT(*) AS visitors,
+				FROM_UNIXTIME(tsDate, '%d/%m/%Y') AS dated,
+				tsDate
+			FROM users_sessions_visitors
+			WHERE (tsDate BETWEEN (?) AND (?))
+			GROUP BY dated DESC
+		");
+		while ($this->oDB->nextRecord()) {
+			$aData[$i]['visitors']	= $this->oDB->f('visitors');
+			$aData[$i]['day']		= date("l", $this->oDB->f('tsDate'));
+			$aData[$i]['date']		= $this->oDB->f("dated");
 
-		//get the first data
-		$aRead	= array($iInit, ($iInit + 86399));
-		$this->oDB->read("SELECT COUNT(*) AS visitors FROM users_sessions_visitors WHERE (tsDate BETWEEN (?) AND (?))", $aRead);
-		if ($this->oDB->nextRecord()) {
-			$aData[0]['visitors']	= $this->oDB->f('visitors');
-			$aData[0]['day']		= date("l", $iInit);
-			$aData[0]['date']		= date("d/m/Y", $iInit);
-			$aData[0]['diff']		= 0;
-		}
-
-		//get the data
-		if ($iDays >= 1) {
-			for ($i = 1; $i < $iDays; $i++) {
-				$iInit	= ($iInit + 86400);
-				$aRead	= array($iInit, ($iInit + 86399));
-				$this->oDB->read("SELECT COUNT(*) AS visitors FROM users_sessions_visitors WHERE (tsDate BETWEEN (?) AND (?))", $aRead);
-				if ($this->oDB->nextRecord()) {
-					$aData[$i]['visitors']	= $this->oDB->f('visitors');
-					$aData[$i]['day']		= date("l", $iInit);
-					$aData[$i]['date']		= date("d/m/Y", $iInit);
-					$aData[$i]['diff']		= ($aData[$i]['visitors'] - $aData[$i - 1]['visitors']);
-				}
+			if ($i == 0) {
+				$aData[$i]['diff']		= ($aData[$i]['visitors'] - 0);
+			} else {
+				$aData[$i]['diff']		= ($aData[$i]['visitors'] - $aData[$i - 1]['visitors']);
 			}
+			$i++;
 		}
 
 		return $aData;
