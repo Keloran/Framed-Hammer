@@ -312,6 +312,7 @@ class Session {
 		if (!$iStart) { $iStart = strtotime("yesterday"); }
 		if (!$iEnd) { $iEnd	= time(); }
 
+		$aRead	= array($iStart, $iEnd);
 		$this->oDB->read("
 			SELECT
 				COUNT(*) AS visitors,
@@ -320,7 +321,7 @@ class Session {
 			FROM users_sessions_visitors
 			WHERE (tsDate BETWEEN (?) AND (?))
 			GROUP BY dated DESC
-		");
+		", $aRead);
 		while ($this->oDB->nextRecord()) {
 			$aData[$i]['visitors']	= $this->oDB->f('visitors');
 			$aData[$i]['day']		= date("l", $this->oDB->f('tsDate'));
