@@ -57,13 +57,11 @@ class Charts_SVG_Create {
 					$jX	= ($jX + 230);
 
 					$iTextY	= ($jY + 15);
-					$iTextX = ($jX + 10);
+					$iTextX = ($jX + 20);
 
 					$iX	= $jX;
 					$iY	= $jY;
 					$kCount++;
-				} else {
-					$iTextX	= $jX;
 				}
 			}
 
