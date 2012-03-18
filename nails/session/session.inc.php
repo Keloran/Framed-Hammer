@@ -363,7 +363,7 @@ class Session {
 			}
 		}
 
-		return $aData;
+		return $aFinal;
 	}
 }
 
