@@ -58,7 +58,7 @@ class Charts_SVG_BarH {
 		//go through the data
 		foreach ($aData as $oObject) {
 			$cColor 	= $oObject->cColor;
-			$iTextY		= ($iY + 11);
+			$iTextX		= ($iX + 11);
 			$iWidth		= $oObject->iPercent;
 			$iPercent	= number_format($oObject->iPercent, 2, ",", ".");
 
@@ -69,9 +69,10 @@ class Charts_SVG_BarH {
 				$cOutput .= "</rect>";
 
 				//description of the bar
-				$cOutput .= "<text x='" . $iX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;' fill='" . $cFontColor . "'>" . $oObject->cDesc . "</text>";
+				$cOutput .= "<text x='" . $iTextX . "' y='" . $iY . "' style='font-size: 12px; text-anchor: right;' fill='" . $cFontColor . "'>" . $oObject->cDesc . "</text>";
 
-				$cOutput .= "<text x='" . $iDescX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right; visibility: hidden;' fill='" . $cFontColor . "'> " . $oObject->iValue . " [" . $iPercent . "%]";				$cOutput .= "<animate attributeName='visibility' begin='1s' fill='freeze' from='hidden' to='visible' calcMode='discrete' />";
+				$cOutput .= "<text x='" . $iDescX . "' y='" . $iY . "' style='font-size: 12px; text-anchor: right; visibility: hidden;' fill='" . $cFontColor . "'> " . $oObject->iValue . " [" . $iPercent . "%]";
+				$cOutput .= "<animate attributeName='visibility' begin='1s' fill='freeze' from='hidden' to='visible' calcMode='discrete' />";
 				$cOutput .= "<set attributeName='visibility' from='hidden' to='visible' begin='graph" . $iY . ".mouseover' end='graph" . $iY . ".mouseout' />";
 				$cOutput .= "</text>";
 			} else {
