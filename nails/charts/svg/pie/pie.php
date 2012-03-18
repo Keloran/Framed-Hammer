@@ -40,7 +40,7 @@ class Charts_SVG_Pie {
 		//set the font color
 		$cFontColor		= $this->aOptions['fontcolor'];
 
-		foreach ($aData as $oObject){
+		foreach ($aData as $oObject) {
 			$iAlpha = ($iAlpha + (($oObject->iPercent / 100) * (2 * M_PI)));
 
 			$iX2 = $iCX + ($iR * sin($iAlpha));
@@ -61,8 +61,8 @@ class Charts_SVG_Pie {
 
 			//description of the bar
 			$cOutput .= "<text x='0' y='0' style='font-size: 12px; text-anchor: right; visibility: hidden;' fill='" . $cFontColor . "'> " . $oObject->iValue . " [" . $iPercent . "%]";
-			$cOutput .= "<set attributeName='visibility' from='hidden' to='visible' begin='graph" . $iX2 . ".mouseover' end='graph" . $iX2 . ".mouseout' />";
-			$cOutput .= "<set attributeName='x' from='0' to='" . $iCX . "' begin='graph" . $iX2 . ".mouseover' end='graph" . $iX2 . ".mouseout' />";
+			$cOutput .= "<set attributeName='visibility' from='hidden' to='visible' begin='graph" . substr($cColor, 1) . ".mouseover' end='graph" . substr($cColor, 1) . ".mouseout' />";
+			$cOutput .= "<set attributeName='x' from='0' to='" . $iCX . "' begin='graph" . substr($cColor, 1) . ".mouseover' end='graph" . substr($cColor, 1) . ".mouseout' />";
 			$cOutput .= "</text>";
 
 			$iX1 = $iX2;
