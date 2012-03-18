@@ -56,7 +56,7 @@ class Charts_SVG_Create {
 				if (($iCount % 20 == 0) && ($iCount != 0)) {
 					$jX	= ($jX + 230);
 
-					$iTextY	= ($jY + 15);
+					$iTextY	= ($jY + 13);
 					$iTextX = ($jX + 20);
 
 					$iX	= $jX;
@@ -79,7 +79,7 @@ class Charts_SVG_Create {
 			$iHeight = ($iHeight + ($iCount * 10));
 		}
 		$iHeight 	= (($iHeight * $kCount) + 5);
-		$iWidth		= (($iWidth * ($kCount * 2)) + 10);
+		$iWidth		= (($iWidth * ($kCount * 2)) + 15);
 		$iYO		= ($iYO - 3);
 
 		//box around it
