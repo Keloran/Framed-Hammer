@@ -343,7 +343,7 @@ class Session {
 			if ($i == 0) {
 				$tsDate	= $iInit;
 			} else {
-				$tsDate	= ($i * 86400);
+				$tsDate	= ($iInit + ($i * 86400));
 			}
 
 			$dDate = date("d/m/Y", $tsDate);
