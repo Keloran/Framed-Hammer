@@ -62,7 +62,7 @@ class Charts_SVG_Pie {
 			//description of the bar
 			$cOutput .= "<text x='0' y='0' style='font-size: 12px; text-anchor: right; visibility: hidden;' fill='" . $cFontColor . "'> " . $oObject->iValue . " [" . $iPercent . "%]";
 			$cOutput .= "<set attributeName='visibility' from='hidden' to='visible' begin='graph" . substr($cColor, 1) . ".mouseover' end='graph" . substr($cColor, 1) . ".mouseout' />";
-			$cOutput .= "<set attributeName='x' from='0' to='" . $iCX . "' begin='graph" . substr($cColor, 1) . ".mouseover' end='graph" . substr($cColor, 1) . ".mouseout' />";
+			$cOutput .= "<set attributeName='x' from='0' to='150' begin='graph" . substr($cColor, 1) . ".mouseover' end='graph" . substr($cColor, 1) . ".mouseout' />";
 			$cOutput .= "</text>";
 
 			$iX1 = $iX2;
