@@ -78,8 +78,8 @@ class Charts_SVG_Create {
 			$kCount = 1;
 			$iHeight = ($iHeight + ($iCount * 10));
 		}
-		$iHeight 	= (($iHeight * $kCount) + 5);
-		$iWidth		= (($iWidth * ($kCount * 2)) + 15);
+		$iHeight 	= (($iHeight * $kCount) + 7);
+		$iWidth		= (($iWidth * ($kCount * 2)) + 18);
 		$iYO		= ($iYO - 3);
 
 		//box around it
