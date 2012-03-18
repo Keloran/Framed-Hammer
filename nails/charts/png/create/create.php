@@ -75,7 +75,15 @@ class Charts_PNG_Create {
 
 		//if there is a chart image passed
 		if ($pChart) {
-			$pNewImage	= imagecreatetruecolor(((imagesx($pChart) + imagesx($imLegendImage)) + 5), imagesy($pChart));
+			$iHeight1	= imagesy($pChart);
+			$iHeight2	= imagesy($imLegendImage);
+			if ($iHeight1 > $iHeight2) {
+				$iHeight = $iHeight1;
+			} else {
+				$iHeight = $iHeight2;
+			}
+
+			$pNewImage	= imagecreatetruecolor(((imagesx($pChart) + imagesx($imLegendImage)) + 5), $iHeight);
 			imagealphablending($pNewImage, true);
 			imagesavealpha($pNewImage, true);
 

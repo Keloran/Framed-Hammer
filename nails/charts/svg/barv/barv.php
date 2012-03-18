@@ -44,7 +44,6 @@ class Charts_SVG_BarV {
 		$cOutput .= "</filter>";
 		$cOutput .= "</defs>";
 
-		$iCount = 0;
 		$iBarY	= $iY;
 		$iDescY	= ($iY + 200);
 
@@ -78,8 +77,7 @@ class Charts_SVG_BarV {
 				$cOutput .= "<text x='" . $iX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;' fill='" . $cFontColor . "'>" . $oObject->cDesc . "</text>";
 			}
 
-			$iX = $iX + 27;
-			$iCount++;
+			$iX = ($iX + 27);
 		}
 
 		return $cOutput;
