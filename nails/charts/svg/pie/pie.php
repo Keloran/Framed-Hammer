@@ -56,7 +56,7 @@ class Charts_SVG_Pie {
 			$cOutput .= " A" . $iR . "," . $iR;
 			$cOutput .= " 0 " . $iOver180 . ",1 ";
 			$cOutput .= $iX2 . "," . $iY2 . " Z' ";
-			$cOutput .= "id='graph" . $iX2 . "' ";
+			$cOutput .= "id='graph" . substr($cColor, 1) . "' ";
 			$cOutput .= "fill='" . $cColor . "' opacity='0.6' />";
 
 			//description of the bar
