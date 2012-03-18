@@ -306,8 +306,9 @@ class Session {
 	 * @return array
 	 */
 	public function getVisitors($iStart = false, $iEnd = false) {
-		$aData	= false;
-		$i		= 0;
+		$aData		= false;
+		$aReturn	= false;
+		$i			= 0;
 
 		if (!$iStart) { $iStart = strtotime("yesterday"); }
 		if (!$iEnd) { $iEnd	= time(); }
@@ -333,6 +334,33 @@ class Session {
 				$aData[$i]['diff']		= ($aData[$i]['visitors'] - $aData[$i - 1]['visitors']);
 			}
 			$i++;
+		}
+
+		//add the blank data if needed
+		$iDays  = (($iEnd - $iStart) / 86400);
+		$iInit  = $iStart;
+		for ($i = 0; $i < $iDays; $i++) {
+			if ($i == 0) {
+				$tsDate	= $iInit;
+			} else {
+				$tsDate	= ($i * 86400);
+			}
+
+			$dDate = date("d/m/Y", $tsDate);
+
+			//add the default info
+			$aFinal[$i]['visitors']	= 0;
+			$aFinal[$i]['day']		= date("l", $tsDate);
+			$aFinal[$i]['date']		= $dDate;
+			$aFinal[$i]['diff']		= 0;
+
+			//make sure there is something for that date
+			for ($j = 0; $j < count($aData); $j++) {
+				if ($dDate == $aData[$j]['date']);
+
+				$aFinal[$i] = $aData[$j];
+				break;
+			}
 		}
 
 		return $aData;
