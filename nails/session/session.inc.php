@@ -356,10 +356,10 @@ class Session {
 
 			//make sure there is something for that date
 			for ($j = 0; $j < count($aData); $j++) {
-				if ($dDate == $aData[$j]['date']);
-
-				$aFinal[$i] = $aData[$j];
-				break;
+				if ($dDate == $aData[$j]['date']) {
+					$aFinal[$i] = $aData[$j];
+					break;
+				}
 			}
 		}
 
