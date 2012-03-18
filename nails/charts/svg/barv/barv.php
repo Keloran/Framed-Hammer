@@ -31,18 +31,18 @@ class Charts_SVG_BarV {
 
 		$aData = $this->aData;
 
-		$cOutput  = "<defs>\n";
-		$cOutput .= "<filter id='flt' filterUnits='userSpaceOnUse' x='0' y='0' width='1200' height='1200'>\n";
-		$cOutput .= "<feGaussianBlur in='SourceAlpha' stdDeviation='0.5' result='blur' />\n";
+		$cOutput  = "<defs>";
+		$cOutput .= "<filter id='flt' filterUnits='userSpaceOnUse' x='0' y='0' width='1200' height='1200'>";
+		$cOutput .= "<feGaussianBlur in='SourceAlpha' stdDeviation='0.5' result='blur' />";
 
-		$cOutput .= "<feSpecularLighting in='blur' surfaceScale='5' specularConstant='0.5' specularExponent='10' result='specOut' style='lighting-color: #FFF'>\n";
-		$cOutput .= "<fePointLight x='-5000' y='-5000' z='5000' />\n";
-		$cOutput .= "</feSpecularLighting>\n";
+		$cOutput .= "<feSpecularLighting in='blur' surfaceScale='5' specularConstant='0.5' specularExponent='10' result='specOut' style='lighting-color: #FFF'>";
+		$cOutput .= "<fePointLight x='-5000' y='-5000' z='5000' />";
+		$cOutput .= "</feSpecularLighting>";
 
-		$cOutput .= "<feComposite in='specOut' in2='SourceAlpha' operator='in' result='specOut2' />\n";
-		$cOutput .= "<feComposite in='SourceGraphic' in2='SpecOut2' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' />\n";
-		$cOutput .= "</filter>\n";
-		$cOutput .= "</defs>\n";
+		$cOutput .= "<feComposite in='specOut' in2='SourceAlpha' operator='in' result='specOut2' />";
+		$cOutput .= "<feComposite in='SourceGraphic' in2='SpecOut2' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' />";
+		$cOutput .= "</filter>";
+		$cOutput .= "</defs>";
 
 		$iCount = 0;
 		$iBarY	= $iY;
@@ -57,11 +57,20 @@ class Charts_SVG_BarV {
 			if (isset($this->aOptions['filter'])) { $cFilter = " filter='url(" . $this->aOptions['filter'] . ")' "; }
 
 			if (isset($this->aOptions["bAnimated"])) {
-				$cOutput .= "<rect x='" . $iX . "' y='" . $iBarY . "' width='15' height='0' fill='" . $cColor . "'" . $cFilter . " transform='rotate(-180 100 100)'>\n";
-				$cOutput .= "<animate attributeName='height' attributeType='XML' begin='0s' dur='1s' fill='freeze' from='0' to='" . $iHeight . "' />\n";
+				$cOutput .= "<rect x='" . $iX . "' y='" . $iBarY . "' width='15' height='0' fill='" . $cColor . "'" . $cFilter . " transform='rotate(-180 100 100)'>";
+				$cOutput .= "<animate attributeName='height' attributeType='XML' begin='0s' dur='1s' fill='freeze' from='0' to='" . $iHeight . "' />";
 				$cOutput .= "</rect>\n";
+
+				//description of the bar
+				$cOutput .= "<text x='" . $iX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;' fill='" . $cFontColor . "'>" . $oObject->cDesc . "</text>";
+
+				$cOutput .= "<text x='" . $iDescX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right; visibility: hidden;' fill='" . $cFontColor . "'> " . $oObject->iValue . " [" . $iPercent . "%]";
+				$cOutput .= "<animate attributeName='visibility' begin='1s' fill='freeze' from='hidden' to='visible' calcMode='discrete' />";
+				$cOutput .= "<set attributeName='visibility' from='hidden' to='visible' begin='graph" . $iY . ".mouseover' end='graph" . $iY . ".mouseout' />";
+				$cOutput .= "</text>";
 			} else {
-				$cOutput .= "<rect x='" . $iX . "' y='" . $iBarY . "' width='15' height='" . $iHeight . "' fill='" . $cColor . "'" . $cFilter . " transform='rotate(-180 100 100)' />\n";
+				$cOutput .= "<rect x='" . $iX . "' y='" . $iBarY . "' width='15' height='" . $iHeight . "' fill='" . $cColor . "'" . $cFilter . " transform='rotate(-180 100 100)' />";
+				$cOutput .= "<text x='" . $iX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;' fill='" . $cFontColor . "'>" . $oObject->cDesc . "</text>";
 			}
 
 			$iX = $iX + 27;

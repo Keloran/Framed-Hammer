@@ -51,7 +51,13 @@ class Charts_SVG_Pie {
 			$cOutput .= " A" . $iR . "," . $iR;
 			$cOutput .= " 0 " . $iOver180 . ",1 ";
 			$cOutput .= $iX2 . "," . $iY2 . " Z' ";
-			$cOutput .= "fill='" . $cColor . "' opacity='0.6' />\n\n";
+			$cOutput .= "fill='" . $cColor . "' opacity='0.6' />";
+
+			//description of the bar
+			$cOutput .= "<text x='" . $iX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;' fill='" . $cFontColor . "'>" . $oObject->cDesc . "</text>";
+			$cOutput .= "<text x='" . $iDescX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right; visibility: hidden;' fill='" . $cFontColor . "'> " . $oObject->iValue . " [" . $iPercent . "%]";
+			$cOutput .= "<set attributeName='visibility' from='hidden' to='visible' begin='graph" . $iY . ".mouseover' end='graph" . $iY . ".mouseout' />";
+			$cOutput .= "</text>";
 
 			$iX1 = $iX2;
 			$iY1 = $iY2;
