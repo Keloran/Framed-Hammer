@@ -37,8 +37,11 @@ class Charts_SVG_Pie {
 
 		$aData	= $this->aData;
 
+		//set the font color
+		$cFontColor		= $this->aOptions['fontcolor'];
+
 		foreach ($aData as $oObject){
-			$iAlpha = $iAlpha + ($oObject->iPercent / 100 * (2 * M_PI));
+			$iAlpha = ($iAlpha + (($oObject->iPercent / 100) * (2 * M_PI)));
 
 			$iX2 = $iCX + ($iR * sin($iAlpha));
 			$iY2 = $iCY - ($iR * cos($iAlpha));
@@ -46,17 +49,20 @@ class Charts_SVG_Pie {
 			$iOver180	= $oObject->iPercent > 50 ? "1" : "0";
 			$cColor 	= $oObject->cColor;
 
+			$iPercent	= number_format($oObject->iPercent, 2, ",", ".");
+
 			$cOutput .= "<path d='M" . $iCX . "," . $iCY;
 			$cOutput .= " L" . $iX1 . "," . $iY1;
 			$cOutput .= " A" . $iR . "," . $iR;
 			$cOutput .= " 0 " . $iOver180 . ",1 ";
 			$cOutput .= $iX2 . "," . $iY2 . " Z' ";
+			$cOutput .= "id='graph" . $iX2 . "' ";
 			$cOutput .= "fill='" . $cColor . "' opacity='0.6' />";
 
 			//description of the bar
-			$cOutput .= "<text x='" . $iX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right;' fill='" . $cFontColor . "'>" . $oObject->cDesc . "</text>";
-			$cOutput .= "<text x='" . $iDescX . "' y='" . $iTextY . "' style='font-size: 12px; text-anchor: right; visibility: hidden;' fill='" . $cFontColor . "'> " . $oObject->iValue . " [" . $iPercent . "%]";
-			$cOutput .= "<set attributeName='visibility' from='hidden' to='visible' begin='graph" . $iY . ".mouseover' end='graph" . $iY . ".mouseout' />";
+			$cOutput .= "<text x='0' y='0' style='font-size: 12px; text-anchor: right; visibility: hidden;' fill='" . $cFontColor . "'> " . $oObject->iValue . " [" . $iPercent . "%]";
+			$cOutput .= "<set attributeName='visibility' from='hidden' to='visible' begin='graph" . $iX2 . ".mouseover' end='graph" . $iX2 . ".mouseout' />";
+			$cOutput .= "<set attributeName='x' from='0' to='" . $iCX . "' begin='graph" . $iX2 . ".mouseover' end='graph" . $iX2 . ".mouseout' />";
 			$cOutput .= "</text>";
 
 			$iX1 = $iX2;

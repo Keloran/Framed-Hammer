@@ -47,6 +47,9 @@ class Charts_SVG_BarV {
 		$iCount = 0;
 		$iBarY	= $iY;
 
+		//set the font color
+		$cFontColor		= $this->aOptions['fontcolor'];
+
 		foreach ($aData as $oObject) {
 			$cColor 	= $oObject->cColor;
 			$iHeight	= $oObject->iPercent * 2;
