@@ -44,7 +44,7 @@ class Charts_SVG_BarV {
 		$cOutput .= "</filter>";
 		$cOutput .= "</defs>";
 
-		$iBarY	= $iY;
+		$iBarY	= ($iY + 15);
 		$iDescY	= ($iY + 200);
 
 		//set the font color
