@@ -47,6 +47,7 @@ class Charts_SVG_BarH {
 
 		$iBarX	= ($iX + 100);
 		$iDescX	= ($iX + 200);
+		$iY		= ($iY + 15);
 
 		//Filter
 		$cFilter 	= false;
