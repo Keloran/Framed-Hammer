@@ -56,7 +56,8 @@ class Charts_PNG_Pie {
 			$iColB 			= $oObject->cColorBlue;
 			$imPartColor	= ImageColorAllocate($this->imImage, $iColR, $iColG, $iColB);
 
-			$iDegree		= (($oObject->iValue / $iTotal) * 360);
+			//$iDegree		= (($oObject->iValue / $iTotal) * 360);
+			$iDegree		= ($oObject->iPercent * 360);
 			imagefilledarc($this->imImage, 225, 225, 450, 450, $iStop, ($iStop + $iDegree), $imPartColor, IMG_ARC_PIE);
 
 			$iStop 		= ($iStop + $iDegree);
