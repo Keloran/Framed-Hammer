@@ -13,6 +13,7 @@ class Charts_Data {
 		$this->cExtra	= $cExtra;
 		$this->cColor	= $this->createColors();
 		$this->iValue	= $iValue; //the set to 0 wasnt needed, it was in the divide that was needed
+		$this->createRGB(); //get the rgb
 	}
 
 	/**
@@ -34,5 +35,31 @@ class Charts_Data {
 		}
 
 		return $cReturn;
+	}
+
+	/**
+	 * Charts_Data::createRGB()
+	 *
+	 * @return null
+	 */
+	private function createRGB() {
+		$cColor	= $this->cColor;
+
+		//remove # from start
+		$cColor	= substr($cColor, 1);
+
+		//now get red
+		$cRed	= hexdec($cColor[0] . $cColor[1]);
+
+		//now get green
+		$cGreen	= hexdec($cColor[2] . $cColor[3]);
+
+		//now get blue
+		$cBlue	= hexdec($cColor[4] . $cColor[5]]);
+
+		//now set to object
+		$this->cColorRed 	= $cRed;
+		$this->cColorGreen	= $cGreen;
+		$this->cColorBlue	= $cBlue;
 	}
 }

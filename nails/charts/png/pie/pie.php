@@ -27,18 +27,6 @@ class Charts_PNG_Pie {
 	}
 
 	/**
-	 * Charts_PNG_Pie::getColor()
-	 *
-	 * @param int $iID
-	 * @return string
-	 */
-	function getColor($iID) {
-		$cColor = $this->aColors[$iID % count($this->aColors)];
-
-		return $cColor;
-	}
-
-	/**
 	 * Charts_PNG_Pie::renderChart()
 	 *
 	 * @return string
@@ -60,20 +48,18 @@ class Charts_PNG_Pie {
 		foreach ($aData as $oObject) { $iTotal += $oObject->iValue; }
 
 		//Draw the circle
-		$i = 0;
 		foreach ($aData as $oObject) {
 			//color
-			#$cColor			= $this->getColor($i);
 			$cColor			= $oObject->cColor;
-			$iColR			= hexdec(substr($cColor, 1, 2));
-			$iColG			= hexdec(substr($cColor, 3, 2));
-			$iColB			= hexdec(substr($cColor, 5, 2));
+			$iColR			= $oObject->cColorRed;
+			$iColG 			= $oObject->cColorGreen;
+			$iColB 			= $oObject->cColorBlue;
 			$imPartColor	= ImageColorAllocate($this->imImage, $iColR, $iColG, $iColB);
 
-			$iDegree		= ($oObject->iValue / $iTotal) * 360;
+			$iDegree		= (($oObject->iValue / $iTotal) * 360);
 			imagefilledarc($this->imImage, 225, 225, 450, 450, $iStop, ($iStop + $iDegree), $imPartColor, IMG_ARC_PIE);
 
-			$iStop 		= $iStop + $iDegree;
+			$iStop 		= ($iStop + $iDegree);
 			$iStopX		= round(225 + (225 * cos($iStop * (M_PI / 180))));
 			$iStopY		= round(225 + (225 * sin($iStop * (M_PI / 180))));
 			$i++;

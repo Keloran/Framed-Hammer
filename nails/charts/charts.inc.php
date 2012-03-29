@@ -57,6 +57,8 @@ class Charts {
 		} // switch
 
 		$oUser 		= $oNails->getUser();
+		if (!is_object($oUser)) { $oUser = new User(); }
+
 		$cSetType	= $cType ? $cType : $oUser->getSetting("graphType");
 		if ($cSetType) { $this->cType = $cSetType; }
 

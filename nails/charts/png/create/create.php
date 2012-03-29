@@ -57,15 +57,14 @@ class Charts_PNG_Create {
 			$iPiePart		= $oObject->cExtra . round($oObject->iValue, 2);
 			$iPiePart100	= $oObject->iPercent;
 
-			#$cColor		= $this->getColor($i);
 			$cColor		= $oObject->cColor;
-			$iColR		= hexdec(substr($cColor, 1, 2));
-			$iColG 		= hexdec(substr($cColor, 3, 2));
-			$iColB 		= hexdec(substr($cColor, 5, 2));
+			$iColR		= $oObject->cColorRed;
+			$iColG 		= $oObject->cColorGreen;
+			$iColB 		= $oObject->cColorBlue;
 			$imPartColor= ImageColorAllocate($imLegendImage, $iColR, $iColG, $iColB);
 
-			ImageFilledRectangle($imLegendImage, 5, $yOffset + 2, 5 + $iBoxWidth, $yOffset + $iBoxHeight + 2, $imPartColor);
-			ImageRectangle($imLegendImage, 5, $yOffset + 2, 5 + $iBoxWidth, $yOffset + $iBoxHeight + 2, $imBorderColor);
+			ImageFilledRectangle($imLegendImage, 5, ($yOffset + 2), (5 + $iBoxWidth), ($yOffset + $iBoxHeight + 2), $imPartColor);
+			ImageRectangle($imLegendImage, 5, ($yOffset + 2), (5 + $iBoxWidth), ($yOffset + $iBoxHeight + 2), $imBorderColor);
 
 			$cText = $oObject->cDesc . " - " . $iPiePart . " (" . $iPiePart100 . "%)";
 			ImageString($imLegendImage, $iFont, '20', $yOffset, $cText, $imTextColor);

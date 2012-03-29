@@ -27,11 +27,11 @@ class Charts_SVG_Create {
 	 * @return
 	 */
 	function makeLegend($cContent, $cFontColor = 'black') {
-		$iX 		= isset($this->aOptions["iX"]) 		? $this->aOptions["iX"] + 305 	: 305;
-		$iY 		= isset($this->aOptions["iY"]) 		? $this->aOptions["iY"] 		: 0;
-		$iWidth 	= isset($this->aOptions["iWidth"]) 	? $this->aOptions["iWidth"] 	: 150;
-		$iHeight 	= isset($this->aOptions["iHeight"]) 	? $this->aOptions["iHeight"] 	: 200;
-		$cFontColor	= isset($this->aOptions['fontcolor'])	? $this->aOptions['fontcolor']	: 'black';
+		$iX 		= isset($this->aOptions["iX"]) 			? ($this->aOptions["iX"] + 305) 	: 305;
+		$iY 		= isset($this->aOptions["iY"]) 			? $this->aOptions["iY"] 			: 0;
+		$iWidth 	= isset($this->aOptions["iWidth"]) 		? $this->aOptions["iWidth"] 		: 150;
+		$iHeight 	= isset($this->aOptions["iHeight"]) 	? $this->aOptions["iHeight"] 		: 200;
+		$cFontColor	= isset($this->aOptions['fontcolor'])	? $this->aOptions['fontcolor']		: 'black';
 
 		$cSVG = "";
 
@@ -53,7 +53,7 @@ class Charts_SVG_Create {
 
 			//set to side
 			if ($jCount >= 15) {
-				if (($iCount % 20 == 0) && ($iCount != 0)) {
+				if ((($iCount % 15) == 0) && ($iCount != 0)) {
 					$jX	= ($jX + 230);
 
 					$iTextY	= ($jY + 13);

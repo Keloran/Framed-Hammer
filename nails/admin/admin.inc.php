@@ -28,6 +28,7 @@ class Admin implements Nails_Interface {
 
 		$this->oDB 		= $this->oNails->getDatabase();
 		$this->oUser	= $this->oNails->getUser();
+		if (!is_object($this->oUser)) { $this->oUser = new User(); }
 	}
 
 	/**
@@ -216,9 +217,7 @@ class Admin implements Nails_Interface {
 		//always validate before sanitizing
 		if (!filter_var($cEmail, FILTER_VALIDATE_EMAIL)) { return false; }
 
-		$oUser	= $this->oNails->getUser();
-
-		$iUserID	= $oUser->getUserID();
+		$iUserID	= $this->oUser->getUserID();
 		$cSan   	= filter_var($cEmail, FILTER_SANITIZE_EMAIL);
 
 		$aInsert	= array($cSan, $iUserID);
