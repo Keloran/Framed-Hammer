@@ -55,7 +55,7 @@ class Charts_Data {
 		$cGreen	= hexdec($cColor[2] . $cColor[3]);
 
 		//now get blue
-		$cBlue	= hexdec($cColor[4] . $cColor[5]]);
+		$cBlue	= hexdec($cColor[4] . $cColor[5]);
 
 		//now set to object
 		$this->cColorRed 	= $cRed;
