@@ -14,6 +14,7 @@ class Charts_Data {
 		$this->cColor	= $this->createColors();
 		$this->iValue	= $iValue; //the set to 0 wasnt needed, it was in the divide that was needed
 		$this->createRGB(); //get the rgb
+		$this->createColorDebug(); //create the debug
 	}
 
 	/**
@@ -61,5 +62,23 @@ class Charts_Data {
 		$this->cColorRed 	= $cRed;
 		$this->cColorGreen	= $cGreen;
 		$this->cColorBlue	= $cBlue;
+	}
+
+	/**
+	 * Charts_Data::createColorDebug()
+	 *
+	 * @return null
+	 */
+	private function createColorDebug() {
+		$cRed	= dechex($this->cColorRed);
+		$cGreen	= dechex($this->cColorGreen);
+		$cBlue	= dechex($this->cColorBlue);
+
+		$aColorDebug = array(
+			"Red"	=> $cRed,
+			"Green"	=> $cGreen,
+			"Blue"	=> $cBlue
+		);
+		$this->aColorDebug = $aColorDebug;
 	}
 }
