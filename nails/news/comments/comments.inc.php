@@ -29,7 +29,7 @@ class News_Comments implements Nails_Interface {
 	 */
 	private function __construct(Nails $oNails) {
 		$this->oNails	= $oNails;
-		$this->oDB	= $oNails->getDatabase();
+		$this->oDB		= $oNails->getDatabase();
 		$this->oSession	= $oNails->getSession();
 		$this->iNewsID	= $this->iArticleID;
 	}

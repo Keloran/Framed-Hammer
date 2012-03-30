@@ -2,8 +2,8 @@
 /**
  * Chart
  *
- * @package
- * @author Max
+ * @package Charts
+ * @author Keloran
  * @copyright Copyright (c) 2008
  * @version $Id: charts.inc.php 63 2009-09-22 09:06:11Z keloran $
  * @access public

@@ -89,9 +89,7 @@ class Spam {
 
 		if ($this->oResponse) {
 			$oIP	= $this->oResponse->ip;
-			if ($oIP) {
-				$bSpam = $oIP->appears;
-			}
+			if ($oIP) { $bSpam = $oIP->appears; }
 		}
 
 		return $bSpam;
@@ -134,8 +132,8 @@ class Spam {
 		//get the contents
 		$pCURL = curl_init();
 		curl_setopt($pCURL,CURLOPT_URL,$cURL);
-		curl_setopt($pCURL,CURLOPT_CONNECTTIMEOUT,2);
-		curl_setopt($pCURL,CURLOPT_RETURNTRANSFER,1);
+		curl_setopt($pCURL,CURLOPT_CONNECTTIMEOUT, 2);
+		curl_setopt($pCURL,CURLOPT_RETURNTRANSFER, 1);
 		$cData = curl_exec($pCURL);
 		curl_close($pCURL);
 

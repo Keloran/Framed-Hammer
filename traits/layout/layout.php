@@ -1,4 +1,13 @@
 <?php
+/**
+ * Layout
+ *
+ * @package Traits
+ * @author Keloran
+ * @copyright Copyright (c) 2012
+ * @version $Id$
+ * @access public
+ */
 trait Layout {
 	/**
 	 * addPagination()

@@ -5,7 +5,7 @@
  * this is to do basic admin details
  * e.g. last time the site was indexed, or tried to be hacked
  *
- * @author your name
+ * @author Keloran
  * @tag value
  */
 class Admin implements Nails_Interface {

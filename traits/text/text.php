@@ -2,7 +2,7 @@
 /**
  * Text
  *
- * @package
+ * @package Traits
  * @author Keloran
  * @copyright Copyright (c) 2011
  * @version $Id$

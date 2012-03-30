@@ -33,13 +33,18 @@ class News implements Nails_Interface {
 	private function __construct(Nails $oNails) {
     	$this->oNails		= $oNails;
 		$this->oUser		= $this->oNails->getUser();
+		if (!is_object($this->oUser)) { $this->oUser = new User(); } //mainly for IDEs
+
 		$this->oSession		= $this->oNails->getSession();
+		if (!is_object($this->oSession)) { $this->oSession = new Session(); }
 
 		$this->iUserLimit	= $this->oUser->getUserLimit();
 		$this->iUserID		= $this->oUser->getUserID();
 
 		//setup comments
 		$this->oComments				= $this->oNails->getNail("news_comments");
+		if (!is_object($this->oComments)) { $this->oComments = new News_Comments(); }
+
 		$this->oComments->iUserLimit	= $this->iUserLimit;
 		$this->oComments->iUserID		= $this->iUserID;
 		$this->oComments->iArticleID	= $oNails->iItem;

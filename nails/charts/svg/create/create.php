@@ -2,7 +2,7 @@
 /**
  *
  * Charts_SVG_Create
- * @package
+ * @package Charts
  * @author Keloran
  * @copyright Copyright (c) 2008
  * @version $Id$

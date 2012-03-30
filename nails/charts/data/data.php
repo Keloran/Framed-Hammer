@@ -1,4 +1,13 @@
 <?php
+/**
+ * Charts_Data
+ *
+ * @package Charts
+ * @author Keloran
+ * @copyright Copyright (c) 2012
+ * @version $Id$
+ * @access public
+ */
 class Charts_Data {
 	var $cDesc 	= false;
 	var $iValue	= false;

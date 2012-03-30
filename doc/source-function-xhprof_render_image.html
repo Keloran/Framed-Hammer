@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.6.0" />
+	<meta name="robots" content="noindex" />
+
+	<title>File callgraph_utils.php</title>
+
+	<script type="text/javascript" src="resources/combined.js?428767200"></script>
+	<script type="text/javascript" src="elementlist.js?1327638098"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?2495970611" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-ChromePhp.html">ChromePhp</a>
+						</li>
+				<li><a href="package-FirstTest.html">FirstTest</a>
+						</li>
+				<li><a href="package-Gallery.html">Gallery</a>
+						</li>
+				<li class="active"><a href="package-None.html">None</a>
+						</li>
+				<li><a href="package-PHP.html">PHP</a>
+						</li>
+				<li><a href="package-UASparser.html">UASparser</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Admin_Install.html">Admin_Install</a></li>
+				<li><a href="class-Cache.html">Cache</a></li>
+				<li><a href="class-Cache_Abstract.html">Cache_Abstract</a></li>
+				<li><a href="class-Cache_File.html">Cache_File</a></li>
+				<li><a href="class-Cache_Install.html">Cache_Install</a></li>
+				<li><a href="class-Cache_Memory.html">Cache_Memory</a></li>
+				<li><a href="class-Charts.html">Charts</a></li>
+				<li><a href="class-Charts_Data.html">Charts_Data</a></li>
+				<li><a href="class-Charts_PNG_BarH.html">Charts_PNG_BarH</a></li>
+				<li><a href="class-Charts_PNG_BarV.html">Charts_PNG_BarV</a></li>
+				<li><a href="class-Charts_PNG_Create.html">Charts_PNG_Create</a></li>
+				<li><a href="class-Charts_PNG_Pie.html">Charts_PNG_Pie</a></li>
+				<li><a href="class-Charts_SVG_BarH.html">Charts_SVG_BarH</a></li>
+				<li><a href="class-Charts_SVG_BarV.html">Charts_SVG_BarV</a></li>
+				<li><a href="class-Charts_SVG_Create.html">Charts_SVG_Create</a></li>
+				<li><a href="class-Charts_SVG_Pie.html">Charts_SVG_Pie</a></li>
+				<li><a href="class-Curl.html">Curl</a></li>
+				<li><a href="class-Curl_Manager.html">Curl_Manager</a></li>
+				<li><a href="class-Database.html">Database</a></li>
+				<li><a href="class-Database_PDO.html">Database_PDO</a></li>
+				<li><a href="class-Email.html">Email</a></li>
+				<li><a href="class-Email_Abstract.html">Email_Abstract</a></li>
+				<li><a href="class-Email_Attachments.html">Email_Attachments</a></li>
+				<li><a href="class-Email_Headers.html">Email_Headers</a></li>
+				<li><a href="class-Email_HTML.html">Email_HTML</a></li>
+				<li><a href="class-Email_Install.html">Email_Install</a></li>
+				<li><a href="class-Email_Send.html">Email_Send</a></li>
+				<li><a href="class-Email_Send_Install.html">Email_Send_Install</a></li>
+				<li><a href="class-Email_Text.html">Email_Text</a></li>
+				<li><a href="class-Encryption.html">Encryption</a></li>
+				<li><a href="class-Encryption_Install.html">Encryption_Install</a></li>
+				<li><a href="class-Footer.html">Footer</a></li>
+				<li><a href="class-Footer_Install.html">Footer_Install</a></li>
+				<li><a href="class-Form.html">Form</a></li>
+				<li><a href="class-Form_Abstract.html">Form_Abstract</a></li>
+				<li><a href="class-Form_Button.html">Form_Button</a></li>
+				<li><a href="class-Form_Element.html">Form_Element</a></li>
+				<li><a href="class-Form_File.html">Form_File</a></li>
+				<li><a href="class-Form_Input.html">Form_Input</a></li>
+				<li><a href="class-Form_Install.html">Form_Install</a></li>
+				<li><a href="class-Form_Meter.html">Form_Meter</a></li>
+				<li><a href="class-Form_Parameters.html">Form_Parameters</a></li>
+				<li><a href="class-Form_Progress.html">Form_Progress</a></li>
+				<li><a href="class-Form_Select.html">Form_Select</a></li>
+				<li><a href="class-Form_TextArea.html">Form_TextArea</a></li>
+				<li><a href="class-Form_Value.html">Form_Value</a></li>
+				<li><a href="class-Forum.html">Forum</a></li>
+				<li><a href="class-Forum_Content.html">Forum_Content</a></li>
+				<li><a href="class-Forum_Install.html">Forum_Install</a></li>
+				<li><a href="class-Gallery_Install.html">Gallery_Install</a></li>
+				<li><a href="class-Google.html">Google</a></li>
+				<li><a href="class-Hammer.html">Hammer</a></li>
+				<li><a href="class-Head.html">Head</a></li>
+				<li><a href="class-Head_CSS.html">Head_CSS</a></li>
+				<li><a href="class-Head_Install.html">Head_Install</a></li>
+				<li><a href="class-Head_JS.html">Head_JS</a></li>
+				<li><a href="class-Head_Meta.html">Head_Meta</a></li>
+				<li><a href="class-Image.html">Image</a></li>
+				<li><a href="class-Menu.html">Menu</a></li>
+				<li><a href="class-Menu_Install.html">Menu_Install</a></li>
+				<li><a href="class-Messages.html">Messages</a></li>
+				<li><a href="class-Messages_Install.html">Messages_Install</a></li>
+				<li><a href="class-Nails.html">Nails</a></li>
+				<li><a href="class-nails_footer_FooterTest.html">nails_footer_FooterTest</a></li>
+				<li><a href="class-News.html">News</a></li>
+				<li><a href="class-News_Comments.html">News_Comments</a></li>
+				<li><a href="class-News_Comments_Install.html">News_Comments_Install</a></li>
+				<li><a href="class-News_Install.html">News_Install</a></li>
+				<li><a href="class-OAuth.html">OAuth</a></li>
+				<li><a href="class-oauth_Consumer.html">oauth_Consumer</a></li>
+				<li><a href="class-Oauth_Response.html">Oauth_Response</a></li>
+				<li><a href="class-oauth_signature.html">oauth_signature</a></li>
+				<li><a href="class-oauth_signature_hmac_sha1.html">oauth_signature_hmac_sha1</a></li>
+				<li><a href="class-oauth_signature_plaintext.html">oauth_signature_plaintext</a></li>
+				<li><a href="class-oauth_signature_rsa_sha1.html">oauth_signature_rsa_sha1</a></li>
+				<li><a href="class-oauth_Token.html">oauth_Token</a></li>
+				<li><a href="class-oReader.html">oReader</a></li>
+				<li><a href="class-Organic.html">Organic</a></li>
+				<li><a href="class-Organic_Install.html">Organic_Install</a></li>
+				<li><a href="class-Screwdriver.html">Screwdriver</a></li>
+				<li><a href="class-Screws.html">Screws</a></li>
+				<li><a href="class-Search.html">Search</a></li>
+				<li><a href="class-Search_Install.html">Search_Install</a></li>
+				<li><a href="class-Session.html">Session</a></li>
+				<li><a href="class-Session_Install.html">Session_Install</a></li>
+				<li><a href="class-Session_Robots.html">Session_Robots</a></li>
+				<li><a href="class-Session_Robots_Install.html">Session_Robots_Install</a></li>
+				<li><a href="class-Setup.html">Setup</a></li>
+				<li><a href="class-Spam.html">Spam</a></li>
+				<li><a href="class-Spam_Install.html">Spam_Install</a></li>
+				<li><a href="class-StaticPages.html">StaticPages</a></li>
+				<li><a href="class-Template.html">Template</a></li>
+				<li><a href="class-Template_Abstract.html">Template_Abstract</a></li>
+				<li><a href="class-Template_Abstract_Extend.html">Template_Abstract_Extend</a></li>
+				<li><a href="class-Template_Content.html">Template_Content</a></li>
+				<li><a href="class-Template_Content_Template.html">Template_Content_Template</a></li>
+				<li><a href="class-Template_Email.html">Template_Email</a></li>
+				<li><a href="class-Template_Layout.html">Template_Layout</a></li>
+				<li><a href="class-Template_Layout_Template.html">Template_Layout_Template</a></li>
+				<li><a href="class-Template_Structure.html">Template_Structure</a></li>
+				<li><a href="class-Twitter.html">Twitter</a></li>
+				<li><a href="class-Twitter_Install.html">Twitter_Install</a></li>
+				<li><a href="class-User.html">User</a></li>
+				<li><a href="class-User_Install.html">User_Install</a></li>
+				<li><a href="class-Validate_Email.html">Validate_Email</a></li>
+				<li><a href="class-Validate_Number.html">Validate_Number</a></li>
+				<li><a href="class-Validate_Text.html">Validate_Text</a></li>
+				<li><a href="class-Validate_TextArea.html">Validate_TextArea</a></li>
+				<li><a href="class-Validate_TextArea_Reverse.html">Validate_TextArea_Reverse</a></li>
+				<li><a href="class-Validator.html">Validator</a></li>
+				<li><a href="class-Validator_Install.html">Validator_Install</a></li>
+				<li><a href="class-Worker.html">Worker</a></li>
+				<li><a href="class-Worker_Comments.html">Worker_Comments</a></li>
+				<li><a href="class-XHProfRuns_Default.html">XHProfRuns_Default</a></li>
+				<li><a href="class-XML.html">XML</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Database_Interface.html">Database_Interface</a></li>
+				<li><a href="class-Email_Interface.html">Email_Interface</a></li>
+				<li><a href="class-Form_Interface.html">Form_Interface</a></li>
+				<li><a href="class-iXHProfRuns.html">iXHProfRuns</a></li>
+				<li><a href="class-Nails_Interface.html">Nails_Interface</a></li>
+				<li><a href="class-Worker_Interface.html">Worker_Interface</a></li>
+			</ul>
+
+			<h3>Traits</h3>
+			<ul>
+				<li><a href="class-Address.html">Address</a></li>
+				<li><a href="class-Browser.html">Browser</a></li>
+				<li><a href="class-Cookie.html">Cookie</a></li>
+				<li><a href="class-Layout.html">Layout</a></li>
+				<li><a href="class-Mailer.html">Mailer</a></li>
+				<li><a href="class-Security.html">Security</a></li>
+				<li><a href="class-Text.html">Text</a></li>
+				<li><a href="class-Warnings.html">Warnings</a></li>
+			</ul>
+
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-Admin_Exception.html">Admin_Exception</a></li>
+				<li><a href="class-Cache_Exception.html">Cache_Exception</a></li>
+				<li><a href="class-Oauth_Exception.html">Oauth_Exception</a></li>
+				<li><a href="class-Organic_Exception.html">Organic_Exception</a></li>
+				<li><a href="class-Session_Exception.html">Session_Exception</a></li>
+				<li><a href="class-Spanner.html">Spanner</a></li>
+			</ul>
+
+
+			<h3>Functions</h3>
+			<ul>
+				<li><a href="function-assertionHandler.html">assertionHandler</a></li>
+				<li><a href="function-checkHeaders.html">checkHeaders</a></li>
+				<li><a href="function-displayXHProfReport.html">displayXHProfReport</a></li>
+				<li><a href="function-errorHandler.html">errorHandler</a></li>
+				<li><a href="function-exceptionHandler.html">exceptionHandler</a></li>
+				<li><a href="function-full_report.html">full_report</a></li>
+				<li><a href="function-funcParam.html">funcParam</a></li>
+				<li><a href="function-get_print_class.html">get_print_class</a></li>
+				<li><a href="function-get_tooltip_attributes.html">get_tooltip_attributes</a></li>
+				<li><a href="function-Hammer.html">Hammer</a></li>
+				<li><a href="function-init_metrics.html">init_metrics</a></li>
+				<li><a href="function-makeSEO.html">makeSEO</a></li>
+				<li><a href="function-ob_process.html">ob_process</a></li>
+				<li><a href="function-pc_info.html">pc_info</a></li>
+				<li><a href="function-pct.html">pct</a></li>
+				<li><a href="function-print_flat_data.html">print_flat_data</a></li>
+				<li><a href="function-print_function_info.html">print_function_info</a></li>
+				<li><a href="function-print_pc_array.html">print_pc_array</a></li>
+				<li><a href="function-print_symbol_summary.html">print_symbol_summary</a></li>
+				<li><a href="function-print_td_num.html">print_td_num</a></li>
+				<li><a href="function-print_td_pct.html">print_td_pct</a></li>
+				<li><a href="function-printRead.html">printRead</a></li>
+				<li><a href="function-profiler_diff_report.html">profiler_diff_report</a></li>
+				<li><a href="function-profiler_report.html">profiler_report</a></li>
+				<li><a href="function-profiler_single_run_report.html">profiler_single_run_report</a></li>
+				<li><a href="function-removeEndSlash.html">removeEndSlash</a></li>
+				<li><a href="function-removeQueryVar.html">removeQueryVar</a></li>
+				<li><a href="function-sort_cbk.html">sort_cbk</a></li>
+				<li><a href="function-stat_description.html">stat_description</a></li>
+				<li><a href="function-symbol_report.html">symbol_report</a></li>
+				<li><a href="function-unSEO.html">unSEO</a></li>
+				<li><a href="function-visitorIP.html">visitorIP</a></li>
+				<li><a href="function-xhprof_aggregate_runs.html">xhprof_aggregate_runs</a></li>
+				<li><a href="function-xhprof_array_set.html">xhprof_array_set</a></li>
+				<li><a href="function-xhprof_array_unset.html">xhprof_array_unset</a></li>
+				<li><a href="function-xhprof_build_parent_child_key.html">xhprof_build_parent_child_key</a></li>
+				<li><a href="function-xhprof_compute_diff.html">xhprof_compute_diff</a></li>
+				<li><a href="function-xhprof_compute_flat_info.html">xhprof_compute_flat_info</a></li>
+				<li><a href="function-xhprof_compute_inclusive_times.html">xhprof_compute_inclusive_times</a></li>
+				<li><a href="function-xhprof_count_format.html">xhprof_count_format</a></li>
+				<li><a href="function-xhprof_error.html">xhprof_error</a></li>
+				<li><a href="function-xhprof_generate_dot_script.html">xhprof_generate_dot_script</a></li>
+				<li><a href="function-xhprof_generate_image_by_dot.html">xhprof_generate_image_by_dot</a></li>
+				<li><a href="function-xhprof_generate_mime_header.html">xhprof_generate_mime_header</a></li>
+				<li><a href="function-xhprof_get_bool_param.html">xhprof_get_bool_param</a></li>
+				<li><a href="function-xhprof_get_children_table.html">xhprof_get_children_table</a></li>
+				<li><a href="function-xhprof_get_content_by_run.html">xhprof_get_content_by_run</a></li>
+				<li><a href="function-xhprof_get_float_param.html">xhprof_get_float_param</a></li>
+				<li><a href="function-xhprof_get_matching_functions.html">xhprof_get_matching_functions</a></li>
+				<li><a href="function-xhprof_get_metrics.html">xhprof_get_metrics</a></li>
+				<li><a href="function-xhprof_get_param_helper.html">xhprof_get_param_helper</a></li>
+				<li><a href="function-xhprof_get_possible_metrics.html">xhprof_get_possible_metrics</a></li>
+				<li><a href="function-xhprof_get_string_param.html">xhprof_get_string_param</a></li>
+				<li><a href="function-xhprof_get_uint_param.html">xhprof_get_uint_param</a></li>
+				<li><a href="function-xhprof_http_header.html">xhprof_http_header</a></li>
+				<li><a href="function-xhprof_include_js_css.html">xhprof_include_js_css</a></li>
+				<li><a href="function-xhprof_normalize_metrics.html">xhprof_normalize_metrics</a></li>
+				<li><a href="function-xhprof_param_init.html">xhprof_param_init</a></li>
+				<li><a href="function-xhprof_parse_parent_child.html">xhprof_parse_parent_child</a></li>
+				<li><a href="function-xhprof_percent_format.html">xhprof_percent_format</a></li>
+				<li><a href="function-xhprof_prune_run.html">xhprof_prune_run</a></li>
+				<li><a href="function-xhprof_render_actions.html">xhprof_render_actions</a></li>
+				<li><a href="function-xhprof_render_diff_image.html">xhprof_render_diff_image</a></li>
+				<li class="active"><a href="function-xhprof_render_image.html">xhprof_render_image</a></li>
+				<li><a href="function-xhprof_render_link.html">xhprof_render_link</a></li>
+				<li><a href="function-xhprof_trim_run.html">xhprof_trim_run</a></li>
+				<li><a href="function-xhprof_valid_run.html">xhprof_valid_run</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-None.html" title="Summary of None"><span>Package</span></a>
+			</li>
+			<li>
+				<a href="function-xhprof_render_image.html" title="Summary of xhprof_render_image"><span>Function</span></a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<pre><code><a href="#1" id="1" class="l">  1: </a><span class="xlang">&lt;?php</span>
+<a href="#2" id="2" class="l">  2: </a><span class="php-comment">//  Copyright (c) 2009 Facebook</span>
+<a href="#3" id="3" class="l">  3: </a><span class="php-comment">//</span>
+<a href="#4" id="4" class="l">  4: </a><span class="php-comment">//  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<a href="#5" id="5" class="l">  5: </a><span class="php-comment">//  you may not use this file except in compliance with the License.</span>
+<a href="#6" id="6" class="l">  6: </a><span class="php-comment">//  You may obtain a copy of the License at</span>
+<a href="#7" id="7" class="l">  7: </a><span class="php-comment">//</span>
+<a href="#8" id="8" class="l">  8: </a><span class="php-comment">//      http://www.apache.org/licenses/LICENSE-2.0</span>
+<a href="#9" id="9" class="l">  9: </a><span class="php-comment">//</span>
+<a href="#10" id="10" class="l"> 10: </a><span class="php-comment">//  Unless required by applicable law or agreed to in writing, software</span>
+<a href="#11" id="11" class="l"> 11: </a><span class="php-comment">//  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<a href="#12" id="12" class="l"> 12: </a><span class="php-comment">//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<a href="#13" id="13" class="l"> 13: </a><span class="php-comment">//  See the License for the specific language governing permissions and</span>
+<a href="#14" id="14" class="l"> 14: </a><span class="php-comment">//  limitations under the License.</span>
+<a href="#15" id="15" class="l"> 15: </a><span class="php-comment">//</span>
+<a href="#16" id="16" class="l"> 16: </a>
+<a href="#17" id="17" class="l"> 17: </a><span class="php-comment">/*
+</span><a href="#18" id="18" class="l"> 18: </a><span class="php-comment"> * This file contains callgraph image generation related XHProf utility
+</span><a href="#19" id="19" class="l"> 19: </a><span class="php-comment"> * functions
+</span><a href="#20" id="20" class="l"> 20: </a><span class="php-comment"> *
+</span><a href="#21" id="21" class="l"> 21: </a><span class="php-comment"> */</span>
+<a href="#22" id="22" class="l"> 22: </a>
+<a href="#23" id="23" class="l"> 23: </a><span class="php-comment">// Supported ouput format</span>
+<a href="#24" id="24" class="l"> 24: </a><span class="php-var">$xhprof_legal_image_types</span> = <span class="php-keyword1">array</span>(
+<a href="#25" id="25" class="l"> 25: </a>    <span class="php-quote">&quot;jpg&quot;</span> =&gt; <span class="php-num">1</span>,
+<a href="#26" id="26" class="l"> 26: </a>    <span class="php-quote">&quot;gif&quot;</span> =&gt; <span class="php-num">1</span>,
+<a href="#27" id="27" class="l"> 27: </a>    <span class="php-quote">&quot;png&quot;</span> =&gt; <span class="php-num">1</span>,
+<a href="#28" id="28" class="l"> 28: </a>    <span class="php-quote">&quot;ps&quot;</span>  =&gt; <span class="php-num">1</span>,
+<a href="#29" id="29" class="l"> 29: </a>    );
+<a href="#30" id="30" class="l"> 30: </a>
+<a href="#31" id="31" class="l"> 31: </a><span class="php-comment">/**
+</span><a href="#32" id="32" class="l"> 32: </a><span class="php-comment"> * Send an HTTP header with the response. You MUST use this function instead
+</span><a href="#33" id="33" class="l"> 33: </a><span class="php-comment"> * of header() so that we can debug header issues because they're virtually
+</span><a href="#34" id="34" class="l"> 34: </a><span class="php-comment"> * impossible to debug otherwise. If you try to commit header(), SVN will
+</span><a href="#35" id="35" class="l"> 35: </a><span class="php-comment"> * reject your commit.
+</span><a href="#36" id="36" class="l"> 36: </a><span class="php-comment"> *
+</span><a href="#37" id="37" class="l"> 37: </a><span class="php-comment"> * @param string  HTTP header name, like 'Location'
+</span><a href="#38" id="38" class="l"> 38: </a><span class="php-comment"> * @param string  HTTP header value, like 'http://www.example.com/'
+</span><a href="#39" id="39" class="l"> 39: </a><span class="php-comment"> *
+</span><a href="#40" id="40" class="l"> 40: </a><span class="php-comment"> */</span>
+<a href="#41" id="41" class="l"> 41: </a><span class="php-keyword1">function</span> xhprof_http_header(<span class="php-var">$name</span>, <span class="php-var">$value</span>) {
+<a href="#42" id="42" class="l"> 42: </a>
+<a href="#43" id="43" class="l"> 43: </a>  <span class="php-keyword1">if</span> (!<span class="php-var">$name</span>) {
+<a href="#44" id="44" class="l"> 44: </a>    xhprof_error(<span class="php-quote">'http_header usage'</span>);
+<a href="#45" id="45" class="l"> 45: </a>    <span class="php-keyword1">return</span> <span class="php-keyword1">null</span>;
+<a href="#46" id="46" class="l"> 46: </a>  }
+<a href="#47" id="47" class="l"> 47: </a>
+<a href="#48" id="48" class="l"> 48: </a>  <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_string</span>(<span class="php-var">$value</span>)) {
+<a href="#49" id="49" class="l"> 49: </a>    xhprof_error(<span class="php-quote">'http_header value not a string'</span>);
+<a href="#50" id="50" class="l"> 50: </a>  }
+<a href="#51" id="51" class="l"> 51: </a>
+<a href="#52" id="52" class="l"> 52: </a>  <span class="php-keyword2">header</span>(<span class="php-var">$name</span>.<span class="php-quote">': '</span>.<span class="php-var">$value</span>, <span class="php-keyword1">true</span>);
+<a href="#53" id="53" class="l"> 53: </a>}
+<a href="#54" id="54" class="l"> 54: </a>
+<a href="#55" id="55" class="l"> 55: </a><span class="php-comment">/**
+</span><a href="#56" id="56" class="l"> 56: </a><span class="php-comment"> * Genearte and send MIME header for the output image to client browser.
+</span><a href="#57" id="57" class="l"> 57: </a><span class="php-comment"> *
+</span><a href="#58" id="58" class="l"> 58: </a><span class="php-comment"> * @author cjiang
+</span><a href="#59" id="59" class="l"> 59: </a><span class="php-comment"> */</span>
+<a href="#60" id="60" class="l"> 60: </a><span class="php-keyword1">function</span> xhprof_generate_mime_header(<span class="php-var">$type</span>, <span class="php-var">$length</span>) {
+<a href="#61" id="61" class="l"> 61: </a>  <span class="php-keyword1">switch</span> (<span class="php-var">$type</span>) {
+<a href="#62" id="62" class="l"> 62: </a>    <span class="php-keyword1">case</span> <span class="php-quote">'jpg'</span>:
+<a href="#63" id="63" class="l"> 63: </a>      <span class="php-var">$mime</span> = <span class="php-quote">'image/jpeg'</span>;
+<a href="#64" id="64" class="l"> 64: </a>      <span class="php-keyword1">break</span>;
+<a href="#65" id="65" class="l"> 65: </a>    <span class="php-keyword1">case</span> <span class="php-quote">'gif'</span>:
+<a href="#66" id="66" class="l"> 66: </a>      <span class="php-var">$mime</span> = <span class="php-quote">'image/gif'</span>;
+<a href="#67" id="67" class="l"> 67: </a>      <span class="php-keyword1">break</span>;
+<a href="#68" id="68" class="l"> 68: </a>    <span class="php-keyword1">case</span> <span class="php-quote">'png'</span>:
+<a href="#69" id="69" class="l"> 69: </a>      <span class="php-var">$mime</span> = <span class="php-quote">'image/png'</span>;
+<a href="#70" id="70" class="l"> 70: </a>      <span class="php-keyword1">break</span>;
+<a href="#71" id="71" class="l"> 71: </a>    <span class="php-keyword1">case</span> <span class="php-quote">'ps'</span>:
+<a href="#72" id="72" class="l"> 72: </a>      <span class="php-var">$mime</span> = <span class="php-quote">'application/postscript'</span>;
+<a href="#73" id="73" class="l"> 73: </a>    <span class="php-keyword1">default</span>:
+<a href="#74" id="74" class="l"> 74: </a>      <span class="php-var">$mime</span> = <span class="php-keyword1">false</span>;
+<a href="#75" id="75" class="l"> 75: </a>  }
+<a href="#76" id="76" class="l"> 76: </a>
+<a href="#77" id="77" class="l"> 77: </a>  <span class="php-keyword1">if</span> (<span class="php-var">$mime</span>) {
+<a href="#78" id="78" class="l"> 78: </a>    xhprof_http_header(<span class="php-quote">'Content-type'</span>, <span class="php-var">$mime</span>);
+<a href="#79" id="79" class="l"> 79: </a>    xhprof_http_header(<span class="php-quote">'Content-length'</span>, (string)<span class="php-var">$length</span>);
+<a href="#80" id="80" class="l"> 80: </a>  }
+<a href="#81" id="81" class="l"> 81: </a>}
+<a href="#82" id="82" class="l"> 82: </a>
+<a href="#83" id="83" class="l"> 83: </a><span class="php-comment">/**
+</span><a href="#84" id="84" class="l"> 84: </a><span class="php-comment"> * Generate image according to DOT script. This function will spawn a process
+</span><a href="#85" id="85" class="l"> 85: </a><span class="php-comment"> * with &quot;dot&quot; command and pipe the &quot;dot_script&quot; to it and pipe out the
+</span><a href="#86" id="86" class="l"> 86: </a><span class="php-comment"> * generated image content.
+</span><a href="#87" id="87" class="l"> 87: </a><span class="php-comment"> *
+</span><a href="#88" id="88" class="l"> 88: </a><span class="php-comment"> * @param dot_script, string, the script for DOT to generate the image.
+</span><a href="#89" id="89" class="l"> 89: </a><span class="php-comment"> * @param type, one of the supported image types, see
+</span><a href="#90" id="90" class="l"> 90: </a><span class="php-comment"> * $xhprof_legal_image_types.
+</span><a href="#91" id="91" class="l"> 91: </a><span class="php-comment"> * @returns, binary content of the generated image on success. empty string on
+</span><a href="#92" id="92" class="l"> 92: </a><span class="php-comment"> *           failure.
+</span><a href="#93" id="93" class="l"> 93: </a><span class="php-comment"> *
+</span><a href="#94" id="94" class="l"> 94: </a><span class="php-comment"> * @author cjiang
+</span><a href="#95" id="95" class="l"> 95: </a><span class="php-comment"> */</span>
+<a href="#96" id="96" class="l"> 96: </a><span class="php-keyword1">function</span> xhprof_generate_image_by_dot(<span class="php-var">$dot_script</span>, <span class="php-var">$type</span>) {
+<a href="#97" id="97" class="l"> 97: </a>  <span class="php-var">$descriptorspec</span> = <span class="php-keyword1">array</span>(
+<a href="#98" id="98" class="l"> 98: </a>       <span class="php-comment">// stdin is a pipe that the child will read from</span>
+<a href="#99" id="99" class="l"> 99: </a>       <span class="php-num">0</span> =&gt; <span class="php-keyword1">array</span>(<span class="php-quote">&quot;pipe&quot;</span>, <span class="php-quote">&quot;r&quot;</span>),
+<a href="#100" id="100" class="l">100: </a>       <span class="php-comment">// stdout is a pipe that the child will write to</span>
+<a href="#101" id="101" class="l">101: </a>       <span class="php-num">1</span> =&gt; <span class="php-keyword1">array</span>(<span class="php-quote">&quot;pipe&quot;</span>, <span class="php-quote">&quot;w&quot;</span>),
+<a href="#102" id="102" class="l">102: </a>       <span class="php-comment">// stderr is a file to write to</span>
+<a href="#103" id="103" class="l">103: </a>       <span class="php-num">2</span> =&gt; <span class="php-keyword1">array</span>(<span class="php-quote">&quot;file&quot;</span>, <span class="php-quote">&quot;/dev/null&quot;</span>, <span class="php-quote">&quot;a&quot;</span>)
+<a href="#104" id="104" class="l">104: </a>       );
+<a href="#105" id="105" class="l">105: </a>
+<a href="#106" id="106" class="l">106: </a>  <span class="php-var">$cmd</span> = <span class="php-quote">&quot; dot -T&quot;</span>.<span class="php-var">$type</span>;
+<a href="#107" id="107" class="l">107: </a>
+<a href="#108" id="108" class="l">108: </a>  <span class="php-var">$process</span> = <span class="php-keyword2">proc_open</span>(<span class="php-var">$cmd</span>, <span class="php-var">$descriptorspec</span>, <span class="php-var">$pipes</span>, <span class="php-quote">&quot;/tmp&quot;</span>, <span class="php-keyword1">array</span>());
+<a href="#109" id="109" class="l">109: </a>
+<a href="#110" id="110" class="l">110: </a>  <span class="php-keyword1">if</span> (<span class="php-keyword2">is_resource</span>(<span class="php-var">$process</span>)) {
+<a href="#111" id="111" class="l">111: </a>    <span class="php-keyword2">fwrite</span>(<span class="php-var">$pipes</span>[<span class="php-num">0</span>], <span class="php-var">$dot_script</span>);
+<a href="#112" id="112" class="l">112: </a>    <span class="php-keyword2">fclose</span>(<span class="php-var">$pipes</span>[<span class="php-num">0</span>]);
+<a href="#113" id="113" class="l">113: </a>
+<a href="#114" id="114" class="l">114: </a>   <span class="php-var">$output</span> = <span class="php-keyword2">stream_get_contents</span>(<span class="php-var">$pipes</span>[<span class="php-num">1</span>]);
+<a href="#115" id="115" class="l">115: </a>    <span class="php-keyword2">fclose</span>(<span class="php-var">$pipes</span>[<span class="php-num">1</span>]);
+<a href="#116" id="116" class="l">116: </a>
+<a href="#117" id="117" class="l">117: </a>    <span class="php-keyword2">proc_close</span>(<span class="php-var">$process</span>);
+<a href="#118" id="118" class="l">118: </a>    <span class="php-keyword1">return</span> <span class="php-var">$output</span>;
+<a href="#119" id="119" class="l">119: </a>  }
+<a href="#120" id="120" class="l">120: </a>  <span class="php-keyword1">print</span> <span class="php-quote">&quot;failed to shell execute cmd=\&quot;</span><span class="php-var">$cmd</span><span class="php-quote">\&quot;\n&quot;</span>;
+<a href="#121" id="121" class="l">121: </a>  <span class="php-keyword1">exit</span>();
+<a href="#122" id="122" class="l">122: </a>}
+<a href="#123" id="123" class="l">123: </a>
+<a href="#124" id="124" class="l">124: </a><span class="php-comment">/*
+</span><a href="#125" id="125" class="l">125: </a><span class="php-comment"> * Get the children list of all nodes.
+</span><a href="#126" id="126" class="l">126: </a><span class="php-comment"> */</span>
+<a href="#127" id="127" class="l">127: </a><span class="php-keyword1">function</span> xhprof_get_children_table(<span class="php-var">$raw_data</span>) {
+<a href="#128" id="128" class="l">128: </a>  <span class="php-var">$children_table</span> = <span class="php-keyword1">array</span>();
+<a href="#129" id="129" class="l">129: </a>  <span class="php-keyword1">foreach</span> (<span class="php-var">$raw_data</span> <span class="php-keyword1">as</span> <span class="php-var">$parent_child</span> =&gt; <span class="php-var">$info</span>) {
+<a href="#130" id="130" class="l">130: </a>    <span class="php-keyword1">list</span>(<span class="php-var">$parent</span>, <span class="php-var">$child</span>) = xhprof_parse_parent_child(<span class="php-var">$parent_child</span>);
+<a href="#131" id="131" class="l">131: </a>    <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$children_table</span>[<span class="php-var">$parent</span>])) {
+<a href="#132" id="132" class="l">132: </a>      <span class="php-var">$children_table</span>[<span class="php-var">$parent</span>] = <span class="php-keyword1">array</span>(<span class="php-var">$child</span>);
+<a href="#133" id="133" class="l">133: </a>    } <span class="php-keyword1">else</span> {
+<a href="#134" id="134" class="l">134: </a>      <span class="php-var">$children_table</span>[<span class="php-var">$parent</span>][] = <span class="php-var">$child</span>;
+<a href="#135" id="135" class="l">135: </a>    }
+<a href="#136" id="136" class="l">136: </a>  }
+<a href="#137" id="137" class="l">137: </a>  <span class="php-keyword1">return</span> <span class="php-var">$children_table</span>;
+<a href="#138" id="138" class="l">138: </a>}
+<a href="#139" id="139" class="l">139: </a>
+<a href="#140" id="140" class="l">140: </a><span class="php-comment">/**
+</span><a href="#141" id="141" class="l">141: </a><span class="php-comment"> * Generate DOT script from the given raw phprof data.
+</span><a href="#142" id="142" class="l">142: </a><span class="php-comment"> *
+</span><a href="#143" id="143" class="l">143: </a><span class="php-comment"> * @param raw_data, phprof profile data.
+</span><a href="#144" id="144" class="l">144: </a><span class="php-comment"> * @param threshold, float, the threshold value [0,1). The functions in the
+</span><a href="#145" id="145" class="l">145: </a><span class="php-comment"> *                   raw_data whose exclusive wall times ratio are below the
+</span><a href="#146" id="146" class="l">146: </a><span class="php-comment"> *                   threshold will be filtered out and won't apprear in the
+</span><a href="#147" id="147" class="l">147: </a><span class="php-comment"> *                   generated image.
+</span><a href="#148" id="148" class="l">148: </a><span class="php-comment"> * @param page, string(optional), the root node name. This can be used to
+</span><a href="#149" id="149" class="l">149: </a><span class="php-comment"> *              replace the 'main()' as the root node.
+</span><a href="#150" id="150" class="l">150: </a><span class="php-comment"> * @param func, string, the focus function.
+</span><a href="#151" id="151" class="l">151: </a><span class="php-comment"> * @param critical_path, bool, whether or not to display critical path with
+</span><a href="#152" id="152" class="l">152: </a><span class="php-comment"> *                             bold lines.
+</span><a href="#153" id="153" class="l">153: </a><span class="php-comment"> * @returns, string, the DOT script to generate image.
+</span><a href="#154" id="154" class="l">154: </a><span class="php-comment"> *
+</span><a href="#155" id="155" class="l">155: </a><span class="php-comment"> * @author cjiang
+</span><a href="#156" id="156" class="l">156: </a><span class="php-comment"> */</span>
+<a href="#157" id="157" class="l">157: </a><span class="php-keyword1">function</span> xhprof_generate_dot_script(<span class="php-var">$raw_data</span>, <span class="php-var">$threshold</span>, <span class="php-var">$source</span>, <span class="php-var">$page</span>,
+<a href="#158" id="158" class="l">158: </a>                                    <span class="php-var">$func</span>, <span class="php-var">$critical_path</span>, <span class="php-var">$right</span>=<span class="php-keyword1">null</span>,
+<a href="#159" id="159" class="l">159: </a>                                    <span class="php-var">$left</span>=<span class="php-keyword1">null</span>) {
+<a href="#160" id="160" class="l">160: </a>
+<a href="#161" id="161" class="l">161: </a>  <span class="php-var">$max_width</span> = <span class="php-num">5</span>;
+<a href="#162" id="162" class="l">162: </a>  <span class="php-var">$max_height</span> = <span class="php-num">3.5</span>;
+<a href="#163" id="163" class="l">163: </a>  <span class="php-var">$max_fontsize</span> = <span class="php-num">35</span>;
+<a href="#164" id="164" class="l">164: </a>  <span class="php-var">$max_sizing_ratio</span> = <span class="php-num">20</span>;
+<a href="#165" id="165" class="l">165: </a>
+<a href="#166" id="166" class="l">166: </a>  <span class="php-var">$totals</span>;
+<a href="#167" id="167" class="l">167: </a>
+<a href="#168" id="168" class="l">168: </a>  <span class="php-keyword1">if</span> (<span class="php-var">$left</span> === <span class="php-keyword1">null</span>) {
+<a href="#169" id="169" class="l">169: </a>    <span class="php-comment">// init_metrics($raw_data, null, null);</span>
+<a href="#170" id="170" class="l">170: </a>  }
+<a href="#171" id="171" class="l">171: </a>  <span class="php-var">$sym_table</span> = xhprof_compute_flat_info(<span class="php-var">$raw_data</span>, <span class="php-var">$totals</span>);
+<a href="#172" id="172" class="l">172: </a>
+<a href="#173" id="173" class="l">173: </a>  <span class="php-keyword1">if</span> (<span class="php-var">$critical_path</span>) {
+<a href="#174" id="174" class="l">174: </a>    <span class="php-var">$children_table</span> = xhprof_get_children_table(<span class="php-var">$raw_data</span>);
+<a href="#175" id="175" class="l">175: </a>    <span class="php-var">$node</span> = <span class="php-quote">&quot;main()&quot;</span>;
+<a href="#176" id="176" class="l">176: </a>    <span class="php-var">$path</span> = <span class="php-keyword1">array</span>();
+<a href="#177" id="177" class="l">177: </a>    <span class="php-var">$path_edges</span> = <span class="php-keyword1">array</span>();
+<a href="#178" id="178" class="l">178: </a>    <span class="php-var">$visited</span> = <span class="php-keyword1">array</span>();
+<a href="#179" id="179" class="l">179: </a>    <span class="php-keyword1">while</span> (<span class="php-var">$node</span>) {
+<a href="#180" id="180" class="l">180: </a>      <span class="php-var">$visited</span>[<span class="php-var">$node</span>] = <span class="php-keyword1">true</span>;
+<a href="#181" id="181" class="l">181: </a>      <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$children_table</span>[<span class="php-var">$node</span>])) {
+<a href="#182" id="182" class="l">182: </a>        <span class="php-var">$max_child</span> = <span class="php-keyword1">null</span>;
+<a href="#183" id="183" class="l">183: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$children_table</span>[<span class="php-var">$node</span>] <span class="php-keyword1">as</span> <span class="php-var">$child</span>) {
+<a href="#184" id="184" class="l">184: </a>
+<a href="#185" id="185" class="l">185: </a>          <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$visited</span>[<span class="php-var">$child</span>])) {
+<a href="#186" id="186" class="l">186: </a>            <span class="php-keyword1">continue</span>;
+<a href="#187" id="187" class="l">187: </a>          }
+<a href="#188" id="188" class="l">188: </a>          <span class="php-keyword1">if</span> (<span class="php-var">$max_child</span> === <span class="php-keyword1">null</span> ||
+<a href="#189" id="189" class="l">189: </a>            <span class="php-keyword2">abs</span>(<span class="php-var">$raw_data</span>[xhprof_build_parent_child_key(<span class="php-var">$node</span>,
+<a href="#190" id="190" class="l">190: </a>                                                        <span class="php-var">$child</span>)][<span class="php-quote">&quot;wt&quot;</span>]) &gt;
+<a href="#191" id="191" class="l">191: </a>            <span class="php-keyword2">abs</span>(<span class="php-var">$raw_data</span>[xhprof_build_parent_child_key(<span class="php-var">$node</span>,
+<a href="#192" id="192" class="l">192: </a>                                                        <span class="php-var">$max_child</span>)][<span class="php-quote">&quot;wt&quot;</span>])) {
+<a href="#193" id="193" class="l">193: </a>            <span class="php-var">$max_child</span> = <span class="php-var">$child</span>;
+<a href="#194" id="194" class="l">194: </a>          }
+<a href="#195" id="195" class="l">195: </a>        }
+<a href="#196" id="196" class="l">196: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$max_child</span> !== <span class="php-keyword1">null</span>) {
+<a href="#197" id="197" class="l">197: </a>          <span class="php-var">$path</span>[<span class="php-var">$max_child</span>] = <span class="php-keyword1">true</span>;
+<a href="#198" id="198" class="l">198: </a>          <span class="php-var">$path_edges</span>[xhprof_build_parent_child_key(<span class="php-var">$node</span>, <span class="php-var">$max_child</span>)] = <span class="php-keyword1">true</span>;
+<a href="#199" id="199" class="l">199: </a>        }
+<a href="#200" id="200" class="l">200: </a>        <span class="php-var">$node</span> = <span class="php-var">$max_child</span>;
+<a href="#201" id="201" class="l">201: </a>      } <span class="php-keyword1">else</span> {
+<a href="#202" id="202" class="l">202: </a>        <span class="php-var">$node</span> = <span class="php-keyword1">null</span>;
+<a href="#203" id="203" class="l">203: </a>      }
+<a href="#204" id="204" class="l">204: </a>    }
+<a href="#205" id="205" class="l">205: </a>  }
+<a href="#206" id="206" class="l">206: </a>
+<a href="#207" id="207" class="l">207: </a>  <span class="php-comment">// if it is a benchmark callgraph, we make the benchmarked function the root.</span>
+<a href="#208" id="208" class="l">208: </a> <span class="php-keyword1">if</span> (<span class="php-var">$source</span> == <span class="php-quote">&quot;bm&quot;</span> &amp;&amp; <span class="php-keyword2">array_key_exists</span>(<span class="php-quote">&quot;main()&quot;</span>, <span class="php-var">$sym_table</span>)) {
+<a href="#209" id="209" class="l">209: </a>    <span class="php-var">$total_times</span> = <span class="php-var">$sym_table</span>[<span class="php-quote">&quot;main()&quot;</span>][<span class="php-quote">&quot;ct&quot;</span>];
+<a href="#210" id="210" class="l">210: </a>    <span class="php-var">$remove_funcs</span> = <span class="php-keyword1">array</span>(<span class="php-quote">&quot;main()&quot;</span>,
+<a href="#211" id="211" class="l">211: </a>                          <span class="php-quote">&quot;hotprofiler_disable&quot;</span>,
+<a href="#212" id="212" class="l">212: </a>                          <span class="php-quote">&quot;call_user_func_array&quot;</span>,
+<a href="#213" id="213" class="l">213: </a>                          <span class="php-quote">&quot;xhprof_disable&quot;</span>);
+<a href="#214" id="214" class="l">214: </a>
+<a href="#215" id="215" class="l">215: </a>    <span class="php-keyword1">foreach</span> (<span class="php-var">$remove_funcs</span> <span class="php-keyword1">as</span> <span class="php-var">$cur_del_func</span>) {
+<a href="#216" id="216" class="l">216: </a>      <span class="php-keyword1">if</span> (<span class="php-keyword2">array_key_exists</span>(<span class="php-var">$cur_del_func</span>, <span class="php-var">$sym_table</span>) &amp;&amp;
+<a href="#217" id="217" class="l">217: </a>          <span class="php-var">$sym_table</span>[<span class="php-var">$cur_del_func</span>][<span class="php-quote">&quot;ct&quot;</span>] == <span class="php-var">$total_times</span>) {
+<a href="#218" id="218" class="l">218: </a>        <span class="php-keyword1">unset</span>(<span class="php-var">$sym_table</span>[<span class="php-var">$cur_del_func</span>]);
+<a href="#219" id="219" class="l">219: </a>      }
+<a href="#220" id="220" class="l">220: </a>    }
+<a href="#221" id="221" class="l">221: </a>  }
+<a href="#222" id="222" class="l">222: </a>
+<a href="#223" id="223" class="l">223: </a>  <span class="php-comment">// use the function to filter out irrelevant functions.</span>
+<a href="#224" id="224" class="l">224: </a>  <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$func</span>)) {
+<a href="#225" id="225" class="l">225: </a>    <span class="php-var">$interested_funcs</span> = <span class="php-keyword1">array</span>();
+<a href="#226" id="226" class="l">226: </a>    <span class="php-keyword1">foreach</span> (<span class="php-var">$raw_data</span> <span class="php-keyword1">as</span> <span class="php-var">$parent_child</span> =&gt; <span class="php-var">$info</span>) {
+<a href="#227" id="227" class="l">227: </a>      <span class="php-keyword1">list</span>(<span class="php-var">$parent</span>, <span class="php-var">$child</span>) = xhprof_parse_parent_child(<span class="php-var">$parent_child</span>);
+<a href="#228" id="228" class="l">228: </a>      <span class="php-keyword1">if</span> (<span class="php-var">$parent</span> == <span class="php-var">$func</span> || <span class="php-var">$child</span> == <span class="php-var">$func</span>) {
+<a href="#229" id="229" class="l">229: </a>        <span class="php-var">$interested_funcs</span>[<span class="php-var">$parent</span>] = <span class="php-num">1</span>;
+<a href="#230" id="230" class="l">230: </a>        <span class="php-var">$interested_funcs</span>[<span class="php-var">$child</span>] = <span class="php-num">1</span>;
+<a href="#231" id="231" class="l">231: </a>      }
+<a href="#232" id="232" class="l">232: </a>    }
+<a href="#233" id="233" class="l">233: </a>    <span class="php-keyword1">foreach</span> (<span class="php-var">$sym_table</span> <span class="php-keyword1">as</span> <span class="php-var">$symbol</span> =&gt; <span class="php-var">$info</span>) {
+<a href="#234" id="234" class="l">234: </a>      <span class="php-keyword1">if</span> (!<span class="php-keyword2">array_key_exists</span>(<span class="php-var">$symbol</span>, <span class="php-var">$interested_funcs</span>)) {
+<a href="#235" id="235" class="l">235: </a>        <span class="php-keyword1">unset</span>(<span class="php-var">$sym_table</span>[<span class="php-var">$symbol</span>]);
+<a href="#236" id="236" class="l">236: </a>      }
+<a href="#237" id="237" class="l">237: </a>    }
+<a href="#238" id="238" class="l">238: </a>  }
+<a href="#239" id="239" class="l">239: </a>
+<a href="#240" id="240" class="l">240: </a>  <span class="php-var">$result</span> = <span class="php-quote">&quot;digraph call_graph {\n&quot;</span>;
+<a href="#241" id="241" class="l">241: </a>
+<a href="#242" id="242" class="l">242: </a>  <span class="php-comment">// Filter out functions whose exclusive time ratio is below threshold, and</span>
+<a href="#243" id="243" class="l">243: </a>  <span class="php-comment">// also assign a unique integer id for each function to be generated. In the</span>
+<a href="#244" id="244" class="l">244: </a>  <span class="php-comment">// meantime, find the function with the most exclusive time (potentially the</span>
+<a href="#245" id="245" class="l">245: </a>  <span class="php-comment">// performance bottleneck).</span>
+<a href="#246" id="246" class="l">246: </a>  <span class="php-var">$cur_id</span> = <span class="php-num">0</span>; <span class="php-var">$max_wt</span> = <span class="php-num">0</span>;
+<a href="#247" id="247" class="l">247: </a>  <span class="php-keyword1">foreach</span> (<span class="php-var">$sym_table</span> <span class="php-keyword1">as</span> <span class="php-var">$symbol</span> =&gt; <span class="php-var">$info</span>) {
+<a href="#248" id="248" class="l">248: </a>    <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$func</span>) &amp;&amp; <span class="php-keyword2">abs</span>(<span class="php-var">$info</span>[<span class="php-quote">&quot;wt&quot;</span>] / <span class="php-var">$totals</span>[<span class="php-quote">&quot;wt&quot;</span>]) &lt; <span class="php-var">$threshold</span>) {
+<a href="#249" id="249" class="l">249: </a>      <span class="php-keyword1">unset</span>(<span class="php-var">$sym_table</span>[<span class="php-var">$symbol</span>]);
+<a href="#250" id="250" class="l">250: </a>      <span class="php-keyword1">continue</span>;
+<a href="#251" id="251" class="l">251: </a>    }
+<a href="#252" id="252" class="l">252: </a>    <span class="php-keyword1">if</span> (<span class="php-var">$max_wt</span> == <span class="php-num">0</span> || <span class="php-var">$max_wt</span> &lt; <span class="php-keyword2">abs</span>(<span class="php-var">$info</span>[<span class="php-quote">&quot;excl_wt&quot;</span>])) {
+<a href="#253" id="253" class="l">253: </a>      <span class="php-var">$max_wt</span> = <span class="php-keyword2">abs</span>(<span class="php-var">$info</span>[<span class="php-quote">&quot;excl_wt&quot;</span>]);
+<a href="#254" id="254" class="l">254: </a>    }
+<a href="#255" id="255" class="l">255: </a>    <span class="php-var">$sym_table</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;id&quot;</span>] = <span class="php-var">$cur_id</span>;
+<a href="#256" id="256" class="l">256: </a>    <span class="php-var">$cur_id</span> ++;
+<a href="#257" id="257" class="l">257: </a>  }
+<a href="#258" id="258" class="l">258: </a>
+<a href="#259" id="259" class="l">259: </a>  <span class="php-comment">// Generate all nodes' information.</span>
+<a href="#260" id="260" class="l">260: </a>  <span class="php-keyword1">foreach</span> (<span class="php-var">$sym_table</span> <span class="php-keyword1">as</span> <span class="php-var">$symbol</span> =&gt; <span class="php-var">$info</span>) {
+<a href="#261" id="261" class="l">261: </a>    <span class="php-keyword1">if</span> (<span class="php-var">$info</span>[<span class="php-quote">&quot;excl_wt&quot;</span>] == <span class="php-num">0</span>) {
+<a href="#262" id="262" class="l">262: </a>      <span class="php-var">$sizing_factor</span> = <span class="php-var">$max_sizing_ratio</span>;
+<a href="#263" id="263" class="l">263: </a>    } <span class="php-keyword1">else</span> {
+<a href="#264" id="264" class="l">264: </a>      <span class="php-var">$sizing_factor</span> = <span class="php-var">$max_wt</span> / <span class="php-keyword2">abs</span>(<span class="php-var">$info</span>[<span class="php-quote">&quot;excl_wt&quot;</span>]) ;
+<a href="#265" id="265" class="l">265: </a>      <span class="php-keyword1">if</span> (<span class="php-var">$sizing_factor</span> &gt; <span class="php-var">$max_sizing_ratio</span>) {
+<a href="#266" id="266" class="l">266: </a>        <span class="php-var">$sizing_factor</span> = <span class="php-var">$max_sizing_ratio</span>;
+<a href="#267" id="267" class="l">267: </a>      }
+<a href="#268" id="268" class="l">268: </a>    }
+<a href="#269" id="269" class="l">269: </a>    <span class="php-var">$fillcolor</span> = ((<span class="php-var">$sizing_factor</span> &lt; <span class="php-num">1.5</span>) ?
+<a href="#270" id="270" class="l">270: </a>                  <span class="php-quote">&quot;, style=filled, fillcolor=red&quot;</span> : <span class="php-quote">&quot;&quot;</span>);
+<a href="#271" id="271" class="l">271: </a>
+<a href="#272" id="272" class="l">272: </a>    <span class="php-keyword1">if</span> (<span class="php-var">$critical_path</span>) {
+<a href="#273" id="273" class="l">273: </a>      <span class="php-comment">// highlight nodes along critical path.</span>
+<a href="#274" id="274" class="l">274: </a>      <span class="php-keyword1">if</span> (!<span class="php-var">$fillcolor</span> &amp;&amp; <span class="php-keyword2">array_key_exists</span>(<span class="php-var">$symbol</span>, <span class="php-var">$path</span>)) {
+<a href="#275" id="275" class="l">275: </a>        <span class="php-var">$fillcolor</span> = <span class="php-quote">&quot;, style=filled, fillcolor=yellow&quot;</span>;
+<a href="#276" id="276" class="l">276: </a>      }
+<a href="#277" id="277" class="l">277: </a>    }
+<a href="#278" id="278" class="l">278: </a>
+<a href="#279" id="279" class="l">279: </a>    <span class="php-var">$fontsize</span> =<span class="php-quote">&quot;, fontsize=&quot;</span>
+<a href="#280" id="280" class="l">280: </a>               .(int)(<span class="php-var">$max_fontsize</span> / ((<span class="php-var">$sizing_factor</span> - <span class="php-num">1</span>) / <span class="php-num">10</span> + <span class="php-num">1</span>));
+<a href="#281" id="281" class="l">281: </a>
+<a href="#282" id="282" class="l">282: </a>    <span class="php-var">$width</span> = <span class="php-quote">&quot;, width=&quot;</span>.<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.1f&quot;</span>, <span class="php-var">$max_width</span> / <span class="php-var">$sizing_factor</span>);
+<a href="#283" id="283" class="l">283: </a>    <span class="php-var">$height</span> = <span class="php-quote">&quot;, height=&quot;</span>.<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.1f&quot;</span>, <span class="php-var">$max_height</span> / <span class="php-var">$sizing_factor</span>);
+<a href="#284" id="284" class="l">284: </a>
+<a href="#285" id="285" class="l">285: </a>    <span class="php-keyword1">if</span> (<span class="php-var">$symbol</span> == <span class="php-quote">&quot;main()&quot;</span>) {
+<a href="#286" id="286" class="l">286: </a>      <span class="php-var">$shape</span> = <span class="php-quote">&quot;octagon&quot;</span>;
+<a href="#287" id="287" class="l">287: </a>      <span class="php-var">$name</span> =<span class="php-quote">&quot;Total: &quot;</span>.(<span class="php-var">$totals</span>[<span class="php-quote">&quot;wt&quot;</span>]/<span class="php-num">1000.0</span>).<span class="php-quote">&quot; ms\\n&quot;</span>;
+<a href="#288" id="288" class="l">288: </a>      <span class="php-var">$name</span> .= <span class="php-keyword2">addslashes</span>(<span class="php-keyword1">isset</span>(<span class="php-var">$page</span>) ? <span class="php-var">$page</span> : <span class="php-var">$symbol</span>);
+<a href="#289" id="289" class="l">289: </a>    } <span class="php-keyword1">else</span> {
+<a href="#290" id="290" class="l">290: </a>      <span class="php-var">$shape</span> = <span class="php-quote">&quot;box&quot;</span>;
+<a href="#291" id="291" class="l">291: </a>      <span class="php-var">$name</span> = <span class="php-keyword2">addslashes</span>(<span class="php-var">$symbol</span>).<span class="php-quote">&quot;\\nInc: &quot;</span>. <span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$info</span>[<span class="php-quote">&quot;wt&quot;</span>]/<span class="php-num">1000</span>) .
+<a href="#292" id="292" class="l">292: </a>              <span class="php-quote">&quot; ms (&quot;</span> . <span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.1f%%&quot;</span>, <span class="php-num">100</span> * <span class="php-var">$info</span>[<span class="php-quote">&quot;wt&quot;</span>]/<span class="php-var">$totals</span>[<span class="php-quote">&quot;wt&quot;</span>]).<span class="php-quote">&quot;)&quot;</span>;
+<a href="#293" id="293" class="l">293: </a>    }
+<a href="#294" id="294" class="l">294: </a>    <span class="php-keyword1">if</span> (<span class="php-var">$left</span> === <span class="php-keyword1">null</span>) {
+<a href="#295" id="295" class="l">295: </a>      <span class="php-var">$label</span> = <span class="php-quote">&quot;, label=\&quot;&quot;</span>.<span class="php-var">$name</span>.<span class="php-quote">&quot;\\nExcl: &quot;</span>
+<a href="#296" id="296" class="l">296: </a>               .(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$info</span>[<span class="php-quote">&quot;excl_wt&quot;</span>]/<span class="php-num">1000.0</span>)).<span class="php-quote">&quot; ms (&quot;</span>
+<a href="#297" id="297" class="l">297: </a>               .<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.1f%%&quot;</span>, <span class="php-num">100</span> * <span class="php-var">$info</span>[<span class="php-quote">&quot;excl_wt&quot;</span>]/<span class="php-var">$totals</span>[<span class="php-quote">&quot;wt&quot;</span>])
+<a href="#298" id="298" class="l">298: </a>               . <span class="php-quote">&quot;)\\n&quot;</span>.<span class="php-var">$info</span>[<span class="php-quote">&quot;ct&quot;</span>].<span class="php-quote">&quot; total calls\&quot;&quot;</span>;
+<a href="#299" id="299" class="l">299: </a>    } <span class="php-keyword1">else</span> {
+<a href="#300" id="300" class="l">300: </a>      <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$left</span>[<span class="php-var">$symbol</span>]) &amp;&amp; <span class="php-keyword1">isset</span>(<span class="php-var">$right</span>[<span class="php-var">$symbol</span>])) {
+<a href="#301" id="301" class="l">301: </a>         <span class="php-var">$label</span> = <span class="php-quote">&quot;, label=\&quot;&quot;</span>.<span class="php-keyword2">addslashes</span>(<span class="php-var">$symbol</span>).
+<a href="#302" id="302" class="l">302: </a>                  <span class="php-quote">&quot;\\nInc: &quot;</span>.(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$left</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;wt&quot;</span>]/<span class="php-num">1000.0</span>))
+<a href="#303" id="303" class="l">303: </a>                  .<span class="php-quote">&quot; ms - &quot;</span>
+<a href="#304" id="304" class="l">304: </a>                  .(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$right</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;wt&quot;</span>]/<span class="php-num">1000.0</span>)).<span class="php-quote">&quot; ms = &quot;</span>
+<a href="#305" id="305" class="l">305: </a>                  .(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$info</span>[<span class="php-quote">&quot;wt&quot;</span>]/<span class="php-num">1000.0</span>)).<span class="php-quote">&quot; ms&quot;</span>.
+<a href="#306" id="306" class="l">306: </a>                  <span class="php-quote">&quot;\\nExcl: &quot;</span>
+<a href="#307" id="307" class="l">307: </a>                  .(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$left</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;excl_wt&quot;</span>]/<span class="php-num">1000.0</span>))
+<a href="#308" id="308" class="l">308: </a>                  .<span class="php-quote">&quot; ms - &quot;</span>.(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$right</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;excl_wt&quot;</span>]/<span class="php-num">1000.0</span>))
+<a href="#309" id="309" class="l">309: </a>                   .<span class="php-quote">&quot; ms = &quot;</span>.(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$info</span>[<span class="php-quote">&quot;excl_wt&quot;</span>]/<span class="php-num">1000.0</span>)).<span class="php-quote">&quot; ms&quot;</span>.
+<a href="#310" id="310" class="l">310: </a>                  <span class="php-quote">&quot;\\nCalls: &quot;</span>.(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$left</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;ct&quot;</span>])).<span class="php-quote">&quot; - &quot;</span>
+<a href="#311" id="311" class="l">311: </a>                   .(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$right</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;ct&quot;</span>])).<span class="php-quote">&quot; = &quot;</span>
+<a href="#312" id="312" class="l">312: </a>                   .(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$info</span>[<span class="php-quote">&quot;ct&quot;</span>])).<span class="php-quote">&quot;\&quot;&quot;</span>;
+<a href="#313" id="313" class="l">313: </a>      } <span class="php-keyword1">else</span> <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$left</span>[<span class="php-var">$symbol</span>])) {
+<a href="#314" id="314" class="l">314: </a>        <span class="php-var">$label</span> = <span class="php-quote">&quot;, label=\&quot;&quot;</span>.<span class="php-keyword2">addslashes</span>(<span class="php-var">$symbol</span>).
+<a href="#315" id="315" class="l">315: </a>                  <span class="php-quote">&quot;\\nInc: &quot;</span>.(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$left</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;wt&quot;</span>]/<span class="php-num">1000.0</span>))
+<a href="#316" id="316" class="l">316: </a>                   .<span class="php-quote">&quot; ms - 0 ms = &quot;</span>.(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$info</span>[<span class="php-quote">&quot;wt&quot;</span>]/<span class="php-num">1000.0</span>))
+<a href="#317" id="317" class="l">317: </a>                   .<span class="php-quote">&quot; ms&quot;</span>.<span class="php-quote">&quot;\\nExcl: &quot;</span>
+<a href="#318" id="318" class="l">318: </a>                   .(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$left</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;excl_wt&quot;</span>]/<span class="php-num">1000.0</span>))
+<a href="#319" id="319" class="l">319: </a>                   .<span class="php-quote">&quot; ms - 0 ms = &quot;</span>
+<a href="#320" id="320" class="l">320: </a>                   .(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$info</span>[<span class="php-quote">&quot;excl_wt&quot;</span>]/<span class="php-num">1000.0</span>)).<span class="php-quote">&quot; ms&quot;</span>.
+<a href="#321" id="321" class="l">321: </a>                  <span class="php-quote">&quot;\\nCalls: &quot;</span>.(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$left</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;ct&quot;</span>])).<span class="php-quote">&quot; - 0 = &quot;</span>
+<a href="#322" id="322" class="l">322: </a>                  .(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$info</span>[<span class="php-quote">&quot;ct&quot;</span>])).<span class="php-quote">&quot;\&quot;&quot;</span>;
+<a href="#323" id="323" class="l">323: </a>      } <span class="php-keyword1">else</span> {
+<a href="#324" id="324" class="l">324: </a>        <span class="php-var">$label</span> = <span class="php-quote">&quot;, label=\&quot;&quot;</span>.<span class="php-keyword2">addslashes</span>(<span class="php-var">$symbol</span>).
+<a href="#325" id="325" class="l">325: </a>                  <span class="php-quote">&quot;\\nInc: 0 ms - &quot;</span>
+<a href="#326" id="326" class="l">326: </a>                  .(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$right</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;wt&quot;</span>]/<span class="php-num">1000.0</span>))
+<a href="#327" id="327" class="l">327: </a>                  .<span class="php-quote">&quot; ms = &quot;</span>.(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$info</span>[<span class="php-quote">&quot;wt&quot;</span>]/<span class="php-num">1000.0</span>)).<span class="php-quote">&quot; ms&quot;</span>.
+<a href="#328" id="328" class="l">328: </a>                  <span class="php-quote">&quot;\\nExcl: 0 ms - &quot;</span>
+<a href="#329" id="329" class="l">329: </a>                  .(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$right</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;excl_wt&quot;</span>]/<span class="php-num">1000.0</span>))
+<a href="#330" id="330" class="l">330: </a>                  .<span class="php-quote">&quot; ms = &quot;</span>.(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$info</span>[<span class="php-quote">&quot;excl_wt&quot;</span>]/<span class="php-num">1000.0</span>)).<span class="php-quote">&quot; ms&quot;</span>.
+<a href="#331" id="331" class="l">331: </a>                  <span class="php-quote">&quot;\\nCalls: 0 - &quot;</span>.(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$right</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;ct&quot;</span>]))
+<a href="#332" id="332" class="l">332: </a>                  .<span class="php-quote">&quot; = &quot;</span>.(<span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.3f&quot;</span>,<span class="php-var">$info</span>[<span class="php-quote">&quot;ct&quot;</span>])).<span class="php-quote">&quot;\&quot;&quot;</span>;
+<a href="#333" id="333" class="l">333: </a>      }
+<a href="#334" id="334" class="l">334: </a>    }
+<a href="#335" id="335" class="l">335: </a>    <span class="php-var">$result</span> .= <span class="php-quote">&quot;N&quot;</span> . <span class="php-var">$sym_table</span>[<span class="php-var">$symbol</span>][<span class="php-quote">&quot;id&quot;</span>];
+<a href="#336" id="336" class="l">336: </a>    <span class="php-var">$result</span> .= <span class="php-quote">&quot;[shape=</span><span class="php-var">$shape</span><span class="php-quote"> &quot;</span>.<span class="php-var">$label</span>.<span class="php-var">$width</span>
+<a href="#337" id="337" class="l">337: </a>               .<span class="php-var">$height</span>.<span class="php-var">$fontsize</span>.<span class="php-var">$fillcolor</span>.<span class="php-quote">&quot;];\n&quot;</span>;
+<a href="#338" id="338" class="l">338: </a>  }
+<a href="#339" id="339" class="l">339: </a>
+<a href="#340" id="340" class="l">340: </a>  <span class="php-comment">// Generate all the edges' information.</span>
+<a href="#341" id="341" class="l">341: </a>  <span class="php-keyword1">foreach</span> (<span class="php-var">$raw_data</span> <span class="php-keyword1">as</span> <span class="php-var">$parent_child</span> =&gt; <span class="php-var">$info</span>) {
+<a href="#342" id="342" class="l">342: </a>    <span class="php-keyword1">list</span>(<span class="php-var">$parent</span>, <span class="php-var">$child</span>) = xhprof_parse_parent_child(<span class="php-var">$parent_child</span>);
+<a href="#343" id="343" class="l">343: </a>
+<a href="#344" id="344" class="l">344: </a>    <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$sym_table</span>[<span class="php-var">$parent</span>]) &amp;&amp; <span class="php-keyword1">isset</span>(<span class="php-var">$sym_table</span>[<span class="php-var">$child</span>]) &amp;&amp;
+<a href="#345" id="345" class="l">345: </a>        (<span class="php-keyword1">empty</span>(<span class="php-var">$func</span>) ||
+<a href="#346" id="346" class="l">346: </a>         (!<span class="php-keyword1">empty</span>(<span class="php-var">$func</span>) &amp;&amp; (<span class="php-var">$parent</span> == <span class="php-var">$func</span> || <span class="php-var">$child</span> == <span class="php-var">$func</span>)) )) {
+<a href="#347" id="347" class="l">347: </a>
+<a href="#348" id="348" class="l">348: </a>      <span class="php-var">$label</span> = <span class="php-var">$info</span>[<span class="php-quote">&quot;ct&quot;</span>] == <span class="php-num">1</span> ? <span class="php-var">$info</span>[<span class="php-quote">&quot;ct&quot;</span>].<span class="php-quote">&quot; call&quot;</span> : <span class="php-var">$info</span>[<span class="php-quote">&quot;ct&quot;</span>].<span class="php-quote">&quot; calls&quot;</span>;
+<a href="#349" id="349" class="l">349: </a>
+<a href="#350" id="350" class="l">350: </a>      <span class="php-var">$headlabel</span> = <span class="php-var">$sym_table</span>[<span class="php-var">$child</span>][<span class="php-quote">&quot;wt&quot;</span>] &gt; <span class="php-num">0</span> ?
+<a href="#351" id="351" class="l">351: </a>                  <span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.1f%%&quot;</span>, <span class="php-num">100</span> * <span class="php-var">$info</span>[<span class="php-quote">&quot;wt&quot;</span>]
+<a href="#352" id="352" class="l">352: </a>                                    / <span class="php-var">$sym_table</span>[<span class="php-var">$child</span>][<span class="php-quote">&quot;wt&quot;</span>])
+<a href="#353" id="353" class="l">353: </a>                  : <span class="php-quote">&quot;0.0%&quot;</span>;
+<a href="#354" id="354" class="l">354: </a>
+<a href="#355" id="355" class="l">355: </a>      <span class="php-var">$taillabel</span> = (<span class="php-var">$sym_table</span>[<span class="php-var">$parent</span>][<span class="php-quote">&quot;wt&quot;</span>] &gt; <span class="php-num">0</span>) ?
+<a href="#356" id="356" class="l">356: </a>        <span class="php-keyword2">sprintf</span>(<span class="php-quote">&quot;%.1f%%&quot;</span>,
+<a href="#357" id="357" class="l">357: </a>                <span class="php-num">100</span> * <span class="php-var">$info</span>[<span class="php-quote">&quot;wt&quot;</span>] /
+<a href="#358" id="358" class="l">358: </a>                (<span class="php-var">$sym_table</span>[<span class="php-var">$parent</span>][<span class="php-quote">&quot;wt&quot;</span>] - <span class="php-var">$sym_table</span>[<span class="php-quote">&quot;</span><span class="php-var">$parent</span><span class="php-quote">&quot;</span>][<span class="php-quote">&quot;excl_wt&quot;</span>]))
+<a href="#359" id="359" class="l">359: </a>        : <span class="php-quote">&quot;0.0%&quot;</span>;
+<a href="#360" id="360" class="l">360: </a>
+<a href="#361" id="361" class="l">361: </a>      <span class="php-var">$linewidth</span>= <span class="php-num">1</span>;
+<a href="#362" id="362" class="l">362: </a>      <span class="php-var">$arrow_size</span> = <span class="php-num">1</span>;
+<a href="#363" id="363" class="l">363: </a>
+<a href="#364" id="364" class="l">364: </a>      <span class="php-keyword1">if</span> (<span class="php-var">$critical_path</span> &amp;&amp;
+<a href="#365" id="365" class="l">365: </a>          <span class="php-keyword1">isset</span>(<span class="php-var">$path_edges</span>[xhprof_build_parent_child_key(<span class="php-var">$parent</span>, <span class="php-var">$child</span>)])) {
+<a href="#366" id="366" class="l">366: </a>        <span class="php-var">$linewidth</span> = <span class="php-num">10</span>; <span class="php-var">$arrow_size</span>=<span class="php-num">2</span>;
+<a href="#367" id="367" class="l">367: </a>      }
+<a href="#368" id="368" class="l">368: </a>
+<a href="#369" id="369" class="l">369: </a>      <span class="php-var">$result</span> .= <span class="php-quote">&quot;N&quot;</span> . <span class="php-var">$sym_table</span>[<span class="php-var">$parent</span>][<span class="php-quote">&quot;id&quot;</span>] . <span class="php-quote">&quot; -&gt; N&quot;</span>
+<a href="#370" id="370" class="l">370: </a>                 . <span class="php-var">$sym_table</span>[<span class="php-var">$child</span>][<span class="php-quote">&quot;id&quot;</span>];
+<a href="#371" id="371" class="l">371: </a>      <span class="php-var">$result</span> .= <span class="php-quote">&quot;[arrowsize=</span><span class="php-var">$arrow_size</span><span class="php-quote">, style=\&quot;setlinewidth(</span><span class="php-var">$linewidth</span><span class="php-quote">)\&quot;,&quot;</span>
+<a href="#372" id="372" class="l">372: </a>                 .<span class="php-quote">&quot; label=\&quot;&quot;</span>
+<a href="#373" id="373" class="l">373: </a>                 .<span class="php-var">$label</span>.<span class="php-quote">&quot;\&quot;, headlabel=\&quot;&quot;</span>.<span class="php-var">$headlabel</span>
+<a href="#374" id="374" class="l">374: </a>                 .<span class="php-quote">&quot;\&quot;, taillabel=\&quot;&quot;</span>.<span class="php-var">$taillabel</span>.<span class="php-quote">&quot;\&quot; ]&quot;</span>;
+<a href="#375" id="375" class="l">375: </a>      <span class="php-var">$result</span> .= <span class="php-quote">&quot;;\n&quot;</span>;
+<a href="#376" id="376" class="l">376: </a>
+<a href="#377" id="377" class="l">377: </a>    }
+<a href="#378" id="378" class="l">378: </a>  }
+<a href="#379" id="379" class="l">379: </a>  <span class="php-var">$result</span> = <span class="php-var">$result</span> . <span class="php-quote">&quot;\n}&quot;</span>;
+<a href="#380" id="380" class="l">380: </a>
+<a href="#381" id="381" class="l">381: </a>  <span class="php-keyword1">return</span> <span class="php-var">$result</span>;
+<a href="#382" id="382" class="l">382: </a>}
+<a href="#383" id="383" class="l">383: </a>
+<a href="#384" id="384" class="l">384: </a><span class="php-keyword1">function</span>  xhprof_render_diff_image(<span class="php-var">$xhprof_runs_impl</span>, <span class="php-var">$run1</span>, <span class="php-var">$run2</span>,
+<a href="#385" id="385" class="l">385: </a>                                   <span class="php-var">$type</span>, <span class="php-var">$threshold</span>, <span class="php-var">$source</span>) {
+<a href="#386" id="386" class="l">386: </a>  <span class="php-var">$total1</span>;
+<a href="#387" id="387" class="l">387: </a>  <span class="php-var">$total2</span>;
+<a href="#388" id="388" class="l">388: </a>
+<a href="#389" id="389" class="l">389: </a>  <span class="php-var">$raw_data1</span> = <span class="php-var">$xhprof_runs_impl</span>-&gt;get_run(<span class="php-var">$run1</span>, <span class="php-var">$source</span>, <span class="php-var">$desc_unused</span>);
+<a href="#390" id="390" class="l">390: </a>  <span class="php-var">$raw_data2</span> = <span class="php-var">$xhprof_runs_impl</span>-&gt;get_run(<span class="php-var">$run2</span>, <span class="php-var">$source</span>, <span class="php-var">$desc_unused</span>);
+<a href="#391" id="391" class="l">391: </a>
+<a href="#392" id="392" class="l">392: </a>  <span class="php-comment">// init_metrics($raw_data1, null, null);</span>
+<a href="#393" id="393" class="l">393: </a>  <span class="php-var">$children_table1</span> = xhprof_get_children_table(<span class="php-var">$raw_data1</span>);
+<a href="#394" id="394" class="l">394: </a>  <span class="php-var">$children_table2</span> = xhprof_get_children_table(<span class="php-var">$raw_data2</span>);
+<a href="#395" id="395" class="l">395: </a>  <span class="php-var">$symbol_tab1</span> = xhprof_compute_flat_info(<span class="php-var">$raw_data1</span>, <span class="php-var">$total1</span>);
+<a href="#396" id="396" class="l">396: </a>  <span class="php-var">$symbol_tab2</span> = xhprof_compute_flat_info(<span class="php-var">$raw_data2</span>, <span class="php-var">$total2</span>);
+<a href="#397" id="397" class="l">397: </a>  <span class="php-var">$run_delta</span> = xhprof_compute_diff(<span class="php-var">$raw_data1</span>, <span class="php-var">$raw_data2</span>);
+<a href="#398" id="398" class="l">398: </a>  <span class="php-var">$script</span> = xhprof_generate_dot_script(<span class="php-var">$run_delta</span>, <span class="php-var">$threshold</span>, <span class="php-var">$source</span>,
+<a href="#399" id="399" class="l">399: </a>                                       <span class="php-keyword1">null</span>, <span class="php-keyword1">null</span>, <span class="php-keyword1">true</span>,
+<a href="#400" id="400" class="l">400: </a>                                       <span class="php-var">$symbol_tab1</span>, <span class="php-var">$symbol_tab2</span>);
+<a href="#401" id="401" class="l">401: </a>  <span class="php-var">$content</span> = xhprof_generate_image_by_dot(<span class="php-var">$script</span>, <span class="php-var">$type</span>);
+<a href="#402" id="402" class="l">402: </a>
+<a href="#403" id="403" class="l">403: </a>  xhprof_generate_mime_header(<span class="php-var">$type</span>, <span class="php-keyword2">strlen</span>(<span class="php-var">$content</span>));
+<a href="#404" id="404" class="l">404: </a>  <span class="php-keyword1">echo</span> <span class="php-var">$content</span>;
+<a href="#405" id="405" class="l">405: </a>}
+<a href="#406" id="406" class="l">406: </a>
+<a href="#407" id="407" class="l">407: </a><span class="php-comment">/**
+</span><a href="#408" id="408" class="l">408: </a><span class="php-comment"> * Generate image content from phprof run id.
+</span><a href="#409" id="409" class="l">409: </a><span class="php-comment"> *
+</span><a href="#410" id="410" class="l">410: </a><span class="php-comment"> * @param object  $xhprof_runs_impl  An object that implements
+</span><a href="#411" id="411" class="l">411: </a><span class="php-comment"> *                                   the iXHProfRuns interface
+</span><a href="#412" id="412" class="l">412: </a><span class="php-comment"> * @param run_id, integer, the unique id for the phprof run, this is the
+</span><a href="#413" id="413" class="l">413: </a><span class="php-comment"> *                primary key for phprof database table.
+</span><a href="#414" id="414" class="l">414: </a><span class="php-comment"> * @param type, string, one of the supported image types. See also
+</span><a href="#415" id="415" class="l">415: </a><span class="php-comment"> *              $xhprof_legal_image_types.
+</span><a href="#416" id="416" class="l">416: </a><span class="php-comment"> * @param threshold, float, the threshold value [0,1). The functions in the
+</span><a href="#417" id="417" class="l">417: </a><span class="php-comment"> *                   raw_data whose exclusive wall times ratio are below the
+</span><a href="#418" id="418" class="l">418: </a><span class="php-comment"> *                   threshold will be filtered out and won't apprear in the
+</span><a href="#419" id="419" class="l">419: </a><span class="php-comment"> *                   generated image.
+</span><a href="#420" id="420" class="l">420: </a><span class="php-comment"> * @param func, string, the focus function.
+</span><a href="#421" id="421" class="l">421: </a><span class="php-comment"> * @returns, string, the DOT script to generate image.
+</span><a href="#422" id="422" class="l">422: </a><span class="php-comment"> *
+</span><a href="#423" id="423" class="l">423: </a><span class="php-comment"> * @author cjiang
+</span><a href="#424" id="424" class="l">424: </a><span class="php-comment"> */</span>
+<a href="#425" id="425" class="l">425: </a><span class="php-keyword1">function</span> xhprof_get_content_by_run(<span class="php-var">$xhprof_runs_impl</span>, <span class="php-var">$run_id</span>, <span class="php-var">$type</span>,
+<a href="#426" id="426" class="l">426: </a>                                   <span class="php-var">$threshold</span>, <span class="php-var">$func</span>, <span class="php-var">$source</span>,
+<a href="#427" id="427" class="l">427: </a>                                   <span class="php-var">$critical_path</span>) {
+<a href="#428" id="428" class="l">428: </a>  <span class="php-keyword1">if</span> (!<span class="php-var">$run_id</span>)
+<a href="#429" id="429" class="l">429: </a>    <span class="php-keyword1">return</span> <span class="php-quote">&quot;&quot;</span>;
+<a href="#430" id="430" class="l">430: </a>
+<a href="#431" id="431" class="l">431: </a>  <span class="php-var">$raw_data</span> = <span class="php-var">$xhprof_runs_impl</span>-&gt;get_run(<span class="php-var">$run_id</span>, <span class="php-var">$source</span>, <span class="php-var">$description</span>);
+<a href="#432" id="432" class="l">432: </a>  <span class="php-keyword1">if</span> (!<span class="php-var">$raw_data</span>) {
+<a href="#433" id="433" class="l">433: </a>    xhprof_error(<span class="php-quote">&quot;Raw data is empty&quot;</span>);
+<a href="#434" id="434" class="l">434: </a>    <span class="php-keyword1">return</span> <span class="php-quote">&quot;&quot;</span>;
+<a href="#435" id="435" class="l">435: </a>  }
+<a href="#436" id="436" class="l">436: </a>
+<a href="#437" id="437" class="l">437: </a>  <span class="php-var">$script</span> = xhprof_generate_dot_script(<span class="php-var">$raw_data</span>, <span class="php-var">$threshold</span>, <span class="php-var">$source</span>,
+<a href="#438" id="438" class="l">438: </a>                                       <span class="php-var">$description</span>, <span class="php-var">$func</span>, <span class="php-var">$critical_path</span>);
+<a href="#439" id="439" class="l">439: </a>
+<a href="#440" id="440" class="l">440: </a>  <span class="php-var">$content</span> = xhprof_generate_image_by_dot(<span class="php-var">$script</span>, <span class="php-var">$type</span>);
+<a href="#441" id="441" class="l">441: </a>  <span class="php-keyword1">return</span> <span class="php-var">$content</span>;
+<a href="#442" id="442" class="l">442: </a>}
+<a href="#443" id="443" class="l">443: </a>
+<a href="#444" id="444" class="l">444: </a><span class="php-comment">/**
+</span><a href="#445" id="445" class="l">445: </a><span class="php-comment"> * Generate image from phprof run id and send it to client.
+</span><a href="#446" id="446" class="l">446: </a><span class="php-comment"> *
+</span><a href="#447" id="447" class="l">447: </a><span class="php-comment"> * @param object  $xhprof_runs_impl  An object that implements
+</span><a href="#448" id="448" class="l">448: </a><span class="php-comment"> *                                   the iXHProfRuns interface
+</span><a href="#449" id="449" class="l">449: </a><span class="php-comment"> * @param run_id, integer, the unique id for the phprof run, this is the
+</span><a href="#450" id="450" class="l">450: </a><span class="php-comment"> *                primary key for phprof database table.
+</span><a href="#451" id="451" class="l">451: </a><span class="php-comment"> * @param type, string, one of the supported image types. See also
+</span><a href="#452" id="452" class="l">452: </a><span class="php-comment"> *              $xhprof_legal_image_types.
+</span><a href="#453" id="453" class="l">453: </a><span class="php-comment"> * @param threshold, float, the threshold value [0,1). The functions in the
+</span><a href="#454" id="454" class="l">454: </a><span class="php-comment"> *                   raw_data whose exclusive wall times ratio are below the
+</span><a href="#455" id="455" class="l">455: </a><span class="php-comment"> *                   threshold will be filtered out and won't apprear in the
+</span><a href="#456" id="456" class="l">456: </a><span class="php-comment"> *                   generated image.
+</span><a href="#457" id="457" class="l">457: </a><span class="php-comment"> * @param func, string, the focus function.
+</span><a href="#458" id="458" class="l">458: </a><span class="php-comment"> * @param bool, does this run correspond to a PHProfLive run or a dev run?
+</span><a href="#459" id="459" class="l">459: </a><span class="php-comment"> * @author cjiang
+</span><a href="#460" id="460" class="l">460: </a><span class="php-comment"> */</span>
+<a href="#461" id="461" class="l">461: </a><span class="php-keyword1">function</span> xhprof_render_image(<span class="php-var">$xhprof_runs_impl</span>, <span class="php-var">$run_id</span>, <span class="php-var">$type</span>, <span class="php-var">$threshold</span>,
+<a href="#462" id="462" class="l">462: </a>                             <span class="php-var">$func</span>, <span class="php-var">$source</span>, <span class="php-var">$critical_path</span>) {
+<a href="#463" id="463" class="l">463: </a>
+<a href="#464" id="464" class="l">464: </a>  <span class="php-var">$content</span> = xhprof_get_content_by_run(<span class="php-var">$xhprof_runs_impl</span>, <span class="php-var">$run_id</span>, <span class="php-var">$type</span>,
+<a href="#465" id="465" class="l">465: </a>                                       <span class="php-var">$threshold</span>,
+<a href="#466" id="466" class="l">466: </a>                                       <span class="php-var">$func</span>, <span class="php-var">$source</span>, <span class="php-var">$critical_path</span>);
+<a href="#467" id="467" class="l">467: </a>  <span class="php-keyword1">if</span> (!<span class="php-var">$content</span>) {
+<a href="#468" id="468" class="l">468: </a>    <span class="php-keyword1">print</span> <span class="php-quote">&quot;Error: either we can not find profile data for run_id &quot;</span>.<span class="php-var">$run_id</span>
+<a href="#469" id="469" class="l">469: </a>          .<span class="php-quote">&quot; or the threshold &quot;</span>.<span class="php-var">$threshold</span>.<span class="php-quote">&quot; is too small or you do not&quot;</span>
+<a href="#470" id="470" class="l">470: </a>          .<span class="php-quote">&quot; have 'dot' image generation utility installed.&quot;</span>;
+<a href="#471" id="471" class="l">471: </a>    <span class="php-keyword1">exit</span>();
+<a href="#472" id="472" class="l">472: </a>  }
+<a href="#473" id="473" class="l">473: </a>
+<a href="#474" id="474" class="l">474: </a>  xhprof_generate_mime_header(<span class="php-var">$type</span>, <span class="php-keyword2">strlen</span>(<span class="php-var">$content</span>));
+<a href="#475" id="475" class="l">475: </a>  <span class="php-keyword1">echo</span> <span class="php-var">$content</span>;
+<a href="#476" id="476" class="l">476: </a>}
+<a href="#477" id="477" class="l">477: </a></code></pre>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 2.6.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

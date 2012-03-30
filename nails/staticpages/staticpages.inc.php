@@ -100,6 +100,8 @@ class StaticPages {
 	 */
 	private function informAdmin() {
 		$oXML			= $this->oNails->getXML();
+		if (!is_object($oXML)) { $oXML = new XML(); } //mainly for IDEs
+
 		$oXML->setFile("config");
 		$oXML->cRoot	= "config";
 

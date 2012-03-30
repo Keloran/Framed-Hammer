@@ -37,6 +37,8 @@ class Session {
 		//ther is no user id so try and retrive it
 		if ($this->iUserID == false) {
 			$this->oUser		= $this->oNails->getUser();
+			if (!is_object($this->oUser)) { $this->oUser = new User(); } //mainly for IDE's
+
 			$this->iUserID		= $this->oUser->getUserID();
 			$this->cUserName	= $this->oUser->getUserName();
 		}

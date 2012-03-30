@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Charts_PNG_Create
+ *
+ * @packageCharts
+ * @author Keloran
+ * @copyright Copyright (c) 2012
+ * @version $Id$
+ * @access public
+ */
 class Charts_PNG_Create {
 	var $aData		= false;
 	var $aColors	= false;

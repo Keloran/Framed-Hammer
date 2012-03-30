@@ -2,8 +2,8 @@
 /**
  * Charts_Bar
  *
- * @package
- * @author Max
+ * @package Charts
+ * @author Keloran
  * @copyright Copyright (c) 2008
  * @version $Id$
  * @access public

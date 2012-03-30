@@ -1,5 +1,20 @@
 <?php
+/**
+ * Warnings
+ *
+ * @package Traits
+ * @author Keloran
+ * @copyright Copyright (c) 2012
+ * @version $Id$
+ * @access public
+ */
 trait Warnings {
+	/**
+	 * Warnings::getWarnings()
+	 *
+	 * @param string $cExtra
+	 * @return string
+	 */
 	function getWarnings($cExtra = false) {
 		$cWarnings	= false;
 		$cReturn	= false;
@@ -28,7 +43,7 @@ trait Warnings {
 	/**
 	 * getShiv()
 	 *
-	 * @return
+	 * @return string
 	 */
 	function getShiv() {
 		$cReturn  = "<!--[if lt IE 9]>\n";
@@ -38,6 +53,11 @@ trait Warnings {
 		return $cReturn;
 	}
 
+	/**
+	 * Warnings::getBanner()
+	 *
+	 * @return string
+	 */
 	function getBanner() {
 		$cWarning  = "<!--[if lte IE 8]>\n";
 		$cWarning .= "<div style=\"clear: both; height: 59px; padding:0 0 0 15px; position: relative;\">\n";

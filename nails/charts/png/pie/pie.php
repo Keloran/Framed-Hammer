@@ -1,9 +1,8 @@
 <?php
-
 /**
  * Charts_PNG_Pie
  *
- * @package
+ * @package Charts
  * @author Keloran
  * @copyright Copyright (c) 2008
  * @version $Id$

@@ -32,6 +32,8 @@ class Twitter implements Nails_Interface {
 		$this->oNails	= $oNails;
 
 		$this->oUser	= $this->oNails->getUser();
+		if (!is_object($this->oUser)) { $this->oUser = new User(); } //mainly for ides
+
 		$this->iUserID	= $this->oUser->getUserID();
 
 		$this->oDB		= $this->oNails->getDatabase();
