@@ -2,8 +2,8 @@
 /**
  * Head
  *
- * @package
- * @author Max
+ * @package Head
+ * @author Keloran
  * @copyright Copyright (c) 2008
  * @version $Id: head.inc.php 455 2009-12-23 13:55:35Z keloran $
  * @access public

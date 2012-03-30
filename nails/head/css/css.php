@@ -2,8 +2,8 @@
 /**
  * head_css
  *
- * @package
- * @author nails
+ * @package Head
+ * @author Keloran
  * @copyright Copyright (c) 2011
  * @version $Id$
  * @access public

@@ -2,14 +2,14 @@
 /**
  * Head_Meta
  *
- * @package
+ * @package Head
  * @author keloran
  * @copyright Copyright (c) 2011
  * @version $Id$
  * @access public
  */
 class Head_Meta {
-	#use browser;
+	use browser;
 
 	private $aData;
 	private $oDB;

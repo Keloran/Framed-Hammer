@@ -2,7 +2,7 @@
 /**
  * head_js
  *
- * @package
+ * @package Head
  * @author keloran
  * @copyright Copyright (c) 2011
  * @version $Id$
@@ -10,7 +10,7 @@
  */
 class Head_JS {
 	//Traits
-	#use Browser;
+	use Browser;
 
 	private $aData;
 	private $oNails;
