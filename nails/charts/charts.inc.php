@@ -102,29 +102,30 @@ class Charts {
 	 * @return
 	 */
 	public function setData(){
-		$aTmp = $this->aData;
-		$iSum = 0;
+		$aTmp 	= $this->aData;
+		$iTotal = 0;
 
 		//since there might not be any data
 		if (!$this->aPreData) { return false; }
 
 		//count the total values
-		foreach ($this->aPreData as $oObject){ $iSum += $oObject->iValue; }
+		foreach ($this->aPreData as $oObject){ $iTotal += $oObject->iValue; }
 
 		//set sum to 1 if acutally its 0, todo divide
-		if ($iSum == 0) { $iSum = 100; }
+		if ($iTotal == 0) { $iTotal = 100; }
 
 		//go through the data and make it percentage
 		foreach ($this->aPreData as $cKey => $oObject){
 			$iValue = $oObject->iValue;
 			if ($iValue == 0) {
-				$iValue = 0.001;
+				$iValue = 0.0001;
 			} else {
-				$iValue = ($iValue - 0.001);
+				$iValue = ($iValue - 0.0001);
 			}
 
-			$oObject->iPercentLegend	= round(($iValue / $iSum) * 100, 2);
-			$oObject->iPercent		= round(($iValue / $iSum) * 100, 3);
+			$oObject->iPercentLegend	= round(($iValue / $iTotal) * 100, 2);
+			$oObject->iPercent			= round(($iValue / $iTotal) * 100, 3);
+			$oObject->iRawPercent		= round(($iValue / $iTotal), 3);
 
 			$this->aData[$cKey]	= $oObject;
 		}

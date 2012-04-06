@@ -18,7 +18,6 @@ class oReader {
 	 * oReader::__construct()
 	 *
 	 * @param mixed $mString
-	 * @param mixed $aOptions
 	 */
 	function __construct($mString) {
 		//there is nothing here, so why continue processing
@@ -31,7 +30,8 @@ class oReader {
 		$this->bScreen		= true;
 
 		//Show the methods of the class your trying diagnose
-		if (is_object($mString)) { $this->cMethods = print_r(get_class_methods($mString), true); }
+		if (is_object($mString)) { $this->cMethods 	= print_r(get_class_methods($mString), true); }
+		if (is_object($mString)) { $this->cVars		= print_r(get_class_vars($mString), true); }
 	}
 
 	/**
@@ -117,15 +117,18 @@ class oReader {
 		if ($this->bColor) {
 			$this->cOutput	 = $this->colorMe($this->cFormated);
 			$this->cOutput	.= $this->colorMe($this->cMethods);
+			$this->cOutput	.= $this->colorMe($this->cVars);
 		} else {
 			$this->cOutput  = $this->cFormated;
 			$this->cOutput .= $this->cMethods;
+			$this->cOutput .= $this->cVars;
 		}
 
 		//if its console then it needs a different method
 		if ($this->bStripper) {
 			$this->cConsole	 = $this->cFormated;
 			$this->cConsole	.= $this->cMethods;
+			$this->cConsole .= $this->cVars;
 		}
 
 		//turn it into new lines
@@ -134,7 +137,11 @@ class oReader {
 
 		//Protect stuff
 		$this->cOutput	= $this->protectMe($this->cOutput);
-		if ($this->bStripper) { $this->cConsole	= $this->protectMe($this->cConsole); }
+		if ($this->bStripper) {
+			if (!$this->bFile) { //since file is on server
+				$this->cConsole	= $this->protectMe($this->cConsole);
+			}
+		}
 
 		//now do we want a header
 		if ($this->bEmail) { $this->cEmail 		= $this->cOutput; }
@@ -158,8 +165,8 @@ class oReader {
 
 		//Console remove all the tags since not in use for console, and firephp
 		if ($this->bStripper) {
-			$this->cConsole = str_replace("<br />", "\n", $this->cConsole);
-			$this->cConsole = strip_tags($this->cConsole);
+			#$this->cConsole = str_replace("<br />", PHP_EOL, $this->cConsole);
+			#$this->cConsole = strip_tags($this->cConsole);
 
 			//do we want to use FirePHP / ChromePHP
 			if ($this->bFirePHP) {
@@ -171,9 +178,11 @@ class oReader {
 				$this->FirePHP($this->cConsole, $this->cLevel);
 			}
 
+			//send to a file
 			if ($this->bFile) {
-				$fFile	= tempnam(HAMMERPATH . "/logs/", "debug");
-				file_put_contents($fFile, $this->cConsole);
+				$fFile			= tempnam(HAMMERPATH . "/logs/", "debug");
+				$cFileContent	= str_replace("\n", PHP_EOL, $this->cConsole);
+				file_put_contents($fFile, $cFileContent);
 				$this->cOutput	= $fFile;
 			}
 		}
