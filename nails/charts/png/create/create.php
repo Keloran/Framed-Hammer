@@ -44,7 +44,7 @@ class Charts_PNG_Create {
 		// Legend Box
 		$i = 0;
 		$iLegWidth		= $iMaxWidth;
-		$iLegHeight		= count($aData) * (ImageFontHeight($iFont) + 2) + 2;
+		$iLegHeight		= (count($aData) * (ImageFontHeight($iFont) + 2) + 2);
 
 		$imLegendImage	= ImageCreateTrueColor($iLegWidth, $iLegHeight);
 		$imBack			= imagecolorallocate($imLegendImage, 255, 255, 255);
@@ -63,7 +63,7 @@ class Charts_PNG_Create {
 
 		foreach($aData as $oObject) {
 			$iPiePart		= $oObject->cExtra . round($oObject->iValue, 2);
-			$iPiePart100	= $oObject->iPercent;
+			$iPiePart100	= round($oObject->iPercent, 2);
 
 			$cColor		= $oObject->cColor;
 			$iColR		= $oObject->cColorRed;

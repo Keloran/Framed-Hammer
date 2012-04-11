@@ -43,8 +43,8 @@ class Charts_SVG_Pie {
 		foreach ($aData as $oObject) {
 			$iAlpha = ($iAlpha + (($oObject->iPercent / 100) * (2 * M_PI)));
 
-			$iX2 = $iCX + ($iR * sin($iAlpha));
-			$iY2 = $iCY - ($iR * cos($iAlpha));
+			$iX2 = ($iCX + ($iR * sin($iAlpha)));
+			$iY2 = ($iCY - ($iR * cos($iAlpha)));
 
 			$iOver180	= $oObject->iPercent > 50 ? "1" : "0";
 			$cColor 	= $oObject->cColor;

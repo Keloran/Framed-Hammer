@@ -31,9 +31,12 @@ class Charts_PNG_Pie {
 	 * @return string
 	 */
 	function renderChart() {
-		$aData	= $this->aData;
-		$i		= 0;
-		$iStop	= 0;
+		$aData		= $this->aData;
+		$i			= 0;
+		$iStart		= 0;
+		$iEnd		= 0;
+		$iEndCheck	= 0;
+		$iEndAngle	= 0;
 
 		//Set the background to white
 		$imBack	= imagecolorallocate($this->imImage, 255, 255, 255);
@@ -46,6 +49,8 @@ class Charts_PNG_Pie {
 		$iTotal = 0;
 		foreach ($aData as $oObject) { $iTotal += $oObject->iValue; }
 
+		$aDebug	= array();
+
 		//Draw the circle
 		foreach ($aData as $oObject) {
 			//color
@@ -55,15 +60,34 @@ class Charts_PNG_Pie {
 			$iColB 			= $oObject->cColorBlue;
 			$imPartColor	= ImageColorAllocate($this->imImage, $iColR, $iColG, $iColB);
 
-			//$iDegree		= (($oObject->iValue / $iTotal) * 360);
-			$iDegree		= ($oObject->iPercent * 360);
-			imagefilledarc($this->imImage, 225, 225, 450, 450, $iStop, ($iStop + $iDegree), $imPartColor, IMG_ARC_PIE);
+			//maths for angle
+			$iDegree		= ($oObject->iRawPercent * 360);
+			$iEnd			= $iDegree;
+			$iEndCheck		= ($iEnd += $iStart);
+			$iEndAngle		= ($iDegree += $iStart);
 
-			$iStop 		= ($iStop + $iDegree);
-			$iStopX		= round(225 + (225 * cos($iStop * (M_PI / 180))));
-			$iStopY		= round(225 + (225 * sin($iStop * (M_PI / 180))));
+			//debug before any corrections
+			$aDebug[$i]['degree']	= $iDegree;
+			$aDebug[$i]['start']	= $iStart;
+			$aDebug[$i]['end']		= $iEndCheck;
+			$aDebug[$i]['data']		= $oObject;
 			$i++;
+
+			//correct for 360/360, or 0 0
+			if (($iStart == 360) && ($iEndCheck == 360)) { continue; }
+			if (($iStart == 0) && ($iEndCheck == 0)) { continue; }
+
+			//actually draw something
+			imagefilledarc($this->imImage, 225, 225, 450, 450, $iStart, 360, $imPartColor, IMG_ARC_PIE);
+
+			//start of next angle
+			$iStart = $iDegree;
 		}
+
+		$oReader			= new oReader($aDebug);
+		$oReader->bScreen 	= false;
+		$oReader->bFile 	= true;
+		$oReader->doOutput();
 
 		imageantialias($this->imImage, true);
 		return $this->imImage;
