@@ -2,7 +2,7 @@
 /**
  * Database_PDO
  *
- * @package
+ * @package Database
  * @author keloran
  * @copyright Copyright (c) 2010
  * @version $Id$

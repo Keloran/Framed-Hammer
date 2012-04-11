@@ -1,4 +1,13 @@
 <?php
+/**
+ * Google
+ *
+ * @package
+ * @author Keloran
+ * @copyright Copyright (c) 2012
+ * @version $Id$
+ * @access public
+ */
 class Google {
 	private $cUser;
 	private $cPass;

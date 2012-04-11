@@ -2,7 +2,7 @@
 /**
  * Email_Abstract
  *
- * @package
+ * @package Email
  * @author keloran
  * @copyright Copyright (c) 2011
  * @version $Id$
@@ -204,7 +204,7 @@ abstract class Email_Abstract implements Email_Interface {
 	 */
 	public function getPartStruct($cPart) {
 		$oStruct	= imap_bodystruct($this->pIMAP, $this->iMID, $cPart);
-		
+
 		return $oStruct;
 	}
 

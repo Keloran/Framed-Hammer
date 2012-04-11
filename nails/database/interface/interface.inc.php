@@ -2,7 +2,7 @@
 /**
  * Database_Interface
  *
- * @package
+ * @package Database
  * @author Keloran
  * @copyright Copyright (c) 2010
  * @version $Id$

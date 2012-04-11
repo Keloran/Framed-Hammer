@@ -1,4 +1,13 @@
 <?php
+/**
+ * Curl
+ *
+ * @package Curl
+ * @author Keloran
+ * @copyright Copyright (c) 2012
+ * @version $Id$
+ * @access public
+ */
 class Curl {
 	const iTimeout = 3;
 

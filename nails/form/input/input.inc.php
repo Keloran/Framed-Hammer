@@ -2,7 +2,7 @@
 /**
  * Form_Input
  *
- * @package
+ * @package Form
  * @author keloran
  * @copyright Copyright (c) 2010
  * @version $Id: input.inc.php 3389 2011-03-02 11:33:32Z keloran $

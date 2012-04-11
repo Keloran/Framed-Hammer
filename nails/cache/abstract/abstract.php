@@ -2,7 +2,7 @@
 /**
  * Cache_Abstract
  *
- * @package
+ * @package Cache
  * @author Keloran
  * @copyright Copyright (c) 2011
  * @version $Id$

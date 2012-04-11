@@ -1,11 +1,11 @@
 <?php
 /**
- * Template_Formed
+ * Form
  *
- * @package
+ * @package Form
  * @author Keloran
- * @copyright Copyright (c) 2009
- * @version $Id: formed.inc.php 462 2009-12-28 23:15:16Z keloran $
+ * @copyright Copyright (c) 2012
+ * @version $Id$
  * @access public
  */
 class Form {

@@ -2,8 +2,8 @@
 /**
  * Database
  *
- * @package
- * @author Max
+ * @package Database
+ * @author Keloran
  * @copyright Copyright (c) 2008
  * @version $Id: database.inc.php 288 2009-11-27 14:28:13Z keloran $
  * @access public

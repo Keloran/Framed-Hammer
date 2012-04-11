@@ -13,10 +13,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
 
-/**
- * Server Side Chrome PHP debugger class
+ * @desc Server Side Chrome PHP debugger class
  *
  * @package ChromePhp
  * @author Craig Campbell <iamcraigcampbell@gmail.com>

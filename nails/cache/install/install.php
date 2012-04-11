@@ -2,7 +2,7 @@
 /**
  * Cache_Install
  *
- * @package
+ * @package Cache
  * @author keloran
  * @copyright Copyright (c) 2011
  * @version $Id$

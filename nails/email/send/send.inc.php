@@ -1,4 +1,13 @@
 <?php
+/**
+ * Email_Send
+ *
+ * @package Email
+ * @author Keloran
+ * @copyright Copyright (c) 2012
+ * @version $Id$
+ * @access public
+ */
 class Email_Send {
 	private $aParams;
 
@@ -358,7 +367,7 @@ class Email_Send {
 
 			$cReturn = $oTemplate->renderTemplate();
 		}
-		
+
 		$this->cFinalTemplate = $cReturn;
 		return $this->cFinalTemplate;
 	}

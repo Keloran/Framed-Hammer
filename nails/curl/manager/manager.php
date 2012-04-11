@@ -2,7 +2,7 @@
 /**
  * Curl_Manager
  *
- * @package
+ * @package Curl
  * @author Keloran
  * @copyright Copyright (c) 2011
  * @version $Id$

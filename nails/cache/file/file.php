@@ -2,7 +2,7 @@
 /**
  * Cache
  *
- * @package
+ * @package Cache
  * @author Keloran
  * @copyright Copyright (c) 2010
  * @version $Id: cache.inc.php 3588 2011-04-14 09:08:04Z keloran $

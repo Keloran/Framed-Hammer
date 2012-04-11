@@ -2,7 +2,7 @@
 /**
  * Form_Progress
  *
- * @package
+ * @package Form
  * @author keloran
  * @copyright Copyright (c) 2010
  * @version $Id: Progress.inc.php 1159 2010-05-10 12:17:11Z keloran $

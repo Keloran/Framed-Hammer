@@ -2,7 +2,7 @@
 /**
  * Form_Button
  *
- * @package
+ * @package Form
  * @author keloran
  * @copyright Copyright (c) 2010
  * @version $Id: button.inc.php 2506 2010-09-16 10:15:40Z keloran $

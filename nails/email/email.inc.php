@@ -2,7 +2,7 @@
 /**
  * Email
  *
- * @package
+ * @package Email
  * @author Keloran
  * @copyright Copyright (c) 2009
  * @version $Id: email.inc.php 501 2010-01-05 10:50:44Z keloran $
@@ -52,6 +52,7 @@ class Email implements Nails_Interface {
 		if (is_object($oNails)) {
 			$this->oNails 	= $oNails;
 			$this->oUser	= $oNails->getUser();
+			if (!is_object($this->oUser)) { $this->oUser = new User(); } //mainly for IDEs
 
 			$iPaged			= $this->oUser->getSetting("pageLimit");
 			$this->iPaged	= $iPaged ?: 50;

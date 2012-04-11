@@ -2,7 +2,7 @@
 /**
  * Form_Value
  *
- * @package
+ * @package Form
  * @author keloran
  * @copyright Copyright (c) 2010
  * @version $Id$

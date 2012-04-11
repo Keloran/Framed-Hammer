@@ -2,7 +2,7 @@
 /**
  * Form_File
  *
- * @package
+ * @package Form
  * @author keloran
  * @copyright Copyright (c) 2010
  * @version $Id: file.inc.php 3382 2011-03-02 11:04:47Z keloran $

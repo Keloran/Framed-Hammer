@@ -1,10 +1,10 @@
 <?php
 /**
- * Cached
+ * Cache_Memory
  *
- * @package
- * @author keloran
- * @copyright Copyright (c) 2010
+ * @package Cache
+ * @author Keloran
+ * @copyright Copyright (c) 2012
  * @version $Id$
  * @access public
  */

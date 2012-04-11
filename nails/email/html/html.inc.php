@@ -2,7 +2,7 @@
 /**
  * Email_Text
  *
- * @package
+ * @package Email
  * @author keloran
  * @copyright Copyright (c) 2011
  * @version $Id$
