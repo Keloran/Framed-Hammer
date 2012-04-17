@@ -220,7 +220,7 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 				$cStatic	= $oStatic->getStatic();
 
 				if ($cStatic) {
-					$cPage = $cStatic;
+					return $cStatic;
 				} else {
 					$this->cError = "Sorry " . $this->cPage . " doesn't seem to exist";
 					$this->addDebug("Error", $this->cError);
