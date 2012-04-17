@@ -8,7 +8,7 @@
  * @version $Id$
  * @access public
  */
-class Template_Content extends Template_Abstract {
+class Template_Static extends Template_Abstract {
 	private $oDB;
 
 	/**
