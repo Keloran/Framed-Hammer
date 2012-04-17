@@ -29,6 +29,11 @@ class Template_Static_Install {
 		}
 	}
 
+	/**
+	 * Template_Static_Install::upgrade()
+	 *
+	 * @return null
+	 */
 	private function upgrade() {
 		if ($this->oNails->checkVersion("template_static", "1.0") == false) {
 			//1.1
