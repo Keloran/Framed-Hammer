@@ -52,6 +52,7 @@ class Screwdriver {
 		$cName_b	= false;
 		$cName_c	= false;
 		$cOriginal	= false;
+		$cGET		= false;
 
 		//can we use filter input, so use it
 		if (function_exists("filter_input")) {
