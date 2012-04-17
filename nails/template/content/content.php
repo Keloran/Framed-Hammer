@@ -85,13 +85,7 @@ class Template_Content extends Template_Abstract {
 		if ($cPage) {
 			$this->cTemplate	= $cPage;
 		} else {
-			$oStatic	= new Template_Static($this->mParams);
-			$cStatic	= $oStatic->getStatic();
-			if ($cStatic) {
-				$this->cTemplate	= $cStatic;
-			} else {
-				$this->cTemplate	= $this->cError;
-			}
+			$this->cTemplate	= $this->cError;
 		}
 
 		$this->cCaller	= "content";

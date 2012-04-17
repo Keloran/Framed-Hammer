@@ -216,8 +216,15 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 
 			//now does the file actually exist
 			if (!file_exists($cPage)) {
-				$this->cError = "Sorry " . $this->cPage . " doesn't seem to exist";
-				$this->addDebug("Error", $this->cError);
+				$oStatic	= new Template_Static($this->mParams);
+				$cStatic	= $oStatic->getStatic();
+
+				if ($cStatic) {
+					$cPage = $cStatic;
+				} else {
+					$this->cError = "Sorry " . $this->cPage . " doesn't seem to exist";
+					$this->addDebug("Error", $this->cError);
+				}
 			}
 		}
 
