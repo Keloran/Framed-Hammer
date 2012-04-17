@@ -9,6 +9,8 @@
  * @access public
  */
 class Template_Static extends Template_Abstract {
+	use Address;
+
 	private $oDB;
 
 	/**
@@ -38,5 +40,6 @@ class Template_Static extends Template_Abstract {
 	 */
 	public function getStatic() {
 		printRead($this->mParams);
+		printRead($this->getAddress());
 	}
 }
