@@ -17,6 +17,8 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 
 	public $cCaller;
 
+	public $bStatic;
+
 	/**
 	 * Template_Abstract::doDebug()
 	 *
@@ -123,6 +125,9 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 
 		//now make sure we have a template otherwise just do nothing
 		if (!$this->cTemplate) { return false; }
+
+		//static page
+		if ($this->cTemplate && $this->bStatic) { return $this->cTemplate; }
 
 		//final check just incase somehow it got here and it still dindt exist
 		if (!file_exists($this->cTemplate)) { return $this->errorTemplate(); }
@@ -352,7 +357,8 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 			$cStatic	= $oStatic->getStatic();
 
 			if ($cStatic) {
-				$this->cError = false;
+				$this->bStatic	= true;
+				$this->cError 	= false;
 				return $cStatic;
 			} else {
 				if ($this->bDebug) { $this->debugTemplates(); }
