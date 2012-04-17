@@ -23,7 +23,12 @@ class Template_Static extends Template_Abstract {
 		if ($cTemplate) { $this->setTemplate($cTemplate); }
 
 		//get Database
-		$this->oDB	= $this->oHammer->getDatabase();
+		if (is_object($this->oHammer)) {
+			$this->oDB	= $this->oHammer->getDatabase();
+		} else {
+			$oHammer	= Hammer::getHammer();
+			$this->oDB	= $oHammer->getDatabase();
+		}
 	}
 
 	/**
