@@ -31,7 +31,7 @@ class oReader {
 
 		//Show the methods of the class your trying diagnose
 		if (is_object($mString)) { $this->cMethods 	= print_r(get_class_methods($mString), true); }
-		if (is_object($mString)) { $this->cVars		= print_r(get_class_vars($mString), true); }
+		if (is_object($mString)) { $this->cVars		= print_r(get_class_vars(get_class($mString)), true); }
 	}
 
 	/**
