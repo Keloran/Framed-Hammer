@@ -36,7 +36,7 @@ class Charts {
 
 		$cBrowser	= $this->getBrowser();
 
-		switch($cBrowser){
+		switch($cBrowser) {
 			case "ie6":
 			case "ie7":
 			case "ie8":
@@ -101,7 +101,7 @@ class Charts {
 	 * @param array $aData
 	 * @return
 	 */
-	public function setData(){
+	public function setData() {
 		$aTmp 	= $this->aData;
 		$iTotal = 0;
 
