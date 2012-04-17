@@ -102,6 +102,9 @@ class Screwdriver {
 		//set the number of params above the standard
 		$this->iParam	= (count($this->aFilters) + 1);
 
+		//get full without split
+		$this->aReturn['fullAddress']	= $cGET;
+
 		//now actually create the address
 		$this->setAddress();
 
