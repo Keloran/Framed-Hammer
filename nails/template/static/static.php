@@ -45,7 +45,7 @@ class Template_Static extends Template_Abstract {
 		if ($this->oDB->nextRecord()) { $cReturn = $this->oDB->f('cPage'); }
 
 		printRead($this->oDB->printQuery());
-		printRead($this->oDB);
+		printRead($cReturn);
 
 		return $cReturn;
 	}
