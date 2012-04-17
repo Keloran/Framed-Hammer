@@ -216,15 +216,8 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 
 			//now does the file actually exist
 			if (!file_exists($cPage)) {
-				$oStatic	= new Template_Static($this->mParams);
-				$cStatic	= $oStatic->getStatic();
-
-				if ($cStatic) {
-					return $cStatic;
-				} else {
-					$this->cError = "Sorry " . $this->cPage . " doesn't seem to exist";
-					$this->addDebug("Error", $this->cError);
-				}
+				$this->cError = "Sorry " . $this->cPage . " Doesn't seem to exist";
+				$this->addDebug("Error", $this->cError);
 			}
 		}
 
@@ -261,7 +254,7 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 		} else if (file_exists($cModern)) {
 			$cReturn		= $cModern;
 		} else {
-			$this->cError	= "Sorry " . $this->cAction . " doesn't seem to exist";
+			$this->cError	= "Sorry " . $this->cAction . " Doesn't seem to exist";
 		}
 
 		//error
@@ -355,7 +348,15 @@ abstract class Template_Abstract extends Template_Abstract_Extend {
 
 		//debug
 		if (!$cPage) {
-			if ($this->bDebug) { $this->debugTemplates(); }
+			$oStatic	= new Template_Static($this->mParams);
+			$cStatic	= $oStatic->getStatic();
+
+			if ($cStatic) {
+				$this->cError = false;
+				return $cStatic;
+			} else {
+				if ($this->bDebug) { $this->debugTemplates(); }
+			}
 		}
 
 		return $cPage;
