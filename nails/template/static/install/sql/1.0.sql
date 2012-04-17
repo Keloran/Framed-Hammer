@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS `template_static` (
+	`iStaticID` INT NOT NULL AUTO_INCREMENT,
+	`cPath` VARCHAR(150) NOT NULL,
+	`cPage` TEXT,
+	PRIMARY KEY (`iStaticID`),
+	INDEX (`cPath`)
+) ENGINE = MyISAM;

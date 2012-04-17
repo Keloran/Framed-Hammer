@@ -39,7 +39,7 @@ class Template_Static extends Template_Abstract {
 	 * @return string
 	 */
 	public function getStatic() {
-		printRead($this->mParams);
-		printRead($this->getAddress());
+		$this->oDB->read("SELECT cPage FROM static WHERE cPath = ? LIMIT 1", $this->mParams['fullAddress']);
+
 	}
 }
