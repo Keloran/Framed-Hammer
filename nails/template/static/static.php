@@ -42,9 +42,10 @@ class Template_Static extends Template_Abstract {
 		$cReturn	= false;
 
 		$this->oDB->read("SELECT cPage FROM template_static WHERE cPath = ? LIMIT 1", $this->mParams['fullAddress']);
-		if ($this->oDB->nextRecord()) { $cReturn	= $this->oDB->f('cPage'); }
+		if ($this->oDB->nextRecord()) { $cReturn = $this->oDB->f('cPage'); }
 
 		printRead($this->oDB->printQuery());
+		printRead($this->oDB);
 
 		return $cReturn;
 	}
