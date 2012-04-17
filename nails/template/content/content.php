@@ -83,7 +83,9 @@ class Template_Content extends Template_Abstract {
 		$this->setVars("defaultPage", $cDefault);
 
 		if (!$cPage) {
-			printRead("tester");
+			printRead("tester", "No-Paged");
+		} else {
+			printRead($cPage, "Paged");
 		}
 
 		if ($cPage) {
