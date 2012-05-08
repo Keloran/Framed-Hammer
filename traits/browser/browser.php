@@ -17,7 +17,7 @@ trait Browser {
 	function getBrowserCap() {
 		$bGetBrowser	= false;
 		$mGetBrowser	= false;
-		$mReturn	= false;
+		$mReturn		= false;
 
 		//do we actually have browser cap, otherwise dont bother trying
 		if (ini_get("browscap")) {

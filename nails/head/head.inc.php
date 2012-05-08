@@ -63,7 +63,7 @@ class Head {
 		}
 
 		$mBrowser		= $this->getBrowser();
-		$this->bMobile	= $this->mobileBrowser($mBrowser);
+		$this->bMobile	= $this->mobileBrowser($mBrowser, true);
 		$this->bWarning = $this->IEBrowser($mBrowser);
 	}
 

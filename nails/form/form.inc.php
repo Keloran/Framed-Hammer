@@ -1230,7 +1230,7 @@ class Form {
 		}
 
 		//finish the start of the div
-		if ($bOpened) { $cReturn .= ">\n"; }
+		//if ($bOpened) { $cReturn .= ">\n"; }
 
 		//form already opened
 		$cReturn .= "<form ";
